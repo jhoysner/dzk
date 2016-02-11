@@ -13,6 +13,7 @@
           </div>
         </div>
       <chat> </chat> 
+
       <!--<Foot/> -->
     </div>
 </template>

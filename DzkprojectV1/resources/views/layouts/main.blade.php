@@ -24,7 +24,7 @@
     <link href="css/fonts-googleapis.css" rel="stylesheet">
     <!-- ===========================================
 				CSS
-		============================================= -->
+	============================================= -->
     <link rel="stylesheet" href="css/simple-line-icons.css">
     <link rel="stylesheet" href="css/font-awesome.min.css">
     <link rel="stylesheet" href="css/bootstrap.css">

@@ -31,6 +31,11 @@
     <link rel="stylesheet" href="css/nice-select.css">
     <link rel="stylesheet" href="css/animate.min.css">
     <link rel="stylesheet" href="css/main.css">
+    
+    <!-- INCLUIR CSS ADICIONALES -->
+    
+    @yield('customcss')
+    
 </head>
 <body>
 <!-- start Header Area -->
@@ -39,33 +44,15 @@
 
 <!-- End Header Area -->
 
-    <!-- Start hero-section -->
-    @include('layouts.section_star_hero2')
-    <!-- End hero-section -->
+<!-- VERIFICAR SI SE ESTA AUTENTICADO EN EL SISTEMA -->
+    @if(Auth::check())
+            @include('layouts.content')
+    @else
+            @include('layouts.content')
+    @endif
+    
+    
 
-    <!-- Start featured-item-section -->
-    @include('layouts.section_featured_item')
-    <!-- End featured-item-section -->
-
-    <!-- Start latest-item-section -->
-    @include('layouts.section_latest_item')
-    <!-- End latest-item-section -->
-
-    <!-- Start free-item-section -->
-    @include('layouts.section_free_item')
-    <!-- End free-item-section -->
-
-    <!-- Start team-section -->
-    @include('layouts.section_team')
-    <!-- End team-section -->
-
-    <!-- Start cta-section -->
-    @include('layouts.section_cta')
-    <!-- End cta-section -->
-
-    <!-- Start counter-section -->
-    @include('layouts.section_counter')
-    <!-- End counter-section -->
 
     <!-- start footer Area -->
     @include('layouts.footer')
@@ -80,6 +67,11 @@
     <script src="js/jquery-ui.js"></script>
     <script src="js/Chart.min.js"></script>
     <script src="js/main.js"></script>
+    
+    
+    <!--SCRIPTS PERSONALIZADOS DE LOS MODULOS  -->
+    @yield('customjs')
+    
 </body>
 
 </html>

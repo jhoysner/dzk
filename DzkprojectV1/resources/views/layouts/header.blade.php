@@ -1,5 +1,5 @@
 <!-- start Header Area -->
-<header id="header">
+<header id="header" class='header-scrolled'>
   <div class="container">
       <div class="row align-items-center justify-content-between">
           <div class="col-lg-2" id="logo">

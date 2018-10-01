@@ -43,9 +43,6 @@
     @include('layouts.section_star_hero2')
     <!-- End hero-section -->
 
-
-
-
     <!-- Start featured-item-section -->
     @include('layouts.section_featured_item')
     <!-- End featured-item-section -->

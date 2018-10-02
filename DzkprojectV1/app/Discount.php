@@ -13,8 +13,10 @@ class Discount extends Model
     protected $table = 'discount';
 
     protected $primaryKey = 'iddiscount';
+    public $incrementing = false;
 
     protected $dates = ['deleted_at'];
+
 
     protected $fillable = [
         'iddiscount',

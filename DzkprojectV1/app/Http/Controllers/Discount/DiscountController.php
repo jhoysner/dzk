@@ -4,6 +4,8 @@ namespace App\Http\Controllers\Discount;
 
 use App\Discount;
 use App\Http\Controllers\Controller;
+use App\Http\Requests\DiscountRequest;
+use App\Transformers\DiscountTransformer;
 use Illuminate\Http\Request;
 
 class DiscountController extends Controller
@@ -15,9 +17,14 @@ class DiscountController extends Controller
      */
     public function index()
     {
-        $discount = Discount::all();
+        $discounts = Discount::all();
 
-        return response()->json($discount);
+        $discounts = fractal()
+                ->collection( $discounts )
+                ->transformWith(new DiscountTransformer)
+                ->toArray();
+
+        return response()->json($discounts, 200);
     }
 
     /**
@@ -36,31 +43,21 @@ class DiscountController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
-    {
-        $discount = Discount::create([
-                'iddiscount' => $request->iddiscount,
-                'title' => $request->title,
-                'description' => $request->description,
-                'image' => $request->image,
-                'startdate' => $request->startdate,
-                'enddate' => $request->enddate,
-                'outstanding' => $request->outstanding,
-                'conditions' => $request->conditions,
-                'restrictions' => $request->restrictions,
-                'amountapproved' => $request->amountapproved,
-                'amountavailable' => $request->amountavailable,
-                'amountredeemed' => $request->amountredeemed,
-                'normalprice' => $request->normalprice,
-                'discountprice' => $request->discountprice,
-                'discountpercentage' => $request->discountpercentage,
-                'discountcategory_iddiscountcategory' => $request->discountcategory_iddiscountcategory,
-        ]);
+    public function store(DiscountRequest $request)
+    {   
+   
+        $fields = $request->all();
+
+        $discount = Discount::create($fields); 
+
+        $discount = fractal( $discount )
+                ->transformWith(new DiscountTransformer)
+                ->toArray();
 
         if ( !$discount )
-            return response()->json(['success' => false, 'mensage' => "El Descuento no se registro."], 422);
+            return response()->json(['error' => 'No se pudo guardar el registro'], 422);
 
-        return response()->json(['success' => true, 'discount'=> $discount]);
+        return response()->json($discount,  201);
 
     }
 
@@ -72,9 +69,13 @@ class DiscountController extends Controller
      */
     public function show($id)
     {
-        $discount = Discount::find($id);
+        $discount = Discount::findOrFail($id);
 
-        return response()->json($discount);
+        $discount = fractal( $discount )
+                ->transformWith(new DiscountTransformer)
+                ->toArray();
+
+        return response()->json($discount, 200);
     }
 
     /**
@@ -103,10 +104,14 @@ class DiscountController extends Controller
 
         if ($discount->save()) {
 
-            return response()->json(['success' => true, 'discount'=> $discount]);
+            $discount = fractal( $discount )
+                ->transformWith(new DiscountTransformer)
+                ->toArray();
+
+            return response()->json($discount, 200);
         }
 
-        return response()->json(['success' => false, 'mensage' => "El Descuento no se actualizo."], 422);
+        return response()->json(['error' => 'No se pudo actualizar el registro'], 422);
 
     }
 
@@ -120,13 +125,17 @@ class DiscountController extends Controller
     {
         $discount = Discount::find($id);
 
-
+                
         if ($discount->delete()) {
             
-            return response()->json(['success' => true, 'discount'=> $discount]);
+            $discount = fractal( $discount )
+                    ->transformWith(new DiscountTransformer)
+                    ->toArray();
+
+            return response()->json($discount, 200);
         }
         
-        return response()->json(['success' => false, 'mensage' => "El Descuento no se Eliminado."], 422);
+        return response()->json(['error' => 'No se pudo eliminar el registro'], 422);
 
     }
 }

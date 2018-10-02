@@ -5,6 +5,10 @@
  * building robust, powerful web applications using Vue and Laravel.
  */
 
+ import mainDashboard from './components/main.vue'
+
+ import router from './routes/Routes.js'
+
 require('./bootstrap');
 
 window.Vue = require('vue');
@@ -15,8 +19,12 @@ window.Vue = require('vue');
  * or customize the JavaScript scaffolding to fit your unique needs.
  */
 
-Vue.component('example-component', require('./components/ExampleComponent.vue'));
+//Vue.component('main-dashboard', require('./components/main.vue'));
 
 const app = new Vue({
-    el: '#app'
+    el: '#app',
+    components: {
+    	mainDashboard,
+    },
+    router
 });

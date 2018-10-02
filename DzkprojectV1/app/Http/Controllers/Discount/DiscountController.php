@@ -5,7 +5,6 @@ namespace App\Http\Controllers\Discount;
 use App\Discount;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\DiscountRequest;
-use App\Transformers\DiscountTransformer;
 use Illuminate\Http\Request;
 
 class DiscountController extends Controller
@@ -19,12 +18,7 @@ class DiscountController extends Controller
     {
         $discounts = Discount::all();
 
-        $discounts = fractal()
-                ->collection( $discounts )
-                ->transformWith(new DiscountTransformer)
-                ->toArray();
-
-        return response()->json($discounts, 200);
+        return response()->json(['data'=> $discounts], 200);
     }
 
     /**
@@ -71,11 +65,7 @@ class DiscountController extends Controller
     {
         $discount = Discount::findOrFail($id);
 
-        $discount = fractal( $discount )
-                ->transformWith(new DiscountTransformer)
-                ->toArray();
-
-        return response()->json($discount, 200);
+        return response()->json(['data'=> $discount], 200);
     }
 
     /**
@@ -104,11 +94,7 @@ class DiscountController extends Controller
 
         if ($discount->save()) {
 
-            $discount = fractal( $discount )
-                ->transformWith(new DiscountTransformer)
-                ->toArray();
-
-            return response()->json($discount, 200);
+            return response()->json(['data'=> $discount], 200);
         }
 
         return response()->json(['error' => 'No se pudo actualizar el registro'], 422);
@@ -128,11 +114,7 @@ class DiscountController extends Controller
                 
         if ($discount->delete()) {
             
-            $discount = fractal( $discount )
-                    ->transformWith(new DiscountTransformer)
-                    ->toArray();
-
-            return response()->json($discount, 200);
+            return response()->json(['data'=> $discount], 200);
         }
         
         return response()->json(['error' => 'No se pudo eliminar el registro'], 422);

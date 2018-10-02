@@ -52651,7 +52651,7 @@ exports = module.exports = __webpack_require__(45)(false);
 
 
 // module
-exports.push([module.i, "\n.html5Map[data-v-25ebd9cd] {\n  width: 100%;\n  height: 200px;\n  display: none;\n}\n.input-map[data-v-25ebd9cd] {\n  display: none;\n}\n", ""]);
+exports.push([module.i, "\n.html5Map[data-v-25ebd9cd] {\n  margin-top: 15px;\n  width: 100%;\n  height: 200px;\n  display: none;\n}\n.geolocation[data-v-25ebd9cd] {\n  cursor: pointer;\n  color: #FFF !important;\n}\n.geolocation[data-v-25ebd9cd]:hover {\n  color: #42b0f2 !important;\n}\n.input-map[data-v-25ebd9cd] {\n  display: none;\n}\n", ""]);
 
 // exports
 
@@ -52832,9 +52832,9 @@ var render = function() {
                   _vm._v(" "),
                   _c("div", { staticClass: "col-lg-4" }, [
                     _c(
-                      "button",
+                      "a",
                       {
-                        staticClass: "primary-btn",
+                        staticClass: "primary-btn geolocation",
                         on: { click: _vm.html5Location }
                       },
                       [_vm._v("Geolocalización HTML5")]
@@ -52982,7 +52982,7 @@ var staticRenderFns = [
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
     return _c("div", { staticClass: "col-lg-4" }, [
-      _c("button", { staticClass: "primary-btn", attrs: { href: "#" } }, [
+      _c("a", { staticClass: "primary-btn geolocation" }, [
         _vm._v("Abrir Maps")
       ])
     ])
@@ -52992,7 +52992,7 @@ var staticRenderFns = [
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
     return _c("div", { staticClass: "col-lg-4" }, [
-      _c("button", { staticClass: "primary-btn", attrs: { href: "#" } }, [
+      _c("a", { staticClass: "primary-btn geolocation" }, [
         _vm._v("Escribir dirección")
       ])
     ])

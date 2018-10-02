@@ -47,13 +47,13 @@
                               <input type="file" placeholder="Imagen corporativa" required class="common-input">
                           </div>
                           <div class="col-lg-4">
-                              <button class="primary-btn" @click="html5Location">Geolocalización HTML5</button>
+                              <a class="primary-btn geolocation" @click="html5Location">Geolocalización HTML5</a>
                           </div>
                           <div class="col-lg-4">
-                              <button href="#" class="primary-btn">Abrir Maps</button>
+                              <a class="primary-btn geolocation">Abrir Maps</a>
                           </div>
                           <div class="col-lg-4">
-                              <button href="#" class="primary-btn">Escribir dirección</button>
+                              <a class="primary-btn geolocation">Escribir dirección</a>
                           </div>
                           <div class="col-lg-12 html5Map" id="html5Map">
                           </div>
@@ -135,9 +135,19 @@ export default {
 </script>
 <style lang="scss" scoped>
   .html5Map {
+    margin-top: 15px;
     width: 100%;
     height: 200px;
     display: none;
+  }
+
+  .geolocation {
+    cursor: pointer;
+    color: #FFF !important;
+  }
+
+  .geolocation:hover {
+    color: #42b0f2 !important;
   }
 
   .input-map {

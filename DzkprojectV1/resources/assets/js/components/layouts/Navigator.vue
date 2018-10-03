@@ -24,6 +24,13 @@
                     Sucursales
                   </a>
               </router-link>
+            </li>            
+            <li>
+              <router-link to='/discount'>
+                  <a>
+                    Discount
+                  </a>
+              </router-link>
             </li>
             <li>
                 <a href="author-account-settings.html">Cerrar Sesión</a>

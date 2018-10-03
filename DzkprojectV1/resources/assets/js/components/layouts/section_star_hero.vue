@@ -1,7 +1,8 @@
 <template>
   <div>
     <!-- Start hero-section2 -->
-    <section class="hero-section2 relative">
+    <!-- <section class="hero-section2 relative"> -->
+    <section class="">
         <div class="overlay overlay-bg"></div>
         <div class="container">
             <div class="row fullscreen justify-content-center align-items-center">

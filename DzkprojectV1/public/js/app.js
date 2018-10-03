@@ -25483,7 +25483,7 @@ var content = __webpack_require__(22);
 if(typeof content === 'string') content = [[module.i, content, '']];
 if(content.locals) module.exports = content.locals;
 // add the styles to the DOM
-var update = __webpack_require__(3)("42b3474c", content, false, {});
+var update = __webpack_require__(3)("7186d799", content, false, {});
 // Hot Module Replacement
 if(false) {
  // When the styles change, update the <style> tags
@@ -26021,7 +26021,7 @@ var content = __webpack_require__(28);
 if(typeof content === 'string') content = [[module.i, content, '']];
 if(content.locals) module.exports = content.locals;
 // add the styles to the DOM
-var update = __webpack_require__(3)("117cc268", content, false, {});
+var update = __webpack_require__(3)("d7fa6742", content, false, {});
 // Hot Module Replacement
 if(false) {
  // When the styles change, update the <style> tags
@@ -26501,7 +26501,7 @@ var content = __webpack_require__(35);
 if(typeof content === 'string') content = [[module.i, content, '']];
 if(content.locals) module.exports = content.locals;
 // add the styles to the DOM
-var update = __webpack_require__(3)("215d53aa", content, false, {});
+var update = __webpack_require__(3)("5030e3f7", content, false, {});
 // Hot Module Replacement
 if(false) {
  // When the styles change, update the <style> tags
@@ -27018,7 +27018,7 @@ var content = __webpack_require__(40);
 if(typeof content === 'string') content = [[module.i, content, '']];
 if(content.locals) module.exports = content.locals;
 // add the styles to the DOM
-var update = __webpack_require__(3)("a30ab1be", content, false, {});
+var update = __webpack_require__(3)("273fd098", content, false, {});
 // Hot Module Replacement
 if(false) {
  // When the styles change, update the <style> tags
@@ -30000,7 +30000,7 @@ var content = __webpack_require__(48);
 if(typeof content === 'string') content = [[module.i, content, '']];
 if(content.locals) module.exports = content.locals;
 // add the styles to the DOM
-var update = __webpack_require__(3)("41413c36", content, false, {});
+var update = __webpack_require__(3)("6caf7e45", content, false, {});
 // Hot Module Replacement
 if(false) {
  // When the styles change, update the <style> tags
@@ -30227,7 +30227,7 @@ var content = __webpack_require__(53);
 if(typeof content === 'string') content = [[module.i, content, '']];
 if(content.locals) module.exports = content.locals;
 // add the styles to the DOM
-var update = __webpack_require__(3)("0ab52bd6", content, false, {});
+var update = __webpack_require__(3)("4d0275e9", content, false, {});
 // Hot Module Replacement
 if(false) {
  // When the styles change, update the <style> tags
@@ -30302,44 +30302,6 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
@@ -30372,169 +30334,76 @@ var staticRenderFns = [
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
     return _c("div", [
-      _c("div", { staticClass: "row", attrs: { id: "tabs" } }, [
-        _c("div", { staticClass: "col-lg-3" }, [
-          _c("div", { staticClass: "options-sidebar" }, [
-            _c("h4", { staticClass: "text-uppercase pb-20" }, [
-              _vm._v("Personal Details")
-            ]),
+      _c("div", { staticClass: "col-lg-12" }, [
+        _c("div", [
+          _c("button", { staticClass: "btn btn-success mb-4" }, [
+            _vm._v("Crear Comercio")
+          ]),
+          _vm._v(" "),
+          _c("div", { staticClass: "settings-content" }, [
+            _c("h4", [_vm._v("Lista de comercios")]),
             _vm._v(" "),
-            _c("ul", [
-              _c("li", [
-                _c("a", { attrs: { href: "#tabs-1" } }, [
-                  _vm._v("Presonal Information")
-                ])
-              ]),
-              _vm._v(" "),
-              _c("li", [
-                _c("a", { attrs: { href: "#tabs-2" } }, [_vm._v("Profile")])
-              ]),
-              _vm._v(" "),
-              _c("li", [
-                _c("a", { attrs: { href: "#tabs-3" } }, [
-                  _vm._v("Email Settings")
-                ])
-              ]),
-              _vm._v(" "),
-              _c("li", [
-                _c("a", { attrs: { href: "#tabs-4" } }, [
-                  _vm._v("Saved Credit Card")
-                ])
-              ]),
-              _vm._v(" "),
-              _c("li", [
-                _c("a", { attrs: { href: "#tabs-5" } }, [
-                  _vm._v("Social Networks")
-                ])
+            _c("div", { staticClass: "responsive" }, [
+              _c("div", { staticClass: "table-responsive" }, [
+                _c(
+                  "table",
+                  {
+                    staticClass:
+                      "table table-hover table-bordered table-striped table-condensed"
+                  },
+                  [
+                    _c("thead", [
+                      _c("tr", [
+                        _c("th", { staticClass: "text-center" }, [
+                          _vm._v("ID Comercio")
+                        ]),
+                        _vm._v(" "),
+                        _c("th", { staticClass: "text-center" }, [
+                          _vm._v("Nombre")
+                        ]),
+                        _vm._v(" "),
+                        _c("th", { staticClass: "text-center" }, [
+                          _vm._v("Teléfono principal")
+                        ]),
+                        _vm._v(" "),
+                        _c("th", { staticClass: "text-center" }, [
+                          _vm._v("Teléfono alternativo")
+                        ]),
+                        _vm._v(" "),
+                        _c("th", { staticClass: "text-center" }, [
+                          _vm._v("Correo")
+                        ]),
+                        _vm._v(" "),
+                        _c("th", { staticClass: "text-center" }, [
+                          _vm._v("Imagen")
+                        ]),
+                        _vm._v(" "),
+                        _c("th", { staticClass: "text-center" }, [
+                          _vm._v("Web")
+                        ]),
+                        _vm._v(" "),
+                        _c("th", { staticClass: "text-center" }, [
+                          _vm._v("País")
+                        ]),
+                        _vm._v(" "),
+                        _c("th", { staticClass: "text-center" }, [
+                          _vm._v("Estado")
+                        ]),
+                        _vm._v(" "),
+                        _c("th", { staticClass: "text-center" }, [
+                          _vm._v("Ciudad")
+                        ]),
+                        _vm._v(" "),
+                        _c("th", { staticClass: "text-center" }, [
+                          _vm._v("Options")
+                        ])
+                      ])
+                    ]),
+                    _vm._v(" "),
+                    _c("tbody", [_c("tr")])
+                  ]
+                )
               ])
-            ])
-          ])
-        ]),
-        _vm._v(" "),
-        _c("div", { staticClass: "col-lg-9" }, [
-          _c("div", { attrs: { id: "tabs-1" } }, [
-            _c("div", { staticClass: "settings-content" }, [
-              _c("h4", [_vm._v("Crear un nuevo Comercio")]),
-              _vm._v(" "),
-              _c(
-                "form",
-                { staticClass: "billing-form", attrs: { action: "#" } },
-                [
-                  _c("div", { staticClass: "row pt-30" }, [
-                    _c("div", { staticClass: "col-lg-6" }, [
-                      _c("input", {
-                        staticClass: "common-input",
-                        attrs: {
-                          type: "text",
-                          placeholder: "Nombre",
-                          required: ""
-                        }
-                      })
-                    ]),
-                    _vm._v(" "),
-                    _c("div", { staticClass: "col-lg-6" }, [
-                      _c("input", {
-                        staticClass: "common-input",
-                        attrs: {
-                          type: "text",
-                          placeholder: "Telefono principal",
-                          required: ""
-                        }
-                      })
-                    ]),
-                    _vm._v(" "),
-                    _c("div", { staticClass: "col-lg-6" }, [
-                      _c("input", {
-                        staticClass: "common-input",
-                        attrs: {
-                          type: "text",
-                          placeholder: "Telefono alternativo",
-                          required: ""
-                        }
-                      })
-                    ]),
-                    _vm._v(" "),
-                    _c("div", { staticClass: "col-lg-6" }, [
-                      _c("input", {
-                        staticClass: "common-input",
-                        attrs: {
-                          type: "email",
-                          placeholder: "Email",
-                          required: ""
-                        }
-                      })
-                    ]),
-                    _vm._v(" "),
-                    _c("div", { staticClass: "col-lg-6" }, [
-                      _c("input", {
-                        staticClass: "common-input",
-                        attrs: {
-                          type: "file",
-                          placeholder: "Imagen corporativa",
-                          required: ""
-                        }
-                      })
-                    ]),
-                    _vm._v(" "),
-                    _c("div", { staticClass: "col-lg-6" }, [
-                      _c("input", {
-                        staticClass: "common-input",
-                        attrs: {
-                          type: "text",
-                          placeholder: "Web",
-                          required: ""
-                        }
-                      })
-                    ]),
-                    _vm._v(" "),
-                    _c("div", { staticClass: "col-lg-12" }, [
-                      _c("div", { staticClass: "sorting" }, [
-                        _vm._v(" Estado\n                                "),
-                        _c("select", [
-                          _c("option", { attrs: { value: "1" } }, [
-                            _vm._v("District*")
-                          ]),
-                          _vm._v(" "),
-                          _c("option", { attrs: { value: "1" } }, [
-                            _vm._v("Default sorting")
-                          ]),
-                          _vm._v(" "),
-                          _c("option", { attrs: { value: "1" } }, [
-                            _vm._v("Default sorting")
-                          ])
-                        ])
-                      ])
-                    ]),
-                    _vm._v(" "),
-                    _c("div", { staticClass: "col-lg-12" }, [
-                      _c("div", { staticClass: "sorting" }, [
-                        _vm._v(" Provincia\n                                "),
-                        _c("select", [
-                          _c("option", { attrs: { value: "1" } }, [
-                            _vm._v("District*")
-                          ]),
-                          _vm._v(" "),
-                          _c("option", { attrs: { value: "1" } }, [
-                            _vm._v("Default sorting")
-                          ]),
-                          _vm._v(" "),
-                          _c("option", { attrs: { value: "1" } }, [
-                            _vm._v("Default sorting")
-                          ])
-                        ])
-                      ])
-                    ]),
-                    _vm._v(" "),
-                    _c("div", { staticClass: "col-lg-12 text-right" }, [
-                      _c(
-                        "a",
-                        { staticClass: "primary-btn", attrs: { href: "#" } },
-                        [_vm._v("Guardar")]
-                      )
-                    ])
-                  ])
-                ]
-              )
             ])
           ])
         ])
@@ -30613,7 +30482,7 @@ var content = __webpack_require__(58);
 if(typeof content === 'string') content = [[module.i, content, '']];
 if(content.locals) module.exports = content.locals;
 // add the styles to the DOM
-var update = __webpack_require__(3)("404f90e2", content, false, {});
+var update = __webpack_require__(3)("3d4a2cbc", content, false, {});
 // Hot Module Replacement
 if(false) {
  // When the styles change, update the <style> tags
@@ -30649,48 +30518,6 @@ exports.push([module.i, "\n.html5Map[data-v-25ebd9cd] {\n  margin-top: 15px;\n  
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__utilities_EventBus__ = __webpack_require__(4);
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
 //
 //
 //
@@ -30790,234 +30617,95 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c("div", [
-    _c("div", { staticClass: "row", attrs: { id: "tabs" } }, [
-      _vm._m(0),
-      _vm._v(" "),
-      _c("div", { staticClass: "col-lg-9" }, [
-        _c("div", { attrs: { id: "tabs-1" } }, [
-          _c("div", { staticClass: "settings-content" }, [
-            _c("h4", [_vm._v("Crear una nueva Sucursal")]),
-            _vm._v(" "),
-            _c(
-              "form",
-              { staticClass: "billing-form", attrs: { action: "#" } },
-              [
-                _c("div", { staticClass: "row pt-30" }, [
-                  _vm._m(1),
-                  _vm._v(" "),
-                  _vm._m(2),
-                  _vm._v(" "),
-                  _vm._m(3),
-                  _vm._v(" "),
-                  _vm._m(4),
-                  _vm._v(" "),
-                  _vm._m(5),
-                  _vm._v(" "),
-                  _vm._m(6),
-                  _vm._v(" "),
-                  _c("div", { staticClass: "col-lg-4" }, [
-                    _c(
-                      "a",
-                      {
-                        staticClass: "primary-btn geolocation",
-                        on: { click: _vm.html5Location }
-                      },
-                      [_vm._v("Geolocalización HTML5")]
-                    )
-                  ]),
-                  _vm._v(" "),
-                  _vm._m(7),
-                  _vm._v(" "),
-                  _vm._m(8),
-                  _vm._v(" "),
-                  _c("div", {
-                    staticClass: "col-lg-12 html5Map",
-                    attrs: { id: "html5Map" }
-                  }),
-                  _vm._v(" "),
-                  _vm._m(9),
-                  _vm._v(" "),
-                  _vm._m(10),
-                  _vm._v(" "),
-                  _vm._m(11)
-                ])
-              ]
-            )
-          ])
-        ])
-      ])
-    ])
-  ])
+  return _vm._m(0)
 }
 var staticRenderFns = [
   function() {
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "col-lg-3" }, [
-      _c("div", { staticClass: "options-sidebar" }, [
-        _c("h4", { staticClass: "text-uppercase pb-20" }, [
-          _vm._v("Personal Details")
-        ]),
-        _vm._v(" "),
-        _c("ul", [
-          _c("li", [
-            _c("a", { attrs: { href: "#tabs-1" } }, [
-              _vm._v("Presonal Information")
+    return _c("div", [
+      _c("div", { staticClass: "col-lg-12" }, [
+        _c("div", [
+          _c("button", { staticClass: "btn btn-success mb-4" }, [
+            _vm._v("Crear Sucursal")
+          ]),
+          _vm._v(" "),
+          _c("div", { staticClass: "settings-content" }, [
+            _c("h4", [_vm._v("Lista de sucursales")]),
+            _vm._v(" "),
+            _c("div", { staticClass: "responsive" }, [
+              _c("div", { staticClass: "table-responsive" }, [
+                _c(
+                  "table",
+                  {
+                    staticClass:
+                      "table table-hover table-bordered table-striped table-condensed"
+                  },
+                  [
+                    _c("thead", [
+                      _c("tr", [
+                        _c("th", { staticClass: "text-center" }, [
+                          _vm._v("ID Sucursal")
+                        ]),
+                        _vm._v(" "),
+                        _c("th", { staticClass: "text-center" }, [
+                          _vm._v("Nombre")
+                        ]),
+                        _vm._v(" "),
+                        _c("th", { staticClass: "text-center" }, [
+                          _vm._v("Dirección")
+                        ]),
+                        _vm._v(" "),
+                        _c("th", { staticClass: "text-center" }, [
+                          _vm._v("Horario de atención")
+                        ]),
+                        _vm._v(" "),
+                        _c("th", { staticClass: "text-center" }, [
+                          _vm._v("Teléfono principal")
+                        ]),
+                        _vm._v(" "),
+                        _c("th", { staticClass: "text-center" }, [
+                          _vm._v("Teléfono alternativo")
+                        ]),
+                        _vm._v(" "),
+                        _c("th", { staticClass: "text-center" }, [
+                          _vm._v("Imagen")
+                        ]),
+                        _vm._v(" "),
+                        _c("th", { staticClass: "text-center" }, [
+                          _vm._v("Latitud y Longitud")
+                        ]),
+                        _vm._v(" "),
+                        _c("th", { staticClass: "text-center" }, [
+                          _vm._v("Comercio")
+                        ]),
+                        _vm._v(" "),
+                        _c("th", { staticClass: "text-center" }, [
+                          _vm._v("País")
+                        ]),
+                        _vm._v(" "),
+                        _c("th", { staticClass: "text-center" }, [
+                          _vm._v("Estado")
+                        ]),
+                        _vm._v(" "),
+                        _c("th", { staticClass: "text-center" }, [
+                          _vm._v("Ciudad")
+                        ]),
+                        _vm._v(" "),
+                        _c("th", { staticClass: "text-center" }, [
+                          _vm._v("Options")
+                        ])
+                      ])
+                    ]),
+                    _vm._v(" "),
+                    _c("tbody", [_c("tr")])
+                  ]
+                )
+              ])
             ])
-          ]),
-          _vm._v(" "),
-          _c("li", [
-            _c("a", { attrs: { href: "#tabs-2" } }, [_vm._v("Profile")])
-          ]),
-          _vm._v(" "),
-          _c("li", [
-            _c("a", { attrs: { href: "#tabs-3" } }, [_vm._v("Email Settings")])
-          ]),
-          _vm._v(" "),
-          _c("li", [
-            _c("a", { attrs: { href: "#tabs-4" } }, [
-              _vm._v("Saved Credit Card")
-            ])
-          ]),
-          _vm._v(" "),
-          _c("li", [
-            _c("a", { attrs: { href: "#tabs-5" } }, [_vm._v("Social Networks")])
           ])
         ])
-      ])
-    ])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "col-lg-6" }, [
-      _c("input", {
-        staticClass: "common-input",
-        attrs: { type: "text", placeholder: "Nombre", required: "" }
-      })
-    ])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "col-lg-6" }, [
-      _c("input", {
-        staticClass: "common-input",
-        attrs: { type: "text", placeholder: "Dirección", required: "" }
-      })
-    ])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "col-lg-12" }, [
-      _c("input", {
-        staticClass: "common-input",
-        attrs: {
-          type: "text",
-          placeholder: "Horario de atención",
-          required: ""
-        }
-      })
-    ])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "col-lg-6" }, [
-      _c("input", {
-        staticClass: "common-input",
-        attrs: { type: "text", placeholder: "Telefono principal", required: "" }
-      })
-    ])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "col-lg-6" }, [
-      _c("input", {
-        staticClass: "common-input",
-        attrs: {
-          type: "text",
-          placeholder: "Telefono alternativo",
-          required: ""
-        }
-      })
-    ])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "col-lg-12" }, [
-      _c("input", {
-        staticClass: "common-input",
-        attrs: { type: "file", placeholder: "Imagen corporativa", required: "" }
-      })
-    ])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "col-lg-4" }, [
-      _c("a", { staticClass: "primary-btn geolocation" }, [
-        _vm._v("Abrir Maps")
-      ])
-    ])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "col-lg-4" }, [
-      _c("a", { staticClass: "primary-btn geolocation" }, [
-        _vm._v("Escribir dirección")
-      ])
-    ])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "col-lg-12 input-map" }, [
-      _c("input", {
-        staticClass: "common-input",
-        attrs: { type: "text", placeholder: "Ubicación", required: "" }
-      })
-    ])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "col-lg-12" }, [
-      _c("div", { staticClass: "sorting" }, [
-        _vm._v(" Comercio al que pertenece\n                                "),
-        _c("select", [
-          _c("option", { attrs: { value: "1" } }, [_vm._v("District*")]),
-          _vm._v(" "),
-          _c("option", { attrs: { value: "1" } }, [_vm._v("Default sorting")]),
-          _vm._v(" "),
-          _c("option", { attrs: { value: "1" } }, [_vm._v("Default sorting")])
-        ])
-      ])
-    ])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "col-lg-12 text-right" }, [
-      _c("a", { staticClass: "primary-btn", attrs: { href: "#" } }, [
-        _vm._v("Guardar")
       ])
     ])
   }

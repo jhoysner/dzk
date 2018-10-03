@@ -2,8 +2,12 @@
   <div>
       <div class="col-lg-12">
           <div>
-              <router-link :to="{name: 'discount.create'}" class="btn btn-success mb-4">Create Discount</router-link>
-              <div class="settings-content">
+<!--               <router-link :to="{name: 'discount.create'}" class="btn btn-success mb-4">Create Discount</router-link>
+ -->              
+                    <a class="btn btn-default" data-toggle="modal" href='#modal-agregar-producto'>
+                        <i class="zmdi zmdi-plus"></i> Registrar producto
+                    </a>
+                  <div class="settings-content">
                   <h4>List Discounts</h4>
                 <!-- <spinner :show="loadingProductos"></spinner> -->
                   <div class="responsive">
@@ -39,23 +43,24 @@
                       </div>
 
                       <!-- <pagination :pag="pagination" @anterior="cargarProductos(...arguments)" @siguiente="cargarProductos(...arguments)"></pagination> -->
-
+                    
                 </div>
               </div>
           </div>
       </div>
+      <create></create> 
   </div>
 </template>
 <script>
+   import Create from './Create'
+
    export default {
         name: "discount",
-
-        // components: { spinner, pagination },
-
+        components: { Create},
         data() {
             return {
-                // form: { nombre: '', codigo: '', costo_venta: null, stock_minimo: '', stock_total: '' },
-                // errorsProducto: {},
+                form: { nombre: '', codigo: '', costo_venta: null, stock_minimo: '', stock_total: '' },
+                errorsProducto: {},
                 discounts: {},
                 // pagination: {},
                 // loadingProductos: false,

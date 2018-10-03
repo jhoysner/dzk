@@ -39,15 +39,15 @@
 	</div>
 
     <script src="{{ asset('/js/vendor/jquery-2.2.4.min.js') }}"></script>
- {{--    <script src="{{ asset('/js/popper.min.js') }}"></script>
+    <script src="{{ asset('/js/popper.min.js') }}"></script>
     <script src="{{ asset('/js/vendor/bootstrap.min.js') }}"></script>
     <script src="{{ asset('/js/easing.min.js') }}"></script>
     <script src="{{ asset('/js/superfish.min.js') }}"></script>
     <script src="{{ asset('/js/jquery.ajaxchimp.min.js') }}"></script>
     <script src="{{ asset('/js/jquery.nice-select.min.js') }}"></script>
     <script src="{{ asset('/js/jquery-ui.js') }}"></script>
-    <script src="{{ asset('/js/Chart.min.js') }}"></script> --}}
-    {{-- <script src="{{ asset('/js/main.js') }}"></script> --}}
+    <script src="{{ asset('/js/Chart.min.js') }}"></script>
+    <script src="{{ asset('/js/main.js') }}"></script>
     <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?v3&key=AIzaSyBnSDDT8mnv1_cDX_iZmaEaYy6qp63be1E"></script>
     <script src="{{ asset('js/app.js') }}"></script>
 </body>

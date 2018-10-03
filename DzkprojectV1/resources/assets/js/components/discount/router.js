@@ -16,10 +16,10 @@ export default [
 
     // ],
   },
-  {
-    path: '/discount-create',
-    name: 'discount.create',
-    component: Create,
+  // {
+  //   path: '/discount-create',
+  //   name: 'discount.create',
+  //   component: Create,
 
-  },
+  // },
 ];

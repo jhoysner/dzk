@@ -21,6 +21,7 @@ const baseRoutes = [
             path: '/branchs',
             component: Branchs
         },
+ 
 ];
 
 

@@ -2,7 +2,7 @@
   <div>
     <div class="col-lg-12">
         <div>
-            <button class="btn btn-success mb-4">Crear Comercio</button>
+            <a class="btn btn-success mb-4" data-toggle="modal" href='#add-commerce'>Crear Comercio</a>
             <div class="settings-content">
                 <h4>Lista de comercios</h4>
               <!-- <spinner :show="loadingProductos"></spinner> -->
@@ -35,12 +35,18 @@
             </div>
         </div>
     </div>
+    <Create/>
   </div>
 </template>
 <script>
 import Bus from '../../utilities/EventBus';
+import Create from './Create';
+
 export default {
   name: "",
+  components: {
+    Create
+  },
   data() {
     return {
 

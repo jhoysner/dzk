@@ -19,3 +19,4 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 
 
 Route::resource('discount','Discount\DiscountController');
+Route::resource('commerce', 'Commerce\CommercesController');

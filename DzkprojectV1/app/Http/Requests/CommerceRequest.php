@@ -24,12 +24,12 @@ class CommerceRequest extends FormRequest
     public function rules()
     {
         return [
-          'idcommerce'        => 'required',
+          //'idcommerce'        => 'required',
           'name'              => 'required',
           'phone1'            => 'numeric|required',
           'phone2'            => 'numeric|required',
-          'email'             => 'required|email',
-          'image'             => 'mimes:jpg, jpeg, png, bmp',
+          'email'             => 'required|email|unique:commerce,email',
+          'image'             => 'required',
           'web'               => 'required',
           'country_idcountry' => 'required',
           'state_idstate'     => 'required',

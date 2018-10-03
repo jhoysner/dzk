@@ -2,7 +2,7 @@
   <div>
     <div class="col-lg-12">
         <div>
-            <button class="btn btn-success mb-4">Crear Sucursal</button>
+            <a class="btn btn-success mb-4" data-toggle="modal" href='#add-branch'>Crear Sucursal</a>
             <div class="settings-content">
                 <h4>Lista de sucursales</h4>
               <!-- <spinner :show="loadingProductos"></spinner> -->
@@ -37,13 +37,18 @@
             </div>
         </div>
     </div>
+    <Create/>
   </div>
 </template>
 <script>
 import Bus from '../../utilities/EventBus';
+import Create from './Create';
 
 export default {
   name: "",
+  components: {
+    Create
+  },
   data() {
     return {
 
@@ -59,56 +64,10 @@ export default {
   },
 
   methods: {
-    html5Location() {
-      let html5Map = document.getElementById('html5Map');
 
-      if (navigator.geolocation) {
-        //html5Map.style.display = "block";
-        $('#html5Map').css('display', 'block');
-
-        navigator.geolocation.getCurrentPosition(function(position) {
-          console.log(position.coords);
-          let lat = position.coords.latitude;
-          let ln = position.coords.longitude;
-
-          let gLatLn = new google.maps.LatLng( lat, ln );
-          let objConfig = {
-            zoom: 14,
-            center: gLatLn
-          };
-
-          let gMap = new google.maps.Map( html5Map, objConfig );
-          let objConfigMarker = {
-            position: gLatLn,
-            map: gMap
-          };
-          let gMarker = new google.maps.Marker( objConfigMarker );
-        });
-      } else {
-          console.log("Geolocation is not supported by this browser.");
-      }
-    },
   }
 }
 </script>
 <style lang="scss" scoped>
-  .html5Map {
-    margin-top: 15px;
-    width: 100%;
-    height: 200px;
-    display: none;
-  }
 
-  .geolocation {
-    cursor: pointer;
-    color: #FFF !important;
-  }
-
-  .geolocation:hover {
-    color: #42b0f2 !important;
-  }
-
-  .input-map {
-    display: none;
-  }
 </style>

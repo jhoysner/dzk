@@ -43,7 +43,7 @@ import Bus from '../../utilities/EventBus';
 import Create from './Create';
 
 export default {
-  name: "",
+  name: "create",
   components: {
     Create
   },

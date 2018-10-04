@@ -35,31 +35,34 @@
                         </div>
                         <div class="col-lg-12">
                             <div class="sorting"> País
-                                <select class="form-control common-input" v-model="form.country_idcountry">
-                                    <option value="1">Colombia</option>
-                                    <option value="2">Venezuela</option>
-                                    <option value="3">Perú</option>
+                                <select class="form-control common-input" v-model="form.country_idcountry" @change="getStates()">
+                                    <option v-for="country in countries" :value="country.id">
+                                      {{ country.name }}
+                                    </option>
                                 </select>
+                                <small class="text-danger" v-if="error.country_idcountry">{{ error.country_idcountry[0] }}</small>
                             </div>
                         </div>
 
                         <div class="col-lg-12">
                             <div class="sorting"> Estado
-                                <select class="form-control common-input" v-model="form.state_idstate">
-                                    <option value="1">District*</option>
-                                    <option value="1">Default sorting</option>
-                                    <option value="1">Default sorting</option>
+                                <select class="form-control common-input" v-model="form.state_idstate" @change="getCities()">
+                                  <option v-for="state in states" :value="state.id">
+                                    {{ state.name }}
+                                  </option>
                                 </select>
+                                <small class="text-danger" v-if="error.state_idstate">{{ error.state_idstate[0] }}</small>
                             </div>
                         </div>
 
                         <div class="col-lg-12">
                             <div class="sorting"> Ciudad
                                 <select class="form-control common-input" v-model="form.city_idcity">
-                                    <option value="1">District*</option>
-                                    <option value="1">Default sorting</option>
-                                    <option value="1">Default sorting</option>
+                                  <option v-for="city in cities" :value="city.id">
+                                    {{ city.name }}
+                                  </option>
                                 </select>
+                                <small class="text-danger" v-if="error.city_idcity">{{ error.city_idcity[0] }}</small>
                             </div>
                         </div>
 
@@ -67,20 +70,19 @@
                             <div class="sorting"> Categoría
                                 <select class="form-control common-input" v-model="form.commercecategory_idcommercecategory">
                                     <option value="1">Category 1</option>
-                                    <option value="1">Category 2</option>
-                                    <option value="1">Category 3</option>
-                                    <option value="1">Category 4</option>
-                                    <option value="1">Category 5</option>
+                                    <option value="2">Category 2</option>
+                                    <option value="3">Category 3</option>
+                                    <option value="4">Category 4</option>
+                                    <option value="5">Category 5</option>
                                 </select>
+                                <small class="text-danger" v-if="error.commercecategory_idcommercecategory">{{ error.commercecategory_idcommercecategory[0] }}</small>
                             </div>
                         </div>
                         <div class="col-lg-12 text-right">
                             <button type="submit" class="btn btn-primary"><i class="zmdi zmdi-plus"></i> Guardar</button>
                         </div>
                       </div>
-
                     </div>
-
                 </div>
             </form>
           </div>
@@ -109,8 +111,16 @@ import axios from 'axios';
               },
               url: '/commerce',
               error: {},
+              countries: [],
+              states: [],
+              cities: []
             }
         },
+
+        created() {
+          this.getCountries();
+        },
+
         methods: {
           getImage(e) {
             let image = e.target.files[0];
@@ -134,6 +144,30 @@ import axios from 'axios';
 	                this.error = err.response.data.errors;
 	            }
             });
+          },
+
+          getCountries() {
+            axios.get('api/countries').then(data => {
+              this.countries = data.data;
+              this.form.country_idcountry = data.data[0].id;
+            })
+            .catch(err => console.log(err))
+          },
+
+          getStates() {
+            axios.get('api/states/' + this.form.country_idcountry).then(data => {
+              this.states = data.data;
+              this.form.state_idstate = data.data[0].id;
+            })
+            .catch(err => console.log(err))
+          },
+
+          getCities() {
+            axios.get('api/cities/' + this.form.state_idstate).then(data => {
+              this.cities = data.data;
+              this.form.city_idcity = data.data[0].id;
+            })
+            .catch(err => console.log(err))
           }
         }
 

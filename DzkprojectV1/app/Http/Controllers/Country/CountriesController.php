@@ -1,8 +1,10 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Country;
 
 use Illuminate\Http\Request;
+use App\Http\Controllers\Controller;
+
 use App\Country;
 use App\State;
 use App\City;
@@ -16,7 +18,7 @@ class CountriesController extends Controller
     $data = [];
 
     $data[0] = [
-      'id' => 0,
+      'id' => '',
       'name' => 'Select Country'
     ];
 
@@ -34,10 +36,10 @@ class CountriesController extends Controller
   {
     $states = State::where('country_idcountry','=',$id)->get();
 
-  $data = [];
+    $data = [];
 
     $data[0] = [
-      'id' => 0,
+      'id' => '',
       'name' => 'Select State'
     ];
 
@@ -59,7 +61,7 @@ class CountriesController extends Controller
   $data = [];
 
     $data[0] = [
-      'id' => 0,
+      'id' => '',
       'name' => 'Select City'
     ];
 

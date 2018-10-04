@@ -53,7 +53,7 @@ class CommercesController extends Controller
         file_put_contents($path, $decoded);
       }
 
-      /*$data = [
+      $data = [
         'idcommerce'  => str_random(36),
         'name'        => $request->name,
         'phone1'      => $request->phone1,
@@ -73,7 +73,7 @@ class CommercesController extends Controller
           return response()->json(['error' => 'No se pudo guardar el registro'], 422);
       }
 
-      return response()->json($commerce,  201);*/
+      return response()->json($commerce,  201);
     }
 
     /**

@@ -20,3 +20,7 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 
 Route::resource('discount','Discount\DiscountController');
 Route::resource('commerce', 'Commerce\CommercesController');
+
+Route::get('countries', 'Country\CountriesController@getCountries');
+Route::get('states/{id}', 'Country\CountriesController@getStates');
+Route::get('cities/{id}', 'Country\CountriesController@getCities');

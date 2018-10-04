@@ -42,16 +42,14 @@ class DiscountController extends Controller
    
         $fields = $request->all();
 
-        $discount = Discount::create($fields); 
+        $fields['iddiscount'] = str_random(36);
 
-        $discount = fractal( $discount )
-                ->transformWith(new DiscountTransformer)
-                ->toArray();
+        $discount = Discount::create($fields); 
 
         if ( !$discount )
             return response()->json(['error' => 'No se pudo guardar el registro'], 422);
 
-        return response()->json($discount,  201);
+        return response()->json(['data'=> $discount], 201);
 
     }
 

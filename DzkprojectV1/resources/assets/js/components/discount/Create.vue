@@ -1,6 +1,6 @@
 <template>
     <div>
-        <div class="modal fade" id="modal-agregar-producto">
+        <div class="modal fade" id="modal-agregar-discount">
             <div class="modal-dialog">
                 <form @submit.prevent="saveDiscount">
                     <div class="modal-content">
@@ -9,16 +9,9 @@
                         </div>
                         <div class="modal-body">
 
-                            <div class="form-group" :class="{ 'has-danger' : errorsDiscount.iddiscount }">
-                                <label>Id</label>
-                                <input type="text" class="form-control" v-model="form.iddiscount" autofocus>
-            
-                            </div>
-                            <span class="text-danger" v-if="!!errorsDiscount.iddiscount"> {{errorsDiscount.iddiscount[0]}} </span>
-
                             <div class="form-group" :class="{ 'has-danger' : errorsDiscount.title }">
                                 <label>Title</label>
-                                <input type="text" class="form-control" v-model="form.title">
+                                <input type="text" class="form-control" v-model="form.title" autofocus="">
                             </div>
                             <span class="text-danger" v-if="!!errorsDiscount.title"> {{errorsDiscount.title[0]}} </span>
 
@@ -47,7 +40,7 @@
                             <span class="text-danger" v-if="!!errorsDiscount.enddate"> {{errorsDiscount.enddate[0]}} </span>                            
                             <div class="form-group" :class="{ 'has-danger' : errorsDiscount.outstanding }">
                                 <label>outstanding</label>
-                                 <input type="number" class="form-control"  v-model="form.startdate" >
+                                 <input type="number" class="form-control"  v-model="form.outstanding" >
                             </div>
                             <span class="text-danger" v-if="!!errorsDiscount.outstanding"> {{errorsDiscount.outstanding[0]}} </span>
 
@@ -117,29 +110,48 @@
         data() {
             return {
                 form: { 
-                  iddiscount: '', 
+                  // iddiscount: '', 
                   title: '', 
-                  image: '', 
+                  image: 'ddsa', 
                   startdate: '', 
                   enddate: '', 
                   outstanding: '', 
                   conditions: '', 
                   restrictions: '', 
                   amountapproved: '', 
-                  amountavailable: '', 
-                  amountredeemed: '', 
+                  amountavailable: 0, 
+                  amountredeemed: 0, 
                   normalprice: '', 
                   discountprice: '', 
                   discountpercentage: '', 
                   discountcategory_iddiscountcategory: '', 
                 },
+                url: '/discount',
                 errorsDiscount: {},
+
             }
         },
         methods: {
             saveDiscount() {
-              
-              console.log(this.form);
+
+                axios.post('api/discount/',this.form,)
+                .then(response => { 
+                    console.log('bien')
+                    this.form = {}
+                    this.$parent.cargarDiscount()
+                    $('#modal-agregar-discount').remove()
+                    $('.modal-backdrop').remove();
+                    $(document.body).removeClass("modal-open");
+                    // swal({
+                    //   title: 'Ok!',
+                    //   text: response.data.mensaje,
+                    //   type: response.data.type
+                    // })
+
+                })
+                .catch(error => {
+                    console.log(error.response)
+                });
             },
 
         }

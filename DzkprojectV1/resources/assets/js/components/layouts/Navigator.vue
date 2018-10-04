@@ -1,7 +1,7 @@
 <template>
   <div>
     <div class="row justify-content-center">
-      <div class="col-lg-12 usr-menu pb-120" id="usr-menu">
+      <div class="col-lg-12 usr-menu pb-50" id="usr-menu">
         <!-- details Tab navs -->
         <ul class="top-nav d-flex justify-content-center offwhite-color-bg">
             <li>

@@ -24,7 +24,7 @@ class DiscountRequest extends FormRequest
     public function rules()
     {
         return [
-            'iddiscount' => 'required',
+            // 'iddiscount' => 'required',
             'title' => 'required',
             'description' => 'required',
             'image' => 'required',

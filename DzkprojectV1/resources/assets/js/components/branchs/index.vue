@@ -42,12 +42,12 @@
 </template>
 <script>
 import Bus from '../../utilities/EventBus';
-import Create from './Create';
+// import Create from './Create';
 
 export default {
   name: "",
   components: {
-    Create
+    // Create
   },
   data() {
     return {

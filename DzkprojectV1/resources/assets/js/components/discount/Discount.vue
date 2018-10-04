@@ -4,8 +4,8 @@
           <div>
 <!--               <router-link :to="{name: 'discount.create'}" class="btn btn-success mb-4">Create Discount</router-link>
  -->              
-                    <a class="btn btn-default" data-toggle="modal" href='#modal-agregar-producto'>
-                        <i class="zmdi zmdi-plus"></i> Registrar producto
+                    <a class="btn btn-success mb-4" data-toggle="modal" href='#modal-agregar-discount'>
+                       ADD DISCOUNT
                     </a>
                   <div class="settings-content">
                   <h4>List Discounts</h4>
@@ -59,7 +59,7 @@
         components: { Create},
         data() {
             return {
-                form: { nombre: '', codigo: '', costo_venta: null, stock_minimo: '', stock_total: '' },
+                // form: { nombre: '', codigo: '', costo_venta: null, stock_minimo: '', stock_total: '' },
                 errorsProducto: {},
                 discounts: {},
                 // pagination: {},
@@ -87,12 +87,12 @@
                 // this.loadingProductos = true
 
                 // console.log(window.BaseUrl+'/api/discount');
-                  axios.get('http://dzkproject.com/api/discount/')
+                  axios.get('api/discount/')
                     .then((response) => {
                         // this.loadingProductos = false
                         this.discounts = response.data.data
                         // this.pagination = response.data.meta.pagination
-                        console.log(response.data.data);
+                        // console.log(response.data.data);
                     })
                     .catch((err) => {
                         // this.loadingProductos = false

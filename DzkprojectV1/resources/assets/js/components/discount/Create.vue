@@ -1,15 +1,11 @@
 <template>
     <div>
-        <div class="modal fade" id="modal-agregar-discount">
-            <div class="modal-dialog">
+        <b-modal v-model="show" id="createModal" ref="createtModal" title="Create Discount" hide-footer>
                 <form @submit.prevent="saveDiscount">
                     <div class="modal-content">
-                        <div class="modal-header">
-                            <h4 class="modal-title"> ADD DISCOUNT</h4>
-                        </div>
                         <div class="modal-body">
 
-                            <div class="form-group" :class="{ 'has-danger' : errorsDiscount.title }">
+                            <div class="form-group" :class="{ 'is-invalid' : errorsDiscount.title }">
                                 <label>Title</label>
                                 <input type="text" class="form-control" v-model="form.title" autofocus="">
                             </div>
@@ -20,7 +16,7 @@
                                 <input type="text" class="form-control" v-model="form.description">
                             </div>
                             <span class="text-danger" v-if="!!errorsDiscount.description"> {{errorsDiscount.description[0]}} </span>
-<!-- 
+                            <!-- 
                             <div class="form-group" :class="{ 'has-danger' : errorsDiscount.image }">
                                 <label>Image</label>
                                  <input type="file" placeholder="image"  class="form-control" v-model="form.image">
@@ -94,19 +90,24 @@
                             
                         </div>
                         <div class="modal-footer">
-                            <button type="button" class="btn btn-default" data-dismiss="modal">Cancelar</button>
+                            <b-btn  @click="show=false">Close</b-btn>
                             <button type="submit" class="btn btn-primary"><i class="zmdi zmdi-plus"></i> Save Discount</button>
                         </div>
                     </div>
                 </form>
-            </div>
-        </div>
+        </b-modal> 
     </div>
 </template>
 
 <script>
+   import bModal from 'bootstrap-vue/es/components/modal/modal'
+   import bModalDirective from 'bootstrap-vue/es/directives/modal/modal'
+
+
     export default {
         name: "create",
+        components: {'b-modal': bModal},
+        directives: {'b-modal': bModalDirective},
         data() {
             return {
                 form: { 
@@ -128,20 +129,21 @@
                 },
                 url: '/discount',
                 errorsDiscount: {},
+                show: false,
+
 
             }
         },
         methods: {
             saveDiscount() {
-
+                this.errorsDiscount = {}
                 axios.post('api/discount/',this.form,)
                 .then(response => { 
                     console.log('bien')
                     this.form = {}
                     this.$parent.cargarDiscount()
-                    $('#modal-agregar-discount').remove()
-                    $('.modal-backdrop').remove();
-                    $(document.body).removeClass("modal-open");
+                    this.$refs.createModal.hide()
+
                     // swal({
                     //   title: 'Ok!',
                     //   text: response.data.mensaje,
@@ -150,7 +152,11 @@
 
                 })
                 .catch(error => {
-                    console.log(error.response)
+                    // console.log(error.response.data.errors)
+                     let errors = this.$laravelErrors.handle(error)
+                     this.errorsDiscount = errors.errors.errors
+                     console.log(this.errorsDiscount)
+
                 });
             },
 

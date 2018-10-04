@@ -4,10 +4,9 @@
           <div>
 <!--               <router-link :to="{name: 'discount.create'}" class="btn btn-success mb-4">Create Discount</router-link>
  -->              
-                    <a class="btn btn-success mb-4" data-toggle="modal" href='#modal-agregar-discount'>
-                       ADD DISCOUNT
-                    </a>
-                  <div class="settings-content">
+                  <b-btn v-b-modal.createModal>Create Dicount</b-btn>
+
+                  <div class="settings-content mt-4">
                   <h4>List Discounts</h4>
                 <!-- <spinner :show="loadingProductos"></spinner> -->
                   <div class="responsive">
@@ -34,7 +33,10 @@
                                       <td class="text-center">{{ discount.enddate }}</td>
                                       <td class="text-right">
                                           <button type="button" @click="detailsDiscount(discount)" class="btn btn-sm  btn-default"> Detalles</button>
+ 
                                           <button type="button" @click="editDiscount(discount)" class="btn  btn-sm  btn-info"> Editar</button>
+                                      
+
                                           <button type="button" @click="confirm(discount)" class="btn btn-sm  btn-danger">Eliminar</button>
                                       </td>
                                   </tr>
@@ -50,16 +52,12 @@
       </div>
       <create></create> 
       <!-- modal edit -->
-        <div class="modal fade" id="modal-edit-discount">
-            <div class="modal-dialog">
-                <form  @submit.prevent="updatedDiscount">
+        <b-modal v-model="showEdit" ref="editModal" title="Edit Discount"hide-footer>
+            <form  @submit.prevent="updatedDiscount">
                     <div class="modal-content">
-                        <div class="modal-header">
-                            <h4 class="modal-title"> Edit Discount {{tmpDiscount.iddiscount}}</h4>
-                        </div>
                         <div class="modal-body">
 
-                            <div class="form-group" :class="{ 'has-danger' : errorsDiscount.title }">
+                            <div class="form-group" :class="{ 'is-invalid' : errorsDiscount.title}">
                                 <label>Title</label>
                                 <input type="text" class="form-control" v-model="tmpDiscount.title" autofocus="">
                             </div>
@@ -70,7 +68,7 @@
                                 <input type="text" class="form-control" v-model="tmpDiscount.description">
                             </div>
                             <span class="text-danger" v-if="!!errorsDiscount.description"> {{errorsDiscount.description[0]}} </span>
-<!-- 
+                            <!--
                             <div class="form-group" :class="{ 'has-danger' : errorsDiscount.image }">
                                 <label>Image</label>
                                  <input type="file" placeholder="image"  class="form-control" v-model="tmpDiscount.image">
@@ -144,22 +142,16 @@
                             
                         </div>
                         <div class="modal-footer">
-                            <button type="button" class="btn btn-default" data-dismiss="modal">Cancelar</button>
+                            <b-btn  @click="showEdit=false">Close</b-btn>
                             <button type="submit" class="btn btn-primary"><i class="zmdi zmdi-plus"></i> Save Discount</button>
                         </div>
                     </div>
                 </form>
-            </div>
-        </div>
-
+        </b-modal>
         <!-- modal detalle -->
-        <div class="modal fade" id="modal-detail-discount">
-            <div class="modal-dialog">
+        <b-modal ref="detailtModal" title="Detail Discount" ok-only>
                 <form  @submit.prevent="updatedDiscount">
                     <div class="modal-content">
-                        <div class="modal-header">
-                            <h4 class="modal-title"> Detail Discount {{tmpDiscount.iddiscount}}</h4>
-                        </div>
                         <div class="modal-body">
 
                             <div class="form-group">
@@ -233,21 +225,21 @@
                             </div>
                             
                         </div>
-                        <div class="modal-footer">
-                            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                        </div>
                     </div>
                 </form>
-            </div>
-        </div>
+        </b-modal>
   </div>
 </template>
 <script>
    import Create from './Create'
+   import bModal from 'bootstrap-vue/es/components/modal/modal'
+   import bModalDirective from 'bootstrap-vue/es/directives/modal/modal'
+
 
    export default {
         name: "discount",
-        components: { Create},
+        components: { Create, 'b-modal': bModal},
+        directives: {'b-modal': bModalDirective},
         data() {
             return {
                form: { 
@@ -270,17 +262,12 @@
                 errorsDiscount: {},
                 discounts: {},
                 tmpDiscount: {},
+                showEdit: false
             }
         },
 
         mounted() {
             this.cargarDiscount();
-        },
-
-        watch: {
-            query() {
-                this.cargarDiscount()
-            }
         },
 
         methods: {
@@ -293,35 +280,37 @@
                         this.discounts = response.data.data
                         // this.pagination = response.data.meta.pagination
                         // console.log(response.data.data);
-                    })
+                    })  
                     .catch((err) => {
                         // this.loadingProductos = false
                         // let errors = this.$laravelErrors.handle(err)
                         // this.errorsProducto = errors.errors
                         console.log(err);
                     });
-            },            
+            },                        
             editDiscount(discount) {
-                // this.errorsProducto = {}
+                this.errorsDiscount = {}
                 this.tmpdDiscount = {}
                 this.tmpDiscount = discount
                 this.tmpDiscount.enddate =''
                 this.tmpDiscount.startdate =''
-                window.$("#modal-edit-discount").modal("show")
-            },
+                this.$refs.editModal.show()
+
+            },        
             updatedDiscount() {
-                this.errorsProducto = {};
+                this.errorsDiscount = {};
                 axios.patch(`/api/discount/${this.tmpDiscount.iddiscount}`, this.tmpDiscount)
                     .then((response) => {
                         this.tmpDiscount = {}
-                        // this.loadingProductos = true
                         this.cargarDiscount()
-                        $('#modal-edit-discount').remove()
-                        $('.modal-backdrop').remove();
-                        $(document.body).removeClass("modal-open");
+                        // this.loadingProductos = true
+                        this.$refs.editModal.hide()
+                        console.log('todo bien')
                     })
                    .catch(error => {
-                        console.log(error.response)
+                     console.log(error.response)
+                     let errors = this.$laravelErrors.handle(error)
+                     this.errorsDiscount = errors.errors.errors
                     });
             },
 
@@ -329,9 +318,38 @@
                 // this.errorsProducto = {}
                 this.tmpDiscount = {}
                 this.tmpDiscount = discount
-                window.$("#modal-detail-discount").modal("show")
-            },
+                this.$refs.detailtModal.show()
 
+            },
+            confirm(discount) {
+                swal({
+                    title: "¿Seguro de eliminar el producto?",
+                    text: "Una vez eliminado, no podras recuperarlo.",
+                    type: "warning",
+                    showCancelButton: true,
+                    confirmButtonColor: '#3085d6',
+                    cancelButtonColor: '#d33',
+                    confirmButtonText: 'Si, eliminar!'
+                })
+                .then((response) => {
+                    if (response) {
+                        this.deleteDiscount(discount)
+                    }
+                })
+            },
+            deleteDiscount(discount) {
+                // this.errorsProducto = {}
+                // axios.delete(`/api/discount/${discount.iddiscount}`)
+                //     .then((response) => {
+                //         swal(
+                //             response.data.title,
+                //             response.data.msg,
+                //             response.data.type
+                //         )
+                //         setTimeout(() => this.cargarDsiscount(), 1000)
+                //     })
+                //     .catch((err) => console.log(err))
+            },
         }
     }
 </script>

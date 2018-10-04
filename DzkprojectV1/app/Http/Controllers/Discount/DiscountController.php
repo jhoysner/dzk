@@ -84,7 +84,7 @@ class DiscountController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(DiscountRequest $request, $id)
     {
         $discount = Discount::find($id);
 

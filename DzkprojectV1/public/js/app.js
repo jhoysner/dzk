@@ -30375,7 +30375,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
-  name: "create",
+  name: "commerce",
   components: {
     Create: __WEBPACK_IMPORTED_MODULE_1__Create___default.a
   },
@@ -32222,7 +32222,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 // import Create from './Create';
 
 /* harmony default export */ __webpack_exports__["default"] = ({
-  name: "",
+  name: "branch",
   components: {
     // Create
   },

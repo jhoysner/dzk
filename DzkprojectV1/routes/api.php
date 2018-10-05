@@ -16,3 +16,8 @@ use Illuminate\Http\Request;
 Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
 });
+
+//$this->post('login', 'Auth\LoginController@authenticate');
+//$this->post('profile', 'UserController@updateProfile');
+
+Route::get('prueba','CountryController@prueba');

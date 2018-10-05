@@ -3,10 +3,15 @@
 namespace App\Http\Controllers\Auth;
 
 use App\User;
+use DB;
+use Carbon\Carbon;
 use App\Http\Controllers\Controller;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Foundation\Auth\RegistersUsers;
+use Mail;
+
 
 class RegisterController extends Controller
 {
@@ -28,7 +33,7 @@ class RegisterController extends Controller
      *
      * @var string
      */
-    protected $redirectTo = '/home';
+    protected $redirectTo = '';
 
     /**
      * Create a new controller instance.
@@ -49,9 +54,13 @@ class RegisterController extends Controller
     protected function validator(array $data)
     {
         return Validator::make($data, [
-            'name' => 'required|string|max:255',
+            'firstname' => 'required|string|max:255',
+            'lastname' => 'required|string|max:255',
             'email' => 'required|string|email|max:255|unique:users',
             'password' => 'required|string|min:6|confirmed',
+            'country_id' => 'required|string',
+            'state_id' => 'required|string',
+            'city_id' => 'required|string'
         ]);
     }
 
@@ -63,10 +72,90 @@ class RegisterController extends Controller
      */
     protected function create(array $data)
     {
-        return User::create([
-            'name' => $data['name'],
+
+
+        $user = User::create([
+            'firstname' => $data['firstname'],
+            'lastname' => $data['lastname'],
             'email' => $data['email'],
             'password' => Hash::make($data['password']),
+            'country_idcountry' => $data['country_id'],
+            'state_idstate' => $data['state_id'],
+            'city_idcity' => $data['city_id'],
         ]);
+
+        return $user;
     }
+
+
+    public function register(Request $request)
+    {
+        $validator = $this->validator($request->all());
+
+        if($validator->fails()) {
+            return response()->json(['error'=>$validator->errors()], 422);
+        }
+
+        $request['access_token'] = str_random(30);
+
+        $user = DB::table('users')->insertGetId(
+            array(
+                'id' => bin2hex(random_bytes(4)),
+                'firstname' => $request->firstname,
+                'lastname' => $request->lastname,
+                'email' => $request->email,
+                'password' => Hash::make($request->password),
+                'access_token' => $request->access_token,
+                'country_idcountry'=>$request->country_id,
+                'state_idstate'=>$request->state_id,
+                'city_idcity'=>$request->city_id,
+                'created_at'=> Carbon::now()->toDateTimeString()
+                )
+        );
+
+        $data = [
+            'email' => $request->email,
+            'firstname' =>  $request->firstname,
+            'lastname' => $request->lastname,
+            'access_token' => $request->access_token
+        ];
+
+        Mail::send('email.registro', $data, function($message) use ($data) {
+            $message->from(\Config::get('mail.from.address'),\Config::get('mail.from.name'));
+            $message->to($data['email']);
+            $message->subject('Activate you users accounts');
+        });
+
+        return response()->json(['success'=>'Se ha enviado un correo para la activación de la cuenta. Por favor revisa su correo'], 201);
+    }
+
+
+    public function emailValidation($code) 
+    {
+        return view('auth.activation');
+    }
+
+    public function activationAccount(Request $request) 
+    {
+        $token = $request->token;
+
+        $user = User::where('access_token','=', $token)->first();
+
+        if(!$user) {
+            return response()->json(['error'=>'Token not valid'], 422);
+        }
+
+        $user->status = 1;
+        $user->access_token = str_random(30);
+        $user->save();
+
+        return response()->json(['success'=>'Account user activate', 'user'=>$user], 200);
+    }
+
+
+    
+
+
+
+
 }

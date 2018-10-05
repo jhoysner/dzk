@@ -19,9 +19,17 @@ class User extends Authenticatable
      *
      * @var array
      */
+    
+    protected $primarykey = ['id'];
     protected $fillable = [
-        'name', 'email', 'password',
+        'firstname', 'middlename', 'lastname', 'birthday', 'phone', 'image', 'email', 'password', 
+        'address', 'latitude', 'longitude', 'provider', 'provider_id', 'access_token', 'lastlogin', 
+        'attemps', 'status', 'city_idcity', 'state_idstate', 'country_idcountry','password'
     ];
+
+    public $incrementing = false;
+
+
 
 
     /**
@@ -30,6 +38,6 @@ class User extends Authenticatable
      * @var array
      */
     protected $hidden = [
-        'password', 'remember_token',
+         'remember_token',
     ];
 }

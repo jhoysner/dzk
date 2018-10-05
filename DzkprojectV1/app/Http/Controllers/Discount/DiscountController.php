@@ -101,28 +101,37 @@ class DiscountController extends Controller
      */
     public function update(DiscountRequest $request, $id)
     {
-        $discount = Discount::find($id);
+        $discount= Discount::find($id);
+        
 
-        if ($request->image) {
+        $exploded = explode(',', $request->image);
+
+        if ($request->image && count($exploded) > 1) {
+
             if (Storage::disk('discount')->exists($discount->image)) {
                 //se borra la imagen anterior    
                 Storage::disk('discount')->delete($discount->image);
-                //nueva imagen
-                $exploded = explode(',', $request->image);
-                $decoded = base64_decode($exploded[1]);
-                if(str_contains($exploded[0], 'jpeg')) {
-                  $ext = 'jpg';
-                } else {
-                  $ext = 'png';
-                }
-                $filename = str_random().'.'.$ext;
-                Storage::disk('discount')->put($filename, $decoded);
-             }
+            }
+            //nueva imagen
+            $decoded = base64_decode($exploded[1]);
+            if(str_contains($exploded[0], 'jpeg')) {
+              $ext = 'jpg';
+            } else {
+              $ext = 'png';
+            }
+            $filename = str_random().'.'.$ext;
+            Storage::disk('discount')->put($filename, $decoded);
+            
+            $imageName = $filename;
         } 
+        else{
+            $imageName= $discount->image; 
+        }
+        
+        
+        $discount->fill($request->except(['image']));
 
-        $discount->fill($request->all());
-
-        $discount->image = $filename;
+        $discount->image = $imageName;
 
         if ($discount->save()) {
 

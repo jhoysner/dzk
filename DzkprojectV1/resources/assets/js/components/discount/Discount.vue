@@ -84,7 +84,7 @@
                             </div>
 
                              <div class="form-group">
-                                <label>End date {{tmpDiscount.enddate}}</label>
+                                <label>End date</label>
                                  <input type="date"   class="form-control" v-model="tmpDiscount.enddate">
                                  <span class="text-danger" v-if="!!errorsDiscount.enddate"> {{errorsDiscount.enddate[0]}} </span>                            
                             </div>
@@ -285,9 +285,7 @@
                         // console.log(response.data.data);
                     })  
                     .catch((err) => {
-                        // this.loadingProductos = false
-                        // let errors = this.$laravelErrors.handle(err)
-                        // this.errorsProducto = errors.errors
+    
                         console.log(err);
                     });
             },                        
@@ -296,11 +294,15 @@
                 this.errorsDiscount = {}
                 this.tmpdDiscount = {}
                 this.tmpDiscount = discount
-                this.tmpDiscount.enddate = ''
-                this.tmpDiscount.startdate = '' 
+                this.tmpDiscount.startdate = this.formatDate(this.tmpDiscount.startdate);
+                this.tmpDiscount.enddate = this.formatDate(this.tmpDiscount.startdate);
                 this.$refs.editModal.show()
 
             },  
+
+            formatDate(value){
+              return  moment(value).format('YYYY-MM-DD')
+            },
    
             updatedDiscount() {
                 this.errorsDiscount = {};
@@ -311,7 +313,7 @@
                         this.cargarDiscount()
                         // this.loadingProductos = true
                         this.$refs.editModal.hide()
-                        console.log('todo bien')
+                        console.log(response)
                         swal({
                           title: "Actualizado",
                           text: "Registro actualizdo con exito",

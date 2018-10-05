@@ -39772,9 +39772,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
                 // this.pagination = response.data.meta.pagination
                 // console.log(response.data.data);
             }).catch(function (err) {
-                // this.loadingProductos = false
-                // let errors = this.$laravelErrors.handle(err)
-                // this.errorsProducto = errors.errors
+
                 console.log(err);
             });
         },
@@ -39783,9 +39781,12 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
             this.errorsDiscount = {};
             this.tmpdDiscount = {};
             this.tmpDiscount = discount;
-            this.tmpDiscount.enddate = '';
-            this.tmpDiscount.startdate = '';
+            this.tmpDiscount.startdate = this.formatDate(this.tmpDiscount.startdate);
+            this.tmpDiscount.enddate = this.formatDate(this.tmpDiscount.startdate);
             this.$refs.editModal.show();
+        },
+        formatDate: function formatDate(value) {
+            return __WEBPACK_IMPORTED_MODULE_3_moment___default()(value).format('YYYY-MM-DD');
         },
         updatedDiscount: function updatedDiscount() {
             var _this2 = this;
@@ -39797,7 +39798,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
                 _this2.cargarDiscount();
                 // this.loadingProductos = true
                 _this2.$refs.editModal.hide();
-                console.log('todo bien');
+                console.log(response);
                 swal({
                     title: "Actualizado",
                     text: "Registro actualizdo con exito",
@@ -41077,9 +41078,7 @@ var render = function() {
                   ]),
                   _vm._v(" "),
                   _c("div", { staticClass: "form-group" }, [
-                    _c("label", [
-                      _vm._v("End date " + _vm._s(_vm.tmpDiscount.enddate))
-                    ]),
+                    _c("label", [_vm._v("End date")]),
                     _vm._v(" "),
                     _c("input", {
                       directives: [

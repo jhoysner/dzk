@@ -5,19 +5,20 @@ namespace App;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
-class State extends Model
+class CommerceCategory extends Model
 {
-  protected $table = 'state';
+  protected $table = 'commercecategory';
 
-  protected $primaryKey = 'idstate';
+  protected $primaryKey = 'idcommercecategory';
   public $incrementing = false;
 
   protected $dates = ['deleted_at'];
 
   protected $fillable = [
-      'idstate',
+      'idcommercecategory',
       'name',
-      'country_idcountry'
+      'image',
+      'icon'
   ];
 
   protected $hidden  = [
@@ -27,10 +28,5 @@ class State extends Model
   public function commerces()
   {
     return $this->hasMany('App\commerce');
-  }
-
-  public function branchs()
-  {
-    return $this->hasMany('App\Branch');
   }
 }

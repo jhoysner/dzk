@@ -24,15 +24,15 @@ class BranchRequest extends FormRequest
     public function rules()
     {
         return [
-          'idbranch'          => 'required',
+          //'idbranch'          => 'required',
           'name'              => 'required',
           'address'           => 'required',
           'schedule'          => 'required',
           'phone1'            => 'numeric|required',
           'phone2'            => 'numeric|required',
-          'image'             => 'mimes:jpg, jpeg, png, bmp',
-          'latitude'          => 'required|numeric',
-          'longitude'         => 'required|numeric',
+          //'image'             => 'mimes:jpg, jpeg, png, bmp',
+          'latitude'          => 'numeric',
+          'longitude'         => 'numeric',
           'commerce_idcommerce' => 'required',
           'country_idcountry' => 'required',
           'state_idstate'     => 'required',

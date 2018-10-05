@@ -1,14 +1,10 @@
 <template>
     <div>
-        <div class="modal fade" id="add-commerce">
-          <div class="modal-dialog">
-            <form @submit.prevent="store()">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <h4 class="modal-title"> Crea un comercio</h4>
-                    </div>
-                    <div class="modal-body">
-                      <div class="row pt-30">
+        <b-modal v-model="show" id="createModal" ref="createModal" title="Crear Comercio" hide-footer>
+          <form @submit.prevent="store()">
+              <div class="modal-content">
+                  <div class="modal-body">
+                    <div class="row pt-30">
                         <div class="col-lg-12">
                             <input type="text" placeholder="Nombre" v-model="form.name" class="common-input">
                             <small class="text-danger" v-if="error.name">{{ error.name[0] }}</small>
@@ -69,11 +65,9 @@
                         <div class="col-lg-12">
                             <div class="sorting"> Categoría
                                 <select class="form-control common-input" v-model="form.commercecategory_idcommercecategory">
-                                    <option value="1">Category 1</option>
-                                    <option value="2">Category 2</option>
-                                    <option value="3">Category 3</option>
-                                    <option value="4">Category 4</option>
-                                    <option value="5">Category 5</option>
+                                  <option v-for="cc in commerceCategories" :value="cc.idcommercecategory">
+                                    {{ cc.name }}
+                                  </option>
                                 </select>
                                 <small class="text-danger" v-if="error.commercecategory_idcommercecategory">{{ error.commercecategory_idcommercecategory[0] }}</small>
                             </div>
@@ -82,11 +76,11 @@
                             <button type="submit" class="btn btn-primary"><i class="zmdi zmdi-plus"></i> Guardar</button>
                         </div>
                       </div>
-                    </div>
-                </div>
-            </form>
-          </div>
-        </div>
+                      
+                  </div>
+              </div>
+          </form>
+        </b-modal> 
     </div>
 </template>
 
@@ -94,7 +88,6 @@
 import axios from 'axios';
 
     export default {
-        name: "create",
         data() {
             return {
               form: {
@@ -113,12 +106,14 @@ import axios from 'axios';
               error: {},
               countries: [],
               states: [],
-              cities: []
+              cities: [],
+              commerceCategories: [],
             }
         },
 
         created() {
           this.getCountries();
+          this.getCommerceCategories();
         },
 
         methods: {
@@ -136,13 +131,21 @@ import axios from 'axios';
             this.error = {};
 
             axios.post('api' + this.url, this.form)
-  					.then(data => {
-  						console.log(data);
-  					})
-  					.catch(err => {
+            .then(data => {
+              console.log(data);
+              this.$refs.createModal.hide();
+              this.form = {};
+              this.$parent.index()
+              swal({
+                title: "Comercio creado",
+                text: "Comercio creado con exito",
+                icon: "success",
+              })
+            })
+            .catch(err => {
               if(err.response.status === 422) {
-	                this.error = err.response.data.errors;
-	            }
+                  this.error = err.response.data.errors;
+              }
             });
           },
 
@@ -166,6 +169,14 @@ import axios from 'axios';
             axios.get('api/cities/' + this.form.state_idstate).then(data => {
               this.cities = data.data;
               this.form.city_idcity = data.data[0].id;
+            })
+            .catch(err => console.log(err))
+          },
+
+          getCommerceCategories() {
+            axios.get('api/commerce-categories').then(data => {
+              this.commerceCategories = data.data.data;
+              this.form.commercecategory_idcommercecategory = data.data.data[0].idcommercecategory;
             })
             .catch(err => console.log(err))
           }

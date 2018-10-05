@@ -17,9 +17,10 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
 });
 
-
 Route::resource('discount','Discount\DiscountController');
 Route::resource('commerce', 'Commerce\CommercesController');
+Route::resource('branch', 'Branch\BranchsController');
+Route::resource('commerce-categories', 'CommerceCategory\CommerceCategoriesController');
 
 Route::get('countries', 'Country\CountriesController@getCountries');
 Route::get('states/{id}', 'Country\CountriesController@getStates');

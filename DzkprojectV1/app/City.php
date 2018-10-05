@@ -24,4 +24,14 @@ class City extends Model
   protected $hidden  = [
       'created_at', 'updated_at', 'deleted_at',
   ];
+
+  public function commerces()
+  {
+    return $this->hasMany('App\commerce');
+  }
+
+  public function branchs()
+  {
+    return $this->hasMany('App\branchs');
+  }
 }

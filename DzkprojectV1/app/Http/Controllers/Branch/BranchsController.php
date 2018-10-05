@@ -5,6 +5,9 @@ namespace App\Http\Controllers\Branch;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 
+use App\Http\Requests\BranchRequest;
+use App\Branch;
+
 class BranchsController extends Controller
 {
     /**
@@ -14,7 +17,13 @@ class BranchsController extends Controller
      */
     public function index()
     {
-        //
+      $branch = Branch::with('countries')
+        ->with('states')
+          ->with('cities')
+            ->with('commerces')
+              ->get();
+
+      return response()->json(['data'=> $branch], 200);
     }
 
     /**
@@ -33,9 +42,48 @@ class BranchsController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(BranchRequest $request)
     {
-        //
+      if($request->image) {
+        $exploded = explode(',', $request->image);
+        $decoded = base64_decode($exploded[1]);
+
+        if(str_contains($exploded[0], 'jpeg')) {
+          $ext = 'jpg';
+        } else {
+          $ext = 'png';
+        }
+
+        $filename = str_random().'.'.$ext;
+        $path = public_path().'/images/branch/'.$filename;
+        file_put_contents($path, $decoded);
+      } else {
+        $filename = null;
+      }
+
+      $data = [
+        'idbranch'    => str_random(36),
+        'name'        => $request->name,
+        'address'     => $request->address,
+        'schedule'    => $request->schedule,
+        'phone1'      => $request->phone1,
+        'phone2'      => $request->phone2,
+        'image'       => $filename,
+        'latitude'    => $request->latitude,
+        'longitude'   => $request->longitude,
+        'commerce_idcommerce'  => $request->commerce_idcommerce,
+        'country_idcountry'   => $request->country_idcountry,
+        'state_idstate'       => $request->state_idstate,
+        'city_idcity'         => $request->city_idcity,
+      ];
+
+      $branch = Branch::create($data);
+
+      if(!$branch){
+          return response()->json(['error' => 'No se pudo guardar el registro'], 422);
+      }
+
+      return response()->json($branch,  201);
     }
 
     /**
@@ -46,7 +94,14 @@ class BranchsController extends Controller
      */
     public function show($id)
     {
-        //
+      $branch = Branch::where('idbranch', $id)
+        ->with('countries')
+          ->with('states')
+            ->with('cities')
+              ->with('commerces')
+                ->get();
+
+      return response()->json(['data'=> $branch], 200);
     }
 
     /**
@@ -57,7 +112,14 @@ class BranchsController extends Controller
      */
     public function edit($id)
     {
-        //
+      $branch = Branch::where('idbranch', $id)
+        ->with('countries')
+          ->with('states')
+            ->with('cities')
+              ->with('commerces')
+                ->get();
+
+      return response()->json(['data'=> $branch], 200);
     }
 
     /**
@@ -69,7 +131,47 @@ class BranchsController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+      $branch = Branch::find($id);
+
+      if($branch->image != $request->image) {
+        $exploded = explode(',', $request->image);
+        $decoded = base64_decode($exploded[1]);
+
+        if(str_contains($exploded[0], 'jpeg')) {
+          $ext = 'jpg';
+        } else {
+          $ext = 'png';
+        }
+
+        $filename = str_random().'.'.$ext;
+        $path = public_path().'/images/branch/'.$filename;
+        file_put_contents($path, $decoded);
+      } else {
+        $filename = $branch->image;
+      }
+
+      $data = [
+        'name'        => $request->name,
+        'address'     => $request->address,
+        'schedule'    => $request->schedule,
+        'phone1'      => $request->phone1,
+        'phone2'      => $request->phone2,
+        'image'       => $filename,
+        'latitude'    => $request->latitude,
+        'longitude'   => $request->longitude,
+        'commerce_idcommerce'  => $request->commerce_idcommerce,
+        'country_idcountry'   => $request->country_idcountry,
+        'state_idstate'       => $request->state_idstate,
+        'city_idcity'         => $request->city_idcity,
+      ];
+
+      $update = $branch->update($data);
+
+      if(!$branch){
+          return response()->json(['error' => 'No se pudo guardar el registro'], 422);
+      }
+
+      return response()->json($branch,  201);
     }
 
     /**
@@ -80,6 +182,12 @@ class BranchsController extends Controller
      */
     public function destroy($id)
     {
-        //
+      $branch = Branch::destroy($id);
+
+      if(!$branch){
+          return response()->json(['error' => 'No se pudo guardar el registro'], 422);
+      }
+
+      return response()->json(['msg' => 'Sucursal eliminada satisfactoriamente.'], 201);
     }
 }

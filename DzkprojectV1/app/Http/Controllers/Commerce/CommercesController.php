@@ -17,7 +17,13 @@ class CommercesController extends Controller
      */
     public function index()
     {
-        //
+      $commerce = Commerce::with('countries')
+        ->with('states')
+          ->with('cities')
+            ->with('ccategories')
+              ->get();
+
+      return response()->json(['data'=> $commerce], 200);
     }
 
     /**
@@ -51,6 +57,8 @@ class CommercesController extends Controller
         $filename = str_random().'.'.$ext;
         $path = public_path().'/images/commerce/'.$filename;
         file_put_contents($path, $decoded);
+      }else {
+        $filename = null;
       }
 
       $data = [
@@ -84,7 +92,14 @@ class CommercesController extends Controller
      */
     public function show($id)
     {
-        //
+      $commerce = Commerce::where('idcommerce', $id)
+        ->with('countries')
+          ->with('states')
+            ->with('cities')
+              ->with('ccategories')
+                ->get();
+
+        return response()->json($commerce,  201);
     }
 
     /**
@@ -95,7 +110,14 @@ class CommercesController extends Controller
      */
     public function edit($id)
     {
-        //
+      $commerce = Commerce::where('idcommerce', $id)
+        ->with('countries')
+          ->with('states')
+            ->with('cities')
+              ->with('ccategories')
+                ->get();
+
+        return response()->json($commerce,  201);
     }
 
     /**
@@ -107,7 +129,45 @@ class CommercesController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+      $commerce = Commerce::find($id);
+
+      if($commerce->image != $request->image) {
+        $exploded = explode(',', $request->image);
+        $decoded = base64_decode($exploded[1]);
+
+        if(str_contains($exploded[0], 'jpeg')) {
+          $ext = 'jpg';
+        } else {
+          $ext = 'png';
+        }
+
+        $filename = str_random().'.'.$ext;
+        $path = public_path().'/images/commerce/'.$filename;
+        file_put_contents($path, $decoded);
+      } else {
+        $filename = $commerce->image;
+      }
+
+      $data = [
+        'name'        => $request->name,
+        'phone1'      => $request->phone1,
+        'phone2'      => $request->phone2,
+        'email'       => $request->email,
+        'image'       => $filename,
+        'web'         => $request->web,
+        'country_idcountry'   => $request->country_idcountry,
+        'state_idstate'       => $request->state_idstate,
+        'city_idcity'         => $request->city_idcity,
+        'commercecategory_idcommercecategory'  => $request->commercecategory_idcommercecategory,
+      ];
+
+      $update = $commerce->update($data);
+
+      if(!$commerce){
+          return response()->json(['error' => 'No se pudo guardar el registro'], 422);
+      }
+
+      return response()->json($commerce,  201);
     }
 
     /**
@@ -118,6 +178,12 @@ class CommercesController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $commerce = Commerce::destroy($id);
+
+        if(!$commerce){
+            return response()->json(['error' => 'No se pudo guardar el registro'], 422);
+        }
+
+        return response()->json(['msg' => 'Comercio eliminado satisfactoriamente.'], 201);
     }
 }

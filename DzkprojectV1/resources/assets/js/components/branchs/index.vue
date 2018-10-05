@@ -37,7 +37,7 @@
             </div>
         </div>
     </div>
-    <Create/>
+    <!-- <Create/> -->
   </div>
 </template>
 <script>

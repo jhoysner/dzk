@@ -7,7 +7,7 @@
 
                             <div class="form-group" :class="{ 'is-invalid' : errorsDiscount.title }">
                                 <label>Title</label>
-                                <input type="text" class="form-control" v-model="form.title" autofocus="">
+                                <input type="text" class="form-control" v-model="form.title" >
                                 <span class="text-danger" v-if="!!errorsDiscount.title"> {{errorsDiscount.title[0]}} </span>
                             </div>
 
@@ -16,12 +16,13 @@
                                 <input type="text" class="form-control" v-model="form.description">
                                 <span class="text-danger" v-if="!!errorsDiscount.description"> {{errorsDiscount.description[0]}} </span>
                             </div>
-                            <!-- 
+                            
                             <div class="form-group" :class="{ 'has-danger' : errorsDiscount.image }">
                                 <label>Image</label>
-                                 <input type="file" placeholder="image"  class="form-control" v-model="form.image">
+                                <input type="file" placeholder="Imagen corporativa" @change="getImage" accept="image/*" class="common-input">
+                                <span class="text-danger" v-if="!!errorsDiscount.costo_venta"> {{errorsDiscount.image[0]}} </span>                           
+                                <img v-if="!!form.image" :src="form.image" class="avatar" alt="Image">                                  
                             </div>
-                            <span class="text-danger" v-if="!!errorsDiscount.costo_venta"> {{errorsDiscount.image[0]}} </span> -->                           
 
                              <div class="form-group" :class="{ 'has-danger' : errorsDiscount.startdate }">
                                 <label>Start date</label>
@@ -113,7 +114,7 @@
                 form: { 
                   // iddiscount: '', 
                   title: '', 
-                  image: 'ddsa', 
+                  image: '', 
                   startdate: '', 
                   enddate: '', 
                   outstanding: '', 
@@ -148,16 +149,31 @@
                     })
                 })
                 .catch(error => {
-                    // console.log(error)
+                    console.log(error.response.data)
                     this.errorsDiscount = error.response.data.errors;
                      // let errors = this.$laravelErrors.handle(error)
                      // this.errorsDiscount = errors.errors.errors
                      // console.log(this.errorsDiscount)
 
                 });
+            },         
+            getImage(e) {
+              let image = e.target.files[0];
+              let reader = new FileReader();
+
+              reader.readAsDataURL(image);
+              reader.onload = e => {
+                this.form.image = e.target.result;
+              }
             },
 
         }
 
     }
 </script>
+
+<style>
+  .avatar{
+    width: 20%;
+  }
+</style>

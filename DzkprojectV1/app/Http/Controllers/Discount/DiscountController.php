@@ -5,7 +5,9 @@ namespace App\Http\Controllers\Discount;
 use App\Discount;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\DiscountRequest;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
 
 class DiscountController extends Controller
 {
@@ -39,10 +41,24 @@ class DiscountController extends Controller
      */
     public function store(DiscountRequest $request)
     {   
-   
+        if($request->image) {
+            $exploded = explode(',', $request->image);
+            $decoded = base64_decode($exploded[1]);
+            if(str_contains($exploded[0], 'jpeg')) {
+              $ext = 'jpg';
+            } else {
+              $ext = 'png';
+            }
+            $filename = str_random().'.'.$ext;
+            Storage::disk('discount')->put($filename, $decoded);
+
+        }
+
         $fields = $request->all();
 
         $fields['iddiscount'] = str_random(36);
+
+        $fields['image'] = $filename;
 
         $discount = Discount::create($fields); 
 

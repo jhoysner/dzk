@@ -12,11 +12,8 @@
  
  import BootstrapVue from 'bootstrap-vue'
 
-import Errors from './utilities/Errors';
+ import swal from 'sweetalert';
 
-
-
-Vue.use(Errors);
 
 Vue.use(BootstrapVue);
 

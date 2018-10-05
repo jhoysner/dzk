@@ -8,14 +8,14 @@
                             <div class="form-group" :class="{ 'is-invalid' : errorsDiscount.title }">
                                 <label>Title</label>
                                 <input type="text" class="form-control" v-model="form.title" autofocus="">
+                                <span class="text-danger" v-if="!!errorsDiscount.title"> {{errorsDiscount.title[0]}} </span>
                             </div>
-                            <span class="text-danger" v-if="!!errorsDiscount.title"> {{errorsDiscount.title[0]}} </span>
 
                             <div class="form-group" :class="{ 'has-danger' : errorsDiscount.description }">
                                 <label>Description</label>
                                 <input type="text" class="form-control" v-model="form.description">
+                                <span class="text-danger" v-if="!!errorsDiscount.description"> {{errorsDiscount.description[0]}} </span>
                             </div>
-                            <span class="text-danger" v-if="!!errorsDiscount.description"> {{errorsDiscount.description[0]}} </span>
                             <!-- 
                             <div class="form-group" :class="{ 'has-danger' : errorsDiscount.image }">
                                 <label>Image</label>
@@ -26,58 +26,58 @@
                              <div class="form-group" :class="{ 'has-danger' : errorsDiscount.startdate }">
                                 <label>Start date</label>
                                  <input type="date" placeholder="image"  class="form-control" v-model="form.startdate">
+                                 <span class="text-danger" v-if="!!errorsDiscount.startdate"> {{errorsDiscount.startdate[0]}} </span>                            
                             </div>
-                            <span class="text-danger" v-if="!!errorsDiscount.startdate"> {{errorsDiscount.startdate[0]}} </span>                            
 
                              <div class="form-group" :class="{ 'has-danger' : errorsDiscount.enddate }">
                                 <label>End date</label>
-                                 <input type="date"   class="form-control" v-model="form.enddate">
+                                <input type="date"   class="form-control" v-model="form.enddate">
+                                <span class="text-danger" v-if="!!errorsDiscount.enddate"> {{errorsDiscount.enddate[0]}} </span>                            
                             </div>
-                            <span class="text-danger" v-if="!!errorsDiscount.enddate"> {{errorsDiscount.enddate[0]}} </span>                            
                             <div class="form-group" :class="{ 'has-danger' : errorsDiscount.outstanding }">
                                 <label>outstanding</label>
-                                 <input type="number" class="form-control"  v-model="form.outstanding" >
+                                <input type="number" class="form-control"  v-model="form.outstanding" >
+                                <span class="text-danger" v-if="!!errorsDiscount.outstanding"> {{errorsDiscount.outstanding[0]}} </span>
                             </div>
-                            <span class="text-danger" v-if="!!errorsDiscount.outstanding"> {{errorsDiscount.outstanding[0]}} </span>
 
                             <div class="form-group" :class="{ 'has-danger' : errorsDiscount.conditions }">
                                 <label>Condition</label>
                                 <textarea name="" id="" cols="30" rows="4" class="common-input"  v-model="form.conditions"></textarea>
+                                <span class="text-danger" v-if="!!errorsDiscount.conditions"> {{errorsDiscount.conditions[0]}} </span>
 
                             </div>  
-                            <span class="text-danger" v-if="!!errorsDiscount.conditions"> {{errorsDiscount.conditions[0]}} </span>
 
                              <div class="form-group" :class="{ 'has-danger' : errorsDiscount.restrictions }">
                                 <label>Restrictions</label>
                                 <textarea name="" id="" cols="30" rows="4" class="common-input"  v-model="form.restrictions"></textarea>
+                                <span class="text-danger" v-if="!!errorsDiscount.restrictions"> {{errorsDiscount.restrictions[0]}} </span>
 
                             </div>
-                            <span class="text-danger" v-if="!!errorsDiscount.restrictions"> {{errorsDiscount.restrictions[0]}} </span>
 
 
                             <div class="form-group" :class="{ 'has-danger' : errorsDiscount.amountapproved }">
                                 <label>Amount Approved</label>
                                 <input type="number" class="form-control" v-model="form.amountapproved">
+                                <span class="text-danger" v-if="!!errorsDiscount.amountapproved"> {{errorsDiscount.amountapproved[0]}} </span>  
                             </div>
-                            <span class="text-danger" v-if="!!errorsDiscount.amountapproved"> {{errorsDiscount.amountapproved[0]}} </span>  
                             
                             <div class="form-group" :class="{ 'has-danger' : errorsDiscount.normalprice }">
                                 <label>Normal Price</label>
                                 <input type="number" class="form-control" v-model="form.normalprice">
+                                <span class="text-danger" v-if="!!errorsDiscount.normalprice"> {{errorsDiscount.normalprice[0]}} </span>  
                             </div>
-                            <span class="text-danger" v-if="!!errorsDiscount.normalprice"> {{errorsDiscount.normalprice[0]}} </span>  
 
                             <div class="form-group" :class="{ 'has-danger' : errorsDiscount.discountprice }">
                                 <label>Discountprice</label>
                                 <input type="number" class="form-control" v-model="form.discountprice">
+                                <span class="text-danger" v-if="!!errorsDiscount.discountprice"> {{errorsDiscount.discountprice[0]}} </span>  
                             </div>
-                            <span class="text-danger" v-if="!!errorsDiscount.discountprice"> {{errorsDiscount.discountprice[0]}} </span>  
 
                             <div class="form-group" :class="{ 'has-danger' : errorsDiscount.discountpercentage }">
                                 <label>Discount Percentage</label>
                                 <input type="number" class="form-control" v-model="form.discountpercentage">
+                                <span class="text-danger" v-if="!!errorsDiscount.discountpercentage"> {{errorsDiscount.discountpercentage[0]}} </span>
                             </div>
-                            <span class="text-danger" v-if="!!errorsDiscount.discountpercentage"> {{errorsDiscount.discountpercentage[0]}} </span>
 
                             <div class="form-group" :class="{ 'has-danger' : errorsDiscount.discountcategory_iddiscountcategory }">
                                 <label>Category Discount</label>
@@ -85,8 +85,8 @@
                                       <!-- <option v-for="option in cities" :value="option.id">{{option.name}}</option> -->
                                       <option value="1">1</option>
                                   </select>
+                                <span class="text-danger" v-if="!!errorsDiscount.discountcategory_iddiscountcategory"> {{errorsDiscount.discountcategory_iddiscountcategory[0]}} </span>
                             </div>
-                            <span class="text-danger" v-if="!!errorsDiscount.discountcategory_iddiscountcategory"> {{errorsDiscount.discountcategory_iddiscountcategory[0]}} </span>
                             
                         </div>
                         <div class="modal-footer">
@@ -130,32 +130,29 @@
                 url: '/discount',
                 errorsDiscount: {},
                 show: false,
-
-
             }
         },
         methods: {
             saveDiscount() {
                 this.errorsDiscount = {}
-                axios.post('api/discount/',this.form,)
+                axios.post('api/discount/',this.form)
                 .then(response => { 
-                    console.log('bien')
                     this.form = {}
                     this.$parent.cargarDiscount()
-                    this.$refs.createModal.hide()
-
-                    // swal({
-                    //   title: 'Ok!',
-                    //   text: response.data.mensaje,
-                    //   type: response.data.type
-                    // })
-
+                    this.$refs.createtModal.hide()
+                    console.log('bien')
+                    swal({
+                      title: "Creado",
+                      text: "Registro creado con exito",
+                      icon: "success",
+                    })
                 })
                 .catch(error => {
-                    // console.log(error.response.data.errors)
-                     let errors = this.$laravelErrors.handle(error)
-                     this.errorsDiscount = errors.errors.errors
-                     console.log(this.errorsDiscount)
+                    // console.log(error)
+                    this.errorsDiscount = error.response.data.errors;
+                     // let errors = this.$laravelErrors.handle(error)
+                     // this.errorsDiscount = errors.errors.errors
+                     // console.log(this.errorsDiscount)
 
                 });
             },

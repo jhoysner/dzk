@@ -5,7 +5,6 @@ namespace App\Http\Controllers\Discount;
 use App\Discount;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\DiscountRequest;
-use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 
@@ -104,7 +103,26 @@ class DiscountController extends Controller
     {
         $discount = Discount::find($id);
 
+        if ($request->image) {
+            if (Storage::disk('discount')->exists($discount->image)) {
+                //se borra la imagen anterior    
+                Storage::disk('discount')->delete($discount->image);
+                //nueva imagen
+                $exploded = explode(',', $request->image);
+                $decoded = base64_decode($exploded[1]);
+                if(str_contains($exploded[0], 'jpeg')) {
+                  $ext = 'jpg';
+                } else {
+                  $ext = 'png';
+                }
+                $filename = str_random().'.'.$ext;
+                Storage::disk('discount')->put($filename, $decoded);
+             }
+        } 
+
         $discount->fill($request->all());
+
+        $discount->image = $filename;
 
         if ($discount->save()) {
 
@@ -125,6 +143,10 @@ class DiscountController extends Controller
     {
         $discount = Discount::find($id);
 
+        if (Storage::disk('discount')->exists($discount->image)) {
+
+            Storage::disk('discount')->delete($discount->image);
+        }
                 
         if ($discount->delete()) {
             

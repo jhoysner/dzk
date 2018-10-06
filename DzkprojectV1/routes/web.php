@@ -12,8 +12,9 @@
 */
 
 Route::get('/', function () {
-    return view('index');
+    return view('dashboard');
 });
+
 
 Route::get('/ejemplo', function () {
     return view('ejemplo/index');
@@ -22,6 +23,10 @@ Route::get('/ejemplo', function () {
 //Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
+
+// Route::get('/dashboard', function() {
+// 	return view('dashboard');
+// });
 
 // Authentication Routes...
 $this->get('login', 'Auth\LoginController@showLoginForm')->name('login');

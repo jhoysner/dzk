@@ -54,6 +54,10 @@ return [
             'url' => env('APP_URL').'/storage',
             'visibility' => 'public',
         ],
+        'discount' => [
+            'driver' => 'local',
+            'root' =>  public_path() . '/images/discount/',
+        ],
 
         's3' => [
             'driver' => 's3',

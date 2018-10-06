@@ -17,7 +17,11 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
 });
 
-//$this->post('login', 'Auth\LoginController@authenticate');
-//$this->post('profile', 'UserController@updateProfile');
+Route::resource('discount','Discount\DiscountController');
+Route::resource('commerce', 'Commerce\CommercesController');
+Route::resource('branch', 'Branch\BranchsController');
+Route::resource('commerce-categories', 'CommerceCategory\CommerceCategoriesController');
 
-Route::get('prueba','CountryController@prueba');
+Route::get('countries', 'Country\CountriesController@getCountries');
+Route::get('states/{id}', 'Country\CountriesController@getStates');
+Route::get('cities/{id}', 'Country\CountriesController@getCities');

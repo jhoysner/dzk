@@ -25,19 +25,25 @@
                 </li>
             </ul>
         </div>
-		<form action="" class="pt-30" v-on:submit.prevent="submitLogin()" novalidate>
-			<div class="form-group">
-				<label class="text-uppercase">Email</label>
-				<input type="email" placeholder="Email Address" onfocus="this.placeholder=''" onblur="this.placeholder = 'Email Address'" required class="common-input mt-10" v-model="email">
-			</div>
-			<div class="form-group">
-				<label class="text-uppercase">Password</label>
-				<input type="password" placeholder="Enter Password" onfocus="this.placeholder=''" onblur="this.placeholder = 'Enter Password'" required class="common-input mt-10" v-model="password">
-				
-			</div>
-			<button class="primary-btn view-btn mt-20 mr-20"><span>Ingresar</span></button>
-		</form>
+       
+			<form action="" class="pt-30" v-on:submit.prevent="submitLogin()" novalidate>
+				<div class="form-group">
+					<label class="text-uppercase">Email</label>
+					<input type="email" placeholder="Email Address" onfocus="this.placeholder=''" onblur="this.placeholder = 'Email Address'" required class="common-input mt-10" v-model="email"><small class="text-danger" v-if="errors.email">{{ errors.email }}</small><small class="text-danger" v-if="errors.emailvalid">{{ errors.emailvalid }}</small>
+				</div>
+				<div class="form-group">
+					<label class="text-uppercase">Password</label>
+					<input type="password" placeholder="Enter Password" onfocus="this.placeholder=''" onblur="this.placeholder = 'Enter Password'" required class="common-input mt-10" v-model="password"><small class="text-danger" v-if="errors.password">{{ errors.password }}</small>
+					
+				</div>
+				<button class="primary-btn view-btn mt-20 mr-20"><span>Ingresar</span></button>
+    			<div class="mt-20 pull-right"><a class="" href="password/reset">Olvidó Contraseña</a></div>
+
+			</form>
+		
+	
 	</div>
+
 </template>
 
 
@@ -53,7 +59,7 @@ import Notify from 'vue-notify-me'
 	 	},
 	 	data() {
             return {
-            	errors:[],
+            	errors:{},
                 'email':"",
                 'password':"",
                 'reg': /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,24}))$/
@@ -62,9 +68,9 @@ import Notify from 'vue-notify-me'
 	 	methods: {
 	 		submitLogin() {
 	 			this.errors = [];
-	 			if(!this.email) this.errors.push('Email required.');
-	 			if(!this.validEmail(this.email)) this.errors.push('Valid email required.');
-	 			if(!this.password) this.errors.push('Password required.');
+	 			if(!this.email) this.errors.password ='Email required.';
+	 			if(!this.validEmail(this.email)) this.errors.emailvalid = 'Valid email required.';
+	 			if(!this.password) this.errors.password = 'Password required.';
 
 	 			if(this.validEmail(this.email) && this.password) {
 	 				const params = {
@@ -84,9 +90,7 @@ import Notify from 'vue-notify-me'
 	 			}
 	 		},
 	 		validEmail:function(email) {
-      				return (this.reg.test(email))
-      				//var re = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
-				    //return re.test(email);
+      			return (this.reg.test(email))
 			}
 	 	}
 	}

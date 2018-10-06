@@ -26,16 +26,14 @@
                     </ul>
                 </div>
 
-
                 <form action="" class="billing-form" v-on:submit.prevent="submitResend()">
                     <div class="row pt-30">
                         <div class="col-lg-12">
                             <input type="email" placeholder="Email Address*" onfocus="this.placeholder=''" onblur="this.placeholder = 'Email Address*'" required class="common-input" v-model="email">
                         </div>
                         <div class="col-lg-12 text-right" required>
-                            <button class="primary-btn">Resend Email</button>
+                            <button class="primary-btn" :disabled="btnlocked">Resend Email</button>
                         </div>
-
                     </div>
                 </form>
             </div>
@@ -46,13 +44,14 @@
 <script>
     export default {
         mounted() {
-            console.log('Component mounted.')
+
         },
         data() {
             return {
                 'email': "",
                 'errors' : [],
                 'success' : [],
+                'btnlocked' : false
             }
         },
         methods: {
@@ -66,13 +65,14 @@
                 const params = {
                     'email': this.email
                 }
-
+                this.btnlocked = true
                 axios.post('/resendemail', params)
                     .then((response) => {
                             this.success.push(response.data.success);
+
                         }).catch((error) => {
                             this.errors.push(error.response.data.error)
-                            
+                            this.btnlocked = true
                         })
             }
         }

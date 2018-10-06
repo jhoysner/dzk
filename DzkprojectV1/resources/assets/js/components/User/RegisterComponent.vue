@@ -2,7 +2,7 @@
 <div id="section-register" class="settings-content">
     <h1>Register User</h1>
         <div class="lg-12">
-            <div v-if="errors.length">
+            <div v-if="errorsback.length">
                 <ul>
                     <li role="alert" v-for="error in errorsback">
                         <div class="alert alert-danger alert-dismissable">
@@ -12,7 +12,9 @@
                     </li>
                 </ul>
             </div>
+        
         </div>
+
     <form action="" class="billing-form" v-on:submit.prevent="submitRegister()" novalidate>
         <div class="row pt-30">
             <div class="col-lg-6">
@@ -58,7 +60,7 @@
             </div>
 
             <div class="col-lg-12 text-right" required>
-                <button class="primary-btn">Register</button>
+                <button class="primary-btn" :disabled="btnlocked">Register</button>
             </div>
         </div>
     </form>
@@ -90,10 +92,14 @@
                 'states': [],
                 'cities': [],
                 'errors' : {},
-                'errorsback' : []
+                'errorsback' : [],
+                'btnlocked' : false
             }
         },
         methods: {
+            countDownChanged (dismissCountDown) {
+              this.dismissCountDown = dismissCountDown
+            },
             submitRegister() {
                 this.errors = {};
                 this.errorsback = [];
@@ -112,8 +118,7 @@
                     this.errors.passwordmatch = 'Passwords do not match'
                 } 
 
-
-                if(this.errors.length>0) {
+                if(Object.keys(this.errors).length > 0) {
                     return
                 }
 
@@ -128,9 +133,21 @@
                     'city_id' : this.city_id
                 }
 
+                this.btnlocked = true
+
                 axios.post('/register', params)
                    .then(response => {
-                        window.location.href = '/login';
+                      this.btnlocked = false
+                      swal({
+                          title: "Aviso",
+                          text: response.data.success,
+                          icon: "success"
+                        })
+                        .then((result) => {
+                        if (result) {
+                           window.location.href = '/login';
+                        }
+                        });
                    })
                    .catch(errors => {
                         let errores = errors.response.data.error
@@ -139,11 +156,8 @@
                             this.errorsback.push(errores[i].toString())
                             console.log(errores[i])
                         }
-                        console.log(this.errorsback)
-
-
+                        this.btnlocked = false
                    });     
-                
             },
             country(id) {
                 this.cities = []

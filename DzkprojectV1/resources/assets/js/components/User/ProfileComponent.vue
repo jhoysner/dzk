@@ -85,7 +85,7 @@
                             <div class="upload-fleid">
                                 <p>Upload an avatar</p>
                                 <div class="input-group input-file">
-                                    <input class="form-control" type="file" @change="previewImage">
+                                    <input class="form-control" type="file" accept="image/*" @change="previewImage">
                                 </div>
                             </div>
                         </div>

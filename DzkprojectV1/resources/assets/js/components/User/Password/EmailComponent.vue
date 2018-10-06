@@ -30,7 +30,7 @@
                             <input type="email" placeholder="Email Address*" onfocus="this.placeholder=''" onblur="this.placeholder = 'Email Address*'" required class="common-input" v-model="email">
                         </div>
                         <div class="col-lg-12 text-right" required>
-                            <button class="primary-btn">Reset Password</button>
+                            <button class="primary-btn" :disabled="btnlocked">Reset Password</button>
                         </div>
 
                     </div>
@@ -50,6 +50,8 @@
                 'email': "",
                 'errors': [],
                 'success':[],
+                'btnlocked' : false
+
             }
         },
         methods: {
@@ -57,10 +59,16 @@
             this.errors = [];
             this.success = [];
 
+                if(!this.email){ 
+                    this.errors.push('Email required.');
+                    return;
+                }
+
                 const params = {
                     'email': this.email
                 }
 
+                this.btnlocked = true
                 axios.post('/password/email', params)
                     .then((response) => {
                             console.log(response.status)
@@ -70,7 +78,7 @@
                             //window.location.href = '/login';
 
                         }).catch((error) => {
-                            console.log(error.response)
+                            this.btnlocked = true
                             this.errors.push(error.response.data)
                         })
             }

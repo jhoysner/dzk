@@ -39,12 +39,12 @@
     
 </head>
 <body>
-    @include('layouts.header')
+    @include('layout.header')
 
     <div id="app">
         @yield('content')
     </div>
-     @include('layouts.footer')
+     @include('layout.footer')
 
     <script src="{{asset('js/vendor/jquery-2.2.4.min.js')}}"></script>
     <script src="{{asset('js/popper.min.js')}}"></script>

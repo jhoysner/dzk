@@ -71,7 +71,19 @@
                       <div class="proceed-btn text-center"><a href="checkout.html" class="primary-btn primary-btn-wr"><span>Proceed to checkout</span></a></div>
                   </div>
               </div>
-              <a class="login-btn" href="login.html">Login</a>
+              @guest
+                <a class="login-btn" href="{{url('/login')}}">Login</a>
+              @else
+                <a class="login-btn" href="{{ route('logout') }}"
+                   onclick="event.preventDefault();
+                                 document.getElementById('logout-form').submit();">
+                    Logout
+                </a>
+
+                <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+                    @csrf
+                </form>
+              @endguest
           </div>
           <!-- #nav-menu-container -->
       </div>

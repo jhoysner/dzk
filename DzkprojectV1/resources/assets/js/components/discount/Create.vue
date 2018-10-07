@@ -134,7 +134,7 @@
         methods: {
             saveDiscount() {
                 this.errorsDiscount = {}
-                axios.post('api/discount/',this.form)
+                axios.post('api/discount',this.form)
                 .then(response => { 
                     this.form = {}
                     this.$parent.cargarDiscount()

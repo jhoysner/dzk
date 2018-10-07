@@ -40,6 +40,8 @@ class DiscountController extends Controller
      */
     public function store(DiscountRequest $request)
     {   
+        $fields = $request->all();
+
         if($request->image) {
             $exploded = explode(',', $request->image);
             $decoded = base64_decode($exploded[1]);
@@ -51,13 +53,11 @@ class DiscountController extends Controller
             $filename = str_random().'.'.$ext;
             Storage::disk('discount')->put($filename, $decoded);
 
+            $fields['image'] = $filename;
         }
 
-        $fields = $request->all();
 
         $fields['iddiscount'] = str_random(36);
-
-        $fields['image'] = $filename;
 
         $discount = Discount::create($fields); 
 

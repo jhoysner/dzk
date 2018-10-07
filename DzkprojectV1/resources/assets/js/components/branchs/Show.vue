@@ -1,6 +1,6 @@
 <template>
     <div>
-        <b-modal v-model="show" id="showModal" ref="createtModal" title="Detalle Sucursal" hide-footer>
+        <b-modal id="showModal" ref="createtModal" :title="branch.name" hide-footer>
           <div class="modal-content">
               <div class="modal-body">
                 <div class="form-group">
@@ -37,30 +37,29 @@
 
               <div class="form-group">
                   <label class="font-weight-bold">Latitud y Logintud</label>
-                  <p>{{ branch.latitude }} - {{ branch.longitude }}</p>
-              </div>
-
-              <div class="form-group">
-                  <label class="font-weight-bold">Comercio</label>
-                  <p>{{ branch.commerces.name }}</p>
+                  <p>{{ branch.latitude }} / {{ branch.longitude }}</p>
               </div>
 
               <div class="form-group">
                   <label class="font-weight-bold">País</label>
-                  <p>{{ branch.countries.name }}</p>
+                  <p>{{ branch.country_idcountry }}</p>
               </div>
 
               <div class="form-group">
                   <label class="font-weight-bold">Estado</label>
-                  <p>{{ branch.states.name }}</p>
+                  <p>{{ branch.state_idstate }}</p>
               </div>
 
               <div class="form-group">
                   <label class="font-weight-bold">Ciudad</label>
-                  <p>{{ branch.cities.name }}</p>
+                  <p>{{ branch.city_idcity }}</p>
               </div>
 
-              </div>     
+              <div class="form-group">
+                  <label class="font-weight-bold">Comercio</label>
+                  <p>{{ branch.commerce_idcommerce }}</p>
+              </div>
+              </div>    
           </div>
         </b-modal> 
     </div>
@@ -71,7 +70,21 @@ import Bus from '../../utilities/EventBus';
 export default {
   data() {
     return {
-      branch: [],
+      branch: {
+        idbranch: '',
+        name: '',
+        address: '',
+        schedule: '',
+        phone1: '',
+        phone2: '',
+        image: '',
+        latitude: '',
+        longitude: '',
+        commerce_idcommerce: '',
+        country_idcountry: '',
+        state_idstate: '',
+        city_idcity: ''
+      },
       url: '/branch',
 
     }
@@ -86,8 +99,19 @@ export default {
   methods: {
     show(id) {
       axios.get('api' + this.url + '/' + id).then(data => {
-        this.branch = data.data.data[0];
-        console.log(data.data.data[0]);
+        this.branch.idbranch = data.data.data[0].idbranch;
+        this.branch.name = data.data.data[0].name;
+        this.branch.address = data.data.data[0].address;
+        this.branch.schedule = data.data.data[0].schedule;
+        this.branch.phone1 = data.data.data[0].phone1;
+        this.branch.phone2 = data.data.data[0].phone2;
+        this.branch.image = data.data.data[0].image;
+        this.branch.latitude = data.data.data[0].latitude;
+        this.branch.longitude = data.data.data[0].longitude;
+        this.branch.country_idcountry = data.data.data[0].countries.name;
+        this.branch.state_idstate = data.data.data[0].states.name;
+        this.branch.city_idcity = data.data.data[0].cities.name;
+        this.branch.commerce_idcommerce = data.data.data[0].commerces.name;
       })
     .catch(err => console.log(err))
     }

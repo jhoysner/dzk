@@ -1,6 +1,6 @@
 <template>
     <div>
-        <b-modal v-model="show" id="createModal" ref="createModal" title="Crear Comercio" hide-footer>
+        <b-modal id="createModal" ref="createModal" title="Crear Comercio" hide-footer>
           <form @submit.prevent="store()">
               <div class="modal-content">
                   <div class="modal-body">
@@ -88,6 +88,7 @@
 import axios from 'axios';
 
     export default {
+      name: 'create',
         data() {
             return {
               form: {
@@ -176,8 +177,7 @@ import axios from 'axios';
           getCommerceCategories() {
             axios.get('api/commerce-categories').then(data => {
               this.commerceCategories = data.data.data;
-              console.log(data);
-              // this.form.commercecategory_idcommercecategory = data.data.data[0].idcommercecategory;
+              this.form.commercecategory_idcommercecategory = data.data.data[0].idcommercecategory;
             })
             .catch(err => console.log(err))
           }

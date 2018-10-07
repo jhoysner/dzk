@@ -71,6 +71,7 @@ import edit from './Edit';
 import axios from 'axios';
 
 export default {
+  name: 'index',
   components: {
     create, show, edit
   },

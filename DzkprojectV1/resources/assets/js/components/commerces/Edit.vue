@@ -1,6 +1,6 @@
 <template>
     <div>
-        <b-modal v-model="show" id="editModal" ref="editModal" title="Editar Comercio" hide-footer>
+        <b-modal id="editModal" ref="editModal" title="Editar Comercio" hide-footer>
           <form @submit.prevent="update">
               <div class="modal-content">
                   <div class="modal-body">
@@ -84,6 +84,7 @@
 import Bus from '../../utilities/EventBus';
 
 export default {
+  name: 'edit',
   data() {
     return {
       editId: '',

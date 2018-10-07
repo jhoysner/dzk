@@ -1,6 +1,6 @@
 <template>
     <div>
-        <b-modal v-model="show" id="editModal" ref="editModal" title="Editar Sucursal" hide-footer>
+        <b-modal id="editModal" ref="editModal" title="Editar Sucursal" hide-footer>
           <form>
               <div class="modal-content">
                   <div class="modal-body">

@@ -1,111 +1,111 @@
 <template>
     <div>
-        <b-modal v-model="show" id="createModal" ref="createModal" title="Crear Sucursal" hide-footer>
-                <form>
-                    <div class="modal-content">
-                        <div class="modal-body">
+        <b-modal id="createModal" ref="createModal" title="Crear Sucursal" hide-footer>
+          <form>
+              <div class="modal-content">
+                  <div class="modal-body">
 
-                            <div class="col-lg-12">
-                                <input type="text" placeholder="Nombre" v-model="form.name" required class="common-input">
-                                <small class="text-danger" v-if="error.name">{{ error.name[0] }}</small>
-                            </div>
-                            <div class="col-lg-12">
-                                <input type="text" placeholder="Dirección" v-model="form.address" required class="common-input">
-                                <small class="text-danger" v-if="error.address">{{ error.address[0] }}</small>
-                            </div>
-                            <div class="col-lg-12">
-                                <input type="text" placeholder="Horario de atención" v-model="form.schedule" required class="common-input">
-                                <small class="text-danger" v-if="error.schedule">{{ error.schedule[0] }}</small>
-                            </div>
-                            <div class="col-lg-12">
-                                <input type="text" placeholder="Telefono principal" v-model="form.phone1" required class="common-input">
-                                <small class="text-danger" v-if="error.phone1">{{ error.phone1[0] }}</small>
-                            </div>
-                            <div class="col-lg-12">
-                                <input type="text" placeholder="Telefono alternativo" v-model="form.phone2" required class="common-input">
-                                <small class="text-danger" v-if="error.phone2">{{ error.phone2[0] }}</small>
-                            </div>
-                            <div class="col-lg-12">
-                                <input type="file" placeholder="Imagen corporativa" @change="getImage" accept="image/*" class="common-input">
-                                <img :src="form.image" class="avatar" alt="Image">
-                            </div>
-                            <div class="col-lg-12">
-                                <div class="sorting"> Localización
-                                    <select class="form-control common-input" id="geocoders" @change="selectGeo()">
-                                        <option value="1">Geolocalización HTML5</option>
-                                        <option value="2" selected>Abrir Maps</option>
-                                        <option value="3">Escribir dirección</option>
-                                    </select>
-                                    <p>
-                                      <small class="text-danger" v-if="error.latitude">
-                                        {{ error.latitude[0] }}
-                                      </small>
-                                    <p>
-                                    <p>
-                                      <small class="text-danger" v-if="error.longitude">
-                                        {{ error.longitude[0] }}
-                                      </small>
-                                    </p>
+                      <div class="col-lg-12">
+                          <input type="text" placeholder="Nombre" v-model="form.name" required class="common-input">
+                          <small class="text-danger" v-if="error.name">{{ error.name[0] }}</small>
+                      </div>
+                      <div class="col-lg-12">
+                          <input type="text" placeholder="Dirección" v-model="form.address" required class="common-input">
+                          <small class="text-danger" v-if="error.address">{{ error.address[0] }}</small>
+                      </div>
+                      <div class="col-lg-12">
+                          <input type="text" placeholder="Horario de atención" v-model="form.schedule" required class="common-input">
+                          <small class="text-danger" v-if="error.schedule">{{ error.schedule[0] }}</small>
+                      </div>
+                      <div class="col-lg-12">
+                          <input type="text" placeholder="Telefono principal" v-model="form.phone1" required class="common-input">
+                          <small class="text-danger" v-if="error.phone1">{{ error.phone1[0] }}</small>
+                      </div>
+                      <div class="col-lg-12">
+                          <input type="text" placeholder="Telefono alternativo" v-model="form.phone2" required class="common-input">
+                          <small class="text-danger" v-if="error.phone2">{{ error.phone2[0] }}</small>
+                      </div>
+                      <div class="col-lg-12">
+                          <input type="file" placeholder="Imagen corporativa" @change="getImage" accept="image/*" class="common-input">
+                          <img :src="form.image" class="avatar" alt="Image">
+                      </div>
+                      <div class="col-lg-12">
+                          <div class="sorting"> Localización
+                              <select class="form-control common-input" id="geocoders" @change="selectGeo()">
+                                  <option value="1">Geolocalización HTML5</option>
+                                  <option value="2" selected>Abrir Maps</option>
+                                  <option value="3">Escribir dirección</option>
+                              </select>
+                              <p>
+                                <small class="text-danger" v-if="error.latitude">
+                                  {{ error.latitude[0] }}
+                                </small>
+                              <p>
+                              <p>
+                                <small class="text-danger" v-if="error.longitude">
+                                  {{ error.longitude[0] }}
+                                </small>
+                              </p>
 
-                                </div>
+                          </div>
 
-                                <div class="col-lg-12 html5Map" id="html5Map"></div>
-                                <div class="col-lg-12 mapPicker" id="mapPicker"></div>
-                                <input type="text" placeholder="Escriba la dirección" id="textMap" @keyup.enter="addressMap()" required class="common-input">
-                                <div class="col-lg-12 textLocation" id="textLocation"></div>
-                            </div>
-                            <div class="col-lg-12">
-                                <div class="sorting"> Comercio al que pertenece
-                                    <select class="form-control common-input" v-model="form.commerce_idcommerce">
-                                      <option v-for="commerce in commerces" :value="commerce.idcommerce">
-                                        {{ commerce.name }}
-                                      </option>
-                                    </select>
-                                    <small class="text-danger" v-if="error.commerce_idcommerce">{{ error.commerce_idcommerce[0] }}</small>
-                                </div>
-                            </div>
+                          <div class="col-lg-12 html5Map" id="html5Map"></div>
+                          <div class="col-lg-12 mapPicker" id="mapPicker"></div>
+                          <input type="text" placeholder="Escriba la dirección" id="textMap" @keyup.enter="addressMap()" required class="common-input">
+                          <div class="col-lg-12 textLocation" id="textLocation"></div>
+                      </div>
+                      <div class="col-lg-12">
+                          <div class="sorting"> Comercio al que pertenece
+                              <select class="form-control common-input" v-model="form.commerce_idcommerce">
+                                <option v-for="commerce in commerces" :value="commerce.idcommerce">
+                                  {{ commerce.name }}
+                                </option>
+                              </select>
+                              <small class="text-danger" v-if="error.commerce_idcommerce">{{ error.commerce_idcommerce[0] }}</small>
+                          </div>
+                      </div>
 
-                            <div class="col-lg-12">
-                                <div class="sorting"> País
-                                    <select class="form-control common-input" v-model="form.country_idcountry" @change="getStates()">
-                                        <option v-for="country in countries" :value="country.id">
-                                          {{ country.name }}
-                                        </option>
-                                    </select>
-                                    <small class="text-danger" v-if="error.country_idcountry">{{ error.country_idcountry[0] }}</small>
-                                </div>
-                            </div>
+                      <div class="col-lg-12">
+                          <div class="sorting"> País
+                              <select class="form-control common-input" v-model="form.country_idcountry" @change="getStates()">
+                                  <option v-for="country in countries" :value="country.id">
+                                    {{ country.name }}
+                                  </option>
+                              </select>
+                              <small class="text-danger" v-if="error.country_idcountry">{{ error.country_idcountry[0] }}</small>
+                          </div>
+                      </div>
 
-                            <div class="col-lg-12">
-                                <div class="sorting"> Estado
-                                    <select class="form-control common-input" v-model="form.state_idstate" @change="getCities()">
-                                      <option v-for="state in states" :value="state.id">
-                                        {{ state.name }}
-                                      </option>
-                                    </select>
-                                    <small class="text-danger" v-if="error.state_idstate">{{ error.state_idstate[0] }}</small>
-                                </div>
-                            </div>
+                      <div class="col-lg-12">
+                          <div class="sorting"> Estado
+                              <select class="form-control common-input" v-model="form.state_idstate" @change="getCities()">
+                                <option v-for="state in states" :value="state.id">
+                                  {{ state.name }}
+                                </option>
+                              </select>
+                              <small class="text-danger" v-if="error.state_idstate">{{ error.state_idstate[0] }}</small>
+                          </div>
+                      </div>
 
-                            <div class="col-lg-12">
-                                <div class="sorting"> Ciudad
-                                    <select class="form-control common-input" v-model="form.city_idcity">
-                                      <option v-for="city in cities" :value="city.id">
-                                        {{ city.name }}
-                                      </option>
-                                    </select>
-                                    <small class="text-danger" v-if="error.city_idcity">{{ error.city_idcity[0] }}</small>
-                                </div>
-                            </div>
+                      <div class="col-lg-12">
+                          <div class="sorting"> Ciudad
+                              <select class="form-control common-input" v-model="form.city_idcity">
+                                <option v-for="city in cities" :value="city.id">
+                                  {{ city.name }}
+                                </option>
+                              </select>
+                              <small class="text-danger" v-if="error.city_idcity">{{ error.city_idcity[0] }}</small>
+                          </div>
+                      </div>
 
-                            <div class="col-lg-12 text-right">
-                                <button type="button" @click.prevent="store" class="btn btn-primary"><i class="zmdi zmdi-plus"></i> Guardar</button>
-                            </div>
-                        </div>
-                        
-                    </div>
-                </form>
-        </b-modal> 
+                      <div class="col-lg-12 text-right">
+                          <button type="button" @click.prevent="store" class="btn btn-primary"><i class="zmdi zmdi-plus"></i> Guardar</button>
+                      </div>
+                  </div>
+                  
+              </div>
+          </form>
+  </b-modal> 
     </div>
 </template>
 

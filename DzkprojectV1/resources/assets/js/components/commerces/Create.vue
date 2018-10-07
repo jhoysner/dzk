@@ -176,7 +176,8 @@ import axios from 'axios';
           getCommerceCategories() {
             axios.get('api/commerce-categories').then(data => {
               this.commerceCategories = data.data.data;
-              this.form.commercecategory_idcommercecategory = data.data.data[0].idcommercecategory;
+              console.log(data);
+              // this.form.commercecategory_idcommercecategory = data.data.data[0].idcommercecategory;
             })
             .catch(err => console.log(err))
           }

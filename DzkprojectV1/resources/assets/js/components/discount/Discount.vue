@@ -4,7 +4,7 @@
           <div>
 <!--               <router-link :to="{name: 'discount.create'}" class="btn btn-success mb-4">Create Discount</router-link>
  -->              
-                  <b-btn v-b-modal.createModal>Create Dicountdsd</b-btn>
+                  <b-btn v-b-modal.createModal>Create Dicount</b-btn>
 
                   <div class="settings-content mt-4">
                   <h4>List Discounts</h4>
@@ -136,8 +136,7 @@
                             <div class="form-group">
                                 <label>Category Discount</label>
                                   <select class="form-control" v-model="tmpDiscount.discountcategory_iddiscountcategory" >
-                                      <!-- <option v-for="option in cities" :value="option.id">{{option.name}}</option> -->
-                                      <option value="1">1</option>
+                                      <option v-for="category in discountCategories" :value="category.iddiscountcategory">{{category.name}}</option>
                                   </select>
                                 <span class="text-danger" v-if="!!errorsDiscount.discountcategory_iddiscountcategory"> {{errorsDiscount.discountcategory_iddiscountcategory[0]}} </span>
                             </div>
@@ -267,11 +266,15 @@
                 tmpDiscount: {},
                 showEdit: false,
                 changeImage: false,
+                discountCategories: [],
             }
         },
 
         mounted() {
             this.cargarDiscount();
+        },
+        created(){
+          this.getDiscountCategories();
         },
         methods: {
             cargarDiscount() {
@@ -370,6 +373,12 @@
                 this.tmpDiscount.image = e.target.result;
                 this.changeImage = true;
               }
+            },
+            getDiscountCategories() {
+            axios.get('api/discount-categories').then(data => {
+                this.discountCategories = data.data.data;
+              })
+              .catch(err => console.log(err))
             },
 
         }

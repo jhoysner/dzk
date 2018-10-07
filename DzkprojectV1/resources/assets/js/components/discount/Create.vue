@@ -83,8 +83,7 @@
                             <div class="form-group" :class="{ 'has-danger' : errorsDiscount.discountcategory_iddiscountcategory }">
                                 <label>Category Discount</label>
                                   <select class="form-control" v-model="form.discountcategory_iddiscountcategory" >
-                                      <!-- <option v-for="option in cities" :value="option.id">{{option.name}}</option> -->
-                                      <option value="1">1</option>
+                                      <option v-for="category in discountCategories" :value="category.iddiscountcategory">{{category.name}}</option>
                                   </select>
                                 <span class="text-danger" v-if="!!errorsDiscount.discountcategory_iddiscountcategory"> {{errorsDiscount.discountcategory_iddiscountcategory[0]}} </span>
                             </div>
@@ -101,14 +100,8 @@
 </template>
 
 <script>
-   import bModal from 'bootstrap-vue/es/components/modal/modal'
-   import bModalDirective from 'bootstrap-vue/es/directives/modal/modal'
-
-
     export default {
         name: "create",
-        components: {'b-modal': bModal},
-        directives: {'b-modal': bModalDirective},
         data() {
             return {
                 form: { 
@@ -131,7 +124,12 @@
                 url: '/discount',
                 errorsDiscount: {},
                 show: false,
+                discountCategories: [],
+
             }
+        },
+        created(){
+          this.getDiscountCategories();
         },
         methods: {
             saveDiscount() {
@@ -166,6 +164,12 @@
                 this.form.image = e.target.result;
               }
             },
+            getDiscountCategories() {
+            axios.get('api/discount-categories').then(data => {
+                this.discountCategories = data.data.data;
+              })
+              .catch(err => console.log(err))
+            }
 
         }
 

@@ -113,5 +113,10 @@ class UserController extends Controller
         return response()->json(['success'=>'Account Inactive'], 200);
     }
 
+    public function logout(Request $request)
+    {
+        
+    }
+
 
 }

@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Discount;
 
+use App\BranchDiscount;
 use App\Discount;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\DiscountRequest;
@@ -163,6 +164,31 @@ class DiscountController extends Controller
         }
         
         return response()->json(['error' => 'No se pudo eliminar el registro'], 422);
+
+    }   
+
+    public function branchDiscount(Request $request)
+    {
+
+        // dd($request->all());
+
+        if ($request->branch_idbranch) {
+            foreach ($request->branch_idbranch as $value) { 
+
+                $idbranch_has_discount = str_random(36);
+
+                BranchDiscount::create([
+                   'idbranch_has_discount' => $idbranch_has_discount,
+                   'discount_iddiscount' => $request->discount_iddiscount,
+                   'branch_idbranch'=> $value,
+                   'amountapproved'=> $request->amountapproved,
+                   'discounthours'=> $request->discounthours,
+                ]);
+                
+            }
+        }
+
+        return response()->json(['success'=> true], 201);
 
     }
 }

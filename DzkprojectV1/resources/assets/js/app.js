@@ -12,14 +12,17 @@
  */
 //import Vue from 'vue'
 
- import mainDashboard from './components/main.vue'
+import mainDashboard from './components/main.vue'
 
- import router from './routes/Routes.js'
- 
- import BootstrapVue from 'bootstrap-vue'
+import router from './routes/Routes.js'
 
- import swal from 'sweetalert';
+import BootstrapVue from 'bootstrap-vue'
 
+import swal from 'sweetalert';
+
+import ToggleButton from 'vue-js-toggle-button'
+
+Vue.use(ToggleButton)
 
 Vue.use(BootstrapVue);
 
@@ -38,7 +41,7 @@ window.Vue = require('vue');
 // Vue.component('activation-component', require('./components/user/activate/ActivationComponent.vue'));
 // Vue.component('locked-component', require('./components/user/activate/LockedComponent.vue'));
 
-//Vue.component('main-dashboard', require('./components/main.vue'));
+// Vue.component('main-dashboard', require('./components/main.vue'));
 // Vue.component('example-component', require('./components/ExampleComponent.vue'));
 
 

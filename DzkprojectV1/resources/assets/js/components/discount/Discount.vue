@@ -235,13 +235,10 @@
 <script>
    import Create from './Create'
    import bModal from 'bootstrap-vue/es/components/modal/modal'
-   import bModalDirective from 'bootstrap-vue/es/directives/modal/modal'
    import moment from 'moment'
 
    export default {
-        name: "discount",
         components: { Create, 'b-modal': bModal},
-        directives: {'b-modal': bModalDirective},
         data() {
             return {
                form: { 

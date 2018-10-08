@@ -96,12 +96,17 @@
                     </div>
                 </form>
         </b-modal> 
+        <branch-discount></branch-discount>
     </div>
 </template>
 
 <script>
+   import branchdiscount from './BranchDiscount'
+   import Bus from '../../utilities/EventBus';
+
     export default {
         name: "create",
+        components: { 'branch-discount':branchdiscount},
         data() {
             return {
                 form: { 
@@ -145,7 +150,9 @@
                       text: "Registro creado con exito",
                       icon: "success",
                     })
+                    Bus.$emit('branch_discount',response);
                 })
+                    // this.$refs.branchDiscountModal.show()
                 .catch(error => {
                     console.log(error.response.data)
                     this.errorsDiscount = error.response.data.errors;

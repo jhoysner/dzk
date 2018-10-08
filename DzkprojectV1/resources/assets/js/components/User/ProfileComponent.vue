@@ -13,16 +13,6 @@
                     </li>
                 </ul>
             </div>
-            <div v-if="success.length">
-                <ul>
-                    <li role="alert" v-for="tmp in success">
-                        <div class="alert alert-success alert-dismissable">
-                          <button type="button" class="close" data-dismiss="alert">&times;</button>
-                          {{tmp}}
-                        </div>
-                    </li>
-                </ul>
-            </div>
         </div>
 
 
@@ -103,8 +93,7 @@
                 
                     <div class="sorting"> Localización
                       <select class="form-control common-input" id="geocoders" @change="selectGeo()">
-                          <option value="" selected>Seleccione</option>
-                          <option value="1">Geolocalización HTML5</option>
+                          <option value="1" selected>Geolocalización HTML5</option>
                           <option value="2">Abrir Maps</option>
                           <option value="3">Escribir dirección</option>
                       </select>
@@ -133,10 +122,14 @@
 </template>
 
 <script>
+//import auth from '../../utilities/auth.js';
+
     export default {
-        props : ['auth'],
+        //props : ['auth'],
+        name: "profile",
         mounted() {
-            this.user = JSON.parse(this.auth);
+            this.user = JSON.parse(localStorage.getItem('userdata'));
+
             document.getElementById('textLocation').style.display = "block";
             document.getElementById('textLocation').style.display = "none";
 
@@ -155,6 +148,7 @@
         },
         data() {
             return {
+                url: '/commerce',
                 'firstname':"",
                 'middlename':"",
                 'lastname':"",
@@ -196,7 +190,9 @@
                 if(!this.user.country_idcountry) this.errors.push('Country required.');
                 if(!this.user.state_idstate) this.errors.push('State required.');
                 if(!this.user.city_idcity) this.errors.push('City required.');
+                
                 let params = new FormData();
+                params.append('userId', this.user.id);
                 params.append('firstname', this.user.firstname);  
                 this.user.middlename? params.append('middlename', this.user.middlename): "";     
                 params.append('lastname', this.user.lastname);
@@ -222,13 +218,16 @@
 
                 axios.post('/profile', params)
                    .then(response => {
-                        console.log(response)
-                        this.success = [];
-                        this.success.push(response.data.success)
+                        localStorage.setItem('userdata',JSON.stringify(response.data.user));
+                        swal({
+                          title: "Aviso",
+                          text: response.data.success,
+                          icon: "success"
+                        })
                    })
                    .catch(errors => {
                         console.log(errors.response)
-                        //this.errors.push(errors.response)
+                        //this.errors.push(errors.response.error)
 
                    });     
             },
@@ -277,7 +276,7 @@
                 {
                     let lon = objPosition.coords.longitude;
                     let lat = objPosition.coords.latitude;
-                    console.log(lon + ' ,' + lat) 
+                    //console.log(lon + ' ,' + lat) 
 
                 }, function(objPositionError)
                 {
@@ -321,7 +320,7 @@
                   html5Map.style.display = "block";
 
                   navigator.geolocation.getCurrentPosition(function(position) {
-                    console.log(position.coords);
+                    //console.log(position.coords);
                     vm.user.latitude = position.coords.latitude;
                     vm.user.longitude = position.coords.longitude;
 
@@ -487,6 +486,6 @@
 }
 
 img {
-  width: 150px;
+  width: 30%;
 }
 </style>

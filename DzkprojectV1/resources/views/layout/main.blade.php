@@ -57,9 +57,11 @@
     <script src="{{asset('js/Chart.min.js')}}"></script>
     <script src="{{asset('js/main.js')}}"></script>
     <script src="{{ asset('js/app.js')}}"></script>
-    <script async defer
-    src="https://maps.googleapis.com/maps/api/js?key=AIzaSyARjJet0cEb9j1zlP0rFo1sW7jRN0s8f_4&callback=initMap">
-    </script>
+    <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?v3&key=AIzaSyBnSDDT8mnv1_cDX_iZmaEaYy6qp63be1E"></script>
+    <!--<script async defer
+        src="https://maps.googleapis.com/maps/api/js?key=AIzaSyARjJet0cEb9j1zlP0rFo1sW7jRN0s8f_4&callback=initMap">
+    </script>-->
+    
     
     <!--SCRIPTS PERSONALIZADOS DE LOS MODULOS  -->
     @yield('customjs')

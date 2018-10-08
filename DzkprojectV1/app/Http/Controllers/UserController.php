@@ -18,7 +18,7 @@ class UserController extends Controller
      */
     public function __construct()
     {
-        $this->middleware('auth');
+        //$this->middleware('auth');
     }
 
 
@@ -29,7 +29,7 @@ class UserController extends Controller
 
     public function updateProfile(Request $request)
     {
-    	$userId = Auth::user()->id;
+    	$userId = $request->userId; //Auth::user()->id;
         $user = User::find($userId);
 
         $user->firstname = $request->firstname;
@@ -86,7 +86,7 @@ class UserController extends Controller
         }
 
         $user->save();
-        return response()->json(['state'=>'Update','success'=>'User Updated'], 200);
+        return response()->json(['state'=>'Update','success'=>'User Updated','user'=>$user], 200);
      
     }
 

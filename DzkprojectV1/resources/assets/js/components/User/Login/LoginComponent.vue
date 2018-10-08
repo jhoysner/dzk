@@ -78,10 +78,10 @@ import Notify from 'vue-notify-me'
 	 					password: this.password 
 	 				}
 					
-					axios.post('/login', params)
+					axios.post('/api/login', params)
                     	.then((response) => {
-                            console.log(response)
-                            window.location.href = '/profile';
+                            localStorage.setItem('userdata',JSON.stringify(response.data.user));
+							window.location.href = '/';
 
                         }).catch((error) => {
                             this.errors.push(error.response.data.error);

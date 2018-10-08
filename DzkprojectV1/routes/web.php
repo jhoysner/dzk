@@ -25,7 +25,7 @@ Route::get('/home', 'HomeController@index')->name('home');
 
 // Authentication Routes...
 $this->get('login', 'Auth\LoginController@showLoginForm')->name('login');
-$this->post('login', 'Auth\LoginController@authenticate');
+//$this->post('login', 'Auth\LoginController@authenticate');
 $this->post('logout', 'Auth\LoginController@logout')->name('logout');
 
 // Registration Routes...
@@ -51,7 +51,7 @@ $this->get('/register/verify/{code}', 'Auth\RegisterController@emailValidation')
 $this->post('/activationaccount', 'Auth\RegisterController@activationAccount');
 
 // Profile
-$this->get('profile', 'UserController@showProfileForm')->name('profile');
+//$this->get('profile', 'UserController@showProfileForm')->name('profile');
 $this->post('profile', 'UserController@updateProfile');
 // Resend Email Activation
 $this->get('resendemail', 'Auth\ResendController@showResendEmailForm'); 

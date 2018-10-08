@@ -33,6 +33,13 @@
               </router-link>
             </li>
             <li>
+              <router-link to='/profile'>
+                  <a>
+                    Perfil
+                  </a>
+              </router-link>
+            </li>
+            <li>
                 <a href="author-account-settings.html">Cerrar Sesión</a>
             </li>
           <!--  <li>

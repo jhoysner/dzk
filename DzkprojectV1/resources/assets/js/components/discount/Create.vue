@@ -152,13 +152,9 @@
                     })
                     Bus.$emit('branch_discount',response);
                 })
-                    // this.$refs.branchDiscountModal.show()
                 .catch(error => {
                     console.log(error.response.data)
                     this.errorsDiscount = error.response.data.errors;
-                     // let errors = this.$laravelErrors.handle(error)
-                     // this.errorsDiscount = errors.errors.errors
-                     // console.log(this.errorsDiscount)
 
                 });
             },         

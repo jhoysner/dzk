@@ -5,7 +5,7 @@ import Dashboard from '../components/Home.vue'
 import Commerces from '../components/commerces/index.vue'
 import Branchs from '../components/branchs/index.vue'
 import discountRoutes from '../components/discount/router'
-import Profile from '../components/user/ProfileComponent.vue'
+// import Profile from '../components/user/ProfileComponent.vue'
 
 Vue.use(Router);
 
@@ -22,10 +22,10 @@ const baseRoutes = [
             path: '/branchs',
             component: Branchs
         },
-        {
-            path: '/profile',
-            component: Profile
-        },
+        // {
+        //     path: '/profile',
+        //     component: Profile
+        // },
  
 ];
 

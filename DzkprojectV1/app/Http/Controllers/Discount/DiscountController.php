@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Discount;
 
+use App\Branch;
 use App\BranchDiscount;
 use App\Discount;
 use App\Http\Controllers\Controller;
@@ -169,23 +170,40 @@ class DiscountController extends Controller
 
     public function branchDiscount(Request $request)
     {
-
         // dd($request->all());
 
-        if ($request->branch_idbranch) {
-            foreach ($request->branch_idbranch as $value) { 
+        if (count($request->sucursales) > 0) {
+            foreach ($request->sucursales as $value) { 
 
                 $idbranch_has_discount = str_random(36);
+
+                // return response()->json(['data'=> $value], 201);
 
                 BranchDiscount::create([
                    'idbranch_has_discount' => $idbranch_has_discount,
                    'discount_iddiscount' => $request->discount_iddiscount,
-                   'branch_idbranch'=> $value,
-                   'amountapproved'=> $request->amountapproved,
-                   'discounthours'=> $request->discounthours,
+                   'branch_idbranch'=> $value['branch_idbranch'],
+                   'amountapproved'=> $value['amountapproved'],
+                   'discounthours'=> $value['discounthours'],
                 ]);
                 
             }
+        }
+        else{
+
+           $branchs =  Branch::all();
+
+           foreach ($branchs as $value) {
+                $idbranch_has_discount = str_random(36);
+                
+                BranchDiscount::create([
+                   'idbranch_has_discount' => $idbranch_has_discount,
+                   'discount_iddiscount' => $request->discount_iddiscount,
+                   'branch_idbranch'=> $value->idbranch,
+                   'amountapproved'=> $request->amountapproved,
+                   'discounthours'=> $request->discounthours,
+                ]);
+           }
         }
 
         return response()->json(['success'=> true], 201);

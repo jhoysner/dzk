@@ -20,9 +20,6 @@ import BootstrapVue from 'bootstrap-vue'
 
 import swal from 'sweetalert';
 
-import ToggleButton from 'vue-js-toggle-button'
-
-Vue.use(ToggleButton)
 
 Vue.use(BootstrapVue);
 

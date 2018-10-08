@@ -136,7 +136,7 @@ class BranchsController extends Controller
       $branch = Branch::find($id);
 
       if($branch->image != $request->image) {
-        Storage::disk('branch')->delete($commerce->image);
+        Storage::disk('branch')->delete($branch->image);
 
         $exploded = explode(',', $request->image);
         $decoded = base64_decode($exploded[1]);

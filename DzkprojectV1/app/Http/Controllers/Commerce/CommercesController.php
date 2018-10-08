@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Commerce;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Storage;
 
 use App\Commerce;
 use App\Http\Requests\CommerceRequest;
@@ -55,8 +56,9 @@ class CommercesController extends Controller
         }
 
         $filename = str_random().'.'.$ext;
-        $path = public_path().'/images/commerce/'.$filename;
-        file_put_contents($path, $decoded);
+        //$path = public_path().'/images/commerce/'.$filename;
+        //file_put_contents($path, $decoded);
+        Storage::disk('commerce')->put($filename, $decoded);
       }else {
         $filename = null;
       }
@@ -127,11 +129,13 @@ class CommercesController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(CommerceRequest $request, $id)
     {
       $commerce = Commerce::find($id);
 
       if($commerce->image != $request->image) {
+        Storage::disk('commerce')->delete($commerce->image);
+
         $exploded = explode(',', $request->image);
         $decoded = base64_decode($exploded[1]);
 
@@ -142,8 +146,9 @@ class CommercesController extends Controller
         }
 
         $filename = str_random().'.'.$ext;
-        $path = public_path().'/images/commerce/'.$filename;
-        file_put_contents($path, $decoded);
+        //$path = public_path().'/images/commerce/'.$filename;
+        //file_put_contents($path, $decoded);
+        Storage::disk('commerce')->put($filename, $decoded);
       } else {
         $filename = $commerce->image;
       }

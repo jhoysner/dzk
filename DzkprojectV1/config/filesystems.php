@@ -58,6 +58,14 @@ return [
             'driver' => 'local',
             'root' =>  public_path() . '/images/discount/',
         ],
+        'commerce' => [
+            'driver' => 'local',
+            'root' =>  public_path() . '/images/commerce/',
+        ],
+        'branch' => [
+            'driver' => 'local',
+            'root' =>  public_path() . '/images/branch/',
+        ],
 
         's3' => [
             'driver' => 's3',

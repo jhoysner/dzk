@@ -28,8 +28,8 @@ class CommerceRequest extends FormRequest
           'name'              => 'required',
           'phone1'            => 'numeric|required',
           'phone2'            => 'numeric|required',
-          'email'             => 'required|email|unique:commerce,email',
-          'image'             => 'required',
+          'email'             => 'required|email', //unique:commerce,email
+          //'image'             => 'required',
           'web'               => 'required',
           'country_idcountry' => 'required',
           'state_idstate'     => 'required',

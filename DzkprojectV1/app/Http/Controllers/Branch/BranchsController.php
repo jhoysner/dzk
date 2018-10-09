@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Branch;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Storage;
 
 use App\Http\Requests\BranchRequest;
 use App\Branch;
@@ -55,8 +56,9 @@ class BranchsController extends Controller
         }
 
         $filename = str_random().'.'.$ext;
-        $path = public_path().'/images/branch/'.$filename;
-        file_put_contents($path, $decoded);
+        //$path = public_path().'/images/branch/'.$filename;
+        //file_put_contents($path, $decoded);
+        Storage::disk('branch')->put($filename, $decoded);
       } else {
         $filename = null;
       }
@@ -129,11 +131,13 @@ class BranchsController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(BranchRequest $request, $id)
     {
       $branch = Branch::find($id);
 
       if($branch->image != $request->image) {
+        Storage::disk('branch')->delete($branch->image);
+
         $exploded = explode(',', $request->image);
         $decoded = base64_decode($exploded[1]);
 
@@ -144,8 +148,9 @@ class BranchsController extends Controller
         }
 
         $filename = str_random().'.'.$ext;
-        $path = public_path().'/images/branch/'.$filename;
-        file_put_contents($path, $decoded);
+        //$path = public_path().'/images/branch/'.$filename;
+        //file_put_contents($path, $decoded);
+        Storage::disk('branch')->put($filename, $decoded);
       } else {
         $filename = $branch->image;
       }

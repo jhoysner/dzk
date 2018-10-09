@@ -10,7 +10,6 @@
             </div>
             <div class="col-md-10">
                 <register-component></register-component>
-                <notifications group="reg" position="bottom right"/>
             </div>
         </div>
     </div>

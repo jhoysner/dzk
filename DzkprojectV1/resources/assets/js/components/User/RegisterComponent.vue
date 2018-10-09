@@ -7,7 +7,8 @@
                     <li role="alert" v-for="error in errorsback">
                         <div class="alert alert-danger alert-dismissable">
                           <button type="button" class="close" data-dismiss="alert">&times;</button>
-                          {{error}}
+                          {{error}} <br>
+                          <a href="/login">Volver al Login</a>
                         </div>
                     </li>
                 </ul>

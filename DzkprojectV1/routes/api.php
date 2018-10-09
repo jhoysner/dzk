@@ -17,9 +17,10 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
 });
 
-
+//Login
 Route::post('login', 'Auth\LoginController@authenticate');
-
+//Logout
+Route::get('logout', 'UserController@logout');
 
 Route::resource('discount','Discount\DiscountController');
 Route::resource('discount-categories','DiscountCategory\DiscountCategoryController');

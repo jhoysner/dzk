@@ -62943,6 +62943,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
 
 //import auth from '../../utilities/auth.js';
 
@@ -62968,7 +62969,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
     },
     data: function data() {
         return {
-            url: '/commerce',
+            'url': '/profile',
             'firstname': "",
             'middlename': "",
             'lastname': "",
@@ -63254,6 +63255,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
         validEmail: function validEmail(email) {
             return this.reg.test(email);
         }
+
     }
 });
 
@@ -96290,6 +96292,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
     mounted: function mounted() {
@@ -96440,10 +96443,13 @@ var render = function() {
                           [_vm._v("×")]
                         ),
                         _vm._v(
-                          "\r\n                          " +
-                            _vm._s(error) +
-                            "\r\n                        "
-                        )
+                          "\r\n                          " + _vm._s(error) + " "
+                        ),
+                        _c("br"),
+                        _vm._v(" "),
+                        _c("a", { attrs: { href: "/login" } }, [
+                          _vm._v("Volver al Login")
+                        ])
                       ]
                     )
                   ])

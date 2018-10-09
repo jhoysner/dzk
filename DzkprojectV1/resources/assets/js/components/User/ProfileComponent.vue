@@ -119,6 +119,7 @@
     </div>
 
 
+
 </template>
 
 <script>
@@ -148,7 +149,7 @@
         },
         data() {
             return {
-                url: '/commerce',
+                'url': '/profile',
                 'firstname':"",
                 'middlename':"",
                 'lastname':"",
@@ -441,7 +442,8 @@
             },
             validEmail:function(email) {
                 return (this.reg.test(email))
-            }
+            },
+            
         }
     }
 </script>

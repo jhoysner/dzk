@@ -2,7 +2,7 @@
     <div id="section-register" class="container">
         <div class="row justify-content-center">
             <div class="col-md-8">
-                <h1>Resend Email Account Activate</h1>
+                <h1>Reenviar correo electrónico para activación de cuenta</h1>
         
                 <div v-if="errors.length">
                     <ul>
@@ -29,10 +29,10 @@
                 <form action="" class="billing-form" v-on:submit.prevent="submitResend()">
                     <div class="row pt-30">
                         <div class="col-lg-12">
-                            <input type="email" placeholder="Email Address*" onfocus="this.placeholder=''" onblur="this.placeholder = 'Email Address*'" required class="common-input" v-model="email">
+                            <input type="email" placeholder="Correo Electrónico*" onfocus="this.placeholder=''" onblur="this.placeholder = 'Correo Electrónico*'" required class="common-input" v-model="email">
                         </div>
                         <div class="col-lg-12 text-right" required>
-                            <button class="primary-btn" :disabled="btnlocked">Resend Email</button>
+                            <button class="primary-btn" :disabled="btnlocked">Reenviar Correo Eletrónico</button>
                         </div>
                     </div>
                 </form>
@@ -58,7 +58,7 @@
             submitResend() {
                 this.errors = []
                 if(!this.email){ 
-                    this.errors.push('Email required.');
+                    this.errors.push('Correo Electrónico requerido.');
                     return;
                 }
 

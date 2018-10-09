@@ -2,7 +2,7 @@
 <div id="section-reset" class="container">
         <div class="row justify-content-center">
             <div class="col-md-8">
-			    <h1>Reset Password</h1>
+			    <h1>Resetear Contraseña</h1>
 			    <div v-if="errors.length">
                     <ul>
                         <li role="alert" v-for="error in errors">
@@ -28,17 +28,17 @@
 			    <form action="" class="billing-form" v-on:submit.prevent="submitReset()">
 			        <div class="pt-30 text-center col-lg-12">
 			            <div class="col-lg-12 ">
-			                <input type="email" placeholder="Email Address*" onfocus="this.placeholder=''" onblur="this.placeholder = 'Email Address*'" required class="common-input" v-model="email">
+			                <input type="email" placeholder="Correo Electrónico*" onfocus="this.placeholder=''" onblur="this.placeholder = 'Correo Electrónico*'" required class="common-input" v-model="email">
 			            </div>
 			            <div class="col-lg-12">
-			                <input type="password" placeholder="Password*" onfocus="this.placeholder=''" onblur="this.placeholder = 'Password*'" required class="common-input" v-model="password">
+			                <input type="password" placeholder="Contraseña*" onfocus="this.placeholder=''" onblur="this.placeholder = 'Contraseña*'" required class="common-input" v-model="password">
 			            </div>
 			            <div class="col-lg-12">
-			                <input type="password" placeholder="Password confirmation*" onfocus="this.placeholder=''" onblur="this.placeholder = 'Password confirmation*'" required class="common-input" v-model="password_confirmation">
+			                <input type="password" placeholder="Confirmación Contraseña*" onfocus="this.placeholder=''" onblur="this.placeholder = 'Confirmación Contraseña*'" required class="common-input" v-model="password_confirmation">
 			            </div>
 			            
 			            <div class="col-lg-12 text-right" >
-			                <button class="primary-btn">Reset Password</button>
+			                <button class="primary-btn">Resetear Contraseña </button>
 			            </div>
 			        </div>
 			    </form>

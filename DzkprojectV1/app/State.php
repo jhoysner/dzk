@@ -33,4 +33,9 @@ class State extends Model
   {
     return $this->hasMany('App\Branch');
   }
+
+  public function users()
+  {
+    return $this->hasMany('App\User');
+  }
 }

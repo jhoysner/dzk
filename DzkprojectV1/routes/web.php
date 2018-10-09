@@ -50,9 +50,6 @@ $this->get('/desactivateaccount/{user}', 'UserController@desactivateAccount');
 $this->get('/register/verify/{code}', 'Auth\RegisterController@emailValidation');
 $this->post('/activationaccount', 'Auth\RegisterController@activationAccount');
 
-// Profile
-//$this->get('profile', 'UserController@showProfileForm')->name('profile');
-$this->post('profile', 'UserController@updateProfile');
 // Resend Email Activation
 $this->get('resendemail', 'Auth\ResendController@showResendEmailForm'); 
 $this->post('resendemail', 'Auth\ResendController@resendEmail'); 

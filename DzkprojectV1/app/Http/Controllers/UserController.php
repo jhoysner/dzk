@@ -2,9 +2,10 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Validator;
+use Illuminate\Http\Request;
 use App\User;
 use App\Params;
 use Storage;
@@ -27,8 +28,40 @@ class UserController extends Controller
         return view('user.profile');
     }
 
+    public function userDetail($id) 
+    {
+        $user = User::with('countries')
+                    ->with('states')
+                    ->with('cities')
+                    ->where('id', $id)
+                    ->get();
+
+        return response()->json(['user'=>$user], 200);
+
+    }
+
+    protected function validator(array $data)
+    {
+        return Validator::make($data, [
+            'firstname' => 'required|string|max:255',
+            'lastname' => 'required|string|max:255',
+            'email' => 'required|string|email|max:255',
+            'password' => 'confirmed',
+            'country_idcountry' => 'required|string',
+            'state_idstate' => 'required|string',
+            'city_idcity' => 'required|string'
+        ]);
+    }
+
     public function updateProfile(Request $request)
     {
+
+        $validator = $this->validator($request->all());
+
+        if($validator->fails()) {
+            return response()->json(['error'=>$validator->errors()], 422);
+        }
+
     	$userId = $request->userId; //Auth::user()->id;
         $user = User::find($userId);
 

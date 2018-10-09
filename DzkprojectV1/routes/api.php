@@ -22,6 +22,13 @@ Route::post('login', 'Auth\LoginController@authenticate');
 //Logout
 Route::get('logout', 'UserController@logout');
 
+//Usuario
+Route::group(["prefix" => "profile"], function () {
+	Route::get('/{id}', 'UserController@userDetail');
+	Route::post('/', 'UserController@updateProfile');
+
+});
+
 Route::resource('discount','Discount\DiscountController');
 Route::resource('discount-categories','DiscountCategory\DiscountCategoryController');
 Route::resource('commerce', 'Commerce\CommercesController');

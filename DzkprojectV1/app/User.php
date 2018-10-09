@@ -40,4 +40,21 @@ class User extends Authenticatable
     protected $hidden = [
          'remember_token',
     ];
+
+
+    public function countries()
+    {
+      return $this->belongsTo('App\Country', 'country_idcountry', 'idcountry');
+    }
+
+    public function states()
+    {
+      return $this->belongsTo('App\State', 'state_idstate', 'idstate');
+    }
+
+    public function cities()
+    {
+      return $this->belongsTo('App\City', 'city_idcity', 'idcity');
+    }
+
 }

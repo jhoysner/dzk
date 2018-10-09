@@ -2,7 +2,7 @@
     <div id="section-register" class="container">
         <div class="row justify-content-center">
             <div class="col-md-8">
-                <h1>Reset Password</h1>
+                <h1>Resetear Contraseña</h1>
                 <div v-if="errors.length">
                     <ul>
                         <li role="alert" v-for="error in errors">
@@ -27,10 +27,10 @@
                 <form action="" class="billing-form" v-on:submit.prevent="submitReset()">
                     <div class="row pt-30">
                         <div class="col-lg-12">
-                            <input type="email" placeholder="Email Address*" onfocus="this.placeholder=''" onblur="this.placeholder = 'Email Address*'" required class="common-input" v-model="email">
+                            <input type="email" placeholder="Correo Electrónico*" onfocus="this.placeholder=''" onblur="this.placeholder = 'Correo Electrónico*'" required class="common-input" v-model="email">
                         </div>
                         <div class="col-lg-12 text-right" required>
-                            <button class="primary-btn" :disabled="btnlocked">Reset Password</button>
+                            <button class="primary-btn" :disabled="btnlocked">Solicitar resetear contraseña</button>
                         </div>
 
                     </div>
@@ -60,7 +60,7 @@
             this.success = [];
 
                 if(!this.email){ 
-                    this.errors.push('Email required.');
+                    this.errors.push('El correo electrónico es requerido.');
                     return;
                 }
 
@@ -73,7 +73,7 @@
                     .then((response) => {
                             console.log(response.status)
                             if(response.status == 200) {
-                                this.success.push('An email has been sent to reset the password.')
+                                this.success.push('Se ha enviado un correo electrónico para resetear la contraseña.')
                             }
                             //window.location.href = '/login';
 

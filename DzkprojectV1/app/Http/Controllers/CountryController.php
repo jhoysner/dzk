@@ -20,7 +20,7 @@ class CountryController extends Controller
 
     	$data[0] = [
     		'id' => 0,
-    		'name' => 'Select Country'
+    		'name' => 'Selecciona Pais'
     	];
 
     	foreach ($countries as $key => $value) {
@@ -41,7 +41,7 @@ class CountryController extends Controller
 
     	$data[0] = [
     		'id' => 0,
-    		'name' => 'Select State'
+    		'name' => 'Selecciona Estado'
     	];
 
     	foreach ($states as $key => $value) {
@@ -63,7 +63,7 @@ class CountryController extends Controller
 
     	$data[0] = [
     		'id' => 0,
-    		'name' => 'Select City'
+    		'name' => 'Selecciona Ciudad'
     	];
 
     	foreach ($cities as $key => $value) {
@@ -76,20 +76,4 @@ class CountryController extends Controller
     	return response()->json($data);
 
     }
-
-public function prueba()
-{
-    $data = [
-            'email' => 'p@example.com',
-            'firstname' =>  'Benito',
-            'lastname' => 'Perez',
-            'access_token' => '12dddd'
-        ];
-
-    Mail::send('email.registro', $data, function($message) use ($data) {
-            $message->from(\Config::get('mail.from.address'),\Config::get('mail.from.name'));
-            $message->to($data['email']);
-            $message->subject('Activate you users accounts');
-        });
-}
 }

@@ -1,6 +1,6 @@
 <template>
 <div id="section-register" class="settings-content">
-    <h1>Register User</h1>
+    <h1>Registrar Usuario</h1>
         <div class="lg-12">
             <div v-if="errorsback.length">
                 <ul>
@@ -20,19 +20,19 @@
     <form action="" class="billing-form" v-on:submit.prevent="submitRegister()" novalidate>
         <div class="row pt-30">
             <div class="col-lg-6">
-                <input type="text" placeholder="First name*" onfocus="this.placeholder=''" onblur="this.placeholder = 'First name*'" required class="common-input" v-model="firstname" ><small class="text-danger" v-if="errors.firstname">{{ errors.firstname }}</small>
+                <input type="text" placeholder="Primer Nombre*" onfocus="this.placeholder=''" onblur="this.placeholder = 'Primer Nombre*'" required class="common-input" v-model="firstname" ><small class="text-danger" v-if="errors.firstname">{{ errors.firstname }}</small>
             </div>
             <div class="col-lg-6">
-                <input type="text" placeholder="Last name*" onfocus="this.placeholder=''" onblur="this.placeholder = 'Last name*'" required class="common-input" v-model="lastname"><small class="text-danger" v-if="errors.lastname">{{ errors.lastname }}</small>
+                <input type="text" placeholder="Apellidos*" onfocus="this.placeholder=''" onblur="this.placeholder = 'Apellidos*'" required class="common-input" v-model="lastname"><small class="text-danger" v-if="errors.lastname">{{ errors.lastname }}</small>
             </div>
             <div class="col-lg-12">
-                <input type="email" placeholder="Email Address*" onfocus="this.placeholder=''" onblur="this.placeholder = 'Email Address*'" required class="common-input" v-model="email"><small class="text-danger" v-if="errors.email">{{ errors.email }}</small>
+                <input type="email" placeholder="Correo Electrónico*" onfocus="this.placeholder=''" onblur="this.placeholder = 'Correo Electrónico*'" required class="common-input" v-model="email"><small class="text-danger" v-if="errors.email">{{ errors.email }}</small>
             </div>
             <div class="col-lg-6">
-                <input type="password" placeholder="Password*" onfocus="this.placeholder=''" onblur="this.placeholder = 'Password*'" required class="common-input" v-model="password"><small class="text-danger" v-if="errors.password">{{ errors.password }}</small><small class="text-danger" v-if="errors.passwordmatch">{{ errors.passwordmatch }}</small>
+                <input type="password" placeholder="Contraseña*" onfocus="this.placeholder=''" onblur="this.placeholder = 'Contraseña*'" required class="common-input" v-model="password"><small class="text-danger" v-if="errors.password">{{ errors.password }}</small><small class="text-danger" v-if="errors.passwordmatch">{{ errors.passwordmatch }}</small>
             </div>
             <div class="col-lg-6">
-                <input type="password" placeholder="Password confirmation*" onfocus="this.placeholder=''" onblur="this.placeholder = 'Password confirmation*'" required class="common-input" v-model="password_confirmation"><small class="text-danger" v-if="errors.password_confirmation">{{ errors.password_confirmation }}</small><small class="text-danger" v-if="errors.passwordmatch">{{ errors.passwordmatch }}</small>
+                <input type="password" placeholder="Confirmación Contraseña*" onfocus="this.placeholder=''" onblur="this.placeholder = 'Confirmación Contraseña*'" required class="common-input" v-model="password_confirmation"><small class="text-danger" v-if="errors.password_confirmation">{{ errors.password_confirmation }}</small><small class="text-danger" v-if="errors.passwordmatch">{{ errors.passwordmatch }}</small>
             </div>
             <div class="col-lg-6">
                 <div class="sorting">
@@ -62,7 +62,7 @@
             </div>
 
             <div class="col-lg-12 text-right" required>
-                <button class="primary-btn" :disabled="btnlocked">Register</button>
+                <button class="primary-btn" :disabled="btnlocked">Registrar</button>
             </div>
         </div>
     </form>
@@ -104,19 +104,19 @@
             submitRegister() {
                 this.errors = {};
                 this.errorsback = [];
-                if(!this.firstname) this.errors.firstname='Firstname required.';
-                if(!this.lastname) this.errors.lastname ='Lastname required.';
-                if(!this.email) this.errors.email = 'Email required.';
-                if(!this.password) this.errors.password = 'Password required.';
-                if(!this.password) this.errors.password_confirmation = 'Password Confirmation required.';
-                if(!this.country_id) this.errors.country_id = 'Country required.';
-                if(!this.state_id) this.errors.state_id = 'State required.';
-                if(!this.city_id) this.errors.city_id = 'City required.';
+                if(!this.firstname) this.errors.firstname='Primer Nombre requerido.';
+                if(!this.lastname) this.errors.lastname ='Apellidos requerido.';
+                if(!this.email) this.errors.email = 'Correo Electrónico requerido.';
+                if(!this.password) this.errors.password = 'Contraseña requerido.';
+                if(!this.password) this.errors.password_confirmation = 'Confirmación Contraseña requerido.';
+                if(!this.country_id) this.errors.country_id = 'Pais requerido.';
+                if(!this.state_id) this.errors.state_id = 'Estado requerido.';
+                if(!this.city_id) this.errors.city_id = 'Ciudad requerido.';
 
                 if (this.password !== this.password_confirmation) {
                     this.password = ""
                     this.password_confirmation = ""
-                    this.errors.passwordmatch = 'Passwords do not match'
+                    this.errors.passwordmatch = 'Contraseñas no coinciden'
                 } 
 
                 if(Object.keys(this.errors).length > 0) {

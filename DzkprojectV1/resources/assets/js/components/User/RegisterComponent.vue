@@ -8,6 +8,7 @@
                         <div class="alert alert-danger alert-dismissable">
                           <button type="button" class="close" data-dismiss="alert">&times;</button>
                           {{error}} <br>
+
                           <a href="/login">Volver al Login</a>
                         </div>
                     </li>
@@ -70,7 +71,6 @@
 
 <script>
     export default {
-
         mounted() {
             axios.get('/getcountries')
                     .then(

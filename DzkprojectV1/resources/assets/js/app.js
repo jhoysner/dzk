@@ -31,7 +31,6 @@ window.Vue = require('vue');
   Vue.component('sider-component', require('./components/User/Login/SiderComponent.vue'));
   Vue.component('register-component', require('./components/User/RegisterComponent.vue'));
   Vue.component('email-component', require('./components/User/Password/EmailComponent.vue'));
-  Vue.component('profile-component', require('./components/User/ProfileComponent.vue'));
   Vue.component('resend-component', require('./components/User/Password/ResendComponent.vue'));
   Vue.component('unlocked-component', require('./components/User/Activate/UnlockedComponent.vue'));
   Vue.component('reset-component', require('./components/User/Password/ResetComponent.vue'));

@@ -22,8 +22,16 @@
                           <small class="text-danger" v-if="error.email">{{ error.email[0] }}</small>
                       </div>
                       <div class="col-lg-12">
-                          <input type="file" placeholder="Imagen corporativa" @change="getImage" accept="image/*" class="common-input">
+                          <label for="">Imagen actual</label>
+                          <p>
+                            <img class="image-commerce" :src="'images/commerce/'+picAct" />
+                          </p>
+                      </div>
+                      <div class="col-lg-12">
+                          <input type="file" id="image" placeholder="Imagen corporativa" @change="getImage" accept="image/*" class="common-input">
+
                           <img :src="commerce.image" class="avatar" alt="Image">
+                          <p><small class="text-danger" v-if="imageError != '' ">{{ imageError }}</small></p>
                       </div>
                       <div class="col-lg-12">
                           <input type="text" placeholder="Web" v-model="commerce.web" class="common-input">
@@ -82,6 +90,7 @@
 
 <script>
 import Bus from '../../utilities/EventBus';
+import $ from 'jquery';
 
 export default {
   name: 'edit',
@@ -94,7 +103,14 @@ export default {
       countries: [],
       states: [],
       cities: [],
-      commerceCategories: []
+      commerceCategories: [],
+      commerceMaxSize: null,
+      commerceMinSize: null,
+      validExtensions: [],
+      imageError: '',
+      picture: '',
+      picsize: '',
+      picAct: '',
     }
   },
 
@@ -104,13 +120,18 @@ export default {
       this.edit(this.editId);
       this.getCountries();
       this.getCommerceCategories();
+      this.getCommercesSize();
+      this.getCommercesExt();
     });
   },
 
   methods: {
     getImage(e) {
       let image = e.target.files[0];
+      console.log(image);
       let reader = new FileReader();
+      this.picture = image.name;
+      this.picsize = image.size;
 
       reader.readAsDataURL(image);
       reader.onload = e => {
@@ -123,6 +144,7 @@ export default {
         this.commerce = data.data[0];
         this.StateAct(data.data[0].country_idcountry);
         this.CityAct(data.data[0].state_idstate);
+        this.picAct = data.data[0].image;
       })
       .catch(err => console.log(err))
     },
@@ -172,6 +194,20 @@ export default {
     },
     update() {
       this.error = {};
+      this.imageError = '';
+
+      this.validateExtensionImage();
+
+      if(this.validateExtensionImage()) {
+        this.imageError = 'La imagen no cumple con el formato adecuado.'; //enviamos el error,
+        return false;
+      }
+
+
+      if(this.validateSizeImage()) {
+        this.imageError = 'La imagen no cumple con las dimensiones esperadas. Debe estar entre: ' + this.commerceMinSize + ' a ' + this.commerceMaxSize + 'KB'; //enviamos el error,
+        return false;
+      }
 
       axios.put('api' + this.url + '/' + this.commerce.idcommerce, this.commerce)
       .then(data => {
@@ -188,9 +224,66 @@ export default {
             this.error = err.response.data.errors;
         }
       });
+    },
+
+    validateExtensionImage() {
+        if(this.picture != "") {
+          let ext = this.picture.split('.').pop();
+        
+          let found = this.validExtensions.indexOf(ext);
+
+          if(found == -1) {
+            return true;
+          } else {
+            return false;
+          }
+        }
+
+    },
+
+    validateSizeImage() {
+      if(this.picsize != "") {
+        let fileSize = this.picsize; //Tamaño de la imagen subida.
+        var sizeKB = parseInt(fileSize / 1024); //Tamaño de la imagen, en kb.
+        if(sizeKB > this.commerceMaxSize || sizeKB < this.commerceMinSize) { //si el tamaño de la imagen, es mayorr al max del establecido en la base de datos o menor al min
+          return true;
+        } else {
+          return false;
+        }
+      }
+    },
+
+    getCommercesSize() {
+      axios.get('api/commerce-size').then(data => {
+        let value = data.data[0].val;
+        let val = JSON.parse(value);
+
+        this.commerceMaxSize = val.maxsize;
+        this.commerceMinSize = val.minsize;
+
+        console.log('El minimo permitido es: ' + this.commerceMinSize + 'KB Y el maximo es: ' + this.commerceMaxSize + 'KB');
+
+      })
+      .catch(err => console.log(err))
+    },
+
+    getCommercesExt() {
+      axios.get('api/commerce-ext').then(data => {
+        let value = data.data[0].val;
+        this.validExtensions = value;
+        console.log(value);
+
+      })
+      .catch(err => console.log(err))
+
     }
   }
 }
 </script>
 <style lang="scss" scoped>
+.image-commerce {
+  width: 80px;
+  height: 50px;
+  border-radius: 50%;
+}
 </style>

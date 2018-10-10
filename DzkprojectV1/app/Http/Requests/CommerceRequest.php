@@ -26,11 +26,11 @@ class CommerceRequest extends FormRequest
         return [
           //'idcommerce'        => 'required',
           'name'              => 'required',
-          'phone1'            => 'numeric|required',
-          'phone2'            => 'numeric|required',
+          'phone1'            => 'required',
+          'phone2'            => 'required',
           'email'             => 'required|email', //unique:commerce,email
-          //'image'             => 'required',
-          'web'               => 'required',
+          //'image'             => 'nullable|image64:jpeg,jpg,png',
+          //'web'             => 'required',
           'country_idcountry' => 'required',
           'state_idstate'     => 'required',
           'city_idcity'       => 'required',

@@ -22,8 +22,9 @@
                             <small class="text-danger" v-if="error.email">{{ error.email[0] }}</small>
                         </div>
                         <div class="col-lg-12">
-                            <input type="file" placeholder="Imagen corporativa" @change="getImage" accept="image/*" class="common-input">
-                            <img :src="form.image" class="avatar" alt="Image">
+                            <input type="file" id="image" placeholder="Imagen corporativa" @change="getImage" accept="image/*" ref="image" class="common-input">
+                            <img v-if="!!form.image" :src="form.image" class="avatar" alt="Image">
+                            <p><small class="text-danger" v-if="imageError != '' ">{{ imageError }}</small></p>
                         </div>
                         <div class="col-lg-12">
                             <input type="text" placeholder="Web" v-model="form.web" class="common-input">
@@ -86,6 +87,7 @@
 
 <script>
 import axios from 'axios';
+import $ from 'jquery';
 
     export default {
       name: 'create',
@@ -109,12 +111,18 @@ import axios from 'axios';
               states: [],
               cities: [],
               commerceCategories: [],
+              commerceMaxSize: null,
+              commerceMinSize: null,
+              validExtensions: [],
+              imageError: '',
             }
         },
 
         created() {
           this.getCountries();
           this.getCommerceCategories();
+          this.getCommercesSize();
+          this.getCommercesExt();
         },
 
         methods: {
@@ -130,12 +138,30 @@ import axios from 'axios';
 
           store() {
             this.error = {};
+            this.imageError = '';
+
+            if(this.validateExtensionImage()) {
+              this.imageError = 'La imagen no cumple con el formato adecuado.'; //enviamos el error,
+              return false;
+            }
+
+
+            if(this.validateSizeImage()) {
+              this.imageError = 'La imagen no cumple con las dimensiones esperadas. Debe estar entre: ' + this.commerceMinSize + ' a ' + this.commerceMaxSize + 'KB'; //enviamos el error,
+              return false;
+            }
 
             axios.post('api' + this.url, this.form)
-            .then(data => {
+            .then(data => {          
+              //Sino, continuamos nuestra operacion.
+
               console.log(data);
               this.$refs.createModal.hide();
               this.form = {};
+              this.getCountries();
+              this.getCommerceCategories();
+              this.form.image = null;
+              this.$refs.image.value = null
               this.$parent.index()
               swal({
                 title: "Comercio creado",
@@ -148,6 +174,31 @@ import axios from 'axios';
                   this.error = err.response.data.errors;
               }
             });
+          },
+
+          validateExtensionImage() {
+            let ext = $("#image").val().split('.').pop();
+            
+            let found = this.validExtensions.indexOf(ext);
+
+            if(found == -1) {
+              return true;
+            } else {
+              return false;
+            }
+
+          },
+
+          validateSizeImage() {
+            if($("#image").val() != "") {
+              let fileSize = $('#image')[0].files[0].size; //Tamaño de la imagen subida.
+              var sizeKB = parseInt(fileSize / 1024); //Tamaño de la imagen, en kb.
+              if(sizeKB > this.commerceMaxSize || sizeKB < this.commerceMinSize) { //si el tamaño de la imagen, es mayorr al max del establecido en la base de datos o menor al min
+                return true;
+              } else {
+                return false;
+              }
+            }
           },
 
           getCountries() {
@@ -180,6 +231,30 @@ import axios from 'axios';
               this.form.commercecategory_idcommercecategory = data.data.data[0].idcommercecategory;
             })
             .catch(err => console.log(err))
+          },
+
+          getCommercesSize() {
+            axios.get('api/commerce-size').then(data => {
+              let value = data.data[0].val;
+              let val = JSON.parse(value);
+
+              this.commerceMaxSize = val.maxsize;
+              this.commerceMinSize = val.minsize;
+
+              console.log('El minimo permitido es: ' + this.commerceMinSize + 'KB Y el maximo es: ' + this.commerceMaxSize + 'KB');
+
+            })
+            .catch(err => console.log(err))
+          },
+
+          getCommercesExt() {
+            axios.get('api/commerce-ext').then(data => {
+              let value = data.data[0].val;
+              this.validExtensions = value;
+
+            })
+            .catch(err => console.log(err))
+
           }
         }
 

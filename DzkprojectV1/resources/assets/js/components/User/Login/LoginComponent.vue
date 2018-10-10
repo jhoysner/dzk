@@ -5,19 +5,19 @@
 		<div v-if="errors.length">
             <ul>
                 <li role="alert" v-for="error in errors">
-                    <div class="alert alert-danger alert-dismissable" v-if="error == 'Account user not active'">
+                    <div class="alert alert-danger alert-dismissable" v-if="error == 'Account user inactive' || error == 'Cuenta de usuario inactiva' ">
                       <button type="button" class="close" data-dismiss="alert">&times;</button>
                       {{error}}<br>
                       <a href="/resendemail">Click para solicitar reenvio de email</a>
                     </div>
 
-                    <div class="alert alert-danger alert-dismissable" v-if="error == 'Account user locked'">
+                    <div class="alert alert-danger alert-dismissable" v-if="error == 'Account user locked' || error == 'Cuenta de usuario bloqueada'">
                       <button type="button" class="close" data-dismiss="alert">&times;</button>
                       {{error}}<br>
                       <a href="/emailunlocked">Click para solicitar activación</a>
                     </div>
                     
-                    <div class="alert alert-danger alert-dismissable" v-if="error !== 'Account user locked' && error !== 'Account user not active'">
+                    <div class="alert alert-danger alert-dismissable" v-if="error !== 'Account user locked' && error !== 'Account user not active' && error !== 'Cuenta de usuario bloqueada' && error !== 'Cuenta de usuario inactiva'">
                       <button type="button" class="close" data-dismiss="alert">&times;</button>
                       {{error}}
                     </div>

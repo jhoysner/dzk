@@ -143,6 +143,37 @@
                                   </select>
                                 <span class="text-danger" v-if="!!errorsDiscount.discountcategory_iddiscountcategory"> {{errorsDiscount.discountcategory_iddiscountcategory[0]}} </span>
                             </div>
+                            <hr>
+                             <div v-if="descuentosucursal.length > 0">
+                                <div class="table-responsive">
+                                      <table class="table table-hover table-bordered table-striped table-condensed">
+                                          <thead>
+                                              <tr>
+                                                  <th class="text-center">Sucursal</th>
+                                                  <th class="text-center">Horaria</th>
+                                                  <th class="text-center">Cantida</th>
+                                                  <th class="text-center">Disponible</th>
+                                                  <th class="text-center">Redimido</th>
+                                                  <th class="text-center">Options</th>
+                                              </tr>
+                                          </thead>
+                                          <tbody>
+                                              <tr v-for="deescueentsucu in descuentosucursal">
+                                                  <td>{{ deescueentsucu}}</td>
+                                                  <td>{{ deescueentsucu.name}}</td>
+                                                  <td>{{ deescueentsucu.pivot.discounthours}}</td>
+                                                  <td>{{ deescueentsucu.pivot.amountapproved}}</td>
+                                                  <td>{{ deescueentsucu.pivot.amountavailable}}</td>
+                                                  <td>{{ deescueentsucu.pivot.amountredeemed}}</td>
+                                                  <td>
+                                                      <button type="button" @click="editBranchDiscount(deescueentsucu)" class="btn  btn-sm  btn-info"> Editar</button>
+                                                  </td>
+                                              </tr>
+                                          </tbody>
+                                      </table>
+                                </div>
+
+                             </div>
                             
                         </div>
                         <div class="modal-footer">
@@ -251,13 +282,42 @@
                                               </tr>
                                           </tbody>
                                       </table>
-                                  </div>
+                                </div>
 
                              </div>
                         </div>
                     </div>
                 </form>
         </b-modal>
+
+        <!-- branchsdiscount -->
+        <b-modal v-model="show" id="branchDiscountEditModal" ref="branchDiscountEditModal" title="Editar Sucursales Descuentos" hide-footer>
+                <form @submit.prevent="saveBranchDiscount" id="formBranchDiscount">
+                      <div class="modal-content">
+                        <div class="container">
+                              
+                            <h3>Sucursal : </h3>   
+ 
+                            <div>
+                              <div class="form-group mt-4">
+                                  <label>Unidades</label>
+                                  <input type="text" class="form-control" v-model="form.amountapproved">
+                              </div>
+                              
+                              <div class="form-group mt-4">
+                                  <label>Horario</label>
+                                  <input type="text" class="form-control" v-model="form.discounthours">
+                              </div>
+                            </div>
+                            
+                        </div>
+                      </div>
+                        <div class="modal-footer">
+                            <b-btn @click="show=false">Cerrar</b-btn>
+                            <button type="submit" class="btn btn-primary"><i class="zmdi zmdi-plus"></i> Guradar Sucursal Descuento</button>
+                        </div>
+                </form>
+        </b-modal> 
   </div>
 </template>
 <script>
@@ -273,11 +333,19 @@
                 discounts: {},
                 tmpDiscount: {},
                 showEdit: false,
+                show: false,
                 changeImage: false,
                 discountCategories: [],
                 descuentosucursal: [],
                 errorpreciodescuento: '',
                 errorporcentaje: '',
+                form: {
+                  discounthours: '',
+                  amountapproved: '',
+                  discount_iddiscount: '',
+                  idbranch_has_discount:'',
+                  branch_idbranch: ''
+                }, 
             }
         },
 
@@ -306,8 +374,36 @@
                 this.tmpDiscount.startdate = this.formatDate(this.tmpDiscount.startdate);
                 this.tmpDiscount.enddate = this.formatDate(this.tmpDiscount.startdate);
                 this.tmpDiscount.outstanding = discount.outstanding == 0 ? false : true ;
+
+
+                axios.get('api/branch-discount/'+this.tmpDiscount.iddiscount)
+                  .then((response) => {
+                      this.branchsdiscount = response.data.data
+                  })  
+                  .catch((err) => {
+  
+                      console.log(err);
+                  });
+
                 this.$refs.editModal.show()
 
+            },             
+            editBranchDiscount(data) {
+
+                axios.get('api/branch-discount-update/'+data.pivot.discount_iddiscount+'/'+data.pivot.idbranch_has_discount)
+                  .then((response) => {
+                      console.log(response.data.data.pivot)
+                      this.form.discounthours = response.data.data.pivot.discounthours
+                      this.form.amountapproved = response.data.data.pivot.amountapproved
+                      this.form.branch_idbranch = response.data.data.pivot.branch_idbranch
+                      this.form.idbranch_has_discount = response.data.data.pivot.idbranch_has_discount
+                      this.form.discount_iddiscount = response.data.data.pivot.discount_iddiscount
+                  })  
+                  .catch((err) => {
+  
+                      console.log(err);
+                });
+                this.$refs.branchDiscountEditModal.show()
             },  
 
             formatDate(value){

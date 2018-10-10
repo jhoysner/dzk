@@ -36,6 +36,7 @@ Route::resource('branch', 'Branch\BranchsController');
 Route::resource('commerce-categories', 'CommerceCategory\CommerceCategoriesController');
 Route::post('branch-discount', 'Discount\DiscountController@branchDiscount');
 Route::get('branch-discount/{id}', 'Discount\DiscountController@getBranchDiscount');
+Route::get('branch-discount-update/{discount}/{id}', 'Discount\DiscountController@udapteBranchDiscount');
 
 Route::get('countries', 'Country\CountriesController@getCountries');
 Route::get('states/{id}', 'Country\CountriesController@getStates');

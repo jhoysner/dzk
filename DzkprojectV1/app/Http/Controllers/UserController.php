@@ -9,6 +9,7 @@ use Illuminate\Http\Request;
 use App\User;
 use App\Params;
 use Storage;
+use Lang;
 
 class UserController extends Controller
 {
@@ -119,7 +120,7 @@ class UserController extends Controller
         }
 
         $user->save();
-        return response()->json(['state'=>'Update','success'=>'User Updated','user'=>$user], 200);
+        return response()->json(['state'=>'Update','success'=>\Lang::get('messages.user_update'),'user'=>$user], 200);
      
     }
 
@@ -143,7 +144,7 @@ class UserController extends Controller
 
         $user->delete();
 
-        return response()->json(['success'=>'Account Inactive'], 200);
+        return response()->json(['success'=>\Lang::get('messages.account_noactive')], 200);
     }
 
     public function logout(Request $request)

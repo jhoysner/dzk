@@ -60562,6 +60562,8 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
 
 
 
@@ -60581,6 +60583,8 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
             descuentosucursal: [],
             errorpreciodescuento: '',
             errorporcentaje: '',
+            errorInicio: '',
+            errorFin: '',
             form: {
                 discounthours: '',
                 amountapproved: '',
@@ -60803,6 +60807,34 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 
                 console.log(err);
             });
+        },
+        handleChangeInicio: function handleChangeInicio(e) {
+            this.errorInicio = '';
+            var inicio = e.target.value;
+            var now = __WEBPACK_IMPORTED_MODULE_2_moment___default()(new Date()).format('YYYY-MM-DD');
+
+            if (inicio >= now) {
+                this.tmpDiscount.startdate = inicio;
+            } else {
+                this.tmpDiscount.startdate = '';
+                this.errorInicio = "La fecha debe ser mayor al dia actual";
+            }
+        },
+        handleChangeFin: function handleChangeFin(e) {
+            this.errorFin = '';
+            var fin = e.target.value;
+            var now = __WEBPACK_IMPORTED_MODULE_2_moment___default()(new Date()).format('YYYY-MM-DD');
+            if (this.tmpDiscount.startdate == '') {
+                this.tmpDiscount.enddate = '';
+                this.errorFin = "Debes introducir primero la fecha de inicio.";
+                return;
+            }
+            if (fin >= this.tmpDiscount.startdate) {
+                this.tmpDiscount.enddate = fin;
+            } else {
+                this.tmpDiscount.enddate = '';
+                this.errorFin = "La fecha debe ser maryor a la fecha inicio.";
+            }
         }
     }
 });
@@ -62815,6 +62847,9 @@ var render = function() {
                       attrs: { type: "date", placeholder: "image" },
                       domProps: { value: _vm.tmpDiscount.startdate },
                       on: {
+                        change: function($event) {
+                          _vm.handleChangeInicio($event)
+                        },
                         input: function($event) {
                           if ($event.target.composing) {
                             return
@@ -62827,6 +62862,10 @@ var render = function() {
                         }
                       }
                     }),
+                    _vm._v(" "),
+                    _c("p", { staticClass: "text-danger" }, [
+                      _vm._v(_vm._s(_vm.errorInicio))
+                    ]),
                     _vm._v(" "),
                     !!_vm.errorsDiscount.startdate
                       ? _c("span", { staticClass: "text-danger" }, [
@@ -62853,6 +62892,9 @@ var render = function() {
                       attrs: { type: "date" },
                       domProps: { value: _vm.tmpDiscount.enddate },
                       on: {
+                        change: function($event) {
+                          _vm.handleChangeFin($event)
+                        },
                         input: function($event) {
                           if ($event.target.composing) {
                             return
@@ -62865,6 +62907,10 @@ var render = function() {
                         }
                       }
                     }),
+                    _vm._v(" "),
+                    _c("p", { staticClass: "text-danger" }, [
+                      _vm._v(_vm._s(_vm.errorFin))
+                    ]),
                     _vm._v(" "),
                     !!_vm.errorsDiscount.enddate
                       ? _c("span", { staticClass: "text-danger" }, [

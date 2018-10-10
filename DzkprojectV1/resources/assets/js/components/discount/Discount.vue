@@ -81,13 +81,15 @@
 
                              <div class="form-group">
                                 <label>Inicio</label>
-                                 <input type="date" placeholder="image"  class="form-control" v-model="tmpDiscount.startdate">
+                                 <input type="date" placeholder="image"  class="form-control" v-model="tmpDiscount.startdate" @change="handleChangeInicio($event)">
+                                <p class="text-danger">{{errorInicio}}</p>
                                 <span class="text-danger" v-if="!!errorsDiscount.startdate"> {{errorsDiscount.startdate[0]}} </span>                            
                             </div>
 
                              <div class="form-group">
                                 <label>Fin</label>
-                                 <input type="date"   class="form-control" v-model="tmpDiscount.enddate">
+                                 <input type="date"   class="form-control" v-model="tmpDiscount.enddate" @change="handleChangeFin($event)">
+                                 <p class="text-danger">{{errorFin}}</p>
                                  <span class="text-danger" v-if="!!errorsDiscount.enddate"> {{errorsDiscount.enddate[0]}} </span>                            
                             </div>
                             <div class="form-group">
@@ -340,6 +342,8 @@
                 descuentosucursal: [],
                 errorpreciodescuento: '',
                 errorporcentaje: '',
+                errorInicio: '',
+                errorFin: '',
                 form: {
                   discounthours: '',
                   amountapproved: '',
@@ -564,6 +568,38 @@
                 });
               
             },  
+            handleChangeInicio(e){
+              this.errorInicio= ''
+               var inicio = e.target.value
+               var now =  moment(new Date()).format('YYYY-MM-DD')
+
+               if( inicio >= now ){
+                  this.tmpDiscount.startdate = inicio
+               }
+
+              else{
+                this.tmpDiscount.startdate = ''
+                this.errorInicio = "La fecha debe ser mayor al dia actual"
+              }
+            },              
+            handleChangeFin(e){
+              this.errorFin= ''
+               var fin = e.target.value
+               var now =  moment(new Date()).format('YYYY-MM-DD')
+               if(this.tmpDiscount.startdate == ''){
+                  this.tmpDiscount.enddate = ''
+                  this.errorFin = "Debes introducir primero la fecha de inicio."
+                  return
+               }
+               if( fin >= this.tmpDiscount.startdate){
+                  this.tmpDiscount.enddate = fin
+               }
+               else{
+                  this.tmpDiscount.enddate = ''
+                  this.errorFin = "La fecha debe ser maryor a la fecha inicio."
+               }
+            },       
+
 
         }
     }

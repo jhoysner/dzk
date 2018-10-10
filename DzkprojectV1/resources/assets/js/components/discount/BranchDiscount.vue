@@ -1,6 +1,6 @@
 <template>
     <div>
-        <b-modal v-model="show" id="branchDiscountModal" ref="branchDiscountModal" title="Brabch Discount" hide-footer>
+        <b-modal v-model="show" id="branchDiscountModal" ref="branchDiscountModal" title="Sucursales Descuentos" hide-footer>
                 <form @submit.prevent="saveBranchDiscount" id="formBranchDiscount">
                       <div class="modal-content">
                         <div class="container">
@@ -52,8 +52,8 @@
                         </div>
                       </div>
                         <div class="modal-footer">
-                            <b-btn @click="show=false">Close</b-btn>
-                            <button type="submit" class="btn btn-primary"><i class="zmdi zmdi-plus"></i> Save Branch Discount</button>
+                            <b-btn @click="show=false">Cerrar</b-btn>
+                            <button type="submit" class="btn btn-primary"><i class="zmdi zmdi-plus"></i> Guradar Sucursal Descuento</button>
                         </div>
                 </form>
         </b-modal> 

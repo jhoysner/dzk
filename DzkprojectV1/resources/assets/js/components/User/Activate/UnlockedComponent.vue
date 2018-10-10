@@ -2,7 +2,7 @@
     <div id="section-register" class="container">
         <div class="row justify-content-center">
             <div class="col-md-8">
-                <h1>Send Email Account Unlocked</h1>
+                <h1>Solicitar activación de cuenta</h1>
         
                 <div v-if="errors.length">
                     <ul>
@@ -32,7 +32,7 @@
                             <input type="email" placeholder="Email Address*" onfocus="this.placeholder=''" onblur="this.placeholder = 'Email Address*'" required class="common-input" v-model="email">
                         </div>
                         <div class="col-lg-12 text-right" required>
-                            <button class="primary-btn">Send Email</button>
+                            <button class="primary-btn">Solicitar</button>
                         </div>
 
                     </div>

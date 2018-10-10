@@ -6,7 +6,7 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\User;
 use Mail;
-
+use Lang;
 
 class ResendController extends Controller
 {
@@ -26,7 +26,7 @@ class ResendController extends Controller
 
     	if(!$user)
     	{
-    		return response()->json(['error'=>'User not found y/o User active'], 422);
+    		return response()->json(['error'=>\Lang::get('messages.user_notfound')], 422);
     	} 
 
     	$user->access_token = str_random(30);
@@ -42,10 +42,10 @@ class ResendController extends Controller
         Mail::send('email.registro', $data, function($message) use ($data) {
             $message->from(\Config::get('mail.from.address'),\Config::get('mail.from.name'));
             $message->to($data['email']);
-            $message->subject('Inactive Account User');
+            $message->subject(\Lang::get('messages.account_notactive'));
         });
 
-        return response()->json(['success'=>'Se ha enviado un correo para la activacion de la cuenta. Por favor revisa su correo'], 201);
+        return response()->json(['success'=>\Lang::get('messages.email_activation')], 201);
 
     }
 
@@ -64,7 +64,7 @@ class ResendController extends Controller
 
     	if(!$user)
     	{
-    		return response()->json(['error'=>'User not found y/o User active'], 422);
+    		return response()->json(['error'=>\Lang::get('messages.user_foundoract')], 422);
     	} 
 
     	$user->access_token = str_random(30);
@@ -80,10 +80,10 @@ class ResendController extends Controller
         Mail::send('email.unlocked', $data, function($message) use ($data) {
             $message->from(\Config::get('mail.from.address'),\Config::get('mail.from.name'));
             $message->to($data['email']);
-            $message->subject('Unlocked User accounts');
+            $message->subject(\Lang::get('messages.user_unlocked'));
         });
 
-        return response()->json(['success'=>'Se ha enviado un correo para la activacion de la cuenta. Por favor revisa su correo'], 201);
+        return response()->json(['success'=>\Lang::get('messages.email_activation')], 201);
 
     }
 
@@ -99,7 +99,7 @@ class ResendController extends Controller
         $user = User::where('access_token','=', $token)->first();
 
         if(!$user) {
-            return response()->json(['error'=>'Token not valid'], 422);
+            return response()->json(['error'=>\Lang::get('messages.token_invalid')], 422);
         }
 
         $user->status = 1;
@@ -107,7 +107,7 @@ class ResendController extends Controller
         $user->access_token = str_random(30);
         $user->save();
 
-        return response()->json(['success'=>'Account user activate', 'user'=>$user], 200);
+        return response()->json(['success'=>\Lang::get('messages.account_active'), 'user'=>$user], 200);
     }
 
 

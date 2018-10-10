@@ -7,6 +7,7 @@ use Illuminate\Foundation\Auth\ResetsPasswords;
 use Illuminate\Support\Facades\Password;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
+use Lang;
 
 class ResetPasswordController extends Controller
 {
@@ -60,7 +61,7 @@ class ResetPasswordController extends Controller
                 return response()->json(['error'=>($response)],422);
 
             case Password::PASSWORD_RESET:
-                return response()->json(['success'=>'Password Update'],200);
+                return response()->json(['success'=>\Lang::get('messages.pass_update')],200);
         }
     }
 

@@ -10,7 +10,11 @@ return [
     'activate_account'=> 'Activate you users accounts',
     'token_invalid'=> 'Token not valid',
     'account_active'=> 'Account user activate',
-    'email_activation'=> 'An email has been sent to activate the account. Please check your email.'
+    'email_activation'=> 'An email has been sent to activate the account. Please check your email.',
+    'user_update'=> 'User Updated',
+    'user_unlocked'=> 'Unlocked User accounts',
+    'user_foundoract'=>  'User not found y/o User active',
+    'pass_update'=> 'Password Update'
 
 
 

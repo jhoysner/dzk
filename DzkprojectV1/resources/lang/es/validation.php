@@ -18,5 +18,6 @@ return [
     'size'                 => [
         'numeric' => 'El :attribute debe ser :size.',
         'string'  => 'El :attribute debe ser :size caracteres.',
-    ]
+    ],
+    'unique'               => 'El :attribute ha sido utilizado.',
 ];

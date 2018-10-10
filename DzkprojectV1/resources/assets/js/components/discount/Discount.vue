@@ -167,6 +167,7 @@
                                                   <td>{{ deescueentsucu.pivot.amountredeemed}}</td>
                                                   <td>
                                                       <button type="button" @click="editBranchDiscount(deescueentsucu)" class="btn  btn-sm  btn-info"> Editar</button>
+                                                      <button type="button" @click="confirmBranchDiscount(deescueentsucu)" class="btn btn-sm  btn-danger">Eliminar</button>
                                                   </td>
                                               </tr>
                                           </tbody>
@@ -292,7 +293,7 @@
 
         <!-- branchsdiscount -->
         <b-modal v-model="show" id="branchDiscountEditModal" ref="branchDiscountEditModal" title="Editar Sucursales Descuentos" hide-footer>
-                <form @submit.prevent="saveBranchDiscount" id="formBranchDiscount">
+                <form @submit.prevent="updateBranchDiscount" id="formBranchDiscount">
                       <div class="modal-content">
                         <div class="container">
                               
@@ -374,17 +375,7 @@
                 this.tmpDiscount.startdate = this.formatDate(this.tmpDiscount.startdate);
                 this.tmpDiscount.enddate = this.formatDate(this.tmpDiscount.startdate);
                 this.tmpDiscount.outstanding = discount.outstanding == 0 ? false : true ;
-
-
-                axios.get('api/branch-discount/'+this.tmpDiscount.iddiscount)
-                  .then((response) => {
-                      this.branchsdiscount = response.data.data
-                  })  
-                  .catch((err) => {
-  
-                      console.log(err);
-                  });
-
+                this.getBranchDiscount(this.tmpDiscount.iddiscount)
                 this.$refs.editModal.show()
 
             },             
@@ -392,7 +383,7 @@
 
                 axios.get('api/branch-discount-update/'+data.pivot.discount_iddiscount+'/'+data.pivot.idbranch_has_discount)
                   .then((response) => {
-                      console.log(response.data.data.pivot)
+                      // console.log(response.data.data.pivot)
                       this.form.discounthours = response.data.data.pivot.discounthours
                       this.form.amountapproved = response.data.data.pivot.amountapproved
                       this.form.branch_idbranch = response.data.data.pivot.branch_idbranch
@@ -432,22 +423,30 @@
                       this.errorsDiscount = error.response.data.errors;
 
                     });
+            },            
+            updateBranchDiscount() {
+                axios.patch(`/api/branch-discount-update/${this.form.discount_iddiscount}/${this.form.idbranch_has_discount}`,this.form)
+                    .then((response) => {
+                        this.form = {}
+                        this.$refs.branchDiscountEditModal.hide()
+                        swal({
+                          title: "Actualizado",
+                          text: "Registro actualizdo con exito",
+                          icon: "success",
+                        })
+
+                    })
+                   .catch(error => 
+                      console.log(error.response)
+
+                    );
             },
 
             detailsDiscount(discount) {
-                // this.errorsProducto = {}
                 this.tmpDiscount = {}
                 this.tmpDiscount = discount
                 this.tmpDiscount.outstanding = discount.outstanding == 0 ? false : true ;
-
-                axios.get('api/branch-discount/'+discount.iddiscount)
-                  .then((response) => {
-                      this.descuentosucursal = response.data.data
-                  })  
-                  .catch((err) => {
-  
-                      console.log(err);
-                  });
+                this.getBranchDiscount(discount.iddiscount)
                 this.$refs.detailtModal.show()
             },
             confirm(discount) {
@@ -462,6 +461,20 @@
                     this.deleteDiscount(discount)
                   }
                 });
+            },            
+            confirmBranchDiscount(deescueentsucu) {
+                this.$refs.editModal.hide()
+                swal({
+                  title: "Quieres Borrar el Registro?",
+                  icon: "warning",
+                  buttons: true,
+                  dangerMode: true,
+                })
+                .then((willDelete) => {
+                  if (willDelete) {
+                    this.deleteBranchDiscount(deescueentsucu)
+                  }
+                });
             },
             deleteDiscount(discount) {
                 this.errorsProducto = {}
@@ -473,6 +486,18 @@
                           icon: "success",
                         })
                         setTimeout(() => this.cargarDiscount(), 1000)
+                    })
+                    .catch((err) => console.log(err))
+            },            
+            deleteBranchDiscount(deescueentsucu) {
+                this.errorsProducto = {}
+                axios.delete(`/api/branch-discount-update/${deescueentsucu.pivot.discount_iddiscount}/${deescueentsucu.pivot.idbranch_has_discount}`)
+                    .then((response) => {
+                        swal({
+                          title: "Eliminado",
+                          text: "Registro eliminado con exito",
+                          icon: "success",
+                        })
                     })
                     .catch((err) => console.log(err))
             },
@@ -526,6 +551,17 @@
               var result = this.tmpDiscount.discountprice*100/precio
               
               this.tmpDiscount.discountpercentage =result;
+              
+            },              
+            getBranchDiscount(value){
+                axios.get('api/branch-discount/'+value)
+                  .then((response) => {
+                      this.descuentosucursal = response.data.data
+                  })  
+                  .catch((err) => {
+  
+                      console.log(err);
+                });
               
             },  
 

@@ -44,7 +44,9 @@ Route::resource('branch', 'Branch\BranchsController');
 Route::resource('commerce-categories', 'CommerceCategory\CommerceCategoriesController');
 Route::post('branch-discount', 'Discount\DiscountController@branchDiscount');
 Route::get('branch-discount/{id}', 'Discount\DiscountController@getBranchDiscount');
-Route::get('branch-discount-update/{discount}/{id}', 'Discount\DiscountController@udapteBranchDiscount');
+Route::get('branch-discount-update/{discount}/{id}', 'Discount\DiscountController@editBranchDiscount');
+Route::patch('branch-discount-update/{discount}/{id}', 'Discount\DiscountController@updateBranchDiscount');
+Route::delete('branch-discount-update/{discount}/{id}', 'Discount\DiscountController@branchDiscountDelete');
 
 Route::get('countries', 'Country\CountriesController@getCountries');
 Route::get('states/{id}', 'Country\CountriesController@getStates');

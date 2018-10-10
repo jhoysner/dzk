@@ -60561,6 +60561,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
 
 
 
@@ -60608,8 +60609,6 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
             });
         },
         editDiscount: function editDiscount(discount) {
-            var _this2 = this;
-
             this.changeImage = false;
             this.errorsDiscount = {};
             this.tmpdDiscount = {};
@@ -60617,26 +60616,19 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
             this.tmpDiscount.startdate = this.formatDate(this.tmpDiscount.startdate);
             this.tmpDiscount.enddate = this.formatDate(this.tmpDiscount.startdate);
             this.tmpDiscount.outstanding = discount.outstanding == 0 ? false : true;
-
-            axios.get('api/branch-discount/' + this.tmpDiscount.iddiscount).then(function (response) {
-                _this2.branchsdiscount = response.data.data;
-            }).catch(function (err) {
-
-                console.log(err);
-            });
-
+            this.getBranchDiscount(this.tmpDiscount.iddiscount);
             this.$refs.editModal.show();
         },
         editBranchDiscount: function editBranchDiscount(data) {
-            var _this3 = this;
+            var _this2 = this;
 
             axios.get('api/branch-discount-update/' + data.pivot.discount_iddiscount + '/' + data.pivot.idbranch_has_discount).then(function (response) {
-                console.log(response.data.data.pivot);
-                _this3.form.discounthours = response.data.data.pivot.discounthours;
-                _this3.form.amountapproved = response.data.data.pivot.amountapproved;
-                _this3.form.branch_idbranch = response.data.data.pivot.branch_idbranch;
-                _this3.form.idbranch_has_discount = response.data.data.pivot.idbranch_has_discount;
-                _this3.form.discount_iddiscount = response.data.data.pivot.discount_iddiscount;
+                // console.log(response.data.data.pivot)
+                _this2.form.discounthours = response.data.data.pivot.discounthours;
+                _this2.form.amountapproved = response.data.data.pivot.amountapproved;
+                _this2.form.branch_idbranch = response.data.data.pivot.branch_idbranch;
+                _this2.form.idbranch_has_discount = response.data.data.pivot.idbranch_has_discount;
+                _this2.form.discount_iddiscount = response.data.data.pivot.discount_iddiscount;
             }).catch(function (err) {
 
                 console.log(err);
@@ -60647,15 +60639,15 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
             return __WEBPACK_IMPORTED_MODULE_2_moment___default()(value).format('YYYY-MM-DD');
         },
         updatedDiscount: function updatedDiscount() {
-            var _this4 = this;
+            var _this3 = this;
 
             this.errorsDiscount = {};
 
             axios.patch('/api/discount/' + this.tmpDiscount.iddiscount, this.tmpDiscount).then(function (response) {
-                _this4.tmpDiscount = {};
-                _this4.cargarDiscount();
+                _this3.tmpDiscount = {};
+                _this3.cargarDiscount();
                 // this.loadingProductos = true
-                _this4.$refs.editModal.hide();
+                _this3.$refs.editModal.hide();
                 console.log(response);
                 swal({
                     title: "Actualizado",
@@ -60664,27 +60656,33 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
                 });
             }).catch(function (error) {
                 console.log(error.response);
-                _this4.errorsDiscount = error.response.data.errors;
+                _this3.errorsDiscount = error.response.data.errors;
+            });
+        },
+        updateBranchDiscount: function updateBranchDiscount() {
+            var _this4 = this;
+
+            axios.patch('/api/branch-discount-update/' + this.form.discount_iddiscount + '/' + this.form.idbranch_has_discount, this.form).then(function (response) {
+                _this4.form = {};
+                _this4.$refs.branchDiscountEditModal.hide();
+                swal({
+                    title: "Actualizado",
+                    text: "Registro actualizdo con exito",
+                    icon: "success"
+                });
+            }).catch(function (error) {
+                return console.log(error.response);
             });
         },
         detailsDiscount: function detailsDiscount(discount) {
-            var _this5 = this;
-
-            // this.errorsProducto = {}
             this.tmpDiscount = {};
             this.tmpDiscount = discount;
             this.tmpDiscount.outstanding = discount.outstanding == 0 ? false : true;
-
-            axios.get('api/branch-discount/' + discount.iddiscount).then(function (response) {
-                _this5.descuentosucursal = response.data.data;
-            }).catch(function (err) {
-
-                console.log(err);
-            });
+            this.getBranchDiscount(discount.iddiscount);
             this.$refs.detailtModal.show();
         },
         confirm: function confirm(discount) {
-            var _this6 = this;
+            var _this5 = this;
 
             swal({
                 title: "Quieres Borrar el Registro?",
@@ -60693,7 +60691,22 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
                 dangerMode: true
             }).then(function (willDelete) {
                 if (willDelete) {
-                    _this6.deleteDiscount(discount);
+                    _this5.deleteDiscount(discount);
+                }
+            });
+        },
+        confirmBranchDiscount: function confirmBranchDiscount(deescueentsucu) {
+            var _this6 = this;
+
+            this.$refs.editModal.hide();
+            swal({
+                title: "Quieres Borrar el Registro?",
+                icon: "warning",
+                buttons: true,
+                dangerMode: true
+            }).then(function (willDelete) {
+                if (willDelete) {
+                    _this6.deleteBranchDiscount(deescueentsucu);
                 }
             });
         },
@@ -60710,6 +60723,18 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
                 setTimeout(function () {
                     return _this7.cargarDiscount();
                 }, 1000);
+            }).catch(function (err) {
+                return console.log(err);
+            });
+        },
+        deleteBranchDiscount: function deleteBranchDiscount(deescueentsucu) {
+            this.errorsProducto = {};
+            axios.delete('/api/branch-discount-update/' + deescueentsucu.pivot.discount_iddiscount + '/' + deescueentsucu.pivot.idbranch_has_discount).then(function (response) {
+                swal({
+                    title: "Eliminado",
+                    text: "Registro eliminado con exito",
+                    icon: "success"
+                });
             }).catch(function (err) {
                 return console.log(err);
             });
@@ -60768,6 +60793,16 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
             var result = this.tmpDiscount.discountprice * 100 / precio;
 
             this.tmpDiscount.discountpercentage = result;
+        },
+        getBranchDiscount: function getBranchDiscount(value) {
+            var _this10 = this;
+
+            axios.get('api/branch-discount/' + value).then(function (response) {
+                _this10.descuentosucursal = response.data.data;
+            }).catch(function (err) {
+
+                console.log(err);
+            });
         }
     }
 });
@@ -63275,6 +63310,22 @@ var render = function() {
                                           }
                                         },
                                         [_vm._v(" Editar")]
+                                      ),
+                                      _vm._v(" "),
+                                      _c(
+                                        "button",
+                                        {
+                                          staticClass: "btn btn-sm  btn-danger",
+                                          attrs: { type: "button" },
+                                          on: {
+                                            click: function($event) {
+                                              _vm.confirmBranchDiscount(
+                                                deescueentsucu
+                                              )
+                                            }
+                                          }
+                                        },
+                                        [_vm._v("Eliminar")]
                                       )
                                     ])
                                   ])
@@ -63582,7 +63633,7 @@ var render = function() {
               on: {
                 submit: function($event) {
                   $event.preventDefault()
-                  return _vm.saveBranchDiscount($event)
+                  return _vm.updateBranchDiscount($event)
                 }
               }
             },

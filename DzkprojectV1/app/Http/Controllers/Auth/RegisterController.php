@@ -11,6 +11,7 @@ use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Foundation\Auth\RegistersUsers;
 use Mail;
+use Lang;
 
 
 class RegisterController extends Controller
@@ -123,10 +124,10 @@ class RegisterController extends Controller
         Mail::send('email.registro', $data, function($message) use ($data) {
             $message->from(\Config::get('mail.from.address'),\Config::get('mail.from.name'));
             $message->to($data['email']);
-            $message->subject('Activate you users accounts');
+            $message->subject(\Lang::get('messages.activate_account'));
         });
 
-        return response()->json(['success'=>'Se ha enviado un correo para la activación de la cuenta. Por favor revisa su correo'], 201);
+        return response()->json(['success'=>\Lang::get('messages.email_activation')], 201);
     }
 
 
@@ -142,14 +143,14 @@ class RegisterController extends Controller
         $user = User::where('access_token','=', $token)->first();
 
         if(!$user) {
-            return response()->json(['error'=>'Token not valid'], 422);
+            return response()->json(['error'=>\Lang::get('messages.token_invalid')], 422);
         }
 
         $user->status = 1;
         $user->access_token = str_random(30);
         $user->save();
 
-        return response()->json(['success'=>'Account user activate', 'user'=>$user], 200);
+        return response()->json(['success'=>\Lang::get('messages.account_active'), 'user'=>$user], 200);
     }
 
 

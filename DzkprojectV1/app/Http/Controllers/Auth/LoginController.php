@@ -94,7 +94,7 @@ class LoginController extends Controller
         if($this->numberLoginAttemps($user->email)) {
             $user->status = 0;
             $user->save();
-            return response()->json(['state'=>'Attempts','error'=>'Account to many attempts access'], 422);            
+            return response()->json(['state'=>'Attempts','error'=>\Lang::get('messages.account_attempts')], 422);            
         } 
 
         if (Auth::attempt($credentials)) {

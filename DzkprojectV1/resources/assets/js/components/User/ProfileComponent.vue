@@ -87,7 +87,6 @@ import edit from './Edit';
                 .then(
                     (response) => {
                         this.user = response.data.user[0];
-                        console.log(this.user)
                     }   
                 )
     

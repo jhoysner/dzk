@@ -8,6 +8,7 @@ use Illuminate\Http\Request;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
 use App\User;
 use App\Params;
+use Lang;
 
 class LoginController extends Controller
 {
@@ -75,19 +76,19 @@ class LoginController extends Controller
         $user = $this->userData($credentials['email']);
  
         if(!$user) {
-            return response()->json(['state'=>'Not_Found','error'=>'User not found'], 404);
+            return response()->json(['state'=>'Not_Found','error'=>\Lang::get('messages.user_notfound')], 404);
         }
 
         if(isset($user->delete)) {
-            return response()->json(['state'=>'Canceled','error'=>'Account canceled'], 422);
+            return response()->json(['state'=>'Canceled','error'=>\Lang::get('messages.account_canceled')], 422);
         }
 
         if($user->status == 0 && is_null($user->lastlogin) && is_null($user->delete_at)) {
-            return response()->json(['state'=>'Inactive','error'=>'Account user not active'], 422);
+            return response()->json(['state'=>'Inactive','error'=>\Lang::get('messages.account_notactive')], 422);
         }
 
         if($user->status == 0 && isset($user->lastlogin) && is_null($user->delete_at)) {
-            return response()->json(['state'=>'Locked','error'=>'Account user locked'], 422);
+            return response()->json(['state'=>'Locked','error'=>\Lang::get('messages.account_locked')], 422);
         }
 
         if($this->numberLoginAttemps($user->email)) {
@@ -100,7 +101,7 @@ class LoginController extends Controller
             return response()->json(['state'=>'Active','success'=>'Successful session start','user' => Auth::user()], 200);
         } 
 
-        return response()->json(['state'=>'Invalid','error'=>'Credentials Invalid'], 422);            
+        return response()->json(['state'=>'Invalid','error'=>\Lang::get('messages.credential_invalid')], 422);            
         
     }
 

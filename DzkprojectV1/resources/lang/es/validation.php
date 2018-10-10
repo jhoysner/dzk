@@ -2,7 +2,7 @@
 
 return [
     'confirmed'            => 'La :attribute no coinciden.',
-    'date'                 => 'The :attribute no es una fecha válida.',
+    'date'                 => 'El :attribute no es una fecha válida.',
     'email'                => 'El :attribute debe ser un correo electrónico válido.',
     'image'                => 'El :attribute debe ser una imagen.',
     'integer'              => 'El :attribute debe ser un entero.',

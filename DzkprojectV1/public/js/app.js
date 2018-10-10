@@ -53965,14 +53965,16 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
       });
     },
     validateExtensionImage: function validateExtensionImage() {
-      var ext = __WEBPACK_IMPORTED_MODULE_1_jquery___default()("#image").val().split('.').pop();
+      if (__WEBPACK_IMPORTED_MODULE_1_jquery___default()("#image").val() != "") {
+        var ext = __WEBPACK_IMPORTED_MODULE_1_jquery___default()("#image").val().split('.').pop();
 
-      var found = this.validExtensions.indexOf(ext);
+        var found = this.validExtensions.indexOf(ext);
 
-      if (found == -1) {
-        return true;
-      } else {
-        return false;
+        if (found == -1) {
+          return true;
+        } else {
+          return false;
+        }
       }
     },
     validateSizeImage: function validateSizeImage() {
@@ -57598,14 +57600,16 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
       });
     },
     validateExtensionImage: function validateExtensionImage() {
-      var ext = $("#image").val().split('.').pop();
+      if ($("#image").val() != "") {
+        var ext = $("#image").val().split('.').pop();
 
-      var found = this.validExtensions.indexOf(ext);
+        var found = this.validExtensions.indexOf(ext);
 
-      if (found == -1) {
-        return true;
-      } else {
-        return false;
+        if (found == -1) {
+          return true;
+        } else {
+          return false;
+        }
       }
     },
     validateSizeImage: function validateSizeImage() {

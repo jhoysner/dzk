@@ -52,4 +52,26 @@ class ParamsController extends Controller
 
       	return response()->json($param,  201);
     }
+
+    public function index()
+    {
+      $params = Params::all();
+
+      return response()->json(['success'=>'', 'params'=>$params],200);
+    
+    }
+
+    public function destroy($id)
+    {
+      $param = Params::find($id);
+
+      if(!$param) {
+          return response()->json(['error' => 'No existe el parametro.'], 422);
+      }
+
+      $param->delete();
+
+      return response()->json(['success'=>'Parametro eliminado correctamente'],200);
+
+    }
 }

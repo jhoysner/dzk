@@ -28,7 +28,7 @@
             <li>
               <router-link to='/discount'>
                   <a>
-                    Discount
+                    Descuentos
                   </a>
               </router-link>
             </li>

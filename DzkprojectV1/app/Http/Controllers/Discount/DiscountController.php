@@ -208,5 +208,15 @@ class DiscountController extends Controller
 
         return response()->json(['success'=> true], 201);
 
+    }    
+
+    public function getBranchDiscount($id)
+    {
+
+        $discount = Discount::find($id);
+
+        $relacion = $discount->branchs;
+
+        return response()->json(['data'=> $relacion], 201);
     }
 }

@@ -40,4 +40,10 @@ class Discount extends Model
     protected $hidden  = [
         'created_at', 'updated_at', 'deleted_at',
     ];
+
+
+    public function  branchs(){
+        return $this->belongsToMany('App\Branch','branch_has_discount')->withPivot('discounthours', 'amountapproved','amountavailable','amountredeemed');
+    }
+
 }

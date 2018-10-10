@@ -29,6 +29,14 @@ Route::group(["prefix" => "profile"], function () {
 
 });
 
+//Parametros
+Route::group(["prefix" => "params"], function () {
+	Route::get('/', 'Params\ParamsController@index');
+	Route::get('/{id}', 'UserController@userDetail');
+	Route::post('/', 'UserController@updateProfile');
+
+});
+
 Route::resource('discount','Discount\DiscountController');
 Route::resource('discount-categories','DiscountCategory\DiscountCategoryController');
 Route::resource('commerce', 'Commerce\CommercesController');

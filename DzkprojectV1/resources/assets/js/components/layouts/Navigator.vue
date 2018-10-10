@@ -12,12 +12,20 @@
                 </router-link>
             </li>
             <li>
+              <router-link to='/params'>
+                  <a>
+                    Parametros
+                  </a>
+              </router-link>
+            </li>
+            <li>
               <router-link to='/commerces'>
                   <a>
                     Comercios
                   </a>
               </router-link>
             </li>
+
             <li>
               <router-link to='/branchs'>
                   <a>

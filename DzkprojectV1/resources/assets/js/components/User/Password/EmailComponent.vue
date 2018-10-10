@@ -30,7 +30,7 @@
                             <input type="email" placeholder="Correo Electrónico*" onfocus="this.placeholder=''" onblur="this.placeholder = 'Correo Electrónico*'" required class="common-input" v-model="email">
                         </div>
                         <div class="col-lg-12 text-right" required>
-                            <button class="primary-btn" :disabled="btnlocked">Solicitar resetear contraseña</button>
+                            <button class="primary-btn" :disabled="btnlocked">Solicitar</button>
                         </div>
 
                     </div>

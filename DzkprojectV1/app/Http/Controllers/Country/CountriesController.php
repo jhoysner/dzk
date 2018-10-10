@@ -19,7 +19,7 @@ class CountriesController extends Controller
 
     $data[0] = [
       'id' => '',
-      'name' => 'Select Country'
+      'name' => 'Seleccione Pais'
     ];
 
     foreach ($countries as $key => $value) {
@@ -40,7 +40,7 @@ class CountriesController extends Controller
 
     $data[0] = [
       'id' => '',
-      'name' => 'Select State'
+      'name' => 'Seleccione Estado'
     ];
 
     foreach ($states as $key => $value) {
@@ -62,7 +62,7 @@ class CountriesController extends Controller
 
     $data[0] = [
       'id' => '',
-      'name' => 'Select City'
+      'name' => 'Seleccione Ciudad'
     ];
 
     foreach ($cities as $key => $value) {

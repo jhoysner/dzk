@@ -63054,26 +63054,6 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
                 }
             });
         },
-        country: function country(id) {
-            var _this2 = this;
-
-            this.cities = [];
-
-            axios.get('/getstates/' + id).then(function (response) {
-                _this2.states = response.data;
-            });
-        },
-        state: function state(id) {
-            var _this3 = this;
-
-            var params = {
-                id: id
-            };
-
-            axios.get('/getcities/' + id).then(function (response) {
-                _this3.cities = response.data;
-            });
-        },
         edit: function edit(id) {
             __WEBPACK_IMPORTED_MODULE_0__utilities_EventBus__["a" /* default */].$emit('id_user', id);
         }

@@ -130,28 +130,6 @@ import edit from './Edit';
                 });
 
             },
-            country(id) {
-                this.cities = []
-
-                axios.get('/getstates/'+id)
-                    .then(
-                        (response) => {
-                            this.states = response.data;
-                        }   
-                    )
-            },
-            state(id) {
-                const params = {
-                    id: id 
-                }
-
-                axios.get('/getcities/'+id)
-                    .then(
-                        (response) => {
-                            this.cities = response.data;
-                        }   
-                    )
-            },
             edit(id) {
               Bus.$emit('id_user', id);
             },

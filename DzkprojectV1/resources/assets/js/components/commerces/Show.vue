@@ -31,7 +31,7 @@
                   </p>
               </div>
 
-              <div class="form-group">
+              <div class="form-group" v-if="commerce.web != null ">
                   <label class="font-weight-bold">Web</label>
                   <p>{{ commerce.web }}</p>
               </div>

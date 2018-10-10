@@ -26,8 +26,16 @@
                             <small class="text-danger" v-if="error.phone2">{{ error.phone2[0] }}</small>
                         </div>
                         <div class="col-lg-12">
-                            <input type="file" placeholder="Imagen corporativa" @change="getImage" accept="image/*" class="common-input">
+                          <label for="">Imagen actual</label>
+                          <p>
+                            <img class="image-branch" :src="'images/branch/'+picAct" />
+                          </p>
+                        </div>
+                        <div class="col-lg-12">
+                            <input type="file" id="image" placeholder="Imagen corporativa" @change="getImage" accept="image/*" class="common-input">
                             <img :src="branch.image" class="avatar" alt="Image">
+                            <p><small class="text-danger" v-if="imageError != '' ">{{ imageError }}</small></p>
+
                         </div>
                         <div class="col-lg-12">
                             <div class="sorting"> Localización
@@ -118,7 +126,14 @@ export default {
       countries: [],
       states: [],
       cities: [],
-      commerces: []
+      commerces: [],
+      branchMaxSize: null,
+      branchMinSize: null,
+      validExtensions: [],
+      imageError: '',
+      picture: '',
+      picsize: '',
+      picAct: '',
     }
   },
 
@@ -131,12 +146,17 @@ export default {
 
     this.markerMap();
     this.getCommerces();
+
+    this.getBranchSize();
+    this.getBranchExt();
   },
 
   methods: {
     getImage(e) {
       let image = e.target.files[0];
       let reader = new FileReader();
+      this.picture = image.name;
+      this.picsize = image.size;
 
       reader.readAsDataURL(image);
       reader.onload = e => {
@@ -149,6 +169,7 @@ export default {
         this.branch = data.data.data[0];
         this.StateAct(data.data.data[0].country_idcountry);
         this.CityAct(data.data.data[0].state_idstate);
+        this.picAct = data.data.data[0].image;
       })
       .catch(err => console.log(err))
     },
@@ -323,6 +344,20 @@ export default {
 
     update() {
       this.error = {};
+      this.imageError = '';
+
+      this.validateExtensionImage();
+
+      if(this.validateExtensionImage()) {
+        this.imageError = 'La imagen no cumple con el formato adecuado.'; //enviamos el error,
+        return false;
+      }
+
+
+      if(this.validateSizeImage()) {
+        this.imageError = 'La imagen no cumple con las dimensiones esperadas. Debe estar entre: ' + this.branchMinSize + ' a ' + this.branchMaxSize + 'KB'; //enviamos el error,
+        return false;
+      }
 
       axios.put('api' + this.url + '/' + this.branch.idbranch, this.branch)
       .then(data => {
@@ -339,6 +374,57 @@ export default {
             this.error = err.response.data.errors;
         }
       });
+    },
+
+    validateExtensionImage() {
+        if(this.picture != "") {
+          let ext = this.picture.split('.').pop();
+        
+          let found = this.validExtensions.indexOf(ext);
+
+          if(found == -1) {
+            return true;
+          } else {
+            return false;
+          }
+        }
+
+    },
+
+    validateSizeImage() {
+      if(this.picsize != "") {
+        let fileSize = this.picsize; //Tamaño de la imagen subida.
+        var sizeKB = parseInt(fileSize / 1024); //Tamaño de la imagen, en kb.
+        if(sizeKB > this.branchMaxSize || sizeKB < this.branchMinSize) { //si el tamaño de la imagen, es mayorr al max del establecido en la base de datos o menor al min
+          return true;
+        } else {
+          return false;
+        }
+      }
+    },
+
+    getBranchSize() {
+      axios.get('api/branch-size').then(data => {
+        let value = data.data[0].val;
+        let val = JSON.parse(value);
+
+        this.branchMaxSize = val.maxsize;
+        this.branchMinSize = val.minsize;
+
+        console.log('El minimo permitido es: ' + this.branchMinSize + 'KB Y el maximo es: ' + this.branchMaxSize + 'KB');
+
+      })
+      .catch(err => console.log(err))
+    },
+
+    getBranchExt() {
+      axios.get('api/branch-ext').then(data => {
+        let value = data.data[0].val;
+        this.validExtensions = value;
+
+      })
+      .catch(err => console.log(err))
+
     }
   }
 }
@@ -382,5 +468,10 @@ export default {
 }
 .avatar {
   width: 150px;
+}
+.image-branch {
+  width: 80px;
+  height: 50px;
+  border-radius: 50%;
 }
 </style>

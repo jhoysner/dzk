@@ -53926,6 +53926,8 @@ exports.push([module.i, "\n.avatar {\n  width: 150px;\n}\n", ""]);
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_axios__ = __webpack_require__(30);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_axios___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_axios__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_jquery__ = __webpack_require__(205);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_jquery___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1_jquery__);
 //
 //
 //
@@ -54012,6 +54014,8 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+
 
 
 
@@ -54036,12 +54040,18 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
       countries: [],
       states: [],
       cities: [],
-      commerceCategories: []
+      commerceCategories: [],
+      commerceMaxSize: null,
+      commerceMinSize: null,
+      validExtensions: [],
+      imageError: ''
     };
   },
   created: function created() {
     this.getCountries();
     this.getCommerceCategories();
+    this.getCommercesSize();
+    this.getCommercesExt();
   },
 
 
@@ -54061,11 +54071,28 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
       var _this2 = this;
 
       this.error = {};
+      this.imageError = '';
+
+      if (this.validateExtensionImage()) {
+        this.imageError = 'La imagen no cumple con el formato adecuado.'; //enviamos el error,
+        return false;
+      }
+
+      if (this.validateSizeImage()) {
+        this.imageError = 'La imagen no cumple con las dimensiones esperadas. Debe estar entre: ' + this.commerceMinSize + ' a ' + this.commerceMaxSize + 'KB'; //enviamos el error,
+        return false;
+      }
 
       __WEBPACK_IMPORTED_MODULE_0_axios___default.a.post('api' + this.url, this.form).then(function (data) {
+        //Sino, continuamos nuestra operacion.
+
         console.log(data);
         _this2.$refs.createModal.hide();
         _this2.form = {};
+        _this2.getCountries();
+        _this2.getCommerceCategories();
+        _this2.form.image = null;
+        _this2.$refs.image.value = null;
         _this2.$parent.index();
         swal({
           title: "Comercio creado",
@@ -54077,6 +54104,29 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
           _this2.error = err.response.data.errors;
         }
       });
+    },
+    validateExtensionImage: function validateExtensionImage() {
+      var ext = __WEBPACK_IMPORTED_MODULE_1_jquery___default()("#image").val().split('.').pop();
+
+      var found = this.validExtensions.indexOf(ext);
+
+      if (found == -1) {
+        return true;
+      } else {
+        return false;
+      }
+    },
+    validateSizeImage: function validateSizeImage() {
+      if (__WEBPACK_IMPORTED_MODULE_1_jquery___default()("#image").val() != "") {
+        var fileSize = __WEBPACK_IMPORTED_MODULE_1_jquery___default()('#image')[0].files[0].size; //Tamaño de la imagen subida.
+        var sizeKB = parseInt(fileSize / 1024); //Tamaño de la imagen, en kb.
+        if (sizeKB > this.commerceMaxSize || sizeKB < this.commerceMinSize) {
+          //si el tamaño de la imagen, es mayorr al max del establecido en la base de datos o menor al min
+          return true;
+        } else {
+          return false;
+        }
+      }
     },
     getCountries: function getCountries() {
       var _this3 = this;
@@ -54114,6 +54164,31 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
       __WEBPACK_IMPORTED_MODULE_0_axios___default.a.get('api/commerce-categories').then(function (data) {
         _this6.commerceCategories = data.data.data;
         _this6.form.commercecategory_idcommercecategory = data.data.data[0].idcommercecategory;
+      }).catch(function (err) {
+        return console.log(err);
+      });
+    },
+    getCommercesSize: function getCommercesSize() {
+      var _this7 = this;
+
+      __WEBPACK_IMPORTED_MODULE_0_axios___default.a.get('api/commerce-size').then(function (data) {
+        var value = data.data[0].val;
+        var val = JSON.parse(value);
+
+        _this7.commerceMaxSize = val.maxsize;
+        _this7.commerceMinSize = val.minsize;
+
+        console.log('El minimo permitido es: ' + _this7.commerceMinSize + 'KB Y el maximo es: ' + _this7.commerceMaxSize + 'KB');
+      }).catch(function (err) {
+        return console.log(err);
+      });
+    },
+    getCommercesExt: function getCommercesExt() {
+      var _this8 = this;
+
+      __WEBPACK_IMPORTED_MODULE_0_axios___default.a.get('api/commerce-ext').then(function (data) {
+        var value = data.data[0].val;
+        _this8.validExtensions = value;
       }).catch(function (err) {
         return console.log(err);
       });
@@ -55168,19 +55243,31 @@ var render = function() {
                     _vm._v(" "),
                     _c("div", { staticClass: "col-lg-12" }, [
                       _c("input", {
+                        ref: "image",
                         staticClass: "common-input",
                         attrs: {
                           type: "file",
+                          id: "image",
                           placeholder: "Imagen corporativa",
                           accept: "image/*"
                         },
                         on: { change: _vm.getImage }
                       }),
                       _vm._v(" "),
-                      _c("img", {
-                        staticClass: "avatar",
-                        attrs: { src: _vm.form.image, alt: "Image" }
-                      })
+                      !!_vm.form.image
+                        ? _c("img", {
+                            staticClass: "avatar",
+                            attrs: { src: _vm.form.image, alt: "Image" }
+                          })
+                        : _vm._e(),
+                      _vm._v(" "),
+                      _c("p", [
+                        _vm.imageError != ""
+                          ? _c("small", { staticClass: "text-danger" }, [
+                              _vm._v(_vm._s(_vm.imageError))
+                            ])
+                          : _vm._e()
+                      ])
                     ]),
                     _vm._v(" "),
                     _c("div", { staticClass: "col-lg-12" }, [
@@ -55777,13 +55864,15 @@ var render = function() {
                 ])
               ]),
               _vm._v(" "),
-              _c("div", { staticClass: "form-group" }, [
-                _c("label", { staticClass: "font-weight-bold" }, [
-                  _vm._v("Web")
-                ]),
-                _vm._v(" "),
-                _c("p", [_vm._v(_vm._s(_vm.commerce.web))])
-              ]),
+              _vm.commerce.web != null
+                ? _c("div", { staticClass: "form-group" }, [
+                    _c("label", { staticClass: "font-weight-bold" }, [
+                      _vm._v("Web")
+                    ]),
+                    _vm._v(" "),
+                    _c("p", [_vm._v(_vm._s(_vm.commerce.web))])
+                  ])
+                : _vm._e(),
               _vm._v(" "),
               _c("div", { staticClass: "form-group" }, [
                 _c("label", { staticClass: "font-weight-bold" }, [
@@ -55924,7 +56013,7 @@ exports = module.exports = __webpack_require__(4)(false);
 
 
 // module
-exports.push([module.i, "", ""]);
+exports.push([module.i, "\n.image-commerce[data-v-57cd6390] {\n  width: 80px;\n  height: 50px;\n  border-radius: 50%;\n}\n", ""]);
 
 // exports
 
@@ -55936,6 +56025,8 @@ exports.push([module.i, "", ""]);
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__utilities_EventBus__ = __webpack_require__(11);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_jquery__ = __webpack_require__(205);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_jquery___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1_jquery__);
 //
 //
 //
@@ -56018,6 +56109,15 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+
 
 
 
@@ -56032,7 +56132,14 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
       countries: [],
       states: [],
       cities: [],
-      commerceCategories: []
+      commerceCategories: [],
+      commerceMaxSize: null,
+      commerceMinSize: null,
+      validExtensions: [],
+      imageError: '',
+      picture: '',
+      picsize: '',
+      picAct: ''
     };
   },
   created: function created() {
@@ -56043,6 +56150,8 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
       _this.edit(_this.editId);
       _this.getCountries();
       _this.getCommerceCategories();
+      _this.getCommercesSize();
+      _this.getCommercesExt();
     });
   },
 
@@ -56052,7 +56161,10 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
       var _this2 = this;
 
       var image = e.target.files[0];
+      console.log(image);
       var reader = new FileReader();
+      this.picture = image.name;
+      this.picsize = image.size;
 
       reader.readAsDataURL(image);
       reader.onload = function (e) {
@@ -56066,6 +56178,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
         _this3.commerce = data.data[0];
         _this3.StateAct(data.data[0].country_idcountry);
         _this3.CityAct(data.data[0].state_idstate);
+        _this3.picAct = data.data[0].image;
       }).catch(function (err) {
         return console.log(err);
       });
@@ -56131,6 +56244,19 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
       var _this10 = this;
 
       this.error = {};
+      this.imageError = '';
+
+      this.validateExtensionImage();
+
+      if (this.validateExtensionImage()) {
+        this.imageError = 'La imagen no cumple con el formato adecuado.'; //enviamos el error,
+        return false;
+      }
+
+      if (this.validateSizeImage()) {
+        this.imageError = 'La imagen no cumple con las dimensiones esperadas. Debe estar entre: ' + this.commerceMinSize + ' a ' + this.commerceMaxSize + 'KB'; //enviamos el error,
+        return false;
+      }
 
       axios.put('api' + this.url + '/' + this.commerce.idcommerce, this.commerce).then(function (data) {
         _this10.$refs.editModal.hide();
@@ -56144,6 +56270,57 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
         if (err.response.status === 422) {
           _this10.error = err.response.data.errors;
         }
+      });
+    },
+    validateExtensionImage: function validateExtensionImage() {
+      if (this.picture != "") {
+        var ext = this.picture.split('.').pop();
+
+        var found = this.validExtensions.indexOf(ext);
+
+        if (found == -1) {
+          return true;
+        } else {
+          return false;
+        }
+      }
+    },
+    validateSizeImage: function validateSizeImage() {
+      if (this.picsize != "") {
+        var fileSize = this.picsize; //Tamaño de la imagen subida.
+        var sizeKB = parseInt(fileSize / 1024); //Tamaño de la imagen, en kb.
+        if (sizeKB > this.commerceMaxSize || sizeKB < this.commerceMinSize) {
+          //si el tamaño de la imagen, es mayorr al max del establecido en la base de datos o menor al min
+          return true;
+        } else {
+          return false;
+        }
+      }
+    },
+    getCommercesSize: function getCommercesSize() {
+      var _this11 = this;
+
+      axios.get('api/commerce-size').then(function (data) {
+        var value = data.data[0].val;
+        var val = JSON.parse(value);
+
+        _this11.commerceMaxSize = val.maxsize;
+        _this11.commerceMinSize = val.minsize;
+
+        console.log('El minimo permitido es: ' + _this11.commerceMinSize + 'KB Y el maximo es: ' + _this11.commerceMaxSize + 'KB');
+      }).catch(function (err) {
+        return console.log(err);
+      });
+    },
+    getCommercesExt: function getCommercesExt() {
+      var _this12 = this;
+
+      axios.get('api/commerce-ext').then(function (data) {
+        var value = data.data[0].val;
+        _this12.validExtensions = value;
+        console.log(value);
+      }).catch(function (err) {
+        return console.log(err);
       });
     }
   }
@@ -56320,10 +56497,24 @@ var render = function() {
                     ]),
                     _vm._v(" "),
                     _c("div", { staticClass: "col-lg-12" }, [
+                      _c("label", { attrs: { for: "" } }, [
+                        _vm._v("Imagen actual")
+                      ]),
+                      _vm._v(" "),
+                      _c("p", [
+                        _c("img", {
+                          staticClass: "image-commerce",
+                          attrs: { src: "images/commerce/" + _vm.picAct }
+                        })
+                      ])
+                    ]),
+                    _vm._v(" "),
+                    _c("div", { staticClass: "col-lg-12" }, [
                       _c("input", {
                         staticClass: "common-input",
                         attrs: {
                           type: "file",
+                          id: "image",
                           placeholder: "Imagen corporativa",
                           accept: "image/*"
                         },
@@ -56333,7 +56524,15 @@ var render = function() {
                       _c("img", {
                         staticClass: "avatar",
                         attrs: { src: _vm.commerce.image, alt: "Image" }
-                      })
+                      }),
+                      _vm._v(" "),
+                      _c("p", [
+                        _vm.imageError != ""
+                          ? _c("small", { staticClass: "text-danger" }, [
+                              _vm._v(_vm._s(_vm.imageError))
+                            ])
+                          : _vm._e()
+                      ])
                     ]),
                     _vm._v(" "),
                     _c("div", { staticClass: "col-lg-12" }, [
@@ -57011,6 +57210,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
 
 
 
@@ -57290,6 +57490,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: "create",
@@ -57314,7 +57515,11 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
       countries: [],
       states: [],
       cities: [],
-      commerces: []
+      commerces: [],
+      branchMaxSize: null,
+      branchMinSize: null,
+      validExtensions: [],
+      imageError: ''
     };
   },
   mounted: function mounted() {
@@ -57322,6 +57527,9 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
     this.getCommerces();
 
     this.markerMap();
+
+    this.getBranchSize();
+    this.getBranchExt();
   },
 
 
@@ -57498,11 +57706,26 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
       var _this7 = this;
 
       this.error = {};
+      this.imageError = '';
+
+      if (this.validateExtensionImage()) {
+        this.imageError = 'La imagen no cumple con el formato adecuado.'; //enviamos el error,
+        return false;
+      }
+
+      if (this.validateSizeImage()) {
+        this.imageError = 'La imagen no cumple con las dimensiones esperadas. Debe estar entre: ' + this.branchMinSize + ' a ' + this.branchMaxSize + 'KB'; //enviamos el error,
+        return false;
+      }
 
       axios.post('api' + this.url, this.form).then(function (data) {
         console.log(data);
         _this7.$refs.createModal.hide();
         _this7.form = {};
+        _this7.getCountries();
+        _this7.getCommerces();
+        _this7.form.image = null;
+        _this7.$refs.image.value = null;
         _this7.$parent.index();
         swal({
           title: "Sucursal creado",
@@ -57513,6 +57736,54 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
         if (err.response.status === 422) {
           _this7.error = err.response.data.errors;
         }
+      });
+    },
+    validateExtensionImage: function validateExtensionImage() {
+      var ext = $("#image").val().split('.').pop();
+
+      var found = this.validExtensions.indexOf(ext);
+
+      if (found == -1) {
+        return true;
+      } else {
+        return false;
+      }
+    },
+    validateSizeImage: function validateSizeImage() {
+      if ($("#image").val() != "") {
+        var fileSize = $('#image')[0].files[0].size; //Tamaño de la imagen subida.
+        var sizeKB = parseInt(fileSize / 1024); //Tamaño de la imagen, en kb.
+        if (sizeKB > this.branchMaxSize || sizeKB < this.branchMinSize) {
+          //si el tamaño de la imagen, es mayorr al max del establecido en la base de datos o menor al min
+          return true;
+        } else {
+          return false;
+        }
+      }
+    },
+    getBranchSize: function getBranchSize() {
+      var _this8 = this;
+
+      axios.get('api/branch-size').then(function (data) {
+        var value = data.data[0].val;
+        var val = JSON.parse(value);
+
+        _this8.branchMaxSize = val.maxsize;
+        _this8.branchMinSize = val.minsize;
+
+        console.log('El minimo permitido es: ' + _this8.branchMinSize + 'KB Y el maximo es: ' + _this8.branchMaxSize + 'KB');
+      }).catch(function (err) {
+        return console.log(err);
+      });
+    },
+    getBranchExt: function getBranchExt() {
+      var _this9 = this;
+
+      axios.get('api/branch-ext').then(function (data) {
+        var value = data.data[0].val;
+        _this9.validExtensions = value;
+      }).catch(function (err) {
+        return console.log(err);
       });
     }
   }
@@ -57716,19 +57987,31 @@ var render = function() {
                 _vm._v(" "),
                 _c("div", { staticClass: "col-lg-12" }, [
                   _c("input", {
+                    ref: "image",
                     staticClass: "common-input",
                     attrs: {
                       type: "file",
+                      id: "image",
                       placeholder: "Imagen corporativa",
                       accept: "image/*"
                     },
                     on: { change: _vm.getImage }
                   }),
                   _vm._v(" "),
-                  _c("img", {
-                    staticClass: "avatar",
-                    attrs: { src: _vm.form.image, alt: "Image" }
-                  })
+                  !!_vm.form.image
+                    ? _c("img", {
+                        staticClass: "avatar",
+                        attrs: { src: _vm.form.image, alt: "Image" }
+                      })
+                    : _vm._e(),
+                  _vm._v(" "),
+                  _c("p", [
+                    _vm.imageError != ""
+                      ? _c("small", { staticClass: "text-danger" }, [
+                          _vm._v(_vm._s(_vm.imageError))
+                        ])
+                      : _vm._e()
+                  ])
                 ]),
                 _vm._v(" "),
                 _c("div", { staticClass: "col-lg-12" }, [
@@ -58398,19 +58681,21 @@ var render = function() {
                 ])
               ]),
               _vm._v(" "),
-              _c("div", { staticClass: "form-group" }, [
-                _c("label", { staticClass: "font-weight-bold" }, [
-                  _vm._v("Latitud y Logintud")
-                ]),
-                _vm._v(" "),
-                _c("p", [
-                  _vm._v(
-                    _vm._s(_vm.branch.latitude) +
-                      " / " +
-                      _vm._s(_vm.branch.longitude)
-                  )
-                ])
-              ]),
+              _vm.branch.latitude != null
+                ? _c("div", { staticClass: "form-group" }, [
+                    _c("label", { staticClass: "font-weight-bold" }, [
+                      _vm._v("Latitud y Logintud")
+                    ]),
+                    _vm._v(" "),
+                    _c("p", [
+                      _vm._v(
+                        _vm._s(_vm.branch.latitude) +
+                          " / " +
+                          _vm._s(_vm.branch.longitude)
+                      )
+                    ])
+                  ])
+                : _vm._e(),
               _vm._v(" "),
               _c("div", { staticClass: "form-group" }, [
                 _c("label", { staticClass: "font-weight-bold" }, [
@@ -58547,7 +58832,7 @@ exports = module.exports = __webpack_require__(4)(false);
 
 
 // module
-exports.push([module.i, "\n.mapHtml5[data-v-7691bfff] {\n  margin-top: 15px;\n  width: 100%;\n  height: 200px;\n  display: none;\n}\n.pickerMap[data-v-7691bfff] {\n  margin-top: 15px;\n  width: 100%;\n  height: 200px;\n}\n.locationText[data-v-7691bfff] {\n  margin-top: 15px;\n  width: 100%;\n  height: 200px;\n  display: none;\n}\n.geolocation[data-v-7691bfff] {\n  cursor: pointer;\n  color: #FFF !important;\n}\n#textlocation[data-v-7691bfff] {\n  display: none;\n}\n.geolocation[data-v-7691bfff]:hover {\n  color: #42b0f2 !important;\n}\n.input-map[data-v-7691bfff] {\n  display: none;\n}\n.avatar[data-v-7691bfff] {\n  width: 150px;\n}\n", ""]);
+exports.push([module.i, "\n.mapHtml5[data-v-7691bfff] {\n  margin-top: 15px;\n  width: 100%;\n  height: 200px;\n  display: none;\n}\n.pickerMap[data-v-7691bfff] {\n  margin-top: 15px;\n  width: 100%;\n  height: 200px;\n}\n.locationText[data-v-7691bfff] {\n  margin-top: 15px;\n  width: 100%;\n  height: 200px;\n  display: none;\n}\n.geolocation[data-v-7691bfff] {\n  cursor: pointer;\n  color: #FFF !important;\n}\n#textlocation[data-v-7691bfff] {\n  display: none;\n}\n.geolocation[data-v-7691bfff]:hover {\n  color: #42b0f2 !important;\n}\n.input-map[data-v-7691bfff] {\n  display: none;\n}\n.avatar[data-v-7691bfff] {\n  width: 150px;\n}\n.image-branch[data-v-7691bfff] {\n  width: 80px;\n  height: 50px;\n  border-radius: 50%;\n}\n", ""]);
 
 // exports
 
@@ -58559,6 +58844,14 @@ exports.push([module.i, "\n.mapHtml5[data-v-7691bfff] {\n  margin-top: 15px;\n  
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__utilities_EventBus__ = __webpack_require__(11);
+//
+//
+//
+//
+//
+//
+//
+//
 //
 //
 //
@@ -58679,7 +58972,14 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
       countries: [],
       states: [],
       cities: [],
-      commerces: []
+      commerces: [],
+      branchMaxSize: null,
+      branchMinSize: null,
+      validExtensions: [],
+      imageError: '',
+      picture: '',
+      picsize: '',
+      picAct: ''
     };
   },
   mounted: function mounted() {
@@ -58693,6 +58993,9 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 
     this.markerMap();
     this.getCommerces();
+
+    this.getBranchSize();
+    this.getBranchExt();
   },
 
 
@@ -58702,6 +59005,8 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 
       var image = e.target.files[0];
       var reader = new FileReader();
+      this.picture = image.name;
+      this.picsize = image.size;
 
       reader.readAsDataURL(image);
       reader.onload = function (e) {
@@ -58715,6 +59020,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
         _this3.branch = data.data.data[0];
         _this3.StateAct(data.data.data[0].country_idcountry);
         _this3.CityAct(data.data.data[0].state_idstate);
+        _this3.picAct = data.data.data[0].image;
       }).catch(function (err) {
         return console.log(err);
       });
@@ -58900,6 +59206,19 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
       var _this11 = this;
 
       this.error = {};
+      this.imageError = '';
+
+      this.validateExtensionImage();
+
+      if (this.validateExtensionImage()) {
+        this.imageError = 'La imagen no cumple con el formato adecuado.'; //enviamos el error,
+        return false;
+      }
+
+      if (this.validateSizeImage()) {
+        this.imageError = 'La imagen no cumple con las dimensiones esperadas. Debe estar entre: ' + this.branchMinSize + ' a ' + this.branchMaxSize + 'KB'; //enviamos el error,
+        return false;
+      }
 
       axios.put('api' + this.url + '/' + this.branch.idbranch, this.branch).then(function (data) {
         _this11.$refs.editModal.hide();
@@ -58913,6 +59232,56 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
         if (err.response.status === 422) {
           _this11.error = err.response.data.errors;
         }
+      });
+    },
+    validateExtensionImage: function validateExtensionImage() {
+      if (this.picture != "") {
+        var ext = this.picture.split('.').pop();
+
+        var found = this.validExtensions.indexOf(ext);
+
+        if (found == -1) {
+          return true;
+        } else {
+          return false;
+        }
+      }
+    },
+    validateSizeImage: function validateSizeImage() {
+      if (this.picsize != "") {
+        var fileSize = this.picsize; //Tamaño de la imagen subida.
+        var sizeKB = parseInt(fileSize / 1024); //Tamaño de la imagen, en kb.
+        if (sizeKB > this.branchMaxSize || sizeKB < this.branchMinSize) {
+          //si el tamaño de la imagen, es mayorr al max del establecido en la base de datos o menor al min
+          return true;
+        } else {
+          return false;
+        }
+      }
+    },
+    getBranchSize: function getBranchSize() {
+      var _this12 = this;
+
+      axios.get('api/branch-size').then(function (data) {
+        var value = data.data[0].val;
+        var val = JSON.parse(value);
+
+        _this12.branchMaxSize = val.maxsize;
+        _this12.branchMinSize = val.minsize;
+
+        console.log('El minimo permitido es: ' + _this12.branchMinSize + 'KB Y el maximo es: ' + _this12.branchMaxSize + 'KB');
+      }).catch(function (err) {
+        return console.log(err);
+      });
+    },
+    getBranchExt: function getBranchExt() {
+      var _this13 = this;
+
+      axios.get('api/branch-ext').then(function (data) {
+        var value = data.data[0].val;
+        _this13.validExtensions = value;
+      }).catch(function (err) {
+        return console.log(err);
       });
     }
   }
@@ -59104,10 +59473,24 @@ var render = function() {
                   ]),
                   _vm._v(" "),
                   _c("div", { staticClass: "col-lg-12" }, [
+                    _c("label", { attrs: { for: "" } }, [
+                      _vm._v("Imagen actual")
+                    ]),
+                    _vm._v(" "),
+                    _c("p", [
+                      _c("img", {
+                        staticClass: "image-branch",
+                        attrs: { src: "images/branch/" + _vm.picAct }
+                      })
+                    ])
+                  ]),
+                  _vm._v(" "),
+                  _c("div", { staticClass: "col-lg-12" }, [
                     _c("input", {
                       staticClass: "common-input",
                       attrs: {
                         type: "file",
+                        id: "image",
                         placeholder: "Imagen corporativa",
                         accept: "image/*"
                       },
@@ -59117,7 +59500,15 @@ var render = function() {
                     _c("img", {
                       staticClass: "avatar",
                       attrs: { src: _vm.branch.image, alt: "Image" }
-                    })
+                    }),
+                    _vm._v(" "),
+                    _c("p", [
+                      _vm.imageError != ""
+                        ? _c("small", { staticClass: "text-danger" }, [
+                            _vm._v(_vm._s(_vm.imageError))
+                          ])
+                        : _vm._e()
+                    ])
                   ]),
                   _vm._v(" "),
                   _c("div", { staticClass: "col-lg-12" }, [
@@ -59567,13 +59958,15 @@ var render = function() {
                                 : _vm._e()
                             ]),
                             _vm._v(" "),
-                            _c("th", [
-                              _vm._v(
-                                _vm._s(branch.latitude) +
-                                  " - " +
-                                  _vm._s(branch.longitude)
-                              )
-                            ]),
+                            branch.latitude != null
+                              ? _c("th", [
+                                  _vm._v(
+                                    _vm._s(branch.latitude) +
+                                      " - " +
+                                      _vm._s(branch.longitude)
+                                  )
+                                ])
+                              : _c("th", [_vm._v("No posee")]),
                             _vm._v(" "),
                             _c("th", [
                               _c(

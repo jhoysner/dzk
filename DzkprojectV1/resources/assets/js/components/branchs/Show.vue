@@ -35,7 +35,7 @@
                   </p>
               </div>
 
-              <div class="form-group">
+              <div class="form-group" v-if="branch.latitude != null">
                   <label class="font-weight-bold">Latitud y Logintud</label>
                   <p>{{ branch.latitude }} / {{ branch.longitude }}</p>
               </div>

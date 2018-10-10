@@ -33,3 +33,7 @@ Route::get('branch-discount/{id}', 'Discount\DiscountController@getBranchDiscoun
 Route::get('countries', 'Country\CountriesController@getCountries');
 Route::get('states/{id}', 'Country\CountriesController@getStates');
 Route::get('cities/{id}', 'Country\CountriesController@getCities');
+Route::get('commerce-size', 'Params\ParamsController@getCommerceSize');
+Route::get('commerce-ext', 'Params\ParamsController@getCommerceType');
+Route::get('branch-size', 'Params\ParamsController@getBranchSize');
+Route::get('branch-ext', 'Params\ParamsController@getBranchType');

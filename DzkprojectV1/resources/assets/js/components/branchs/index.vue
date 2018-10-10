@@ -38,7 +38,8 @@
                                   <img class="image-branch" v-if="branch.image != null" :src="'images/branch/'+branch.image" />
                                   <p v-if="branch.image == null">No posee imagen.</p>
                                 </th>
-                                <th>{{ branch.latitude }} - {{ branch.longitude }}</th>
+                                <th v-if="branch.latitude != null">{{ branch.latitude }} - {{ branch.longitude }}</th>
+                                <th v-else>No posee</th>
                                 <!--<th>{{ branch.commerces.name }}</th>
                                 <th>{{ branch.countries.name }}</th>
                                 <th>{{ branch.states.name }}</th>

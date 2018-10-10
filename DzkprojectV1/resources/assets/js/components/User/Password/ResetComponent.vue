@@ -87,14 +87,17 @@ export default {
 
                 axios.post('/password/reset', params)
                     .then((response) => {
-                            //this.success.push(response.data.success);
+                            console.log(response)
                             if(response.status == 200) {
                             	window.location.href = '/login';
                             }
 
                         }).catch((error) => {
-                            let err = error.response.data.errors
-                            this.errors.push(err)
+                            if(error.response.status == 422){
+                                let err = error.response.data.errors
+                                this.errors.push(err)    
+                            }
+                            
 
                         })
             }

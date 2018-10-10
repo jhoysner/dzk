@@ -4,6 +4,9 @@ namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Foundation\Auth\ResetsPasswords;
+use Illuminate\Support\Facades\Password;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Hash;
 
 class ResetPasswordController extends Controller
 {
@@ -36,4 +39,30 @@ class ResetPasswordController extends Controller
     {
         $this->middleware('guest');
     }
+
+    public function resetPassword(Request $request)
+    {
+        $credentials = $request->only(
+            'email', 'password', 'password_confirmation', 'token'
+        );
+
+        $response = Password::reset($credentials, function($user, $password)
+        {
+            $user->password = Hash::make($password);
+            $user->save();
+        });
+
+        switch ($response)
+        {
+            case Password::INVALID_PASSWORD:
+            case Password::INVALID_TOKEN:
+            case Password::INVALID_USER:
+                return response()->json(['error'=>($response)],422);
+
+            case Password::PASSWORD_RESET:
+                return response()->json(['success'=>'Password Update'],200);
+        }
+    }
+
+   
 }

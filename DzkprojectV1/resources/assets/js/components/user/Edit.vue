@@ -35,8 +35,8 @@
                         </div>
                         <div class="col-lg-12">
                             <label>Fecha de Nacimiento</label>
-                            <input type="date" v-model="user.birthday" class="common-input">
-                            <small class="text-danger" v-if="error.birthday">{{ error.birthday[0] }}</small>
+                            <input type="date" v-model="user.birthday" v-bind:max="datemax" class="common-input">
+                            <small class="text-danger" v-if="error.birthday" >{{ error.birthday[0] }}</small>
                         </div>
                         <div class="col-lg-12">
                             <label>Dirección</label>
@@ -121,6 +121,8 @@ export default {
       password: "",
       password_confirmation: "",
       imageData : "", 
+      datemax : "",
+      datemin : ""
 
     }
   },
@@ -131,13 +133,14 @@ export default {
       this.edit(this.editId);
       this.getCountries();
     });
-
   },
 
   methods: {
     edit(id) {
       axios.get('api' + this.url + '/' + id ).then(response => {
         this.user = response.data.user[0];
+        this.datemax = new Date(this.fecha(-5320)).toISOString().slice(0,10);
+      console.log(this.datemax)
         this.country(this.user.country_idcountry)
         this.state(this.user.state_idstate)
         this.imageData = this.user.image
@@ -146,7 +149,11 @@ export default {
       })
       .catch(err => console.log(err))
     },
-
+    fecha(dias) {
+      let fecha = new Date()
+      fecha.setDate(fecha.getDate() + dias)
+      return fecha
+    },
     getCountries() {
       axios.get('api/countries').then(data => {
         this.countries = data.data;
@@ -293,7 +300,7 @@ export default {
 
     update() {
       this.errors = {};
-
+console.log(this.user.birthday)
       let params = new FormData();
       params.append('userId', this.user.id);
       params.append('firstname', this.user.firstname);  
@@ -321,13 +328,19 @@ export default {
       axios.post('api'+this.url, params)
          .then(response => {
               localStorage.setItem('userdata',JSON.stringify(response.data.user));
-              this.$refs.editModal.hide();
+              this.$refs.editModal.hide();              
               swal({
                 title: "Aviso",
                 text: response.data.success,
                 icon: "success"
               })
-              this.$router.reload()
+              //router.go({path:"/"})              
+              //router.push({ name: 'profile' })
+              //this.$router.push('/profile') 
+              //this.$route.router.go('/profile');
+              //router.go('/')
+              //this.$router.reload()
+
          })
          .catch(errors => {
               console.log(errors.response)

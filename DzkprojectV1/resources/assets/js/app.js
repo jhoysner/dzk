@@ -20,7 +20,6 @@ import BootstrapVue from 'bootstrap-vue'
 
 import swal from 'sweetalert';
 
-
 Vue.use(BootstrapVue);
 
 require('./bootstrap');

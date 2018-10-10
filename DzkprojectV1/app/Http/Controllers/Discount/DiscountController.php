@@ -218,5 +218,20 @@ class DiscountController extends Controller
         $relacion = $discount->branchs;
 
         return response()->json(['data'=> $relacion], 201);
+    }    
+
+    public function udapteBranchDiscount($discount,$id)
+    {
+        $discount = Discount::find($discount);
+
+        $data  = $discount->branchs()->wherePivot('idbranch_has_discount', $id)->first();
+
+
+        // dd($data);
+        // $discount = Discount::find($id);
+
+        // $relacion = $discount->branchs;
+
+        return response()->json(['data'=> $data], 201);
     }
 }

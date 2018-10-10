@@ -43,7 +43,7 @@ class Discount extends Model
 
 
     public function  branchs(){
-        return $this->belongsToMany('App\Branch','branch_has_discount')->withPivot('discounthours', 'amountapproved','amountavailable','amountredeemed');
+        return $this->belongsToMany('App\Branch','branch_has_discount')->withPivot('idbranch_has_discount','discounthours', 'amountapproved','amountavailable','amountredeemed');
     }
 
 }

@@ -132,7 +132,7 @@
 
                             <div class="form-group">
                                 <label>Porcentaje Descuento</label>
-                                <input type="number"  step='0.01' class="form-control" v-model="tmpDiscount.discountpercentage" @change="handleChangePorcentaje($event)">>
+                                <input type="number"  step='0.01' class="form-control" v-model="tmpDiscount.discountpercentage" @change="handleChangePorcentaje($event)">
                                 <span class="text-danger" v-if="!!errorsDiscount.discountpercentage"> {{errorsDiscount.discountpercentage[0]}} </span>
                             </div>
 
@@ -159,7 +159,7 @@
                                           </thead>
                                           <tbody>
                                               <tr v-for="deescueentsucu in descuentosucursal">
-                                                  <td>{{ deescueentsucu}}</td>
+                                                  <!-- <td>{{ deescueentsucu}}</td> -->
                                                   <td>{{ deescueentsucu.name}}</td>
                                                   <td>{{ deescueentsucu.pivot.discounthours}}</td>
                                                   <td>{{ deescueentsucu.pivot.amountapproved}}</td>

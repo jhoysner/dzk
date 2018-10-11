@@ -24,13 +24,18 @@ class HomeInitController extends Controller
 
     public function commerce_detail($id)
     {
-    	$commerce = Commerce::where('idcommerce', $id)
-    	->with('countries')
-	        ->with('states')
-	          ->with('cities')
-	            ->with('ccategories')
-	              ->get();
+        $commerce = Commerce::where('idcommerce', $id)
+        ->with('countries')
+            ->with('states')
+              ->with('cities')
+                ->with('ccategories')
+                    ->with(['branchs' =>function ($query) {
+                            $query->with('discounts');
+                        }])->get();
 
         return response()->json(['data'=> $commerce], 200);
+
     }
+
+
 }

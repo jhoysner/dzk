@@ -42,6 +42,7 @@ Route::resource('discount-categories','DiscountCategory\DiscountCategoryControll
 Route::resource('commerce', 'Commerce\CommercesController');
 Route::resource('branch', 'Branch\BranchsController');
 Route::resource('commerce-categories', 'CommerceCategory\CommerceCategoriesController');
+
 Route::post('branch-discount', 'Discount\DiscountController@branchDiscount');
 Route::get('branch-discount/{id}', 'Discount\DiscountController@getBranchDiscount');
 Route::get('branch-discount-update/{discount}/{id}', 'Discount\DiscountController@editBranchDiscount');

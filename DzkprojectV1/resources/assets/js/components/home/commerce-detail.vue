@@ -1,6 +1,25 @@
 <template>
 	<div id="section-profile" class="settings-content">
-            <h1>{{ commerce.name }}</h1>
+        <h2 class="my-4">Comercio: {{commerce.idcommerce}}</h2>
+        <ul class="nav nav-tabs">
+          <li class="nav-item">
+             <router-link :to="`/commerce/${id}`" class="nav-link active">
+                Detalle
+             </router-link>
+          </li>
+          <li class="nav-item">
+             <router-link :to="`/commerce/${id}/branchs`" class="nav-link">
+                Sucursales
+             </router-link>
+          </li>
+          <li class="nav-item">
+            <router-link :to="`/commerce/${id}/discounts`" class="nav-link">
+                Descuentos
+            </router-link>
+          </li>
+        </ul>
+
+            <h3 class="mt-4">{{ commerce.name }}</h3>
             <div>
                 <div class="row pt-30">
                     <div class="col-lg-6">
@@ -48,10 +67,9 @@
 
                     <div class="clearfix"></div>
                     <br>
-                    <div class="col-lg-12 text-right" id="buttons-form">
-                        <button class="btn btn-info">Descuentos</button>
-                    </div>
+              
                 </div>
+            
             </div>
         </div>
 </template>
@@ -74,6 +92,7 @@
 			        city_idcity: '',
 			        commercecategory_idcommercecategory: ''
 			     },
+                 branchs:[],
 			}
 		},
 
@@ -82,22 +101,23 @@
 		},
 
 		methods: {
-			index() {
-		      axios.get('/api/detail-commerce/' + this.$route.params.id).then(data => {
-		        this.commerce.idcommerce = data.data.data[0].idcommerce;
-		        this.commerce.name = data.data.data[0].name;
-		        this.commerce.phone1 = data.data.data[0].phone1;
-		        this.commerce.phone2 = data.data.data[0].phone2;
-		        this.commerce.email = data.data.data[0].email;
-		        this.commerce.image = data.data.data[0].image;
-		        this.commerce.web = data.data.data[0].web;
-		        this.commerce.country_idcountry = data.data.data[0].countries.name;
-		        this.commerce.state_idstate = data.data.data[0].states.name;
-		        this.commerce.city_idcity = data.data.data[0].cities.name;
-		        this.commerce.commercecategory_idcommercecategory = data.data.data[0].ccategories.name;
-		      })
-		      .catch(err => console.log(err))
-		    },
+            index() {
+              axios.get('/api/detail-commerce/' + this.$route.params.id).then(data => {
+                this.commerce.idcommerce = data.data.data[0].idcommerce;
+                this.commerce.name = data.data.data[0].name;
+                this.commerce.phone1 = data.data.data[0].phone1;
+                this.commerce.phone2 = data.data.data[0].phone2;
+                this.commerce.email = data.data.data[0].email;
+                this.commerce.image = data.data.data[0].image;
+                this.commerce.web = data.data.data[0].web;
+                this.commerce.country_idcountry = data.data.data[0].countries.name;
+                this.commerce.state_idstate = data.data.data[0].states.name;
+                this.commerce.city_idcity = data.data.data[0].cities.name;
+                this.commerce.commercecategory_idcommercecategory = data.data.data[0].ccategories.name;
+              })
+              .catch(err => console.log(err))
+            },			
+
 		}
 	}
 </script>

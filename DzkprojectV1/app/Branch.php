@@ -55,4 +55,8 @@ class Branch extends Model
     {
       return $this->belongsTo('App\Commerce', 'commerce_idcommerce', 'idcommerce');
     }
+
+    public function  discounts(){
+        return $this->belongsToMany('App\Discount','branch_has_discount')->withPivot('idbranch_has_discount','discounthours', 'amountapproved','amountavailable','amountredeemed')->whereNull('branch_has_discount.deleted_at');
+    }
 }

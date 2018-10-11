@@ -5,40 +5,43 @@
             <div class="settings-content">
                 <h4>Comercios</h4>
               <!-- <spinner :show="loadingProductos"></spinner> -->
-                <div class="responsive">
-                  <div class="table-responsive">
-                      <table class="table table-hover table-bordered table-striped table-condensed">
-                          <thead>
-                            <tr>
-                                <th class="text-center">ID Comercio</th>
-                                <th class="text-center">Nombre</th>
-                                <th class="text-center">Correo</th> 
-                                <th class="text-center">Imagen</th>
-                                <th class="text-center">Categoría</th>
-                                <th class="text-center">Options</th>
-                            </tr>
-                          </thead>
-                          <tbody>
-                            <tr v-for="commerce in commerces" :key="commerce.idcommerce">
-                              <td>{{ commerce.idcommerce }}</td>
-                              <td>{{ commerce.name }}</td>
-                              <td>{{ commerce.email }}</td>
-                              <th>
-                                <img class="image-commerce" v-if="commerce.image != null" :src="'images/commerce/'+commerce.image" />
-                                  <p v-if="commerce.image == null">No posee imagen.</p>
-                              </th>
-                              <td>{{ commerce.ccategories.name }}</td>
-                              <td>
-                              	<router-link :to="`/commerce/${commerce.idcommerce}`">
-                              		<a href="#" class="btn btn-warning sm">
-                              		Detalle
-                              		</a>     
-					            </router-link>
-                              </td>
-                            </tr>
-                          </tbody>
-                      </table>
-                  </div>
+              <div class="row justify-content-center stat-table-wrap">
+                <div class="col-lg-12 stat-wrap-container">
+                    <div class="stat-wrap">
+                        <a href="#" class="primary-btn white-btn"><i class="icons icon-magnifier"></i></a>
+                        <table class="table table-striped mt-40 stat-table">
+                            <thead>
+                              <tr>
+                                <th>ID Comercio</th>
+                                <th>Nombre</th>
+                                <th>Correo</th> 
+                                <th>Imagen</th>
+                                <th>Categoría</th>
+                                <th>Options</th>
+                              </tr>
+                            </thead>
+                            <tbody>
+                              <tr v-for="commerce in commerces" :key="commerce.idcommerce">
+                                <td>{{ commerce.idcommerce }}</td>
+                                <td>{{ commerce.name }}</td>
+                                <td>{{ commerce.email }}</td>
+                                <th>
+                                  <img class="image-commerce" v-if="commerce.image != null" :src="'images/commerce/'+commerce.image" />
+                                    <p v-if="commerce.image == null">No posee imagen.</p>
+                                </th>
+                                <td>{{ commerce.ccategories.name }}</td>
+                                <td>
+                                  <router-link :to="`commerce/${commerce.idcommerce}`">
+                                    <a href="#" class="btn btn-warning btn-sm">
+                                    Detalle
+                                    </a>     
+                                  </router-link>
+                                </td>
+                              </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
               </div>
             </div>
         </div>

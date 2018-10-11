@@ -249,9 +249,15 @@ class DiscountController extends Controller
 
         $data  = $discount->branchs()->wherePivot('idbranch_has_discount', $id)->first();
 
-        $data->pivot->delete();
+
+        $deleteRecord = BranchDiscount::find($data->pivot->idbranch_has_discount);
+
+        $deleteRecord->delete();
+
+        return response()->json(['data'=> $deleteRecord], 201);
+
         
-        return response()->json(['data'=> $data], 201);
+        // return response()->json(['data'=> $data], 201);
 
     }
 }

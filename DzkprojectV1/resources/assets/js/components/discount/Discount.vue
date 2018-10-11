@@ -502,6 +502,7 @@
                           text: "Registro eliminado con exito",
                           icon: "success",
                         })
+                        console.log(response)
                     })
                     .catch((err) => console.log(err))
             },

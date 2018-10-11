@@ -55,3 +55,5 @@ Route::get('commerce-size', 'Params\ParamsController@getCommerceSize');
 Route::get('commerce-ext', 'Params\ParamsController@getCommerceType');
 Route::get('branch-size', 'Params\ParamsController@getBranchSize');
 Route::get('branch-ext', 'Params\ParamsController@getBranchType');
+Route::get('all-commerces', 'HomeInit\HomeInitController@allCommerce');
+Route::get('detail-commerce/{id}', 'HomeInit\HomeInitController@commerce_detail');

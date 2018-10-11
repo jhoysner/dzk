@@ -36,7 +36,7 @@
                   <p>{{ commerce.web }}</p>
               </div>
 
-              <div class="form-group" v-if="">
+              <div class="form-group">
                   <label class="font-weight-bold">País</label>
                   <p>{{ commerce.country_idcountry }}</p>
               </div>

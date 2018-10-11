@@ -6,6 +6,7 @@ import Commerces from '../components/commerces/index.vue'
 import Branchs from '../components/branchs/index.vue'
 import Profile from '../components/User/ProfileComponent.vue'
 import Params from '../components/params/index.vue'
+import DetailCommerce from '../components/home/commerce-detail';
 
 import discountRoutes from '../components/discount/router'
 
@@ -23,6 +24,10 @@ const baseRoutes = [
         {
             path: '/commerces',
             component: Commerces
+        },
+        {
+            path: '/commerce/:id',
+            component: DetailCommerce
         },
         {
             path: '/branchs',

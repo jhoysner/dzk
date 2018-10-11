@@ -300,7 +300,7 @@ export default {
 
     update() {
       this.errors = {};
-console.log(this.user.birthday)
+
       let params = new FormData();
       params.append('userId', this.user.id);
       params.append('firstname', this.user.firstname);  
@@ -329,18 +329,13 @@ console.log(this.user.birthday)
          .then(response => {
               localStorage.setItem('userdata',JSON.stringify(response.data.user));
               this.$refs.editModal.hide();              
+              this.$parent.index()
+              $('#editModal').trigger("reset");
               swal({
                 title: "Aviso",
                 text: response.data.success,
                 icon: "success"
               })
-              //router.go({path:"/"})              
-              //router.push({ name: 'profile' })
-              //this.$router.push('/profile') 
-              //this.$route.router.go('/profile');
-              //router.go('/')
-              //this.$router.reload()
-
          })
          .catch(errors => {
               console.log(errors.response)

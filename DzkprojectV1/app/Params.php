@@ -11,8 +11,18 @@ class Params extends Model
     protected $dates = ['deleted_at'];
 
     protected $table = 'params';
-	protected $primarykey = 'idparams';
+	protected $primaryKey = 'idparams';
+	
+	public $incrementing = false;
+
     protected $fillable = [
-        'key', 'val'
+        'idparams',
+        'key', 
+        'val', 
+        'description'
+    ];
+
+    protected $hidden  = [
+        'created_at', 'updated_at', 'deleted_at',
     ];
 }

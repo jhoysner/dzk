@@ -4,6 +4,8 @@ namespace App\Http\Controllers\Params;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use App\Http\Requests\ParamsCreateRequest;
+use App\Http\Requests\ParamsUpdateRequest;
 
 use App\Params;
 
@@ -63,7 +65,7 @@ class ParamsController extends Controller
 
     public function destroy($id)
     {
-      $param = Params::find($id);
+      $param = Params::where('idparams','=',$id);
 
       if(!$param) {
           return response()->json(['error' => 'No existe el parametro.'], 422);
@@ -72,6 +74,51 @@ class ParamsController extends Controller
       $param->delete();
 
       return response()->json(['success'=>'Parametro eliminado correctamente'],200);
+    }
+
+    public function store(ParamsCreateRequest $request)
+    {
+      $input = $request->all();
+
+      $input['idparams'] =str_random(36); //bin2hex(random_bytes(15));
+
+      $param = Params::create($input);
+
+      if(!$param) {
+          return response()->json(['error' => 'Error al guardar.'], 422);
+      }
+
+      return response()->json(['success'=>'Parametro guardado correctamente'],201);
+    }
+
+    public function show($id)
+    {
+      $param = Params::where('idparams','=',$id)->get();
+
+      if(!$param) {
+          return response()->json(['error' => 'Error se encuentra el parametro.'], 422);
+      }
+
+      return response()->json(['success'=>true, 'param'=>$param],200);
+      
+    }
+
+    public function update(ParamsUpdateRequest $request)
+    {
+      $id = $request->idparams;
+
+      $param = Params::where('idparams','=',$id)->first();
+
+      $input= $request->all();
+
+      $update = $param->update($input);
+
+      if(!$update) {
+          return response()->json(['error' => 'Error al actualizar.'], 422);
+      }
+
+      return response()->json(['success'=>'Parametro actualizado correctamente'],200);
 
     }
+
 }

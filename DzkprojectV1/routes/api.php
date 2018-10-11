@@ -32,9 +32,10 @@ Route::group(["prefix" => "profile"], function () {
 //Parametros
 Route::group(["prefix" => "params"], function () {
 	Route::get('/', 'Params\ParamsController@index');
-	Route::get('/{id}', 'UserController@userDetail');
-	Route::post('/', 'UserController@updateProfile');
-
+	Route::get('/{id}', 'Params\ParamsController@show');
+	Route::delete('/{id}', 'Params\ParamsController@destroy');
+	Route::post('/', 'Params\ParamsController@store');
+	Route::put('/', 'Params\ParamsController@update');
 });
 
 Route::resource('discount','Discount\DiscountController');

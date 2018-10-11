@@ -81,15 +81,7 @@ import edit from './Edit';
     export default {
         name: "profile",
         mounted() {
-            this.data = JSON.parse(localStorage.getItem('userdata'));
-            
-            axios.get('api'+ this.url + '/'+ this.data.id)
-                .then(
-                    (response) => {
-                        this.user = response.data.user[0];
-                    }   
-                )
-    
+            this.index();
         },
         components : {
             edit
@@ -102,6 +94,16 @@ import edit from './Edit';
             }
         },
         methods: {
+            index() {
+                this.data = JSON.parse(localStorage.getItem('userdata'));
+            
+                axios.get('api'+ this.url + '/'+ this.data.id)
+                    .then(
+                        (response) => {
+                            this.user = response.data.user[0];
+                        }   
+                    )
+            },
             desactivate() {
                 let id = this.user.id
 

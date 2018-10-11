@@ -23,9 +23,9 @@
                               <th>{{ param.key }}</th>
                               <th>{{ param.val }}</th>
                               <td class="text-right">
-                                  <b-btn v-b-modal="'showModal'" @click="show(commerce.idcommerce)" class="btn btn-sm" variant="default">Detalle</b-btn>
-                                  <b-btn v-b-modal="'editModal'" @click="edit(commerce.idcommerce)" class="btn btn-sm" variant="warning">Editar</b-btn>
-                                  <button type="button" @click="confirm(commerce.idcommerce)" class="btn btn-sm  btn-danger">Eliminar</button>
+                                  <b-btn v-b-modal="'showModal'" @click="show(param.idparams)" class="btn btn-sm" variant="default">Detalle</b-btn>
+                                  <b-btn v-b-modal="'editModal'" @click="edit(param.idparams)" class="btn btn-sm" variant="warning">Editar</b-btn>
+                                  <button type="button" @click="eliminar(param.idparams)" class="btn btn-sm  btn-danger">Eliminar</button>
                               </td>
                               </th>
                             </tr>
@@ -36,21 +36,24 @@
             </div>
         </div>
     </div>
+    <create></create>
+    <edit></edit>
+    <show></show>
   </div>
 </template>
 <script>
 
 import Bus from '../../utilities/EventBus';
-//import create from './Create';
-//import show from './Show';
-//import edit from './Edit';
+import create from './Create';
+import show from './Show';
+import edit from './Edit';
 
 import axios from 'axios';
 
 export default {
   name: 'index',
   components: {
-    //create, show, edit
+    create, edit, show
   },
   data() {
     return {
@@ -60,12 +63,6 @@ export default {
   },
 
   created() {
-    /*let data = {
-      title: 'Comercios',
-      subtitle: 'Crea un comercio'
-    };
-    Bus.$emit('jumbo-msg', data);*/
-
     this.index();
   },
 
@@ -73,48 +70,46 @@ export default {
     index() {
       axios.get('api' + this.url).then(response => {
         this.params = response.data.params
-        console.log(this.params)
-
       })
       .catch(err => console.log(err))
     },
 
     show(id) {
-      Bus.$emit('id_commerce', id);
+      Bus.$emit('id_params', id);
     },
 
     edit(id) {
       Bus.$emit('edit_id', id);
     },
 
-    confirm(id) {
+    eliminar(id) {
         swal({
-          title: "Seguro quieres eliminar el comercio?",
+          title: "Esta seguro de eliminar el parametro?",
           icon: "warning",
           buttons: true,
           dangerMode: true,
+          showCancelButton: true,
+          confirmButtonText: 'Si!'
         })
-        .then((willDelete) => {
-          if (willDelete) {
-            this.destroy(id)
-          }
+        .then((result) => {
+                if (result) {
+                axios.delete('api' + this.url + '/' + id).then(response => {
+                        this.index()
+                        swal(response.data.success, {
+                        icon: "success",
+                        });
+                     })
+                .catch(error => {
+                  swal(error.data.errors, {
+                        icon: "danger",
+                        });
+                })
+                }
         });
-    },
-
-    destroy(id) {
-      axios.delete('api' + this.url + '/' + id).then(data => {
-        console.log(data);
-        this.index();
-      })
-      .catch(err => console.log(err))
     }
   }
 }
 </script>
 <style lang="scss" scoped>
-  .image-commerce {
-    width: 80px;
-    height: 50px;
-    border-radius: 50%;
-  }
+  
 </style>

@@ -101,7 +101,7 @@ class RegisterController extends Controller
 
         $user = DB::table('users')->insertGetId(
             array(
-                'id' => bin2hex(random_bytes(10)),
+                'id' => bin2hex(random_bytes(15)),
                 'firstname' => $request->firstname,
                 'lastname' => $request->lastname,
                 'email' => $request->email,

@@ -1,6 +1,5 @@
 <template>
 	<div id="section-profile" class="settings-content">
-        <a href="#" class="btn btn-danger">Volver atrás</a>
         <h2 class="my-4">Descuento: {{discount.iddiscount}}</h2>
 
             <h3 class="mt-4">{{ discount.title }}</h3>

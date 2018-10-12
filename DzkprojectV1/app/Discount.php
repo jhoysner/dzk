@@ -46,4 +46,9 @@ class Discount extends Model
         return $this->belongsToMany('App\Branch','branch_has_discount')->withPivot('idbranch_has_discount','discounthours', 'amountapproved','amountavailable','amountredeemed')->whereNull('branch_has_discount.deleted_at');
     }
 
+    public function tags()
+    {
+        return $this->belongsToMany('App\Branch','branch_has_discount')->withPivot('idbranch_has_discount','discounthours', 'amountapproved','amountavailable','amountredeemed')->whereNull('branch_has_discount.deleted_at');   
+    }
+
 }

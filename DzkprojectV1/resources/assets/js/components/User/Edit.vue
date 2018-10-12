@@ -83,8 +83,8 @@
                         <div class="col-lg-12">
                             <div class="sorting"> Localización
                                 <select class="form-control common-input" id="geocoder" @change="selectGeo()">
-                                    <option value="1" >Geolocalización HTML5</option>
-                                    <option value="2"selected>Abrir Maps</option>
+                                    <option value="1" selected>Geolocalización HTML5</option>
+                                    <option value="2">Abrir Maps</option>
                                     <option value="3">Escribir dirección</option>
                                 </select>
                             </div>
@@ -212,11 +212,12 @@ export default {
     },
 
     markerMap() {
-      document.getElementById('html5Map').style.display = "none";
-      document.getElementById('textMap').style.display = "none";
-      document.getElementById('mapPicker').style.display = "block";
-
       console.log('ingreso')
+
+      //document.getElementById('html5Map').style.display = "none";
+      //document.getElementById('textMap').style.display = "none";
+      //document.getElementById('mapPicker').style.display = "block";
+
       let map = new google.maps.Map(document.getElementById('mapPicker'), {
           center: {
               lat: 4.710988599999999,
@@ -348,7 +349,7 @@ export default {
     },
     country(id) {
       this.cities = []
-      axios.get('/getstates/'+id)
+      axios.get('/api/states/'+id)
           .then(
               (response) => {
                   this.states = response.data;
@@ -356,7 +357,7 @@ export default {
           )
     },
     state(id) {
-      axios.get('/getcities/'+id)
+      axios.get('/api/cities/'+id)
         .then(
             (response) => {
                 this.cities = response.data;

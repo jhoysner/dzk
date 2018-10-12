@@ -24,4 +24,14 @@ class Tags extends Model
     protected $hidden  = [
         'created_at', 'updated_at', 'deleted_at',
     ];
+
+    public function commerces()
+    {
+
+    }
+
+    public function discounts()
+    {
+    	
+    }
 }

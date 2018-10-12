@@ -45,9 +45,12 @@ class UserController extends Controller
     {
         return Validator::make($data, [
             'firstname' => 'required|string|max:255',
+            'middlename' => 'string|max:255',
             'lastname' => 'required|string|max:255',
             'email' => 'required|string|email|max:255',
             'password' => 'confirmed',
+            'phone'=> 'string|max:20',
+            'address'=> 'string|max:512',
             'country_idcountry' => 'required|string',
             'state_idstate' => 'required|string',
             'city_idcity' => 'required|string'

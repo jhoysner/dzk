@@ -58,4 +58,9 @@ class Commerce extends Model
     {
       return $this->hasMany('App\Branch');
     }
+
+    public function tags()
+    {
+        
+    }
 }

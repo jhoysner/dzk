@@ -146,6 +146,7 @@
                                 <span class="text-danger" v-if="!!errorsDiscount.discountcategory_iddiscountcategory"> {{errorsDiscount.discountcategory_iddiscountcategory[0]}} </span>
                             </div>
                             <hr>
+                             <button type="button" class="btn btn-default btn-sm my-4" @click="addBranchDiscount(tmpDiscount)">Agregar Sucursal</button>
                              <div v-if="descuentosucursal.length > 0">
                                 <div class="table-responsive">
                                       <table class="table table-hover table-bordered table-striped table-condensed">
@@ -175,10 +176,6 @@
                                           </tbody>
                                       </table>
                                 </div>
-
-                               
-    
-
                              </div>
                             <div class="form-group">
                               <label>Tags</label>
@@ -306,7 +303,7 @@
                       <div class="modal-content">
                         <div class="container">
                               
-                            <h3>Sucursal : </h3>   
+                            <h3>Sucursal: {{sucursalName}} </h3>   
  
                             <div>
                               <div class="form-group mt-4">
@@ -328,9 +325,11 @@
                         </div>
                 </form>
         </b-modal> 
+
   </div>
 </template>
 <script>
+   import Bus from '../../utilities/EventBus';
    import Create from './Create'
    import bModal from 'bootstrap-vue/es/components/modal/modal'
    import moment from 'moment'
@@ -345,6 +344,7 @@
                 showEdit: false,
                 show: false,
                 changeImage: false,
+                sucursalName: '',
                 discountCategories: [],
                 descuentosucursal: [],
                 errorpreciodescuento: '',
@@ -373,6 +373,10 @@
           this.getTags()
         },
         methods: {
+            addBranchDiscount(response){
+                // console.log(response)
+                Bus.$emit('branch_discount_add',response);
+            },
             //Guarda tag
             addTag (newTag) {
               const tag = {
@@ -425,6 +429,7 @@
                 axios.get('api/branch-discount-update/'+data.pivot.discount_iddiscount+'/'+data.pivot.idbranch_has_discount)
                   .then((response) => {
                       // console.log(response.data.data.pivot)
+                      this.sucursalName = response.data.data.name
                       this.form.discounthours = response.data.data.pivot.discounthours
                       this.form.amountapproved = response.data.data.pivot.amountapproved
                       this.form.branch_idbranch = response.data.data.pivot.branch_idbranch

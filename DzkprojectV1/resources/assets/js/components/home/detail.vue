@@ -20,7 +20,7 @@
                         <label><strong>Correo Electrónico</strong></label>
                         <p>{{commerce.email}}</p>
                     </div>
-					<div class="col-lg-12">
+					         <div class="col-lg-12">
                         <label>
                         	<strong>
                         		Afiliado a {{ countbranchs }} sucursales
@@ -28,7 +28,7 @@
                         </label>
                         <p>
                         	<ul v-for="branch in branchs" :key="branch.idbranch">
-                        		<li>{{ branch.name }}</li>
+                        		<li class="pl-2">{{ branch.name }}</li>
                         	</ul>
                         </p>
                         <hr>
@@ -36,23 +36,22 @@
                     <div class="col-lg-12">
                         <label>
                         	<strong>
-                        		Disponibles {{ countDiscounts }} Descuentos
+                        	 Descuentos Disponibles : {{ countDiscounts }}
                         	</strong>
                         </label>
-                        <template  v-for="branch in branchs">
+                  <!--    <template  v-for="branch in branchs">
                         	<ul v-for="discount in branch.discounts">
                         		<li>{{ discount.title }}</li>
                         	</ul>
-                        </template>
+                        </template> -->
                         <hr>
                     </div>
 
-                </div>
-              
+                </div>             
               </div>
               <div class="modal-footer">
                 <router-link :to="`commerce/${commerce.idcommerce}`">
-	              <a href="#" class="btn btn-warning btn-sm">
+	              <a href="#" class="btn btn-primary btn-sm">
 	               Detalle
 	              </a>     
 	            </router-link>

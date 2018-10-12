@@ -1,5 +1,6 @@
 <template>
 	<div id="section-profile" class="settings-content">
+        <button type="button" class="btn btn-outline-dark pull-right" @click="$router.go(-1)">Atras</button>
         <h2 class="my-4">Descuento: {{discount.iddiscount}}</h2>
 
             <h3 class="mt-4">{{ discount.title }}</h3>
@@ -70,7 +71,7 @@
                                         <td>{{ branch.latitude }} - {{ branch.longitude }}</td>
                                         <td>
                                           <router-link :to="`/branch/${branch.idbranch}`">
-                                            <a href="#" class="btn btn-warning btn-sm">
+                                            <a href="#" class="btn btn-primary btn-sm">
                                             Detalle
                                             </a>     
                                           </router-link>

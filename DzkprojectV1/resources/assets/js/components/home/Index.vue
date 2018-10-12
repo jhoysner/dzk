@@ -38,7 +38,7 @@
                                     Detalle
                                     </a>     
                                   </router-link> -->
-                                  <b-btn variant="warning" v-b-modal.showModal  @click="detail(commerce.idcommerce)">
+                                  <b-btn variant="primary" v-b-modal.showModal  @click="detail(commerce.idcommerce)">
                                     Ver Detalles
                                   </b-btn>
                                 </td>

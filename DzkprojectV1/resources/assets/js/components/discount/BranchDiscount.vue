@@ -84,6 +84,11 @@
               this.form.discount_iddiscount = response.data.data.iddiscount;
               this.getDiscountBranch()
               this.$refs.branchDiscountModal.show()
+          });           
+           Bus.$on('branch_discount_add', (response) => {
+              this.form.discount_iddiscount = response.iddiscount;
+              this.getDiscountBranch()
+              this.$refs.branchDiscountModal.show()
           });
         },
         methods: {

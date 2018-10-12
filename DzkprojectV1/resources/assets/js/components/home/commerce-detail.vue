@@ -1,5 +1,6 @@
 <template>
 	<div id="section-profile" class="settings-content">
+        <button type="button" class="btn btn-outline-dark pull-right" @click="$router.push('/')">Atras</button>
         <h2 class="my-4">Comercio: {{commerce.idcommerce}}</h2>
         <ul class="nav nav-tabs">
           <li class="nav-item">

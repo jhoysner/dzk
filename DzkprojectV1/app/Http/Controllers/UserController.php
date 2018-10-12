@@ -88,7 +88,7 @@ class UserController extends Controller
 
         if ( $request->hasFile('imagen') ) {
 
-            $path = public_path().'/img/profiles/';
+            $path = public_path().'/images/profiles/';
 
             $imagenInit = $request->file('imagen');
             
@@ -99,7 +99,7 @@ class UserController extends Controller
                     unlink($path . $user->image);
                     }
 
-            $temp_name = '/img/profiles/'.$user->id.'.'.$extension;
+            $temp_name = '/images/profiles/'.$user->id.'.'.$extension;
 
             $user->image = $temp_name;
 

@@ -54311,6 +54311,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
 
 
 
@@ -54339,6 +54340,8 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
       commerceCategories: [],
       commerceMaxSize: null,
       commerceMinSize: null,
+      commerceTagNum: null,
+      tagError: '',
       validExtensions: [],
       imageError: '',
       results: [],
@@ -54351,6 +54354,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
     this.getCommerceCategories();
     this.getCommercesSize();
     this.getCommercesExt();
+    this.getTagsNum();
     this.getTags();
   },
 
@@ -54409,6 +54413,11 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 
       if (this.validateSizeImage()) {
         this.imageError = 'La imagen no cumple con las dimensiones esperadas. Debe estar entre: ' + this.commerceMinSize + ' a ' + this.commerceMaxSize + 'KB'; //enviamos el error,
+        return false;
+      }
+
+      if (this.value.length > this.commerceTagNum) {
+        this.tagError = 'El numero permitido de tags son: ' + this.commerceTagNum + '.'; //enviamos el error,
         return false;
       }
 
@@ -54523,6 +54532,18 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
       __WEBPACK_IMPORTED_MODULE_0_axios___default.a.get('api/commerce-ext').then(function (data) {
         var value = data.data[0].val;
         _this9.validExtensions = value;
+      }).catch(function (err) {
+        return console.log(err);
+      });
+    },
+    getTagsNum: function getTagsNum() {
+      var _this10 = this;
+
+      __WEBPACK_IMPORTED_MODULE_0_axios___default.a.get('api/tag-num').then(function (data) {
+        var value = data.data[0].val;
+        var val = JSON.parse(value);
+
+        _this10.commerceTagNum = val.commerce;
       }).catch(function (err) {
         return console.log(err);
       });
@@ -55943,7 +55964,15 @@ var render = function() {
                             },
                             expression: "value"
                           }
-                        })
+                        }),
+                        _vm._v(" "),
+                        _c("p", [
+                          _vm.tagError != ""
+                            ? _c("small", { staticClass: "text-danger" }, [
+                                _vm._v(_vm._s(_vm.tagError))
+                              ])
+                            : _vm._e()
+                        ])
                       ],
                       1
                     ),
@@ -56576,6 +56605,8 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
 
 
 
@@ -56594,6 +56625,8 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
       commerceCategories: [],
       commerceMaxSize: null,
       commerceMinSize: null,
+      commerceTagNum: null,
+      tagError: '',
       validExtensions: [],
       imageError: '',
       picture: '',
@@ -56613,6 +56646,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
       _this.getCommerceCategories();
       _this.getCommercesSize();
       _this.getCommercesExt();
+      _this.getTagsNum();
       _this.getTags();
     });
   },
@@ -56750,6 +56784,11 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
         return false;
       }
 
+      if (this.value.length > this.commerceTagNum) {
+        this.tagError = 'El numero permitido de tags son: ' + this.commerceTagNum + '.'; //enviamos el error,
+        return false;
+      }
+
       this.commerce.tags = this.value;
 
       axios.put('api' + this.url + '/' + this.commerce.idcommerce, this.commerce).then(function (data) {
@@ -56828,6 +56867,18 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
       }).catch(function (err) {
 
         console.log(err);
+      });
+    },
+    getTagsNum: function getTagsNum() {
+      var _this15 = this;
+
+      axios.get('api/tag-num').then(function (data) {
+        var value = data.data[0].val;
+        var val = JSON.parse(value);
+
+        _this15.commerceTagNum = val.commerce;
+      }).catch(function (err) {
+        return console.log(err);
       });
     },
     randomString: function randomString(len, an) {
@@ -57382,7 +57433,15 @@ var render = function() {
                             },
                             expression: "value"
                           }
-                        })
+                        }),
+                        _vm._v(" "),
+                        _c("p", [
+                          _vm.tagError != ""
+                            ? _c("small", { staticClass: "text-danger" }, [
+                                _vm._v(_vm._s(_vm.tagError))
+                              ])
+                            : _vm._e()
+                        ])
                       ],
                       1
                     ),
@@ -61409,8 +61468,6 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 
         _this9.userMaxSize = val.maxsize;
         _this9.userMinSize = val.minsize;
-
-        console.log('El minimo permitido es: ' + _this9.userMinSize + 'KB Y el maximo es: ' + _this9.userMaxSize + 'KB');
       }).catch(function (err) {
         return console.log(err);
       });
@@ -66816,6 +66873,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
 
 
 
@@ -66845,7 +66903,9 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
         branch_idbranch: ''
       },
       options: [],
-      value: []
+      value: [],
+      discountTagNum: null,
+      tagError: ''
 
     };
   },
@@ -66907,6 +66967,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
       this.tmpDiscount.outstanding = discount.outstanding == 0 ? false : true;
       this.getBranchDiscount(this.tmpDiscount.iddiscount);
       this.getTagsDiscount(this.tmpDiscount.iddiscount);
+      this.getTagsNum();
       this.$refs.editModal.show();
     },
     editBranchDiscount: function editBranchDiscount(data) {
@@ -66932,6 +66993,12 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
       var _this4 = this;
 
       this.errorsDiscount = {};
+      this.tagError = '';
+
+      if (this.value.length > this.discountTagNum) {
+        this.tagError = 'El numero permitido de tags son: ' + this.discountTagNum + '.'; //enviamos el error,
+        return false;
+      }
 
       this.tmpDiscount.tags = this.value;
 
@@ -67137,6 +67204,18 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
       }).catch(function (err) {
 
         console.log(err);
+      });
+    },
+    getTagsNum: function getTagsNum() {
+      var _this13 = this;
+
+      axios.get('api/tag-num').then(function (data) {
+        var value = data.data[0].val;
+        var val = JSON.parse(value);
+
+        _this13.discountTagNum = val.discount;
+      }).catch(function (err) {
+        return console.log(err);
       });
     },
     randomString: function randomString(len, an) {
@@ -67389,6 +67468,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
 
 
 
@@ -67424,13 +67504,16 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
       errorpreciodescuento: '',
       errorporcentaje: '',
       options: [],
-      value: []
+      value: [],
+      discountTagNum: null,
+      tagError: ''
 
     };
   },
   created: function created() {
     this.getDiscountCategories();
     this.getTags();
+    this.getTagsNum();
   },
 
   methods: {
@@ -67469,6 +67552,11 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
       this.errorsDiscount = {};
       this.errorInicio = '';
       this.errorFin = '';
+
+      if (this.value.length > this.discountTagNum) {
+        this.tagError = 'El numero permitido de tags son: ' + this.discountTagNum + '.'; //enviamos el error,
+        return false;
+      }
 
       this.form.tags = this.value;
 
@@ -67575,6 +67663,18 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
       var result = this.form.discountprice * 100 / precio;
 
       this.form.discountpercentage = result;
+    },
+    getTagsNum: function getTagsNum() {
+      var _this5 = this;
+
+      axios.get('api/tag-num').then(function (data) {
+        var value = data.data[0].val;
+        var val = JSON.parse(value);
+
+        _this5.discountTagNum = val.discount;
+      }).catch(function (err) {
+        return console.log(err);
+      });
     },
     randomString: function randomString(len, an) {
       an = an && an.toLowerCase();
@@ -69000,7 +69100,15 @@ var render = function() {
                           },
                           expression: "value"
                         }
-                      })
+                      }),
+                      _vm._v(" "),
+                      _c("p", [
+                        _vm.tagError != ""
+                          ? _c("small", { staticClass: "text-danger" }, [
+                              _vm._v(_vm._s(_vm.tagError))
+                            ])
+                          : _vm._e()
+                      ])
                     ],
                     1
                   )
@@ -69899,7 +70007,15 @@ var render = function() {
                           },
                           expression: "value"
                         }
-                      })
+                      }),
+                      _vm._v(" "),
+                      _c("p", [
+                        _vm.tagError != ""
+                          ? _c("small", { staticClass: "text-danger" }, [
+                              _vm._v(_vm._s(_vm.tagError))
+                            ])
+                          : _vm._e()
+                      ])
                     ],
                     1
                   )

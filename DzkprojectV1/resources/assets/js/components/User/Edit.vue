@@ -411,10 +411,7 @@ export default {
 
         this.userMaxSize = val.maxsize;
         this.userMinSize = val.minsize;
-
-        console.log('El minimo permitido es: ' + this.userMinSize + 'KB Y el maximo es: ' + this.userMaxSize + 'KB');
-
-      })
+     })
       .catch(err => console.log(err))
     },
 

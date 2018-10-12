@@ -77,6 +77,7 @@
                         <div class="col-lg-12">
                           <label>Tags</label>
                           <multiselect v-model="value" tag-placeholder="Agregar tag" placeholder="Buscar o Agregar tag" label="name" track-by="code" :options="options" :multiple="true" :taggable="true" :searchable="true" tag-position="bottom" @tag="addTag"></multiselect>
+                          <p><small class="text-danger" v-if="tagError != '' ">{{ tagError }}</small></p>
                         </div>     
                                            
                         <div class="col-lg-12 text-right">
@@ -119,6 +120,8 @@ import $ from 'jquery';
               commerceCategories: [],
               commerceMaxSize: null,
               commerceMinSize: null,
+              commerceTagNum : null,
+              tagError: '',
               validExtensions: [],
               imageError: '',
               results: [],
@@ -132,7 +135,8 @@ import $ from 'jquery';
           this.getCommerceCategories();
           this.getCommercesSize();
           this.getCommercesExt();
-          this.getTags()
+          this.getTagsNum();
+          this.getTags();
         },
 
         methods: {
@@ -183,6 +187,11 @@ import $ from 'jquery';
 
             if(this.validateSizeImage()) {
               this.imageError = 'La imagen no cumple con las dimensiones esperadas. Debe estar entre: ' + this.commerceMinSize + ' a ' + this.commerceMaxSize + 'KB'; //enviamos el error,
+              return false;
+            }
+
+            if(this.value.length > this.commerceTagNum ) {
+              this.tagError = 'El numero permitido de tags son: ' + this.commerceTagNum + '.'; //enviamos el error,
               return false;
             }
 
@@ -291,6 +300,17 @@ import $ from 'jquery';
             axios.get('api/commerce-ext').then(data => {
               let value = data.data[0].val;
               this.validExtensions = value;
+
+            })
+            .catch(err => console.log(err))
+
+          },
+          getTagsNum() {
+            axios.get('api/tag-num').then(data => {
+              let value = data.data[0].val;
+              let val = JSON.parse(value);
+
+              this.commerceTagNum = val.commerce;
 
             })
             .catch(err => console.log(err))

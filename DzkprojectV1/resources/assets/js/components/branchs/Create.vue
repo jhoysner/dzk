@@ -354,14 +354,16 @@
           },
 
           validateExtensionImage() {
-            let ext = $("#image").val().split('.').pop();
+            if($("#image").val() != "") {
+              let ext = $("#image").val().split('.').pop();
             
-            let found = this.validExtensions.indexOf(ext);
+              let found = this.validExtensions.indexOf(ext);
 
-            if(found == -1) {
-              return true;
-            } else {
-              return false;
+              if(found == -1) {
+                return true;
+              } else {
+                return false;
+              }
             }
 
           },

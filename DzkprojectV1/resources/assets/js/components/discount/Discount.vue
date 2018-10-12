@@ -81,13 +81,15 @@
 
                              <div class="form-group">
                                 <label>Inicio</label>
-                                 <input type="date" placeholder="image"  class="form-control" v-model="tmpDiscount.startdate">
+                                 <input type="date" placeholder="image"  class="form-control" v-model="tmpDiscount.startdate" @change="handleChangeInicio($event)">
+                                <p class="text-danger">{{errorInicio}}</p>
                                 <span class="text-danger" v-if="!!errorsDiscount.startdate"> {{errorsDiscount.startdate[0]}} </span>                            
                             </div>
 
                              <div class="form-group">
                                 <label>Fin</label>
-                                 <input type="date"   class="form-control" v-model="tmpDiscount.enddate">
+                                 <input type="date"   class="form-control" v-model="tmpDiscount.enddate" @change="handleChangeFin($event)">
+                                 <p class="text-danger">{{errorFin}}</p>
                                  <span class="text-danger" v-if="!!errorsDiscount.enddate"> {{errorsDiscount.enddate[0]}} </span>                            
                             </div>
                             <div class="form-group">
@@ -167,6 +169,7 @@
                                                   <td>{{ deescueentsucu.pivot.amountredeemed}}</td>
                                                   <td>
                                                       <button type="button" @click="editBranchDiscount(deescueentsucu)" class="btn  btn-sm  btn-info"> Editar</button>
+                                                      <button type="button" @click="confirmBranchDiscount(deescueentsucu)" class="btn btn-sm  btn-danger">Eliminar</button>
                                                   </td>
                                               </tr>
                                           </tbody>
@@ -299,7 +302,7 @@
 
         <!-- branchsdiscount -->
         <b-modal v-model="show" id="branchDiscountEditModal" ref="branchDiscountEditModal" title="Editar Sucursales Descuentos" hide-footer>
-                <form @submit.prevent="saveBranchDiscount" id="formBranchDiscount">
+                <form @submit.prevent="updateBranchDiscount" id="formBranchDiscount">
                       <div class="modal-content">
                         <div class="container">
                               
@@ -346,6 +349,8 @@
                 descuentosucursal: [],
                 errorpreciodescuento: '',
                 errorporcentaje: '',
+                errorInicio: '',
+                errorFin: '',
                 form: {
                   discounthours: '',
                   amountapproved: '',
@@ -411,17 +416,7 @@
                 this.tmpDiscount.startdate = this.formatDate(this.tmpDiscount.startdate);
                 this.tmpDiscount.enddate = this.formatDate(this.tmpDiscount.startdate);
                 this.tmpDiscount.outstanding = discount.outstanding == 0 ? false : true ;
-
-
-                axios.get('api/branch-discount/'+this.tmpDiscount.iddiscount)
-                  .then((response) => {
-                      this.branchsdiscount = response.data.data
-                  })  
-                  .catch((err) => {
-  
-                      console.log(err);
-                  });
-
+                this.getBranchDiscount(this.tmpDiscount.iddiscount)
                 this.$refs.editModal.show()
 
             },             
@@ -429,7 +424,7 @@
 
                 axios.get('api/branch-discount-update/'+data.pivot.discount_iddiscount+'/'+data.pivot.idbranch_has_discount)
                   .then((response) => {
-                      console.log(response.data.data.pivot)
+                      // console.log(response.data.data.pivot)
                       this.form.discounthours = response.data.data.pivot.discounthours
                       this.form.amountapproved = response.data.data.pivot.amountapproved
                       this.form.branch_idbranch = response.data.data.pivot.branch_idbranch
@@ -469,22 +464,30 @@
                       this.errorsDiscount = error.response.data.errors;
 
                     });
+            },            
+            updateBranchDiscount() {
+                axios.patch(`/api/branch-discount-update/${this.form.discount_iddiscount}/${this.form.idbranch_has_discount}`,this.form)
+                    .then((response) => {
+                        this.form = {}
+                        this.$refs.branchDiscountEditModal.hide()
+                        swal({
+                          title: "Actualizado",
+                          text: "Registro actualizdo con exito",
+                          icon: "success",
+                        })
+
+                    })
+                   .catch(error => 
+                      console.log(error.response)
+
+                    );
             },
 
             detailsDiscount(discount) {
-                // this.errorsProducto = {}
                 this.tmpDiscount = {}
                 this.tmpDiscount = discount
                 this.tmpDiscount.outstanding = discount.outstanding == 0 ? false : true ;
-
-                axios.get('api/branch-discount/'+discount.iddiscount)
-                  .then((response) => {
-                      this.descuentosucursal = response.data.data
-                  })  
-                  .catch((err) => {
-  
-                      console.log(err);
-                  });
+                this.getBranchDiscount(discount.iddiscount)
                 this.$refs.detailtModal.show()
             },
             confirm(discount) {
@@ -499,6 +502,20 @@
                     this.deleteDiscount(discount)
                   }
                 });
+            },            
+            confirmBranchDiscount(deescueentsucu) {
+                this.$refs.editModal.hide()
+                swal({
+                  title: "Quieres Borrar el Registro?",
+                  icon: "warning",
+                  buttons: true,
+                  dangerMode: true,
+                })
+                .then((willDelete) => {
+                  if (willDelete) {
+                    this.deleteBranchDiscount(deescueentsucu)
+                  }
+                });
             },
             deleteDiscount(discount) {
                 this.errorsProducto = {}
@@ -510,6 +527,19 @@
                           icon: "success",
                         })
                         setTimeout(() => this.cargarDiscount(), 1000)
+                    })
+                    .catch((err) => console.log(err))
+            },            
+            deleteBranchDiscount(deescueentsucu) {
+                this.errorsProducto = {}
+                axios.delete(`/api/branch-discount-update/${deescueentsucu.pivot.discount_iddiscount}/${deescueentsucu.pivot.idbranch_has_discount}`)
+                    .then((response) => {
+                        swal({
+                          title: "Eliminado",
+                          text: "Registro eliminado con exito",
+                          icon: "success",
+                        })
+                        console.log(response)
                     })
                     .catch((err) => console.log(err))
             },
@@ -564,7 +594,50 @@
               
               this.tmpDiscount.discountpercentage =result;
               
+            },              
+            getBranchDiscount(value){
+                axios.get('api/branch-discount/'+value)
+                  .then((response) => {
+                      this.descuentosucursal = response.data.data
+                  })  
+                  .catch((err) => {
+  
+                      console.log(err);
+                });
+              
             },  
+            handleChangeInicio(e){
+              this.errorInicio= ''
+               var inicio = e.target.value
+               var now =  moment(new Date()).format('YYYY-MM-DD')
+
+               if( inicio >= now ){
+                  this.tmpDiscount.startdate = inicio
+               }
+
+              else{
+                this.tmpDiscount.startdate = ''
+                this.errorInicio = "La fecha debe ser mayor al dia actual"
+              }
+            },              
+            handleChangeFin(e){
+              this.errorFin= ''
+               var fin = e.target.value
+               var now =  moment(new Date()).format('YYYY-MM-DD')
+               if(this.tmpDiscount.startdate == ''){
+                  this.tmpDiscount.enddate = ''
+                  this.errorFin = "Debes introducir primero la fecha de inicio."
+                  return
+               }
+               if( fin >= this.tmpDiscount.startdate){
+                  this.tmpDiscount.enddate = fin
+               }
+               else{
+                  this.tmpDiscount.enddate = ''
+                  this.errorFin = "La fecha debe ser maryor a la fecha inicio."
+               }
+            },       
+
 
             randomString(len, an){
               an = an&&an.toLowerCase();

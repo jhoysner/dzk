@@ -1,5 +1,4 @@
 import Discount from './Discount.vue';
-import Create from './Create.vue';
 
 
 export default [

@@ -15,6 +15,10 @@ Route::get('/', function () {
     return view('dashboard');
 });
 
+Route::get('{any}', function () {
+    return view('dashboard');
+})->where('any', '.*');
+
 Route::get('/ejemplo', function () {
     return view('ejemplo/index');
 });

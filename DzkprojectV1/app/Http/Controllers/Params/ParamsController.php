@@ -121,4 +121,38 @@ class ParamsController extends Controller
 
     }
 
+    public function getUserSize()
+    {
+      $param = Params::where('key', 'user_img_upload_size')->get();
+
+      if(!$param){
+          return response()->json(['error' => 'No se encontraron valores por defecto.'], 422);
+        }
+
+        return response()->json($param,  201);
+    }
+
+    public function getUsertype()
+    {
+      $param = Params::where('key', 'user_img_upload_type')->get();
+
+      if(!$param){
+          return response()->json(['error' => 'No se encontraron valores por defecto.'], 422);
+        }
+
+        return response()->json($param,  201);
+    }
+
+    public function getTagNum()
+    {
+      $param = Params::where('key', 'tags_num')->get();
+
+      if(!$param){
+          return response()->json(['error' => 'No se encontraron valores por defecto.'], 422);
+        }
+
+        return response()->json($param,  201);
+    }
+
+
 }

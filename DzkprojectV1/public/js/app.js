@@ -61099,6 +61099,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
 
 
 
@@ -61116,7 +61117,11 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
       password_confirmation: "",
       imageData: "",
       datemax: "",
-      datemin: ""
+      datemin: "",
+      validExtensions: [],
+      userMaxSize: null,
+      userMinSize: null,
+      imageError: ''
 
     };
   },
@@ -61127,6 +61132,8 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
       _this.editId = data;
       _this.edit(_this.editId);
       _this.getCountries();
+      _this.getUserSize();
+      _this.getUserExt();
     });
   },
 
@@ -61138,7 +61145,6 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
       axios.get('api' + this.url + '/' + id).then(function (response) {
         _this2.user = response.data.user[0];
         _this2.datemax = new Date(_this2.fecha(-5320)).toISOString().slice(0, 10);
-        console.log(_this2.datemax);
         _this2.country(_this2.user.country_idcountry);
         _this2.state(_this2.user.state_idstate);
         _this2.imageData = _this2.user.image;
@@ -61177,7 +61183,30 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
         reader.readAsDataURL(input.files[0]);
       }
     },
+    validateExtensionImage: function validateExtensionImage() {
+      if ($("#image").val() != "") {
+        var ext = $("#image").val().split('.').pop();
 
+        var found = this.validExtensions.indexOf(ext);
+        if (found == -1) {
+          return true;
+        } else {
+          return false;
+        }
+      }
+    },
+    validateSizeImage: function validateSizeImage() {
+      if ($("#image").val() != "") {
+        var fileSize = $('#image')[0].files[0].size; //Tamaño de la imagen subida.
+        var sizeKB = parseInt(fileSize / 1024); //Tamaño de la imagen, en kb.
+        if (sizeKB > this.userMaxSize || sizeKB < this.userMinSize) {
+          //si el tamaño de la imagen, es mayorr al max del establecido en la base de datos o menor al min
+          return true;
+        } else {
+          return false;
+        }
+      }
+    },
     html5Location: function html5Location() {
       var mapHtml5 = document.getElementById('mapHtml5');
       document.getElementById('textlocation').style.display = "none";
@@ -61304,6 +61333,16 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 
       this.errors = {};
 
+      if (this.validateExtensionImage()) {
+        this.imageError = 'La imagen no cumple con el formato adecuado.'; //enviamos el error,
+        return false;
+      }
+
+      if (this.validateSizeImage()) {
+        this.imageError = 'La imagen no cumple con las dimensiones esperadas. Debe estar entre: ' + this.userMinSize + ' a ' + this.userMaxSize + 'KB'; //enviamos el error,
+        return false;
+      }
+
       var params = new FormData();
       params.append('userId', this.user.id);
       params.append('firstname', this.user.firstname);
@@ -61359,6 +61398,31 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 
       axios.get('/api/cities/' + id).then(function (response) {
         _this8.cities = response.data;
+      });
+    },
+    getUserSize: function getUserSize() {
+      var _this9 = this;
+
+      axios.get('api/user-size').then(function (data) {
+        var value = data.data[0].val;
+        var val = JSON.parse(value);
+
+        _this9.userMaxSize = val.maxsize;
+        _this9.userMinSize = val.minsize;
+
+        console.log('El minimo permitido es: ' + _this9.userMinSize + 'KB Y el maximo es: ' + _this9.userMaxSize + 'KB');
+      }).catch(function (err) {
+        return console.log(err);
+      });
+    },
+    getUserExt: function getUserExt() {
+      var _this10 = this;
+
+      axios.get('api/user-ext').then(function (data) {
+        var value = data.data[0].val;
+        _this10.validExtensions = value;
+      }).catch(function (err) {
+        return console.log(err);
       });
     }
   }
@@ -61816,10 +61880,22 @@ var render = function() {
                       ),
                       _c("div", { staticClass: "input-group input-file" }, [
                         _c("input", {
+                          ref: "image",
                           staticClass: "form-control",
-                          attrs: { type: "file", accept: "image/*" },
+                          attrs: {
+                            type: "file",
+                            id: "image",
+                            placeholder: "Imagen de Perfil",
+                            accept: "image/*"
+                          },
                           on: { change: _vm.previewImage }
-                        })
+                        }),
+                        _vm._v(" "),
+                        _vm.imageError != ""
+                          ? _c("small", { staticClass: "text-danger" }, [
+                              _vm._v(_vm._s(_vm.imageError))
+                            ])
+                          : _vm._e()
                       ])
                     ])
                   ]),

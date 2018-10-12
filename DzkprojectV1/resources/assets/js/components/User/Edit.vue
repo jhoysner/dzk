@@ -70,7 +70,8 @@
                         <div class="col-lg-12">
                           <div class="upload-fleid"> Seleccionar imagen de Perfil
                             <div class="input-group input-file">
-                              <input class="form-control" type="file" accept="image/*" @change="previewImage">
+                              <input class="form-control" type="file" id="image" ref="image" placeholder="Imagen de Perfil" accept="image/*" @change="previewImage">
+                              <small class="text-danger" v-if="imageError != '' ">{{ imageError }}</small>
                             </div>
                           </div>
                         </div>
@@ -122,7 +123,11 @@ export default {
       password_confirmation: "",
       imageData : "", 
       datemax : "",
-      datemin : ""
+      datemin : "",
+      validExtensions: [],
+      userMaxSize: null,
+      userMinSize: null,
+      imageError: '',
 
     }
   },
@@ -132,6 +137,8 @@ export default {
       this.editId = data;
       this.edit(this.editId);
       this.getCountries();
+      this.getUserSize();
+      this.getUserExt();
     });
   },
 
@@ -140,12 +147,10 @@ export default {
       axios.get('api' + this.url + '/' + id ).then(response => {
         this.user = response.data.user[0];
         this.datemax = new Date(this.fecha(-5320)).toISOString().slice(0,10);
-      console.log(this.datemax)
         this.country(this.user.country_idcountry)
         this.state(this.user.state_idstate)
         this.imageData = this.user.image
-        this.html5Location()
-             
+        this.html5Location()             
       })
       .catch(err => console.log(err))
     },
@@ -171,6 +176,31 @@ export default {
           }
 
           reader.readAsDataURL(input.files[0])
+      }
+    },
+    validateExtensionImage() {
+      if($("#image").val() != "") {
+        let ext = $("#image").val().split('.').pop();
+      
+        let found = this.validExtensions.indexOf(ext);
+        if(found == -1) {
+          return true;
+        } else {
+          return false;
+        }
+      }
+
+    },
+
+    validateSizeImage() {
+      if($("#image").val() != "") {
+        let fileSize = $('#image')[0].files[0].size; //Tamaño de la imagen subida.
+        var sizeKB = parseInt(fileSize / 1024); //Tamaño de la imagen, en kb.
+        if(sizeKB > this.userMaxSize || sizeKB < this.userMinSize) { //si el tamaño de la imagen, es mayorr al max del establecido en la base de datos o menor al min
+          return true;
+        } else {
+          return false;
+        }
       }
     },
 
@@ -302,6 +332,16 @@ export default {
     update() {
       this.errors = {};
 
+      if(this.validateExtensionImage()) {
+        this.imageError = 'La imagen no cumple con el formato adecuado.'; //enviamos el error,
+        return false;
+      }
+
+      if(this.validateSizeImage()) {
+        this.imageError = 'La imagen no cumple con las dimensiones esperadas. Debe estar entre: ' + this.userMinSize + ' a ' + this.userMaxSize + 'KB'; //enviamos el error,
+        return false;
+      }
+
       let params = new FormData();
       params.append('userId', this.user.id);
       params.append('firstname', this.user.firstname);  
@@ -363,6 +403,29 @@ export default {
                 this.cities = response.data;
             }   
         )
+    },
+    getUserSize() {
+      axios.get('api/user-size').then(data => {
+        let value = data.data[0].val;
+        let val = JSON.parse(value);
+
+        this.userMaxSize = val.maxsize;
+        this.userMinSize = val.minsize;
+
+        console.log('El minimo permitido es: ' + this.userMinSize + 'KB Y el maximo es: ' + this.userMaxSize + 'KB');
+
+      })
+      .catch(err => console.log(err))
+    },
+
+    getUserExt() {
+      axios.get('api/user-ext').then(data => {
+        let value = data.data[0].val;
+        this.validExtensions = value;
+
+      })
+      .catch(err => console.log(err))
+
     },
 
   }

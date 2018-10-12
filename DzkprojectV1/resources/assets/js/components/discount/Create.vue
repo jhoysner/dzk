@@ -269,7 +269,7 @@
 
                var result = precio*this.form.discountpercentage/100
               
-               console.log(result) 
+               // console.log(result) 
 
                this.form.discountprice = precio-result;
               
@@ -286,10 +286,10 @@
 
               var precio = this.form.normalprice
 
-              var result = this.form.discountprice*100/precio
+              var result =  100*this.form.discountprice/this.form.normalprice
               
-              this.form.discountpercentage =result;
-              
+              this.form.discountpercentage = 100-result;
+            
             },
             randomString(len, an){
               an = an&&an.toLowerCase();

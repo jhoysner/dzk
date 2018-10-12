@@ -33,7 +33,33 @@ const baseRoutes = [
         {
             path: '/commerces',
             component: Commerces
+        },      
+        {
+            path: '/commerce/:id',
+            component: DetailCommerce,
+            
+        },        
+        {
+            path: '/commerce/:id/branchs',
+            component: DetailCommerceBranch,
+
+        },        
+        {
+            path: '/commerce/:id/discounts',
+            component: DetailCommerceDisocount,
+
         },
+        {
+            path: '/branch/:id',
+            component: DetailBranch,
+            
+        }, 
+        {
+            path: '/discount/:id',
+            component: DetailDiscount,
+            
+        }, 
+
         {
             path: '/branchs',
             component: Branchs

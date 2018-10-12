@@ -78,7 +78,7 @@ class DiscountController extends Controller
      */
     public function show($id)
     {
-        $discount = Discount::findOrFail($id);
+        $discount = Discount::where('iddiscount', $id)->with('branchs')->first();
 
         return response()->json(['data'=> $discount], 200);
     }

@@ -77,6 +77,12 @@
                               <small class="text-danger" v-if="error.commercecategory_idcommercecategory">{{ error.commercecategory_idcommercecategory[0] }}</small>
                           </div>
                       </div>
+
+                      <div class="col-lg-12">
+                        <label>Tags</label>
+                        <multiselect v-model="value" tag-placeholder="Agregar tag" placeholder="Buscar o Agregar tag" label="name" track-by="code" :options="options" :multiple="true" :taggable="true" :searchable="true" tag-position="bottom" @tag="addTag"></multiselect>
+                      </div> 
+                      
                       <div class="col-lg-12 text-right">
                           <button type="submit" class="btn btn-primary"><i class="zmdi zmdi-plus"></i> Guardar</button>
                       </div>
@@ -111,6 +117,8 @@ export default {
       picture: '',
       picsize: '',
       picAct: '',
+      options: [],
+      value: [],
     }
   },
 
@@ -122,10 +130,36 @@ export default {
       this.getCommerceCategories();
       this.getCommercesSize();
       this.getCommercesExt();
+      this.getTags()
     });
   },
 
   methods: {
+    //Guarda tag
+    addTag (newTag) {
+      const tag = {
+        name: this.validName(newTag),
+        code: this.randomString(36)
+      }
+
+      this.value.push(tag)
+      this.options.push(tag)
+
+      axios.post('api/tags', tag).then(response =>{
+        //console.log(response)
+      })
+    },
+    //Muestra Listado de Tag
+    getTags() {
+       axios.get('api/tags').then(response => {
+        this.options = []
+        this.options = response.data.tags
+        this.options.forEach(function(item) {
+          item.code = item.idtags
+        })
+      })
+      .catch(err => console.log(err))
+    },
     getImage(e) {
       let image = e.target.files[0];
       console.log(image);
@@ -276,7 +310,37 @@ export default {
       })
       .catch(err => console.log(err))
 
+    },
+    randomString(len, an){
+      an = an&&an.toLowerCase();
+      var str="", i=0, min=an=="a"?10:0, max=an=="n"?10:62;
+      for(;i++<len;){
+        var r = Math.random()*(max-min)+min <<0;
+        str += String.fromCharCode(r+=r>9?r<36?55:61:48);
+      }
+      return str;
+    },
+    validName(cadena) {
+      let specialChars = "!@#$^&%*()+=-[]\/{}|:<>?,.";
+      
+      //Elimina los caracteres
+      for (let i = 0; i < specialChars.length; i++) {
+        cadena= cadena.replace(new RegExp("\\" + specialChars[i], 'gi'), '');
+      }
+      //conviente a minuscula
+      cadena = cadena.toLowerCase();
+      
+      //eliminamso acentos y ñ
+      cadena = cadena.replace(/á/gi,"a");
+      cadena = cadena.replace(/é/gi,"e");
+      cadena = cadena.replace(/í/gi,"i");
+      cadena = cadena.replace(/ó/gi,"o");
+      cadena = cadena.replace(/ú/gi,"u");
+      cadena = cadena.replace(/ñ/gi,"n");
+      
+      return cadena
     }
+
   }
 }
 </script>

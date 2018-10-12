@@ -11,17 +11,15 @@
                       <table class="table table-hover table-bordered table-striped table-condensed">
                           <thead>
                             <tr>
-                                <th class="text-center">ID Parametro</th>
                                 <th class="text-center">Key</th>
                                 <th class="text-center">Valor</th>
-                                <th class="text-center">Options</th>
+                                <th class="text-center">Opciones</th>
                             </tr>
                           </thead>
                           <tbody>
                             <tr v-for="param in params">
-                              <th>{{ param.idparams }}</th>
-                              <th>{{ param.key }}</th>
-                              <th>{{ param.val }}</th>
+                              <td>{{ param.key }}</td>
+                              <td>{{ param.val }}</td>
                               <td class="text-right">
                                   <b-btn v-b-modal="'showModal'" @click="show(param.idparams)" class="btn btn-sm" variant="default">Detalle</b-btn>
                                   <b-btn v-b-modal="'editModal'" @click="edit(param.idparams)" class="btn btn-sm" variant="warning">Editar</b-btn>

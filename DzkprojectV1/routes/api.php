@@ -26,7 +26,6 @@ Route::get('logout', 'UserController@logout');
 Route::group(["prefix" => "profile"], function () {
 	Route::get('/{id}', 'UserController@userDetail');
 	Route::post('/', 'UserController@updateProfile');
-
 });
 
 //Parametros
@@ -36,6 +35,16 @@ Route::group(["prefix" => "params"], function () {
 	Route::delete('/{id}', 'Params\ParamsController@destroy');
 	Route::post('/', 'Params\ParamsController@store');
 	Route::put('/', 'Params\ParamsController@update');
+});
+
+//Tags
+Route::group(["prefix" => "tags"], function () {
+	Route::get('/', 'Tags\TagsController@index');
+	Route::get('/{id}', 'Tags\TagsController@show');
+	Route::delete('/{id}', 'Tags\TagsController@destroy');
+	Route::post('/', 'Tags\TagsController@store');
+	Route::put('/', 'Tags\TagsController@update');
+	Route::get('/search/{search}', 'Tags\TagsController@search');
 });
 
 Route::resource('discount','Discount\DiscountController');

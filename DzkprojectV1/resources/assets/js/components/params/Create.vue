@@ -52,13 +52,13 @@ import axios from 'axios';
             this.error = {};
 
             axios.post('api' + this.url, this.form)
-            .then(data => {          
+            .then(response => {          
               this.$refs.createModal.hide();
               this.form = {};
               this.$parent.index()
               swal({
                 title: "Parametro creado",
-                text: "Parametro creado correctamente",
+                text: response.data.success,
                 icon: "success",
               })
             })

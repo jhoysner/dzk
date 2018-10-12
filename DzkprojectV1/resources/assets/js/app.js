@@ -20,11 +20,14 @@ import BootstrapVue from 'bootstrap-vue'
 
 import swal from 'sweetalert';
 import ToggleButton from 'vue-js-toggle-button'
+import Multiselect from 'vue-multiselect'
 
 
 Vue.use(ToggleButton)
 
 Vue.use(BootstrapVue);
+
+Vue.component('multiselect', Multiselect)
 
 require('./bootstrap');
 

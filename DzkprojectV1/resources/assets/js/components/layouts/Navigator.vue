@@ -12,6 +12,13 @@
                 </router-link>
             </li>
             <li>
+              <router-link to='/tags'>
+                  <a>
+                    Tags
+                  </a>
+              </router-link>
+            </li>
+            <li>
               <router-link to='/params'>
                   <a>
                     Parametros

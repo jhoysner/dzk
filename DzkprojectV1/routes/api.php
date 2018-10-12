@@ -46,6 +46,12 @@ Route::group(["prefix" => "tags"], function () {
 	Route::put('/', 'Tags\TagsController@update');
 	Route::get('/search/{search}', 'Tags\TagsController@search');
 });
+//Discount-tags
+Route::get('tags-discount/{id}', 'Discount\DiscountController@getTagsDiscount');
+
+//Commerce-tags
+Route::get('tags-commerce/{id}', 'Commerce\CommercesController@getTagsCommerce');
+
 
 Route::resource('discount','Discount\DiscountController');
 Route::resource('discount-categories','DiscountCategory\DiscountCategoryController');

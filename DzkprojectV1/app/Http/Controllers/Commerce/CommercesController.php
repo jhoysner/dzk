@@ -5,8 +5,8 @@ namespace App\Http\Controllers\Commerce;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Storage;
-
 use App\Commerce;
+use App\CommerceTags;
 use App\Http\Requests\CommerceRequest;
 
 class CommercesController extends Controller
@@ -78,6 +78,20 @@ class CommercesController extends Controller
       ];
 
       $commerce = Commerce::create($data);
+
+      if(count($request->tags) > 0) {
+        foreach ($request->tags as $value) { 
+
+                $idcommerce_has_tags = str_random(36);
+
+                CommerceTags::create([
+                   'idcommerce_has_tags' => $idcommerce_has_tags,
+                   'commerce_idcommerce' => $commerce->idcommerce,
+                   'tags_idtags'=> $value['code']
+                ]);
+                
+            }
+      }
 
       if(!$commerce){
           return response()->json(['error' => 'No se pudo guardar el registro'], 422);
@@ -168,6 +182,24 @@ class CommercesController extends Controller
 
       $update = $commerce->update($data);
 
+      //elimina tags
+      $commercetags = CommerceTags::where('commerce_idcommerce',$commerce->idcommerce)->get();
+      foreach ($commercetags as $temp) {
+          $temp->delete();
+      }
+
+      //si existe tags los agrega
+      if(count($request->tags) > 0) {
+          foreach ($request->tags as $value) { 
+              $idcommerce_has_tags = str_random(36);
+              CommerceTags::create([
+                  'idcommerce_has_tags' => $idcommerce_has_tags,
+                  'commerce_idcommerce' => $commerce->idcommerce,
+                  'tags_idtags'=> $value['code']
+              ]);
+          }
+      }
+
       if(!$commerce){
           return response()->json(['error' => 'No se pudo guardar el registro'], 422);
       }
@@ -190,5 +222,14 @@ class CommercesController extends Controller
         }
 
         return response()->json(['msg' => 'Comercio eliminado satisfactoriamente.'], 201);
+    }
+
+    public function getTagsCommerce($id)
+    {
+        $commerce = Commerce::find($id);
+
+        $commercetags = $commerce->tags;
+
+        return response()->json(['data'=> $commercetags], 200);
     }
 }

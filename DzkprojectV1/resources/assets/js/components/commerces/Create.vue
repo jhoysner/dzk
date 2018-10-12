@@ -186,6 +186,8 @@ import $ from 'jquery';
               return false;
             }
 
+            this.form.tags = this.value
+              
             axios.post('api' + this.url, this.form)
             .then(data => {          
               //Sino, continuamos nuestra operacion.
@@ -197,6 +199,7 @@ import $ from 'jquery';
               this.getCommerceCategories();
               this.form.image = null;
               this.$refs.image.value = null
+              this.value = []
               this.$parent.index()
               swal({
                 title: "Comercio creado",

@@ -184,12 +184,16 @@
                 this.errorsDiscount = {}
                 this.errorInicio= ''
                 this.errorFin= ''
+
+                this.form.tags = this.value
+
                 axios.post('api/discount',this.form)
                 .then(response => { 
                     this.form = {}            
                     this.form.outstanding = false
                     this.form.amountavailable= 0 
                     this.form.amountredeemed= 0
+                    this.value = []
 
                     this.$parent.cargarDiscount()
                     $('#createModal').trigger("reset");

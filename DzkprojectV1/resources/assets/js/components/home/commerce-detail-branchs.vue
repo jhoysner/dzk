@@ -1,5 +1,6 @@
 <template>
   <div id="section-profile" class="settings-content">
+        <a href="#" class="btn btn-danger">Volver atrás</a>
         <h2 class="my-4">Comercio: {{commerce.idcommerce}}</h2>
 
         <ul class="nav nav-tabs">
@@ -43,7 +44,7 @@
                             </td>
                             <td>{{ branch.latitude }} - {{ branch.longitude }}</td>
                             <td>
-                              <router-link to="#">
+                              <router-link :to="`/branch/${branch.idbranch}`">
                                 <a href="#" class="btn btn-warning btn-sm">
                                 Detalle
                                 </a>     

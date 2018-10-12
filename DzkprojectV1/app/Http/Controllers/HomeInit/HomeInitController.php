@@ -17,9 +17,23 @@ class HomeInitController extends Controller
         ->with('states')
           ->with('cities')
             ->with('ccategories')
-              ->get();
+              ->paginate(2);
 
-        return response()->json(['data'=> $commerce], 200);
+        //$commerce = Commerce::orderBy('idcommerce', 'DESC')->paginate(2);
+
+        return response()->json([
+            'paginate' => [
+                'total'         =>  $commerce->total(),
+                'current_page'  =>  $commerce->currentPage(),
+                'per_page'      =>  $commerce->perPage(),
+                'last_page'     =>  $commerce->lastPage(),
+                'from'          =>  $commerce->firstItem(),
+                'to'            =>  $commerce->lastPage()
+            ],
+
+            'commerce' => $commerce
+
+        ]);
     }
 
     public function commerce_detail($id)
@@ -36,6 +50,4 @@ class HomeInitController extends Controller
         return response()->json(['data'=> $commerce], 200);
 
     }
-
-
 }

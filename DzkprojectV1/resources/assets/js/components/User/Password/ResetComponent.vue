@@ -70,7 +70,6 @@ export default {
                 if(!this.password) this.errors.push('Password required.');
                 if(!this.password_confirmation) this.errors.push('Password Confirmation required.');
                 
-                console.log(this.password)
                 if (this.password !== this.password_confirmation) {
                     this.password = ""
                     this.password_confirmation = ""
@@ -89,7 +88,16 @@ export default {
                     .then((response) => {
                             console.log(response)
                             if(response.status == 200) {
-                            	window.location.href = '/login';
+                            	swal({
+                                  title: "Aviso",
+                                  text: "Se reseteo correctamente la contraseña. Se redireccionará al Login.",
+                                  icon: "success"
+                                })
+                                .then((result) => {
+                                if (result) {
+                                   window.location.href = '/login';
+                                }
+                                });
                             }
 
                         }).catch((error) => {

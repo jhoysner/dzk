@@ -105488,7 +105488,6 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
             if (!this.password) this.errors.push('Password required.');
             if (!this.password_confirmation) this.errors.push('Password Confirmation required.');
 
-            console.log(this.password);
             if (this.password !== this.password_confirmation) {
                 this.password = "";
                 this.password_confirmation = "";
@@ -105506,7 +105505,15 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
             axios.post('/password/reset', params).then(function (response) {
                 console.log(response);
                 if (response.status == 200) {
-                    window.location.href = '/login';
+                    swal({
+                        title: "Aviso",
+                        text: "Se reseteo correctamente la contraseña. Se redireccionará al Login.",
+                        icon: "success"
+                    }).then(function (result) {
+                        if (result) {
+                            window.location.href = '/login';
+                        }
+                    });
                 }
             }).catch(function (error) {
                 if (error.response.status == 422) {

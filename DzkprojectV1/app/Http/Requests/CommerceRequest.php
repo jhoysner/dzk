@@ -25,12 +25,12 @@ class CommerceRequest extends FormRequest
     {
         return [
           //'idcommerce'        => 'required',
-          'name'              => 'required',
-          'phone1'            => 'required',
-          'phone2'            => 'required',
-          'email'             => 'required|email', //unique:commerce,email
+          'name'              => 'required|string|max:128',
+          'phone1'            => 'required|string|max:20',
+          'phone2'            => 'required|string|max:20',
+          'email'             => 'required|email|max:45', //unique:commerce,email
           //'image'             => 'nullable|image64:jpeg,jpg,png',
-          //'web'             => 'required',
+          'web'               => 'nullable|string|max:128',
           'country_idcountry' => 'required',
           'state_idstate'     => 'required',
           'city_idcity'       => 'required',
@@ -45,6 +45,7 @@ class CommerceRequest extends FormRequest
             'numeric' => 'El campo :attribute es admite solo números.',
             'email' => 'El campo :attribute no contiene un email válido.',
             'mimes' => 'El campo :attribute admite solo formato de imagenes.',
+            'max' =>  'El campo :attribute excede el limite permitido de caracteres.'
         ];
     }
 }

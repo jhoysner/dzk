@@ -1,6 +1,5 @@
 <template>
 	<div id="section-profile" class="settings-content">
-        <a href="#" class="btn btn-danger">Volver atrás</a>
         <h2 class="my-4">Comercio: {{commerce.idcommerce}}</h2>
         <ul class="nav nav-tabs">
           <li class="nav-item">

@@ -1,6 +1,5 @@
 <template>
   <div id="section-profile" class="settings-content">
-        <a href="#" class="btn btn-danger">Volver atrás</a>
         <h2 class="my-4">Comercio: {{commerce.idcommerce}}</h2>
 
         <ul class="nav nav-tabs">
@@ -77,14 +76,14 @@
     },
 
     methods: {
-            index() {
-              axios.get('/api/detail-commerce/' + this.$route.params.id).then(data => {
-                this.commerce.idcommerce = data.data.data[0].idcommerce;
-                this.branchs = data.data.data[0].branchs;
+      index() {
+        axios.get('/api/detail-commerce/' + this.$route.params.id).then(data => {
+          this.commerce.idcommerce = data.data.data[0].idcommerce;
+          this.branchs = data.data.data[0].branchs;
 
-              })
-              .catch(err => console.log(err))
-            },      
+        })
+        .catch(err => console.log(err))
+      },      
 
     }
   }

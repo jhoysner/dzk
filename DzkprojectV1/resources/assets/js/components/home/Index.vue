@@ -33,11 +33,14 @@
                                 </th>
                                 <td>{{ commerce.ccategories.name }}</td>
                                 <td>
-                                  <router-link :to="`commerce/${commerce.idcommerce}`">
+                                  <!--<router-link :to="`commerce/${commerce.idcommerce}`">
                                     <a href="#" class="btn btn-warning btn-sm">
                                     Detalle
                                     </a>     
-                                  </router-link>
+                                  </router-link> -->
+                                  <b-btn variant="warning" v-b-modal.showModal  @click="detail(commerce.idcommerce)">
+                                    Ver Detalles
+                                  </b-btn>
                                 </td>
                               </tr>
                             </tbody>
@@ -58,14 +61,17 @@
         <li class="page-item">
           <a class="page-link" href="#" v-if="pagination.current_page < pagination.last_page" @click.prevent="changePage(pagination.current_page + 1)"><i class="fa fa-caret-right" aria-hidden="true"></i></a></li>
     </ul>
+    <show></show>
   </div>
 </template>
 
 <script>
 import Bus from '../../utilities/EventBus.js';
 import $ from 'jquery';
+import show from './detail';
 
   export default {
+    components: {show},
     data() {
       return {
         commerces: [],
@@ -126,7 +132,7 @@ import $ from 'jquery';
     methods: {
       index(page) {
         axios.get('api/all-commerces?page=' + page).then(response => {
-          console.log(response);
+          //console.log(response);
           this.commerces = response.data.commerce.data;
           this.pagination = response.data.paginate;
         })
@@ -140,6 +146,10 @@ import $ from 'jquery';
 
       toggleSearch() {
         $('#search').toggle();
+      },
+
+      detail(id) {
+        Bus.$emit('detail_homeinit', id);
       },
     },
   }

@@ -8,7 +8,7 @@
               <!-- <spinner :show="loadingProductos"></spinner> -->
                 <div class="responsive">
                     <div class="table-responsive">
-                        <table class="table table-hover table-bordered table-striped table-condensed">
+                        <table class="table table-striped mt-40 stat-table">
                             <thead>
                                 <tr>
                                     <th class="text-center">ID Sucursal</th>
@@ -28,29 +28,27 @@
                             </thead>
                             <tbody>
                               <tr v-for="branch in branchs">
-                                <th>{{ branch.idbranch }}</th>
-                                <th>{{ branch.name }}</th>
-                                <!--<th>{{ branch.address }}</th>
-                                <th>{{ branch.schedule }}</th>
-                                <th>{{ branch.phone1 }}</th>
-                                <th>{{ branch.phone2 }}</th> -->
-                                <th>
+                                <td>{{ branch.idbranch }}</td>
+                                <td>{{ branch.name }}</td>
+                                <!--<td>{{ branch.address }}</td>
+                                <td>{{ branch.schedule }}</td>
+                                <td>{{ branch.phone1 }}</td>
+                                <td>{{ branch.phone2 }}</td> -->
+                                <td>
                                   <img class="image-branch" v-if="branch.image != null" :src="'images/branch/'+branch.image" />
                                   <p v-if="branch.image == null">No posee imagen.</p>
-                                </th>
-                                <th v-if="branch.latitude != null">{{ branch.latitude }} - {{ branch.longitude }}</th>
-                                <th v-else>No posee</th>
-                                <!--<th>{{ branch.commerces.name }}</th>
-                                <th>{{ branch.countries.name }}</th>
-                                <th>{{ branch.states.name }}</th>
-                                <th>{{ branch.cities.name }}</th> -->
-                                <th>
-                                  <td class="text-right">
-                                      <b-btn v-b-modal="'showModal'" @click="show(branch.idbranch)" variant="default">Detalle</b-btn>
-                                      <b-btn v-b-modal="'editModal'" @click="edit(branch.idbranch)" variant="warning">Editar</b-btn>
-                                      <button type="button" @click="confirm(branch.idbranch)" class="btn btn-sm  btn-danger">Eliminar</button>
-                                  </td>
-                                </th>
+                                </td>
+                                <td v-if="branch.latitude != null">{{ branch.latitude }} - {{ branch.longitude }}</td>
+                                <td v-else>No posee</td>
+                                <!--<td>{{ branch.commerces.name }}</td>
+                                <td>{{ branch.countries.name }}</td>
+                                <td>{{ branch.states.name }}</td>
+                                <td>{{ branch.cities.name }}</td> -->
+                                <td class="text-right">
+                                    <b-btn v-b-modal="'showModal'" size="sm" @click="show(branch.idbranch)" variant="default">Detalle</b-btn>
+                                    <b-btn v-b-modal="'editModal'" size="sm" @click="edit(branch.idbranch)" variant="warning">Editar</b-btn>
+                                    <button type="button" @click="confirm(branch.idbranch)" class="btn btn-sm  btn-danger">Eliminar</button>
+                                </td>
                               </tr>
                             </tbody>
                         </table>

@@ -56,12 +56,17 @@
                     </table>
                 </div>
             </div>
+            <paginator :pagination="pagination"></paginator>
         </div>
   </div>
 </template>
 
 <script>
+import Bus from '../../utilities/EventBus.js';
+import paginator from '../../utilities/paginator';
+
   export default {
+    components: { paginator },
     data() {
       return {
         id: this.$route.params.id,
@@ -69,22 +74,40 @@
           idcommerce: '',
         },
         branchs:[],
+        pagination: {
+            'total': 0,
+            'current_page': 0,
+            'per_page': 0,
+            'last_page': 0,
+            'from': 0,
+            'to': 0
+        },
       }
     },
 
     mounted() {
-      this.index();
+      this.getCommerce();
+      this.getBranchs();
+
+      Bus.$on('change_page', (page) => {
+        this.getBranchs(page);
+      });
     },
 
     methods: {
-      index() {
+      getCommerce() {
         axios.get('/api/detail-commerce/' + this.$route.params.id).then(data => {
           this.commerce.idcommerce = data.data.data[0].idcommerce;
-          this.branchs = data.data.data[0].branchs;
-
         })
         .catch(err => console.log(err))
-      },      
+      },
+
+      getBranchs(page) {
+        axios.get('/api/commerce-detail-branchs/' + this.$route.params.id + '?page=' + page).then(response => {
+          this.branchs = response.data.branch.data;
+          this.pagination = response.data.paginate;        
+        }).catch(err => console.log(err))
+      },        
 
     }
   }

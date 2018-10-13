@@ -50,4 +50,25 @@ class HomeInitController extends Controller
         return response()->json(['data'=> $commerce], 200);
 
     }
+
+    public function commerce_detail_branchs($id)
+    {
+        $branch = Branch::where('commerce_idcommerce', $id)->paginate(1);
+
+        //$commerce = Commerce::orderBy('idcommerce', 'DESC')->paginate(2);
+
+        return response()->json([
+            'paginate' => [
+                'total'         =>  $branch->total(),
+                'current_page'  =>  $branch->currentPage(),
+                'per_page'      =>  $branch->perPage(),
+                'last_page'     =>  $branch->lastPage(),
+                'from'          =>  $branch->firstItem(),
+                'to'            =>  $branch->lastPage()
+            ],
+
+            'branch' => $branch
+
+        ]);
+    }
 }

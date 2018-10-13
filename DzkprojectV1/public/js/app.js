@@ -58236,8 +58236,8 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 
       //dragged event of marker
       google.maps.event.addListener(marker, 'dragend', function () {
-        _this2.form.latitude = marker.getPosition().lat();
-        _this2.form.longitude = marker.getPosition().lng();
+        _this2.user.latitude = marker.getPosition().lat();
+        _this2.user.longitude = marker.getPosition().lng();
       });
     },
     showInputAddress: function showInputAddress() {
@@ -60960,19 +60960,19 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 var disposed = false
 function injectStyle (ssrContext) {
   if (disposed) return
-  __webpack_require__(302)
+  __webpack_require__(558)
 }
 var normalizeComponent = __webpack_require__(3)
 /* script */
 var __vue_script__ = __webpack_require__(304)
 /* template */
-var __vue_template__ = __webpack_require__(305)
+var __vue_template__ = __webpack_require__(560)
 /* template functional */
 var __vue_template_functional__ = false
 /* styles */
 var __vue_styles__ = injectStyle
 /* scopeId */
-var __vue_scopeId__ = "data-v-3acff272"
+var __vue_scopeId__ = null
 /* moduleIdentifier (server only) */
 var __vue_module_identifier__ = null
 var Component = normalizeComponent(
@@ -61005,52 +61005,26 @@ module.exports = Component.exports
 
 
 /***/ }),
-/* 302 */
-/***/ (function(module, exports, __webpack_require__) {
-
-// style-loader: Adds some css to the DOM by adding a <style> tag
-
-// load the styles
-var content = __webpack_require__(303);
-if(typeof content === 'string') content = [[module.i, content, '']];
-if(content.locals) module.exports = content.locals;
-// add the styles to the DOM
-var update = __webpack_require__(5)("a39bda88", content, false, {});
-// Hot Module Replacement
-if(false) {
- // When the styles change, update the <style> tags
- if(!content.locals) {
-   module.hot.accept("!!../../../../../node_modules/css-loader/index.js!../../../../../node_modules/vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-3acff272\",\"scoped\":true,\"hasInlineConfig\":true}!../../../../../node_modules/sass-loader/lib/loader.js!../../../../../node_modules/vue-loader/lib/selector.js?type=styles&index=0!./Edit.vue", function() {
-     var newContent = require("!!../../../../../node_modules/css-loader/index.js!../../../../../node_modules/vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-3acff272\",\"scoped\":true,\"hasInlineConfig\":true}!../../../../../node_modules/sass-loader/lib/loader.js!../../../../../node_modules/vue-loader/lib/selector.js?type=styles&index=0!./Edit.vue");
-     if(typeof newContent === 'string') newContent = [[module.id, newContent, '']];
-     update(newContent);
-   });
- }
- // When the module is disposed, remove the <style> tags
- module.hot.dispose(function() { update(); });
-}
-
-/***/ }),
-/* 303 */
-/***/ (function(module, exports, __webpack_require__) {
-
-exports = module.exports = __webpack_require__(2)(false);
-// imports
-
-
-// module
-exports.push([module.i, "\n.mapHtml5[data-v-3acff272] {\n  margin-top: 15px;\n  width: 100%;\n  height: 200px;\n  display: none;\n}\n.pickerMap[data-v-3acff272] {\n  margin-top: 15px;\n  width: 100%;\n  height: 200px;\n}\n.locationText[data-v-3acff272] {\n  margin-top: 15px;\n  width: 100%;\n  height: 200px;\n  display: none;\n}\n.geolocation[data-v-3acff272] {\n  cursor: pointer;\n  color: #FFF !important;\n}\n#textlocation[data-v-3acff272] {\n  display: none;\n}\n.geolocation[data-v-3acff272]:hover {\n  color: #42b0f2 !important;\n}\n.input-map[data-v-3acff272] {\n  display: none;\n}\nimg[data-v-3acff272] {\n  width: 30%;\n}\n", ""]);
-
-// exports
-
-
-/***/ }),
+/* 302 */,
+/* 303 */,
 /* 304 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__utilities_EventBus__ = __webpack_require__(8);
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 //
 //
 //
@@ -61193,6 +61167,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
       _this.getCountries();
       _this.getUserSize();
       _this.getUserExt();
+      _this.markerMap();
     });
   },
 
@@ -61207,7 +61182,6 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
         _this2.country(_this2.user.country_idcountry);
         _this2.state(_this2.user.state_idstate);
         _this2.imageData = _this2.user.image;
-        _this2.html5Location();
       }).catch(function (err) {
         return console.log(err);
       });
@@ -61267,18 +61241,17 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
       }
     },
     html5Location: function html5Location() {
-      var mapHtml5 = document.getElementById('mapHtml5');
-      document.getElementById('textlocation').style.display = "none";
-      document.getElementById('pickerMap').style.display = "none";
+      var html5Map = document.getElementById('html5Map');
+      document.getElementById('textMap').style.display = "none";
+      document.getElementById('mapPicker').style.display = "none";
 
       var vm = this;
 
       if (navigator.geolocation) {
-        mapHtml5.style.display = "block";
+        html5Map.style.display = "block";
 
         navigator.geolocation.getCurrentPosition(function (position) {
-          console.log(position.coords);
-
+          //console.log(position.coords);
           vm.user.latitude = position.coords.latitude;
           vm.user.longitude = position.coords.longitude;
 
@@ -61291,7 +61264,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
             center: gLatLn
           };
 
-          var gMap = new google.maps.Map(mapHtml5, objConfig);
+          var gMap = new google.maps.Map(html5Map, objConfig);
           var objConfigMarker = {
             position: gLatLn,
             map: gMap
@@ -61305,11 +61278,9 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
     markerMap: function markerMap() {
       var _this5 = this;
 
-      console.log('ingreso');
-
-      //document.getElementById('html5Map').style.display = "none";
-      //document.getElementById('textMap').style.display = "none";
-      //document.getElementById('mapPicker').style.display = "block";
+      document.getElementById('html5Map').style.display = "none";
+      document.getElementById('textMap').style.display = "none";
+      document.getElementById('mapPicker').style.display = "block";
 
       var map = new google.maps.Map(document.getElementById('mapPicker'), {
         center: {
@@ -61335,10 +61306,10 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
         _this5.user.longitude = marker.getPosition().lng();
       });
     },
-    inputAddress: function inputAddress() {
-      document.getElementById('mapHtml5').style.display = "none";
-      document.getElementById('pickerMap').style.display = "none";
-      document.getElementById('textlocation').style.display = "block";
+    showInputAddress: function showInputAddress() {
+      document.getElementById('html5Map').style.display = "none";
+      document.getElementById('mapPicker').style.display = "none";
+      document.getElementById('textMap').style.display = "block";
     },
     addressMap: function addressMap() {
 
@@ -61348,13 +61319,12 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 
       var geocoder = new google.maps.Geocoder();
 
-      document.getElementById('textlocation').style.display = 'block';
-      var address = document.getElementById('textlocation').value;
+      var address = document.getElementById('textMap').value;
 
       geocoder.geocode({ 'address': address }, function (results, status) {
 
         if (status == google.maps.GeocoderStatus.OK) {
-          document.getElementById('locationText').style.display = "block";
+          document.getElementById('textLocation').style.display = "block";
 
           latitude = results[0].geometry.location.lat();
           longitude = results[0].geometry.location.lng();
@@ -61362,7 +61332,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
           vm.user.latitude = latitude;
           vm.user.longitude = longitude;
 
-          var map = new google.maps.Map(document.getElementById('locationText'), {
+          var map = new google.maps.Map(document.getElementById('textLocation'), {
             center: {
               lat: latitude,
               lng: longitude
@@ -61370,7 +61340,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
             zoom: 17
           });
         } else {
-          document.getElementById('locationText').style.display = "none";
+          document.getElementById('textLocation').style.display = "none";
 
           vm.user.latitude = '';
           vm.user.longitude = '';
@@ -61378,13 +61348,13 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
       });
     },
     selectGeo: function selectGeo() {
-      var val = document.getElementById('geocoder').value;
+      var val = document.getElementById('geocoders').value;
       if (val == 1) {
         this.html5Location();
       } else if (val == 2) {
         this.markerMap();
       } else {
-        this.inputAddress();
+        this.showInputAddress();
       }
     },
     update: function update() {
@@ -61486,585 +61456,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 });
 
 /***/ }),
-/* 305 */
-/***/ (function(module, exports, __webpack_require__) {
-
-var render = function() {
-  var _vm = this
-  var _h = _vm.$createElement
-  var _c = _vm._self._c || _h
-  return _c(
-    "div",
-    [
-      _c(
-        "b-modal",
-        {
-          ref: "editModal",
-          attrs: { id: "editModal", title: "Editar Perfil", "hide-footer": "" }
-        },
-        [
-          _c("form", [
-            _c("div", { staticClass: "modal-content" }, [
-              _c("div", { staticClass: "modal-body" }, [
-                _c("div", { staticClass: "row pt-30" }, [
-                  _c("div", { staticClass: "col-lg-12" }, [
-                    _c("label", [_vm._v("Primer Nombre")]),
-                    _vm._v(" "),
-                    _c("input", {
-                      directives: [
-                        {
-                          name: "model",
-                          rawName: "v-model",
-                          value: _vm.user.firstname,
-                          expression: "user.firstname"
-                        }
-                      ],
-                      staticClass: "common-input",
-                      attrs: { type: "text", placeholder: "Primer Nombre" },
-                      domProps: { value: _vm.user.firstname },
-                      on: {
-                        input: function($event) {
-                          if ($event.target.composing) {
-                            return
-                          }
-                          _vm.$set(_vm.user, "firstname", $event.target.value)
-                        }
-                      }
-                    }),
-                    _vm._v(" "),
-                    _vm.error.firstname
-                      ? _c("small", { staticClass: "text-danger" }, [
-                          _vm._v(_vm._s(_vm.error.firstname[0]))
-                        ])
-                      : _vm._e()
-                  ]),
-                  _vm._v(" "),
-                  _c("div", { staticClass: "col-lg-12" }, [
-                    _c("label", [_vm._v("Segundo Nombre")]),
-                    _vm._v(" "),
-                    _c("input", {
-                      directives: [
-                        {
-                          name: "model",
-                          rawName: "v-model",
-                          value: _vm.user.middlename,
-                          expression: "user.middlename"
-                        }
-                      ],
-                      staticClass: "common-input",
-                      attrs: { type: "text", placeholder: "Segundo Nombre" },
-                      domProps: { value: _vm.user.middlename },
-                      on: {
-                        input: function($event) {
-                          if ($event.target.composing) {
-                            return
-                          }
-                          _vm.$set(_vm.user, "middlename", $event.target.value)
-                        }
-                      }
-                    }),
-                    _vm._v(" "),
-                    _vm.error.middlename
-                      ? _c("small", { staticClass: "text-danger" }, [
-                          _vm._v(_vm._s(_vm.error.middlename[0]))
-                        ])
-                      : _vm._e()
-                  ]),
-                  _vm._v(" "),
-                  _c("div", { staticClass: "col-lg-12" }, [
-                    _c("label", [_vm._v("Apellidos")]),
-                    _vm._v(" "),
-                    _c("input", {
-                      directives: [
-                        {
-                          name: "model",
-                          rawName: "v-model",
-                          value: _vm.user.lastname,
-                          expression: "user.lastname"
-                        }
-                      ],
-                      staticClass: "common-input",
-                      attrs: { type: "text", placeholder: "Apellidos" },
-                      domProps: { value: _vm.user.lastname },
-                      on: {
-                        input: function($event) {
-                          if ($event.target.composing) {
-                            return
-                          }
-                          _vm.$set(_vm.user, "lastname", $event.target.value)
-                        }
-                      }
-                    }),
-                    _vm._v(" "),
-                    _vm.error.lastname
-                      ? _c("small", { staticClass: "text-danger" }, [
-                          _vm._v(_vm._s(_vm.error.lastname[0]))
-                        ])
-                      : _vm._e()
-                  ]),
-                  _vm._v(" "),
-                  _c("div", { staticClass: "col-lg-12" }, [
-                    _c("input", {
-                      directives: [
-                        {
-                          name: "model",
-                          rawName: "v-model",
-                          value: _vm.password,
-                          expression: "password"
-                        }
-                      ],
-                      staticClass: "common-input",
-                      attrs: { type: "password", placeholder: "Contraseña" },
-                      domProps: { value: _vm.password },
-                      on: {
-                        input: function($event) {
-                          if ($event.target.composing) {
-                            return
-                          }
-                          _vm.password = $event.target.value
-                        }
-                      }
-                    }),
-                    _vm._v(" "),
-                    _vm.error.password
-                      ? _c("small", { staticClass: "text-danger" }, [
-                          _vm._v(_vm._s(_vm.error.password[0]))
-                        ])
-                      : _vm._e()
-                  ]),
-                  _vm._v(" "),
-                  _c("div", { staticClass: "col-lg-12" }, [
-                    _c("input", {
-                      directives: [
-                        {
-                          name: "model",
-                          rawName: "v-model",
-                          value: _vm.password_confirmation,
-                          expression: "password_confirmation"
-                        }
-                      ],
-                      staticClass: "common-input",
-                      attrs: {
-                        type: "password",
-                        placeholder: "Confirmación Contraseña"
-                      },
-                      domProps: { value: _vm.password_confirmation },
-                      on: {
-                        input: function($event) {
-                          if ($event.target.composing) {
-                            return
-                          }
-                          _vm.password_confirmation = $event.target.value
-                        }
-                      }
-                    }),
-                    _vm._v(" "),
-                    _vm.error.password_confirmation
-                      ? _c("small", { staticClass: "text-danger" }, [
-                          _vm._v(_vm._s(_vm.error.password_confirmation[0]))
-                        ])
-                      : _vm._e()
-                  ]),
-                  _vm._v(" "),
-                  _c("div", { staticClass: "col-lg-12" }, [
-                    _c("label", [_vm._v("Teléfono")]),
-                    _vm._v(" "),
-                    _c("input", {
-                      directives: [
-                        {
-                          name: "model",
-                          rawName: "v-model",
-                          value: _vm.user.phone,
-                          expression: "user.phone"
-                        }
-                      ],
-                      staticClass: "common-input",
-                      attrs: { type: "text", placeholder: "Teléfono" },
-                      domProps: { value: _vm.user.phone },
-                      on: {
-                        input: function($event) {
-                          if ($event.target.composing) {
-                            return
-                          }
-                          _vm.$set(_vm.user, "phone", $event.target.value)
-                        }
-                      }
-                    }),
-                    _vm._v(" "),
-                    _vm.error.phone
-                      ? _c("small", { staticClass: "text-danger" }, [
-                          _vm._v(_vm._s(_vm.error.phone[0]))
-                        ])
-                      : _vm._e()
-                  ]),
-                  _vm._v(" "),
-                  _c("div", { staticClass: "col-lg-12" }, [
-                    _c("label", [_vm._v("Fecha de Nacimiento")]),
-                    _vm._v(" "),
-                    _c("input", {
-                      directives: [
-                        {
-                          name: "model",
-                          rawName: "v-model",
-                          value: _vm.user.birthday,
-                          expression: "user.birthday"
-                        }
-                      ],
-                      staticClass: "common-input",
-                      attrs: { type: "date", max: _vm.datemax },
-                      domProps: { value: _vm.user.birthday },
-                      on: {
-                        input: function($event) {
-                          if ($event.target.composing) {
-                            return
-                          }
-                          _vm.$set(_vm.user, "birthday", $event.target.value)
-                        }
-                      }
-                    }),
-                    _vm._v(" "),
-                    _vm.error.birthday
-                      ? _c("small", { staticClass: "text-danger" }, [
-                          _vm._v(_vm._s(_vm.error.birthday[0]))
-                        ])
-                      : _vm._e()
-                  ]),
-                  _vm._v(" "),
-                  _c("div", { staticClass: "col-lg-12" }, [
-                    _c("label", [_vm._v("Dirección")]),
-                    _vm._v(" "),
-                    _c("textarea", {
-                      directives: [
-                        {
-                          name: "model",
-                          rawName: "v-model",
-                          value: _vm.user.address,
-                          expression: "user.address"
-                        }
-                      ],
-                      staticClass: "common-input",
-                      attrs: { row: "2", cols: "30" },
-                      domProps: { value: _vm.user.address },
-                      on: {
-                        input: function($event) {
-                          if ($event.target.composing) {
-                            return
-                          }
-                          _vm.$set(_vm.user, "address", $event.target.value)
-                        }
-                      }
-                    }),
-                    _vm._v(" "),
-                    _vm.error.address
-                      ? _c("small", { staticClass: "text-danger" }, [
-                          _vm._v(_vm._s(_vm.error.address[0]))
-                        ])
-                      : _vm._e()
-                  ]),
-                  _vm._v(" "),
-                  _c("div", { staticClass: "col-lg-12" }, [
-                    _c("div", { staticClass: "sorting" }, [
-                      _vm._v("País\n                        "),
-                      _c(
-                        "select",
-                        {
-                          directives: [
-                            {
-                              name: "model",
-                              rawName: "v-model",
-                              value: _vm.user.country_idcountry,
-                              expression: "user.country_idcountry"
-                            }
-                          ],
-                          staticClass: "form-control common-input",
-                          on: {
-                            change: [
-                              function($event) {
-                                var $$selectedVal = Array.prototype.filter
-                                  .call($event.target.options, function(o) {
-                                    return o.selected
-                                  })
-                                  .map(function(o) {
-                                    var val = "_value" in o ? o._value : o.value
-                                    return val
-                                  })
-                                _vm.$set(
-                                  _vm.user,
-                                  "country_idcountry",
-                                  $event.target.multiple
-                                    ? $$selectedVal
-                                    : $$selectedVal[0]
-                                )
-                              },
-                              function($event) {
-                                _vm.country(_vm.user.country_idcountry)
-                              }
-                            ]
-                          }
-                        },
-                        _vm._l(_vm.countries, function(option) {
-                          return _c(
-                            "option",
-                            { domProps: { value: option.id } },
-                            [_vm._v(_vm._s(option.name))]
-                          )
-                        })
-                      ),
-                      _vm._v(" "),
-                      _vm.error.country
-                        ? _c("small", { staticClass: "text-danger" }, [
-                            _vm._v(_vm._s(_vm.error.country[0]))
-                          ])
-                        : _vm._e()
-                    ])
-                  ]),
-                  _vm._v(" "),
-                  _c("div", { staticClass: "col-lg-12" }, [
-                    _c("div", { staticClass: "sorting" }, [
-                      _vm._v("Estado\n                        "),
-                      _c(
-                        "select",
-                        {
-                          directives: [
-                            {
-                              name: "model",
-                              rawName: "v-model",
-                              value: _vm.user.state_idstate,
-                              expression: "user.state_idstate"
-                            }
-                          ],
-                          staticClass: "form-control common-input",
-                          attrs: { required: "" },
-                          on: {
-                            change: [
-                              function($event) {
-                                var $$selectedVal = Array.prototype.filter
-                                  .call($event.target.options, function(o) {
-                                    return o.selected
-                                  })
-                                  .map(function(o) {
-                                    var val = "_value" in o ? o._value : o.value
-                                    return val
-                                  })
-                                _vm.$set(
-                                  _vm.user,
-                                  "state_idstate",
-                                  $event.target.multiple
-                                    ? $$selectedVal
-                                    : $$selectedVal[0]
-                                )
-                              },
-                              function($event) {
-                                _vm.state(_vm.user.state_idstate)
-                              }
-                            ]
-                          }
-                        },
-                        _vm._l(_vm.states, function(option) {
-                          return _c(
-                            "option",
-                            { domProps: { value: option.id } },
-                            [_vm._v(_vm._s(option.name))]
-                          )
-                        })
-                      ),
-                      _vm._v(" "),
-                      _vm.error.state
-                        ? _c("small", { staticClass: "text-danger" }, [
-                            _vm._v(_vm._s(_vm.error.state[0]))
-                          ])
-                        : _vm._e()
-                    ])
-                  ]),
-                  _vm._v(" "),
-                  _c("div", { staticClass: "col-lg-12" }, [
-                    _c("div", { staticClass: "sorting" }, [
-                      _vm._v("Ciudad\n                        "),
-                      _c(
-                        "select",
-                        {
-                          directives: [
-                            {
-                              name: "model",
-                              rawName: "v-model",
-                              value: _vm.user.city_idcity,
-                              expression: "user.city_idcity"
-                            }
-                          ],
-                          staticClass: "form-control common-input",
-                          attrs: { required: "" },
-                          on: {
-                            change: function($event) {
-                              var $$selectedVal = Array.prototype.filter
-                                .call($event.target.options, function(o) {
-                                  return o.selected
-                                })
-                                .map(function(o) {
-                                  var val = "_value" in o ? o._value : o.value
-                                  return val
-                                })
-                              _vm.$set(
-                                _vm.user,
-                                "city_idcity",
-                                $event.target.multiple
-                                  ? $$selectedVal
-                                  : $$selectedVal[0]
-                              )
-                            }
-                          }
-                        },
-                        _vm._l(_vm.cities, function(option) {
-                          return _c(
-                            "option",
-                            { domProps: { value: option.id } },
-                            [_vm._v(_vm._s(option.name))]
-                          )
-                        })
-                      ),
-                      _vm._v(" "),
-                      _vm.error.city
-                        ? _c("small", { staticClass: "text-danger" }, [
-                            _vm._v(_vm._s(_vm.error.city[0]))
-                          ])
-                        : _vm._e()
-                    ])
-                  ]),
-                  _vm._v(" "),
-                  _c("div", { staticClass: "col-lg-12" }, [
-                    _c("div", { staticClass: "upload-fleid" }, [
-                      _vm._v(
-                        " Seleccionar imagen de Perfil\n                        "
-                      ),
-                      _c("div", { staticClass: "input-group input-file" }, [
-                        _c("input", {
-                          ref: "image",
-                          staticClass: "form-control",
-                          attrs: {
-                            type: "file",
-                            id: "image",
-                            placeholder: "Imagen de Perfil",
-                            accept: "image/*"
-                          },
-                          on: { change: _vm.previewImage }
-                        }),
-                        _vm._v(" "),
-                        _vm.imageError != ""
-                          ? _c("small", { staticClass: "text-danger" }, [
-                              _vm._v(_vm._s(_vm.imageError))
-                            ])
-                          : _vm._e()
-                      ])
-                    ])
-                  ]),
-                  _vm._v(" "),
-                  _c(
-                    "div",
-                    { staticClass: "col-lg-12 text-center avatar-wrap" },
-                    [
-                      _c("div", { staticClass: "avatar-thumb mr-20" }, [
-                        _c("img", { attrs: { src: _vm.imageData, alt: "" } })
-                      ])
-                    ]
-                  ),
-                  _vm._v(" "),
-                  _c("div", { staticClass: "col-lg-12" }, [
-                    _c("div", { staticClass: "sorting" }, [
-                      _vm._v(" Localización\n                            "),
-                      _c(
-                        "select",
-                        {
-                          staticClass: "form-control common-input",
-                          attrs: { id: "geocoder" },
-                          on: {
-                            change: function($event) {
-                              _vm.selectGeo()
-                            }
-                          }
-                        },
-                        [
-                          _c(
-                            "option",
-                            { attrs: { value: "1", selected: "" } },
-                            [_vm._v("Geolocalización HTML5")]
-                          ),
-                          _vm._v(" "),
-                          _c("option", { attrs: { value: "2" } }, [
-                            _vm._v("Abrir Maps")
-                          ]),
-                          _vm._v(" "),
-                          _c("option", { attrs: { value: "3" } }, [
-                            _vm._v("Escribir dirección")
-                          ])
-                        ]
-                      )
-                    ]),
-                    _vm._v(" "),
-                    _c("div", {
-                      staticClass: "col-lg-12 mapHtml5",
-                      attrs: { id: "mapHtml5" }
-                    }),
-                    _vm._v(" "),
-                    _c("div", {
-                      staticClass: "col-lg-12 pickerMap",
-                      attrs: { id: "pickerMap" }
-                    }),
-                    _vm._v(" "),
-                    _c("input", {
-                      staticClass: "common-input",
-                      attrs: {
-                        type: "text",
-                        placeholder: "Escriba la dirección",
-                        id: "textlocation"
-                      },
-                      on: { change: _vm.addressMap }
-                    }),
-                    _vm._v(" "),
-                    _c("div", {
-                      staticClass: "col-lg-12 locationText",
-                      attrs: { id: "locationText" }
-                    })
-                  ]),
-                  _vm._v(" "),
-                  _c("div", { staticClass: "col-lg-12 text-right" }, [
-                    _c(
-                      "button",
-                      {
-                        staticClass: "btn btn-primary",
-                        attrs: { type: "button" },
-                        on: {
-                          click: function($event) {
-                            $event.preventDefault()
-                            return _vm.update($event)
-                          }
-                        }
-                      },
-                      [
-                        _c("i", { staticClass: "zmdi zmdi-plus" }),
-                        _vm._v(" Guardar")
-                      ]
-                    )
-                  ])
-                ])
-              ])
-            ])
-          ])
-        ]
-      )
-    ],
-    1
-  )
-}
-var staticRenderFns = []
-render._withStripped = true
-module.exports = { render: render, staticRenderFns: staticRenderFns }
-if (false) {
-  module.hot.accept()
-  if (module.hot.data) {
-    require("vue-hot-reload-api")      .rerender("data-v-3acff272", module.exports)
-  }
-}
-
-/***/ }),
+/* 305 */,
 /* 306 */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -106363,6 +105755,667 @@ if (false) {
 /***/ (function(module, exports) {
 
 // removed by extract-text-webpack-plugin
+
+/***/ }),
+/* 557 */,
+/* 558 */
+/***/ (function(module, exports, __webpack_require__) {
+
+// style-loader: Adds some css to the DOM by adding a <style> tag
+
+// load the styles
+var content = __webpack_require__(559);
+if(typeof content === 'string') content = [[module.i, content, '']];
+if(content.locals) module.exports = content.locals;
+// add the styles to the DOM
+var update = __webpack_require__(5)("38d04cda", content, false, {});
+// Hot Module Replacement
+if(false) {
+ // When the styles change, update the <style> tags
+ if(!content.locals) {
+   module.hot.accept("!!../../../../../node_modules/css-loader/index.js!../../../../../node_modules/vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-3acff272\",\"scoped\":false,\"hasInlineConfig\":true}!../../../../../node_modules/vue-loader/lib/selector.js?type=styles&index=0!./Edit.vue", function() {
+     var newContent = require("!!../../../../../node_modules/css-loader/index.js!../../../../../node_modules/vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-3acff272\",\"scoped\":false,\"hasInlineConfig\":true}!../../../../../node_modules/vue-loader/lib/selector.js?type=styles&index=0!./Edit.vue");
+     if(typeof newContent === 'string') newContent = [[module.id, newContent, '']];
+     update(newContent);
+   });
+ }
+ // When the module is disposed, remove the <style> tags
+ module.hot.dispose(function() { update(); });
+}
+
+/***/ }),
+/* 559 */
+/***/ (function(module, exports, __webpack_require__) {
+
+exports = module.exports = __webpack_require__(2)(false);
+// imports
+
+
+// module
+exports.push([module.i, "\n.html5Map {\r\n  margin-top: 15px;\r\n  width: 100%;\r\n  height: 200px;\r\n  display: none;\n}\n.mapPicker {\r\n  margin-top: 15px;\r\n  width: 100%;\r\n  height: 200px;\n}\n.textLocation {\r\n  margin-top: 15px;\r\n  width: 100%;\r\n  height: 200px;\r\n  display: none;\n}\n.geolocation {\r\n  cursor: pointer;\r\n  color: #FFF !important;\n}\n.geolocation:hover {\r\n  color: #42b0f2 !important;\n}\n#textMap {\r\n  display: none;\n}\n.input-map {\r\n  display: none;\n}\nimg {\r\n  width: 30%;\n}\r\n", ""]);
+
+// exports
+
+
+/***/ }),
+/* 560 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c(
+    "div",
+    [
+      _c(
+        "b-modal",
+        {
+          ref: "editModal",
+          attrs: { id: "editModal", title: "Editar Perfil", "hide-footer": "" }
+        },
+        [
+          _c("form", [
+            _c("div", { staticClass: "modal-content" }, [
+              _c("div", { staticClass: "modal-body" }, [
+                _c("div", { staticClass: "row pt-30" }, [
+                  _c("div", { staticClass: "col-lg-12" }, [
+                    _c("label", [_vm._v("Primer Nombre")]),
+                    _vm._v(" "),
+                    _c("input", {
+                      directives: [
+                        {
+                          name: "model",
+                          rawName: "v-model",
+                          value: _vm.user.firstname,
+                          expression: "user.firstname"
+                        }
+                      ],
+                      staticClass: "common-input",
+                      attrs: { type: "text", placeholder: "Primer Nombre" },
+                      domProps: { value: _vm.user.firstname },
+                      on: {
+                        input: function($event) {
+                          if ($event.target.composing) {
+                            return
+                          }
+                          _vm.$set(_vm.user, "firstname", $event.target.value)
+                        }
+                      }
+                    }),
+                    _vm._v(" "),
+                    _vm.error.firstname
+                      ? _c("small", { staticClass: "text-danger" }, [
+                          _vm._v(_vm._s(_vm.error.firstname[0]))
+                        ])
+                      : _vm._e()
+                  ]),
+                  _vm._v(" "),
+                  _c("div", { staticClass: "col-lg-12" }, [
+                    _c("label", [_vm._v("Segundo Nombre")]),
+                    _vm._v(" "),
+                    _c("input", {
+                      directives: [
+                        {
+                          name: "model",
+                          rawName: "v-model",
+                          value: _vm.user.middlename,
+                          expression: "user.middlename"
+                        }
+                      ],
+                      staticClass: "common-input",
+                      attrs: { type: "text", placeholder: "Segundo Nombre" },
+                      domProps: { value: _vm.user.middlename },
+                      on: {
+                        input: function($event) {
+                          if ($event.target.composing) {
+                            return
+                          }
+                          _vm.$set(_vm.user, "middlename", $event.target.value)
+                        }
+                      }
+                    }),
+                    _vm._v(" "),
+                    _vm.error.middlename
+                      ? _c("small", { staticClass: "text-danger" }, [
+                          _vm._v(_vm._s(_vm.error.middlename[0]))
+                        ])
+                      : _vm._e()
+                  ]),
+                  _vm._v(" "),
+                  _c("div", { staticClass: "col-lg-12" }, [
+                    _c("label", [_vm._v("Apellidos")]),
+                    _vm._v(" "),
+                    _c("input", {
+                      directives: [
+                        {
+                          name: "model",
+                          rawName: "v-model",
+                          value: _vm.user.lastname,
+                          expression: "user.lastname"
+                        }
+                      ],
+                      staticClass: "common-input",
+                      attrs: { type: "text", placeholder: "Apellidos" },
+                      domProps: { value: _vm.user.lastname },
+                      on: {
+                        input: function($event) {
+                          if ($event.target.composing) {
+                            return
+                          }
+                          _vm.$set(_vm.user, "lastname", $event.target.value)
+                        }
+                      }
+                    }),
+                    _vm._v(" "),
+                    _vm.error.lastname
+                      ? _c("small", { staticClass: "text-danger" }, [
+                          _vm._v(_vm._s(_vm.error.lastname[0]))
+                        ])
+                      : _vm._e()
+                  ]),
+                  _vm._v(" "),
+                  _c("div", { staticClass: "col-lg-12" }, [
+                    _c("input", {
+                      directives: [
+                        {
+                          name: "model",
+                          rawName: "v-model",
+                          value: _vm.password,
+                          expression: "password"
+                        }
+                      ],
+                      staticClass: "common-input",
+                      attrs: { type: "password", placeholder: "Contraseña" },
+                      domProps: { value: _vm.password },
+                      on: {
+                        input: function($event) {
+                          if ($event.target.composing) {
+                            return
+                          }
+                          _vm.password = $event.target.value
+                        }
+                      }
+                    }),
+                    _vm._v(" "),
+                    _vm.error.password
+                      ? _c("small", { staticClass: "text-danger" }, [
+                          _vm._v(_vm._s(_vm.error.password[0]))
+                        ])
+                      : _vm._e()
+                  ]),
+                  _vm._v(" "),
+                  _c("div", { staticClass: "col-lg-12" }, [
+                    _c("input", {
+                      directives: [
+                        {
+                          name: "model",
+                          rawName: "v-model",
+                          value: _vm.password_confirmation,
+                          expression: "password_confirmation"
+                        }
+                      ],
+                      staticClass: "common-input",
+                      attrs: {
+                        type: "password",
+                        placeholder: "Confirmación Contraseña"
+                      },
+                      domProps: { value: _vm.password_confirmation },
+                      on: {
+                        input: function($event) {
+                          if ($event.target.composing) {
+                            return
+                          }
+                          _vm.password_confirmation = $event.target.value
+                        }
+                      }
+                    }),
+                    _vm._v(" "),
+                    _vm.error.password_confirmation
+                      ? _c("small", { staticClass: "text-danger" }, [
+                          _vm._v(_vm._s(_vm.error.password_confirmation[0]))
+                        ])
+                      : _vm._e()
+                  ]),
+                  _vm._v(" "),
+                  _c("div", { staticClass: "col-lg-12" }, [
+                    _c("label", [_vm._v("Teléfono")]),
+                    _vm._v(" "),
+                    _c("input", {
+                      directives: [
+                        {
+                          name: "model",
+                          rawName: "v-model",
+                          value: _vm.user.phone,
+                          expression: "user.phone"
+                        }
+                      ],
+                      staticClass: "common-input",
+                      attrs: { type: "text", placeholder: "Teléfono" },
+                      domProps: { value: _vm.user.phone },
+                      on: {
+                        input: function($event) {
+                          if ($event.target.composing) {
+                            return
+                          }
+                          _vm.$set(_vm.user, "phone", $event.target.value)
+                        }
+                      }
+                    }),
+                    _vm._v(" "),
+                    _vm.error.phone
+                      ? _c("small", { staticClass: "text-danger" }, [
+                          _vm._v(_vm._s(_vm.error.phone[0]))
+                        ])
+                      : _vm._e()
+                  ]),
+                  _vm._v(" "),
+                  _c("div", { staticClass: "col-lg-12" }, [
+                    _c("label", [_vm._v("Fecha de Nacimiento")]),
+                    _vm._v(" "),
+                    _c("input", {
+                      directives: [
+                        {
+                          name: "model",
+                          rawName: "v-model",
+                          value: _vm.user.birthday,
+                          expression: "user.birthday"
+                        }
+                      ],
+                      staticClass: "common-input",
+                      attrs: { type: "date", max: _vm.datemax },
+                      domProps: { value: _vm.user.birthday },
+                      on: {
+                        input: function($event) {
+                          if ($event.target.composing) {
+                            return
+                          }
+                          _vm.$set(_vm.user, "birthday", $event.target.value)
+                        }
+                      }
+                    }),
+                    _vm._v(" "),
+                    _vm.error.birthday
+                      ? _c("small", { staticClass: "text-danger" }, [
+                          _vm._v(_vm._s(_vm.error.birthday[0]))
+                        ])
+                      : _vm._e()
+                  ]),
+                  _vm._v(" "),
+                  _c("div", { staticClass: "col-lg-12" }, [
+                    _c("label", [_vm._v("Dirección")]),
+                    _vm._v(" "),
+                    _c("textarea", {
+                      directives: [
+                        {
+                          name: "model",
+                          rawName: "v-model",
+                          value: _vm.user.address,
+                          expression: "user.address"
+                        }
+                      ],
+                      staticClass: "common-input",
+                      attrs: { row: "2", cols: "30" },
+                      domProps: { value: _vm.user.address },
+                      on: {
+                        input: function($event) {
+                          if ($event.target.composing) {
+                            return
+                          }
+                          _vm.$set(_vm.user, "address", $event.target.value)
+                        }
+                      }
+                    }),
+                    _vm._v(" "),
+                    _vm.error.address
+                      ? _c("small", { staticClass: "text-danger" }, [
+                          _vm._v(_vm._s(_vm.error.address[0]))
+                        ])
+                      : _vm._e()
+                  ]),
+                  _vm._v(" "),
+                  _c("div", { staticClass: "col-lg-12" }, [
+                    _c("div", { staticClass: "sorting" }, [
+                      _vm._v("País\n                        "),
+                      _c(
+                        "select",
+                        {
+                          directives: [
+                            {
+                              name: "model",
+                              rawName: "v-model",
+                              value: _vm.user.country_idcountry,
+                              expression: "user.country_idcountry"
+                            }
+                          ],
+                          staticClass: "form-control common-input",
+                          on: {
+                            change: [
+                              function($event) {
+                                var $$selectedVal = Array.prototype.filter
+                                  .call($event.target.options, function(o) {
+                                    return o.selected
+                                  })
+                                  .map(function(o) {
+                                    var val = "_value" in o ? o._value : o.value
+                                    return val
+                                  })
+                                _vm.$set(
+                                  _vm.user,
+                                  "country_idcountry",
+                                  $event.target.multiple
+                                    ? $$selectedVal
+                                    : $$selectedVal[0]
+                                )
+                              },
+                              function($event) {
+                                _vm.country(_vm.user.country_idcountry)
+                              }
+                            ]
+                          }
+                        },
+                        _vm._l(_vm.countries, function(option) {
+                          return _c(
+                            "option",
+                            { domProps: { value: option.id } },
+                            [_vm._v(_vm._s(option.name))]
+                          )
+                        })
+                      ),
+                      _vm._v(" "),
+                      _vm.error.country
+                        ? _c("small", { staticClass: "text-danger" }, [
+                            _vm._v(_vm._s(_vm.error.country[0]))
+                          ])
+                        : _vm._e()
+                    ])
+                  ]),
+                  _vm._v(" "),
+                  _c("div", { staticClass: "col-lg-12" }, [
+                    _c("div", { staticClass: "sorting" }, [
+                      _vm._v("Estado\n                        "),
+                      _c(
+                        "select",
+                        {
+                          directives: [
+                            {
+                              name: "model",
+                              rawName: "v-model",
+                              value: _vm.user.state_idstate,
+                              expression: "user.state_idstate"
+                            }
+                          ],
+                          staticClass: "form-control common-input",
+                          attrs: { required: "" },
+                          on: {
+                            change: [
+                              function($event) {
+                                var $$selectedVal = Array.prototype.filter
+                                  .call($event.target.options, function(o) {
+                                    return o.selected
+                                  })
+                                  .map(function(o) {
+                                    var val = "_value" in o ? o._value : o.value
+                                    return val
+                                  })
+                                _vm.$set(
+                                  _vm.user,
+                                  "state_idstate",
+                                  $event.target.multiple
+                                    ? $$selectedVal
+                                    : $$selectedVal[0]
+                                )
+                              },
+                              function($event) {
+                                _vm.state(_vm.user.state_idstate)
+                              }
+                            ]
+                          }
+                        },
+                        _vm._l(_vm.states, function(option) {
+                          return _c(
+                            "option",
+                            { domProps: { value: option.id } },
+                            [_vm._v(_vm._s(option.name))]
+                          )
+                        })
+                      ),
+                      _vm._v(" "),
+                      _vm.error.state
+                        ? _c("small", { staticClass: "text-danger" }, [
+                            _vm._v(_vm._s(_vm.error.state[0]))
+                          ])
+                        : _vm._e()
+                    ])
+                  ]),
+                  _vm._v(" "),
+                  _c("div", { staticClass: "col-lg-12" }, [
+                    _c("div", { staticClass: "sorting" }, [
+                      _vm._v("Ciudad\n                        "),
+                      _c(
+                        "select",
+                        {
+                          directives: [
+                            {
+                              name: "model",
+                              rawName: "v-model",
+                              value: _vm.user.city_idcity,
+                              expression: "user.city_idcity"
+                            }
+                          ],
+                          staticClass: "form-control common-input",
+                          attrs: { required: "" },
+                          on: {
+                            change: function($event) {
+                              var $$selectedVal = Array.prototype.filter
+                                .call($event.target.options, function(o) {
+                                  return o.selected
+                                })
+                                .map(function(o) {
+                                  var val = "_value" in o ? o._value : o.value
+                                  return val
+                                })
+                              _vm.$set(
+                                _vm.user,
+                                "city_idcity",
+                                $event.target.multiple
+                                  ? $$selectedVal
+                                  : $$selectedVal[0]
+                              )
+                            }
+                          }
+                        },
+                        _vm._l(_vm.cities, function(option) {
+                          return _c(
+                            "option",
+                            { domProps: { value: option.id } },
+                            [_vm._v(_vm._s(option.name))]
+                          )
+                        })
+                      ),
+                      _vm._v(" "),
+                      _vm.error.city
+                        ? _c("small", { staticClass: "text-danger" }, [
+                            _vm._v(_vm._s(_vm.error.city[0]))
+                          ])
+                        : _vm._e()
+                    ])
+                  ]),
+                  _vm._v(" "),
+                  _c("div", { staticClass: "col-lg-12" }, [
+                    _c("div", { staticClass: "upload-fleid" }, [
+                      _vm._v(
+                        " Seleccionar imagen de Perfil\n                        "
+                      ),
+                      _c("div", { staticClass: "input-group input-file" }, [
+                        _c("input", {
+                          ref: "image",
+                          staticClass: "form-control",
+                          attrs: {
+                            type: "file",
+                            id: "image",
+                            placeholder: "Imagen de Perfil",
+                            accept: "image/*"
+                          },
+                          on: { change: _vm.previewImage }
+                        }),
+                        _vm._v(" "),
+                        _vm.imageError != ""
+                          ? _c("small", { staticClass: "text-danger" }, [
+                              _vm._v(_vm._s(_vm.imageError))
+                            ])
+                          : _vm._e()
+                      ])
+                    ])
+                  ]),
+                  _vm._v(" "),
+                  _c(
+                    "div",
+                    { staticClass: "col-lg-12 text-center avatar-wrap" },
+                    [
+                      _c("div", { staticClass: "avatar-thumb mr-20" }, [
+                        _c("img", { attrs: { src: _vm.imageData, alt: "" } })
+                      ])
+                    ]
+                  ),
+                  _vm._v(" "),
+                  _c("div", { staticClass: "col-lg-12" }, [
+                    _c("div", { staticClass: "sorting" }, [
+                      _vm._v(" Localización\n                            "),
+                      _c(
+                        "select",
+                        {
+                          staticClass: "form-control common-input",
+                          attrs: { id: "geocoders" },
+                          on: {
+                            change: function($event) {
+                              _vm.selectGeo()
+                            }
+                          }
+                        },
+                        [
+                          _c("option", { attrs: { value: "1" } }, [
+                            _vm._v("Geolocalización HTML5")
+                          ]),
+                          _vm._v(" "),
+                          _c(
+                            "option",
+                            { attrs: { value: "2", selected: "" } },
+                            [_vm._v("Abrir Maps")]
+                          ),
+                          _vm._v(" "),
+                          _c("option", { attrs: { value: "3" } }, [
+                            _vm._v("Escribir dirección")
+                          ])
+                        ]
+                      ),
+                      _vm._v(" "),
+                      _c("p", [
+                        _vm.error.latitude
+                          ? _c("small", { staticClass: "text-danger" }, [
+                              _vm._v(
+                                "\n                                " +
+                                  _vm._s(_vm.error.latitude[0]) +
+                                  "\n                              "
+                              )
+                            ])
+                          : _vm._e()
+                      ]),
+                      _c("p"),
+                      _c("p", [
+                        _vm.error.longitude
+                          ? _c("small", { staticClass: "text-danger" }, [
+                              _vm._v(
+                                "\n                                " +
+                                  _vm._s(_vm.error.longitude[0]) +
+                                  "\n                              "
+                              )
+                            ])
+                          : _vm._e()
+                      ])
+                    ]),
+                    _vm._v(" "),
+                    _c("div", {
+                      staticClass: "col-lg-12 html5Map",
+                      attrs: { id: "html5Map" }
+                    }),
+                    _vm._v(" "),
+                    _c("div", {
+                      staticClass: "col-lg-12 mapPicker",
+                      attrs: { id: "mapPicker" }
+                    }),
+                    _vm._v(" "),
+                    _c("input", {
+                      staticClass: "common-input",
+                      attrs: {
+                        type: "text",
+                        placeholder: "Escriba la dirección",
+                        id: "textMap",
+                        required: ""
+                      },
+                      on: {
+                        keyup: function($event) {
+                          if (
+                            !("button" in $event) &&
+                            _vm._k(
+                              $event.keyCode,
+                              "enter",
+                              13,
+                              $event.key,
+                              "Enter"
+                            )
+                          ) {
+                            return null
+                          }
+                          _vm.addressMap()
+                        }
+                      }
+                    }),
+                    _vm._v(" "),
+                    _c("div", {
+                      staticClass: "col-lg-12 textLocation",
+                      attrs: { id: "textLocation" }
+                    })
+                  ]),
+                  _vm._v(" "),
+                  _c("div", { staticClass: "col-lg-12 text-right" }, [
+                    _c(
+                      "button",
+                      {
+                        staticClass: "btn btn-primary",
+                        attrs: { type: "button" },
+                        on: {
+                          click: function($event) {
+                            $event.preventDefault()
+                            return _vm.update($event)
+                          }
+                        }
+                      },
+                      [
+                        _c("i", { staticClass: "zmdi zmdi-plus" }),
+                        _vm._v(" Guardar")
+                      ]
+                    )
+                  ])
+                ])
+              ])
+            ])
+          ])
+        ]
+      )
+    ],
+    1
+  )
+}
+var staticRenderFns = []
+render._withStripped = true
+module.exports = { render: render, staticRenderFns: staticRenderFns }
+if (false) {
+  module.hot.accept()
+  if (module.hot.data) {
+    require("vue-hot-reload-api")      .rerender("data-v-3acff272", module.exports)
+  }
+}
 
 /***/ })
 /******/ ]);

@@ -83,18 +83,30 @@
                         
                         <div class="col-lg-12">
                             <div class="sorting"> Localización
-                                <select class="form-control common-input" id="geocoder" @change="selectGeo()">
-                                    <option value="1" selected>Geolocalización HTML5</option>
-                                    <option value="2">Abrir Maps</option>
+                                <select class="form-control common-input" id="geocoders" @change="selectGeo()">
+                                    <option value="1">Geolocalización HTML5</option>
+                                    <option value="2" selected>Abrir Maps</option>
                                     <option value="3">Escribir dirección</option>
                                 </select>
+                                <p>
+                                  <small class="text-danger" v-if="error.latitude">
+                                    {{ error.latitude[0] }}
+                                  </small>
+                                <p>
+                                <p>
+                                  <small class="text-danger" v-if="error.longitude">
+                                    {{ error.longitude[0] }}
+                                  </small>
+                                </p>
+
                             </div>
 
-                            <div class="col-lg-12 mapHtml5" id="mapHtml5"></div>
-                            <div class="col-lg-12 pickerMap" id="pickerMap"></div>
-                            <input type="text" placeholder="Escriba la dirección" id="textlocation" @change="addressMap" class="common-input">
-                            <div class="col-lg-12 locationText" id="locationText"></div>
+                            <div class="col-lg-12 html5Map" id="html5Map"></div>
+                            <div class="col-lg-12 mapPicker" id="mapPicker"></div>
+                            <input type="text" placeholder="Escriba la dirección" id="textMap" @keyup.enter="addressMap()" required class="common-input">
+                            <div class="col-lg-12 textLocation" id="textLocation"></div>
                         </div>
+
                         <div class="col-lg-12 text-right">
                             <button type="button" @click.prevent="update" class="btn btn-primary"><i class="zmdi zmdi-plus"></i> Guardar</button>
                         </div>
@@ -139,6 +151,8 @@ export default {
       this.getCountries();
       this.getUserSize();
       this.getUserExt();
+      this.markerMap();
+
     });
   },
 
@@ -150,7 +164,6 @@ export default {
         this.country(this.user.country_idcountry)
         this.state(this.user.state_idstate)
         this.imageData = this.user.image
-        this.html5Location()             
       })
       .catch(err => console.log(err))
     },
@@ -203,20 +216,18 @@ export default {
         }
       }
     },
-
     html5Location() {
-      let mapHtml5 = document.getElementById('mapHtml5');
-      document.getElementById('textlocation').style.display = "none";
-      document.getElementById('pickerMap').style.display = "none";
+      let html5Map = document.getElementById('html5Map');
+      document.getElementById('textMap').style.display = "none";
+      document.getElementById('mapPicker').style.display = "none";
 
       let vm = this;
 
       if (navigator.geolocation) {
-        mapHtml5.style.display = "block";
+        html5Map.style.display = "block";
 
         navigator.geolocation.getCurrentPosition(function(position) {
-          console.log(position.coords);
-
+          //console.log(position.coords);
           vm.user.latitude = position.coords.latitude;
           vm.user.longitude = position.coords.longitude;
 
@@ -229,7 +240,7 @@ export default {
             center: gLatLn
           };
 
-          let gMap = new google.maps.Map( mapHtml5, objConfig );
+          let gMap = new google.maps.Map( html5Map, objConfig );
           let objConfigMarker = {
             position: gLatLn,
             map: gMap
@@ -242,11 +253,9 @@ export default {
     },
 
     markerMap() {
-      console.log('ingreso')
-
-      //document.getElementById('html5Map').style.display = "none";
-      //document.getElementById('textMap').style.display = "none";
-      //document.getElementById('mapPicker').style.display = "block";
+      document.getElementById('html5Map').style.display = "none";
+      document.getElementById('textMap').style.display = "none";
+      document.getElementById('mapPicker').style.display = "block";
 
       let map = new google.maps.Map(document.getElementById('mapPicker'), {
           center: {
@@ -271,13 +280,12 @@ export default {
           this.user.latitude = marker.getPosition().lat();
           this.user.longitude = marker.getPosition().lng();
       });
-
     },
 
-    inputAddress() {
-      document.getElementById('mapHtml5').style.display = "none";
-      document.getElementById('pickerMap').style.display = "none";
-      document.getElementById('textlocation').style.display = "block";
+    showInputAddress() {
+      document.getElementById('html5Map').style.display = "none";
+      document.getElementById('mapPicker').style.display = "none";
+      document.getElementById('textMap').style.display = "block";
     },
 
     addressMap() {
@@ -288,13 +296,12 @@ export default {
 
       let geocoder = new google.maps.Geocoder();
 
-      document.getElementById('textlocation').style.display = 'block';
-      let address = document.getElementById('textlocation').value;
+      let address = document.getElementById('textMap').value;
 
       geocoder.geocode({'address': address}, function(results, status) {
 
          if (status == google.maps.GeocoderStatus.OK) {
-           document.getElementById('locationText').style.display = "block";
+           document.getElementById('textLocation').style.display = "block";
 
               latitude = results[0].geometry.location.lat();
               longitude = results[0].geometry.location.lng();
@@ -302,7 +309,7 @@ export default {
               vm.user.latitude = latitude;
               vm.user.longitude = longitude;
 
-            let map = new google.maps.Map(document.getElementById('locationText'), {
+            let map = new google.maps.Map(document.getElementById('textLocation'), {
                   center: {
                       lat: latitude,
                       lng: longitude
@@ -310,7 +317,7 @@ export default {
                   zoom: 17
               });
           } else {
-              document.getElementById('locationText').style.display = "none";
+              document.getElementById('textLocation').style.display = "none";
 
               vm.user.latitude = '';
               vm.user.longitude = '';
@@ -319,15 +326,16 @@ export default {
     },
 
     selectGeo() {
-      let val = document.getElementById('geocoder').value;
+      let val = document.getElementById('geocoders').value;
       if(val == 1) {
         this.html5Location();
       } else if (val == 2) {
         this.markerMap();
       } else {
-        this.inputAddress();
+        this.showInputAddress();
       }
     },
+
 
     update() {
       this.errors = {};
@@ -429,21 +437,21 @@ export default {
 }
 </script>
 
-<style lang="scss" scoped>
-.mapHtml5 {
+<style media="screen">
+.html5Map {
   margin-top: 15px;
   width: 100%;
   height: 200px;
   display: none;
 }
 
-.pickerMap {
+.mapPicker {
   margin-top: 15px;
   width: 100%;
   height: 200px;
 }
 
-.locationText {
+.textLocation {
   margin-top: 15px;
   width: 100%;
   height: 200px;
@@ -455,14 +463,13 @@ export default {
   color: #FFF !important;
 }
 
-#textlocation {
-  display: none;
-}
-
 .geolocation:hover {
   color: #42b0f2 !important;
 }
 
+#textMap {
+  display: none;
+}
 .input-map {
   display: none;
 }

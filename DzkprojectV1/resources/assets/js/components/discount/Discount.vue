@@ -180,6 +180,7 @@
                             <div class="form-group">
                               <label>Tags</label>
                               <multiselect v-model="value" tag-placeholder="Agregar tag" placeholder="Buscar o Agregar tag" label="name" track-by="code" :options="options" :multiple="true" :taggable="true" :searchable="true" tag-position="bottom" @tag="addTag"></multiselect>
+                              <p><small class="text-danger" v-if="tagError != '' ">{{ tagError }}</small></p>
                             </div> 
                             
                         </div>
@@ -266,8 +267,9 @@
                                 <p>{{tmpDiscount.discountcategory_iddiscountcategory}}</p>
 
                             </div>
-                             <hr>
+                             
                              <div v-if="descuentosucursal.length > 0">
+                              <hr>
                                 <div class="table-responsive">
                                       <table class="table table-hover table-bordered table-striped table-condensed">
                                           <thead>
@@ -292,6 +294,11 @@
                                 </div>
 
                              </div>
+                             <div class="form-group">
+                              <label class="font-weight-bold">Tags</label>
+                              <multiselect v-model="value" tag-placeholder="Agregar tag" placeholder="No tiene Tag" label="name" track-by="code" :options="options" :multiple="true" :taggable="true" :disabled="true"></multiselect>
+                            </div> 
+
                         </div>
                     </div>
                 </form>
@@ -359,7 +366,10 @@
                   branch_idbranch: ''
                 }, 
                 options: [],
-                value: [],
+                value: [],               
+                discountTagNum : null,
+                tagError: '',
+ 
  
             }
         },
@@ -421,6 +431,7 @@
                 this.tmpDiscount.enddate = this.formatDate(this.tmpDiscount.startdate);
                 this.tmpDiscount.outstanding = discount.outstanding == 0 ? false : true ;
                 this.getBranchDiscount(this.tmpDiscount.iddiscount)
+                this.getTagsNum()
                 this.$refs.editModal.show()
 
             },             
@@ -449,6 +460,14 @@
    
             updatedDiscount() {
                 this.errorsDiscount = {};
+                this.tagError = '';
+
+                if(this.value.length > this.discountTagNum ) {
+                  this.tagError = 'El numero permitido de tags son: ' + this.discountTagNum + '.'; //enviamos el error,
+                  return false;
+                }
+
+                this.tmpDiscount.tags = this.value
 
                 axios.patch(`/api/discount/${this.tmpDiscount.iddiscount}`, this.tmpDiscount)
                     .then((response) => {
@@ -642,8 +661,18 @@
                   this.errorFin = "La fecha debe ser maryor a la fecha inicio."
                }
             },       
+            
+            getTagsNum() {
+              axios.get('api/tag-num').then(data => {
+                let value = data.data[0].val;
+                let val = JSON.parse(value);
 
+                this.discountTagNum = val.discount;
 
+              })
+              .catch(err => console.log(err))
+
+            },
             randomString(len, an){
               an = an&&an.toLowerCase();
               var str="", i=0, min=an=="a"?10:0, max=an=="n"?10:62;

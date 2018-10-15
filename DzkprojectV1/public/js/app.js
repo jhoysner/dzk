@@ -67782,6 +67782,13 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
 
 
 
@@ -67813,7 +67820,9 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
         branch_idbranch: ''
       },
       options: [],
-      value: []
+      value: [],
+      discountTagNum: null,
+      tagError: ''
 
     };
   },
@@ -67879,6 +67888,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
       this.tmpDiscount.enddate = this.formatDate(this.tmpDiscount.startdate);
       this.tmpDiscount.outstanding = discount.outstanding == 0 ? false : true;
       this.getBranchDiscount(this.tmpDiscount.iddiscount);
+      this.getTagsNum();
       this.$refs.editModal.show();
     },
     editBranchDiscount: function editBranchDiscount(data) {
@@ -67905,6 +67915,14 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
       var _this4 = this;
 
       this.errorsDiscount = {};
+      this.tagError = '';
+
+      if (this.value.length > this.discountTagNum) {
+        this.tagError = 'El numero permitido de tags son: ' + this.discountTagNum + '.'; //enviamos el error,
+        return false;
+      }
+
+      this.tmpDiscount.tags = this.value;
 
       axios.patch('/api/discount/' + this.tmpDiscount.iddiscount, this.tmpDiscount).then(function (response) {
         _this4.tmpDiscount = {};
@@ -68095,6 +68113,18 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
         this.tmpDiscount.enddate = '';
         this.errorFin = "La fecha debe ser maryor a la fecha inicio.";
       }
+    },
+    getTagsNum: function getTagsNum() {
+      var _this12 = this;
+
+      axios.get('api/tag-num').then(function (data) {
+        var value = data.data[0].val;
+        var val = JSON.parse(value);
+
+        _this12.discountTagNum = val.discount;
+      }).catch(function (err) {
+        return console.log(err);
+      });
     },
     randomString: function randomString(len, an) {
       an = an && an.toLowerCase();
@@ -70904,7 +70934,15 @@ var render = function() {
                           },
                           expression: "value"
                         }
-                      })
+                      }),
+                      _vm._v(" "),
+                      _c("p", [
+                        _vm.tagError != ""
+                          ? _c("small", { staticClass: "text-danger" }, [
+                              _vm._v(_vm._s(_vm.tagError))
+                            ])
+                          : _vm._e()
+                      ])
                     ],
                     1
                   )
@@ -71088,10 +71126,10 @@ var render = function() {
                     ])
                   ]),
                   _vm._v(" "),
-                  _c("hr"),
-                  _vm._v(" "),
                   _vm.descuentosucursal.length > 0
                     ? _c("div", [
+                        _c("hr"),
+                        _vm._v(" "),
                         _c("div", { staticClass: "table-responsive" }, [
                           _c(
                             "table",
@@ -71172,7 +71210,38 @@ var render = function() {
                           )
                         ])
                       ])
-                    : _vm._e()
+                    : _vm._e(),
+                  _vm._v(" "),
+                  _c(
+                    "div",
+                    { staticClass: "form-group" },
+                    [
+                      _c("label", { staticClass: "font-weight-bold" }, [
+                        _vm._v("Tags")
+                      ]),
+                      _vm._v(" "),
+                      _c("multiselect", {
+                        attrs: {
+                          "tag-placeholder": "Agregar tag",
+                          placeholder: "No tiene Tag",
+                          label: "name",
+                          "track-by": "code",
+                          options: _vm.options,
+                          multiple: true,
+                          taggable: true,
+                          disabled: true
+                        },
+                        model: {
+                          value: _vm.value,
+                          callback: function($$v) {
+                            _vm.value = $$v
+                          },
+                          expression: "value"
+                        }
+                      })
+                    ],
+                    1
+                  )
                 ])
               ])
             ]

@@ -54899,18 +54899,17 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 
       this.error = {};
       this.imageError = '';
-      /*
-                  if(this.validateExtensionImage()) {
-                    this.imageError = 'La imagen no cumple con el formato adecuado.'; //enviamos el error,
-                    return false;
-                  }
-      
-      
-                  if(this.validateSizeImage()) {
-                    this.imageError = 'La imagen no cumple con las dimensiones esperadas. Debe estar entre: ' + this.commerceMinSize + ' a ' + this.commerceMaxSize + 'KB'; //enviamos el error,
-                    return false;
-                  }
-      */
+
+      if (this.validateExtensionImage()) {
+        this.imageError = 'La imagen no cumple con el formato adecuado.'; //enviamos el error,
+        return false;
+      }
+
+      if (this.validateSizeImage()) {
+        this.imageError = 'La imagen no cumple con las dimensiones esperadas. Debe estar entre: ' + this.commerceMinSize + ' a ' + this.commerceMaxSize + 'KB'; //enviamos el error,
+        return false;
+      }
+
       if (this.value.length > this.commerceTagNum) {
         this.tagError = 'El numero permitido de tags son: ' + this.commerceTagNum + '.'; //enviamos el error,
         return false;

@@ -53,7 +53,7 @@ class HomeInitController extends Controller
 
     public function commerce_detail_branchs($id)
     {
-        $branch = Branch::where('commerce_idcommerce', $id)->paginate(1);
+        $branch = Branch::where('commerce_idcommerce', $id)->paginate(2);
 
         //$commerce = Commerce::orderBy('idcommerce', 'DESC')->paginate(2);
 
@@ -70,5 +70,25 @@ class HomeInitController extends Controller
             'branch' => $branch
 
         ]);
+    }    
+    public function commerce_detail_discount($id)
+    {
+
+        $branchs = Branch::where('commerce_idcommerce', $id)->with('discounts')->paginate(1);
+                  
+
+        return response()->json([
+            'paginate' => [
+                'total'         =>  $branchs->total(),
+                'current_page'  =>  $branchs->currentPage(),
+                'per_page'      =>  $branchs->perPage(),
+                'last_page'     =>  $branchs->lastPage(),
+                'from'          =>  $branchs->firstItem(),
+                'to'            =>  $branchs->lastPage()
+            ],
+
+            'branchs' => $branchs
+
+        ],200);
     }
 }

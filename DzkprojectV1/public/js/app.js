@@ -49135,7 +49135,7 @@ var content = __webpack_require__(213);
 if(typeof content === 'string') content = [[module.i, content, '']];
 if(content.locals) module.exports = content.locals;
 // add the styles to the DOM
-var update = __webpack_require__(5)("42b3474c", content, false, {});
+var update = __webpack_require__(5)("7186d799", content, false, {});
 // Hot Module Replacement
 if(false) {
  // When the styles change, update the <style> tags
@@ -49673,7 +49673,7 @@ var content = __webpack_require__(219);
 if(typeof content === 'string') content = [[module.i, content, '']];
 if(content.locals) module.exports = content.locals;
 // add the styles to the DOM
-var update = __webpack_require__(5)("117cc268", content, false, {});
+var update = __webpack_require__(5)("d7fa6742", content, false, {});
 // Hot Module Replacement
 if(false) {
  // When the styles change, update the <style> tags
@@ -49890,7 +49890,7 @@ var content = __webpack_require__(224);
 if(typeof content === 'string') content = [[module.i, content, '']];
 if(content.locals) module.exports = content.locals;
 // add the styles to the DOM
-var update = __webpack_require__(5)("215d53aa", content, false, {});
+var update = __webpack_require__(5)("5030e3f7", content, false, {});
 // Hot Module Replacement
 if(false) {
  // When the styles change, update the <style> tags
@@ -50407,7 +50407,7 @@ var content = __webpack_require__(229);
 if(typeof content === 'string') content = [[module.i, content, '']];
 if(content.locals) module.exports = content.locals;
 // add the styles to the DOM
-var update = __webpack_require__(5)("a30ab1be", content, false, {});
+var update = __webpack_require__(5)("273fd098", content, false, {});
 // Hot Module Replacement
 if(false) {
  // When the styles change, update the <style> tags
@@ -53506,7 +53506,7 @@ var content = __webpack_require__(237);
 if(typeof content === 'string') content = [[module.i, content, '']];
 if(content.locals) module.exports = content.locals;
 // add the styles to the DOM
-var update = __webpack_require__(5)("213487a5", content, false, {});
+var update = __webpack_require__(5)("683ebe78", content, false, {});
 // Hot Module Replacement
 if(false) {
  // When the styles change, update the <style> tags
@@ -53732,7 +53732,7 @@ var content = __webpack_require__(241);
 if(typeof content === 'string') content = [[module.i, content, '']];
 if(content.locals) module.exports = content.locals;
 // add the styles to the DOM
-var update = __webpack_require__(5)("e4679f9e", content, false, {});
+var update = __webpack_require__(5)("2808d3be", content, false, {});
 // Hot Module Replacement
 if(false) {
  // When the styles change, update the <style> tags
@@ -54432,7 +54432,7 @@ var content = __webpack_require__(249);
 if(typeof content === 'string') content = [[module.i, content, '']];
 if(content.locals) module.exports = content.locals;
 // add the styles to the DOM
-var update = __webpack_require__(5)("0ab52bd6", content, false, {});
+var update = __webpack_require__(5)("4d0275e9", content, false, {});
 // Hot Module Replacement
 if(false) {
  // When the styles change, update the <style> tags
@@ -54673,7 +54673,7 @@ var content = __webpack_require__(253);
 if(typeof content === 'string') content = [[module.i, content, '']];
 if(content.locals) module.exports = content.locals;
 // add the styles to the DOM
-var update = __webpack_require__(5)("b98d80a8", content, false, {});
+var update = __webpack_require__(5)("aad5900e", content, false, {});
 // Hot Module Replacement
 if(false) {
  // When the styles change, update the <style> tags
@@ -54805,6 +54805,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
 
 
 
@@ -54833,6 +54834,8 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
       commerceCategories: [],
       commerceMaxSize: null,
       commerceMinSize: null,
+      commerceTagNum: null,
+      tagError: '',
       validExtensions: [],
       imageError: '',
       results: [],
@@ -54845,6 +54848,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
     this.getCommerceCategories();
     this.getCommercesSize();
     this.getCommercesExt();
+    this.getTagsNum();
     this.getTags();
   },
 
@@ -54906,6 +54910,13 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
         return false;
       }
 
+      if (this.value.length > this.commerceTagNum) {
+        this.tagError = 'El numero permitido de tags son: ' + this.commerceTagNum + '.'; //enviamos el error,
+        return false;
+      }
+
+      this.form.tags = this.value;
+
       __WEBPACK_IMPORTED_MODULE_0_axios___default.a.post('api' + this.url, this.form).then(function (data) {
         //Sino, continuamos nuestra operacion.
 
@@ -54916,6 +54927,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
         _this3.getCommerceCategories();
         _this3.form.image = null;
         _this3.$refs.image.value = null;
+        _this3.value = [];
         _this3.$parent.index();
         swal({
           title: "Comercio creado",
@@ -55014,6 +55026,18 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
       __WEBPACK_IMPORTED_MODULE_0_axios___default.a.get('api/commerce-ext').then(function (data) {
         var value = data.data[0].val;
         _this9.validExtensions = value;
+      }).catch(function (err) {
+        return console.log(err);
+      });
+    },
+    getTagsNum: function getTagsNum() {
+      var _this10 = this;
+
+      __WEBPACK_IMPORTED_MODULE_0_axios___default.a.get('api/tag-num').then(function (data) {
+        var value = data.data[0].val;
+        var val = JSON.parse(value);
+
+        _this10.commerceTagNum = val.commerce;
       }).catch(function (err) {
         return console.log(err);
       });
@@ -56434,7 +56458,15 @@ var render = function() {
                             },
                             expression: "value"
                           }
-                        })
+                        }),
+                        _vm._v(" "),
+                        _c("p", [
+                          _vm.tagError != ""
+                            ? _c("small", { staticClass: "text-danger" }, [
+                                _vm._v(_vm._s(_vm.tagError))
+                              ])
+                            : _vm._e()
+                        ])
                       ],
                       1
                     ),
@@ -56535,7 +56567,7 @@ var content = __webpack_require__(276);
 if(typeof content === 'string') content = [[module.i, content, '']];
 if(content.locals) module.exports = content.locals;
 // add the styles to the DOM
-var update = __webpack_require__(5)("8785f1a6", content, false, {});
+var update = __webpack_require__(5)("6236a28c", content, false, {});
 // Hot Module Replacement
 if(false) {
  // When the styles change, update the <style> tags
@@ -56633,6 +56665,12 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
+//
+//
+//
+//
 
 
 
@@ -56652,13 +56690,17 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
         city_idcity: '',
         commercecategory_idcommercecategory: ''
       },
-      url: '/commerce'
+      url: '/commerce',
+      options: [],
+      value: []
+
     };
   },
   mounted: function mounted() {
     var _this = this;
 
     __WEBPACK_IMPORTED_MODULE_0__utilities_EventBus__["a" /* default */].$on('id_commerce', function (id) {
+      _this.getTagsCommerce(id);
       axios.get('api' + _this.url + '/' + id).then(function (data) {
         _this.commerce.idcommerce = data.data[0].idcommerce;
         _this.commerce.name = data.data[0].name;
@@ -56679,7 +56721,22 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 
 
   methods: {
-    show: function show(id) {}
+    show: function show(id) {},
+    getTagsCommerce: function getTagsCommerce(value) {
+      var _this2 = this;
+
+      console.log(value);
+      axios.get('api/tags-commerce/' + value).then(function (response) {
+        _this2.value = response.data.data;
+        _this2.value.forEach(function (item) {
+          item.code = item.idtags;
+        });
+        console.log(_this2.value);
+      }).catch(function (err) {
+
+        console.log(err);
+      });
+    }
   }
 });
 
@@ -56796,7 +56853,38 @@ var render = function() {
                     _vm._s(_vm.commerce.commercecategory_idcommercecategory)
                   )
                 ])
-              ])
+              ]),
+              _vm._v(" "),
+              _c(
+                "div",
+                { staticClass: "form-group" },
+                [
+                  _c("label", { staticClass: "font-weight-bold" }, [
+                    _vm._v("Tags")
+                  ]),
+                  _vm._v(" "),
+                  _c("multiselect", {
+                    attrs: {
+                      "tag-placeholder": "Agregar tag",
+                      placeholder: "No tiene Tag",
+                      label: "name",
+                      "track-by": "code",
+                      options: _vm.options,
+                      multiple: true,
+                      taggable: true,
+                      disabled: true
+                    },
+                    model: {
+                      value: _vm.value,
+                      callback: function($$v) {
+                        _vm.value = $$v
+                      },
+                      expression: "value"
+                    }
+                  })
+                ],
+                1
+              )
             ])
           ])
         ]
@@ -56877,7 +56965,7 @@ var content = __webpack_require__(281);
 if(typeof content === 'string') content = [[module.i, content, '']];
 if(content.locals) module.exports = content.locals;
 // add the styles to the DOM
-var update = __webpack_require__(5)("daffff62", content, false, {});
+var update = __webpack_require__(5)("b5b0b048", content, false, {});
 // Hot Module Replacement
 if(false) {
  // When the styles change, update the <style> tags
@@ -57011,6 +57099,8 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
 
 
 
@@ -57029,6 +57119,8 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
       commerceCategories: [],
       commerceMaxSize: null,
       commerceMinSize: null,
+      commerceTagNum: null,
+      tagError: '',
       validExtensions: [],
       imageError: '',
       picture: '',
@@ -57048,6 +57140,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
       _this.getCommerceCategories();
       _this.getCommercesSize();
       _this.getCommercesExt();
+      _this.getTagsNum();
       _this.getTags();
     });
   },
@@ -57105,6 +57198,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
         _this4.StateAct(data.data[0].country_idcountry);
         _this4.CityAct(data.data[0].state_idstate);
         _this4.picAct = data.data[0].image;
+        _this4.getTagsCommerce(data.data[0].idcommerce);
       }).catch(function (err) {
         return console.log(err);
       });
@@ -57184,6 +57278,13 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
         return false;
       }
 
+      if (this.value.length > this.commerceTagNum) {
+        this.tagError = 'El numero permitido de tags son: ' + this.commerceTagNum + '.'; //enviamos el error,
+        return false;
+      }
+
+      this.commerce.tags = this.value;
+
       axios.put('api' + this.url + '/' + this.commerce.idcommerce, this.commerce).then(function (data) {
         _this11.$refs.editModal.hide();
         _this11.$parent.index();
@@ -57245,6 +57346,31 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
         var value = data.data[0].val;
         _this13.validExtensions = value;
         console.log(value);
+      }).catch(function (err) {
+        return console.log(err);
+      });
+    },
+    getTagsCommerce: function getTagsCommerce(value) {
+      var _this14 = this;
+
+      axios.get('api/tags-commerce/' + value).then(function (response) {
+        _this14.value = response.data.data;
+        _this14.value.forEach(function (item) {
+          item.code = item.idtags;
+        });
+      }).catch(function (err) {
+
+        console.log(err);
+      });
+    },
+    getTagsNum: function getTagsNum() {
+      var _this15 = this;
+
+      axios.get('api/tag-num').then(function (data) {
+        var value = data.data[0].val;
+        var val = JSON.parse(value);
+
+        _this15.commerceTagNum = val.commerce;
       }).catch(function (err) {
         return console.log(err);
       });
@@ -57801,7 +57927,15 @@ var render = function() {
                             },
                             expression: "value"
                           }
-                        })
+                        }),
+                        _vm._v(" "),
+                        _c("p", [
+                          _vm.tagError != ""
+                            ? _c("small", { staticClass: "text-danger" }, [
+                                _vm._v(_vm._s(_vm.tagError))
+                              ])
+                            : _vm._e()
+                        ])
                       ],
                       1
                     ),
@@ -58086,7 +58220,7 @@ var content = __webpack_require__(287);
 if(typeof content === 'string') content = [[module.i, content, '']];
 if(content.locals) module.exports = content.locals;
 // add the styles to the DOM
-var update = __webpack_require__(5)("404f90e2", content, false, {});
+var update = __webpack_require__(5)("3d4a2cbc", content, false, {});
 // Hot Module Replacement
 if(false) {
  // When the styles change, update the <style> tags
@@ -58326,7 +58460,7 @@ var content = __webpack_require__(291);
 if(typeof content === 'string') content = [[module.i, content, '']];
 if(content.locals) module.exports = content.locals;
 // add the styles to the DOM
-var update = __webpack_require__(5)("69785c48", content, false, {});
+var update = __webpack_require__(5)("cf6826d6", content, false, {});
 // Hot Module Replacement
 if(false) {
  // When the styles change, update the <style> tags
@@ -58350,7 +58484,7 @@ exports = module.exports = __webpack_require__(2)(false);
 
 
 // module
-exports.push([module.i, "\n.html5Map {\n  margin-top: 15px;\n  width: 100%;\n  height: 200px;\n  display: none;\n}\n.mapPicker {\n  margin-top: 15px;\n  width: 100%;\n  height: 200px;\n}\n.textLocation {\n  margin-top: 15px;\n  width: 100%;\n  height: 200px;\n  display: none;\n}\n.geolocation {\n  cursor: pointer;\n  color: #FFF !important;\n}\n.geolocation:hover {\n  color: #42b0f2 !important;\n}\n#textMap {\n  display: none;\n}\n.input-map {\n  display: none;\n}\n.avatar {\n  width: 150px;\n}\n", ""]);
+exports.push([module.i, "\n.html5Map {\r\n  margin-top: 15px;\r\n  width: 100%;\r\n  height: 200px;\r\n  display: none;\n}\n.mapPicker {\r\n  margin-top: 15px;\r\n  width: 100%;\r\n  height: 200px;\n}\n.textLocation {\r\n  margin-top: 15px;\r\n  width: 100%;\r\n  height: 200px;\r\n  display: none;\n}\n.geolocation {\r\n  cursor: pointer;\r\n  color: #FFF !important;\n}\n.geolocation:hover {\r\n  color: #42b0f2 !important;\n}\n#textMap {\r\n  display: none;\n}\n.input-map {\r\n  display: none;\n}\n.avatar {\r\n  width: 150px;\n}\r\n", ""]);
 
 // exports
 
@@ -58589,8 +58723,8 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 
       //dragged event of marker
       google.maps.event.addListener(marker, 'dragend', function () {
-        _this2.form.latitude = marker.getPosition().lat();
-        _this2.form.longitude = marker.getPosition().lng();
+        _this2.user.latitude = marker.getPosition().lat();
+        _this2.user.longitude = marker.getPosition().lng();
       });
     },
     showInputAddress: function showInputAddress() {
@@ -59431,7 +59565,7 @@ var content = __webpack_require__(296);
 if(typeof content === 'string') content = [[module.i, content, '']];
 if(content.locals) module.exports = content.locals;
 // add the styles to the DOM
-var update = __webpack_require__(5)("79b1b00c", content, false, {});
+var update = __webpack_require__(5)("264c6787", content, false, {});
 // Hot Module Replacement
 if(false) {
  // When the styles change, update the <style> tags
@@ -59792,7 +59926,7 @@ var content = __webpack_require__(301);
 if(typeof content === 'string') content = [[module.i, content, '']];
 if(content.locals) module.exports = content.locals;
 // add the styles to the DOM
-var update = __webpack_require__(5)("e099100c", content, false, {});
+var update = __webpack_require__(5)("1a4e90f2", content, false, {});
 // Hot Module Replacement
 if(false) {
  // When the styles change, update the <style> tags
@@ -61126,7 +61260,7 @@ var content = __webpack_require__(307);
 if(typeof content === 'string') content = [[module.i, content, '']];
 if(content.locals) module.exports = content.locals;
 // add the styles to the DOM
-var update = __webpack_require__(5)("09dbf2a3", content, false, {});
+var update = __webpack_require__(5)("ae416c20", content, false, {});
 // Hot Module Replacement
 if(false) {
  // When the styles change, update the <style> tags
@@ -61150,7 +61284,7 @@ exports = module.exports = __webpack_require__(2)(false);
 
 
 // module
-exports.push([module.i, "\n#section-profile: {\n margin-top: 100px;\n}\nimg {\n  width: 30%;\n}\n", ""]);
+exports.push([module.i, "\n#section-profile: {\r\n margin-top: 100px;\n}\nimg {\r\n  width: 30%;\n}\r\n", ""]);
 
 // exports
 
@@ -61320,7 +61454,7 @@ var __vue_template_functional__ = false
 /* styles */
 var __vue_styles__ = injectStyle
 /* scopeId */
-var __vue_scopeId__ = "data-v-3acff272"
+var __vue_scopeId__ = null
 /* moduleIdentifier (server only) */
 var __vue_module_identifier__ = null
 var Component = normalizeComponent(
@@ -61363,13 +61497,13 @@ var content = __webpack_require__(311);
 if(typeof content === 'string') content = [[module.i, content, '']];
 if(content.locals) module.exports = content.locals;
 // add the styles to the DOM
-var update = __webpack_require__(5)("24102022", content, false, {});
+var update = __webpack_require__(5)("38d04cda", content, false, {});
 // Hot Module Replacement
 if(false) {
  // When the styles change, update the <style> tags
  if(!content.locals) {
-   module.hot.accept("!!../../../../../node_modules/css-loader/index.js!../../../../../node_modules/vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-3acff272\",\"scoped\":true,\"hasInlineConfig\":true}!../../../../../node_modules/sass-loader/lib/loader.js!../../../../../node_modules/vue-loader/lib/selector.js?type=styles&index=0!./Edit.vue", function() {
-     var newContent = require("!!../../../../../node_modules/css-loader/index.js!../../../../../node_modules/vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-3acff272\",\"scoped\":true,\"hasInlineConfig\":true}!../../../../../node_modules/sass-loader/lib/loader.js!../../../../../node_modules/vue-loader/lib/selector.js?type=styles&index=0!./Edit.vue");
+   module.hot.accept("!!../../../../../node_modules/css-loader/index.js!../../../../../node_modules/vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-3acff272\",\"scoped\":false,\"hasInlineConfig\":true}!../../../../../node_modules/vue-loader/lib/selector.js?type=styles&index=0!./Edit.vue", function() {
+     var newContent = require("!!../../../../../node_modules/css-loader/index.js!../../../../../node_modules/vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-3acff272\",\"scoped\":false,\"hasInlineConfig\":true}!../../../../../node_modules/vue-loader/lib/selector.js?type=styles&index=0!./Edit.vue");
      if(typeof newContent === 'string') newContent = [[module.id, newContent, '']];
      update(newContent);
    });
@@ -61387,7 +61521,7 @@ exports = module.exports = __webpack_require__(2)(false);
 
 
 // module
-exports.push([module.i, "\n.mapHtml5[data-v-3acff272] {\n  margin-top: 15px;\n  width: 100%;\n  height: 200px;\n  display: none;\n}\n.pickerMap[data-v-3acff272] {\n  margin-top: 15px;\n  width: 100%;\n  height: 200px;\n}\n.locationText[data-v-3acff272] {\n  margin-top: 15px;\n  width: 100%;\n  height: 200px;\n  display: none;\n}\n.geolocation[data-v-3acff272] {\n  cursor: pointer;\n  color: #FFF !important;\n}\n#textlocation[data-v-3acff272] {\n  display: none;\n}\n.geolocation[data-v-3acff272]:hover {\n  color: #42b0f2 !important;\n}\n.input-map[data-v-3acff272] {\n  display: none;\n}\nimg[data-v-3acff272] {\n  width: 30%;\n}\n", ""]);
+exports.push([module.i, "\n.html5Map {\r\n  margin-top: 15px;\r\n  width: 100%;\r\n  height: 200px;\r\n  display: none;\n}\n.mapPicker {\r\n  margin-top: 15px;\r\n  width: 100%;\r\n  height: 200px;\n}\n.textLocation {\r\n  margin-top: 15px;\r\n  width: 100%;\r\n  height: 200px;\r\n  display: none;\n}\n.geolocation {\r\n  cursor: pointer;\r\n  color: #FFF !important;\n}\n.geolocation:hover {\r\n  color: #42b0f2 !important;\n}\n#textMap {\r\n  display: none;\n}\n.input-map {\r\n  display: none;\n}\nimg {\r\n  width: 30%;\n}\r\n", ""]);
 
 // exports
 
@@ -61399,6 +61533,19 @@ exports.push([module.i, "\n.mapHtml5[data-v-3acff272] {\n  margin-top: 15px;\n  
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__utilities_EventBus__ = __webpack_require__(7);
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 //
 //
 //
@@ -61523,7 +61670,11 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
       password_confirmation: "",
       imageData: "",
       datemax: "",
-      datemin: ""
+      datemin: "",
+      validExtensions: [],
+      userMaxSize: null,
+      userMinSize: null,
+      imageError: ''
 
     };
   },
@@ -61534,6 +61685,9 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
       _this.editId = data;
       _this.edit(_this.editId);
       _this.getCountries();
+      _this.getUserSize();
+      _this.getUserExt();
+      _this.markerMap();
     });
   },
 
@@ -61545,11 +61699,9 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
       axios.get('api' + this.url + '/' + id).then(function (response) {
         _this2.user = response.data.user[0];
         _this2.datemax = new Date(_this2.fecha(-5320)).toISOString().slice(0, 10);
-        console.log(_this2.datemax);
         _this2.country(_this2.user.country_idcountry);
         _this2.state(_this2.user.state_idstate);
         _this2.imageData = _this2.user.image;
-        _this2.html5Location();
       }).catch(function (err) {
         return console.log(err);
       });
@@ -61584,20 +61736,42 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
         reader.readAsDataURL(input.files[0]);
       }
     },
+    validateExtensionImage: function validateExtensionImage() {
+      if ($("#image").val() != "") {
+        var ext = $("#image").val().split('.').pop();
 
+        var found = this.validExtensions.indexOf(ext.toLowerCase());
+        if (found == -1) {
+          return true;
+        } else {
+          return false;
+        }
+      }
+    },
+    validateSizeImage: function validateSizeImage() {
+      if ($("#image").val() != "") {
+        var fileSize = $('#image')[0].files[0].size; //Tamaño de la imagen subida.
+        var sizeKB = parseInt(fileSize / 1024); //Tamaño de la imagen, en kb.
+        if (sizeKB > this.userMaxSize || sizeKB < this.userMinSize) {
+          //si el tamaño de la imagen, es mayorr al max del establecido en la base de datos o menor al min
+          return true;
+        } else {
+          return false;
+        }
+      }
+    },
     html5Location: function html5Location() {
-      var mapHtml5 = document.getElementById('mapHtml5');
-      document.getElementById('textlocation').style.display = "none";
-      document.getElementById('pickerMap').style.display = "none";
+      var html5Map = document.getElementById('html5Map');
+      document.getElementById('textMap').style.display = "none";
+      document.getElementById('mapPicker').style.display = "none";
 
       var vm = this;
 
       if (navigator.geolocation) {
-        mapHtml5.style.display = "block";
+        html5Map.style.display = "block";
 
         navigator.geolocation.getCurrentPosition(function (position) {
-          console.log(position.coords);
-
+          //console.log(position.coords);
           vm.user.latitude = position.coords.latitude;
           vm.user.longitude = position.coords.longitude;
 
@@ -61610,7 +61784,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
             center: gLatLn
           };
 
-          var gMap = new google.maps.Map(mapHtml5, objConfig);
+          var gMap = new google.maps.Map(html5Map, objConfig);
           var objConfigMarker = {
             position: gLatLn,
             map: gMap
@@ -61624,11 +61798,9 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
     markerMap: function markerMap() {
       var _this5 = this;
 
-      console.log('ingreso');
-
-      //document.getElementById('html5Map').style.display = "none";
-      //document.getElementById('textMap').style.display = "none";
-      //document.getElementById('mapPicker').style.display = "block";
+      document.getElementById('html5Map').style.display = "none";
+      document.getElementById('textMap').style.display = "none";
+      document.getElementById('mapPicker').style.display = "block";
 
       var map = new google.maps.Map(document.getElementById('mapPicker'), {
         center: {
@@ -61654,10 +61826,10 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
         _this5.user.longitude = marker.getPosition().lng();
       });
     },
-    inputAddress: function inputAddress() {
-      document.getElementById('mapHtml5').style.display = "none";
-      document.getElementById('pickerMap').style.display = "none";
-      document.getElementById('textlocation').style.display = "block";
+    showInputAddress: function showInputAddress() {
+      document.getElementById('html5Map').style.display = "none";
+      document.getElementById('mapPicker').style.display = "none";
+      document.getElementById('textMap').style.display = "block";
     },
     addressMap: function addressMap() {
 
@@ -61667,13 +61839,12 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 
       var geocoder = new google.maps.Geocoder();
 
-      document.getElementById('textlocation').style.display = 'block';
-      var address = document.getElementById('textlocation').value;
+      var address = document.getElementById('textMap').value;
 
       geocoder.geocode({ 'address': address }, function (results, status) {
 
         if (status == google.maps.GeocoderStatus.OK) {
-          document.getElementById('locationText').style.display = "block";
+          document.getElementById('textLocation').style.display = "block";
 
           latitude = results[0].geometry.location.lat();
           longitude = results[0].geometry.location.lng();
@@ -61681,7 +61852,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
           vm.user.latitude = latitude;
           vm.user.longitude = longitude;
 
-          var map = new google.maps.Map(document.getElementById('locationText'), {
+          var map = new google.maps.Map(document.getElementById('textLocation'), {
             center: {
               lat: latitude,
               lng: longitude
@@ -61689,7 +61860,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
             zoom: 17
           });
         } else {
-          document.getElementById('locationText').style.display = "none";
+          document.getElementById('textLocation').style.display = "none";
 
           vm.user.latitude = '';
           vm.user.longitude = '';
@@ -61697,19 +61868,29 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
       });
     },
     selectGeo: function selectGeo() {
-      var val = document.getElementById('geocoder').value;
+      var val = document.getElementById('geocoders').value;
       if (val == 1) {
         this.html5Location();
       } else if (val == 2) {
         this.markerMap();
       } else {
-        this.inputAddress();
+        this.showInputAddress();
       }
     },
     update: function update() {
       var _this6 = this;
 
       this.errors = {};
+
+      if (this.validateExtensionImage()) {
+        this.imageError = 'La imagen no cumple con el formato adecuado.'; //enviamos el error,
+        return false;
+      }
+
+      if (this.validateSizeImage()) {
+        this.imageError = 'La imagen no cumple con las dimensiones esperadas. Debe estar entre: ' + this.userMinSize + ' a ' + this.userMaxSize + 'KB'; //enviamos el error,
+        return false;
+      }
 
       var params = new FormData();
       params.append('userId', this.user.id);
@@ -61766,6 +61947,29 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 
       axios.get('/api/cities/' + id).then(function (response) {
         _this8.cities = response.data;
+      });
+    },
+    getUserSize: function getUserSize() {
+      var _this9 = this;
+
+      axios.get('api/user-size').then(function (data) {
+        var value = data.data[0].val;
+        var val = JSON.parse(value);
+
+        _this9.userMaxSize = val.maxsize;
+        _this9.userMinSize = val.minsize;
+      }).catch(function (err) {
+        return console.log(err);
+      });
+    },
+    getUserExt: function getUserExt() {
+      var _this10 = this;
+
+      axios.get('api/user-ext').then(function (data) {
+        var value = data.data[0].val;
+        _this10.validExtensions = value;
+      }).catch(function (err) {
+        return console.log(err);
       });
     }
   }
@@ -62223,10 +62427,22 @@ var render = function() {
                       ),
                       _c("div", { staticClass: "input-group input-file" }, [
                         _c("input", {
+                          ref: "image",
                           staticClass: "form-control",
-                          attrs: { type: "file", accept: "image/*" },
+                          attrs: {
+                            type: "file",
+                            id: "image",
+                            placeholder: "Imagen de Perfil",
+                            accept: "image/*"
+                          },
                           on: { change: _vm.previewImage }
-                        })
+                        }),
+                        _vm._v(" "),
+                        _vm.imageError != ""
+                          ? _c("small", { staticClass: "text-danger" }, [
+                              _vm._v(_vm._s(_vm.imageError))
+                            ])
+                          : _vm._e()
                       ])
                     ])
                   ]),
@@ -62248,7 +62464,7 @@ var render = function() {
                         "select",
                         {
                           staticClass: "form-control common-input",
-                          attrs: { id: "geocoder" },
+                          attrs: { id: "geocoders" },
                           on: {
                             change: function($event) {
                               _vm.selectGeo()
@@ -62256,31 +62472,55 @@ var render = function() {
                           }
                         },
                         [
+                          _c("option", { attrs: { value: "1" } }, [
+                            _vm._v("Geolocalización HTML5")
+                          ]),
+                          _vm._v(" "),
                           _c(
                             "option",
-                            { attrs: { value: "1", selected: "" } },
-                            [_vm._v("Geolocalización HTML5")]
+                            { attrs: { value: "2", selected: "" } },
+                            [_vm._v("Abrir Maps")]
                           ),
-                          _vm._v(" "),
-                          _c("option", { attrs: { value: "2" } }, [
-                            _vm._v("Abrir Maps")
-                          ]),
                           _vm._v(" "),
                           _c("option", { attrs: { value: "3" } }, [
                             _vm._v("Escribir dirección")
                           ])
                         ]
-                      )
+                      ),
+                      _vm._v(" "),
+                      _c("p", [
+                        _vm.error.latitude
+                          ? _c("small", { staticClass: "text-danger" }, [
+                              _vm._v(
+                                "\n                                " +
+                                  _vm._s(_vm.error.latitude[0]) +
+                                  "\n                              "
+                              )
+                            ])
+                          : _vm._e()
+                      ]),
+                      _c("p"),
+                      _c("p", [
+                        _vm.error.longitude
+                          ? _c("small", { staticClass: "text-danger" }, [
+                              _vm._v(
+                                "\n                                " +
+                                  _vm._s(_vm.error.longitude[0]) +
+                                  "\n                              "
+                              )
+                            ])
+                          : _vm._e()
+                      ])
                     ]),
                     _vm._v(" "),
                     _c("div", {
-                      staticClass: "col-lg-12 mapHtml5",
-                      attrs: { id: "mapHtml5" }
+                      staticClass: "col-lg-12 html5Map",
+                      attrs: { id: "html5Map" }
                     }),
                     _vm._v(" "),
                     _c("div", {
-                      staticClass: "col-lg-12 pickerMap",
-                      attrs: { id: "pickerMap" }
+                      staticClass: "col-lg-12 mapPicker",
+                      attrs: { id: "mapPicker" }
                     }),
                     _vm._v(" "),
                     _c("input", {
@@ -62288,14 +62528,31 @@ var render = function() {
                       attrs: {
                         type: "text",
                         placeholder: "Escriba la dirección",
-                        id: "textlocation"
+                        id: "textMap",
+                        required: ""
                       },
-                      on: { change: _vm.addressMap }
+                      on: {
+                        keyup: function($event) {
+                          if (
+                            !("button" in $event) &&
+                            _vm._k(
+                              $event.keyCode,
+                              "enter",
+                              13,
+                              $event.key,
+                              "Enter"
+                            )
+                          ) {
+                            return null
+                          }
+                          _vm.addressMap()
+                        }
+                      }
                     }),
                     _vm._v(" "),
                     _c("div", {
-                      staticClass: "col-lg-12 locationText",
-                      attrs: { id: "locationText" }
+                      staticClass: "col-lg-12 textLocation",
+                      attrs: { id: "textLocation" }
                     })
                   ]),
                   _vm._v(" "),
@@ -62638,7 +62895,7 @@ var content = __webpack_require__(317);
 if(typeof content === 'string') content = [[module.i, content, '']];
 if(content.locals) module.exports = content.locals;
 // add the styles to the DOM
-var update = __webpack_require__(5)("5ea74207", content, false, {});
+var update = __webpack_require__(5)("baa43e4c", content, false, {});
 // Hot Module Replacement
 if(false) {
  // When the styles change, update the <style> tags
@@ -62854,7 +63111,7 @@ var content = __webpack_require__(321);
 if(typeof content === 'string') content = [[module.i, content, '']];
 if(content.locals) module.exports = content.locals;
 // add the styles to the DOM
-var update = __webpack_require__(5)("3843c8d0", content, false, {});
+var update = __webpack_require__(5)("7511045d", content, false, {});
 // Hot Module Replacement
 if(false) {
  // When the styles change, update the <style> tags
@@ -63195,7 +63452,7 @@ var content = __webpack_require__(326);
 if(typeof content === 'string') content = [[module.i, content, '']];
 if(content.locals) module.exports = content.locals;
 // add the styles to the DOM
-var update = __webpack_require__(5)("331ffd1e", content, false, {});
+var update = __webpack_require__(5)("6480bc3e", content, false, {});
 // Hot Module Replacement
 if(false) {
  // When the styles change, update the <style> tags
@@ -63421,7 +63678,7 @@ var content = __webpack_require__(331);
 if(typeof content === 'string') content = [[module.i, content, '']];
 if(content.locals) module.exports = content.locals;
 // add the styles to the DOM
-var update = __webpack_require__(5)("51d7a17e", content, false, {});
+var update = __webpack_require__(5)("5524ea0e", content, false, {});
 // Hot Module Replacement
 if(false) {
  // When the styles change, update the <style> tags
@@ -63940,7 +64197,7 @@ var content = __webpack_require__(337);
 if(typeof content === 'string') content = [[module.i, content, '']];
 if(content.locals) module.exports = content.locals;
 // add the styles to the DOM
-var update = __webpack_require__(5)("28bd9841", content, false, {});
+var update = __webpack_require__(5)("6fc7cf14", content, false, {});
 // Hot Module Replacement
 if(false) {
  // When the styles change, update the <style> tags
@@ -64018,7 +64275,6 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
-//
 
 
 
@@ -64057,30 +64313,6 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
     },
     edit: function edit(id) {
       __WEBPACK_IMPORTED_MODULE_0__utilities_EventBus__["a" /* default */].$emit('edit_id', id);
-    },
-    eliminar: function eliminar(id) {
-      var _this2 = this;
-
-      swal({
-        title: "Seguro quieres eliminar el tag?",
-        icon: "warning",
-        buttons: true,
-        dangerMode: true
-      }).then(function (willDelete) {
-        if (willDelete) {
-          _this2.destroy(id);
-        }
-      });
-    },
-    destroy: function destroy(id) {
-      var _this3 = this;
-
-      __WEBPACK_IMPORTED_MODULE_3_axios___default.a.delete('api' + this.url + '/' + id).then(function (data) {
-        console.log(data);
-        _this3.index();
-      }).catch(function (err) {
-        return console.log(err);
-      });
     }
   }
 });
@@ -64147,7 +64379,7 @@ var content = __webpack_require__(341);
 if(typeof content === 'string') content = [[module.i, content, '']];
 if(content.locals) module.exports = content.locals;
 // add the styles to the DOM
-var update = __webpack_require__(5)("41d6ecd8", content, false, {});
+var update = __webpack_require__(5)("47d8df36", content, false, {});
 // Hot Module Replacement
 if(false) {
  // When the styles change, update the <style> tags
@@ -64467,7 +64699,7 @@ var content = __webpack_require__(347);
 if(typeof content === 'string') content = [[module.i, content, '']];
 if(content.locals) module.exports = content.locals;
 // add the styles to the DOM
-var update = __webpack_require__(5)("659603ba", content, false, {});
+var update = __webpack_require__(5)("25d02687", content, false, {});
 // Hot Module Replacement
 if(false) {
  // When the styles change, update the <style> tags
@@ -64758,20 +64990,6 @@ var render = function() {
                                     }
                                   },
                                   [_vm._v("Editar")]
-                                ),
-                                _vm._v(" "),
-                                _c(
-                                  "button",
-                                  {
-                                    staticClass: "btn btn-sm btn-xs btn-danger",
-                                    attrs: { type: "button" },
-                                    on: {
-                                      click: function($event) {
-                                        _vm.eliminar(tag.idtags)
-                                      }
-                                    }
-                                  },
-                                  [_vm._v("Eliminar")]
                                 )
                               ],
                               1
@@ -64883,7 +65101,7 @@ var content = __webpack_require__(353);
 if(typeof content === 'string') content = [[module.i, content, '']];
 if(content.locals) module.exports = content.locals;
 // add the styles to the DOM
-var update = __webpack_require__(5)("5edad276", content, false, {});
+var update = __webpack_require__(5)("4950a1d8", content, false, {});
 // Hot Module Replacement
 if(false) {
  // When the styles change, update the <style> tags
@@ -65330,7 +65548,7 @@ var content = __webpack_require__(358);
 if(typeof content === 'string') content = [[module.i, content, '']];
 if(content.locals) module.exports = content.locals;
 // add the styles to the DOM
-var update = __webpack_require__(5)("396f8841", content, false, {});
+var update = __webpack_require__(5)("7a4b3c14", content, false, {});
 // Hot Module Replacement
 if(false) {
  // When the styles change, update the <style> tags
@@ -65887,7 +66105,7 @@ var content = __webpack_require__(363);
 if(typeof content === 'string') content = [[module.i, content, '']];
 if(content.locals) module.exports = content.locals;
 // add the styles to the DOM
-var update = __webpack_require__(5)("d1a4bc48", content, false, {});
+var update = __webpack_require__(5)("0febacef", content, false, {});
 // Hot Module Replacement
 if(false) {
  // When the styles change, update the <style> tags
@@ -66383,7 +66601,7 @@ var content = __webpack_require__(368);
 if(typeof content === 'string') content = [[module.i, content, '']];
 if(content.locals) module.exports = content.locals;
 // add the styles to the DOM
-var update = __webpack_require__(5)("a3faa7ea", content, false, {});
+var update = __webpack_require__(5)("7a99f41e", content, false, {});
 // Hot Module Replacement
 if(false) {
  // When the styles change, update the <style> tags
@@ -66792,7 +67010,7 @@ var content = __webpack_require__(373);
 if(typeof content === 'string') content = [[module.i, content, '']];
 if(content.locals) module.exports = content.locals;
 // add the styles to the DOM
-var update = __webpack_require__(5)("1a61b58a", content, false, {});
+var update = __webpack_require__(5)("129696e4", content, false, {});
 // Hot Module Replacement
 if(false) {
  // When the styles change, update the <style> tags
@@ -66827,9 +67045,6 @@ exports.push([module.i, "\n.image-commerce {\n  width: 80px;\n  height: 50px;\n 
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__utilities_EventBus_js__ = __webpack_require__(7);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__utilities_paginator__ = __webpack_require__(45);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__utilities_paginator___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1__utilities_paginator__);
 //
 //
 //
@@ -66897,46 +67112,26 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
-//
-//
-
-
-
 
 /* harmony default export */ __webpack_exports__["default"] = ({
-  components: { paginator: __WEBPACK_IMPORTED_MODULE_1__utilities_paginator___default.a },
   data: function data() {
     return {
       id: this.$route.params.id,
-      branchs: [],
-      pagination: {
-        'total': 0,
-        'current_page': 0,
-        'per_page': 0,
-        'last_page': 0,
-        'from': 0,
-        'to': 0
-      }
+      branchs: []
     };
   },
   mounted: function mounted() {
-    var _this = this;
-
+    console.log(this.id);
     this.index();
-    __WEBPACK_IMPORTED_MODULE_0__utilities_EventBus_js__["a" /* default */].$on('change_page', function (page) {
-      _this.index(page);
-    });
   },
 
 
   methods: {
-    index: function index(page) {
-      var _this2 = this;
+    index: function index() {
+      var _this = this;
 
-      axios.get('/api/commerce-detail-discounts/' + this.$route.params.id + '?page=' + page).then(function (response) {
-        console.log(response.data.branchs.data);
-        _this2.branchs = response.data.branchs.data;
-        _this2.pagination = response.data.paginate;
+      axios.get('/api/detail-commerce/' + this.$route.params.id).then(function (data) {
+        _this.branchs = data.data.data[0].branchs;
       }).catch(function (err) {
         return console.log(err);
       });
@@ -67023,85 +67218,78 @@ var render = function() {
       _vm._v(" "),
       _c("h3", { staticClass: "mt-4" }, [_vm._v("Descuentos")]),
       _vm._v(" "),
-      _c(
-        "div",
-        { staticClass: "row justify-content-center stat-table-wrap" },
-        [
-          _c("div", { staticClass: "col-lg-12 stat-wrap-container" }, [
-            _c("div", { staticClass: "stat-wrap" }, [
-              _c(
-                "table",
-                { staticClass: "table table-striped mt-40 stat-table" },
-                [
-                  _vm._m(0),
-                  _vm._v(" "),
-                  _c(
-                    "tbody",
-                    [
-                      _vm._l(_vm.branchs, function(branch) {
-                        return _vm._l(branch.discounts, function(discount) {
-                          return _c("tr", [
-                            _c("td", [_vm._v(_vm._s(discount.iddiscount))]),
-                            _vm._v(" "),
-                            _c("td", [_vm._v(_vm._s(discount.title))]),
-                            _vm._v(" "),
-                            _c("td", [_vm._v(_vm._s(discount.description))]),
-                            _vm._v(" "),
-                            _c("td", [_vm._v(_vm._s(discount.startdate))]),
-                            _vm._v(" "),
-                            _c("td", [_vm._v(_vm._s(discount.enddate))]),
-                            _vm._v(" "),
-                            _c("td", [
-                              _vm._v(
-                                "\n                            " +
-                                  _vm._s(discount.outstanding ? "Si" : "No") +
-                                  "\n                            "
-                              )
-                            ]),
-                            _vm._v(" "),
-                            _c(
-                              "td",
-                              [
-                                _c(
-                                  "router-link",
-                                  {
-                                    attrs: {
-                                      to: "/discount/" + discount.iddiscount
-                                    }
-                                  },
-                                  [
-                                    _c(
-                                      "a",
-                                      {
-                                        staticClass: "btn btn-primary btn-sm",
-                                        attrs: { href: "#" }
-                                      },
-                                      [
-                                        _vm._v(
-                                          "\n                                Detalle\n                                "
-                                        )
-                                      ]
-                                    )
-                                  ]
-                                )
-                              ],
-                              1
+      _c("div", { staticClass: "row justify-content-center stat-table-wrap" }, [
+        _c("div", { staticClass: "col-lg-12 stat-wrap-container" }, [
+          _c("div", { staticClass: "stat-wrap" }, [
+            _c(
+              "table",
+              { staticClass: "table table-striped mt-40 stat-table" },
+              [
+                _vm._m(0),
+                _vm._v(" "),
+                _c(
+                  "tbody",
+                  [
+                    _vm._l(_vm.branchs, function(branch) {
+                      return _vm._l(branch.discounts, function(discount) {
+                        return _c("tr", [
+                          _c("td", [_vm._v(_vm._s(discount.iddiscount))]),
+                          _vm._v(" "),
+                          _c("td", [_vm._v(_vm._s(discount.title))]),
+                          _vm._v(" "),
+                          _c("td", [_vm._v(_vm._s(discount.description))]),
+                          _vm._v(" "),
+                          _c("td", [_vm._v(_vm._s(discount.startdate))]),
+                          _vm._v(" "),
+                          _c("td", [_vm._v(_vm._s(discount.enddate))]),
+                          _vm._v(" "),
+                          _c("td", [
+                            _vm._v(
+                              "\n                            " +
+                                _vm._s(discount.outstanding ? "Si" : "No") +
+                                "\n                            "
                             )
-                          ])
-                        })
+                          ]),
+                          _vm._v(" "),
+                          _c(
+                            "td",
+                            [
+                              _c(
+                                "router-link",
+                                {
+                                  attrs: {
+                                    to: "/discount/" + discount.iddiscount
+                                  }
+                                },
+                                [
+                                  _c(
+                                    "a",
+                                    {
+                                      staticClass: "btn btn-primary btn-sm",
+                                      attrs: { href: "#" }
+                                    },
+                                    [
+                                      _vm._v(
+                                        "\n                                Detalle\n                                "
+                                      )
+                                    ]
+                                  )
+                                ]
+                              )
+                            ],
+                            1
+                          )
+                        ])
                       })
-                    ],
-                    2
-                  )
-                ]
-              )
-            ])
-          ]),
-          _vm._v(" "),
-          _c("paginator", { attrs: { pagination: _vm.pagination } })
-        ],
-        1
-      )
+                    })
+                  ],
+                  2
+                )
+              ]
+            )
+          ])
+        ])
+      ])
     ]
   )
 }
@@ -67223,7 +67411,7 @@ var content = __webpack_require__(379);
 if(typeof content === 'string') content = [[module.i, content, '']];
 if(content.locals) module.exports = content.locals;
 // add the styles to the DOM
-var update = __webpack_require__(5)("0f4278b2", content, false, {});
+var update = __webpack_require__(5)("6f4fe7f4", content, false, {});
 // Hot Module Replacement
 if(false) {
  // When the styles change, update the <style> tags
@@ -67594,6 +67782,13 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
 
 
 
@@ -67625,7 +67820,9 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
         branch_idbranch: ''
       },
       options: [],
-      value: []
+      value: [],
+      discountTagNum: null,
+      tagError: ''
 
     };
   },
@@ -67691,6 +67888,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
       this.tmpDiscount.enddate = this.formatDate(this.tmpDiscount.startdate);
       this.tmpDiscount.outstanding = discount.outstanding == 0 ? false : true;
       this.getBranchDiscount(this.tmpDiscount.iddiscount);
+      this.getTagsNum();
       this.$refs.editModal.show();
     },
     editBranchDiscount: function editBranchDiscount(data) {
@@ -67717,6 +67915,14 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
       var _this4 = this;
 
       this.errorsDiscount = {};
+      this.tagError = '';
+
+      if (this.value.length > this.discountTagNum) {
+        this.tagError = 'El numero permitido de tags son: ' + this.discountTagNum + '.'; //enviamos el error,
+        return false;
+      }
+
+      this.tmpDiscount.tags = this.value;
 
       axios.patch('/api/discount/' + this.tmpDiscount.iddiscount, this.tmpDiscount).then(function (response) {
         _this4.tmpDiscount = {};
@@ -67908,6 +68114,18 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
         this.errorFin = "La fecha debe ser maryor a la fecha inicio.";
       }
     },
+    getTagsNum: function getTagsNum() {
+      var _this12 = this;
+
+      axios.get('api/tag-num').then(function (data) {
+        var value = data.data[0].val;
+        var val = JSON.parse(value);
+
+        _this12.discountTagNum = val.discount;
+      }).catch(function (err) {
+        return console.log(err);
+      });
+    },
     randomString: function randomString(len, an) {
       an = an && an.toLowerCase();
       var str = "",
@@ -68005,7 +68223,7 @@ var content = __webpack_require__(383);
 if(typeof content === 'string') content = [[module.i, content, '']];
 if(content.locals) module.exports = content.locals;
 // add the styles to the DOM
-var update = __webpack_require__(5)("d382636a", content, false, {});
+var update = __webpack_require__(5)("13d6a1d8", content, false, {});
 // Hot Module Replacement
 if(false) {
  // When the styles change, update the <style> tags
@@ -68158,6 +68376,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
 
 
 
@@ -68193,13 +68412,16 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
       errorpreciodescuento: '',
       errorporcentaje: '',
       options: [],
-      value: []
+      value: [],
+      discountTagNum: null,
+      tagError: ''
 
     };
   },
   created: function created() {
     this.getDiscountCategories();
     this.getTags();
+    this.getTagsNum();
   },
 
   methods: {
@@ -68238,11 +68460,20 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
       this.errorsDiscount = {};
       this.errorInicio = '';
       this.errorFin = '';
+
+      if (this.value.length > this.discountTagNum) {
+        this.tagError = 'El numero permitido de tags son: ' + this.discountTagNum + '.'; //enviamos el error,
+        return false;
+      }
+
+      this.form.tags = this.value;
+
       axios.post('api/discount', this.form).then(function (response) {
         _this2.form = {};
         _this2.form.outstanding = false;
         _this2.form.amountavailable = 0;
         _this2.form.amountredeemed = 0;
+        _this2.value = [];
 
         _this2.$parent.cargarDiscount();
         $('#createModal').trigger("reset");
@@ -68340,6 +68571,18 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
       var result = 100 * this.form.discountprice / this.form.normalprice;
 
       this.form.discountpercentage = 100 - result;
+    },
+    getTagsNum: function getTagsNum() {
+      var _this5 = this;
+
+      axios.get('api/tag-num').then(function (data) {
+        var value = data.data[0].val;
+        var val = JSON.parse(value);
+
+        _this5.discountTagNum = val.discount;
+      }).catch(function (err) {
+        return console.log(err);
+      });
     },
     randomString: function randomString(len, an) {
       an = an && an.toLowerCase();
@@ -68439,7 +68682,7 @@ var content = __webpack_require__(387);
 if(typeof content === 'string') content = [[module.i, content, '']];
 if(content.locals) module.exports = content.locals;
 // add the styles to the DOM
-var update = __webpack_require__(5)("2d80b57e", content, false, {});
+var update = __webpack_require__(5)("1df4c864", content, false, {});
 // Hot Module Replacement
 if(false) {
  // When the styles change, update the <style> tags
@@ -69770,7 +70013,15 @@ var render = function() {
                           },
                           expression: "value"
                         }
-                      })
+                      }),
+                      _vm._v(" "),
+                      _c("p", [
+                        _vm.tagError != ""
+                          ? _c("small", { staticClass: "text-danger" }, [
+                              _vm._v(_vm._s(_vm.tagError))
+                            ])
+                          : _vm._e()
+                      ])
                     ],
                     1
                   )
@@ -70683,7 +70934,15 @@ var render = function() {
                           },
                           expression: "value"
                         }
-                      })
+                      }),
+                      _vm._v(" "),
+                      _c("p", [
+                        _vm.tagError != ""
+                          ? _c("small", { staticClass: "text-danger" }, [
+                              _vm._v(_vm._s(_vm.tagError))
+                            ])
+                          : _vm._e()
+                      ])
                     ],
                     1
                   )
@@ -70867,10 +71126,10 @@ var render = function() {
                     ])
                   ]),
                   _vm._v(" "),
-                  _c("hr"),
-                  _vm._v(" "),
                   _vm.descuentosucursal.length > 0
                     ? _c("div", [
+                        _c("hr"),
+                        _vm._v(" "),
                         _c("div", { staticClass: "table-responsive" }, [
                           _c(
                             "table",
@@ -70951,7 +71210,38 @@ var render = function() {
                           )
                         ])
                       ])
-                    : _vm._e()
+                    : _vm._e(),
+                  _vm._v(" "),
+                  _c(
+                    "div",
+                    { staticClass: "form-group" },
+                    [
+                      _c("label", { staticClass: "font-weight-bold" }, [
+                        _vm._v("Tags")
+                      ]),
+                      _vm._v(" "),
+                      _c("multiselect", {
+                        attrs: {
+                          "tag-placeholder": "Agregar tag",
+                          placeholder: "No tiene Tag",
+                          label: "name",
+                          "track-by": "code",
+                          options: _vm.options,
+                          multiple: true,
+                          taggable: true,
+                          disabled: true
+                        },
+                        model: {
+                          value: _vm.value,
+                          callback: function($$v) {
+                            _vm.value = $$v
+                          },
+                          expression: "value"
+                        }
+                      })
+                    ],
+                    1
+                  )
                 ])
               ])
             ]
@@ -103262,46 +103552,46 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
-				mounted: function mounted() {
-								console.log('Login Mounted.');
-				},
-				data: function data() {
-								return {
-												errors: {},
-												'email': "",
-												'password': "",
-												'reg': /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,24}))$/
-								};
-				},
+	mounted: function mounted() {
+		console.log('Login Mounted.');
+	},
+	data: function data() {
+		return {
+			errors: {},
+			'email': "",
+			'password': "",
+			'reg': /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,24}))$/
+		};
+	},
 
-				methods: {
-								submitLogin: function submitLogin() {
-												var _this = this;
+	methods: {
+		submitLogin: function submitLogin() {
+			var _this = this;
 
-												this.errors = [];
-												if (!this.email) this.errors.password = 'El Correo Electrónico es requerido.';
-												if (!this.validEmail(this.email)) this.errors.emailvalid = 'Se requiere un correo válido.';
-												if (!this.password) this.errors.password = 'La contraseña es requerido.';
+			this.errors = [];
+			if (!this.email) this.errors.password = 'El Correo Electrónico es requerido.';
+			if (!this.validEmail(this.email)) this.errors.emailvalid = 'Se requiere un correo válido.';
+			if (!this.password) this.errors.password = 'La contraseña es requerido.';
 
-												if (this.validEmail(this.email) && this.password) {
-																var params = {
-																				email: this.email,
-																				password: this.password
-																};
+			if (this.validEmail(this.email) && this.password) {
+				var params = {
+					email: this.email,
+					password: this.password
+				};
 
-																axios.post('/api/login', params).then(function (response) {
-																				localStorage.setItem('userdata', JSON.stringify(response.data.user));
-																				window.location.href = '/';
-																}).catch(function (error) {
-																				_this.errors.push(error.response.data.error);
-																});
-												}
-								},
+				axios.post('/api/login', params).then(function (response) {
+					localStorage.setItem('userdata', JSON.stringify(response.data.user));
+					window.location.href = '/';
+				}).catch(function (error) {
+					_this.errors.push(error.response.data.error);
+				});
+			}
+		},
 
-								validEmail: function validEmail(email) {
-												return this.reg.test(email);
-								}
-				}
+		validEmail: function validEmail(email) {
+			return this.reg.test(email);
+		}
+	}
 });
 
 /***/ }),
@@ -103372,7 +103662,7 @@ var content = __webpack_require__(517);
 if(typeof content === 'string') content = [[module.i, content, '']];
 if(content.locals) module.exports = content.locals;
 // add the styles to the DOM
-var update = __webpack_require__(5)("92562968", content, false, {});
+var update = __webpack_require__(5)("1cb5a15a", content, false, {});
 // Hot Module Replacement
 if(false) {
  // When the styles change, update the <style> tags
@@ -103574,7 +103864,7 @@ var content = __webpack_require__(521);
 if(typeof content === 'string') content = [[module.i, content, '']];
 if(content.locals) module.exports = content.locals;
 // add the styles to the DOM
-var update = __webpack_require__(5)("2bd3cb81", content, false, {});
+var update = __webpack_require__(5)("b6a6a370", content, false, {});
 // Hot Module Replacement
 if(false) {
  // When the styles change, update the <style> tags
@@ -104288,7 +104578,7 @@ var content = __webpack_require__(531);
 if(typeof content === 'string') content = [[module.i, content, '']];
 if(content.locals) module.exports = content.locals;
 // add the styles to the DOM
-var update = __webpack_require__(5)("6f5ad49e", content, false, {});
+var update = __webpack_require__(5)("09ba2804", content, false, {});
 // Hot Module Replacement
 if(false) {
  // When the styles change, update the <style> tags
@@ -104312,7 +104602,7 @@ exports = module.exports = __webpack_require__(2)(false);
 
 
 // module
-exports.push([module.i, "\n#section-register[data-v-7a6797a6]{\n    margin-top: 70px;\n}\n", ""]);
+exports.push([module.i, "\n#section-register[data-v-7a6797a6]{\r\n    margin-top: 70px;\n}\r\n", ""]);
 
 // exports
 
@@ -104544,7 +104834,7 @@ var render = function() {
                           [_vm._v("×")]
                         ),
                         _vm._v(
-                          "\n                          " + _vm._s(error) + " "
+                          "\r\n                          " + _vm._s(error) + " "
                         ),
                         _c("br"),
                         _vm._v(" "),
@@ -105002,7 +105292,7 @@ var content = __webpack_require__(536);
 if(typeof content === 'string') content = [[module.i, content, '']];
 if(content.locals) module.exports = content.locals;
 // add the styles to the DOM
-var update = __webpack_require__(5)("e783da38", content, false, {});
+var update = __webpack_require__(5)("7fc889e4", content, false, {});
 // Hot Module Replacement
 if(false) {
  // When the styles change, update the <style> tags
@@ -105026,7 +105316,7 @@ exports = module.exports = __webpack_require__(2)(false);
 
 
 // module
-exports.push([module.i, "\n#section-register {\n    margin-top: 120px;\n    margin-bottom: 100px;\n}\n", ""]);
+exports.push([module.i, "\n#section-register {\r\n    margin-top: 120px;\r\n    margin-bottom: 100px;\n}\r\n", ""]);
 
 // exports
 
@@ -105347,7 +105637,7 @@ var content = __webpack_require__(541);
 if(typeof content === 'string') content = [[module.i, content, '']];
 if(content.locals) module.exports = content.locals;
 // add the styles to the DOM
-var update = __webpack_require__(5)("9c9c7ccc", content, false, {});
+var update = __webpack_require__(5)("2f762a9a", content, false, {});
 // Hot Module Replacement
 if(false) {
  // When the styles change, update the <style> tags
@@ -105371,7 +105661,7 @@ exports = module.exports = __webpack_require__(2)(false);
 
 
 // module
-exports.push([module.i, "\n#section-register {\n    margin-top: 120px;\n    margin-bottom: 100px;\n}\n", ""]);
+exports.push([module.i, "\n#section-register {\r\n    margin-top: 120px;\r\n    margin-bottom: 100px;\n}\r\n", ""]);
 
 // exports
 
@@ -105685,7 +105975,7 @@ var content = __webpack_require__(546);
 if(typeof content === 'string') content = [[module.i, content, '']];
 if(content.locals) module.exports = content.locals;
 // add the styles to the DOM
-var update = __webpack_require__(5)("54ef7144", content, false, {});
+var update = __webpack_require__(5)("18531f44", content, false, {});
 // Hot Module Replacement
 if(false) {
  // When the styles change, update the <style> tags
@@ -105709,7 +105999,7 @@ exports = module.exports = __webpack_require__(2)(false);
 
 
 // module
-exports.push([module.i, "\n#section-register {\n    margin-top: 120px;\n    margin-bottom: 100px;\n}\n", ""]);
+exports.push([module.i, "\n#section-register {\r\n    margin-top: 120px;\r\n    margin-bottom: 100px;\n}\r\n", ""]);
 
 // exports
 
@@ -106017,7 +106307,7 @@ var content = __webpack_require__(551);
 if(typeof content === 'string') content = [[module.i, content, '']];
 if(content.locals) module.exports = content.locals;
 // add the styles to the DOM
-var update = __webpack_require__(5)("17fc131d", content, false, {});
+var update = __webpack_require__(5)("0b868a1d", content, false, {});
 // Hot Module Replacement
 if(false) {
  // When the styles change, update the <style> tags
@@ -106041,7 +106331,7 @@ exports = module.exports = __webpack_require__(2)(false);
 
 
 // module
-exports.push([module.i, "\n#section-reset {\n\tmargin-top: 100px;\n\tmargin-bottom: 60px;\n}\n", ""]);
+exports.push([module.i, "\n#section-reset {\r\n\tmargin-top: 100px;\r\n\tmargin-bottom: 60px;\n}\r\n", ""]);
 
 // exports
 
@@ -106127,7 +106417,6 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
             if (!this.password) this.errors.push('Password required.');
             if (!this.password_confirmation) this.errors.push('Password Confirmation required.');
 
-            console.log(this.password);
             if (this.password !== this.password_confirmation) {
                 this.password = "";
                 this.password_confirmation = "";
@@ -106145,7 +106434,15 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
             axios.post('/password/reset', params).then(function (response) {
                 console.log(response);
                 if (response.status == 200) {
-                    window.location.href = '/login';
+                    swal({
+                        title: "Aviso",
+                        text: "Se reseteo correctamente la contraseña. Se redireccionará al Login.",
+                        icon: "success"
+                    }).then(function (result) {
+                        if (result) {
+                            window.location.href = '/login';
+                        }
+                    });
                 }
             }).catch(function (error) {
                 if (error.response.status == 422) {
@@ -106192,9 +106489,9 @@ var render = function() {
                             [_vm._v("×")]
                           ),
                           _vm._v(
-                            "\n                              " +
+                            "\r\n                              " +
                               _vm._s(error) +
-                              "\n                            "
+                              "\r\n                            "
                           )
                         ]
                       )
@@ -106225,7 +106522,7 @@ var render = function() {
                             [_vm._v("×")]
                           ),
                           _vm._v(
-                            "\n                              " + _vm._s(tmp)
+                            "\r\n                              " + _vm._s(tmp)
                           ),
                           _c("br"),
                           _vm._v(" "),
@@ -106436,7 +106733,7 @@ var content = __webpack_require__(556);
 if(typeof content === 'string') content = [[module.i, content, '']];
 if(content.locals) module.exports = content.locals;
 // add the styles to the DOM
-var update = __webpack_require__(5)("2983905a", content, false, {});
+var update = __webpack_require__(5)("26290d4c", content, false, {});
 // Hot Module Replacement
 if(false) {
  // When the styles change, update the <style> tags
@@ -106460,7 +106757,7 @@ exports = module.exports = __webpack_require__(2)(false);
 
 
 // module
-exports.push([module.i, "\n#section-activation {\n    margin-top: 120px;\n    margin-bottom: 100px;\n}\n", ""]);
+exports.push([module.i, "\n#section-activation {\r\n    margin-top: 120px;\r\n    margin-bottom: 100px;\n}\r\n", ""]);
 
 // exports
 
@@ -106744,7 +107041,7 @@ var content = __webpack_require__(561);
 if(typeof content === 'string') content = [[module.i, content, '']];
 if(content.locals) module.exports = content.locals;
 // add the styles to the DOM
-var update = __webpack_require__(5)("48db6bf6", content, false, {});
+var update = __webpack_require__(5)("72c05614", content, false, {});
 // Hot Module Replacement
 if(false) {
  // When the styles change, update the <style> tags
@@ -106768,7 +107065,7 @@ exports = module.exports = __webpack_require__(2)(false);
 
 
 // module
-exports.push([module.i, "\n#section-activation {\n    margin-top: 120px;\n    margin-bottom: 100px;\n}\n", ""]);
+exports.push([module.i, "\n#section-activation {\r\n    margin-top: 120px;\r\n    margin-bottom: 100px;\n}\r\n", ""]);
 
 // exports
 

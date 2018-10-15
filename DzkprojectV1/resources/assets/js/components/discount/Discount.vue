@@ -146,6 +146,7 @@
                                 <span class="text-danger" v-if="!!errorsDiscount.discountcategory_iddiscountcategory"> {{errorsDiscount.discountcategory_iddiscountcategory[0]}} </span>
                             </div>
                             <hr>
+                             <button type="button" class="btn btn-default btn-sm my-4" @click="addBranchDiscount(tmpDiscount)">Agregar Sucursal</button>
                              <div v-if="descuentosucursal.length > 0">
                                 <div class="table-responsive">
                                       <table class="table table-hover table-bordered table-striped table-condensed">
@@ -175,12 +176,10 @@
                                           </tbody>
                                       </table>
                                 </div>
-
                              </div>
                             <div class="form-group">
                               <label>Tags</label>
                               <multiselect v-model="value" tag-placeholder="Agregar tag" placeholder="Buscar o Agregar tag" label="name" track-by="code" :options="options" :multiple="true" :taggable="true" :searchable="true" tag-position="bottom" @tag="addTag"></multiselect>
-                              <p><small class="text-danger" v-if="tagError != '' ">{{ tagError }}</small></p>
                             </div> 
                             
                         </div>
@@ -265,10 +264,10 @@
                             <div class="form-group">
                                 <label class="font-weight-bold">Categoria Descuento</label>
                                 <p>{{tmpDiscount.discountcategory_iddiscountcategory}}</p>
+
                             </div>
-                             
+                             <hr>
                              <div v-if="descuentosucursal.length > 0">
-                              <hr>
                                 <div class="table-responsive">
                                       <table class="table table-hover table-bordered table-striped table-condensed">
                                           <thead>
@@ -291,13 +290,8 @@
                                           </tbody>
                                       </table>
                                 </div>
-                             
-                             </div>
-                             <div class="form-group">
-                              <label class="font-weight-bold">Tags</label>
-                              <multiselect v-model="value" tag-placeholder="Agregar tag" placeholder="No tiene Tag" label="name" track-by="code" :options="options" :multiple="true" :taggable="true" :disabled="true"></multiselect>
-                            </div> 
 
+                             </div>
                         </div>
                     </div>
                 </form>
@@ -309,7 +303,7 @@
                       <div class="modal-content">
                         <div class="container">
                               
-                            <h3>Sucursal : </h3>   
+                            <h3>Sucursal: {{sucursalName}} </h3>   
  
                             <div>
                               <div class="form-group mt-4">
@@ -331,9 +325,11 @@
                         </div>
                 </form>
         </b-modal> 
+
   </div>
 </template>
 <script>
+   import Bus from '../../utilities/EventBus';
    import Create from './Create'
    import bModal from 'bootstrap-vue/es/components/modal/modal'
    import moment from 'moment'
@@ -348,6 +344,7 @@
                 showEdit: false,
                 show: false,
                 changeImage: false,
+                sucursalName: '',
                 discountCategories: [],
                 descuentosucursal: [],
                 errorpreciodescuento: '',
@@ -363,8 +360,6 @@
                 }, 
                 options: [],
                 value: [],
-                discountTagNum : null,
-                tagError: '',
  
             }
         },
@@ -378,6 +373,10 @@
           this.getTags()
         },
         methods: {
+            addBranchDiscount(response){
+                // console.log(response)
+                Bus.$emit('branch_discount_add',response);
+            },
             //Guarda tag
             addTag (newTag) {
               const tag = {
@@ -422,8 +421,6 @@
                 this.tmpDiscount.enddate = this.formatDate(this.tmpDiscount.startdate);
                 this.tmpDiscount.outstanding = discount.outstanding == 0 ? false : true ;
                 this.getBranchDiscount(this.tmpDiscount.iddiscount)
-                this.getTagsDiscount(this.tmpDiscount.iddiscount)
-                this.getTagsNum()
                 this.$refs.editModal.show()
 
             },             
@@ -432,6 +429,7 @@
                 axios.get('api/branch-discount-update/'+data.pivot.discount_iddiscount+'/'+data.pivot.idbranch_has_discount)
                   .then((response) => {
                       // console.log(response.data.data.pivot)
+                      this.sucursalName = response.data.data.name
                       this.form.discounthours = response.data.data.pivot.discounthours
                       this.form.amountapproved = response.data.data.pivot.amountapproved
                       this.form.branch_idbranch = response.data.data.pivot.branch_idbranch
@@ -451,14 +449,6 @@
    
             updatedDiscount() {
                 this.errorsDiscount = {};
-                this.tagError = '';
-
-                if(this.value.length > this.discountTagNum ) {
-                  this.tagError = 'El numero permitido de tags son: ' + this.discountTagNum + '.'; //enviamos el error,
-                  return false;
-                }
-
-                this.tmpDiscount.tags = this.value
 
                 axios.patch(`/api/discount/${this.tmpDiscount.iddiscount}`, this.tmpDiscount)
                     .then((response) => {
@@ -504,7 +494,6 @@
                 this.tmpDiscount.outstanding = discount.outstanding == 0 ? false : true ;
                 this.getBranchDiscount(discount.iddiscount)
                 this.$refs.detailtModal.show()
-                this.getTagsDiscount(this.tmpDiscount.iddiscount)
             },
             confirm(discount) {
                 swal({
@@ -653,31 +642,7 @@
                   this.errorFin = "La fecha debe ser maryor a la fecha inicio."
                }
             },       
-            getTagsDiscount(value){
-                axios.get('api/tags-discount/'+value)
-                  .then((response) => {
-                      this.value = response.data.data
-                      this.value.forEach(function(item) {
-                        item.code = item.idtags
-                      })
-                  })  
-                  .catch((err) => {
-  
-                      console.log(err);
-                });
-              
-            }, 
-            getTagsNum() {
-              axios.get('api/tag-num').then(data => {
-                let value = data.data[0].val;
-                let val = JSON.parse(value);
 
-                this.discountTagNum = val.discount;
-
-              })
-              .catch(err => console.log(err))
-
-            },
 
             randomString(len, an){
               an = an&&an.toLowerCase();

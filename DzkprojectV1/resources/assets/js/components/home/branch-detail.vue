@@ -1,6 +1,6 @@
 <template>
 	<div id="section-profile" class="settings-content">
-        <a href="#" class="btn btn-danger">Volver atrás</a>
+        <button type="button" class="btn btn-outline-dark pull-right" @click="$router.go(-1)">Atras</button>
         <h2 class="my-4">Surcursal: {{branch.idbranch}}</h2>
 
             <h3 class="mt-4">{{ branch.name }}</h3>
@@ -57,14 +57,55 @@
                     <br>
               
                 </div>
-            
+                <div v-if="discounts"> 
+                    <h3 class="mt-4">Descuentos</h3>    
+                    <div class="row justify-content-center stat-table-wrap">
+                        <div class="col-lg-12 stat-wrap-container">
+                            <div class="stat-wrap">
+                                <table class="table table-striped mt-40 stat-table">
+                                    <thead>
+                                      <tr>
+                                        <th>ID Descuento</th>
+                                        <th>Titulo</th>
+                                        <th>Descripcion</th>
+                                        <th>Inicio</th>
+                                        <th>Fin</th>
+                                        <th>Destacado</th>
+                                        <th>Opcciones</th>
+                                        </tr>
+                                      </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr v-for="discount in discounts">
+                                                  <td>{{ discount.iddiscount}}</td>
+                                                  <td>{{ discount.title }}</td>
+                                                  <td>{{ discount.description }}</td>
+                                                  <td>{{ discount.startdate }}</td>
+                                                  <td>{{ discount.enddate }}</td>
+                                                  <td>
+                                                  {{ discount.outstanding ? "Si" : "No" }}
+                                                  </td>
+                                                  <td>
+                                                    <router-link :to="`/discount/${discount.iddiscount}`">
+                                                      <a href="#" class="btn btn-primary btn-sm">
+                                                      Detalle
+                                                      </a>     
+                                                    </router-link>
+                                                  </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
-        </div>
+    </div>
 </template>
 
 <script>
-	export default {
-		data() {
+    export default {
+        data() {
 			return {
 				id: this.$route.params.id,
 			     branch: {
@@ -82,7 +123,7 @@
                     state_idstate: '',
                     city_idcity: ''
                   },
-                 branchs:[],
+                 discounts:[],
 			}
 		},
 
@@ -106,9 +147,12 @@
                 this.branch.state_idstate = response.data.data[0].states.name;
                 this.branch.city_idcity = response.data.data[0].cities.name;
                 this.branch.commerce_idcommerce = response.data.data[0].commerces.name;
+                this.discounts = response.data.data[0].discounts;
+
+                console.log(response)
               })
               .catch(err => console.log(err))
-            },			
+            },	
 
 		}
 	}

@@ -8,7 +8,7 @@
               <!-- <spinner :show="loadingProductos"></spinner> -->
                 <div class="responsive">
                   <div class="table-responsive">
-                      <table class="table table-hover table-bordered table-striped table-condensed">
+                      <table class="table table-striped mt-40 stat-table">
                           <thead>
                             <tr>
                                 <th class="text-center">ID Comercio</th>
@@ -27,27 +27,25 @@
                           </thead>
                           <tbody>
                             <tr v-for="commerce in commerces">
-                              <th>{{ commerce.idcommerce }}</th>
-                              <th>{{ commerce.name }}</th>
-                              <!--<th>{{ commerce.phone1 }}</th>
-                              <th>{{ commerce.phone2 }}</th> -->
-                              <th>{{ commerce.email }}</th>
-                              <th>
+                              <td>{{ commerce.idcommerce }}</td>
+                              <td>{{ commerce.name }}</td>
+                              <!--<td>{{ commerce.phone1 }}</td>
+                              <td>{{ commerce.phone2 }}</td> -->
+                              <td>{{ commerce.email }}</td>
+                              <td>
                                 <img class="image-commerce" v-if="commerce.image != null" :src="'images/commerce/'+commerce.image" />
                                   <p v-if="commerce.image == null">No posee imagen.</p>
-                              </th>
-                             <!--<th>{{ commerce.web }}</th>
-                              <th>{{ commerce.countries.name }}</th>
-                              <th>{{ commerce.states.name }}</th>
-                              <th>{{ commerce.cities.name }}</th> -->
-                              <th>{{ commerce.ccategories.name }}</th>
-                              <th>
-                                <td class="text-right">
-                                    <b-btn v-b-modal="'showModal'" @click="show(commerce.idcommerce)" variant="default">Detalle</b-btn>
-                                    <b-btn v-b-modal="'editModal'" @click="edit(commerce.idcommerce)" variant="warning">Editar</b-btn>
-                                    <button type="button" @click="confirm(commerce.idcommerce)" class="btn btn-sm  btn-danger">Eliminar</button>
-                                </td>
-                              </th>
+                              </td>
+                             <!--<td>{{ commerce.web }}</td>
+                              <td>{{ commerce.countries.name }}</td>
+                              <td>{{ commerce.states.name }}</td>
+                              <td>{{ commerce.cities.name }}</td> -->
+                              <td>{{ commerce.ccategories.name }}</td>
+                              <td class="text-right">
+                                  <b-btn v-b-modal="'showModal'" size="sm" @click="show(commerce.idcommerce)" variant="default">Detalle</b-btn>
+                                  <b-btn v-b-modal="'editModal'" size="sm" @click="edit(commerce.idcommerce)" variant="warning">Editar</b-btn>
+                                  <button type="button" @click="confirm(commerce.idcommerce)" class="btn btn-sm  btn-danger">Eliminar</button>
+                              </td>
                             </tr>
                           </tbody>
                       </table>

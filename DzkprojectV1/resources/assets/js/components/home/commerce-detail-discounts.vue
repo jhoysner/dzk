@@ -1,6 +1,6 @@
 <template>
   <div id="section-profile" class="settings-content">
-        <a href="#" class="btn btn-danger">Volver atrás</a>
+        <button type="button" class="btn btn-outline-dark pull-right" @click="$router.push('/')">Atras</button>
         <h2 class="my-4">Comercio: {{id}}</h2>
 
         <ul class="nav nav-tabs">
@@ -40,21 +40,21 @@
                         <tbody>
                           <template  v-for="branch in branchs">
                             <tr v-for="discount in branch.discounts">
-                                      <td>{{ discount.iddiscount}}</td>
-                                      <td>{{ discount.title }}</td>
-                                      <td>{{ discount.description }}</td>
-                                      <td>{{ discount.startdate }}</td>
-                                      <td>{{ discount.enddate }}</td>
-                                      <td>
-                                      {{ discount.outstanding ? "Si" : "No" }}
-                                      </td>
-                                      <td>
-                                        <router-link :to="`/discount/${discount.iddiscount}`">
-                                          <a href="#" class="btn btn-warning btn-sm">
-                                          Detalle
-                                          </a>     
-                                        </router-link>
-                                      </td>
+                              <td>{{ discount.iddiscount}}</td>
+                              <td>{{ discount.title }}</td>
+                              <td>{{ discount.description }}</td>
+                              <td>{{ discount.startdate }}</td>
+                              <td>{{ discount.enddate }}</td>
+                              <td>
+                              {{ discount.outstanding ? "Si" : "No" }}
+                              </td>
+                              <td>
+                                <router-link :to="`/discount/${discount.iddiscount}`">
+                                  <a href="#" class="btn btn-primary btn-sm">
+                                  Detalle
+                                  </a>     
+                                </router-link>
+                              </td>
                             </tr>
                           </template>
                         </tbody>

@@ -1,6 +1,6 @@
 <template>
 	<div id="section-profile" class="settings-content">
-        <a href="#" class="btn btn-danger">Volver atrás</a>
+        <button type="button" class="btn btn-outline-dark pull-right" @click="$router.go(-1)">Atras</button>
         <h2 class="my-4">Descuento: {{discount.iddiscount}}</h2>
 
             <h3 class="mt-4">{{ discount.title }}</h3>
@@ -45,7 +45,45 @@
                     <br>
               
                 </div>
-            
+                <div>
+                    <h3 class="mt-4">Sucursales</h3>    
+                    <div class="row justify-content-center stat-table-wrap">
+                        <div class="col-lg-12 stat-wrap-container">
+                            <div class="stat-wrap">
+                                <table class="table table-striped mt-40 stat-table">
+                                    <thead>
+                                      <tr>
+                                        <th>ID Sucursal</th>
+                                        <th>Nombre</th>
+                                        <th>Imagen</th>
+                                        <th>Latitud y Longitud</th>
+                                        <th>Options</th>
+                                      </tr>
+                                    </thead>
+                                    <tbody>
+                                      <tr v-for="branch in branchs" >
+                                        <td>{{ branch.idbranch }}</td>
+                                        <td>{{ branch.name }}</td>
+                                        <td>
+                                          <img class="image-branch" v-if="branch.image != null" :src="'images/branch/'+branch.image" />
+                                          <p v-if="branch.image == null">No posee imagen.</p>
+                                        </td>
+                                        <td>{{ branch.latitude }} - {{ branch.longitude }}</td>
+                                        <td>
+                                          <router-link :to="`/branch/${branch.idbranch}`">
+                                            <a href="#" class="btn btn-primary btn-sm">
+                                            Detalle
+                                            </a>     
+                                          </router-link>
+                                        </td>
+                                        
+                                      </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
 </template>
@@ -72,6 +110,7 @@
                     discountprice: '',
                     discountpercentage: ''
 			    },
+                branchs:[],
 			}
 		},
 
@@ -81,7 +120,8 @@
 
 		methods: {
             index() {
-              axios.get('/api/discount/' + this.$route.params.id).then(response => {
+              axios.get('/api/discount/' +this.id).then(response => {
+                console.log(response)
                 this.discount.iddiscount = response.data.data.iddiscount;
                 this.discount.title = response.data.data.title;
                 this.discount.description = response.data.data.description;
@@ -91,6 +131,8 @@
                 this.discount.outstanding = response.data.data.outstanding;
                 this.discount.conditions = response.data.data.conditions;
                 this.discount.restrictions = response.data.data.restrictions;
+
+                this.branchs = response.data.data.branchs;
               })
               .catch(err => console.log(err))
             },			

@@ -25,11 +25,11 @@ class BranchRequest extends FormRequest
     {
         return [
           //'idbranch'          => 'required',
-          'name'              => 'required',
-          'address'           => 'required',
-          'schedule'          => 'required',
-          'phone1'            => 'required',
-          'phone2'            => 'required',
+          'name'              => 'required|string|max:128',
+          'address'           => 'required|string|max:256',
+          'schedule'          => 'required|string|max:512',
+          'phone1'            => 'required|string|max:20',
+          'phone2'            => 'required|string|max:20',
           //'image'             => 'mimes:jpg, jpeg, png, bmp',
           'latitude'          => 'nullable|numeric',
           'longitude'         => 'nullable|numeric',
@@ -47,6 +47,7 @@ class BranchRequest extends FormRequest
             'numeric' => 'El campo :attribute es admite solo números.',
             'email' => 'El campo :attribute no contiene un email válido.',
             'mimes' => 'El campo :attribute admite solo formato de imagenes.',
+            'max' =>  'El campo :attribute excede el limite permitido de caracteres.'
         ];
     }
 }

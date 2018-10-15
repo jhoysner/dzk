@@ -227,7 +227,7 @@ import $ from 'jquery';
             if($("#image").val() != "") {
               let ext = $("#image").val().split('.').pop();
             
-              let found = this.validExtensions.indexOf(ext);
+              let found = this.validExtensions.indexOf(ext.toLowerCase());
 
               if(found == -1) {
                 return true;

@@ -1,6 +1,6 @@
 <template>
   <div id="section-profile" class="settings-content">
-        <a href="#" class="btn btn-danger">Volver atrás</a>
+        <button type="button" class="btn btn-outline-dark pull-right" @click="$router.push('/')">Atras</button>
         <h2 class="my-4">Comercio: {{commerce.idcommerce}}</h2>
 
         <ul class="nav nav-tabs">
@@ -45,7 +45,7 @@
                             <td>{{ branch.latitude }} - {{ branch.longitude }}</td>
                             <td>
                               <router-link :to="`/branch/${branch.idbranch}`">
-                                <a href="#" class="btn btn-warning btn-sm">
+                                <a href="#" class="btn btn-primary btn-sm">
                                 Detalle
                                 </a>     
                               </router-link>
@@ -56,12 +56,17 @@
                     </table>
                 </div>
             </div>
+            <paginator :pagination="pagination"></paginator>
         </div>
   </div>
 </template>
 
 <script>
+import Bus from '../../utilities/EventBus.js';
+import paginator from '../../utilities/paginator';
+
   export default {
+    components: { paginator },
     data() {
       return {
         id: this.$route.params.id,
@@ -69,22 +74,40 @@
           idcommerce: '',
         },
         branchs:[],
+        pagination: {
+            'total': 0,
+            'current_page': 0,
+            'per_page': 0,
+            'last_page': 0,
+            'from': 0,
+            'to': 0
+        },
       }
     },
 
     mounted() {
-      this.index();
+      this.getCommerce();
+      this.getBranchs();
+
+      Bus.$on('change_page', (page) => {
+        this.getBranchs(page);
+      });
     },
 
     methods: {
-            index() {
-              axios.get('/api/detail-commerce/' + this.$route.params.id).then(data => {
-                this.commerce.idcommerce = data.data.data[0].idcommerce;
-                this.branchs = data.data.data[0].branchs;
+      getCommerce() {
+        axios.get('/api/detail-commerce/' + this.$route.params.id).then(data => {
+          this.commerce.idcommerce = data.data.data[0].idcommerce;
+        })
+        .catch(err => console.log(err))
+      },
 
-              })
-              .catch(err => console.log(err))
-            },      
+      getBranchs(page) {
+        axios.get('/api/commerce-detail-branchs/' + this.$route.params.id + '?page=' + page).then(response => {
+          this.branchs = response.data.branch.data;
+          this.pagination = response.data.paginate;        
+        }).catch(err => console.log(err))
+      },        
 
     }
   }

@@ -101,7 +101,8 @@ class BranchsController extends Controller
           ->with('states')
             ->with('cities')
               ->with('commerces')
-                ->get();
+                ->with('discounts')
+                 ->get();
 
       return response()->json(['data'=> $branch], 200);
     }

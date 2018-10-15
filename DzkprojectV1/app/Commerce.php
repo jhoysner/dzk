@@ -61,6 +61,6 @@ class Commerce extends Model
 
     public function tags()
     {
-        
+        return $this->belongsToMany('App\Tags','commerce_has_tags')->withPivot('idcommerce_has_tags','commerce_idcommerce', 'tags_idtags')->whereNull('commerce_has_tags.deleted_at');
     }
 }

@@ -55,6 +55,12 @@
                   <label class="font-weight-bold">Categoría</label>
                   <p>{{ commerce.commercecategory_idcommercecategory }}</p>
               </div> 
+
+              <div class="form-group">
+                <label class="font-weight-bold">Tags</label>
+                <multiselect v-model="value" tag-placeholder="Agregar tag" placeholder="No tiene Tag" label="name" track-by="code" :options="options" :multiple="true" :taggable="true" :disabled="true"></multiselect>
+              </div> 
+
             </div>     
         </div>
       </b-modal> 
@@ -77,14 +83,18 @@ export default {
         country_idcountry: '',
         state_idstate: '',
         city_idcity: '',
-        commercecategory_idcommercecategory: ''
+        commercecategory_idcommercecategory: '',
       },
       url: '/commerce',
+      options: [],
+      value: []
+ 
     }
   },
 
   mounted() {
     Bus.$on('id_commerce', (id) => {
+      this.getTagsCommerce(id)
       axios.get('api' + this.url + '/' + id).then(data => {
         this.commerce.idcommerce = data.data[0].idcommerce;
         this.commerce.name = data.data[0].name;
@@ -100,13 +110,33 @@ export default {
       })
       .catch(err => console.log(err))
     });
+        
+
   },
 
 
   methods: {
     show(id) {
       
-    }
+    },
+    getTagsCommerce(value){
+      console.log(value)
+      axios.get('api/tags-commerce/'+value)
+        .then((response) => {
+            this.value = response.data.data
+            this.value.forEach(function(item) {
+              item.code = item.idtags
+            })
+            console.log(this.value)
+        })  
+        .catch((err) => {
+
+            console.log(err);
+      });
+    
+    },
+
+
   }
 }
 </script>

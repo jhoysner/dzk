@@ -20,7 +20,6 @@
                               <td width="80%">{{ tag.name }}</td>
                               <td class="text-right">
                                   <b-btn v-b-modal="'editModal'" @click="edit(tag.idtags)" class="btn btn-sm" variant="warning">Editar</b-btn>
-                                  <button type="button" @click="eliminar(tag.idtags)" class="btn btn-sm btn-xs btn-danger">Eliminar</button>
                               </td>
                               </th>
                             </tr>
@@ -72,28 +71,6 @@ export default {
     edit(id) {
       Bus.$emit('edit_id', id);
     },
-
-    eliminar(id) {
-        swal({
-          title: "Seguro quieres eliminar el tag?",
-          icon: "warning",
-          buttons: true,
-          dangerMode: true,
-        })
-        .then((willDelete) => {
-          if (willDelete) {
-            this.destroy(id)
-          }
-        });
-    },
-
-    destroy(id) {
-      axios.delete('api' + this.url + '/' + id).then(data => {
-        console.log(data);
-        this.index();
-      })
-      .catch(err => console.log(err))
-    }
   }
 }
 </script>

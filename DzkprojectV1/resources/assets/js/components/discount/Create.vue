@@ -97,6 +97,7 @@
                             <div class="form-group">
                               <label>Tags</label>
                               <multiselect v-model="value" tag-placeholder="Agregar tag" placeholder="Buscar o Agregar tag" label="name" track-by="code" :options="options" :multiple="true" :taggable="true" :searchable="true" tag-position="bottom" @tag="addTag"></multiselect>
+                              <p><small class="text-danger" v-if="tagError != '' ">{{ tagError }}</small></p>
                             </div>     
                         
                         </div>
@@ -147,12 +148,15 @@
                 errorporcentaje: '',
                 options: [],
                 value: [],
+                discountTagNum : null,
+                tagError: '',
 
             }
         },
         created(){
           this.getDiscountCategories();
-          this.getTags()
+          this.getTags();
+          this.getTagsNum();
         },
         methods: {
             //Guarda tag
@@ -184,12 +188,22 @@
                 this.errorsDiscount = {}
                 this.errorInicio= ''
                 this.errorFin= ''
+
+                if(this.value.length > this.discountTagNum ) {
+                  this.tagError = 'El numero permitido de tags son: ' + this.discountTagNum + '.'; //enviamos el error,
+                  return false;
+                }
+
+
+                this.form.tags = this.value
+
                 axios.post('api/discount',this.form)
                 .then(response => { 
                     this.form = {}            
                     this.form.outstanding = false
                     this.form.amountavailable= 0 
                     this.form.amountredeemed= 0
+                    this.value = []
 
                     this.$parent.cargarDiscount()
                     $('#createModal').trigger("reset");
@@ -290,6 +304,17 @@
               
               this.form.discountpercentage = 100-result;
             
+            },
+            getTagsNum() {
+              axios.get('api/tag-num').then(data => {
+                let value = data.data[0].val;
+                let val = JSON.parse(value);
+
+                this.discountTagNum = val.discount;
+
+              })
+              .catch(err => console.log(err))
+
             },
             randomString(len, an){
               an = an&&an.toLowerCase();

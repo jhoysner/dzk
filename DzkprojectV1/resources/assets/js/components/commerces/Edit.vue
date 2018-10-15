@@ -81,6 +81,8 @@
                       <div class="col-lg-12">
                         <label>Tags</label>
                         <multiselect v-model="value" tag-placeholder="Agregar tag" placeholder="Buscar o Agregar tag" label="name" track-by="code" :options="options" :multiple="true" :taggable="true" :searchable="true" tag-position="bottom" @tag="addTag"></multiselect>
+                        <p><small class="text-danger" v-if="tagError != '' ">{{ tagError }}</small></p>
+
                       </div> 
                       
                       <div class="col-lg-12 text-right">
@@ -112,6 +114,8 @@ export default {
       commerceCategories: [],
       commerceMaxSize: null,
       commerceMinSize: null,
+      commerceTagNum : null,
+      tagError: '',
       validExtensions: [],
       imageError: '',
       picture: '',
@@ -130,6 +134,7 @@ export default {
       this.getCommerceCategories();
       this.getCommercesSize();
       this.getCommercesExt();
+      this.getTagsNum();
       this.getTags()
     });
   },
@@ -179,6 +184,7 @@ export default {
         this.StateAct(data.data[0].country_idcountry);
         this.CityAct(data.data[0].state_idstate);
         this.picAct = data.data[0].image;
+        this.getTagsCommerce(data.data[0].idcommerce)
       })
       .catch(err => console.log(err))
     },
@@ -242,6 +248,13 @@ export default {
         this.imageError = 'La imagen no cumple con las dimensiones esperadas. Debe estar entre: ' + this.commerceMinSize + ' a ' + this.commerceMaxSize + 'KB'; //enviamos el error,
         return false;
       }
+      
+      if(this.value.length > this.commerceTagNum ) {
+        this.tagError = 'El numero permitido de tags son: ' + this.commerceTagNum + '.'; //enviamos el error,
+        return false;
+      }
+
+      this.commerce.tags = this.value
 
       axios.put('api' + this.url + '/' + this.commerce.idcommerce, this.commerce)
       .then(data => {
@@ -306,6 +319,31 @@ export default {
         let value = data.data[0].val;
         this.validExtensions = value;
         console.log(value);
+
+      })
+      .catch(err => console.log(err))
+
+    },
+    getTagsCommerce(value){
+        axios.get('api/tags-commerce/'+value)
+          .then((response) => {
+              this.value = response.data.data
+              this.value.forEach(function(item) {
+                item.code = item.idtags
+              })
+          })  
+          .catch((err) => {
+
+              console.log(err);
+        });
+      
+    },
+    getTagsNum() {
+      axios.get('api/tag-num').then(data => {
+        let value = data.data[0].val;
+        let val = JSON.parse(value);
+
+        this.commerceTagNum = val.commerce;
 
       })
       .catch(err => console.log(err))

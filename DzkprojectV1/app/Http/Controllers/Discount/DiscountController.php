@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Discount;
 use App\Branch;
 use App\BranchDiscount;
 use App\Discount;
+use App\DiscountTags;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\DiscountRequest;
 use Illuminate\Http\Request;
@@ -61,7 +62,20 @@ class DiscountController extends Controller
 
         $fields['iddiscount'] = str_random(36);
 
-        $discount = Discount::create($fields); 
+        $discount = Discount::create($fields);
+
+        if(count($request->tags) > 0) {
+        foreach ($request->tags as $value) { 
+
+                $iddiscount_has_tags = str_random(36);
+
+                DiscountTags::create([
+                   'iddiscount_has_tags' => $iddiscount_has_tags,
+                   'discount_iddiscount' => $discount->iddiscount,
+                   'tags_idtags'=> $value['code']
+                ]);
+            }
+      } 
 
         if ( !$discount )
             return response()->json(['error' => 'No se pudo guardar el registro'], 422);
@@ -134,6 +148,24 @@ class DiscountController extends Controller
         $discount->fill($request->except(['image']));
 
         $discount->image = $imageName;
+
+        //elimina tags
+        $discounttags = DiscountTags::where('discount_iddiscount',$discount->iddiscount)->get();
+        foreach ($discounttags as $temp) {
+            $temp->delete();
+        }
+
+        //si existe tags los agrega
+        if(count($request->tags) > 0) {
+            foreach ($request->tags as $value) { 
+                $iddiscount_has_tags = str_random(36);
+                DiscountTags::create([
+                    'iddiscount_has_tags' => $iddiscount_has_tags,
+                    'discount_iddiscount' => $discount->iddiscount,
+                    'tags_idtags'=> $value['code']
+                ]);
+            }
+        }
 
         if ($discount->save()) {
 
@@ -260,4 +292,14 @@ class DiscountController extends Controller
         // return response()->json(['data'=> $data], 201);
 
     }
+
+    public function getTagsDiscount($id)
+    {
+        $discount = Discount::find($id);
+
+        $discounttags = $discount->tags;
+
+        return response()->json(['data'=> $discounttags], 200);
+    }    
+
 }

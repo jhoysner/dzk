@@ -88,56 +88,28 @@ class UserController extends Controller
 
         if ( $request->hasFile('imagen') ) {
 
-            $path = public_path().'/img/profiles/';
-
-            //Obtiene Parametro de la imagen
-            $params = $this->paramsImage();
+            $path = public_path().'/images/profiles/';
 
             $imagenInit = $request->file('imagen');
             
-            $extension = $imagenInit->getClientOriginalExtension();                        
+            $extension = $imagenInit->getClientOriginalExtension();  
 
-            if (strpos($params['tipo']['val'], $extension)) {
-                $medidas = json_decode($params['medidas']['val']);
-
-                $imagenmed = getimagesize($imagenInit);    //Sacamos la información
-                $ancho = $imagenmed[0];              //Ancho
-                $alto = $imagenmed[1];
-
-               if($medidas->minsize == $ancho && $medidas->maxsize == $alto) {
-
-                    if ( $user->image != null )
+            if ( $user->image != null )
                     if(file_exists($path . $user->image)){
                     unlink($path . $user->image);
                     }
 
-                    $temp_name = '/img/profiles/'.$user->id.'.'.$extension;
+            $temp_name = '/images/profiles/'.$user->id.'.'.$extension;
 
-                    $user->image = $temp_name;
+            $user->image = $temp_name;
 
-                    $imagenInit->move($path, $temp_name);    
-                }                
-                
-            }            
+            $imagenInit->move($path, $temp_name);                         
             
         }
 
         $user->save();
         return response()->json(['state'=>'Update','success'=>\Lang::get('messages.user_update'),'user'=>$user], 200);
      
-    }
-
-    protected function paramsImage()
-    {
-        $med = Params::where('key','=','user_img_upload_size')->first();
-
-        $type = Params::where('key','=','user_img_upload_type')->first();
-
-        $img = [];
-        $img['medidas'] = $med;
-        $img['tipo'] = $type;
-
-        return $img;  
     }
 
     public function desactivateAccount($id) 

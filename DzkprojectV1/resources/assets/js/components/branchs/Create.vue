@@ -224,8 +224,8 @@
 
             //dragged event of marker
             google.maps.event.addListener(marker, 'dragend', () => {
-                this.form.latitude = marker.getPosition().lat();
-                this.form.longitude = marker.getPosition().lng();
+                this.user.latitude = marker.getPosition().lat();
+                this.user.longitude = marker.getPosition().lng();
             });
           },
 

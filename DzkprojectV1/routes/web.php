@@ -15,9 +15,6 @@ Route::get('/', function () {
     return view('dashboard');
 });
 
-Route::get('{any}', function () {
-    return view('dashboard');
-})->where('any', '.*');
 
 Route::get('/ejemplo', function () {
     return view('ejemplo/index');
@@ -63,3 +60,7 @@ $this->post('emailunlocked', 'Auth\ResendController@unlockedEmail');
 $this->get('/account/verify/{code}', 'Auth\ResendController@unlockedAccount'); 
 $this->post('/accountunlocked', 'Auth\ResendController@accountUnlock'); 
 
+
+Route::get('{any}', function () {
+    return view('dashboard');
+})->where('any', '.*');

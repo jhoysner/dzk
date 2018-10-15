@@ -39,11 +39,6 @@
                         	 Descuentos Disponibles : {{ countDiscounts }}
                         	</strong>
                         </label>
-                  <!--    <template  v-for="branch in branchs">
-                        	<ul v-for="discount in branch.discounts">
-                        		<li>{{ discount.title }}</li>
-                        	</ul>
-                        </template> -->
                         <hr>
                     </div>
 

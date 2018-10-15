@@ -24,7 +24,7 @@
                     </div>
                     <div class="col-lg-6">
                         <label><strong>Destacado</strong></label>
-                        <p>{{discount.outstanding}}</p>
+                        <p> {{ discount.outstanding ? "Si" : "No" }}</p>
                     </div>
                     <div class="col-lg-6">
                         <label><strong>Imagen</strong></label>
@@ -39,6 +39,18 @@
                     <div class="col-lg-6">
                         <label><strong>Restricciones</strong></label>
                         <p>{{discount.restrictions}}</p>
+                    </div>                    
+                    <div class="col-lg-6">
+                        <label><strong>Normal Precio</strong></label>
+                        <p>{{discount.normalprice}}</p>
+                    </div>
+                    <div class="col-lg-6">
+                        <label><strong>Precio Descuento</strong></label>
+                        <p>{{discount.discountprice}}</p>
+                    </div>                    
+                    <div class="col-lg-6">
+                        <label><strong>Porcetaje Descuento</strong></label>
+                        <p>{{discount.discountpercentage}} %</p>
                     </div>
 
                     <div class="clearfix"></div>
@@ -131,6 +143,9 @@
                 this.discount.outstanding = response.data.data.outstanding;
                 this.discount.conditions = response.data.data.conditions;
                 this.discount.restrictions = response.data.data.restrictions;
+                this.discount.normalprice = response.data.data.normalprice;
+                this.discount.discountprice = response.data.data.discountprice;
+                this.discount.discountpercentage = response.data.data.discountpercentage;
 
                 this.branchs = response.data.data.branchs;
               })

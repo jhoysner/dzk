@@ -5,13 +5,13 @@
             <div class="settings-content">
               <ul class="nav nav-tabs">
                 <li class="nav-item">
-                  <a href="" class="nav-link active" @click="$router.push('/')">
+                  <a href="" class="nav-link" @click="$router.push('/')">
                     
                       COMERCIOS
                   </a>
                 </li>
                 <li class="nav-item">
-                   <router-link to="/home-discounts" class="nav-link">
+                   <router-link to="/home-discounts" class="nav-link active">
                       DESCUENTOS
                    </router-link>
                 </li>
@@ -26,35 +26,32 @@
                         <table class="table table-striped mt-40 stat-table">
                             <thead>
                               <tr>
-                                <th>ID Comercio</th>
-                                <th>Nombre</th>
-                                <th>Correo</th> 
-                                <th>Imagen</th>
-                                <th>Categoría</th>
-                                <th>Options</th>
+                                  <th>ID Descuento</th>
+                                  <th>Titulo</th>
+                                  <th>Descripcion</th>
+                                  <th>Inicio</th>
+                                  <th>Fin</th>
+                                  <th>Destacado</th>
+                                  <th>Options</th>
                               </tr>
                             </thead>
                             <tbody>
-                              <tr v-for="commerce in filter" :key="commerce.idcommerce">
-                                <td>{{ commerce.idcommerce }}</td>
-                                <td>{{ commerce.name }}</td>
-                                <td>{{ commerce.email }}</td>
-                                <th>
-                                  <img class="image-commerce" v-if="commerce.image != null" :src="'images/commerce/'+commerce.image" />
-                                    <p v-if="commerce.image == null">No posee imagen.</p>
-                                </th>
-                                <td>{{ commerce.ccategories.name }}</td>
-                                <td>
-                                  <!--<router-link :to="`commerce/${commerce.idcommerce}`">
-                                    <a href="#" class="btn btn-warning btn-sm">
-                                    Detalle
-                                    </a>     
-                                  </router-link> -->
-                                  <b-btn variant="primary" size="sm" v-b-modal.showModal  @click="detail(commerce.idcommerce)">
-                                    Ver Detalles
-                                  </b-btn>
-                                </td>
+                              <tr  v-for="discount in filter">
+                                  <td>{{ discount.iddiscount}}</td>
+                                  <td>{{ discount.title }}</td>
+                                  <td class="text-center">{{ discount.description }}</td>
+                                  <td class="text-center">{{ discount.startdate }}</td>
+                                  <td class="text-center">{{ discount.enddate }}</td>
+                                  <td class="text-center">
+                                    {{ discount.outstanding ? "Si" : "No" }}
+                                  </td>
+                                  <td>
+                                    <b-btn variant="primary" size="sm" v-b-modal.showModal  @click="detail(discount.iddiscount)">
+                                      Ver Detalles
+                                     </b-btn>
+                                  </td>
                               </tr>
+                           
                             </tbody>
                         </table>
                     </div>
@@ -64,21 +61,21 @@
         </div>
     </div>
     <paginator :pagination="pagination"></paginator>
-    <show></show>
+    <detail></detail>
   </div>
 </template>
 
 <script>
 import Bus from '../../utilities/EventBus.js';
 import $ from 'jquery';
-import show from './detail';
+import detail from './modal-detail-discount';
 import paginator from '../../utilities/paginator';
 
   export default {
-    components: { show, paginator},
+    components: { detail, paginator},
     data() {
       return {
-        commerces: [],
+        discounts: [],
         pagination: {
             'total': 0,
             'current_page': 0,
@@ -103,16 +100,18 @@ import paginator from '../../utilities/paginator';
     computed: {
         filter() {
           const search = this.search.toLowerCase();
-          return this.commerces.filter((item) => item.name.toLowerCase().includes(search));
+          return this.discounts.filter((item) => item.title.toLowerCase().includes(search));
         }
     },
 
     methods: {
       index(page) {
-        axios.get('api/all-commerces?page=' + page).then(response => {
+        axios.get('api/all-discounts?page=' + page).then(response => {
           //console.log(response);
-          this.commerces = response.data.commerce.data;
+          this.discounts = response.data.discount.data;
           this.pagination = response.data.paginate;
+
+          console.log(response.data.discount.data)
         })
         .catch(err => console.log(err))
       },
@@ -122,7 +121,7 @@ import paginator from '../../utilities/paginator';
       },
 
       detail(id) {
-        Bus.$emit('detail_homeinit', id);
+        Bus.$emit('detail_homeinit-discount', id);
       },
     },
   }

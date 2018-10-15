@@ -13,7 +13,7 @@ class HomeInitController extends Controller
 {
     public function allCommerce()
     {
-    	$commerce = Commerce::with('countries')
+        $commerce = Commerce::with('countries')
         ->with('states')
           ->with('cities')
             ->with('ccategories')
@@ -34,6 +34,27 @@ class HomeInitController extends Controller
             'commerce' => $commerce
 
         ]);
+    }    
+    public function allDiscount()
+    {
+    	$discount = Discount::with('branchs')
+              ->paginate(2);
+
+        //$discount = discount::orderBy('iddiscount', 'DESC')->paginate(2);
+
+        return response()->json([
+            'paginate' => [
+                'total'         =>  $discount->total(),
+                'current_page'  =>  $discount->currentPage(),
+                'per_page'      =>  $discount->perPage(),
+                'last_page'     =>  $discount->lastPage(),
+                'from'          =>  $discount->firstItem(),
+                'to'            =>  $discount->lastPage()
+            ],
+
+            'discount' => $discount
+
+        ]);
     }
 
     public function commerce_detail($id)
@@ -49,13 +70,20 @@ class HomeInitController extends Controller
 
         return response()->json(['data'=> $commerce], 200);
 
+    }    
+
+    public function discount_detail($id)
+    {
+        $discount = Discount::where('iddiscount', $id)
+                    ->with('branchs')->get();
+
+        return response()->json(['data'=> $discount], 200);
+
     }
 
     public function commerce_detail_branchs($id)
     {
         $branch = Branch::where('commerce_idcommerce', $id)->paginate(2);
-
-        //$commerce = Commerce::orderBy('idcommerce', 'DESC')->paginate(2);
 
         return response()->json([
             'paginate' => [

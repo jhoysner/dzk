@@ -2,6 +2,7 @@ import Vue from 'vue'
 
 import Router from 'vue-router'
 import Index from '../components/home/Index'
+import IndexDiscount from '../components/home/index-discount.vue'
 import Commerces from '../components/commerces/index.vue'
 import Branchs from '../components/branchs/index.vue'
 import Profile from '../components/User/ProfileComponent.vue'
@@ -21,6 +22,10 @@ const baseRoutes = [
         {
             path: '/',
             component: Index
+        },        
+        {
+            path: '/home-discounts',
+            component: IndexDiscount
         },
         {
             path: '/tags',

@@ -5,10 +5,9 @@
             <div class="settings-content">
               <ul class="nav nav-tabs">
                 <li class="nav-item">
-                  <a href="" class="nav-link" @click="$router.push('/')">
-                    
+                  <router-link to="/" class="nav-link active">
                       COMERCIOS
-                  </a>
+                  </router-link>
                 </li>
                 <li class="nav-item">
                    <router-link to="/home-discounts" class="nav-link active">

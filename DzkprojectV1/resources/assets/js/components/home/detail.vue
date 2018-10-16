@@ -4,10 +4,10 @@
           <div class="modal-content">
               <div class="modal-body">
                 <div class="row pt-30">
-                	<div class="col-lg-12">
+                	<!--<div class="col-lg-12">
                         <label><strong>ID Comercio</strong></label>
                         <p>{{commerce.idcommerce}}</p>
-                    </div>
+                    </div> -->
                     <div class="col-lg-6">
                         <label><strong>Telefono principal</strong></label>
                         <p>{{commerce.phone1}}</p>
@@ -23,7 +23,7 @@
 					         <div class="col-lg-12">
                         <label>
                         	<strong>
-                        		Afiliado a {{ countbranchs }} sucursales
+                        		Sucursales
                         	</strong>
                         </label>
                         <p>
@@ -36,10 +36,9 @@
                     <div class="col-lg-12">
                         <label>
                         	<strong>
-                        	 Descuentos Disponibles : {{ countDiscounts }}
+                        	 Descuentos
                         	</strong>
                         </label>
-                        <hr>
                     </div>
 
                 </div>             
@@ -61,16 +60,16 @@ import Bus from '../../utilities/EventBus.js';
 	export default {
 		data() {
 			return {
-				commerce: {
-			     	idcommerce: '',
-			        name: '',
-			        phone1: '',
-			        email: '',
-			        commercecategory_idcommercecategory: ''
-			     },
-			  countbranchs: '',
+			  commerce: {
+		     	idcommerce: '',
+	        name: '',
+	        phone1: '',
+	        email: '',
+	        commercecategory_idcommercecategory: ''
+		    },
+			  //countbranchs: '',
 			  branchs: [],
-			  countDiscounts: 0
+			  //countDiscounts: 0
 			}
 		},
 
@@ -91,12 +90,12 @@ import Bus from '../../utilities/EventBus.js';
           this.commerce.email = response.data.data[0].email;
           this.commerce.commercecategory_idcommercecategory = response.data.data[0].ccategories.name;
           this.branchs = response.data.data[0].branchs;
-          this.countbranchs = response.data.data[0].branchs.length;
+          //this.countbranchs = response.data.data[0].branchs.length;
           
-          response.data.data[0].branchs.forEach(response => {
+          /*response.data.data[0].branchs.forEach(response => {
           	this.countDiscounts += response.discounts.length;
           	//console.log(this.countDiscounts + ' Descuentos');
-          });
+          });*/
         })
         .catch(err => console.log(err))
       },	

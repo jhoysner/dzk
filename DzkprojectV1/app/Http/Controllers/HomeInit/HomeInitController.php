@@ -60,6 +60,7 @@ class HomeInitController extends Controller
 
     public function commerce_detail($id)
     {
+
         $commerce = Commerce::where('idcommerce', $id)
         ->with('countries')
             ->with('states')
@@ -71,7 +72,23 @@ class HomeInitController extends Controller
 
         return response()->json(['data'=> $commerce], 200);
 
-    }    
+    }
+
+    public function commerce_detail_random($id)
+    {
+        $commerce = Commerce::where('idcommerce', $id)
+        ->with('countries')
+            ->with('states')
+              ->with('cities')
+                ->with('ccategories')
+                    ->with(['branchs' =>function ($query) {
+                            $query->inRandomOrder()->take(2);
+                            $query->inRandomOrder()->with('discounts')->take(2);
+                        }])->get();
+
+        return response()->json(['data'=> $commerce], 200);
+
+    } 
 
     public function discount_detail($id)
     {

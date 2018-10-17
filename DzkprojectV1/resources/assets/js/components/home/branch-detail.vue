@@ -92,68 +92,6 @@
                                                 2.Get to the point – Ask your question or explain your situation right away. Don’t beat around the bush. 3.Don’t be arrogant – You are calling technical support because you need help. Don’t try and be a smart guy. 4.Call for yourself.
                                             </p> -->
                                         </div>
-                                        <div class="other-details">
-                                            <h4 class="text-uppercase">Feaatures</h4>
-                                            <div class="row">
-                                                <div class="col-lg-6">
-                                                    <ul class="support-list">
-                                                        <li>
-                                                            <img src="/img/bullet.png" alt="">{{branch.country_idcountry}}
-                                                        </li>
-                                                        <li>
-                                                            <img src="/img/bullet.png" alt="">{{branch.state_idstate}}
-                                                        </li>
-                                                        <li>
-                                                            <img src="/img/bullet.png" alt="">{{branch.city_idcity}}
-                                                        </li>
-                                                        <!--<li>
-                                                            <img src="img/bullet.png" alt="">3 Simple Ways To Save A Bunch Of Money
-                                                        </li> -->
-                                                    </ul>
-                                                </div>
-                                                <div class="col-lg-6">
-                                                    <ul class="support-list">
-                                                       <!-- <li>
-                                                            <img src="img/bullet.png" alt="">Help Finding Information Online
-                                                        </li>
-                                                        <li>
-                                                            <img src="img/bullet.png" alt="">5 Reasons To Choose A Notebook Over
-                                                        </li>
-                                                        <li>
-                                                            <img src="img/bullet.png" alt="">3 Simple Ways To Save A Bunch Of Money
-                                                        </li> -->
-                                                    </ul>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="other-details">
-                                            <h4 class="text-uppercase">Descuentos</h4>
-                                            <div class="row">
-                                                <div class="col-lg-6">
-                                                    <ul class="support-list">
-                                                        <!--<li v-for="branch in branchs">
-                                                            <img src="/img/bullet.png" alt="">{{ branch.name }}
-                                                        </li> -->
-                                                        <!--<li>
-                                                            <img src="img/bullet.png" alt="">3 Simple Ways To Save A Bunch Of Money
-                                                        </li> -->
-                                                    </ul>
-                                                </div>
-                                                <div class="col-lg-6">
-                                                    <ul class="support-list">
-                                                       <!-- <li>
-                                                            <img src="img/bullet.png" alt="">Help Finding Information Online
-                                                        </li>
-                                                        <li>
-                                                            <img src="img/bullet.png" alt="">5 Reasons To Choose A Notebook Over
-                                                        </li>
-                                                        <li>
-                                                            <img src="img/bullet.png" alt="">3 Simple Ways To Save A Bunch Of Money
-                                                        </li> -->
-                                                    </ul>
-                                                </div>
-                                            </div>
-                                        </div>
                                     </div>
                                     <!-- Overview section -->
                                 </div>
@@ -163,30 +101,43 @@
                         <div class="col-lg-3 sidebar theme-details-sidebar">
                             <div class="single-sidebar">
                                 <div class="price-title d-flex flex-row justify-content-between">
-                                    <h6>Minimalistic shop only</h6>
-                                    <h3 class="price">$39</h3>
+                                    <h6>Nuestra ubicación</h6>
+                                    <!--<h3 class="price">$39</h3> -->
                                 </div>
                                 <ul>
-                                    <li>01 year theme support</li>
-                                    <li>01 year theme updates</li>
+                                  <li>
+                                    {{branch.country_idcountry}}
+                                  </li>
+                                  <li>
+                                    {{branch.state_idstate}}
+                                  </li>
+                                  <li>
+                                    {{branch.city_idcity}}
+                                  </li>
                                 </ul>
-                                <a href="#" class="primary-btn">purchase only</a>
+                               <!-- <a href="#" class="primary-btn">purchase only</a> -->
                             </div>
 
-                            <div class="single-sidebar d-flex flex-row justify-content-between align-items-center total-downlaod">
+                           <!-- <div class="single-sidebar d-flex flex-row justify-content-between align-items-center total-downlaod">
                                 <h6>Total Downloads</h6>
                                 <h3>968</h3>
-                            </div>
+                            </div> -->
 
                             <div class="single-sidebar theme-details">
-                                <h6>Theme Details</h6>
+                                <h6>Descuentos</h6>
                                 <ul class="theme-details-list">
-                                    <li><i class="icons icon-basket-loaded"></i> eCommerce, Magazine, Writing</li>
+                                    <!--<li><i class="icons icon-basket-loaded"></i> eCommerce, Magazine, Writing</li>
                                     <li> <i class="icons icon-bell"></i> Theme version: 4.3.5</li>
                                     <li><i class="icons icon-notebook"></i>View help file</li>
                                     <li><i class="icons icon-wrench"></i>Sass files included</li>
-                                    <li><i class="icons icon-cloud-upload"></i>Download child theme</li>
-                                </ul>
+                                    <li><i class="icons icon-cloud-upload"></i>Download child theme</li> -->
+                                    <li v-for="discount in discounts">
+                                      <router-link :to="`/discount/${discount.iddiscount}`">
+                                        {{ discount.title }} - ${{ discount.amountapproved }}
+                                      </router-link>
+                                    </li>
+                                    <span v-if="discounts.length < 1">Sin descuentos.</span>
+                              </ul>
                             </div>
 
                             <div class="single-sidebar theme-tags">

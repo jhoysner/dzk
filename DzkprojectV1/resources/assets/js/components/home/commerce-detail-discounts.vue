@@ -1,9 +1,10 @@
 <template>
   <div id="section-profile" class="settings-content">
         <button type="button" class="btn btn-outline-dark pull-right" @click="$router.push('/')">Atras</button>
-        <h2 class="my-4">Comercio: {{id}}</h2>
+        <!--<h2 class="my-4">Comercio: {{id}}</h2> -->
+        <br />
 
-        <ul class="nav nav-tabs">
+        <!--<ul class="nav nav-tabs">
           <li class="nav-item">
              <router-link :to="`/commerce/${id}`" class="nav-link">
                 Detalle
@@ -19,12 +20,12 @@
                 Descuentos
              </router-link>
           </li>
-        </ul>
+        </ul> -->
         <h3 class="mt-4">Descuentos</h3>    
         <div class="row justify-content-center stat-table-wrap">
             <div class="col-lg-12 stat-wrap-container">
                 <div class="stat-wrap">
-                    <table class="table table-striped mt-40 stat-table">
+                    <!--<table class="table table-striped mt-40 stat-table">
                         <thead>
                           <tr>
                             <th>ID Descuento</th>
@@ -58,7 +59,63 @@
                             </tr>
                           </template>
                         </tbody>
-                    </table>
+                    </table> -->
+                    <div v-for="branch in branchs" :key="branch.idbranch">
+                      <div class="row pb-120 pt-80">    <!-- Aqui empieza -->           
+                        <div class="col-lg-3 col-md-6" v-for="discount in branch.discounts">
+                          <div class="single-image-thumb single-feature-item relative">   
+                              <div class="thumb relative">
+                                <div class="thumb-img relative" v-if="discount.image == null">
+                                    <div class="overlay overlay-bg"></div>
+                                    <img class="img-fluid" src="/img/f5.jpg" alt="">
+                                </div>
+                                <div class="thumb-img relative" v-else>
+                                    <div class="overlay overlay-bg"></div>
+                                    <img class="img-fluid" :src="'/images/discount/'+discount.image" alt="">
+                                </div>
+                                <div class="link">
+                                    <a class="relative">
+                                      <i class="icons icon-eye"></i>
+                                    </a>
+
+                                    <!--<a class="relative" href="cart.html">
+                                      <i class="icons icon-basket-loaded"></i>
+                                    </a> -->
+                                </div>
+                              </div>
+                              <div class="details pb-10 pt-20">
+                                  <div class="title d-flex flex-row justify-content-between">
+                                      <a>
+                                        <h6>
+                                          <router-link :to="`/discount/${discount.iddiscount}`">
+                                            {{ discount.title }}
+                                          </router-link>               
+                                        </h6>
+                                      </a>
+                                      <h6 class="price">
+                                        <router-link :to="`/branch/${branch.idbranch}`">
+                                          {{ branch.name }}
+                                        </router-link>
+                                      </h6>
+                                  </div>
+                              </div>
+                              <!--<div class="details pb-10 pt-20">
+                                  <div class="title d-flex flex-row justify-content-between">
+                                      <a href="theme-details.html">
+                                          <h6>{{ branch.ccommerce.name }} </h6>
+                                      </a>
+                                  </div>
+                              </div> -->
+                              <div class="meta d-flex flex-row">
+                                  <!--<div class="user-img"><img src="img/user-img.png" alt=""></div> -->
+                                  <!--<a href="theme-details.html">
+                                      <h6>Ver descuentos activos</h6>
+                                  </a> -->
+                              </div>
+                          </div>
+                        </div>
+                      </div> <!-- Aqui termina -->
+                    </div>
                 </div>
             </div>
             <paginator :pagination="pagination"></paginator>

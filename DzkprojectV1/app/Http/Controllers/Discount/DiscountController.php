@@ -92,7 +92,7 @@ class DiscountController extends Controller
      */
     public function show($id)
     {
-        $discount = Discount::where('iddiscount', $id)->with('branchs','categories')->first();
+        $discount = Discount::where('iddiscount', $id)->with('branchs','categories','tags')->first();
 
         return response()->json(['data'=> $discount], 200);
     }

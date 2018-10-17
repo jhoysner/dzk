@@ -22,7 +22,7 @@
                         <a class="primary-btn white-btn" @click="toggleSearch"><i class="icons icon-magnifier"></i></a>
                         <hr>
                         <input type="text" class="form-control" id="search" placeholder="Buscar" v-model="search">
-<!--                         <table class="table table-striped mt-40 stat-table">
+<!--     <table class="table table-striped mt-40 stat-table">
                             <thead>
                               <tr>
                                   <th>ID Descuento</th>
@@ -73,7 +73,7 @@
                                 </div>
                                 <div class="details pb-10 pt-20">
                                     <div class="title d-flex flex-row justify-content-between">
-                                        <a class="showModal" v-b-modal.showModal  @click="detail(discount.idcommerce)">
+                                        <a class="showModal" v-b-modal.showModal  @click="detail(discount.iddiscount)">
                                             <h6>{{ discount.title }}</h6>
                                         </a>
                                         <h6 class="price">${{ discount.discountprice }}</h6>
@@ -82,7 +82,8 @@
                                 <div class="details pb-10 pt-20">
                                     <div class="title d-flex flex-row justify-content-between">
                                         <a href="theme-details.html">
-                                            <h6>Nombre del Comercio</h6>
+                                          <h6 v-if="discount.branchs.length > 0">{{discount.branchs[0].commerces.name}}</h6>
+                                          <h6 v-if="discount.branchs.length < 1">Descuento sin Asignar</h6>
                                         </a>
                                         <h6 class="price"><s>${{ discount.normalprice }}</s></h6>
                                     </div>
@@ -92,14 +93,15 @@
                                         <a href="theme-details.html">
                                             <h6>{{ discount.categories.name }} </h6>
                                         </a>
+                                        <i class="icons icon-share"></i>
                                     </div>
                                 </div>
                                 <div class="details pb-10 pt-20">
                                     <div class="title d-flex flex-row justify-content-between">
-                                        <a href="theme-details.html">
-                                            <h6>Listado de tags</h6>
-                                        </a>
-                                        <i class="icons icon-share"></i>
+                                        <div v-for="tag in discount.tags"> 
+                                          <span class="badge badge-secondary">{{tag.name}}</span>
+                                        </div>
+                                        <span v-if="discount.tags.length < 1"> Sin Tags</span>
                                     </div>
                                 </div>
                                 <div class="meta d-flex flex-row">
@@ -131,6 +133,7 @@ import paginator from '../../utilities/paginator';
     data() {
       return {
         discounts: [],
+        // commerce: '',
         pagination: {
             'total': 0,
             'current_page': 0,
@@ -165,8 +168,8 @@ import paginator from '../../utilities/paginator';
           //console.log(response);
           this.discounts = response.data.discount.data;
           this.pagination = response.data.paginate;
-
-          console.log(response.data.discount.data)
+          // this.commerce = response.data.discount.data[0].branchs[0].commerces.name;
+          // console.log(response)
         })
         .catch(err => console.log(err))
       },

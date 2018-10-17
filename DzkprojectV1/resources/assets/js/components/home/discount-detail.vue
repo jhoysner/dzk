@@ -97,7 +97,7 @@
                     </div>
                 </div>
             </div> -->
-                    <div class="container">
+        <div class="container">
             <div class="row">
                 <div class="col-lg-9">
                     <div class="tab-content">
@@ -118,10 +118,6 @@
                                     <p v-if="discount.restrictions != null">
                                         Restricciones: {{ discount.restrictions }}
                                     </p>
-            <!--                         <p v-if="discount.web != null ">
-                                        web: {{ discount.web }}
-                                    </p> -->
-                                
                                 </div>
                                 <div class="other-details">
                                     <h4 class="text-uppercase">Categoria</h4>
@@ -141,15 +137,28 @@
                                 <div class="other-details">
                                     <h4 class="text-uppercase">Sucursales</h4>
                                     <div class="row">
-                                        <div class="col-lg-6">
-                                            <ul class="support-list">
-                                                <li v-if="branchs.length < 1">No posee sucursales aún.</li>
-                                                <li v-for="branch in branchs">
-                                                    <img src="/img/bullet.png" alt="">{{ branch.name }}
-                                                </li>
-                                            </ul>
-                                        </div>
-                                        <div class="col-lg-6">
+                                        <div class="col">
+                                            <b-card-group deck>
+                                                <div v-for="branch in branchs">                                          
+                                                    <b-card :title="branch.name"
+                                                          img-src="https://picsum.photos/150/100/?image=25"
+                                                          img-alt="Image"
+                                                          img-top
+                                                          tag="article"
+                                                          style="max-width: 15rem;"
+                                                          class="mb-2">
+                                                        <p class="card-text">
+                                                          {{branch.name}}
+                                                        </p>
+                                                        <!-- <b-button href="#" variant="primary" size="sm">ver</b-button> -->
+                                                         <router-link :to="`/branch/${branch.idbranch}`">
+                                                            <a href="#" class="btn btn-primary btn-sm">
+                                                            Detalle
+                                                            </a>     
+                                                          </router-link>
+                                                    </b-card>    
+                                                </div>
+                                            </b-card-group>
 
                                         </div>
                                     </div>
@@ -190,8 +199,8 @@
                     <div class="single-sidebar theme-tags">
                         <h6>Tags</h6>
                         <ul class="tag-list">
-                            <li> <i class="icons icon-folder"></i> <a href="#">Bootstrap templates</a>,<a href="#"> business & services</a>, Marketing</li>
-                            <li> <i class="icons icon-tag"></i> <a href="#">Agency</a>,<a href="#"> business</a>,<a href="#"> corporate</a></li>
+                           
+                            <li v-for="tag in tags"> <i class="icons icon-tag"></i> {{tag.name}}</li>
                         </ul>
                         <div class="sidebar-social">
                             <ul>
@@ -233,6 +242,7 @@
                     discountcategory_iddiscountcategory: ''
 			    },
                 branchs:[],
+                tags:[],
 			}
 		},
 
@@ -243,7 +253,7 @@
 		methods: {
             index() {
               axios.get('/api/discount/' +this.id).then(response => {
-                console.log(response)
+                // console.log(response)
                 this.discount.iddiscount = response.data.data.iddiscount;
                 this.discount.title = response.data.data.title;
                 this.discount.description = response.data.data.description;
@@ -259,6 +269,9 @@
                 this.discount.discountcategory_iddiscountcategory = response.data.data.categories.name;
 
                 this.branchs = response.data.data.branchs;
+                this.tags = response.data.data.tags;
+
+                console.log(response.data.data)
               })
               .catch(err => console.log(err))
             },			

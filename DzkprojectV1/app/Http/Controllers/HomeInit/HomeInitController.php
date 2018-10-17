@@ -37,7 +37,7 @@ class HomeInitController extends Controller
     }    
     public function allDiscount()
     {
-    	$discount = Discount::with('branchs')
+    	$discount = Discount::with('branchs','categories')
               ->paginate(2);
 
         //$discount = discount::orderBy('iddiscount', 'DESC')->paginate(2);

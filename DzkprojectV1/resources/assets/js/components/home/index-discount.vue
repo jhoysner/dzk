@@ -5,7 +5,7 @@
             <div class="settings-content">
               <ul class="nav nav-tabs">
                 <li class="nav-item">
-                  <router-link to="/" class="nav-link active">
+                  <router-link to="/" class="nav-link">
                       COMERCIOS
                   </router-link>
                 </li>
@@ -22,7 +22,7 @@
                         <a class="primary-btn white-btn" @click="toggleSearch"><i class="icons icon-magnifier"></i></a>
                         <hr>
                         <input type="text" class="form-control" id="search" placeholder="Buscar" v-model="search">
-                        <table class="table table-striped mt-40 stat-table">
+<!--                         <table class="table table-striped mt-40 stat-table">
                             <thead>
                               <tr>
                                   <th>ID Descuento</th>
@@ -52,7 +52,63 @@
                               </tr>
                            
                             </tbody>
-                        </table>
+                        </table> -->
+                        <div class="row pb-120 pt-80">    <!-- Aqui empieza -->           
+                          <div class="col-lg-3 col-md-6" v-for="discount in filter" :key="discount.iddiscount">
+                            <div class="single-image-thumb single-feature-item relative">   
+                                <div class="thumb relative">
+                                  <div class="thumb-img relative" v-if="discount.image == null">
+                                      <div class="overlay overlay-bg"></div>
+                                      <img class="img-fluid" src="img/f5.jpg" alt="">
+                                  </div>
+                                  <div class="thumb-img relative" v-else>
+                                      <div class="overlay overlay-bg"></div>
+                                      <img class="img-fluid" :src="'images/discount/'+discount.image" alt="">
+                                  </div>
+                                  <div class="link">
+                                      <a class="relative showModal" v-b-modal.showModal  @click="detail(discount.iddiscount)">
+                                        <i class="icons icon-eye"></i>
+                                      </a>
+                                  </div>
+                                </div>
+                                <div class="details pb-10 pt-20">
+                                    <div class="title d-flex flex-row justify-content-between">
+                                        <a class="showModal" v-b-modal.showModal  @click="detail(discount.idcommerce)">
+                                            <h6>{{ discount.title }}</h6>
+                                        </a>
+                                        <h6 class="price">${{ discount.discountprice }}</h6>
+                                    </div>
+                                </div>
+                                <div class="details pb-10 pt-20">
+                                    <div class="title d-flex flex-row justify-content-between">
+                                        <a href="theme-details.html">
+                                            <h6>Nombre del Comercio</h6>
+                                        </a>
+                                        <h6 class="price"><s>${{ discount.normalprice }}</s></h6>
+                                    </div>
+                                </div>
+                                <div class="details pb-10 pt-20">
+                                    <div class="title d-flex flex-row justify-content-between">
+                                        <a href="theme-details.html">
+                                            <h6>{{ discount.categories.name }} </h6>
+                                        </a>
+                                    </div>
+                                </div>
+                                <div class="details pb-10 pt-20">
+                                    <div class="title d-flex flex-row justify-content-between">
+                                        <a href="theme-details.html">
+                                            <h6>Listado de tags</h6>
+                                        </a>
+                                        <i class="icons icon-share"></i>
+                                    </div>
+                                </div>
+                                <div class="meta d-flex flex-row">
+                                    <!--<div class="user-img"><img src="img/user-img.png" alt=""></div> -->
+                                       <button type="button" class="btn btn-outline-primary">Obetener este Descuento</button>
+                                </div>
+                            </div>
+                          </div>
+                        </div> <!-- Aqui termina -->
                     </div>
                 </div>
               </div>
@@ -136,4 +192,5 @@ import paginator from '../../utilities/paginator';
   #search {
     display: none;
   }
+
 </style>

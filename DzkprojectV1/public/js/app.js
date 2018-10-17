@@ -49135,7 +49135,7 @@ var content = __webpack_require__(213);
 if(typeof content === 'string') content = [[module.i, content, '']];
 if(content.locals) module.exports = content.locals;
 // add the styles to the DOM
-var update = __webpack_require__(4)("7186d799", content, false, {});
+var update = __webpack_require__(4)("42b3474c", content, false, {});
 // Hot Module Replacement
 if(false) {
  // When the styles change, update the <style> tags
@@ -49673,7 +49673,7 @@ var content = __webpack_require__(219);
 if(typeof content === 'string') content = [[module.i, content, '']];
 if(content.locals) module.exports = content.locals;
 // add the styles to the DOM
-var update = __webpack_require__(4)("d7fa6742", content, false, {});
+var update = __webpack_require__(4)("117cc268", content, false, {});
 // Hot Module Replacement
 if(false) {
  // When the styles change, update the <style> tags
@@ -49890,7 +49890,7 @@ var content = __webpack_require__(224);
 if(typeof content === 'string') content = [[module.i, content, '']];
 if(content.locals) module.exports = content.locals;
 // add the styles to the DOM
-var update = __webpack_require__(4)("5030e3f7", content, false, {});
+var update = __webpack_require__(4)("215d53aa", content, false, {});
 // Hot Module Replacement
 if(false) {
  // When the styles change, update the <style> tags
@@ -50407,7 +50407,7 @@ var content = __webpack_require__(229);
 if(typeof content === 'string') content = [[module.i, content, '']];
 if(content.locals) module.exports = content.locals;
 // add the styles to the DOM
-var update = __webpack_require__(4)("273fd098", content, false, {});
+var update = __webpack_require__(4)("a30ab1be", content, false, {});
 // Hot Module Replacement
 if(false) {
  // When the styles change, update the <style> tags
@@ -53512,7 +53512,7 @@ var content = __webpack_require__(237);
 if(typeof content === 'string') content = [[module.i, content, '']];
 if(content.locals) module.exports = content.locals;
 // add the styles to the DOM
-var update = __webpack_require__(4)("683ebe78", content, false, {});
+var update = __webpack_require__(4)("213487a5", content, false, {});
 // Hot Module Replacement
 if(false) {
  // When the styles change, update the <style> tags
@@ -53815,7 +53815,7 @@ var content = __webpack_require__(241);
 if(typeof content === 'string') content = [[module.i, content, '']];
 if(content.locals) module.exports = content.locals;
 // add the styles to the DOM
-var update = __webpack_require__(4)("2808d3be", content, false, {});
+var update = __webpack_require__(4)("e4679f9e", content, false, {});
 // Hot Module Replacement
 if(false) {
  // When the styles change, update the <style> tags
@@ -54702,7 +54702,7 @@ var content = __webpack_require__(249);
 if(typeof content === 'string') content = [[module.i, content, '']];
 if(content.locals) module.exports = content.locals;
 // add the styles to the DOM
-var update = __webpack_require__(4)("32243c1c", content, false, {});
+var update = __webpack_require__(4)("0c531b65", content, false, {});
 // Hot Module Replacement
 if(false) {
  // When the styles change, update the <style> tags
@@ -54726,7 +54726,7 @@ exports = module.exports = __webpack_require__(2)(false);
 
 
 // module
-exports.push([module.i, "\n.image-commerce {\n  width: 80px;\n  height: 50px;\n  border-radius: 50%;\n}\n#search {\n  display: none;\n}\n", ""]);
+exports.push([module.i, "\n.image-commerce {\n  width: 80px;\n  height: 50px;\n  border-radius: 50%;\n}\n#search {\n  display: none;\n}\n\n", ""]);
 
 // exports
 
@@ -54744,6 +54744,62 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__modal_detail_discount___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_2__modal_detail_discount__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__utilities_paginator__ = __webpack_require__(27);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__utilities_paginator___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_3__utilities_paginator__);
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 //
 //
 //
@@ -54938,7 +54994,7 @@ var content = __webpack_require__(253);
 if(typeof content === 'string') content = [[module.i, content, '']];
 if(content.locals) module.exports = content.locals;
 // add the styles to the DOM
-var update = __webpack_require__(4)("4784e4e2", content, false, {});
+var update = __webpack_require__(4)("cf454688", content, false, {});
 // Hot Module Replacement
 if(false) {
  // When the styles change, update the <style> tags
@@ -55228,10 +55284,10 @@ var render = function() {
                 [
                   _c(
                     "router-link",
-                    { staticClass: "nav-link active", attrs: { to: "/" } },
+                    { staticClass: "nav-link", attrs: { to: "/" } },
                     [
                       _vm._v(
-                        "\n                    COMERCIOS\n                "
+                        "\n                      COMERCIOS\n                  "
                       )
                     ]
                   )
@@ -55251,7 +55307,7 @@ var render = function() {
                     },
                     [
                       _vm._v(
-                        "\n                    DESCUENTOS\n                 "
+                        "\n                      DESCUENTOS\n                   "
                       )
                     ]
                   )
@@ -55304,72 +55360,200 @@ var render = function() {
                     }),
                     _vm._v(" "),
                     _c(
-                      "table",
-                      { staticClass: "table table-striped mt-40 stat-table" },
-                      [
-                        _vm._m(0),
-                        _vm._v(" "),
-                        _c(
-                          "tbody",
-                          _vm._l(_vm.filter, function(discount) {
-                            return _c("tr", [
-                              _c("td", [_vm._v(_vm._s(discount.iddiscount))]),
-                              _vm._v(" "),
-                              _c("td", [_vm._v(_vm._s(discount.title))]),
-                              _vm._v(" "),
-                              _c("td", { staticClass: "text-center" }, [
-                                _vm._v(_vm._s(discount.description))
-                              ]),
-                              _vm._v(" "),
-                              _c("td", { staticClass: "text-center" }, [
-                                _vm._v(_vm._s(discount.startdate))
-                              ]),
-                              _vm._v(" "),
-                              _c("td", { staticClass: "text-center" }, [
-                                _vm._v(_vm._s(discount.enddate))
-                              ]),
-                              _vm._v(" "),
-                              _c("td", { staticClass: "text-center" }, [
-                                _vm._v(
-                                  "\n                                  " +
-                                    _vm._s(discount.outstanding ? "Si" : "No") +
-                                    "\n                                "
-                                )
-                              ]),
-                              _vm._v(" "),
-                              _c(
-                                "td",
-                                [
-                                  _c(
-                                    "b-btn",
-                                    {
-                                      directives: [
-                                        {
-                                          name: "b-modal",
-                                          rawName: "v-b-modal.showModal",
-                                          modifiers: { showModal: true }
-                                        }
-                                      ],
-                                      attrs: { variant: "primary", size: "sm" },
-                                      on: {
-                                        click: function($event) {
-                                          _vm.detail(discount.iddiscount)
-                                        }
-                                      }
-                                    },
-                                    [
-                                      _vm._v(
-                                        "\n                                    Ver Detalles\n                                   "
+                      "div",
+                      { staticClass: "row pb-120 pt-80" },
+                      _vm._l(_vm.filter, function(discount) {
+                        return _c(
+                          "div",
+                          {
+                            key: discount.iddiscount,
+                            staticClass: "col-lg-3 col-md-6"
+                          },
+                          [
+                            _c(
+                              "div",
+                              {
+                                staticClass:
+                                  "single-image-thumb single-feature-item relative"
+                              },
+                              [
+                                _c("div", { staticClass: "thumb relative" }, [
+                                  discount.image == null
+                                    ? _c(
+                                        "div",
+                                        { staticClass: "thumb-img relative" },
+                                        [
+                                          _c("div", {
+                                            staticClass: "overlay overlay-bg"
+                                          }),
+                                          _vm._v(" "),
+                                          _c("img", {
+                                            staticClass: "img-fluid",
+                                            attrs: {
+                                              src: "img/f5.jpg",
+                                              alt: ""
+                                            }
+                                          })
+                                        ]
                                       )
-                                    ]
-                                  )
-                                ],
-                                1
-                              )
-                            ])
-                          })
+                                    : _c(
+                                        "div",
+                                        { staticClass: "thumb-img relative" },
+                                        [
+                                          _c("div", {
+                                            staticClass: "overlay overlay-bg"
+                                          }),
+                                          _vm._v(" "),
+                                          _c("img", {
+                                            staticClass: "img-fluid",
+                                            attrs: {
+                                              src:
+                                                "images/discount/" +
+                                                discount.image,
+                                              alt: ""
+                                            }
+                                          })
+                                        ]
+                                      ),
+                                  _vm._v(" "),
+                                  _c("div", { staticClass: "link" }, [
+                                    _c(
+                                      "a",
+                                      {
+                                        directives: [
+                                          {
+                                            name: "b-modal",
+                                            rawName: "v-b-modal.showModal",
+                                            modifiers: { showModal: true }
+                                          }
+                                        ],
+                                        staticClass: "relative showModal",
+                                        on: {
+                                          click: function($event) {
+                                            _vm.detail(discount.iddiscount)
+                                          }
+                                        }
+                                      },
+                                      [
+                                        _c("i", {
+                                          staticClass: "icons icon-eye"
+                                        })
+                                      ]
+                                    )
+                                  ])
+                                ]),
+                                _vm._v(" "),
+                                _c(
+                                  "div",
+                                  { staticClass: "details pb-10 pt-20" },
+                                  [
+                                    _c(
+                                      "div",
+                                      {
+                                        staticClass:
+                                          "title d-flex flex-row justify-content-between"
+                                      },
+                                      [
+                                        _c(
+                                          "a",
+                                          {
+                                            directives: [
+                                              {
+                                                name: "b-modal",
+                                                rawName: "v-b-modal.showModal",
+                                                modifiers: { showModal: true }
+                                              }
+                                            ],
+                                            staticClass: "showModal",
+                                            on: {
+                                              click: function($event) {
+                                                _vm.detail(discount.idcommerce)
+                                              }
+                                            }
+                                          },
+                                          [
+                                            _c("h6", [
+                                              _vm._v(_vm._s(discount.title))
+                                            ])
+                                          ]
+                                        ),
+                                        _vm._v(" "),
+                                        _c("h6", { staticClass: "price" }, [
+                                          _vm._v(
+                                            "$" + _vm._s(discount.discountprice)
+                                          )
+                                        ])
+                                      ]
+                                    )
+                                  ]
+                                ),
+                                _vm._v(" "),
+                                _c(
+                                  "div",
+                                  { staticClass: "details pb-10 pt-20" },
+                                  [
+                                    _c(
+                                      "div",
+                                      {
+                                        staticClass:
+                                          "title d-flex flex-row justify-content-between"
+                                      },
+                                      [
+                                        _vm._m(0, true),
+                                        _vm._v(" "),
+                                        _c("h6", { staticClass: "price" }, [
+                                          _c("s", [
+                                            _vm._v(
+                                              "$" + _vm._s(discount.normalprice)
+                                            )
+                                          ])
+                                        ])
+                                      ]
+                                    )
+                                  ]
+                                ),
+                                _vm._v(" "),
+                                _c(
+                                  "div",
+                                  { staticClass: "details pb-10 pt-20" },
+                                  [
+                                    _c(
+                                      "div",
+                                      {
+                                        staticClass:
+                                          "title d-flex flex-row justify-content-between"
+                                      },
+                                      [
+                                        _c(
+                                          "a",
+                                          {
+                                            attrs: {
+                                              href: "theme-details.html"
+                                            }
+                                          },
+                                          [
+                                            _c("h6", [
+                                              _vm._v(
+                                                _vm._s(
+                                                  discount.categories.name
+                                                ) + " "
+                                              )
+                                            ])
+                                          ]
+                                        )
+                                      ]
+                                    )
+                                  ]
+                                ),
+                                _vm._v(" "),
+                                _vm._m(1, true),
+                                _vm._v(" "),
+                                _vm._m(2, true)
+                              ]
+                            )
+                          ]
                         )
-                      ]
+                      })
                     )
                   ])
                 ])
@@ -55391,22 +55575,38 @@ var staticRenderFns = [
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("thead", [
-      _c("tr", [
-        _c("th", [_vm._v("ID Descuento")]),
-        _vm._v(" "),
-        _c("th", [_vm._v("Titulo")]),
-        _vm._v(" "),
-        _c("th", [_vm._v("Descripcion")]),
-        _vm._v(" "),
-        _c("th", [_vm._v("Inicio")]),
-        _vm._v(" "),
-        _c("th", [_vm._v("Fin")]),
-        _vm._v(" "),
-        _c("th", [_vm._v("Destacado")]),
-        _vm._v(" "),
-        _c("th", [_vm._v("Options")])
-      ])
+    return _c("a", { attrs: { href: "theme-details.html" } }, [
+      _c("h6", [_vm._v("Nombre del Comercio")])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "details pb-10 pt-20" }, [
+      _c(
+        "div",
+        { staticClass: "title d-flex flex-row justify-content-between" },
+        [
+          _c("a", { attrs: { href: "theme-details.html" } }, [
+            _c("h6", [_vm._v("Listado de tags")])
+          ]),
+          _vm._v(" "),
+          _c("i", { staticClass: "icons icon-share" })
+        ]
+      )
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "meta d-flex flex-row" }, [
+      _c(
+        "button",
+        { staticClass: "btn btn-outline-primary", attrs: { type: "button" } },
+        [_vm._v("Obetener este Descuento")]
+      )
     ])
   }
 ]
@@ -55481,7 +55681,7 @@ var content = __webpack_require__(259);
 if(typeof content === 'string') content = [[module.i, content, '']];
 if(content.locals) module.exports = content.locals;
 // add the styles to the DOM
-var update = __webpack_require__(4)("4d0275e9", content, false, {});
+var update = __webpack_require__(4)("0ab52bd6", content, false, {});
 // Hot Module Replacement
 if(false) {
  // When the styles change, update the <style> tags
@@ -55722,7 +55922,7 @@ var content = __webpack_require__(263);
 if(typeof content === 'string') content = [[module.i, content, '']];
 if(content.locals) module.exports = content.locals;
 // add the styles to the DOM
-var update = __webpack_require__(4)("aad5900e", content, false, {});
+var update = __webpack_require__(4)("b98d80a8", content, false, {});
 // Hot Module Replacement
 if(false) {
  // When the styles change, update the <style> tags
@@ -57616,7 +57816,7 @@ var content = __webpack_require__(286);
 if(typeof content === 'string') content = [[module.i, content, '']];
 if(content.locals) module.exports = content.locals;
 // add the styles to the DOM
-var update = __webpack_require__(4)("6236a28c", content, false, {});
+var update = __webpack_require__(4)("8785f1a6", content, false, {});
 // Hot Module Replacement
 if(false) {
  // When the styles change, update the <style> tags
@@ -58014,7 +58214,7 @@ var content = __webpack_require__(291);
 if(typeof content === 'string') content = [[module.i, content, '']];
 if(content.locals) module.exports = content.locals;
 // add the styles to the DOM
-var update = __webpack_require__(4)("b5b0b048", content, false, {});
+var update = __webpack_require__(4)("daffff62", content, false, {});
 // Hot Module Replacement
 if(false) {
  // When the styles change, update the <style> tags
@@ -59269,7 +59469,7 @@ var content = __webpack_require__(297);
 if(typeof content === 'string') content = [[module.i, content, '']];
 if(content.locals) module.exports = content.locals;
 // add the styles to the DOM
-var update = __webpack_require__(4)("3d4a2cbc", content, false, {});
+var update = __webpack_require__(4)("404f90e2", content, false, {});
 // Hot Module Replacement
 if(false) {
  // When the styles change, update the <style> tags
@@ -59509,7 +59709,7 @@ var content = __webpack_require__(301);
 if(typeof content === 'string') content = [[module.i, content, '']];
 if(content.locals) module.exports = content.locals;
 // add the styles to the DOM
-var update = __webpack_require__(4)("cf6826d6", content, false, {});
+var update = __webpack_require__(4)("69785c48", content, false, {});
 // Hot Module Replacement
 if(false) {
  // When the styles change, update the <style> tags
@@ -59533,7 +59733,7 @@ exports = module.exports = __webpack_require__(2)(false);
 
 
 // module
-exports.push([module.i, "\n.html5Map {\r\n  margin-top: 15px;\r\n  width: 100%;\r\n  height: 200px;\r\n  display: none;\n}\n.mapPicker {\r\n  margin-top: 15px;\r\n  width: 100%;\r\n  height: 200px;\n}\n.textLocation {\r\n  margin-top: 15px;\r\n  width: 100%;\r\n  height: 200px;\r\n  display: none;\n}\n.geolocation {\r\n  cursor: pointer;\r\n  color: #FFF !important;\n}\n.geolocation:hover {\r\n  color: #42b0f2 !important;\n}\n#textMap {\r\n  display: none;\n}\n.input-map {\r\n  display: none;\n}\n.avatar {\r\n  width: 150px;\n}\r\n", ""]);
+exports.push([module.i, "\n.html5Map {\n  margin-top: 15px;\n  width: 100%;\n  height: 200px;\n  display: none;\n}\n.mapPicker {\n  margin-top: 15px;\n  width: 100%;\n  height: 200px;\n}\n.textLocation {\n  margin-top: 15px;\n  width: 100%;\n  height: 200px;\n  display: none;\n}\n.geolocation {\n  cursor: pointer;\n  color: #FFF !important;\n}\n.geolocation:hover {\n  color: #42b0f2 !important;\n}\n#textMap {\n  display: none;\n}\n.input-map {\n  display: none;\n}\n.avatar {\n  width: 150px;\n}\n", ""]);
 
 // exports
 
@@ -60614,7 +60814,7 @@ var content = __webpack_require__(306);
 if(typeof content === 'string') content = [[module.i, content, '']];
 if(content.locals) module.exports = content.locals;
 // add the styles to the DOM
-var update = __webpack_require__(4)("264c6787", content, false, {});
+var update = __webpack_require__(4)("79b1b00c", content, false, {});
 // Hot Module Replacement
 if(false) {
  // When the styles change, update the <style> tags
@@ -60975,7 +61175,7 @@ var content = __webpack_require__(311);
 if(typeof content === 'string') content = [[module.i, content, '']];
 if(content.locals) module.exports = content.locals;
 // add the styles to the DOM
-var update = __webpack_require__(4)("1a4e90f2", content, false, {});
+var update = __webpack_require__(4)("e099100c", content, false, {});
 // Hot Module Replacement
 if(false) {
  // When the styles change, update the <style> tags
@@ -62309,7 +62509,7 @@ var content = __webpack_require__(317);
 if(typeof content === 'string') content = [[module.i, content, '']];
 if(content.locals) module.exports = content.locals;
 // add the styles to the DOM
-var update = __webpack_require__(4)("ae416c20", content, false, {});
+var update = __webpack_require__(4)("09dbf2a3", content, false, {});
 // Hot Module Replacement
 if(false) {
  // When the styles change, update the <style> tags
@@ -62333,7 +62533,7 @@ exports = module.exports = __webpack_require__(2)(false);
 
 
 // module
-exports.push([module.i, "\n#section-profile: {\r\n margin-top: 100px;\n}\nimg {\r\n  width: 30%;\n}\r\n", ""]);
+exports.push([module.i, "\n#section-profile: {\n margin-top: 100px;\n}\nimg {\n  width: 30%;\n}\n", ""]);
 
 // exports
 
@@ -62546,7 +62746,7 @@ var content = __webpack_require__(321);
 if(typeof content === 'string') content = [[module.i, content, '']];
 if(content.locals) module.exports = content.locals;
 // add the styles to the DOM
-var update = __webpack_require__(4)("38d04cda", content, false, {});
+var update = __webpack_require__(4)("235db6c6", content, false, {});
 // Hot Module Replacement
 if(false) {
  // When the styles change, update the <style> tags
@@ -62570,7 +62770,7 @@ exports = module.exports = __webpack_require__(2)(false);
 
 
 // module
-exports.push([module.i, "\n.html5Map {\r\n  margin-top: 15px;\r\n  width: 100%;\r\n  height: 200px;\r\n  display: none;\n}\n.mapPicker {\r\n  margin-top: 15px;\r\n  width: 100%;\r\n  height: 200px;\n}\n.textLocation {\r\n  margin-top: 15px;\r\n  width: 100%;\r\n  height: 200px;\r\n  display: none;\n}\n.geolocation {\r\n  cursor: pointer;\r\n  color: #FFF !important;\n}\n.geolocation:hover {\r\n  color: #42b0f2 !important;\n}\n#textMap {\r\n  display: none;\n}\n.input-map {\r\n  display: none;\n}\nimg {\r\n  width: 30%;\n}\r\n", ""]);
+exports.push([module.i, "\n.html5Map {\n  margin-top: 15px;\n  width: 100%;\n  height: 200px;\n  display: none;\n}\n.mapPicker {\n  margin-top: 15px;\n  width: 100%;\n  height: 200px;\n}\n.textLocation {\n  margin-top: 15px;\n  width: 100%;\n  height: 200px;\n  display: none;\n}\n.geolocation {\n  cursor: pointer;\n  color: #FFF !important;\n}\n.geolocation:hover {\n  color: #42b0f2 !important;\n}\n#textMap {\n  display: none;\n}\n.input-map {\n  display: none;\n}\nimg {\n  width: 30%;\n}\n", ""]);
 
 // exports
 
@@ -63944,7 +64144,7 @@ var content = __webpack_require__(327);
 if(typeof content === 'string') content = [[module.i, content, '']];
 if(content.locals) module.exports = content.locals;
 // add the styles to the DOM
-var update = __webpack_require__(4)("baa43e4c", content, false, {});
+var update = __webpack_require__(4)("5ea74207", content, false, {});
 // Hot Module Replacement
 if(false) {
  // When the styles change, update the <style> tags
@@ -64160,7 +64360,7 @@ var content = __webpack_require__(331);
 if(typeof content === 'string') content = [[module.i, content, '']];
 if(content.locals) module.exports = content.locals;
 // add the styles to the DOM
-var update = __webpack_require__(4)("7511045d", content, false, {});
+var update = __webpack_require__(4)("3843c8d0", content, false, {});
 // Hot Module Replacement
 if(false) {
  // When the styles change, update the <style> tags
@@ -64501,7 +64701,7 @@ var content = __webpack_require__(336);
 if(typeof content === 'string') content = [[module.i, content, '']];
 if(content.locals) module.exports = content.locals;
 // add the styles to the DOM
-var update = __webpack_require__(4)("6480bc3e", content, false, {});
+var update = __webpack_require__(4)("331ffd1e", content, false, {});
 // Hot Module Replacement
 if(false) {
  // When the styles change, update the <style> tags
@@ -64727,7 +64927,7 @@ var content = __webpack_require__(341);
 if(typeof content === 'string') content = [[module.i, content, '']];
 if(content.locals) module.exports = content.locals;
 // add the styles to the DOM
-var update = __webpack_require__(4)("5524ea0e", content, false, {});
+var update = __webpack_require__(4)("51d7a17e", content, false, {});
 // Hot Module Replacement
 if(false) {
  // When the styles change, update the <style> tags
@@ -65246,7 +65446,7 @@ var content = __webpack_require__(347);
 if(typeof content === 'string') content = [[module.i, content, '']];
 if(content.locals) module.exports = content.locals;
 // add the styles to the DOM
-var update = __webpack_require__(4)("6fc7cf14", content, false, {});
+var update = __webpack_require__(4)("28bd9841", content, false, {});
 // Hot Module Replacement
 if(false) {
  // When the styles change, update the <style> tags
@@ -65428,7 +65628,7 @@ var content = __webpack_require__(351);
 if(typeof content === 'string') content = [[module.i, content, '']];
 if(content.locals) module.exports = content.locals;
 // add the styles to the DOM
-var update = __webpack_require__(4)("47d8df36", content, false, {});
+var update = __webpack_require__(4)("41d6ecd8", content, false, {});
 // Hot Module Replacement
 if(false) {
  // When the styles change, update the <style> tags
@@ -65748,7 +65948,7 @@ var content = __webpack_require__(357);
 if(typeof content === 'string') content = [[module.i, content, '']];
 if(content.locals) module.exports = content.locals;
 // add the styles to the DOM
-var update = __webpack_require__(4)("25d02687", content, false, {});
+var update = __webpack_require__(4)("659603ba", content, false, {});
 // Hot Module Replacement
 if(false) {
  // When the styles change, update the <style> tags
@@ -66150,7 +66350,7 @@ var content = __webpack_require__(363);
 if(typeof content === 'string') content = [[module.i, content, '']];
 if(content.locals) module.exports = content.locals;
 // add the styles to the DOM
-var update = __webpack_require__(4)("4950a1d8", content, false, {});
+var update = __webpack_require__(4)("5edad276", content, false, {});
 // Hot Module Replacement
 if(false) {
  // When the styles change, update the <style> tags
@@ -66939,7 +67139,7 @@ var content = __webpack_require__(368);
 if(typeof content === 'string') content = [[module.i, content, '']];
 if(content.locals) module.exports = content.locals;
 // add the styles to the DOM
-var update = __webpack_require__(4)("7a4b3c14", content, false, {});
+var update = __webpack_require__(4)("396f8841", content, false, {});
 // Hot Module Replacement
 if(false) {
  // When the styles change, update the <style> tags
@@ -67698,7 +67898,7 @@ var content = __webpack_require__(373);
 if(typeof content === 'string') content = [[module.i, content, '']];
 if(content.locals) module.exports = content.locals;
 // add the styles to the DOM
-var update = __webpack_require__(4)("0febacef", content, false, {});
+var update = __webpack_require__(4)("d1a4bc48", content, false, {});
 // Hot Module Replacement
 if(false) {
  // When the styles change, update the <style> tags
@@ -67835,61 +68035,172 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
-	data: function data() {
-		return {
-			id: this.$route.params.id,
-			discount: {
-				iddiscount: '',
-				title: '',
-				description: '',
-				image: '',
-				startdate: '',
-				enddate: '',
-				outstanding: '',
-				conditions: '',
-				restrictions: '',
-				amountapproved: '',
-				amountavailable: '',
-				amountredeemed: '',
-				normalprice: '',
-				discountprice: '',
-				discountpercentage: ''
-			},
-			branchs: []
-		};
-	},
-	mounted: function mounted() {
-		this.index();
-	},
+  data: function data() {
+    return {
+      id: this.$route.params.id,
+      discount: {
+        iddiscount: '',
+        title: '',
+        description: '',
+        image: '',
+        startdate: '',
+        enddate: '',
+        outstanding: '',
+        conditions: '',
+        restrictions: '',
+        amountapproved: '',
+        amountavailable: '',
+        amountredeemed: '',
+        normalprice: '',
+        discountprice: '',
+        discountcategory_iddiscountcategory: ''
+      },
+      branchs: []
+    };
+  },
+  mounted: function mounted() {
+    this.index();
+  },
 
 
-	methods: {
-		index: function index() {
-			var _this = this;
+  methods: {
+    index: function index() {
+      var _this = this;
 
-			axios.get('/api/discount/' + this.id).then(function (response) {
-				console.log(response);
-				_this.discount.iddiscount = response.data.data.iddiscount;
-				_this.discount.title = response.data.data.title;
-				_this.discount.description = response.data.data.description;
-				_this.discount.image = response.data.data.image;
-				_this.discount.startdate = response.data.data.startdate;
-				_this.discount.enddate = response.data.data.enddate;
-				_this.discount.outstanding = response.data.data.outstanding;
-				_this.discount.conditions = response.data.data.conditions;
-				_this.discount.restrictions = response.data.data.restrictions;
-				_this.discount.normalprice = response.data.data.normalprice;
-				_this.discount.discountprice = response.data.data.discountprice;
-				_this.discount.discountpercentage = response.data.data.discountpercentage;
+      axios.get('/api/discount/' + this.id).then(function (response) {
+        console.log(response);
+        _this.discount.iddiscount = response.data.data.iddiscount;
+        _this.discount.title = response.data.data.title;
+        _this.discount.description = response.data.data.description;
+        _this.discount.image = response.data.data.image;
+        _this.discount.startdate = response.data.data.startdate;
+        _this.discount.enddate = response.data.data.enddate;
+        _this.discount.outstanding = response.data.data.outstanding;
+        _this.discount.conditions = response.data.data.conditions;
+        _this.discount.restrictions = response.data.data.restrictions;
+        _this.discount.normalprice = response.data.data.normalprice;
+        _this.discount.discountprice = response.data.data.discountprice;
+        _this.discount.discountpercentage = response.data.data.discountpercentage;
+        _this.discount.discountcategory_iddiscountcategory = response.data.data.categories.name;
 
-				_this.branchs = response.data.data.branchs;
-			}).catch(function (err) {
-				return console.log(err);
-			});
-		}
-	}
+        _this.branchs = response.data.data.branchs;
+      }).catch(function (err) {
+        return console.log(err);
+      });
+    }
+  }
 });
 
 /***/ }),
@@ -67918,173 +68229,192 @@ var render = function() {
         [_vm._v("Atras")]
       ),
       _vm._v(" "),
-      _c("h2", { staticClass: "my-4" }, [
-        _vm._v("Descuento: " + _vm._s(_vm.discount.iddiscount))
-      ]),
+      _c("h3", { staticClass: "my-4" }, [_vm._v(_vm._s(_vm.discount.title))]),
       _vm._v(" "),
-      _c("h3", { staticClass: "mt-4" }, [_vm._v(_vm._s(_vm.discount.title))]),
-      _vm._v(" "),
-      _c("div", [
-        _c("div", { staticClass: "row pt-30" }, [
-          _c("div", { staticClass: "col-lg-6" }, [
-            _vm._m(0),
-            _vm._v(" "),
-            _c("p", [_vm._v(_vm._s(_vm.discount.iddiscount))])
-          ]),
-          _vm._v(" "),
-          _c("div", { staticClass: "col-lg-6" }, [
-            _vm._m(1),
-            _vm._v(" "),
-            _c("p", [_vm._v(_vm._s(_vm.discount.description))])
-          ]),
-          _vm._v(" "),
-          _c("div", { staticClass: "col-lg-6" }, [
-            _vm._m(2),
-            _vm._v(" "),
-            _c("p", [_vm._v(_vm._s(_vm.discount.startdate))])
-          ]),
-          _vm._v(" "),
-          _c("div", { staticClass: "col-lg-6" }, [
-            _vm._m(3),
-            _vm._v(" "),
-            _c("p", [_vm._v(_vm._s(_vm.discount.enddate))])
-          ]),
-          _vm._v(" "),
-          _c("div", { staticClass: "col-lg-6" }, [
-            _vm._m(4),
-            _vm._v(" "),
-            _c("p", [
-              _vm._v(" " + _vm._s(_vm.discount.outstanding ? "Si" : "No"))
-            ])
-          ]),
-          _vm._v(" "),
-          _c("div", { staticClass: "col-lg-6" }, [
-            _vm._m(5),
-            _vm._v(" "),
-            _c("p", [
-              _c("img", {
-                staticClass: "image-discount",
-                attrs: { src: "images/discount/" + _vm.discount.image }
-              })
-            ])
-          ]),
-          _vm._v(" "),
-          _c("div", { staticClass: "col-lg-6" }, [
-            _vm._m(6),
-            _vm._v(" "),
-            _c("p", [_vm._v(_vm._s(_vm.discount.condition))])
-          ]),
-          _vm._v(" "),
-          _c("div", { staticClass: "col-lg-6" }, [
-            _vm._m(7),
-            _vm._v(" "),
-            _c("p", [_vm._v(_vm._s(_vm.discount.restrictions))])
-          ]),
-          _vm._v(" "),
-          _c("div", { staticClass: "col-lg-6" }, [
-            _vm._m(8),
-            _vm._v(" "),
-            _c("p", [_vm._v(_vm._s(_vm.discount.normalprice))])
-          ]),
-          _vm._v(" "),
-          _c("div", { staticClass: "col-lg-6" }, [
-            _vm._m(9),
-            _vm._v(" "),
-            _c("p", [_vm._v(_vm._s(_vm.discount.discountprice))])
-          ]),
-          _vm._v(" "),
-          _c("div", { staticClass: "col-lg-6" }, [
-            _vm._m(10),
-            _vm._v(" "),
-            _c("p", [_vm._v(_vm._s(_vm.discount.discountpercentage) + " %")])
-          ]),
-          _vm._v(" "),
-          _c("div", { staticClass: "clearfix" }),
-          _vm._v(" "),
-          _c("br")
-        ]),
-        _vm._v(" "),
-        _c("div", [
-          _c("h3", { staticClass: "mt-4" }, [_vm._v("Sucursales")]),
-          _vm._v(" "),
-          _c(
-            "div",
-            { staticClass: "row justify-content-center stat-table-wrap" },
-            [
-              _c("div", { staticClass: "col-lg-12 stat-wrap-container" }, [
-                _c("div", { staticClass: "stat-wrap" }, [
-                  _c(
-                    "table",
-                    { staticClass: "table table-striped mt-40 stat-table" },
-                    [
-                      _vm._m(11),
+      _c("div", { staticClass: "container" }, [
+        _c("div", { staticClass: "row" }, [
+          _c("div", { staticClass: "col-lg-9" }, [
+            _c("div", { staticClass: "tab-content" }, [
+              _c(
+                "div",
+                { staticClass: "tab-pane active", attrs: { id: "overview" } },
+                [
+                  _c("div", { staticClass: "overview-section" }, [
+                    _c("div", { staticClass: "theme-thumb" }, [
+                      _c("img", {
+                        staticClass: "img-fluid",
+                        attrs: {
+                          src: "../images/discount/" + _vm.discount.image
+                        }
+                      })
+                    ]),
+                    _vm._v(" "),
+                    _c("div", { staticClass: "other-details" }, [
+                      _c("h4", { staticClass: "text-uppercase" }, [
+                        _vm._v("Informacion")
+                      ]),
                       _vm._v(" "),
-                      _c(
-                        "tbody",
-                        _vm._l(_vm.branchs, function(branch) {
-                          return _c("tr", [
-                            _c("td", [_vm._v(_vm._s(branch.idbranch))]),
-                            _vm._v(" "),
-                            _c("td", [_vm._v(_vm._s(branch.name))]),
-                            _vm._v(" "),
-                            _c("td", [
-                              branch.image != null
-                                ? _c("img", {
-                                    staticClass: "image-branch",
-                                    attrs: {
-                                      src: "images/branch/" + branch.image
-                                    }
-                                  })
-                                : _vm._e(),
-                              _vm._v(" "),
-                              branch.image == null
-                                ? _c("p", [_vm._v("No posee imagen.")])
-                                : _vm._e()
-                            ]),
-                            _vm._v(" "),
-                            _c("td", [
-                              _vm._v(
-                                _vm._s(branch.latitude) +
-                                  " - " +
-                                  _vm._s(branch.longitude)
-                              )
-                            ]),
-                            _vm._v(" "),
-                            _c(
-                              "td",
-                              [
-                                _c(
-                                  "router-link",
-                                  {
-                                    attrs: { to: "/branch/" + branch.idbranch }
-                                  },
-                                  [
-                                    _c(
-                                      "a",
-                                      {
-                                        staticClass: "btn btn-primary btn-sm",
-                                        attrs: { href: "#" }
-                                      },
-                                      [
-                                        _vm._v(
-                                          "\n                                            Detalle\n                                            "
-                                        )
-                                      ]
-                                    )
-                                  ]
-                                )
-                              ],
-                              1
+                      _c("p", [
+                        _vm._v(
+                          "\n                                        " +
+                            _vm._s(_vm.discount.description) +
+                            "\n                                    "
+                        )
+                      ]),
+                      _vm._v(" "),
+                      _vm.discount.conditions != null
+                        ? _c("p", [
+                            _vm._v(
+                              "\n                                        Condiciones: " +
+                                _vm._s(_vm.discount.conditions) +
+                                "\n                                    "
                             )
                           ])
-                        })
-                      )
-                    ]
-                  )
+                        : _vm._e(),
+                      _vm._v(" "),
+                      _vm.discount.restrictions != null
+                        ? _c("p", [
+                            _vm._v(
+                              "\n                                        Restricciones: " +
+                                _vm._s(_vm.discount.restrictions) +
+                                "\n                                    "
+                            )
+                          ])
+                        : _vm._e()
+                    ]),
+                    _vm._v(" "),
+                    _c("div", { staticClass: "other-details" }, [
+                      _c("h4", { staticClass: "text-uppercase" }, [
+                        _vm._v("Categoria")
+                      ]),
+                      _vm._v(" "),
+                      _c("div", { staticClass: "row" }, [
+                        _c("div", { staticClass: "col-lg-6" }, [
+                          _c("ul", { staticClass: "support-list" }, [
+                            _c("li", [
+                              _c("img", {
+                                attrs: { src: "/img/bullet.png", alt: "" }
+                              }),
+                              _vm._v(
+                                _vm._s(
+                                  _vm.discount
+                                    .discountcategory_iddiscountcategory
+                                ) +
+                                  "\n                                                "
+                              )
+                            ])
+                          ])
+                        ]),
+                        _vm._v(" "),
+                        _c("div", { staticClass: "col-lg-6" })
+                      ])
+                    ]),
+                    _vm._v(" "),
+                    _c("div", { staticClass: "other-details" }, [
+                      _c("h4", { staticClass: "text-uppercase" }, [
+                        _vm._v("Sucursales")
+                      ]),
+                      _vm._v(" "),
+                      _c("div", { staticClass: "row" }, [
+                        _c("div", { staticClass: "col-lg-6" }, [
+                          _c(
+                            "ul",
+                            { staticClass: "support-list" },
+                            [
+                              _vm.branchs.length < 1
+                                ? _c("li", [_vm._v("No posee sucursales aún.")])
+                                : _vm._e(),
+                              _vm._v(" "),
+                              _vm._l(_vm.branchs, function(branch) {
+                                return _c("li", [
+                                  _c("img", {
+                                    attrs: { src: "/img/bullet.png", alt: "" }
+                                  }),
+                                  _vm._v(
+                                    _vm._s(branch.name) +
+                                      "\n                                                "
+                                  )
+                                ])
+                              })
+                            ],
+                            2
+                          )
+                        ]),
+                        _vm._v(" "),
+                        _c("div", { staticClass: "col-lg-6" })
+                      ])
+                    ])
+                  ])
+                ]
+              )
+            ])
+          ]),
+          _vm._v(" "),
+          _c("div", { staticClass: "col-lg-3 sidebar theme-details-sidebar" }, [
+            _c("div", { staticClass: "single-sidebar" }, [
+              _c(
+                "div",
+                {
+                  staticClass:
+                    "price-title d-flex flex-row justify-content-between"
+                },
+                [
+                  _c("h3", { staticClass: "price my-2" }, [
+                    _vm._v(_vm._s(_vm.discount.discountprice))
+                  ]),
+                  _vm._v(" "),
+                  _c("h4", [
+                    _c("s", [_vm._v(_vm._s(_vm.discount.normalprice))])
+                  ]),
+                  _vm._v(" "),
+                  _c("h6", [
+                    _vm._v(_vm._s(_vm.discount.discountpercentage) + "%")
+                  ])
+                ]
+              ),
+              _vm._v(" "),
+              _c("a", { staticClass: "primary-btn", attrs: { href: "#" } }, [
+                _vm._v("purchase only")
+              ])
+            ]),
+            _vm._v(" "),
+            _c(
+              "div",
+              {
+                directives: [
+                  {
+                    name: "show",
+                    rawName: "v-show",
+                    value: _vm.discount.outstanding,
+                    expression: "discount.outstanding"
+                  }
+                ]
+              },
+              [
+                _c("h3", { staticClass: "alert alert-success text-center" }, [
+                  _vm._v("Destacado")
+                ])
+              ]
+            ),
+            _vm._v(" "),
+            _c("div", { staticClass: "single-sidebar theme-details" }, [
+              _c("h6", [_vm._v("Detalle Fecha")]),
+              _vm._v(" "),
+              _c("ul", { staticClass: "theme-details-list" }, [
+                _c("li", [
+                  _c("i", { staticClass: "icons icon-tag" }),
+                  _vm._v(" " + _vm._s(_vm.discount.startdate))
+                ]),
+                _vm._v(" "),
+                _c("li", [
+                  _c("i", { staticClass: "icons icon-tag" }),
+                  _vm._v(" " + _vm._s(_vm.discount.enddate))
                 ])
               ])
-            ]
-          )
+            ]),
+            _vm._v(" "),
+            _vm._m(0)
+          ])
         ])
       ])
     ]
@@ -68095,83 +68425,77 @@ var staticRenderFns = [
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("label", [_c("strong", [_vm._v("ID Descuento")])])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("label", [_c("strong", [_vm._v("Descripción")])])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("label", [_c("strong", [_vm._v("Inicio")])])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("label", [_c("strong", [_vm._v("Fin")])])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("label", [_c("strong", [_vm._v("Destacado")])])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("label", [_c("strong", [_vm._v("Imagen")])])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("label", [_c("strong", [_vm._v("Condición")])])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("label", [_c("strong", [_vm._v("Restricciones")])])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("label", [_c("strong", [_vm._v("Normal Precio")])])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("label", [_c("strong", [_vm._v("Precio Descuento")])])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("label", [_c("strong", [_vm._v("Porcetaje Descuento")])])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("thead", [
-      _c("tr", [
-        _c("th", [_vm._v("ID Sucursal")]),
+    return _c("div", { staticClass: "single-sidebar theme-tags" }, [
+      _c("h6", [_vm._v("Tags")]),
+      _vm._v(" "),
+      _c("ul", { staticClass: "tag-list" }, [
+        _c("li", [
+          _c("i", { staticClass: "icons icon-folder" }),
+          _vm._v(" "),
+          _c("a", { attrs: { href: "#" } }, [_vm._v("Bootstrap templates")]),
+          _vm._v(","),
+          _c("a", { attrs: { href: "#" } }, [_vm._v(" business & services")]),
+          _vm._v(", Marketing")
+        ]),
         _vm._v(" "),
-        _c("th", [_vm._v("Nombre")]),
-        _vm._v(" "),
-        _c("th", [_vm._v("Imagen")]),
-        _vm._v(" "),
-        _c("th", [_vm._v("Latitud y Longitud")]),
-        _vm._v(" "),
-        _c("th", [_vm._v("Options")])
+        _c("li", [
+          _c("i", { staticClass: "icons icon-tag" }),
+          _vm._v(" "),
+          _c("a", { attrs: { href: "#" } }, [_vm._v("Agency")]),
+          _vm._v(","),
+          _c("a", { attrs: { href: "#" } }, [_vm._v(" business")]),
+          _vm._v(","),
+          _c("a", { attrs: { href: "#" } }, [_vm._v(" corporate")])
+        ])
+      ]),
+      _vm._v(" "),
+      _c("div", { staticClass: "sidebar-social" }, [
+        _c("ul", [
+          _c("li", [
+            _c("a", { attrs: { href: "#" } }, [
+              _c("i", {
+                staticClass: "fa fa-facebook",
+                attrs: { "aria-hidden": "true" }
+              })
+            ])
+          ]),
+          _vm._v(" "),
+          _c("li", [
+            _c("a", { attrs: { href: "#" } }, [
+              _c("i", {
+                staticClass: "fa fa-twitter",
+                attrs: { "aria-hidden": "true" }
+              })
+            ])
+          ]),
+          _vm._v(" "),
+          _c("li", [
+            _c("a", { attrs: { href: "#" } }, [
+              _c("i", {
+                staticClass: "fa fa-github",
+                attrs: { "aria-hidden": "true" }
+              })
+            ])
+          ]),
+          _vm._v(" "),
+          _c("li", [
+            _c("a", { attrs: { href: "#" } }, [
+              _c("i", {
+                staticClass: "fa fa-slack",
+                attrs: { "aria-hidden": "true" }
+              })
+            ])
+          ]),
+          _vm._v(" "),
+          _c("li", [
+            _c("a", { attrs: { href: "#" } }, [
+              _c("i", {
+                staticClass: "fa fa-dribbble",
+                attrs: { "aria-hidden": "true" }
+              })
+            ])
+          ])
+        ])
       ])
     ])
   }
@@ -68247,7 +68571,7 @@ var content = __webpack_require__(378);
 if(typeof content === 'string') content = [[module.i, content, '']];
 if(content.locals) module.exports = content.locals;
 // add the styles to the DOM
-var update = __webpack_require__(4)("7a99f41e", content, false, {});
+var update = __webpack_require__(4)("a3faa7ea", content, false, {});
 // Hot Module Replacement
 if(false) {
  // When the styles change, update the <style> tags
@@ -68703,7 +69027,7 @@ var content = __webpack_require__(383);
 if(typeof content === 'string') content = [[module.i, content, '']];
 if(content.locals) module.exports = content.locals;
 // add the styles to the DOM
-var update = __webpack_require__(4)("129696e4", content, false, {});
+var update = __webpack_require__(4)("1a61b58a", content, false, {});
 // Hot Module Replacement
 if(false) {
  // When the styles change, update the <style> tags
@@ -69134,7 +69458,7 @@ var content = __webpack_require__(389);
 if(typeof content === 'string') content = [[module.i, content, '']];
 if(content.locals) module.exports = content.locals;
 // add the styles to the DOM
-var update = __webpack_require__(4)("6f4fe7f4", content, false, {});
+var update = __webpack_require__(4)("0f4278b2", content, false, {});
 // Hot Module Replacement
 if(false) {
  // When the styles change, update the <style> tags
@@ -69946,7 +70270,7 @@ var content = __webpack_require__(393);
 if(typeof content === 'string') content = [[module.i, content, '']];
 if(content.locals) module.exports = content.locals;
 // add the styles to the DOM
-var update = __webpack_require__(4)("13d6a1d8", content, false, {});
+var update = __webpack_require__(4)("d382636a", content, false, {});
 // Hot Module Replacement
 if(false) {
  // When the styles change, update the <style> tags
@@ -70405,7 +70729,7 @@ var content = __webpack_require__(397);
 if(typeof content === 'string') content = [[module.i, content, '']];
 if(content.locals) module.exports = content.locals;
 // add the styles to the DOM
-var update = __webpack_require__(4)("1df4c864", content, false, {});
+var update = __webpack_require__(4)("2d80b57e", content, false, {});
 // Hot Module Replacement
 if(false) {
  // When the styles change, update the <style> tags
@@ -105275,46 +105599,46 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
-	mounted: function mounted() {
-		console.log('Login Mounted.');
-	},
-	data: function data() {
-		return {
-			errors: {},
-			'email': "",
-			'password': "",
-			'reg': /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,24}))$/
-		};
-	},
+				mounted: function mounted() {
+								console.log('Login Mounted.');
+				},
+				data: function data() {
+								return {
+												errors: {},
+												'email': "",
+												'password': "",
+												'reg': /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,24}))$/
+								};
+				},
 
-	methods: {
-		submitLogin: function submitLogin() {
-			var _this = this;
+				methods: {
+								submitLogin: function submitLogin() {
+												var _this = this;
 
-			this.errors = [];
-			if (!this.email) this.errors.password = 'El Correo Electrónico es requerido.';
-			if (!this.validEmail(this.email)) this.errors.emailvalid = 'Se requiere un correo válido.';
-			if (!this.password) this.errors.password = 'La contraseña es requerido.';
+												this.errors = [];
+												if (!this.email) this.errors.password = 'El Correo Electrónico es requerido.';
+												if (!this.validEmail(this.email)) this.errors.emailvalid = 'Se requiere un correo válido.';
+												if (!this.password) this.errors.password = 'La contraseña es requerido.';
 
-			if (this.validEmail(this.email) && this.password) {
-				var params = {
-					email: this.email,
-					password: this.password
-				};
+												if (this.validEmail(this.email) && this.password) {
+																var params = {
+																				email: this.email,
+																				password: this.password
+																};
 
-				axios.post('/api/login', params).then(function (response) {
-					localStorage.setItem('userdata', JSON.stringify(response.data.user));
-					window.location.href = '/';
-				}).catch(function (error) {
-					_this.errors.push(error.response.data.error);
-				});
-			}
-		},
+																axios.post('/api/login', params).then(function (response) {
+																				localStorage.setItem('userdata', JSON.stringify(response.data.user));
+																				window.location.href = '/';
+																}).catch(function (error) {
+																				_this.errors.push(error.response.data.error);
+																});
+												}
+								},
 
-		validEmail: function validEmail(email) {
-			return this.reg.test(email);
-		}
-	}
+								validEmail: function validEmail(email) {
+												return this.reg.test(email);
+								}
+				}
 });
 
 /***/ }),
@@ -105385,7 +105709,7 @@ var content = __webpack_require__(527);
 if(typeof content === 'string') content = [[module.i, content, '']];
 if(content.locals) module.exports = content.locals;
 // add the styles to the DOM
-var update = __webpack_require__(4)("1cb5a15a", content, false, {});
+var update = __webpack_require__(4)("92562968", content, false, {});
 // Hot Module Replacement
 if(false) {
  // When the styles change, update the <style> tags
@@ -105587,7 +105911,7 @@ var content = __webpack_require__(531);
 if(typeof content === 'string') content = [[module.i, content, '']];
 if(content.locals) module.exports = content.locals;
 // add the styles to the DOM
-var update = __webpack_require__(4)("b6a6a370", content, false, {});
+var update = __webpack_require__(4)("2bd3cb81", content, false, {});
 // Hot Module Replacement
 if(false) {
  // When the styles change, update the <style> tags
@@ -106301,7 +106625,7 @@ var content = __webpack_require__(541);
 if(typeof content === 'string') content = [[module.i, content, '']];
 if(content.locals) module.exports = content.locals;
 // add the styles to the DOM
-var update = __webpack_require__(4)("09ba2804", content, false, {});
+var update = __webpack_require__(4)("6f5ad49e", content, false, {});
 // Hot Module Replacement
 if(false) {
  // When the styles change, update the <style> tags
@@ -106325,7 +106649,7 @@ exports = module.exports = __webpack_require__(2)(false);
 
 
 // module
-exports.push([module.i, "\n#section-register[data-v-7a6797a6]{\r\n    margin-top: 70px;\n}\r\n", ""]);
+exports.push([module.i, "\n#section-register[data-v-7a6797a6]{\n    margin-top: 70px;\n}\n", ""]);
 
 // exports
 
@@ -106557,7 +106881,7 @@ var render = function() {
                           [_vm._v("×")]
                         ),
                         _vm._v(
-                          "\r\n                          " + _vm._s(error) + " "
+                          "\n                          " + _vm._s(error) + " "
                         ),
                         _c("br"),
                         _vm._v(" "),
@@ -107015,7 +107339,7 @@ var content = __webpack_require__(546);
 if(typeof content === 'string') content = [[module.i, content, '']];
 if(content.locals) module.exports = content.locals;
 // add the styles to the DOM
-var update = __webpack_require__(4)("7fc889e4", content, false, {});
+var update = __webpack_require__(4)("e783da38", content, false, {});
 // Hot Module Replacement
 if(false) {
  // When the styles change, update the <style> tags
@@ -107039,7 +107363,7 @@ exports = module.exports = __webpack_require__(2)(false);
 
 
 // module
-exports.push([module.i, "\n#section-register {\r\n    margin-top: 120px;\r\n    margin-bottom: 100px;\n}\r\n", ""]);
+exports.push([module.i, "\n#section-register {\n    margin-top: 120px;\n    margin-bottom: 100px;\n}\n", ""]);
 
 // exports
 
@@ -107360,7 +107684,7 @@ var content = __webpack_require__(551);
 if(typeof content === 'string') content = [[module.i, content, '']];
 if(content.locals) module.exports = content.locals;
 // add the styles to the DOM
-var update = __webpack_require__(4)("2f762a9a", content, false, {});
+var update = __webpack_require__(4)("9c9c7ccc", content, false, {});
 // Hot Module Replacement
 if(false) {
  // When the styles change, update the <style> tags
@@ -107384,7 +107708,7 @@ exports = module.exports = __webpack_require__(2)(false);
 
 
 // module
-exports.push([module.i, "\n#section-register {\r\n    margin-top: 120px;\r\n    margin-bottom: 100px;\n}\r\n", ""]);
+exports.push([module.i, "\n#section-register {\n    margin-top: 120px;\n    margin-bottom: 100px;\n}\n", ""]);
 
 // exports
 
@@ -107698,7 +108022,7 @@ var content = __webpack_require__(556);
 if(typeof content === 'string') content = [[module.i, content, '']];
 if(content.locals) module.exports = content.locals;
 // add the styles to the DOM
-var update = __webpack_require__(4)("18531f44", content, false, {});
+var update = __webpack_require__(4)("54ef7144", content, false, {});
 // Hot Module Replacement
 if(false) {
  // When the styles change, update the <style> tags
@@ -107722,7 +108046,7 @@ exports = module.exports = __webpack_require__(2)(false);
 
 
 // module
-exports.push([module.i, "\n#section-register {\r\n    margin-top: 120px;\r\n    margin-bottom: 100px;\n}\r\n", ""]);
+exports.push([module.i, "\n#section-register {\n    margin-top: 120px;\n    margin-bottom: 100px;\n}\n", ""]);
 
 // exports
 
@@ -108030,7 +108354,7 @@ var content = __webpack_require__(561);
 if(typeof content === 'string') content = [[module.i, content, '']];
 if(content.locals) module.exports = content.locals;
 // add the styles to the DOM
-var update = __webpack_require__(4)("0b868a1d", content, false, {});
+var update = __webpack_require__(4)("17fc131d", content, false, {});
 // Hot Module Replacement
 if(false) {
  // When the styles change, update the <style> tags
@@ -108054,7 +108378,7 @@ exports = module.exports = __webpack_require__(2)(false);
 
 
 // module
-exports.push([module.i, "\n#section-reset {\r\n\tmargin-top: 100px;\r\n\tmargin-bottom: 60px;\n}\r\n", ""]);
+exports.push([module.i, "\n#section-reset {\n\tmargin-top: 100px;\n\tmargin-bottom: 60px;\n}\n", ""]);
 
 // exports
 
@@ -108212,9 +108536,9 @@ var render = function() {
                             [_vm._v("×")]
                           ),
                           _vm._v(
-                            "\r\n                              " +
+                            "\n                              " +
                               _vm._s(error) +
-                              "\r\n                            "
+                              "\n                            "
                           )
                         ]
                       )
@@ -108245,7 +108569,7 @@ var render = function() {
                             [_vm._v("×")]
                           ),
                           _vm._v(
-                            "\r\n                              " + _vm._s(tmp)
+                            "\n                              " + _vm._s(tmp)
                           ),
                           _c("br"),
                           _vm._v(" "),
@@ -108456,7 +108780,7 @@ var content = __webpack_require__(566);
 if(typeof content === 'string') content = [[module.i, content, '']];
 if(content.locals) module.exports = content.locals;
 // add the styles to the DOM
-var update = __webpack_require__(4)("26290d4c", content, false, {});
+var update = __webpack_require__(4)("2983905a", content, false, {});
 // Hot Module Replacement
 if(false) {
  // When the styles change, update the <style> tags
@@ -108480,7 +108804,7 @@ exports = module.exports = __webpack_require__(2)(false);
 
 
 // module
-exports.push([module.i, "\n#section-activation {\r\n    margin-top: 120px;\r\n    margin-bottom: 100px;\n}\r\n", ""]);
+exports.push([module.i, "\n#section-activation {\n    margin-top: 120px;\n    margin-bottom: 100px;\n}\n", ""]);
 
 // exports
 
@@ -108764,7 +109088,7 @@ var content = __webpack_require__(571);
 if(typeof content === 'string') content = [[module.i, content, '']];
 if(content.locals) module.exports = content.locals;
 // add the styles to the DOM
-var update = __webpack_require__(4)("72c05614", content, false, {});
+var update = __webpack_require__(4)("48db6bf6", content, false, {});
 // Hot Module Replacement
 if(false) {
  // When the styles change, update the <style> tags
@@ -108788,7 +109112,7 @@ exports = module.exports = __webpack_require__(2)(false);
 
 
 // module
-exports.push([module.i, "\n#section-activation {\r\n    margin-top: 120px;\r\n    margin-bottom: 100px;\n}\r\n", ""]);
+exports.push([module.i, "\n#section-activation {\n    margin-top: 120px;\n    margin-bottom: 100px;\n}\n", ""]);
 
 // exports
 

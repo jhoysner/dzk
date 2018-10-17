@@ -72,21 +72,22 @@
                                     <i class="icons icon-eye"></i>
                                   </a>
 
-                                  <a class="relative" href="cart.html">
+                                  <!--<a class="relative" href="cart.html">
                                     <i class="icons icon-basket-loaded"></i>
-                                  </a>
+                                  </a> -->
                               </div>
                             </div>
                             <div class="details pb-10 pt-20">
                                 <div class="title d-flex flex-row justify-content-between">
                                     <a>
-                                        <h6>
-                                          <router-link :to="`/branch/${branch.idbranch}`">
-                                            {{ branch.name }}
-                                          </router-link>
-                                        </h6>
+                                      <h6>
+                                        <router-link :to="`/branch/${branch.idbranch}`">
+                                          {{ branch.name }}
+                                        </router-link>
+                                      </h6>
                                     </a>
-                                    <h6 class="price">$59</h6>
+                                    <!--<h6 class="price">$59</h6> -->
+                                    <i class="icons icon-share"></i>
                                 </div>
                             </div>
                             <!--<div class="details pb-10 pt-20">

@@ -27,9 +27,18 @@
                         	</strong>
                         </label>
                         <p>
-                        	<ul v-for="branch in branchs" :key="branch.idbranch">
-                        		<li class="pl-2">{{ branch.name }}</li>
+                        	<ul>
+                        		<li class="pl-2" v-for="branch in branchs" :key="branch.idbranch">
+                              {{ branch.name }} - {{ branch.phone1 }} - {{ branch.address }}
+                            </li>
                         	</ul>
+                          <span class="pl-2" v-if="branchs.length > 1"> <!-- Cambiar en su momento por un minimo de 5 -->
+                            <a href="#">
+                              <router-link :to="`commerce/${commerce.idcommerce}`">
+                                Leer más
+                              </router-link>
+                            </a>
+                          </span>
                         </p>
                         <hr>
                     </div>
@@ -39,16 +48,32 @@
                         	 Descuentos
                         	</strong>
                         </label>
+                        <p>
+                          <ul>
+                            <template v-for="branch in branchs">
+                              <li class="pl-2" v-for="discount in branch.discounts" :key="discount.iddiscount">
+                                {{ discount.title }} - ${{ discount.amountapproved }}
+                              </li>
+                              <span class="pl-2" v-if="branch.discounts.length > 1"> <!-- Cambiar en su momento por un minimo de 5 -->
+                                <a href="#">
+                                  <router-link :to="`commerce/${commerce.idcommerce}`">
+                                    Leer más
+                                  </router-link>
+                                </a>
+                              </span>
+                            </template>
+                          </ul>
+                        </p>
                     </div>
 
                 </div>             
               </div>
               <div class="modal-footer">
                 <router-link :to="`commerce/${commerce.idcommerce}`">
-	              <a href="#" class="btn btn-primary btn-sm">
-	               Detalle
-	              </a>     
-	            </router-link>
+  	              <a href="#" class="btn btn-primary btn-sm">
+  	               Detalle
+  	              </a>     
+	              </router-link>
               </div>
           </div>
         </b-modal> 
@@ -83,7 +108,7 @@ import Bus from '../../utilities/EventBus.js';
 			showCommerce(id) {
 				this.countDiscounts = 0; 
 
-        axios.get('/api/detail-commerce/' + id).then(response => {
+        axios.get('/api/detail-commerce/' + id + '/random').then(response => {
           this.commerce.idcommerce = response.data.data[0].idcommerce;
           this.commerce.name = response.data.data[0].name;
           this.commerce.phone1 = response.data.data[0].phone1;
@@ -92,10 +117,12 @@ import Bus from '../../utilities/EventBus.js';
           this.branchs = response.data.data[0].branchs;
           //this.countbranchs = response.data.data[0].branchs.length;
           
-          /*response.data.data[0].branchs.forEach(response => {
-          	this.countDiscounts += response.discounts.length;
-          	//console.log(this.countDiscounts + ' Descuentos');
-          });*/
+          response.data.data[0].branchs.forEach(res => {
+            //this.discounts = response.discounts;
+            if(res.discounts.length > 0) {
+              console.log(res);
+            }
+          });
         })
         .catch(err => console.log(err))
       },	

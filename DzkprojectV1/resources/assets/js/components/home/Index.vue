@@ -73,9 +73,9 @@
                                         <i class="icons icon-eye"></i>
                                       </a>
 
-                                      <a class="relative" href="cart.html">
+                                      <!--<a class="relative" href="cart.html">
                                         <i class="icons icon-basket-loaded"></i>
-                                      </a>
+                                      </a> -->
                                   </div>
                                 </div>
                                 <div class="details pb-10 pt-20">
@@ -83,7 +83,8 @@
                                         <a class="showModal" v-b-modal.showModal  @click="detail(commerce.idcommerce)">
                                             <h6>{{ commerce.name }}</h6>
                                         </a>
-                                        <h6 class="price">$59</h6>
+                                        <!--<h6 class="price">$59</h6> -->
+                                        <i class="icons icon-share"></i>
                                     </div>
                                 </div>
                                 <div class="details pb-10 pt-20">
@@ -116,7 +117,11 @@
                                 <div class="meta d-flex flex-row">
                                     <!--<div class="user-img"><img src="img/user-img.png" alt=""></div> -->
                                     <a href="theme-details.html">
-                                        <h6>Ver descuentos activos</h6>
+                                        <h6>
+                                          <router-link class="branch-link" :to="`/commerce/${commerce.idcommerce}/discounts`">
+                                            Ver descuentos activos
+                                          </router-link>
+                                        </h6>
                                     </a>
                                 </div>
                             </div>

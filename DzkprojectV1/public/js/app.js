@@ -53689,6 +53689,11 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
+//
+//
+//
 
 
 
@@ -53839,7 +53844,7 @@ exports = module.exports = __webpack_require__(2)(false);
 
 
 // module
-exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", ""]);
+exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", ""]);
 
 // exports
 
@@ -53851,6 +53856,31 @@ exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__utilities_EventBus_js__ = __webpack_require__(7);
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 //
 //
 //
@@ -53940,7 +53970,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 
 			this.countDiscounts = 0;
 
-			axios.get('/api/detail-commerce/' + id).then(function (response) {
+			axios.get('/api/detail-commerce/' + id + '/random').then(function (response) {
 				_this2.commerce.idcommerce = response.data.data[0].idcommerce;
 				_this2.commerce.name = response.data.data[0].name;
 				_this2.commerce.phone1 = response.data.data[0].phone1;
@@ -53949,10 +53979,12 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 				_this2.branchs = response.data.data[0].branchs;
 				//this.countbranchs = response.data.data[0].branchs.length;
 
-				/*response.data.data[0].branchs.forEach(response => {
-    	this.countDiscounts += response.discounts.length;
-    	//console.log(this.countDiscounts + ' Descuentos');
-    });*/
+				response.data.data[0].branchs.forEach(function (res) {
+					//this.discounts = response.discounts;
+					if (res.discounts.length > 0) {
+						console.log(res);
+					}
+				});
 			}).catch(function (err) {
 				return console.log(err);
 			});
@@ -54016,16 +54048,53 @@ var render = function() {
                     ])
                   ]),
                   _vm._v(" "),
-                  _c(
-                    "p",
-                    _vm._l(_vm.branchs, function(branch) {
-                      return _c("ul", { key: branch.idbranch }, [
-                        _c("li", { staticClass: "pl-2" }, [
-                          _vm._v(_vm._s(branch.name))
+                  _c("p", [
+                    _c(
+                      "ul",
+                      _vm._l(_vm.branchs, function(branch) {
+                        return _c(
+                          "li",
+                          { key: branch.idbranch, staticClass: "pl-2" },
+                          [
+                            _vm._v(
+                              "\n                              " +
+                                _vm._s(branch.name) +
+                                " - " +
+                                _vm._s(branch.phone1) +
+                                " - " +
+                                _vm._s(branch.address) +
+                                "\n                            "
+                            )
+                          ]
+                        )
+                      })
+                    ),
+                    _vm._v(" "),
+                    _vm.branchs.length > 1
+                      ? _c("span", { staticClass: "pl-2" }, [
+                          _c(
+                            "a",
+                            { attrs: { href: "#" } },
+                            [
+                              _c(
+                                "router-link",
+                                {
+                                  attrs: {
+                                    to: "commerce/" + _vm.commerce.idcommerce
+                                  }
+                                },
+                                [
+                                  _vm._v(
+                                    "\n                                Leer más\n                              "
+                                  )
+                                ]
+                              )
+                            ],
+                            1
+                          )
                         ])
-                      ])
-                    })
-                  ),
+                      : _vm._e()
+                  ]),
                   _vm._v(" "),
                   _c("hr")
                 ]),
@@ -54037,6 +54106,64 @@ var render = function() {
                         "\n                        \t Descuentos\n                        \t"
                       )
                     ])
+                  ]),
+                  _vm._v(" "),
+                  _c("p", [
+                    _c(
+                      "ul",
+                      [
+                        _vm._l(_vm.branchs, function(branch) {
+                          return [
+                            _vm._l(branch.discounts, function(discount) {
+                              return _c(
+                                "li",
+                                {
+                                  key: discount.iddiscount,
+                                  staticClass: "pl-2"
+                                },
+                                [
+                                  _vm._v(
+                                    "\n                                " +
+                                      _vm._s(discount.title) +
+                                      " - $" +
+                                      _vm._s(discount.amountapproved) +
+                                      "\n                              "
+                                  )
+                                ]
+                              )
+                            }),
+                            _vm._v(" "),
+                            branch.discounts.length > 1
+                              ? _c("span", { staticClass: "pl-2" }, [
+                                  _c(
+                                    "a",
+                                    { attrs: { href: "#" } },
+                                    [
+                                      _c(
+                                        "router-link",
+                                        {
+                                          attrs: {
+                                            to:
+                                              "commerce/" +
+                                              _vm.commerce.idcommerce
+                                          }
+                                        },
+                                        [
+                                          _vm._v(
+                                            "\n                                    Leer más\n                                  "
+                                          )
+                                        ]
+                                      )
+                                    ],
+                                    1
+                                  )
+                                ])
+                              : _vm._e()
+                          ]
+                        })
+                      ],
+                      2
+                    )
                   ])
                 ])
               ])
@@ -54056,7 +54183,11 @@ var render = function() {
                         staticClass: "btn btn-primary btn-sm",
                         attrs: { href: "#" }
                       },
-                      [_vm._v("\n\t               Detalle\n\t              ")]
+                      [
+                        _vm._v(
+                          "\n  \t               Detalle\n  \t              "
+                        )
+                      ]
                     )
                   ]
                 )
@@ -54437,9 +54568,7 @@ var render = function() {
                                           staticClass: "icons icon-eye"
                                         })
                                       ]
-                                    ),
-                                    _vm._v(" "),
-                                    _vm._m(0, true)
+                                    )
                                   ])
                                 ]),
                                 _vm._v(" "),
@@ -54478,15 +54607,15 @@ var render = function() {
                                           ]
                                         ),
                                         _vm._v(" "),
-                                        _c("h6", { staticClass: "price" }, [
-                                          _vm._v("$59")
-                                        ])
+                                        _c("i", {
+                                          staticClass: "icons icon-share"
+                                        })
                                       ]
                                     )
                                   ]
                                 ),
                                 _vm._v(" "),
-                                _vm._m(1, true),
+                                _vm._m(0, true),
                                 _vm._v(" "),
                                 _c(
                                   "div",
@@ -54532,7 +54661,7 @@ var render = function() {
                                           "title d-flex flex-row justify-content-between"
                                       },
                                       [
-                                        _vm._m(2, true),
+                                        _vm._m(1, true),
                                         _vm._v(" "),
                                         _c(
                                           "h6",
@@ -54563,7 +54692,41 @@ var render = function() {
                                   ]
                                 ),
                                 _vm._v(" "),
-                                _vm._m(3, true)
+                                _c(
+                                  "div",
+                                  { staticClass: "meta d-flex flex-row" },
+                                  [
+                                    _c(
+                                      "a",
+                                      { attrs: { href: "theme-details.html" } },
+                                      [
+                                        _c(
+                                          "h6",
+                                          [
+                                            _c(
+                                              "router-link",
+                                              {
+                                                staticClass: "branch-link",
+                                                attrs: {
+                                                  to:
+                                                    "/commerce/" +
+                                                    commerce.idcommerce +
+                                                    "/discounts"
+                                                }
+                                              },
+                                              [
+                                                _vm._v(
+                                                  "\n                                          Ver descuentos activos\n                                        "
+                                                )
+                                              ]
+                                            )
+                                          ],
+                                          1
+                                        )
+                                      ]
+                                    )
+                                  ]
+                                )
                               ]
                             )
                           ]
@@ -54590,14 +54753,6 @@ var staticRenderFns = [
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("a", { staticClass: "relative", attrs: { href: "cart.html" } }, [
-      _c("i", { staticClass: "icons icon-basket-loaded" })
-    ])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
     return _c("div", { staticClass: "details pb-10 pt-20" }, [
       _c(
         "div",
@@ -54618,16 +54773,6 @@ var staticRenderFns = [
     var _c = _vm._self._c || _h
     return _c("a", { attrs: { href: "theme-details.html" } }, [
       _c("h6", [_vm._v("Listado de tags")])
-    ])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "meta d-flex flex-row" }, [
-      _c("a", { attrs: { href: "theme-details.html" } }, [
-        _c("h6", [_vm._v("Ver descuentos activos")])
-      ])
     ])
   }
 ]
@@ -66625,23 +66770,6 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
     data: function data() {
@@ -66786,50 +66914,6 @@ var render = function() {
                     _vm._v(" "),
                     _c("div", { staticClass: "other-details" }, [
                       _c("h4", { staticClass: "text-uppercase" }, [
-                        _vm._v("Feaatures")
-                      ]),
-                      _vm._v(" "),
-                      _c("div", { staticClass: "row" }, [
-                        _c("div", { staticClass: "col-lg-6" }, [
-                          _c("ul", { staticClass: "support-list" }, [
-                            _c("li", [
-                              _c("img", {
-                                attrs: { src: "/img/bullet.png", alt: "" }
-                              }),
-                              _vm._v(
-                                _vm._s(_vm.commerce.country_idcountry) +
-                                  "\n                                            "
-                              )
-                            ]),
-                            _vm._v(" "),
-                            _c("li", [
-                              _c("img", {
-                                attrs: { src: "/img/bullet.png", alt: "" }
-                              }),
-                              _vm._v(
-                                _vm._s(_vm.commerce.state_idstate) +
-                                  "\n                                            "
-                              )
-                            ]),
-                            _vm._v(" "),
-                            _c("li", [
-                              _c("img", {
-                                attrs: { src: "/img/bullet.png", alt: "" }
-                              }),
-                              _vm._v(
-                                _vm._s(_vm.commerce.city_idcity) +
-                                  "\n                                            "
-                              )
-                            ])
-                          ])
-                        ]),
-                        _vm._v(" "),
-                        _vm._m(0)
-                      ])
-                    ]),
-                    _vm._v(" "),
-                    _c("div", { staticClass: "other-details" }, [
-                      _c("h4", { staticClass: "text-uppercase" }, [
                         _vm._v("Sucursales")
                       ]),
                       _vm._v(" "),
@@ -66844,33 +66928,117 @@ var render = function() {
                                 : _vm._e(),
                               _vm._v(" "),
                               _vm._l(_vm.branchs, function(branch) {
-                                return _c("li", [
-                                  _c("img", {
-                                    attrs: { src: "/img/bullet.png", alt: "" }
-                                  }),
-                                  _vm._v(
-                                    _vm._s(branch.name) +
-                                      "\n                                            "
-                                  )
-                                ])
+                                return _c(
+                                  "li",
+                                  [
+                                    _c("img", {
+                                      attrs: { src: "/img/bullet.png", alt: "" }
+                                    }),
+                                    _vm._v(" "),
+                                    _c(
+                                      "router-link",
+                                      {
+                                        staticClass: "branch-link",
+                                        attrs: {
+                                          to: "/branch/" + branch.idbranch
+                                        }
+                                      },
+                                      [
+                                        _vm._v(
+                                          "\n                                                  " +
+                                            _vm._s(branch.name) +
+                                            "\n                                                "
+                                        )
+                                      ]
+                                    )
+                                  ],
+                                  1
+                                )
                               })
                             ],
                             2
                           )
                         ]),
                         _vm._v(" "),
-                        _vm._m(1)
+                        _vm._m(0)
                       ])
-                    ]),
-                    _vm._v(" "),
-                    _vm._m(2)
+                    ])
                   ])
                 ]
               )
             ])
           ]),
           _vm._v(" "),
-          _vm._m(3)
+          _c("div", { staticClass: "col-lg-3 sidebar theme-details-sidebar" }, [
+            _c("div", { staticClass: "single-sidebar" }, [
+              _vm._m(1),
+              _vm._v(" "),
+              _c("ul", [
+                _c("li", [
+                  _vm._v(
+                    "\n                          " +
+                      _vm._s(_vm.commerce.country_idcountry) +
+                      "\n                      "
+                  )
+                ]),
+                _vm._v(" "),
+                _c("li", [
+                  _vm._v(
+                    "\n                          " +
+                      _vm._s(_vm.commerce.state_idstate) +
+                      "\n                      "
+                  )
+                ]),
+                _vm._v(" "),
+                _c("li", [
+                  _vm._v(
+                    "\n                          " +
+                      _vm._s(_vm.commerce.city_idcity) +
+                      "\n                      "
+                  )
+                ])
+              ])
+            ]),
+            _vm._v(" "),
+            _c("div", { staticClass: "single-sidebar theme-details" }, [
+              _c("h6", [_vm._v("Descuentos")]),
+              _vm._v(" "),
+              _c(
+                "ul",
+                { staticClass: "theme-details-list" },
+                [
+                  _vm._l(_vm.branchs, function(branch) {
+                    return _vm._l(branch.discounts, function(discount) {
+                      return _c(
+                        "li",
+                        [
+                          _c(
+                            "router-link",
+                            {
+                              attrs: { to: "/discount/" + discount.iddiscount }
+                            },
+                            [
+                              _vm._v(
+                                "\n                                " +
+                                  _vm._s(discount.title) +
+                                  " - $" +
+                                  _vm._s(discount.amountapproved) +
+                                  "\n                            "
+                              )
+                            ]
+                          )
+                        ],
+                        1
+                      )
+                    })
+                  })
+                ],
+                2
+              )
+            ]),
+            _vm._v(" "),
+            _vm._m(2)
+          ])
         ])
       ])
     ]
@@ -66889,183 +67057,89 @@ var staticRenderFns = [
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "col-lg-6" }, [
-      _c("ul", { staticClass: "support-list" })
-    ])
+    return _c(
+      "div",
+      { staticClass: "price-title d-flex flex-row justify-content-between" },
+      [_c("h6", [_vm._v("Nuestra ubicación")])]
+    )
   },
   function() {
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "other-details" }, [
-      _c("h4", { staticClass: "text-uppercase" }, [_vm._v("Descuentos")]),
+    return _c("div", { staticClass: "single-sidebar theme-tags" }, [
+      _c("h6", [_vm._v("Tags")]),
       _vm._v(" "),
-      _c("div", { staticClass: "row" }, [
-        _c("div", { staticClass: "col-lg-6" }, [
-          _c("ul", { staticClass: "support-list" })
+      _c("ul", { staticClass: "tag-list" }, [
+        _c("li", [
+          _c("i", { staticClass: "icons icon-folder" }),
+          _vm._v(" "),
+          _c("a", { attrs: { href: "#" } }, [_vm._v("Bootstrap templates")]),
+          _vm._v(","),
+          _c("a", { attrs: { href: "#" } }, [_vm._v(" business & services")]),
+          _vm._v(", Marketing")
         ]),
         _vm._v(" "),
-        _c("div", { staticClass: "col-lg-6" }, [
-          _c("ul", { staticClass: "support-list" })
+        _c("li", [
+          _c("i", { staticClass: "icons icon-tag" }),
+          _vm._v(" "),
+          _c("a", { attrs: { href: "#" } }, [_vm._v("Agency")]),
+          _vm._v(","),
+          _c("a", { attrs: { href: "#" } }, [_vm._v(" business")]),
+          _vm._v(","),
+          _c("a", { attrs: { href: "#" } }, [_vm._v(" corporate")])
+        ])
+      ]),
+      _vm._v(" "),
+      _c("div", { staticClass: "sidebar-social" }, [
+        _c("ul", [
+          _c("li", [
+            _c("a", { attrs: { href: "#" } }, [
+              _c("i", {
+                staticClass: "fa fa-facebook",
+                attrs: { "aria-hidden": "true" }
+              })
+            ])
+          ]),
+          _vm._v(" "),
+          _c("li", [
+            _c("a", { attrs: { href: "#" } }, [
+              _c("i", {
+                staticClass: "fa fa-twitter",
+                attrs: { "aria-hidden": "true" }
+              })
+            ])
+          ]),
+          _vm._v(" "),
+          _c("li", [
+            _c("a", { attrs: { href: "#" } }, [
+              _c("i", {
+                staticClass: "fa fa-github",
+                attrs: { "aria-hidden": "true" }
+              })
+            ])
+          ]),
+          _vm._v(" "),
+          _c("li", [
+            _c("a", { attrs: { href: "#" } }, [
+              _c("i", {
+                staticClass: "fa fa-slack",
+                attrs: { "aria-hidden": "true" }
+              })
+            ])
+          ]),
+          _vm._v(" "),
+          _c("li", [
+            _c("a", { attrs: { href: "#" } }, [
+              _c("i", {
+                staticClass: "fa fa-dribbble",
+                attrs: { "aria-hidden": "true" }
+              })
+            ])
+          ])
         ])
       ])
     ])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c(
-      "div",
-      { staticClass: "col-lg-3 sidebar theme-details-sidebar" },
-      [
-        _c("div", { staticClass: "single-sidebar" }, [
-          _c(
-            "div",
-            {
-              staticClass: "price-title d-flex flex-row justify-content-between"
-            },
-            [
-              _c("h6", [_vm._v("Minimalistic shop only")]),
-              _vm._v(" "),
-              _c("h3", { staticClass: "price" }, [_vm._v("$39")])
-            ]
-          ),
-          _vm._v(" "),
-          _c("ul", [
-            _c("li", [_vm._v("01 year theme support")]),
-            _vm._v(" "),
-            _c("li", [_vm._v("01 year theme updates")])
-          ]),
-          _vm._v(" "),
-          _c("a", { staticClass: "primary-btn", attrs: { href: "#" } }, [
-            _vm._v("purchase only")
-          ])
-        ]),
-        _vm._v(" "),
-        _c(
-          "div",
-          {
-            staticClass:
-              "single-sidebar d-flex flex-row justify-content-between align-items-center total-downlaod"
-          },
-          [
-            _c("h6", [_vm._v("Total Downloads")]),
-            _vm._v(" "),
-            _c("h3", [_vm._v("968")])
-          ]
-        ),
-        _vm._v(" "),
-        _c("div", { staticClass: "single-sidebar theme-details" }, [
-          _c("h6", [_vm._v("Theme Details")]),
-          _vm._v(" "),
-          _c("ul", { staticClass: "theme-details-list" }, [
-            _c("li", [
-              _c("i", { staticClass: "icons icon-basket-loaded" }),
-              _vm._v(" eCommerce, Magazine, Writing")
-            ]),
-            _vm._v(" "),
-            _c("li", [
-              _c("i", { staticClass: "icons icon-bell" }),
-              _vm._v(" Theme version: 4.3.5")
-            ]),
-            _vm._v(" "),
-            _c("li", [
-              _c("i", { staticClass: "icons icon-notebook" }),
-              _vm._v("View help file")
-            ]),
-            _vm._v(" "),
-            _c("li", [
-              _c("i", { staticClass: "icons icon-wrench" }),
-              _vm._v("Sass files included")
-            ]),
-            _vm._v(" "),
-            _c("li", [
-              _c("i", { staticClass: "icons icon-cloud-upload" }),
-              _vm._v("Download child theme")
-            ])
-          ])
-        ]),
-        _vm._v(" "),
-        _c("div", { staticClass: "single-sidebar theme-tags" }, [
-          _c("h6", [_vm._v("Tags")]),
-          _vm._v(" "),
-          _c("ul", { staticClass: "tag-list" }, [
-            _c("li", [
-              _c("i", { staticClass: "icons icon-folder" }),
-              _vm._v(" "),
-              _c("a", { attrs: { href: "#" } }, [
-                _vm._v("Bootstrap templates")
-              ]),
-              _vm._v(","),
-              _c("a", { attrs: { href: "#" } }, [
-                _vm._v(" business & services")
-              ]),
-              _vm._v(", Marketing")
-            ]),
-            _vm._v(" "),
-            _c("li", [
-              _c("i", { staticClass: "icons icon-tag" }),
-              _vm._v(" "),
-              _c("a", { attrs: { href: "#" } }, [_vm._v("Agency")]),
-              _vm._v(","),
-              _c("a", { attrs: { href: "#" } }, [_vm._v(" business")]),
-              _vm._v(","),
-              _c("a", { attrs: { href: "#" } }, [_vm._v(" corporate")])
-            ])
-          ]),
-          _vm._v(" "),
-          _c("div", { staticClass: "sidebar-social" }, [
-            _c("ul", [
-              _c("li", [
-                _c("a", { attrs: { href: "#" } }, [
-                  _c("i", {
-                    staticClass: "fa fa-facebook",
-                    attrs: { "aria-hidden": "true" }
-                  })
-                ])
-              ]),
-              _vm._v(" "),
-              _c("li", [
-                _c("a", { attrs: { href: "#" } }, [
-                  _c("i", {
-                    staticClass: "fa fa-twitter",
-                    attrs: { "aria-hidden": "true" }
-                  })
-                ])
-              ]),
-              _vm._v(" "),
-              _c("li", [
-                _c("a", { attrs: { href: "#" } }, [
-                  _c("i", {
-                    staticClass: "fa fa-github",
-                    attrs: { "aria-hidden": "true" }
-                  })
-                ])
-              ]),
-              _vm._v(" "),
-              _c("li", [
-                _c("a", { attrs: { href: "#" } }, [
-                  _c("i", {
-                    staticClass: "fa fa-slack",
-                    attrs: { "aria-hidden": "true" }
-                  })
-                ])
-              ]),
-              _vm._v(" "),
-              _c("li", [
-                _c("a", { attrs: { href: "#" } }, [
-                  _c("i", {
-                    staticClass: "fa fa-dribbble",
-                    attrs: { "aria-hidden": "true" }
-                  })
-                ])
-              ])
-            ])
-          ])
-        ])
-      ]
-    )
   }
 ]
 render._withStripped = true
@@ -67174,55 +67248,6 @@ exports.push([module.i, "\n.image-branch {\n  width: 80px;\n  height: 50px;\n  b
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
 //
 //
 //
@@ -67584,60 +67609,83 @@ var render = function() {
                             )
                           ])
                         : _vm._e()
-                    ]),
-                    _vm._v(" "),
-                    _c("div", { staticClass: "other-details" }, [
-                      _c("h4", { staticClass: "text-uppercase" }, [
-                        _vm._v("Feaatures")
-                      ]),
-                      _vm._v(" "),
-                      _c("div", { staticClass: "row" }, [
-                        _c("div", { staticClass: "col-lg-6" }, [
-                          _c("ul", { staticClass: "support-list" }, [
-                            _c("li", [
-                              _c("img", {
-                                attrs: { src: "/img/bullet.png", alt: "" }
-                              }),
-                              _vm._v(
-                                _vm._s(_vm.branch.country_idcountry) +
-                                  "\n                                                        "
-                              )
-                            ]),
-                            _vm._v(" "),
-                            _c("li", [
-                              _c("img", {
-                                attrs: { src: "/img/bullet.png", alt: "" }
-                              }),
-                              _vm._v(
-                                _vm._s(_vm.branch.state_idstate) +
-                                  "\n                                                        "
-                              )
-                            ]),
-                            _vm._v(" "),
-                            _c("li", [
-                              _c("img", {
-                                attrs: { src: "/img/bullet.png", alt: "" }
-                              }),
-                              _vm._v(
-                                _vm._s(_vm.branch.city_idcity) +
-                                  "\n                                                        "
-                              )
-                            ])
-                          ])
-                        ]),
-                        _vm._v(" "),
-                        _vm._m(0)
-                      ])
-                    ]),
-                    _vm._v(" "),
-                    _vm._m(1)
+                    ])
                   ])
                 ]
               )
             ])
           ]),
           _vm._v(" "),
-          _vm._m(2)
+          _c("div", { staticClass: "col-lg-3 sidebar theme-details-sidebar" }, [
+            _c("div", { staticClass: "single-sidebar" }, [
+              _vm._m(0),
+              _vm._v(" "),
+              _c("ul", [
+                _c("li", [
+                  _vm._v(
+                    "\n                                    " +
+                      _vm._s(_vm.branch.country_idcountry) +
+                      "\n                                  "
+                  )
+                ]),
+                _vm._v(" "),
+                _c("li", [
+                  _vm._v(
+                    "\n                                    " +
+                      _vm._s(_vm.branch.state_idstate) +
+                      "\n                                  "
+                  )
+                ]),
+                _vm._v(" "),
+                _c("li", [
+                  _vm._v(
+                    "\n                                    " +
+                      _vm._s(_vm.branch.city_idcity) +
+                      "\n                                  "
+                  )
+                ])
+              ])
+            ]),
+            _vm._v(" "),
+            _c("div", { staticClass: "single-sidebar theme-details" }, [
+              _c("h6", [_vm._v("Descuentos")]),
+              _vm._v(" "),
+              _c(
+                "ul",
+                { staticClass: "theme-details-list" },
+                [
+                  _vm._l(_vm.discounts, function(discount) {
+                    return _c(
+                      "li",
+                      [
+                        _c(
+                          "router-link",
+                          { attrs: { to: "/discount/" + discount.iddiscount } },
+                          [
+                            _vm._v(
+                              "\n                                        " +
+                                _vm._s(discount.title) +
+                                " - $" +
+                                _vm._s(discount.amountapproved) +
+                                "\n                                      "
+                            )
+                          ]
+                        )
+                      ],
+                      1
+                    )
+                  }),
+                  _vm._v(" "),
+                  _vm.discounts.length < 1
+                    ? _c("span", [_vm._v("Sin descuentos.")])
+                    : _vm._e()
+                ],
+                2
+              )
+            ]),
+            _vm._v(" "),
+            _vm._m(1)
+          ])
         ])
       ])
     ]
@@ -67648,183 +67696,89 @@ var staticRenderFns = [
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "col-lg-6" }, [
-      _c("ul", { staticClass: "support-list" })
-    ])
+    return _c(
+      "div",
+      { staticClass: "price-title d-flex flex-row justify-content-between" },
+      [_c("h6", [_vm._v("Nuestra ubicación")])]
+    )
   },
   function() {
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "other-details" }, [
-      _c("h4", { staticClass: "text-uppercase" }, [_vm._v("Descuentos")]),
+    return _c("div", { staticClass: "single-sidebar theme-tags" }, [
+      _c("h6", [_vm._v("Tags")]),
       _vm._v(" "),
-      _c("div", { staticClass: "row" }, [
-        _c("div", { staticClass: "col-lg-6" }, [
-          _c("ul", { staticClass: "support-list" })
+      _c("ul", { staticClass: "tag-list" }, [
+        _c("li", [
+          _c("i", { staticClass: "icons icon-folder" }),
+          _vm._v(" "),
+          _c("a", { attrs: { href: "#" } }, [_vm._v("Bootstrap templates")]),
+          _vm._v(","),
+          _c("a", { attrs: { href: "#" } }, [_vm._v(" business & services")]),
+          _vm._v(", Marketing")
         ]),
         _vm._v(" "),
-        _c("div", { staticClass: "col-lg-6" }, [
-          _c("ul", { staticClass: "support-list" })
+        _c("li", [
+          _c("i", { staticClass: "icons icon-tag" }),
+          _vm._v(" "),
+          _c("a", { attrs: { href: "#" } }, [_vm._v("Agency")]),
+          _vm._v(","),
+          _c("a", { attrs: { href: "#" } }, [_vm._v(" business")]),
+          _vm._v(","),
+          _c("a", { attrs: { href: "#" } }, [_vm._v(" corporate")])
+        ])
+      ]),
+      _vm._v(" "),
+      _c("div", { staticClass: "sidebar-social" }, [
+        _c("ul", [
+          _c("li", [
+            _c("a", { attrs: { href: "#" } }, [
+              _c("i", {
+                staticClass: "fa fa-facebook",
+                attrs: { "aria-hidden": "true" }
+              })
+            ])
+          ]),
+          _vm._v(" "),
+          _c("li", [
+            _c("a", { attrs: { href: "#" } }, [
+              _c("i", {
+                staticClass: "fa fa-twitter",
+                attrs: { "aria-hidden": "true" }
+              })
+            ])
+          ]),
+          _vm._v(" "),
+          _c("li", [
+            _c("a", { attrs: { href: "#" } }, [
+              _c("i", {
+                staticClass: "fa fa-github",
+                attrs: { "aria-hidden": "true" }
+              })
+            ])
+          ]),
+          _vm._v(" "),
+          _c("li", [
+            _c("a", { attrs: { href: "#" } }, [
+              _c("i", {
+                staticClass: "fa fa-slack",
+                attrs: { "aria-hidden": "true" }
+              })
+            ])
+          ]),
+          _vm._v(" "),
+          _c("li", [
+            _c("a", { attrs: { href: "#" } }, [
+              _c("i", {
+                staticClass: "fa fa-dribbble",
+                attrs: { "aria-hidden": "true" }
+              })
+            ])
+          ])
         ])
       ])
     ])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c(
-      "div",
-      { staticClass: "col-lg-3 sidebar theme-details-sidebar" },
-      [
-        _c("div", { staticClass: "single-sidebar" }, [
-          _c(
-            "div",
-            {
-              staticClass: "price-title d-flex flex-row justify-content-between"
-            },
-            [
-              _c("h6", [_vm._v("Minimalistic shop only")]),
-              _vm._v(" "),
-              _c("h3", { staticClass: "price" }, [_vm._v("$39")])
-            ]
-          ),
-          _vm._v(" "),
-          _c("ul", [
-            _c("li", [_vm._v("01 year theme support")]),
-            _vm._v(" "),
-            _c("li", [_vm._v("01 year theme updates")])
-          ]),
-          _vm._v(" "),
-          _c("a", { staticClass: "primary-btn", attrs: { href: "#" } }, [
-            _vm._v("purchase only")
-          ])
-        ]),
-        _vm._v(" "),
-        _c(
-          "div",
-          {
-            staticClass:
-              "single-sidebar d-flex flex-row justify-content-between align-items-center total-downlaod"
-          },
-          [
-            _c("h6", [_vm._v("Total Downloads")]),
-            _vm._v(" "),
-            _c("h3", [_vm._v("968")])
-          ]
-        ),
-        _vm._v(" "),
-        _c("div", { staticClass: "single-sidebar theme-details" }, [
-          _c("h6", [_vm._v("Theme Details")]),
-          _vm._v(" "),
-          _c("ul", { staticClass: "theme-details-list" }, [
-            _c("li", [
-              _c("i", { staticClass: "icons icon-basket-loaded" }),
-              _vm._v(" eCommerce, Magazine, Writing")
-            ]),
-            _vm._v(" "),
-            _c("li", [
-              _c("i", { staticClass: "icons icon-bell" }),
-              _vm._v(" Theme version: 4.3.5")
-            ]),
-            _vm._v(" "),
-            _c("li", [
-              _c("i", { staticClass: "icons icon-notebook" }),
-              _vm._v("View help file")
-            ]),
-            _vm._v(" "),
-            _c("li", [
-              _c("i", { staticClass: "icons icon-wrench" }),
-              _vm._v("Sass files included")
-            ]),
-            _vm._v(" "),
-            _c("li", [
-              _c("i", { staticClass: "icons icon-cloud-upload" }),
-              _vm._v("Download child theme")
-            ])
-          ])
-        ]),
-        _vm._v(" "),
-        _c("div", { staticClass: "single-sidebar theme-tags" }, [
-          _c("h6", [_vm._v("Tags")]),
-          _vm._v(" "),
-          _c("ul", { staticClass: "tag-list" }, [
-            _c("li", [
-              _c("i", { staticClass: "icons icon-folder" }),
-              _vm._v(" "),
-              _c("a", { attrs: { href: "#" } }, [
-                _vm._v("Bootstrap templates")
-              ]),
-              _vm._v(","),
-              _c("a", { attrs: { href: "#" } }, [
-                _vm._v(" business & services")
-              ]),
-              _vm._v(", Marketing")
-            ]),
-            _vm._v(" "),
-            _c("li", [
-              _c("i", { staticClass: "icons icon-tag" }),
-              _vm._v(" "),
-              _c("a", { attrs: { href: "#" } }, [_vm._v("Agency")]),
-              _vm._v(","),
-              _c("a", { attrs: { href: "#" } }, [_vm._v(" business")]),
-              _vm._v(","),
-              _c("a", { attrs: { href: "#" } }, [_vm._v(" corporate")])
-            ])
-          ]),
-          _vm._v(" "),
-          _c("div", { staticClass: "sidebar-social" }, [
-            _c("ul", [
-              _c("li", [
-                _c("a", { attrs: { href: "#" } }, [
-                  _c("i", {
-                    staticClass: "fa fa-facebook",
-                    attrs: { "aria-hidden": "true" }
-                  })
-                ])
-              ]),
-              _vm._v(" "),
-              _c("li", [
-                _c("a", { attrs: { href: "#" } }, [
-                  _c("i", {
-                    staticClass: "fa fa-twitter",
-                    attrs: { "aria-hidden": "true" }
-                  })
-                ])
-              ]),
-              _vm._v(" "),
-              _c("li", [
-                _c("a", { attrs: { href: "#" } }, [
-                  _c("i", {
-                    staticClass: "fa fa-github",
-                    attrs: { "aria-hidden": "true" }
-                  })
-                ])
-              ]),
-              _vm._v(" "),
-              _c("li", [
-                _c("a", { attrs: { href: "#" } }, [
-                  _c("i", {
-                    staticClass: "fa fa-slack",
-                    attrs: { "aria-hidden": "true" }
-                  })
-                ])
-              ]),
-              _vm._v(" "),
-              _c("li", [
-                _c("a", { attrs: { href: "#" } }, [
-                  _c("i", {
-                    staticClass: "fa fa-dribbble",
-                    attrs: { "aria-hidden": "true" }
-                  })
-                ])
-              ])
-            ])
-          ])
-        ])
-      ]
-    )
   }
 ]
 render._withStripped = true
@@ -68723,6 +68677,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
 
 
 
@@ -68895,9 +68850,9 @@ var render = function() {
                                         },
                                         [
                                           _vm._v(
-                                            "\n                                          " +
+                                            "\n                                        " +
                                               _vm._s(branch.name) +
-                                              "\n                                        "
+                                              "\n                                      "
                                           )
                                         ]
                                       )
@@ -68906,9 +68861,7 @@ var render = function() {
                                   )
                                 ]),
                                 _vm._v(" "),
-                                _c("h6", { staticClass: "price" }, [
-                                  _vm._v("$59")
-                                ])
+                                _c("i", { staticClass: "icons icon-share" })
                               ]
                             )
                           ]),
@@ -68938,10 +68891,6 @@ var staticRenderFns = [
     return _c("div", { staticClass: "link" }, [
       _c("a", { staticClass: "relative" }, [
         _c("i", { staticClass: "icons icon-eye" })
-      ]),
-      _vm._v(" "),
-      _c("a", { staticClass: "relative", attrs: { href: "cart.html" } }, [
-        _c("i", { staticClass: "icons icon-basket-loaded" })
       ])
     ])
   },
@@ -69134,6 +69083,63 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 
 
@@ -69205,56 +69211,7 @@ var render = function() {
         [_vm._v("Atras")]
       ),
       _vm._v(" "),
-      _c("h2", { staticClass: "my-4" }, [
-        _vm._v("Comercio: " + _vm._s(_vm.id))
-      ]),
-      _vm._v(" "),
-      _c("ul", { staticClass: "nav nav-tabs" }, [
-        _c(
-          "li",
-          { staticClass: "nav-item" },
-          [
-            _c(
-              "router-link",
-              { staticClass: "nav-link", attrs: { to: "/commerce/" + _vm.id } },
-              [_vm._v("\n              Detalle\n           ")]
-            )
-          ],
-          1
-        ),
-        _vm._v(" "),
-        _c(
-          "li",
-          { staticClass: "nav-item" },
-          [
-            _c(
-              "router-link",
-              {
-                staticClass: "nav-link",
-                attrs: { to: "/commerce/" + _vm.id + "/branchs" }
-              },
-              [_vm._v("\n              Sucursales\n           ")]
-            )
-          ],
-          1
-        ),
-        _vm._v(" "),
-        _c(
-          "li",
-          { staticClass: "nav-item" },
-          [
-            _c(
-              "router-link",
-              {
-                staticClass: "nav-link active",
-                attrs: { to: "/commerce/" + _vm.id + "/discounts" }
-              },
-              [_vm._v("\n              Descuentos\n           ")]
-            )
-          ],
-          1
-        )
-      ]),
+      _c("br"),
       _vm._v(" "),
       _c("h3", { staticClass: "mt-4" }, [_vm._v("Descuentos")]),
       _vm._v(" "),
@@ -69263,74 +69220,131 @@ var render = function() {
         { staticClass: "row justify-content-center stat-table-wrap" },
         [
           _c("div", { staticClass: "col-lg-12 stat-wrap-container" }, [
-            _c("div", { staticClass: "stat-wrap" }, [
-              _c(
-                "table",
-                { staticClass: "table table-striped mt-40 stat-table" },
-                [
-                  _vm._m(0),
-                  _vm._v(" "),
+            _c(
+              "div",
+              { staticClass: "stat-wrap" },
+              _vm._l(_vm.branchs, function(branch) {
+                return _c("div", { key: branch.idbranch }, [
                   _c(
-                    "tbody",
-                    [
-                      _vm._l(_vm.branchs, function(branch) {
-                        return _vm._l(branch.discounts, function(discount) {
-                          return _c("tr", [
-                            _c("td", [_vm._v(_vm._s(discount.iddiscount))]),
+                    "div",
+                    { staticClass: "row pb-120 pt-80" },
+                    _vm._l(branch.discounts, function(discount) {
+                      return _c("div", { staticClass: "col-lg-3 col-md-6" }, [
+                        _c(
+                          "div",
+                          {
+                            staticClass:
+                              "single-image-thumb single-feature-item relative"
+                          },
+                          [
+                            _c("div", { staticClass: "thumb relative" }, [
+                              discount.image == null
+                                ? _c(
+                                    "div",
+                                    { staticClass: "thumb-img relative" },
+                                    [
+                                      _c("div", {
+                                        staticClass: "overlay overlay-bg"
+                                      }),
+                                      _vm._v(" "),
+                                      _c("img", {
+                                        staticClass: "img-fluid",
+                                        attrs: { src: "/img/f5.jpg", alt: "" }
+                                      })
+                                    ]
+                                  )
+                                : _c(
+                                    "div",
+                                    { staticClass: "thumb-img relative" },
+                                    [
+                                      _c("div", {
+                                        staticClass: "overlay overlay-bg"
+                                      }),
+                                      _vm._v(" "),
+                                      _c("img", {
+                                        staticClass: "img-fluid",
+                                        attrs: {
+                                          src:
+                                            "/images/discount/" +
+                                            discount.image,
+                                          alt: ""
+                                        }
+                                      })
+                                    ]
+                                  ),
+                              _vm._v(" "),
+                              _vm._m(0, true)
+                            ]),
                             _vm._v(" "),
-                            _c("td", [_vm._v(_vm._s(discount.title))]),
-                            _vm._v(" "),
-                            _c("td", [_vm._v(_vm._s(discount.description))]),
-                            _vm._v(" "),
-                            _c("td", [_vm._v(_vm._s(discount.startdate))]),
-                            _vm._v(" "),
-                            _c("td", [_vm._v(_vm._s(discount.enddate))]),
-                            _vm._v(" "),
-                            _c("td", [
-                              _vm._v(
-                                "\n                            " +
-                                  _vm._s(discount.outstanding ? "Si" : "No") +
-                                  "\n                            "
+                            _c("div", { staticClass: "details pb-10 pt-20" }, [
+                              _c(
+                                "div",
+                                {
+                                  staticClass:
+                                    "title d-flex flex-row justify-content-between"
+                                },
+                                [
+                                  _c("a", [
+                                    _c(
+                                      "h6",
+                                      [
+                                        _c(
+                                          "router-link",
+                                          {
+                                            attrs: {
+                                              to:
+                                                "/discount/" +
+                                                discount.iddiscount
+                                            }
+                                          },
+                                          [
+                                            _vm._v(
+                                              "\n                                          " +
+                                                _vm._s(discount.title) +
+                                                "\n                                        "
+                                            )
+                                          ]
+                                        )
+                                      ],
+                                      1
+                                    )
+                                  ]),
+                                  _vm._v(" "),
+                                  _c(
+                                    "h6",
+                                    { staticClass: "price" },
+                                    [
+                                      _c(
+                                        "router-link",
+                                        {
+                                          attrs: {
+                                            to: "/branch/" + branch.idbranch
+                                          }
+                                        },
+                                        [
+                                          _vm._v(
+                                            "\n                                        " +
+                                              _vm._s(branch.name) +
+                                              "\n                                      "
+                                          )
+                                        ]
+                                      )
+                                    ],
+                                    1
+                                  )
+                                ]
                               )
                             ]),
                             _vm._v(" "),
-                            _c(
-                              "td",
-                              [
-                                _c(
-                                  "router-link",
-                                  {
-                                    attrs: {
-                                      to: "/discount/" + discount.iddiscount
-                                    }
-                                  },
-                                  [
-                                    _c(
-                                      "a",
-                                      {
-                                        staticClass: "btn btn-primary btn-sm",
-                                        attrs: { href: "#" }
-                                      },
-                                      [
-                                        _vm._v(
-                                          "\n                                Detalle\n                                "
-                                        )
-                                      ]
-                                    )
-                                  ]
-                                )
-                              ],
-                              1
-                            )
-                          ])
-                        })
-                      })
-                    ],
-                    2
+                            _c("div", { staticClass: "meta d-flex flex-row" })
+                          ]
+                        )
+                      ])
+                    })
                   )
-                ]
-              )
-            ])
+                ])
+              })
+            )
           ]),
           _vm._v(" "),
           _c("paginator", { attrs: { pagination: _vm.pagination } })
@@ -69345,21 +69359,9 @@ var staticRenderFns = [
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("thead", [
-      _c("tr", [
-        _c("th", [_vm._v("ID Descuento")]),
-        _vm._v(" "),
-        _c("th", [_vm._v("Titulo")]),
-        _vm._v(" "),
-        _c("th", [_vm._v("Descripcion")]),
-        _vm._v(" "),
-        _c("th", [_vm._v("Inicio")]),
-        _vm._v(" "),
-        _c("th", [_vm._v("Fin")]),
-        _vm._v(" "),
-        _c("th", [_vm._v("Destacado")]),
-        _vm._v(" "),
-        _c("th", [_vm._v("Opcciones")])
+    return _c("div", { staticClass: "link" }, [
+      _c("a", { staticClass: "relative" }, [
+        _c("i", { staticClass: "icons icon-eye" })
       ])
     ])
   }

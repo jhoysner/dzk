@@ -80,7 +80,7 @@ import Notify from 'vue-notify-me'
 					
 					axios.post('/api/login', params)
                     	.then((response) => {
-                            localStorage.setItem('userdata',JSON.stringify(response.data.user));
+                            localStorage.setItem('userdata',JSON.stringify(response.data.user.id));
 							window.location.href = '/';
 
                         }).catch((error) => {

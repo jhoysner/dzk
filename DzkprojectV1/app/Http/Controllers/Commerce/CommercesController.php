@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Commerce;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Storage;
+use Illuminate\Database\Eloquent\Builder;
 use App\Commerce;
 use App\CommerceTags;
 use App\Http\Requests\CommerceRequest;
@@ -232,4 +233,5 @@ class CommercesController extends Controller
 
         return response()->json(['data'=> $commercetags], 200);
     }
+
 }

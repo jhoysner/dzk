@@ -81,3 +81,4 @@ Route::get('detail-commerce/{id}', 'HomeInit\HomeInitController@commerce_detail'
 Route::get('detail-discount/{id}', 'HomeInit\HomeInitController@discount_detail');
 Route::get('commerce-detail-branchs/{id}', 'HomeInit\HomeInitController@commerce_detail_branchs');
 Route::get('commerce-detail-discounts/{id}', 'HomeInit\HomeInitController@commerce_detail_discount');
+Route::post('search', 'Search\SearchController@getSearch');

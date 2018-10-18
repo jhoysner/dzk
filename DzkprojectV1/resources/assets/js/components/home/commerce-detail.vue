@@ -56,7 +56,7 @@
                                 <div class="other-details">
                                     <h4 class="text-uppercase">Sucursales</h4>
                                     <div class="row">
-                                        <div class="col-lg-6">
+                                        <!--<div class="col-lg-6">
                                             <ul class="support-list">
                                                 <li v-if="branchs.length < 1">No posee sucursales aún.</li>
                                                 <li v-for="branch in branchs">
@@ -64,24 +64,33 @@
                                                     <router-link class="branch-link" :to="`/branch/${branch.idbranch}`">
                                                       {{ branch.name }}
                                                     </router-link>
-                                                </li>
+                                                </li> -->
                                                 <!--<li>
                                                     <img src="img/bullet.png" alt="">3 Simple Ways To Save A Bunch Of Money
-                                                </li> -->
+                                                </li> 
                                             </ul>
-                                        </div>
-                                        <div class="col-lg-6">
-                                            <ul class="support-list">
-                                               <!-- <li>
-                                                    <img src="img/bullet.png" alt="">Help Finding Information Online
-                                                </li>
-                                                <li>
-                                                    <img src="img/bullet.png" alt="">5 Reasons To Choose A Notebook Over
-                                                </li>
-                                                <li>
-                                                    <img src="img/bullet.png" alt="">3 Simple Ways To Save A Bunch Of Money
-                                                </li> -->
-                                            </ul>
+                                        </div>-->
+                                        <div class="col">
+                                            <b-card-group deck>
+                                                <div v-for="branch in branchs">                                          
+                                                    <b-card :title="branch.name"
+                                                          :img-src="'../images/branch/'+branch.image"
+                                                          img-alt="Image"
+                                                          img-top
+                                                          tag="article"
+                                                          style="width: 14rem;"
+                                                          class="mb-2">
+                                                        <p class="card-text">
+                                                          {{branch.address}}
+                                                        </p>
+                                                        <!-- <b-button href="#" variant="primary" size="sm">ver</b-button> -->
+                                                        <router-link :to="`/branch/${branch.idbranch}`" class="btn btn-primary btn-sm">
+                                                            Ir   
+                                                        </router-link>
+                                                    </b-card>    
+                                                </div>
+                                            </b-card-group>
+
                                         </div>
                                     </div>
                                 </div>
@@ -165,8 +174,7 @@
                     <div class="single-sidebar theme-tags">
                         <h6>Tags</h6>
                         <ul class="tag-list">
-                            <li> <i class="icons icon-folder"></i> <a href="#">Bootstrap templates</a>,<a href="#"> business & services</a>, Marketing</li>
-                            <li> <i class="icons icon-tag"></i> <a href="#">Agency</a>,<a href="#"> business</a>,<a href="#"> corporate</a></li>
+                            <li v-for="tag in tags"> <i class="icons icon-tag"></i> {{tag.name}}</li>
                         </ul>
                         <div class="sidebar-social">
                             <ul>
@@ -257,6 +265,7 @@
                     commercecategory_idcommercecategory: ''
                  },
                  branchs:[],
+                 tags: []
             }
         },
 
@@ -279,6 +288,7 @@
                 this.commerce.city_idcity = response.data.data[0].cities.name;
                 this.commerce.commercecategory_idcommercecategory = response.data.data[0].ccategories.name;
                 this.branchs = response.data.data[0].branchs;
+                this.tags = response.data.data[0].tags;
               })
               .catch(err => console.log(err))
             },          
@@ -292,5 +302,9 @@
       width: 80px;
       height: 50px;
       border-radius: 50%;
+    }
+
+    .card-img-top {
+        height: 10rem;
     }
 </style>

@@ -17,7 +17,8 @@ class HomeInitController extends Controller
         ->with('states')
           ->with('cities')
             ->with('ccategories')
-              ->paginate(2);
+              ->with('tags')
+                ->paginate(2);
 
         //$commerce = Commerce::orderBy('idcommerce', 'DESC')->paginate(2);
 
@@ -66,9 +67,10 @@ class HomeInitController extends Controller
             ->with('states')
               ->with('cities')
                 ->with('ccategories')
-                    ->with(['branchs' =>function ($query) {
-                            $query->with('discounts');
-                        }])->get();
+                    ->with('tags')
+                        ->with(['branchs' =>function ($query) {
+                                $query->with('discounts');
+                            }])->get();
 
         return response()->json(['data'=> $commerce], 200);
 

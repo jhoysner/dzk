@@ -141,11 +141,11 @@
                             </div>
 
                             <div class="single-sidebar theme-tags">
-                                <h6>Tags</h6>
+                                <!--<h6>Tags</h6>
                                 <ul class="tag-list">
                                     <li> <i class="icons icon-folder"></i> <a href="#">Bootstrap templates</a>,<a href="#"> business & services</a>, Marketing</li>
                                     <li> <i class="icons icon-tag"></i> <a href="#">Agency</a>,<a href="#"> business</a>,<a href="#"> corporate</a></li>
-                                </ul>
+                                </ul> -->
                                 <div class="sidebar-social">
                                     <ul>
                                         <li><a href="#"><i class="fa fa-facebook" aria-hidden="true"></i></a></li>

@@ -34,7 +34,7 @@
                         	</ul>
                           <span class="pl-2" v-if="branchs.length > 1"> <!-- Cambiar en su momento por un minimo de 5 -->
                             <a href="#">
-                              <router-link :to="`commerce/${commerce.idcommerce}`">
+                              <router-link :to="`/commerce/${commerce.idcommerce}/branchs`">
                                 Leer más
                               </router-link>
                             </a>
@@ -56,7 +56,7 @@
                               </li>
                               <span class="pl-2" v-if="branch.discounts.length > 1"> <!-- Cambiar en su momento por un minimo de 5 -->
                                 <a href="#">
-                                  <router-link :to="`commerce/${commerce.idcommerce}`">
+                                  <router-link :to="`/commerce/${commerce.idcommerce}/discounts`">
                                     Leer más
                                   </router-link>
                                 </a>

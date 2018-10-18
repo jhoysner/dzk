@@ -53536,7 +53536,7 @@ exports = module.exports = __webpack_require__(2)(false);
 
 
 // module
-exports.push([module.i, "\n.image-commerce {\n  width: 80px;\n  height: 50px;\n  border-radius: 50%;\n}\n#search {\n  display: none;\n}\n.showModal {\n  cursor: pointer;\n}\n.thumb-img {\n  width: 250px;\n  height: 125px;\n}\n.branch-link {\n  color: #333;\n}\n", ""]);
+exports.push([module.i, "\n.image-commerce {\n  width: 80px;\n  height: 50px;\n  border-radius: 50%;\n}\n#search {\n  display: none;\n}\n.showModal {\n  cursor: pointer;\n}\n.thumb-img {\n  width: 250px;\n  height: 125px;\n}\n.branch-link {\n  color: #333;\n}\n.view-branch {\n  margin-top: 5px;\n}\n.view-branch:hover {\n  color: #FFF;\n}\n", ""]);
 
 // exports
 
@@ -53554,7 +53554,6 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__detail___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_2__detail__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__utilities_paginator__ = __webpack_require__(27);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__utilities_paginator___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_3__utilities_paginator__);
-//
 //
 //
 //
@@ -54080,7 +54079,10 @@ var render = function() {
                                 "router-link",
                                 {
                                   attrs: {
-                                    to: "commerce/" + _vm.commerce.idcommerce
+                                    to:
+                                      "/commerce/" +
+                                      _vm.commerce.idcommerce +
+                                      "/branchs"
                                   }
                                 },
                                 [
@@ -54144,8 +54146,9 @@ var render = function() {
                                         {
                                           attrs: {
                                             to:
-                                              "commerce/" +
-                                              _vm.commerce.idcommerce
+                                              "/commerce/" +
+                                              _vm.commerce.idcommerce +
+                                              "/discounts"
                                           }
                                         },
                                         [
@@ -54661,33 +54664,24 @@ var render = function() {
                                           "title d-flex flex-row justify-content-between"
                                       },
                                       [
-                                        _vm._m(1, true),
-                                        _vm._v(" "),
-                                        _c(
-                                          "h6",
-                                          { staticClass: "price" },
-                                          [
+                                        _vm._l(commerce.tags, function(tag) {
+                                          return _c("div", [
                                             _c(
-                                              "router-link",
+                                              "span",
                                               {
-                                                staticClass: "branch-link",
-                                                attrs: {
-                                                  to:
-                                                    "/commerce/" +
-                                                    commerce.idcommerce +
-                                                    "/branchs"
-                                                }
+                                                staticClass:
+                                                  "badge badge-secondary"
                                               },
-                                              [
-                                                _vm._v(
-                                                  "\n                                          Ver sucursales\n                                        "
-                                                )
-                                              ]
+                                              [_vm._v(_vm._s(tag.name))]
                                             )
-                                          ],
-                                          1
-                                        )
-                                      ]
+                                          ])
+                                        }),
+                                        _vm._v(" "),
+                                        commerce.tags.length < 1
+                                          ? _c("span", [_vm._v(" Sin Tags")])
+                                          : _vm._e()
+                                      ],
+                                      2
                                     )
                                   ]
                                 ),
@@ -54697,35 +54691,51 @@ var render = function() {
                                   { staticClass: "meta d-flex flex-row" },
                                   [
                                     _c(
-                                      "a",
-                                      { attrs: { href: "theme-details.html" } },
+                                      "router-link",
+                                      {
+                                        staticClass:
+                                          "btn btn-outline-primary btn-block view-branch",
+                                        attrs: {
+                                          to:
+                                            "/commerce/" +
+                                            commerce.idcommerce +
+                                            "/branchs"
+                                        }
+                                      },
                                       [
-                                        _c(
-                                          "h6",
-                                          [
-                                            _c(
-                                              "router-link",
-                                              {
-                                                staticClass: "branch-link",
-                                                attrs: {
-                                                  to:
-                                                    "/commerce/" +
-                                                    commerce.idcommerce +
-                                                    "/discounts"
-                                                }
-                                              },
-                                              [
-                                                _vm._v(
-                                                  "\n                                          Ver descuentos activos\n                                        "
-                                                )
-                                              ]
-                                            )
-                                          ],
-                                          1
+                                        _vm._v(
+                                          "\n                                  Ver sucursales\n                                "
                                         )
                                       ]
                                     )
-                                  ]
+                                  ],
+                                  1
+                                ),
+                                _vm._v(" "),
+                                _c(
+                                  "div",
+                                  { staticClass: "meta d-flex flex-row" },
+                                  [
+                                    _c(
+                                      "router-link",
+                                      {
+                                        staticClass:
+                                          "btn btn-outline-primary btn-block view-branch",
+                                        attrs: {
+                                          to:
+                                            "/commerce/" +
+                                            commerce.idcommerce +
+                                            "/discounts"
+                                        }
+                                      },
+                                      [
+                                        _vm._v(
+                                          "\n                                    Ver descuentos activos\n                                  "
+                                        )
+                                      ]
+                                    )
+                                  ],
+                                  1
                                 )
                               ]
                             )
@@ -54765,14 +54775,6 @@ var staticRenderFns = [
           _c("h6", { staticClass: "price" }, [_vm._v("Leer comentarios")])
         ]
       )
-    ])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("a", { attrs: { href: "theme-details.html" } }, [
-      _c("h6", [_vm._v("Listado de tags")])
     ])
   }
 ]
@@ -66558,7 +66560,7 @@ exports = module.exports = __webpack_require__(2)(false);
 
 
 // module
-exports.push([module.i, "\n.image-commerce {\n  width: 80px;\n  height: 50px;\n  border-radius: 50%;\n}\n", ""]);
+exports.push([module.i, "\n.image-commerce {\n  width: 80px;\n  height: 50px;\n  border-radius: 50%;\n}\n.card-img-top {\n    height: 10rem;\n}\n", ""]);
 
 // exports
 
@@ -66569,6 +66571,14 @@ exports.push([module.i, "\n.image-commerce {\n  width: 80px;\n  height: 50px;\n 
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+//
+//
+//
+//
+//
+//
+//
+//
 //
 //
 //
@@ -66827,7 +66837,8 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
                 city_idcity: '',
                 commercecategory_idcommercecategory: ''
             },
-            branchs: []
+            branchs: [],
+            tags: []
         };
     },
     mounted: function mounted() {
@@ -66852,6 +66863,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
                 _this.commerce.city_idcity = response.data.data[0].cities.name;
                 _this.commerce.commercecategory_idcommercecategory = response.data.data[0].ccategories.name;
                 _this.branchs = response.data.data[0].branchs;
+                _this.tags = response.data.data[0].tags;
             }).catch(function (err) {
                 return console.log(err);
             });
@@ -66957,49 +66969,66 @@ var render = function() {
                       ]),
                       _vm._v(" "),
                       _c("div", { staticClass: "row" }, [
-                        _c("div", { staticClass: "col-lg-6" }, [
-                          _c(
-                            "ul",
-                            { staticClass: "support-list" },
-                            [
-                              _vm.branchs.length < 1
-                                ? _c("li", [_vm._v("No posee sucursales aún.")])
-                                : _vm._e(),
-                              _vm._v(" "),
+                        _c(
+                          "div",
+                          { staticClass: "col" },
+                          [
+                            _c(
+                              "b-card-group",
+                              { attrs: { deck: "" } },
                               _vm._l(_vm.branchs, function(branch) {
                                 return _c(
-                                  "li",
+                                  "div",
                                   [
-                                    _c("img", {
-                                      attrs: { src: "/img/bullet.png", alt: "" }
-                                    }),
-                                    _vm._v(" "),
                                     _c(
-                                      "router-link",
+                                      "b-card",
                                       {
-                                        staticClass: "branch-link",
+                                        staticClass: "mb-2",
+                                        staticStyle: { width: "14rem" },
                                         attrs: {
-                                          to: "/branch/" + branch.idbranch
+                                          title: branch.name,
+                                          "img-src":
+                                            "../images/branch/" + branch.image,
+                                          "img-alt": "Image",
+                                          "img-top": "",
+                                          tag: "article"
                                         }
                                       },
                                       [
-                                        _vm._v(
-                                          "\n                                                  " +
-                                            _vm._s(branch.name) +
-                                            "\n                                                "
+                                        _c("p", { staticClass: "card-text" }, [
+                                          _vm._v(
+                                            "\n                                                      " +
+                                              _vm._s(branch.address) +
+                                              "\n                                                    "
+                                          )
+                                        ]),
+                                        _vm._v(" "),
+                                        _c(
+                                          "router-link",
+                                          {
+                                            staticClass:
+                                              "btn btn-primary btn-sm",
+                                            attrs: {
+                                              to: "/branch/" + branch.idbranch
+                                            }
+                                          },
+                                          [
+                                            _vm._v(
+                                              "\n                                                        Ir   \n                                                    "
+                                            )
+                                          ]
                                         )
-                                      ]
+                                      ],
+                                      1
                                     )
                                   ],
                                   1
                                 )
                               })
-                            ],
-                            2
-                          )
-                        ]),
-                        _vm._v(" "),
-                        _vm._m(0)
+                            )
+                          ],
+                          1
+                        )
                       ])
                     ])
                   ])
@@ -67010,7 +67039,7 @@ var render = function() {
           _vm._v(" "),
           _c("div", { staticClass: "col-lg-3 sidebar theme-details-sidebar" }, [
             _c("div", { staticClass: "single-sidebar" }, [
-              _vm._m(1),
+              _vm._m(0),
               _vm._v(" "),
               _c("ul", [
                 _c("li", [
@@ -67076,7 +67105,22 @@ var render = function() {
               )
             ]),
             _vm._v(" "),
-            _vm._m(2)
+            _c("div", { staticClass: "single-sidebar theme-tags" }, [
+              _c("h6", [_vm._v("Tags")]),
+              _vm._v(" "),
+              _c(
+                "ul",
+                { staticClass: "tag-list" },
+                _vm._l(_vm.tags, function(tag) {
+                  return _c("li", [
+                    _c("i", { staticClass: "icons icon-tag" }),
+                    _vm._v(" " + _vm._s(tag.name))
+                  ])
+                })
+              ),
+              _vm._v(" "),
+              _vm._m(1)
+            ])
           ])
         ])
       ])
@@ -67084,14 +67128,6 @@ var render = function() {
   )
 }
 var staticRenderFns = [
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "col-lg-6" }, [
-      _c("ul", { staticClass: "support-list" })
-    ])
-  },
   function() {
     var _vm = this
     var _h = _vm.$createElement
@@ -67106,75 +67142,50 @@ var staticRenderFns = [
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "single-sidebar theme-tags" }, [
-      _c("h6", [_vm._v("Tags")]),
-      _vm._v(" "),
-      _c("ul", { staticClass: "tag-list" }, [
+    return _c("div", { staticClass: "sidebar-social" }, [
+      _c("ul", [
         _c("li", [
-          _c("i", { staticClass: "icons icon-folder" }),
-          _vm._v(" "),
-          _c("a", { attrs: { href: "#" } }, [_vm._v("Bootstrap templates")]),
-          _vm._v(","),
-          _c("a", { attrs: { href: "#" } }, [_vm._v(" business & services")]),
-          _vm._v(", Marketing")
+          _c("a", { attrs: { href: "#" } }, [
+            _c("i", {
+              staticClass: "fa fa-facebook",
+              attrs: { "aria-hidden": "true" }
+            })
+          ])
         ]),
         _vm._v(" "),
         _c("li", [
-          _c("i", { staticClass: "icons icon-tag" }),
-          _vm._v(" "),
-          _c("a", { attrs: { href: "#" } }, [_vm._v("Agency")]),
-          _vm._v(","),
-          _c("a", { attrs: { href: "#" } }, [_vm._v(" business")]),
-          _vm._v(","),
-          _c("a", { attrs: { href: "#" } }, [_vm._v(" corporate")])
-        ])
-      ]),
-      _vm._v(" "),
-      _c("div", { staticClass: "sidebar-social" }, [
-        _c("ul", [
-          _c("li", [
-            _c("a", { attrs: { href: "#" } }, [
-              _c("i", {
-                staticClass: "fa fa-facebook",
-                attrs: { "aria-hidden": "true" }
-              })
-            ])
-          ]),
-          _vm._v(" "),
-          _c("li", [
-            _c("a", { attrs: { href: "#" } }, [
-              _c("i", {
-                staticClass: "fa fa-twitter",
-                attrs: { "aria-hidden": "true" }
-              })
-            ])
-          ]),
-          _vm._v(" "),
-          _c("li", [
-            _c("a", { attrs: { href: "#" } }, [
-              _c("i", {
-                staticClass: "fa fa-github",
-                attrs: { "aria-hidden": "true" }
-              })
-            ])
-          ]),
-          _vm._v(" "),
-          _c("li", [
-            _c("a", { attrs: { href: "#" } }, [
-              _c("i", {
-                staticClass: "fa fa-slack",
-                attrs: { "aria-hidden": "true" }
-              })
-            ])
-          ]),
-          _vm._v(" "),
-          _c("li", [
-            _c("a", { attrs: { href: "#" } }, [
-              _c("i", {
-                staticClass: "fa fa-dribbble",
-                attrs: { "aria-hidden": "true" }
-              })
-            ])
+          _c("a", { attrs: { href: "#" } }, [
+            _c("i", {
+              staticClass: "fa fa-twitter",
+              attrs: { "aria-hidden": "true" }
+            })
+          ])
+        ]),
+        _vm._v(" "),
+        _c("li", [
+          _c("a", { attrs: { href: "#" } }, [
+            _c("i", {
+              staticClass: "fa fa-github",
+              attrs: { "aria-hidden": "true" }
+            })
+          ])
+        ]),
+        _vm._v(" "),
+        _c("li", [
+          _c("a", { attrs: { href: "#" } }, [
+            _c("i", {
+              staticClass: "fa fa-slack",
+              attrs: { "aria-hidden": "true" }
+            })
+          ])
+        ]),
+        _vm._v(" "),
+        _c("li", [
+          _c("a", { attrs: { href: "#" } }, [
+            _c("i", {
+              staticClass: "fa fa-dribbble",
+              attrs: { "aria-hidden": "true" }
+            })
           ])
         ])
       ])
@@ -67746,29 +67757,6 @@ var staticRenderFns = [
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
     return _c("div", { staticClass: "single-sidebar theme-tags" }, [
-      _c("h6", [_vm._v("Tags")]),
-      _vm._v(" "),
-      _c("ul", { staticClass: "tag-list" }, [
-        _c("li", [
-          _c("i", { staticClass: "icons icon-folder" }),
-          _vm._v(" "),
-          _c("a", { attrs: { href: "#" } }, [_vm._v("Bootstrap templates")]),
-          _vm._v(","),
-          _c("a", { attrs: { href: "#" } }, [_vm._v(" business & services")]),
-          _vm._v(", Marketing")
-        ]),
-        _vm._v(" "),
-        _c("li", [
-          _c("i", { staticClass: "icons icon-tag" }),
-          _vm._v(" "),
-          _c("a", { attrs: { href: "#" } }, [_vm._v("Agency")]),
-          _vm._v(","),
-          _c("a", { attrs: { href: "#" } }, [_vm._v(" business")]),
-          _vm._v(","),
-          _c("a", { attrs: { href: "#" } }, [_vm._v(" corporate")])
-        ])
-      ]),
-      _vm._v(" "),
       _c("div", { staticClass: "sidebar-social" }, [
         _c("ul", [
           _c("li", [
@@ -68633,7 +68621,7 @@ exports = module.exports = __webpack_require__(2)(false);
 
 
 // module
-exports.push([module.i, "\n.image-commerce {\n  width: 80px;\n  height: 50px;\n  border-radius: 50%;\n}\n.thumb-img {\n  width: 250px;\n  height: 125px;\n}\n", ""]);
+exports.push([module.i, "\n.image-commerce {\n  width: 80px;\n  height: 50px;\n  border-radius: 50%;\n}\n.thumb-img {\n  width: 250px;\n  height: 125px;\n}\n.view-branch:hover .link-branch {\n  color: #FFF;\n}\n", ""]);
 
 // exports
 
@@ -68950,7 +68938,31 @@ var render = function() {
                             )
                           ]),
                           _vm._v(" "),
-                          _vm._m(1, true)
+                          _c(
+                            "div",
+                            { staticClass: "meta d-flex flex-row" },
+                            [
+                              _c(
+                                "router-link",
+                                {
+                                  staticClass:
+                                    "btn btn-outline-primary btn-block view-branch",
+                                  attrs: {
+                                    to:
+                                      "/commerce/" +
+                                      _vm.commerce.idcommerce +
+                                      "/discounts"
+                                  }
+                                },
+                                [
+                                  _vm._v(
+                                    "\n                                Ver descuentos activos\n                              "
+                                  )
+                                ]
+                              )
+                            ],
+                            1
+                          )
                         ]
                       )
                     ]
@@ -68975,16 +68987,6 @@ var staticRenderFns = [
     return _c("div", { staticClass: "link" }, [
       _c("a", { staticClass: "relative" }, [
         _c("i", { staticClass: "icons icon-eye" })
-      ])
-    ])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "meta d-flex flex-row" }, [
-      _c("a", { attrs: { href: "theme-details.html" } }, [
-        _c("h6", [_vm._v("Ver descuentos activos")])
       ])
     ])
   }

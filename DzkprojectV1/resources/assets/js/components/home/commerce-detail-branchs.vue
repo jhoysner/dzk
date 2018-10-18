@@ -99,9 +99,9 @@
                             </div> -->
                             <div class="meta d-flex flex-row">
                                 <!--<div class="user-img"><img src="img/user-img.png" alt=""></div> -->
-                                <a href="theme-details.html">
-                                    <h6>Ver descuentos activos</h6>
-                                </a>
+                                <router-link class="btn btn-outline-primary btn-block view-branch" :to="`/commerce/${commerce.idcommerce}/discounts`">
+                                  Ver descuentos activos
+                                </router-link>
                             </div>
                         </div>
                       </div>
@@ -176,5 +176,9 @@ import paginator from '../../utilities/paginator';
   .thumb-img {
     width: 250px;
     height: 125px;
+  }
+
+  .view-branch:hover .link-branch {
+    color: #FFF;
   }
 </style>

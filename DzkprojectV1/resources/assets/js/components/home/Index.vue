@@ -104,25 +104,24 @@
                                 </div>
                                 <div class="details pb-10 pt-20">
                                     <div class="title d-flex flex-row justify-content-between">
-                                        <a href="theme-details.html">
-                                            <h6>Listado de tags</h6>
-                                        </a>
-                                        <h6 class="price">
-                                          <router-link class="branch-link" :to="`/commerce/${commerce.idcommerce}/branchs`">
-                                            Ver sucursales
-                                          </router-link>
-                                        </h6>
+                                        <div v-for="tag in commerce.tags"> 
+                                          <span class="badge badge-secondary">{{tag.name}}</span>
+                                        </div>
+                                        <span v-if="commerce.tags.length < 1"> Sin Tags</span>
                                     </div>
                                 </div>
                                 <div class="meta d-flex flex-row">
+                                  <router-link class="btn btn-outline-primary btn-block view-branch":to="`/commerce/${commerce.idcommerce}/branchs`">
+                                    Ver sucursales
+                                  </router-link>
+                                </div>
+                                <div class="meta d-flex flex-row">
                                     <!--<div class="user-img"><img src="img/user-img.png" alt=""></div> -->
-                                    <a href="theme-details.html">
-                                        <h6>
-                                          <router-link class="branch-link" :to="`/commerce/${commerce.idcommerce}/discounts`">
-                                            Ver descuentos activos
-                                          </router-link>
-                                        </h6>
-                                    </a>
+                                    <!--<a href="theme-details.html"> -->
+                                    <router-link class="btn btn-outline-primary btn-block view-branch" :to="`/commerce/${commerce.idcommerce}/discounts`">
+                                      Ver descuentos activos
+                                    </router-link>
+                                    <!--</a> -->
                                 </div>
                             </div>
                           </div>
@@ -220,5 +219,13 @@ import paginator from '../../utilities/paginator';
 
   .branch-link {
     color: #333;
+  }
+
+  .view-branch {
+    margin-top: 5px;
+  }
+
+  .view-branch:hover {
+    color: #FFF;
   }
 </style>

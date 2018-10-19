@@ -25,9 +25,9 @@
                         <div class="form-group">
                           
                         </div>
-                        <div class="container">
+                        <div class="container" id="search">
                           <div class="row">
-                            <div class="col-lg-6">
+                            <div class="col-lg-12">
                               <div class="form-group">
                                 <label for="">Categoría</label>
                                 <select name="" class="form-control" v-model="category">
@@ -36,10 +36,10 @@
                               </div>
                               <div class="form-group">
                                 <label for="">Tags</label>
-                                <multiselect v-model="value" tag-placeholder="Agregar tag" placeholder="Buscar o Agregar tag" label="name" track-by="code" :options="options" :multiple="true" :taggable="true" :searchable="true" tag-position="bottom" @tag="addTag"></multiselect>
+                                <multiselect v-model="value" tag-placeholder="Agregar tag" placeholder="Buscar o Agregar tag" label="name" track-by="code" :options="options" :multiple="true" :taggable="true" :searchable="true" tag-position="bottom" @input="onChange"></multiselect>
                               </div>
                               <div class="form-group">
-                                <input type="text" class="form-control" id="search" placeholder="Buscar" v-model="search">
+                                <input type="text" class="form-control" placeholder="Buscar" v-model="search">
                               </div>
                               <div class="form-group">
                                 <button class="btn btn-primary btn-block" @click="filtering">Filtrar</button>
@@ -185,6 +185,7 @@ import paginator from '../../utilities/paginator';
           search: null,
           options: [],
           value: [],
+          tags: [],
           categorycommerce: [],
           category: null
       }
@@ -208,14 +209,15 @@ import paginator from '../../utilities/paginator';
     },
 
     methods: {
-      addTag (newTag) {
-        const tag = {
-          name: this.validName(newTag),
-          code: this.randomString(36)
-        }
-
-        this.value.push(tag)
-        this.options.push(tag)
+      onChange(val) {
+        let list=[];
+        val.map(function(value, key) {
+          let tag = {
+            id : value.idtags
+          }
+          list.push(tag);
+        });
+        this.tags = list;
       },
 
       //Muestra Listado de Tag
@@ -257,9 +259,10 @@ import paginator from '../../utilities/paginator';
 
       filtering() {
         let data = {
-          category: this.category,
-          tags: this.value,
-          search: this.search
+          category_commerce: this.category,
+          tags: this.tags,
+          work: this.search,
+          type: 'commerce'
         };
 
         console.log(data);

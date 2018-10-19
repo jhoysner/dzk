@@ -179,7 +179,7 @@ import paginator from '../../utilities/paginator';
       this.getDiscountCategories();
 
       Bus.$on('change_page', (page) => {
-        this.index(page);
+        this.filtering(page);
       });
     },
     // computed: {
@@ -241,7 +241,7 @@ import paginator from '../../utilities/paginator';
         .catch(err => console.log(err))
       },
 
-      filtering() {
+      filtering(page) {
         let data = {
           category_discount: this.category,
           tags: this.tags,
@@ -250,6 +250,12 @@ import paginator from '../../utilities/paginator';
         };
 
         console.log(data);
+
+        axios.post('api/all-discounts?page=' + page, data).then(response => {
+          this.discounts = response.data.discount.data;
+          this.pagination = response.data.paginate;
+        })
+        .catch(err => console.log(err));
       }
     },
   }

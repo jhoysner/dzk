@@ -197,7 +197,7 @@ import paginator from '../../utilities/paginator';
       this.getCommerceCategories();
 
       Bus.$on('change_page', (page) => {
-        this.index(page);
+        this.filtering(page);
       });
     },
 
@@ -257,7 +257,7 @@ import paginator from '../../utilities/paginator';
         .catch(err => console.log(err))
       },
 
-      filtering() {
+      filtering(page) {
         let data = {
           category_commerce: this.category,
           tags: this.tags,
@@ -265,9 +265,9 @@ import paginator from '../../utilities/paginator';
           type: 'commerce'
         };
 
-        console.log(data);
+        // console.log(data);
 
-        axios.post('api/all-commerces', data).then(response => {
+        axios.post('api/all-commerces?page=' + page, data).then(response => {
           this.commerces = response.data.commerce.data;
           this.pagination = response.data.paginate;
         })

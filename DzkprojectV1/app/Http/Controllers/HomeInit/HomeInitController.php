@@ -11,30 +11,52 @@ use App\Discount;
 
 class HomeInitController extends Controller
 {
-    public function allCommerce()
+    public function allCommerce(Request $request)
     {
-        $commerce = Commerce::with('countries')
+
+        /*$commerce = Commerce::with('countries')
         ->with('states')
           ->with('cities')
             ->with('ccategories')
               ->with('tags')
-                ->paginate(2);
+                ->paginate(2);*/
 
         //$commerce = Commerce::orderBy('idcommerce', 'DESC')->paginate(2);
 
+        $commerce = Commerce::with('countries')
+        ->with('states')
+          ->with('cities')
+            ->with('ccategories')
+              ->with('tags');
+
+              if($request->type = 'commerce') {
+                if($request->category_commerce != null) {
+                    $commerce->where('commercecategory_idcommercecategory', $request->category_commerce);
+                }
+
+                if($request->work != null) {
+                    $commerce->where('name', 'LIKE', '%'.$request->work.'%');
+                }
+
+              }
+
+        $page = $commerce->paginate(2);
+
+
         return response()->json([
             'paginate' => [
-                'total'         =>  $commerce->total(),
-                'current_page'  =>  $commerce->currentPage(),
-                'per_page'      =>  $commerce->perPage(),
-                'last_page'     =>  $commerce->lastPage(),
-                'from'          =>  $commerce->firstItem(),
-                'to'            =>  $commerce->lastPage()
+                'total'         =>  $page->total(),
+                'current_page'  =>  $page->currentPage(),
+                'per_page'      =>  $page->perPage(),
+                'last_page'     =>  $page->lastPage(),
+                'from'          =>  $page->firstItem(),
+                'to'            =>  $page->lastPage()
             ],
 
-            'commerce' => $commerce
+            'commerce' => $page
 
         ]);
+
     }    
     public function allDiscount()
     {

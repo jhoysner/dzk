@@ -266,6 +266,12 @@ import paginator from '../../utilities/paginator';
         };
 
         console.log(data);
+
+        axios.post('api/all-commerces', data).then(response => {
+          this.commerces = response.data.commerce.data;
+          this.pagination = response.data.paginate;
+        })
+        .catch(err => console.log(err));
       }
     },
   }

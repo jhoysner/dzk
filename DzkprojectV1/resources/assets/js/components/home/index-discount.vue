@@ -235,7 +235,7 @@ import paginator from '../../utilities/paginator';
         axios.get('api/discount-categories').then(data => {
           // console.log(data)
           this.categorydiscount = data.data.data;
-          this.categorydiscount.unshift({iddiscounttegory: null, name: 'Seleccione una opcion'});
+          this.categorydiscount.unshift({iddiscountcategory: null, name: 'Seleccione una opcion'});
           this.category = data.data.data[0].iddiscountcategory;
         })
         .catch(err => console.log(err))

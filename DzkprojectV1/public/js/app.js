@@ -55323,7 +55323,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
       axios.get('api/discount-categories').then(function (data) {
         // console.log(data)
         _this4.categorydiscount = data.data.data;
-        _this4.categorydiscount.unshift({ iddiscounttegory: null, name: 'Seleccione una opcion' });
+        _this4.categorydiscount.unshift({ iddiscountcategory: null, name: 'Seleccione una opcion' });
         _this4.category = data.data.data[0].iddiscountcategory;
       }).catch(function (err) {
         return console.log(err);

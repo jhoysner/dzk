@@ -11,50 +11,107 @@ use App\Discount;
 
 class HomeInitController extends Controller
 {
-    public function allCommerce()
+    public function allCommerce(Request $request)
     {
-        $commerce = Commerce::with('countries')
+
+        /*$commerce = Commerce::with('countries')
         ->with('states')
           ->with('cities')
             ->with('ccategories')
               ->with('tags')
-                ->paginate(2);
+                ->paginate(2);*/
 
         //$commerce = Commerce::orderBy('idcommerce', 'DESC')->paginate(2);
 
+        $commerce = Commerce::with('countries')
+        ->with('states')
+          ->with('cities')
+            ->with('ccategories')
+              ->with('tags');
+
+              if($request->type = 'commerce') {
+                if($request->category_commerce != null) {
+                    $commerce->where('commercecategory_idcommercecategory', $request->category_commerce);
+                }
+
+                if($request->tags && count($request->tags) > 0) {
+
+                    foreach ($request->tags as $value) {
+              
+                        $commerce->WhereHas('tags', function ($query) use ($value) {
+                            $query->where('idtags',$value);
+                        });
+                    }
+                }
+
+                if($request->work != null) {
+                    $commerce->where('name', 'LIKE', '%'.$request->work.'%');
+                }
+
+              }
+
+        $page = $commerce->paginate(2);
+
+
         return response()->json([
             'paginate' => [
-                'total'         =>  $commerce->total(),
-                'current_page'  =>  $commerce->currentPage(),
-                'per_page'      =>  $commerce->perPage(),
-                'last_page'     =>  $commerce->lastPage(),
-                'from'          =>  $commerce->firstItem(),
-                'to'            =>  $commerce->lastPage()
+                'total'         =>  $page->total(),
+                'current_page'  =>  $page->currentPage(),
+                'per_page'      =>  $page->perPage(),
+                'last_page'     =>  $page->lastPage(),
+                'from'          =>  $page->firstItem(),
+                'to'            =>  $page->lastPage()
             ],
 
-            'commerce' => $commerce
+            'commerce' => $page
 
         ]);
-    }    
-    public function allDiscount()
-    {
-    	$discount = Discount::with('categories','tags')->with(['branchs' =>function ($query) {
-                            $query->with('commerces');
-                        }])->paginate(2);
 
-        //$discount = discount::orderBy('iddiscount', 'DESC')->paginate(2);
+    }    
+    public function allDiscount(Request $request)
+    {
+        // $discount = Discount::with('categories','tags')->with(['branchs' =>function ($query) {
+     //                        $query->with('commerces');
+                        // }])->paginate(2);
+
+
+        $discount = Discount::with('categories','tags')->with(['branchs' =>function ($query) {
+                            $query->with('commerces');
+                        }]);
+
+            if($request->type = 'discount') {
+                if($request->category_discount != null) {
+                    $discount->where('discountcategory_iddiscountcategory', $request->category_discount);
+                }
+                if($request->tags && count($request->tags) > 0) {
+
+                    foreach ($request->tags as $value) {
+              
+                        $discount->WhereHas('tags', function ($query) use ($value) {
+                                            $query->where('idtags',$value);
+                                        });
+                    }
+                }
+
+                if($request->work != null) {
+                    $discount->where('title', 'LIKE', '%'.$request->work.'%');
+                }                
+
+            }
+
+        $page = $discount->paginate(2);
 
         return response()->json([
             'paginate' => [
-                'total'         =>  $discount->total(),
-                'current_page'  =>  $discount->currentPage(),
-                'per_page'      =>  $discount->perPage(),
-                'last_page'     =>  $discount->lastPage(),
-                'from'          =>  $discount->firstItem(),
-                'to'            =>  $discount->lastPage()
+                'total'         =>  $page->total(),
+                'current_page'  =>  $page->currentPage(),
+                'per_page'      =>  $page->perPage(),
+                'last_page'     =>  $page->lastPage(),
+                'from'          =>  $page->firstItem(),
+                'to'            =>  $page->lastPage()
             ],
 
-            'discount' => $discount
+            'discount' => $page
 
         ]);
     }

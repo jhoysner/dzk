@@ -141,7 +141,7 @@
                                             <b-card-group deck>
                                                 <div v-for="branch in branchs">                                          
                                                     <b-card :title="branch.name"
-                                                          img-src="https://picsum.photos/150/100/?image=25"
+                                                         :img-src="'../images/branch/'+branch.image"
                                                           img-alt="Image"
                                                           img-top
                                                           tag="article"

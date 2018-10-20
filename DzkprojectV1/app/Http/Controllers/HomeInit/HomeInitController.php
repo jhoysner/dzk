@@ -64,7 +64,8 @@ class HomeInitController extends Controller
      //                        $query->with('commerces');
                         // }])->paginate(2);
 
-    	$discount = Discount::with('categories','tags')->with(['branchs' =>function ($query) {
+
+        $discount = Discount::with('categories','tags')->with(['branchs' =>function ($query) {
                             $query->with('commerces');
                         }]);
 
@@ -72,16 +73,23 @@ class HomeInitController extends Controller
                 if($request->category_discount != null) {
                     $discount->where('discountcategory_iddiscountcategory', $request->category_discount);
                 }
+                if($request->tags && count($request->tags) > 0) {
+
+                    foreach ($request->tags as $value) {
+              
+                        $discount->WhereHas('tags', function ($query) use ($value) {
+                                            $query->where('idtags',$value);
+                                        });
+                    }
+                }
 
                 if($request->work != null) {
                     $discount->where('title', 'LIKE', '%'.$request->work.'%');
-                }
+                }                
 
             }
 
-
         $page = $discount->paginate(2);
-
 
         return response()->json([
             'paginate' => [

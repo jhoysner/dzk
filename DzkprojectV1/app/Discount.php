@@ -49,6 +49,11 @@ class Discount extends Model
     public function tags()
     {
         return $this->belongsToMany('App\Tags','discount_has_tags')->withPivot('iddiscount_has_tags','discount_iddiscount', 'tags_idtags')->whereNull('discount_has_tags.deleted_at');   
+    }   
+
+    public function categories()
+    {
+       return $this->belongsTo('App\DiscountCategory', 'discountcategory_iddiscountcategory', 'iddiscountcategory');
     }
 
 }

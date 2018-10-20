@@ -4,159 +4,286 @@ namespace App\Http\Controllers\Search;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Validator;
+use App\Params;
 use App\User;
 use App\Branch;
-use App\Discount;
-use App\Commerce;
 use DB;
 
 
 class SearchController extends Controller
 {
-    
+    protected function getSearchRange()
+    {
+    	$param = Params::where('key','distance_search_range')->first();
+    	return $param;
+    }
+
+    protected function getAlphaNumeric($cadena)
+    {
+    	$cadenaLimpia = preg_replace('([^A-Za-z0-9 ])', '', $cadena);	     					
+      	return $cadenaLimpia;
+    }
+
+    protected function getQuitElement($array_word)
+    {
+    	$elementos = array('el', 'los', 'la', 'las', 'un', 'una', 'unos', 'unas', 'de', 'del', 'en');
+
+    	$result = array_diff($array_word, $elementos);
+    	return $result;
+    }
+
+    protected function getWord($cadena)
+    {
+    	$word = "";
+		//Limpiar caracteres solo alfanumericos
+		$word = $this->getAlphaNumeric($cadena);
+		//conversion a minusculas
+		$word = strtolower($word);
+		//reemplazo b v por comodin *
+		
+		//split quitar espacio 
+		$word = preg_split("/[\s,]+/", $word);
+
+		//retirar los articulos (el, los, la, las, un, una, unos, unas, de, del, en)
+		$word = $this->getQuitElement($word);
+
+		return $word;
+    }
+
+
 	public function getSearch(Request $request)
-    {
-      
-      $locUser = $this->getLocalization(1);
+	{
+		$validator = $this->validator($request->all());
 
-	  $branchs = DB::select('call sp_branchs_user('.$locUser['latitude'].','.$locUser['longitude'].')');
+        if($validator->fails()) {
+            return response()->json(['error'=>$validator->errors()], 422);
+        }
 
-	  foreach ($branchs as $value) {
-	  	$commerces = $commerce = Commerce::where('idcommerce', $id)
-						        ->with('countries')
-						            ->with('states')
-						              ->with('cities')
-						                ->with('ccategories')
-						                    ->with(['branchs' =>function ($query) {
-						                            $query->with('discounts');
-						                        }])->get();
+		$limit = 10;
+		$offset = 0;
 
-	  	return ($commerces);
-	  }
+		//Obtiene la latitud y logitud del cliente 
+      	$local_user = $this->getLocalizationUser();
+      	      	
+		//Obtiene los rangos de busqueda de distancia
+		$range = $this->getSearchRange();
+		
+		if(is_null($range)){
+			$val_range = [0,500];
+		} else {
+			$val_range = explode(',', trim($range->val,'{}'));
+		}
+		
+		//Recorre los rangos hasta encontrar Branchs
+		$ri = 0;
+		while($ri < count($val_range)) {
+			$rango1 = $val_range[$ri];
+			if(isset($val_range[$ri+1])) {
+				$rango2 = $val_range[$ri+1];
+			} else {
+				$rango2 = null;
+			}
 
-	dd($branchs);
+			$branchs = DB::select('call sp_branchs_user(?,?,?,?,?,?)', array($local_user['latitude'],$local_user['longitude'],$rango1,$rango2,$limit,$offset));
 
+			if(count($branchs) > 0) {
+				break;
+			}
 
+			$ri++;
+		}
 
-	  switch ($request->type) {
-	    case 'commerce':
-	      
+      	$branch = array();
+      	foreach ($branchs as $key => $value) {
+      		$branch[] = $value->idbranch; 
+      	}
 
-	      $commerces = Commerce::with('branchs')->get();
-	      
-	      foreach ($commerces as $value) {
-	        foreach ($value->branchs as $temp) {
-	          $temp['distance'] = $this->getDistancia($userLat,$userLng,$temp->lalitude,$temp->longitude);
-	        }
+		switch ($request->type) {
+	    	case 'commerce':      	
+				$query = Branch::with(['commerces' => function($q) use($request) {
+								//Valida que exista una categoria
+		    					if($request->category_commerce) {			  					
+									$category_commerce = $request->category_commerce;
+									$q->where('commercecategory_idcommercecategory',$category_commerce);
+					  			}
+					  			//Valida que exista una palabra
+					  			if($request->word) {			  					
+									//realiza opciones de limpiado, conversion minuscula, etc
+									$word = $this->getWord($request->word);
+									//Incluir elemento del array obtenido
+									foreach ($word as $value) {
+										if($value === reset($word)){
+											$q->where('name','like','%'.$value.'%');
+										} else {
+											$q->orWhere('name','like','%'.$value.'%');
+										}
+									}
+							  	}
+							  	$q->with(['tags' => function($p) use($request) {
+							  		//Valida que exista Tags
+							  		if($request->tags) {
+							  			$tags = $request->tags;
+							  			foreach ($tags as $value) {
+							  				if($value === reset($tags)){
+												$p->where('idtags',$value);
+											} else {
+												$p->orWhere('idtags',$value);
+											}		
+							  			}
+							  		}
+							  	}]);	
+							  	$q->with('ccategories');
 
-	        //$value->branchs()->sortByDesc('')
+							}]);
 
-	      }
+	    		$query = $query->paginate($limit);
+	    		//$query = $query->get();
+	 			
+	 			$paginate = $this->getPaginate($query);
 
-	      $ordenados = $commerces->branchs()->orderBy('distance', 'DESC');
-	      return($ordenados);
-	      return($commerces);
+				$resultado = [];
+				foreach ($query as $value) {
+		      		$resultado[$value->idbranch] =$value;	
+		      	}
 
+				//Ordena el resultado obtenido por distancia
+		    	foreach ($branchs as $key => $value) {
+		    		if($resultado[$value->idbranch]['commerces'] == ""){
+		    			unset($branchs[$key]);
+		    		} else {
+		    			$value->commerce = $resultado[$value->idbranch]['commerces'];
+		    		}
+		    		
+		    	}
 
-	      
-	      $query = Commerce::select()->orderBy('commerce.name', 'ASC'); 
+		    	$data=[];
+		    	$data['commerces'] = $branchs;
+				
+				return response()->json([
+										'success' => true, 
+										'data'     => $data,
+										'paginate' => $paginate
+										], 200);
+				break;
 
-	      if($request->idtags) {
-	        $query = $query->join('commerce_has_tags','commerce.idcommerce', '=', 'commerce_has_tags.commerce_idcommerce');
-	        foreach ($request->idtags as $key => $value) {
-	            $query = $query->orWhere(function($q) use ($value){
-	                $q->where('commerce_has_tags.tags_idtags','=',$value);
-	            });
-	        }
-	      }
+	    	case 'discount':
+	    		$query = Branch::select('idbranch')
+	    					->with(['discounts'=> function($q) use($request) {
+		    					//Valida que exista una categoria
+		    					if($request->category_discount) {			  					
+									$category_discount = $request->category_discount;
+									$q->where('discountcategory_iddiscountcategory',$category_discount);
+					  			}
+					  			//Valida que exista una palabra
+					  			if($request->word) {			  					
+									//realiza opciones de limpiado, conversion minuscula, etc
+									$word = $this->getWord($request->word);
+									//Incluir elemento del array obtenido
+									foreach ($word as $value) {
+										if($value === reset($word)){
+											$q->where('title','like','%'.$value.'%');
+										} else {
+											$q->orWhere('title','like','%'.$value.'%');
+										}
+									}
+							  	}
+							  	$q->with(['tags' => function($p) use($request) {
+							  		//Valida que exista Tags
+							  		if($request->tags) {
+							  			$tags = $request->tags;
+							  			foreach ($tags as $value) {
+							  				if($value === reset($tags)){
+												$p->where('idtags',$value);
+											} else {
+												$p->orWhere('idtags',$value);
+											}		
+							  			}
+							  		}
+							  	}]);	
+							  	$q->with('categories');	
+		    				}])
+	    					->whereIn('idbranch',$branch);
 
-	      if($request->idcommercecategory) {
-	        $query = $query->where('commercecategory_idcommercecategory','=', $request->idcommercecategory);
-	      }
+	    		$query = $query->paginate($limit);
+	    		//$query = $query->get();
+	 			
+	 			$paginate = $this->getPaginate($query);
 
-	      if($request->words) {
-	        $query= $query->where('commerce.name', 'like', '%'.$request->words.'%');
-	      }
-	      
-	      if($request->offset) {
-	        $query = $query->offset($request->offset);
-	      }
+	    		$resultado = [];
+				foreach ($query as $value) {
+		      		$resultado[$value->idbranch] =$value;	
+		      	}
 
-	      if($request->limit) {
-	        $query = $this->getLimit($query, $request->limit);
-	      } else {
-	        $query = $this->getLimit($query);
-	      }
+		      	//Ordena el resultado obtenido por distancia ASC
+		    	foreach ($branchs as $key => $value) {
+		    		if($resultado[$value->idbranch]['discounts']->count() == 0){
+		    			unset($branchs[$key]);
+		    		} else {
+		    			$value->discount = $resultado[$value->idbranch]['discounts'];
+		    		}
+		    		
+		    	}
 
-	      return response()->json(['success'=>true, 'data'=>$query]);
-	      break;
+		    	$data=[];
+		    	$data['discounts'] = $branchs;
+
+				return response()->json([
+										'success'  => true, 
+										'data' 	   => $data,
+										'paginate' => $paginate
+										], 200);
+	    		break;
 	    
-	    case 'discount':
-	      
-	    $discounts = Discount::with('branchs')->get();
+	    	default:
+	      		return response()->json(['error' => 'Se requiere el tipo de busqueda a realizar'], 422);
+	      		break;
+	    }
 
-	   /* foreach ($discounts as $key => $value) {
-	      $branch = $value->branchs;
-	    }*/
+	}
 
-	  return($discounts);
 
-	      /*if($request->idtags) {
-	        $query = $query->join('discount_has_tags','commerce.idcommerce', '=', 'commerce_has_tags.commerce_idcommerce');
-	        foreach ($request->idtags as $key => $value) {
-	            $query = $query->orWhere(function($q) use ($value){
-	                $q->where('commerce_has_tags.tags_idtags','=',$value);
-	            });
-	        }
-	      }*/
-
-	      if($request->iddiscountcategory) {
-	        $query = $query->where('commercecategory_idcommercecategory','=', $request->idcommercecategory);
-	      }
-
-	      if($request->words) {
-	        $query= $query->where('discount.title', 'like', '%'.$request->words.'%');
-	      }
-	      
-	      if($request->offset) {
-	        $query = $query->offset($request->offset);
-	      }
-
-	      if($request->limit) {
-	        $query = $this->getLimit($query, $request->limit);
-	      } else {
-	        $query = $this->getLimit($query);
-	      }
-
-	      return response()->json(['success'=>true, 'data'=>$query]);
-	      break;
-	    
-	    default:
-	      return response()->json(['error' => 'Se requiere el tipo de busqueda a realizar'], 422);
-	      break;
-	  }
-
-    }
-
-    // Limita el query
-    protected function getLimit ($query, $limit = 10) {
-        
-        $data = $query->limit($limit)->get();
-
-        return $data;
-    }
-
-    protected function getLocalization($id)
+    protected function getLocalizationUser()
     {
-    	$idUser ="851e91410915be4dbd49";
+    	$id_user = "851e91410915be4dbd49";
 
-  		$user= User::find($idUser); 
+  		$user= User::find($id_user); 
 
 	  	$localization = [];
 
-	  	$localization['latitude'] = $user->latitude;
-	  	$localization['longitude'] = $user->longitude;
+	  	if(isset($user)) {
+		  	$localization['latitude']  = $user->latitude;
+		  	$localization['longitude'] = $user->longitude;	  		
+	  	} else {
+		  	$localization['latitude']  = 4.710988599999999;
+		  	$localization['longitude'] = -74.072092;	  			  		
+	  	}
 	  	
 	  	return $localization;
     }
+
+    protected function getPaginate($query)
+    {
+    	$data = [
+		    'total'         =>  $query->total(),
+	        'current_page'  =>  $query->currentPage(),
+	        'per_page'      =>  $query->perPage(),
+	        'last_page'     =>  $query->lastPage(),
+	        'from'          =>  $query->firstItem(),
+	        'to'            =>  $query->lastPage(),
+    	];
+    	return $data;
+    }
+
+    protected function validator(array $data)
+    {
+        return Validator::make($data, [
+            'type'  => 'required|string',
+            'tags' 	=> 'array',
+            'word'  => 'string',
+        ]);
+    }
+
+	
 }

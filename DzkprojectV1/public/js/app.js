@@ -53536,7 +53536,7 @@ exports = module.exports = __webpack_require__(2)(false);
 
 
 // module
-exports.push([module.i, "\n.image-commerce {\n  width: 80px;\n  height: 50px;\n  border-radius: 50%;\n}\n#search {\n  display: none;\n}\n", ""]);
+exports.push([module.i, "\n.image-commerce {\n    width: 80px;\n    height: 50px;\n    border-radius: 50%;\n}\n#search {\n    display: none;\n}\nfieldset[disabled] .multiselect {\n  pointer-events: none;\n}\n.multiselect__spinner {\n  position: absolute;\n  right: 1px;\n  top: 1px;\n  width: 48px;\n  height: 35px;\n  background: #fff;\n  display: block;\n}\n.multiselect__spinner:before,\n.multiselect__spinner:after {\n  position: absolute;\n  content: \"\";\n  top: 50%;\n  left: 50%;\n  margin: -8px 0 0 -8px;\n  width: 16px;\n  height: 16px;\n  border-radius: 100%;\n  border-color: #41B883 transparent transparent;\n  border-style: solid;\n  border-width: 2px;\n  -webkit-box-shadow: 0 0 0 1px transparent;\n          box-shadow: 0 0 0 1px transparent;\n}\n.multiselect__spinner:before {\n  -webkit-animation: spinning 2.4s cubic-bezier(0.41, 0.26, 0.2, 0.62);\n          animation: spinning 2.4s cubic-bezier(0.41, 0.26, 0.2, 0.62);\n  -webkit-animation-iteration-count: infinite;\n          animation-iteration-count: infinite;\n}\n.multiselect__spinner:after {\n  -webkit-animation: spinning 2.4s cubic-bezier(0.51, 0.09, 0.21, 0.8);\n          animation: spinning 2.4s cubic-bezier(0.51, 0.09, 0.21, 0.8);\n  -webkit-animation-iteration-count: infinite;\n          animation-iteration-count: infinite;\n}\n.multiselect__loading-enter-active,\n.multiselect__loading-leave-active {\n  -webkit-transition: opacity 0.4s ease-in-out;\n  transition: opacity 0.4s ease-in-out;\n  opacity: 1;\n}\n.multiselect__loading-enter,\n.multiselect__loading-leave-active {\n  opacity: 0;\n}\n.multiselect,\n.multiselect__input,\n.multiselect__single {\n  font-family: inherit;\n  font-size: 14px;\n  -ms-touch-action: manipulation;\n      touch-action: manipulation;\n}\n.multiselect {\n  -webkit-box-sizing: content-box;\n          box-sizing: content-box;\n  display: block;\n  position: relative;\n  width: 100%;\n  min-height: 40px;\n  text-align: left;\n  color: #35495E;\n}\n.multiselect * {\n  -webkit-box-sizing: border-box;\n          box-sizing: border-box;\n}\n.multiselect:focus {\n  outline: none;\n}\n.multiselect--disabled {\n  pointer-events: none;\n  opacity: 0.6;\n}\n.multiselect--active {\n  z-index: 50;\n}\n.multiselect--active:not(.multiselect--above) .multiselect__current,\n.multiselect--active:not(.multiselect--above) .multiselect__input,\n.multiselect--active:not(.multiselect--above) .multiselect__tags {\n  border-bottom-left-radius: 0;\n  border-bottom-right-radius: 0;\n}\n.multiselect--active .multiselect__select {\n  -webkit-transform: rotateZ(180deg);\n          transform: rotateZ(180deg);\n}\n.multiselect--above.multiselect--active .multiselect__current,\n.multiselect--above.multiselect--active .multiselect__input,\n.multiselect--above.multiselect--active .multiselect__tags {\n  border-top-left-radius: 0;\n  border-top-right-radius: 0;\n}\n.multiselect__input,\n.multiselect__single {\n  position: relative;\n  display: inline-block;\n  min-height: 20px;\n  line-height: 20px;\n  border: none;\n  border-radius: 5px;\n  background: #fff;\n  padding: 1px 0 0 5px;\n  width: calc(100%);\n  -webkit-transition: border 0.1s ease;\n  transition: border 0.1s ease;\n  -webkit-box-sizing: border-box;\n          box-sizing: border-box;\n  margin-bottom: 8px;\n  vertical-align: top;\n}\n.multiselect__tag ~ .multiselect__input,\n.multiselect__tag ~ .multiselect__single {\n  width: auto;\n}\n.multiselect__input:hover,\n.multiselect__single:hover {\n  border-color: #cfcfcf;\n}\n.multiselect__input:focus,\n.multiselect__single:focus {\n  border-color: #a8a8a8;\n  outline: none;\n}\n.multiselect__single {\n  padding-left: 6px;\n  margin-bottom: 8px;\n}\n.multiselect__tags-wrap {\n  display: inline\n}\n.multiselect__tags {\n  min-height: 40px;\n  display: block;\n  padding: 8px 40px 0 8px;\n  border-radius: 5px;\n  border: 1px solid #E8E8E8;\n  background: #fff;\n}\n.multiselect__tag {\n  position: relative;\n  display: inline-block;\n  padding: 4px 26px 4px 10px;\n  border-radius: 5px;\n  margin-right: 10px;\n  color: #fff;\n  line-height: 1;\n  background: #5240b8;\n  margin-bottom: 5px;\n  white-space: nowrap;\n  overflow: hidden;\n  max-width: 100%;\n  text-overflow: ellipsis;\n}\n.multiselect__tag-icon {\n  cursor: pointer;\n  margin-left: 7px;\n  position: absolute;\n  right: 0;\n  top: 0;\n  bottom: 0;\n  font-weight: 700;\n  font-style: initial;\n  width: 22px;\n  text-align: center;\n  line-height: 22px;\n  -webkit-transition: all 0.2s ease;\n  transition: all 0.2s ease;\n  border-radius: 5px;\n}\n.multiselect__tag-icon:after {\n  content: \"\\D7\";\n  color: #266d4d;\n  font-size: 14px;\n}\n.multiselect__tag-icon:focus,\n.multiselect__tag-icon:hover {\n  background: #369a6e;\n}\n.multiselect__tag-icon:focus:after,\n.multiselect__tag-icon:hover:after {\n  color: white;\n}\n.multiselect__current {\n  line-height: 16px;\n  min-height: 40px;\n  -webkit-box-sizing: border-box;\n          box-sizing: border-box;\n  display: block;\n  overflow: hidden;\n  padding: 8px 12px 0;\n  padding-right: 30px;\n  white-space: nowrap;\n  margin: 0;\n  text-decoration: none;\n  border-radius: 5px;\n  border: 1px solid #E8E8E8;\n  cursor: pointer;\n}\n.multiselect__select {\n  line-height: 16px;\n  display: block;\n  position: absolute;\n  -webkit-box-sizing: border-box;\n          box-sizing: border-box;\n  width: 40px;\n  height: 38px;\n  right: 1px;\n  top: 1px;\n  padding: 4px 8px;\n  margin: 0;\n  text-decoration: none;\n  text-align: center;\n  cursor: pointer;\n  -webkit-transition: -webkit-transform 0.2s ease;\n  transition: -webkit-transform 0.2s ease;\n  transition: transform 0.2s ease;\n  transition: transform 0.2s ease, -webkit-transform 0.2s ease;\n}\n.multiselect__select:before {\n  position: relative;\n  right: 0;\n  top: 65%;\n  color: #999;\n  margin-top: 4px;\n  border-style: solid;\n  border-width: 5px 5px 0 5px;\n  border-color: #999999 transparent transparent transparent;\n  content: \"\";\n}\n.multiselect__placeholder {\n  color: #ADADAD;\n  display: inline-block;\n  margin-bottom: 10px;\n  padding-top: 2px;\n}\n.multiselect--active .multiselect__placeholder {\n  display: none;\n}\n.multiselect__content-wrapper {\n  position: absolute;\n  display: block;\n  background: #fff;\n  width: 100%;\n  max-height: 240px;\n  overflow: auto;\n  border: 1px solid #E8E8E8;\n  border-top: none;\n  border-bottom-left-radius: 5px;\n  border-bottom-right-radius: 5px;\n  z-index: 50;\n  -webkit-overflow-scrolling: touch;\n}\n.multiselect__content {\n  list-style: none;\n  display: inline-block;\n  padding: 0;\n  margin: 0;\n  min-width: 100%;\n  vertical-align: top;\n}\n.multiselect--above .multiselect__content-wrapper {\n  bottom: 100%;\n  border-bottom-left-radius: 0;\n  border-bottom-right-radius: 0;\n  border-top-left-radius: 5px;\n  border-top-right-radius: 5px;\n  border-bottom: none;\n  border-top: 1px solid #E8E8E8;\n}\n.multiselect__content::webkit-scrollbar {\n  display: none;\n}\n.multiselect__element {\n  display: block;\n}\n.multiselect__option {\n  display: block;\n  padding: 12px;\n  min-height: 40px;\n  line-height: 16px;\n  text-decoration: none;\n  text-transform: none;\n  vertical-align: middle;\n  position: relative;\n  cursor: pointer;\n  white-space: nowrap;\n}\n.multiselect__option:after {\n  top: 0;\n  right: 0;\n  position: absolute;\n  line-height: 40px;\n  padding-right: 12px;\n  padding-left: 20px;\n}\n.multiselect__option--highlight {\n  background: #41B883;\n  outline: none;\n  color: white;\n}\n.multiselect__option--highlight:after {\n  content: attr(data-select);\n  background: #41B883;\n  color: white;\n}\n.multiselect__option--selected {\n  background: #F3F3F3;\n  color: #35495E;\n  font-weight: bold;\n}\n.multiselect__option--selected:after {\n  content: attr(data-selected);\n  color: silver;\n}\n.multiselect__option--selected.multiselect__option--highlight {\n  background: #FF6A6A;\n  color: #fff;\n}\n.multiselect__option--selected.multiselect__option--highlight:after {\n  background: #FF6A6A;\n  content: attr(data-deselect);\n  color: #fff;\n}\n.multiselect--disabled {\n  background: #ededed;\n  pointer-events: none;\n}\n.multiselect--disabled .multiselect__current,\n.multiselect--disabled .multiselect__select {\n  background: #ededed;\n  color: #a6a6a6;\n}\n.multiselect__option--disabled {\n  background: #ededed;\n  color: #a6a6a6;\n  cursor: text;\n  pointer-events: none;\n}\n.multiselect__option--disabled.multiselect__option--highlight {\n  background: #dedede !important;\n}\n.multiselect-enter-active,\n.multiselect-leave-active {\n  -webkit-transition: all 0.15s ease;\n  transition: all 0.15s ease;\n}\n.multiselect-enter,\n.multiselect-leave-active {\n  opacity: 0;\n}\n.multiselect__strong {\n  margin-bottom: 10px;\n  display: inline-block\n}\n*[dir=\"rtl\"] .multiselect {\n    text-align: right;\n}\n*[dir=\"rtl\"] .multiselect__select {\n    right: auto;\n    left: 1px;\n}\n*[dir=\"rtl\"] .multiselect__tags {\n    padding: 8px 8px 0px 40px;\n}\n*[dir=\"rtl\"] .multiselect__content {\n    text-align: right;\n}\n*[dir=\"rtl\"] .multiselect__option:after {\n    right: auto;\n    left: 0;\n}\n*[dir=\"rtl\"] .multiselect__clear {\n    right: auto;\n    left: 12px;\n}\n*[dir=\"rtl\"] .multiselect__spinner {\n    right: auto;\n    left: 1px;\n}\n@-webkit-keyframes spinning {\nfrom { -webkit-transform:rotate(0); transform:rotate(0)\n}\nto { -webkit-transform:rotate(2turn); transform:rotate(2turn)\n}\n}\n@keyframes spinning {\nfrom { -webkit-transform:rotate(0); transform:rotate(0)\n}\nto { -webkit-transform:rotate(2turn); transform:rotate(2turn)\n}\n}\n\n", ""]);
 
 // exports
 
@@ -53554,6 +53554,9 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__detail___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_2__detail__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__utilities_paginator__ = __webpack_require__(27);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__utilities_paginator___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_3__utilities_paginator__);
+//
+//
+//
 //
 //
 //
@@ -53644,13 +53647,16 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
         'to': 0
       },
       offset: 2,
-      search: ''
+      search: '',
+      options: [],
+      value: []
     };
   },
   mounted: function mounted() {
     var _this = this;
 
     this.index();
+    this.getTags();
 
     __WEBPACK_IMPORTED_MODULE_0__utilities_EventBus_js__["a" /* default */].$on('change_page', function (page) {
       _this.index(page);
@@ -53668,13 +53674,27 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
   },
 
   methods: {
-    index: function index(page) {
+    //Muestra Listado de Tag
+    getTags: function getTags() {
       var _this2 = this;
+
+      axios.get('api/tags').then(function (response) {
+        _this2.options = [];
+        _this2.options = response.data.tags;
+        _this2.options.forEach(function (item) {
+          item.code = item.idtags;
+        });
+      }).catch(function (err) {
+        return console.log(err);
+      });
+    },
+    index: function index(page) {
+      var _this3 = this;
 
       axios.get('api/all-commerces?page=' + page).then(function (response) {
         //console.log(response);
-        _this2.commerces = response.data.commerce.data;
-        _this2.pagination = response.data.paginate;
+        _this3.commerces = response.data.commerce.data;
+        _this3.pagination = response.data.paginate;
       }).catch(function (err) {
         return console.log(err);
       });
@@ -54278,6 +54298,34 @@ var render = function() {
                         on: { click: _vm.toggleSearch }
                       },
                       [_c("i", { staticClass: "icons icon-magnifier" })]
+                    ),
+                    _vm._v(" "),
+                    _c(
+                      "div",
+                      [
+                        _c("multiselect", {
+                          attrs: {
+                            "tag-placeholder": "Agregar tag",
+                            placeholder: "Buscar o Agregar tag",
+                            label: "name",
+                            "track-by": "code",
+                            options: _vm.options,
+                            multiple: true,
+                            taggable: true,
+                            searchable: true,
+                            "tag-position": "bottom"
+                          },
+                          on: { tag: _vm.addTag },
+                          model: {
+                            value: _vm.value,
+                            callback: function($$v) {
+                              _vm.value = $$v
+                            },
+                            expression: "value"
+                          }
+                        })
+                      ],
+                      1
                     ),
                     _vm._v(" "),
                     _c("hr"),

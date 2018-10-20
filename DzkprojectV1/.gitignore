@@ -3,6 +3,8 @@
 /public/storage
 /public/img/profiles
 /public/images/profiles
+/public/images/commerce
+/public/images/branch
 /storage/*.key
 /vendor
 /.idea

@@ -5,6 +5,7 @@ return [
     'date'                 => 'El :attribute no es una fecha válida.',
     'email'                => 'El :attribute debe ser un correo electrónico válido.',
     'image'                => 'El :attribute debe ser una imagen.',
+    'array'                => 'El :attribute debe ser un array.',
     'integer'              => 'El :attribute debe ser un entero.',
     'max'                  => [
         'numeric' => 'El :attribute no puede mayor a  :max.',

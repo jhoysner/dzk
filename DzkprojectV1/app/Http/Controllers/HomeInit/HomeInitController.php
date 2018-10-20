@@ -34,6 +34,16 @@ class HomeInitController extends Controller
                     $commerce->where('commercecategory_idcommercecategory', $request->category_commerce);
                 }
 
+                if($request->tags && count($request->tags) > 0) {
+
+                    foreach ($request->tags as $value) {
+              
+                        $commerce->WhereHas('tags', function ($query) use ($value) {
+                            $query->where('idtags',$value);
+                        });
+                    }
+                }
+
                 if($request->work != null) {
                     $commerce->where('name', 'LIKE', '%'.$request->work.'%');
                 }

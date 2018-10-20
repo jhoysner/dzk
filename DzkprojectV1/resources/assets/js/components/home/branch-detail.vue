@@ -1,10 +1,10 @@
 <template>
 	<div id="section-profile" class="settings-content">
         <button type="button" class="btn btn-outline-dark pull-right" @click="$router.go(-1)">Atras</button>
-        <h2 class="my-4">Surcursal: {{branch.idbranch}}</h2>
+        <!--<h2 class="my-4">Surcursal: {{branch.idbranch}}</h2> -->
+        <br />
 
-            <h3 class="mt-4">{{ branch.name }}</h3>
-            <div>
+            <!--<div>
                 <div class="row pt-30">
                     <div class="col-lg-6">
                         <label><strong>ID Sucursal</strong></label>
@@ -54,10 +54,112 @@
                     </div>
 
                     <div class="clearfix"></div>
-                    <br>
+                    <br> 
               
+                </div>-->
+                <div class="col-lg-12">
+                    <h2 class="pb-30 semi-bold">{{ branch.name }}</h2>                   
+                </div> 
+
+                <div class="container">
+                    <div class="row">
+                        <div class="col-lg-9">
+                            <div class="tab-content">
+                                <div class="tab-pane active" id="overview">
+                                    <!-- Overview section -->
+                                    <div class="overview-section">
+                                        <div class="theme-thumb">
+                                            <img class="img-fluid" :src="'../images/branch/'+branch.image" />
+                                        </div>
+                                        <div class="other-details">
+                                            <h4 class="text-uppercase">Overview</h4>
+                                            <p>
+                                                Dirección: {{ branch.address }}
+                                            </p>
+                                            <p>
+                                                Horario de atención: {{ branch.schedule }}
+                                            </p>
+                                            <p>
+                                                Teléfono principal: {{ branch.phone1 }}
+                                            </p>
+                                            <p>
+                                                Teléfono alternativo: {{ branch.phone2 }}
+                                            </p>
+                                            <p v-if="branch.latitude != null ">
+                                                Latitud y Longitud: {{branch.latitude}} / {{ branch.longitude }}
+                                            </p>
+                                            <!--<p>
+                                                2.Get to the point – Ask your question or explain your situation right away. Don’t beat around the bush. 3.Don’t be arrogant – You are calling technical support because you need help. Don’t try and be a smart guy. 4.Call for yourself.
+                                            </p> -->
+                                        </div>
+                                    </div>
+                                    <!-- Overview section -->
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-lg-3 sidebar theme-details-sidebar">
+                            <div class="single-sidebar">
+                                <div class="price-title d-flex flex-row justify-content-between">
+                                    <h6>Nuestra ubicación</h6>
+                                    <!--<h3 class="price">$39</h3> -->
+                                </div>
+                                <ul>
+                                  <li>
+                                    {{branch.country_idcountry}}
+                                  </li>
+                                  <li>
+                                    {{branch.state_idstate}}
+                                  </li>
+                                  <li>
+                                    {{branch.city_idcity}}
+                                  </li>
+                                </ul>
+                               <!-- <a href="#" class="primary-btn">purchase only</a> -->
+                            </div>
+
+                           <!-- <div class="single-sidebar d-flex flex-row justify-content-between align-items-center total-downlaod">
+                                <h6>Total Downloads</h6>
+                                <h3>968</h3>
+                            </div> -->
+
+                            <div class="single-sidebar theme-details">
+                                <h6>Descuentos</h6>
+                                <ul class="theme-details-list">
+                                    <!--<li><i class="icons icon-basket-loaded"></i> eCommerce, Magazine, Writing</li>
+                                    <li> <i class="icons icon-bell"></i> Theme version: 4.3.5</li>
+                                    <li><i class="icons icon-notebook"></i>View help file</li>
+                                    <li><i class="icons icon-wrench"></i>Sass files included</li>
+                                    <li><i class="icons icon-cloud-upload"></i>Download child theme</li> -->
+                                    <li v-for="discount in discounts">
+                                      <router-link :to="`/discount/${discount.iddiscount}`">
+                                        {{ discount.title }} - ${{ discount.amountapproved }}
+                                      </router-link>
+                                    </li>
+                                    <span v-if="discounts.length < 1">Sin descuentos.</span>
+                              </ul>
+                            </div>
+
+                            <div class="single-sidebar theme-tags">
+                                <!--<h6>Tags</h6>
+                                <ul class="tag-list">
+                                    <li> <i class="icons icon-folder"></i> <a href="#">Bootstrap templates</a>,<a href="#"> business & services</a>, Marketing</li>
+                                    <li> <i class="icons icon-tag"></i> <a href="#">Agency</a>,<a href="#"> business</a>,<a href="#"> corporate</a></li>
+                                </ul> -->
+                                <div class="sidebar-social">
+                                    <ul>
+                                        <li><a href="#"><i class="fa fa-facebook" aria-hidden="true"></i></a></li>
+                                        <li><a href="#"><i class="fa fa-twitter" aria-hidden="true"></i></a></li>
+                                        <li><a href="#"><i class="fa fa-github" aria-hidden="true"></i></a></li>
+                                        <li><a href="#"><i class="fa fa-slack" aria-hidden="true"></i></a></li>
+                                        <li><a href="#"><i class="fa fa-dribbble" aria-hidden="true"></i></a></li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
-                <div v-if="discounts"> 
+                <!--<div v-if="discounts"> 
                     <h3 class="mt-4">Descuentos</h3>    
                     <div class="row justify-content-center stat-table-wrap">
                         <div class="col-lg-12 stat-wrap-container">
@@ -98,7 +200,7 @@
                             </div>
                         </div>
                     </div>
-                </div>
+                </div> -->
             </div>
     </div>
 </template>

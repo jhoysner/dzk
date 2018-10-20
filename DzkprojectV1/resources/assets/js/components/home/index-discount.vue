@@ -5,10 +5,9 @@
             <div class="settings-content">
               <ul class="nav nav-tabs">
                 <li class="nav-item">
-                  <a href="" class="nav-link" @click="$router.push('/')">
-                    
+                  <router-link to="/" class="nav-link">
                       COMERCIOS
-                  </a>
+                  </router-link>
                 </li>
                 <li class="nav-item">
                    <router-link to="/home-discounts" class="nav-link active">
@@ -23,7 +22,7 @@
                         <a class="primary-btn white-btn" @click="toggleSearch"><i class="icons icon-magnifier"></i></a>
                         <hr>
                         <input type="text" class="form-control" id="search" placeholder="Buscar" v-model="search">
-                        <table class="table table-striped mt-40 stat-table">
+<!--     <table class="table table-striped mt-40 stat-table">
                             <thead>
                               <tr>
                                   <th>ID Descuento</th>
@@ -53,7 +52,65 @@
                               </tr>
                            
                             </tbody>
-                        </table>
+                        </table> -->
+                        <div class="row pb-120 pt-80">    <!-- Aqui empieza -->           
+                          <div class="col-lg-3 col-md-6" v-for="discount in filter" :key="discount.iddiscount">
+                            <div class="single-image-thumb single-feature-item relative">   
+                                <div class="thumb relative">
+                                  <div class="thumb-img relative" v-if="discount.image == null">
+                                      <div class="overlay overlay-bg"></div>
+                                      <img class="img-fluid" src="img/f5.jpg" alt="">
+                                  </div>
+                                  <div class="thumb-img relative" v-else>
+                                      <div class="overlay overlay-bg"></div>
+                                      <img class="img-fluid" :src="'images/discount/'+discount.image" alt="">
+                                  </div>
+                                  <div class="link">
+                                      <a class="relative showModal" v-b-modal.showModal  @click="detail(discount.iddiscount)">
+                                        <i class="icons icon-eye"></i>
+                                      </a>
+                                  </div>
+                                </div>
+                                <div class="details pb-10 pt-20">
+                                    <div class="title d-flex flex-row justify-content-between">
+                                        <a class="showModal" v-b-modal.showModal  @click="detail(discount.iddiscount)">
+                                            <h6>{{ discount.title }}</h6>
+                                        </a>
+                                        <h6 class="price">${{ discount.discountprice }}</h6>
+                                    </div>
+                                </div>
+                                <div class="details pb-10 pt-20">
+                                    <div class="title d-flex flex-row justify-content-between">
+                                        <a href="theme-details.html">
+                                          <h6 v-if="discount.branchs.length > 0">{{discount.branchs[0].commerces.name}}</h6>
+                                          <h6 v-if="discount.branchs.length < 1">Descuento sin Asignar</h6>
+                                        </a>
+                                        <h6 class="price"><s>${{ discount.normalprice }}</s></h6>
+                                    </div>
+                                </div>
+                                <div class="details pb-10 pt-20">
+                                    <div class="title d-flex flex-row justify-content-between">
+                                        <a href="theme-details.html">
+                                            <h6>{{ discount.categories.name }} </h6>
+                                        </a>
+                                        <i class="icons icon-share"></i>
+                                    </div>
+                                </div>
+                                <div class="details pb-10 pt-20">
+                                    <div class="title d-flex flex-row justify-content-between">
+                                        <div v-for="tag in discount.tags"> 
+                                          <span class="badge badge-secondary">{{tag.name}}</span>
+                                        </div>
+                                        <span v-if="discount.tags.length < 1"> Sin Tags</span>
+                                    </div>
+                                </div>
+                                <div class="meta d-flex flex-row">
+                                    <!--<div class="user-img"><img src="img/user-img.png" alt=""></div> -->
+                                       <button type="button" class="btn btn-outline-primary">Obetener este Descuento</button>
+                                </div>
+                            </div>
+                          </div>
+                        </div> <!-- Aqui termina -->
                     </div>
                 </div>
               </div>
@@ -76,6 +133,7 @@ import paginator from '../../utilities/paginator';
     data() {
       return {
         discounts: [],
+        // commerce: '',
         pagination: {
             'total': 0,
             'current_page': 0,
@@ -110,8 +168,8 @@ import paginator from '../../utilities/paginator';
           //console.log(response);
           this.discounts = response.data.discount.data;
           this.pagination = response.data.paginate;
-
-          console.log(response.data.discount.data)
+          // this.commerce = response.data.discount.data[0].branchs[0].commerces.name;
+          // console.log(response)
         })
         .catch(err => console.log(err))
       },
@@ -137,4 +195,5 @@ import paginator from '../../utilities/paginator';
   #search {
     display: none;
   }
+
 </style>

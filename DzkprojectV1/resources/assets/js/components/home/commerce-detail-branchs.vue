@@ -1,9 +1,9 @@
 <template>
   <div id="section-profile" class="settings-content">
         <button type="button" class="btn btn-outline-dark pull-right" @click="$router.push('/')">Atras</button>
-        <h2 class="my-4">Comercio: {{commerce.idcommerce}}</h2>
+        <br />
 
-        <ul class="nav nav-tabs">
+        <!--<ul class="nav nav-tabs">
           <li class="nav-item">
              <router-link :to="`/commerce/${id}`" class="nav-link">
                 Detalle
@@ -19,12 +19,13 @@
                 Descuentos
              </router-link>
           </li>
-        </ul>
-        <h3 class="mt-4">Sucursales</h3>    
+        </ul> -->
+        <h3 class="mt-4">Sucursales</h3>
+        <h5 v-if="branchs.length < 1">Este comercio aún no posee sucursales.</h5>    
         <div class="row justify-content-center stat-table-wrap">
             <div class="col-lg-12 stat-wrap-container">
                 <div class="stat-wrap">
-                    <table class="table table-striped mt-40 stat-table">
+                    <!--<table class="table table-striped mt-40 stat-table">
                         <thead>
                           <tr>
                             <th>ID Sucursal</th>
@@ -53,7 +54,58 @@
                             
                           </tr>
                         </tbody>
-                    </table>
+                    </table> -->
+                    <div class="row pb-120 pt-80">    <!-- Aqui empieza -->           
+                      <div class="col-lg-3 col-md-6" v-for="branch in branchs" :key="branch.idbranch">
+                        <div class="single-image-thumb single-feature-item relative">   
+                            <div class="thumb relative">
+                              <div class="thumb-img relative" v-if="branch.image == null">
+                                  <div class="overlay overlay-bg"></div>
+                                  <img class="img-fluid" src="/img/f5.jpg" alt="">
+                              </div>
+                              <div class="thumb-img relative" v-else>
+                                  <div class="overlay overlay-bg"></div>
+                                  <img class="img-fluid" :src="'/images/branch/'+branch.image" alt="">
+                              </div>
+                              <div class="link">
+                                  <a class="relative">
+                                    <i class="icons icon-eye"></i>
+                                  </a>
+
+                                  <!--<a class="relative" href="cart.html">
+                                    <i class="icons icon-basket-loaded"></i>
+                                  </a> -->
+                              </div>
+                            </div>
+                            <div class="details pb-10 pt-20">
+                                <div class="title d-flex flex-row justify-content-between">
+                                    <a>
+                                      <h6>
+                                        <router-link :to="`/branch/${branch.idbranch}`">
+                                          {{ branch.name }}
+                                        </router-link>
+                                      </h6>
+                                    </a>
+                                    <!--<h6 class="price">$59</h6> -->
+                                    <i class="icons icon-share"></i>
+                                </div>
+                            </div>
+                            <!--<div class="details pb-10 pt-20">
+                                <div class="title d-flex flex-row justify-content-between">
+                                    <a href="theme-details.html">
+                                        <h6>{{ branch.ccommerce.name }} </h6>
+                                    </a>
+                                </div>
+                            </div> -->
+                            <div class="meta d-flex flex-row">
+                                <!--<div class="user-img"><img src="img/user-img.png" alt=""></div> -->
+                                <router-link class="btn btn-outline-primary btn-block view-branch" :to="`/commerce/${commerce.idcommerce}/discounts`">
+                                  Ver descuentos activos
+                                </router-link>
+                            </div>
+                        </div>
+                      </div>
+                    </div> <!-- Aqui termina -->
                 </div>
             </div>
             <paginator :pagination="pagination"></paginator>
@@ -105,7 +157,8 @@ import paginator from '../../utilities/paginator';
       getBranchs(page) {
         axios.get('/api/commerce-detail-branchs/' + this.$route.params.id + '?page=' + page).then(response => {
           this.branchs = response.data.branch.data;
-          this.pagination = response.data.paginate;        
+          this.pagination = response.data.paginate;   
+          console.log(response.data.branch.data);  
         }).catch(err => console.log(err))
       },        
 
@@ -118,5 +171,14 @@ import paginator from '../../utilities/paginator';
     width: 80px;
     height: 50px;
     border-radius: 50%;
+  }
+
+  .thumb-img {
+    width: 250px;
+    height: 125px;
+  }
+
+  .view-branch:hover .link-branch {
+    color: #FFF;
   }
 </style>

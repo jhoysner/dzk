@@ -17,7 +17,8 @@ class HomeInitController extends Controller
         ->with('states')
           ->with('cities')
             ->with('ccategories')
-              ->paginate(2);
+              ->with('tags')
+                ->paginate(2);
 
         //$commerce = Commerce::orderBy('idcommerce', 'DESC')->paginate(2);
 
@@ -37,8 +38,9 @@ class HomeInitController extends Controller
     }    
     public function allDiscount()
     {
-    	$discount = Discount::with('branchs')
-              ->paginate(2);
+    	$discount = Discount::with('categories','tags')->with(['branchs' =>function ($query) {
+                            $query->with('commerces');
+                        }])->paginate(2);
 
         //$discount = discount::orderBy('iddiscount', 'DESC')->paginate(2);
 
@@ -59,18 +61,36 @@ class HomeInitController extends Controller
 
     public function commerce_detail($id)
     {
+
+        $commerce = Commerce::where('idcommerce', $id)
+        ->with('countries')
+            ->with('states')
+              ->with('cities')
+                ->with('ccategories')
+                    ->with('tags')
+                        ->with(['branchs' =>function ($query) {
+                                $query->with('discounts');
+                            }])->get();
+
+        return response()->json(['data'=> $commerce], 200);
+
+    }
+
+    public function commerce_detail_random($id)
+    {
         $commerce = Commerce::where('idcommerce', $id)
         ->with('countries')
             ->with('states')
               ->with('cities')
                 ->with('ccategories')
                     ->with(['branchs' =>function ($query) {
-                            $query->with('discounts');
+                            $query->inRandomOrder()->take(2);
+                            $query->inRandomOrder()->with('discounts')->take(2);
                         }])->get();
 
         return response()->json(['data'=> $commerce], 200);
 
-    }    
+    } 
 
     public function discount_detail($id)
     {

@@ -1,6 +1,6 @@
 <template>
     <div id="section-profile" class="settings-content">
-        <button type="button" class="btn btn-outline-dark pull-right" @click="$router.push('/')">
+        <button type="button" class="btn btn-outline-dark pull-right" @click="$router.go(-1)">
             Atras
         </button>
         <br />

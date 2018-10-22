@@ -103,7 +103,11 @@
                                 <div class="details pb-10 pt-20">
                                     <div class="title d-flex flex-row justify-content-between">
                                         <a href="theme-details.html">
-                                          <h6 v-if="discount.branchs.length > 0">{{discount.branchs[0].commerces.name}}</h6>
+                                          <h6 v-if="discount.branchs.length > 0">
+                                            <router-link :to="`/commerce/${discount.branchs[0].commerces.idcommerce}`">
+                                              <span> {{discount.branchs[0].commerces.name}}</span>
+                                            </router-link>
+                                         </h6>
                                           <h6 v-if="discount.branchs.length < 1">Descuento sin Asignar</h6>
                                         </a>
                                         <h6 class="price"><s>${{ discount.normalprice }}</s></h6>

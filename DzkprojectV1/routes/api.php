@@ -60,6 +60,7 @@ Route::resource('commerce-categories', 'CommerceCategory\CommerceCategoriesContr
 
 Route::post('branch-discount', 'Discount\DiscountController@branchDiscount');
 Route::get('branch-discount/{id}', 'Discount\DiscountController@getBranchDiscount');
+Route::get('branch-select/{id}', 'Discount\DiscountController@getBranchDiscountSelect');
 Route::get('branch-discount-update/{discount}/{id}', 'Discount\DiscountController@editBranchDiscount');
 Route::patch('branch-discount-update/{discount}/{id}', 'Discount\DiscountController@updateBranchDiscount');
 Route::delete('branch-discount-update/{discount}/{id}', 'Discount\DiscountController@branchDiscountDelete');

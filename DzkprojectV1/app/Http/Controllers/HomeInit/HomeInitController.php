@@ -152,7 +152,9 @@ class HomeInitController extends Controller
     public function discount_detail($id)
     {
         $discount = Discount::where('iddiscount', $id)
-                    ->with('branchs')->get();
+                    ->with(['branchs' =>function ($query) {
+                            $query->with('commerces');
+                        }])->get();
 
         return response()->json(['data'=> $discount], 200);
 

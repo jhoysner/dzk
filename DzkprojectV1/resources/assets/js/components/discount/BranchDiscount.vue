@@ -1,6 +1,6 @@
 <template>
     <div>
-        <b-modal v-model="show" id="branchDiscountModal" ref="branchDiscountModal" title="Sucursales Descuentos" hide-footer>
+        <b-modal v-model="show" id="branchDiscountModal" ref="branchDiscountModal" title="Sucursales Descuentos" hide-footer  @hidden="onHidden" >
                 <form @submit.prevent="saveBranchDiscount" id="formBranchDiscount">
                       <div class="modal-content">
                         <div class="container">
@@ -72,6 +72,7 @@
                   discounthours:'',
                   amountapproved:'',
                 },
+                edit: false,
                 errorsDiscount: {},
                 show: false,
                 branchs: {},
@@ -86,8 +87,9 @@
               this.$refs.branchDiscountModal.show()
           });           
            Bus.$on('branch_discount_add', (response) => {
+              this.edit = true;
               this.form.discount_iddiscount = response.iddiscount;
-              this.getDiscountBranch()
+              this.getDiscountBranchSelected(this.form.discount_iddiscount)
               this.$refs.branchDiscountModal.show()
           });
         },
@@ -95,6 +97,13 @@
           getDiscountBranch() {
             axios.get('api/branch').then(data => {
               this.branchs = data.data.data;
+            })
+            .catch(err => console.log(err))
+          },          
+          getDiscountBranchSelected(id) {
+            axios.get('api/branch-select/'+id).then(data => {
+              this.branchs = data.data.data;
+              console.log(data);
             })
             .catch(err => console.log(err))
           },
@@ -118,6 +127,13 @@
                       text: "Registro Descuento por sucursales con exito",
                       icon: "success",
                     })
+                    if(this.edit){
+                      // console.log(this.$parent.$parent)
+                      // this.$parent.$parent.cargarDiscount()
+                      this.$root.$emit('bv::show::modal', 'editModal');
+                      this.edit = false;
+                    }
+
                 })
                 .catch(error => {
                     console.log(error.response.data)
@@ -160,8 +176,10 @@
                   }
               }
               return null;
+          },
+          onHidden (evt) {
+            this.$parent.$parent.cargarDiscount()
           }
-
 
         }
 

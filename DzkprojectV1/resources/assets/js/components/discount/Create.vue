@@ -281,11 +281,11 @@
 
               var precio = this.form.normalprice
 
-               var result = precio*this.form.discountpercentage/100
+              var result = precio*this.form.discountpercentage/100
               
                // console.log(result) 
 
-               this.form.discountprice = precio-result;
+              this.form.discountprice = precio-result;
               
             },              
             handleChangePrecioDescuento(e){

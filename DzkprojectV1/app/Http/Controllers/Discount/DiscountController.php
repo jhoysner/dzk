@@ -92,7 +92,9 @@ class DiscountController extends Controller
      */
     public function show($id)
     {
-        $discount = Discount::where('iddiscount', $id)->with('branchs','categories','tags')->first();
+        $discount = Discount::where('iddiscount', $id)->with('categories','tags')->with(['branchs' =>function ($query) {
+                            $query->with('commerces');
+                        }])->first();
 
         return response()->json(['data'=> $discount], 200);
     }
@@ -250,6 +252,15 @@ class DiscountController extends Controller
         $relacion = $discount->branchs;
 
         return response()->json(['data'=> $relacion], 201);
+    }       
+
+    public function getBranchDiscountSelect($id)
+    {
+
+        $used = BranchDiscount::where('discount_iddiscount', $id)->pluck('branch_idbranch');
+        $branchs = Branch::whereNotIn('idbranch', $used)->get();
+
+        return response()->json(['data'=> $branchs], 201);
     }    
 
     public function editBranchDiscount($discount,$id)

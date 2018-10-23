@@ -54,7 +54,7 @@
       </div>
       <create></create> 
       <!-- modal edit -->
-        <b-modal v-model="showEdit" ref="editModal" title="Editar Descuento"hide-footer>
+        <b-modal v-model="showEdit" id="editModal" ref="editModal" title="Editar Descuento"  @hidden="onHidden" hide-footer>
             <form  @submit.prevent="updatedDiscount">
                     <div class="modal-content">
                         <div class="modal-body">
@@ -146,7 +146,8 @@
                                 <span class="text-danger" v-if="!!errorsDiscount.discountcategory_iddiscountcategory"> {{errorsDiscount.discountcategory_iddiscountcategory[0]}} </span>
                             </div>
                             <hr>
-                             <button type="button" class="btn btn-default btn-sm my-4" @click="addBranchDiscount(tmpDiscount)">Agregar Sucursal</button>
+                             <button type="button" class="btn btn-default btn-sm my-4" @click="addBranchDiscount(tmpDiscount)">Agregar Sucursal</button>                        
+
                              <div v-if="descuentosucursal.length > 0">
                                 <div class="table-responsive">
                                       <table class="table table-hover table-bordered table-striped table-condensed">
@@ -376,7 +377,6 @@
 
         mounted() {
             this.cargarDiscount();
-
         },
         created(){
           this.getDiscountCategories();
@@ -613,10 +613,10 @@
               }
 
               var precio = this.tmpDiscount.normalprice
-
-              var result = this.tmpDiscount.discountprice*100/precio
               
-              this.tmpDiscount.discountpercentage =result;
+              var result =  100*this.tmpDiscount.discountprice/this.tmpDiscount.normalprice
+              
+              this.tmpDiscount.discountpercentage = 100-result;
               
             },              
             getBranchDiscount(value){
@@ -701,6 +701,12 @@
               cadena = cadena.replace(/ñ/gi,"n");
               
               return cadena
+            },
+            onHidden (evt) {
+              // Return focus to our Open Modal button
+              // See accessibility below for additional return-focus methods
+              // this.$refs.btnShow.$el.focus()
+              this.cargarDiscount();
             }
 
         }

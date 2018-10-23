@@ -23,6 +23,12 @@
                     <div class="col-lg-6">
                         <label><strong>Final</strong></label>
                         <p>{{discount.enddate}}</p>
+                    </div>                    
+                    <div class="col-lg-6">
+                        <label><strong>Comercio</strong></label>
+                         <router-link :to="`/commerce/${commerce.idcommerce}`">
+                            <p>{{commerce.name}}</p>
+                         </router-link>
                     </div>
                    <div class="col-lg-12">
                         <label>
@@ -77,6 +83,7 @@ import Bus from '../../utilities/EventBus.js';
            },
         countbranchs: '',
         branchs: [],
+        commerce: [],
       }
     },
 
@@ -100,6 +107,10 @@ import Bus from '../../utilities/EventBus.js';
           this.discount.description = response.data.data[0].description;
           this.countbranchs = response.data.data[0].branchs.length;
           this.branchs = response.data.data[0].branchs;
+          this.commerce = response.data.data[0].branchs[0].commerces;
+
+
+          console.log(response)
         })
         .catch(err => console.log(err))
       },  

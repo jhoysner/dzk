@@ -189,6 +189,14 @@
                     </div>
 
                     <div class="single-sidebar theme-details">
+                        <h6>Comercio</h6>
+                        <router-link :to="`/commerce/${commerce.idcommerce}`">
+                            <span>{{commerce.name}}</span>
+                        </router-link>
+
+                    </div>                    
+
+                    <div class="single-sidebar theme-details">
                         <h6>Detalle Fecha</h6>
                         <ul class="theme-details-list">
                             <li> <i class="icons icon-tag"></i> {{discount.startdate}}</li>
@@ -242,6 +250,7 @@
                     discountcategory_iddiscountcategory: ''
 			    },
                 branchs:[],
+                commerce:[],
                 tags:[],
 			}
 		},
@@ -270,8 +279,9 @@
 
                 this.branchs = response.data.data.branchs;
                 this.tags = response.data.data.tags;
+                this.commerce = response.data.data.branchs[0].commerces;
 
-                console.log(response.data.data)
+                // console.log(response.data.data)
               })
               .catch(err => console.log(err))
             },			

@@ -161,13 +161,18 @@
                             <li><i class="icons icon-notebook"></i>View help file</li>
                             <li><i class="icons icon-wrench"></i>Sass files included</li>
                             <li><i class="icons icon-cloud-upload"></i>Download child theme</li> -->
-                            <template v-for="branch in branchs">
+                            <!--<template v-for="branch in branchs">
                               <li v-for="discount in branch.discounts">
                                 <router-link :to="`/discount/${discount.iddiscount}`">
                                     {{ discount.title }} - ${{ discount.amountapproved }}
                                 </router-link>
                               </li>
-                            </template>
+                            </template> -->
+                            <li v-for="discount in discounts">
+                                <router-link :to="`/discount/${discount.iddiscount}`">
+                                    {{ discount.title }} - ${{ discount.amountapproved }}
+                                </router-link>
+                            </li>
                         </ul>
                     </div>
 
@@ -247,6 +252,7 @@
 </template>
 
 <script>
+import $ from 'jquery';
     export default {
         data() {
             return {
@@ -265,7 +271,8 @@
                     commercecategory_idcommercecategory: ''
                  },
                  branchs:[],
-                 tags: []
+                 tags: [],
+                 discounts: [],
             }
         },
 
@@ -289,10 +296,28 @@
                 this.commerce.commercecategory_idcommercecategory = response.data.data[0].ccategories.name;
                 this.branchs = response.data.data[0].branchs;
                 this.tags = response.data.data[0].tags;
+
+                let unification = []; //Unificacion de descuentos repetidos vacío.
+
+                response.data.data[0].branchs.forEach(res => {
+                    unification.push(JSON.stringify(res.discounts)); //Se unifican.
+                });
+
+                let ids = []; //Variables id para comparar
+                let clean = []; //Variable de descuentos sin repetir vacía.
+
+                $.each(unification, (index, value) => {
+                    if($.inArray(value.iddiscount, ids) == -1) //Comparamos el id con los del array.
+                    {
+                        ids.push(value.iddiscount); //Sino se repiten lo guardamos en el array ids.
+                        clean.push(value); // Y guardamos todo la data en clean.
+                    }
+                });
+
+                this.discounts = JSON.parse(clean); //Parseamos y añadimos a discounts para mostrarlos.
               })
               .catch(err => console.log(err))
             },          
-
         }
     }
 </script>

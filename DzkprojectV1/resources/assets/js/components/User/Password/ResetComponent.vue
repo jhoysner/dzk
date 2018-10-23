@@ -66,14 +66,14 @@ export default {
         methods: {
         	submitReset() {
                 this.errors = []
-                if(!this.email) this.errors.push('Email required.');
-                if(!this.password) this.errors.push('Password required.');
-                if(!this.password_confirmation) this.errors.push('Password Confirmation required.');
+                if(!this.email) this.errors.push('Correo Electrónico requerido.');
+                if(!this.password) this.errors.push('Contraseña requerida.');
+                if(!this.password_confirmation) this.errors.push('La confirmación de la contraseña es requerida.');
                 
                 if (this.password !== this.password_confirmation) {
                     this.password = ""
                     this.password_confirmation = ""
-                    this.errors.push('Passwords do not match')
+                    this.errors.push('La contraseña no son iguales.')
                     return
                 }
 
@@ -102,11 +102,16 @@ export default {
 
                         }).catch((error) => {
                             if(error.response.status == 422){
-                                let err = error.response.data.errors
-                                this.errors.push(err)    
+                                let errores = error.response.data.error
+                                if(typeof(errores) == 'object'){
+                                    for (let i in errores) {
+                                        this.errors.push(errores[i].toString())
+                                    }
+                                }
+                                if(typeof(errores) == 'string') {
+                                    this.errors.push(errores)
+                                }
                             }
-                            
-
                         })
             }
         }

@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Validator;
+use Illuminate\Pagination\LengthAwarePaginator;
 use App\Params;
 use App\User;
 use App\Branch;
@@ -16,8 +17,20 @@ class SearchController extends Controller
 {
     protected function getSearchRange()
     {
-    	$param = Params::where('key','distance_search_range')->first();
+    	$param = Params::where('key','search_distance_ranges')->first();
     	return $param;
+    }
+
+    protected function getCoordenateDefault()
+    {
+		$param = Params::where('key','coordenates_default')->first();
+    	return $param;	
+    }
+
+    protected function getLimit()
+    {
+		$param = Params::where('key','search_limit_row')->first();
+    	return $param;	
     }
 
     protected function getAlphaNumeric($cadena)
@@ -34,6 +47,17 @@ class SearchController extends Controller
     	return $result;
     }
 
+    protected function getComodin($cadena)
+    {
+    	$string_reemp = array('v','b');
+
+    	foreach ($string_reemp as $value) {
+    		$cadena = str_replace($value, '_', $cadena);
+    	}
+    	
+    	return $cadena;
+    }
+
     protected function getWord($cadena)
     {
     	$word = "";
@@ -42,7 +66,7 @@ class SearchController extends Controller
 		//conversion a minusculas
 		$word = strtolower($word);
 		//reemplazo b v por comodin *
-		
+		//$word = $this->getComodin($word);
 		//split quitar espacio 
 		$word = preg_split("/[\s,]+/", $word);
 
@@ -61,7 +85,9 @@ class SearchController extends Controller
             return response()->json(['error'=>$validator->errors()], 422);
         }
 
-		$limit = 10;
+		$limit = $this->getLimit();
+		$limit = intval($limit->val);
+
 		$offset = 0;
 
 		//Obtiene la latitud y logitud del cliente 
@@ -136,12 +162,13 @@ class SearchController extends Controller
 							  	}]);	
 							  	$q->with('ccategories');
 
-							}]);
+							}])
+							->whereIn('idbranch',$branch);
 
 	    		$query = $query->paginate($limit);
 	    		//$query = $query->get();
 	 			
-	 			$paginate = $this->getPaginate($query);
+	 			$paginate = $this->getPaginate($query, $limit);
 
 				$resultado = [];
 				foreach ($query as $value) {
@@ -160,11 +187,14 @@ class SearchController extends Controller
 
 		    	$data=[];
 		    	$data['commerces'] = $branchs;
+
+//		    	$pagination = $this->getPagination($branchs, $limit);
 				
 				return response()->json([
-										'success' => true, 
-										'data'     => $data,
-										'paginate' => $paginate
+										'success'    => true, 
+										'data'       => $data,
+										'paginate'   => $paginate,
+//										'data' =>$pagination
 										], 200);
 				break;
 
@@ -207,9 +237,8 @@ class SearchController extends Controller
 	    					->whereIn('idbranch',$branch);
 
 	    		$query = $query->paginate($limit);
-	    		//$query = $query->get();
-	 			
-	 			$paginate = $this->getPaginate($query);
+	    		
+	    		$paginate = $this->getPaginate($query);
 
 	    		$resultado = [];
 				foreach ($query as $value) {
@@ -229,10 +258,13 @@ class SearchController extends Controller
 		    	$data=[];
 		    	$data['discounts'] = $branchs;
 
+//		    	$pagination = $this->getPagination($branchs, $limit);
+				
 				return response()->json([
-										'success'  => true, 
-										'data' 	   => $data,
-										'paginate' => $paginate
+										'success'    => true, 
+										'data' 	     => $data,
+										'paginate' 	 => $paginate,
+										//'data' => $pagination
 										], 200);
 	    		break;
 	    
@@ -246,7 +278,7 @@ class SearchController extends Controller
 
     protected function getLocalizationUser()
     {
-    	$id_user = "851e91410915be4dbd49";
+    	$id_user = 1;//"851e91410915be4dbd49";
 
   		$user= User::find($id_user); 
 
@@ -256,8 +288,11 @@ class SearchController extends Controller
 		  	$localization['latitude']  = $user->latitude;
 		  	$localization['longitude'] = $user->longitude;	  		
 	  	} else {
-		  	$localization['latitude']  = 4.710988599999999;
-		  	$localization['longitude'] = -74.072092;	  			  		
+	  		$coord = $this->getCoordenateDefault();
+	  		$coord = json_decode($coord['val'], true);
+
+		  	$localization['latitude']  = $coord['latitud'];
+		  	$localization['longitude'] = $coord['longitud'];	  			  		
 	  	}
 	  	
 	  	return $localization;
@@ -285,5 +320,27 @@ class SearchController extends Controller
         ]);
     }
 
+    protected function getPagination($array,$limit)
+    {
+    	// Get current page form url e.x. &page=1
+        $currentPage = LengthAwarePaginator::resolveCurrentPage();
+ 
+        // Create a new Laravel collection from the array data
+        $itemCollection = collect($array);
+ 
+        // Define how many items we want to be visible in each page
+        $perPage = $limit; //1;
+ 
+        // Slice the collection to get the items to display in current page
+        $currentPageItems = $itemCollection->slice(($currentPage * $perPage) - $perPage, $perPage)->all();
+ 
+        // Create our paginator and pass it to the view
+        $paginatedItems= new LengthAwarePaginator($currentPageItems , count($itemCollection), $perPage);
+ 
+        // set url path for generted links
+        //$paginatedItems->setPath($request->url());
+ 
+        return $paginatedItems;
+    }
 	
 }

@@ -12,7 +12,7 @@ return [
     ],
     'min'                  => [
         'numeric' => 'El :attribute debe tener un minimo de :min.',
-        'string'  => 'El :attribute debe tener un minimo de :min caracteres.',
+        'string'  => 'La :attribute debe tener un minimo de :min caracteres.',
     ],
     'numeric'              => 'El :attribute debe ser un número.',
     'required'             => 'El campo :attribute es requerido.',
@@ -20,6 +20,22 @@ return [
         'numeric' => 'El :attribute debe ser :size.',
         'string'  => 'El :attribute debe ser :size caracteres.',
     ],
+    'max'                  => [
+        'numeric' => 'El :attribute no puede mayor a :max.',
+        'file'    => 'El :attribute no puede mayor a :max kilobytes.',
+        'string'  => 'El :attribute no puede mayor a :max caracteres.',
+        'array'   => 'El :attribute no puede mayor a :max items.',
+    ],
     'string'               => 'El :attribute debe ser una cadena de caracteres.',
     'unique'               => 'El :attribute ha sido utilizado.',
+
+
+    'attributes' => [
+        'name' => 'nombre',
+        'email' => 'correo electrónico',
+        'password' => 'contraseña',
+        'firstname' => 'primer nombre',
+        'lastname' => 'apellidos',
+        'description' => 'descripción',
+    ],
 ];

@@ -57,7 +57,6 @@
                             </div>
                         </div>
                     </div>
-
                     <div class="clearfix"></div>
                     <br>
                     <div class="col-lg-12 text-right" id="buttons-form">
@@ -90,14 +89,13 @@ import edit from './Edit';
             return {
                 'url': '/profile',
                 'user' : { },
-                'name' : ""
+                'countries.name' : ""
             }
         },
         methods: {
             index() {
                 this.data = JSON.parse(localStorage.getItem('userdata'));
-            
-                axios.get('api'+ this.url + '/'+ this.data.id)
+                axios.get('api'+ this.url + '/'+ this.data)
                     .then(
                         (response) => {
                             this.user = response.data.user[0];

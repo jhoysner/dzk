@@ -17,4 +17,4 @@ return [
     'pass_update'=> 'Contraseña actualizada'
 
 
-    ];
+];

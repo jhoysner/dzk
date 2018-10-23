@@ -376,7 +376,7 @@ export default {
 
       axios.post('api'+this.url, params)
          .then(response => {
-              localStorage.setItem('userdata',JSON.stringify(response.data.user));
+              localStorage.setItem('userdata',JSON.stringify(response.data.user.id));
               this.$refs.editModal.hide();              
               this.$parent.index()
               $('#editModal').trigger("reset");
@@ -387,10 +387,8 @@ export default {
               })
          })
          .catch(errors => {
-              console.log(errors.response)
             if(errors.response.status === 422) {
               this.error = errors.response.data.error;
-              console.log(this.error)
             }
          });
 

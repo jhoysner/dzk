@@ -66,7 +66,7 @@ class SearchController extends Controller
 		//conversion a minusculas
 		$word = strtolower($word);
 		//reemplazo b v por comodin *
-		//$word = $this->getComodin($word);
+		$word = $this->getComodin($word);
 		//split quitar espacio 
 		$word = preg_split("/[\s,]+/", $word);
 
@@ -112,7 +112,7 @@ class SearchController extends Controller
 				$rango2 = null;
 			}
 
-			$branchs = DB::select('call sp_branchs_user(?,?,?,?,?,?)', array($local_user['latitude'],$local_user['longitude'],$rango1,$rango2,$limit,$offset));
+			$branchs = DB::select('call sp_getbranch_from_location(?,?,?,?,?,?)', array($local_user['latitude'],$local_user['longitude'],$rango1,$rango2,$limit,$offset));
 
 			if(count($branchs) > 0) {
 				break;

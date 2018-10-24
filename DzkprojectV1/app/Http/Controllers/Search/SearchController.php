@@ -88,7 +88,11 @@ class SearchController extends Controller
 		$limit = $this->getLimit();
 		$limit = intval($limit->val);
 
-		$offset = 0;
+		if(!$request->offset) {
+			$offset = 0;
+		} else {
+			$offset = $request->offset;
+		}
 
 		//Obtiene la latitud y logitud del cliente 
       	$local_user = $this->getLocalizationUser();

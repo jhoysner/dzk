@@ -2,12 +2,13 @@
 
 namespace App\Http\Controllers\HomeInit;
 
-use Illuminate\Http\Request;
-use App\Http\Controllers\Controller;
-
-use App\Commerce;
 use App\Branch;
+use App\Commerce;
 use App\Discount;
+use App\Http\Controllers\Controller;
+use App\UserHasDiscount;
+use Illuminate\Http\Request;
+use LaravelQRCode\Facades\QRCode;
 
 class HomeInitController extends Controller
 {
@@ -93,8 +94,8 @@ class HomeInitController extends Controller
                     }
                 }
 
-                if($request->work != null) {
-                    $discount->where('title', 'LIKE', '%'.$request->work.'%');
+                if($request->word != null) {
+                    $discount->where('title', 'LIKE', '%'.$request->word.'%');
                 }                
 
             }
@@ -197,5 +198,27 @@ class HomeInitController extends Controller
             'branchs' => $branchs
 
         ],200);
+    }
+
+    public function  saveUserHasDiscount(Request $request)
+    {
+
+        $fields = $request->all();
+        
+        $fields['idusers_has_discount'] = str_random(36);
+
+        $fields['charcode'] = str_random(4);
+
+        // $file = QRCode::text($fields['charcode'])->png();
+
+        $fields['qrcode'] = 'qrblod';
+
+        $user_has_discount = UserHasDiscount::create($fields);
+
+        if ( !$user_has_discount )
+            return response()->json(['error' => 'No se pudo guardar el registro'], 422);
+
+        return response()->json(['data'=> $user_has_discount], 201);
+
     }
 }

@@ -131,7 +131,7 @@
                                 </div>
                                 <div class="meta d-flex flex-row">
                                     <!--<div class="user-img"><img src="img/user-img.png" alt=""></div> -->
-                                       <button type="button" class="btn btn-outline-primary">Obetener este Descuento</button>
+                                       <button type="button" class="btn btn-outline-primary" @click="obtenerDescuento(discount)" >Obetener este Descuento</button>
                                 </div>
                             </div>
                           </div>
@@ -167,13 +167,26 @@ import paginator from '../../utilities/paginator';
             'from': 0,
             'to': 0
         },
-          offset: 2,
-          search: null,
-          options: [],
-          value: [],
-          tags: [],
-          categorydiscount: [],
-          category: null
+        offset: 2,
+        search: null,
+        options: [],
+        value: [],
+        tags: [],
+        categorydiscount: [],
+        category: null,
+        form: { 
+          'validfrom': '',
+          'validto':'',
+          'amount':'',
+          'normalprice':'',
+          'discountprice':'',
+          'discountpercentage': '',
+          'discount_iddiscount': '',
+          'userhasdiscountstatus_iduserhasdiscountstatus': '',
+          'commerce_idcommerce': '',
+          'branch_idbranch': '',
+          'users_id': '',
+        },
       }
     },
 
@@ -249,7 +262,7 @@ import paginator from '../../utilities/paginator';
         let data = {
           category_discount: this.category,
           tags: this.tags,
-          work: this.search,
+          word: this.search,
           type: 'discount'
         };
 
@@ -260,6 +273,36 @@ import paginator from '../../utilities/paginator';
           this.pagination = response.data.paginate;
         })
         .catch(err => console.log(err));
+      },
+      obtenerDescuento(discount){
+
+         this.form.validfrom = discount.startdate;
+         this.form.validto = discount.enddate;
+         this.form.amount = 1;
+         this.form.normalprice = discount.normalprice;
+         this.form.discountprice = discount.discountprice;
+         this.form.discountpercentage = discount.discountpercentage;
+         this.form.discount_iddiscount = discount.iddiscount;
+         this.form.userhasdiscountstatus_iduserhasdiscountstatus = 'eada8935-d7cc-11e8-86bd-74c63b1404ed';
+         this.form.commerce_idcommerce = discount.branchs[0].commerce_idcommerce;
+         this.form.branch_idbranch = discount.branchs[0].idbranch;
+         this.form.users_id = 'abcd1234';
+   
+        console.log(discount)
+
+        axios.post('api/user-has-discount', this.form).
+          then(response => {
+              this.form = {};
+              swal({
+                title: "Obtenido",
+                text: "Se obtuvo Descuento Satifactoriamente",
+                icon: "success",
+              })
+          })
+          .catch(error => {
+            console.log(error.response.data)
+
+          });
       }
     },
   }

@@ -6292,35 +6292,6 @@ module.exports = g;
 /* 17 */
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__(265);
-
-/***/ }),
-/* 18 */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-/*
- * Key Codes (events)
- */
-
-/* harmony default export */ __webpack_exports__["a"] = ({
-  SPACE: 32,
-  ENTER: 13,
-  ESC: 27,
-  LEFT: 37,
-  UP: 38,
-  RIGHT: 39,
-  DOWN: 40,
-  PAGEUP: 33,
-  PAGEDOWN: 34,
-  HOME: 36,
-  END: 35
-});
-
-/***/ }),
-/* 19 */
-/***/ (function(module, exports, __webpack_require__) {
-
 var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;/*!
  * jQuery JavaScript Library v3.3.1
  * https://jquery.com/
@@ -16687,6 +16658,35 @@ if ( !noGlobal ) {
 return jQuery;
 } );
 
+
+/***/ }),
+/* 18 */
+/***/ (function(module, exports, __webpack_require__) {
+
+module.exports = __webpack_require__(265);
+
+/***/ }),
+/* 19 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/*
+ * Key Codes (events)
+ */
+
+/* harmony default export */ __webpack_exports__["a"] = ({
+  SPACE: 32,
+  ENTER: 13,
+  ESC: 27,
+  LEFT: 37,
+  UP: 38,
+  RIGHT: 39,
+  DOWN: 40,
+  PAGEUP: 33,
+  PAGEDOWN: 34,
+  HOME: 36,
+  END: 35
+});
 
 /***/ }),
 /* 20 */
@@ -45231,7 +45231,7 @@ module.exports = function(module) {
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__mixins_listen_on_root__ = __webpack_require__(24);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__utils_observe_dom__ = __webpack_require__(25);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__utils_warn__ = __webpack_require__(12);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__utils_key_codes__ = __webpack_require__(18);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__utils_key_codes__ = __webpack_require__(19);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_7__utils_bv_event_class__ = __webpack_require__(36);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_8__utils_dom__ = __webpack_require__(9);
 function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
@@ -46519,7 +46519,7 @@ var unbindTargets = function unbindTargets(vnode, binding, listenTypes) {
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__listen_on_root__ = __webpack_require__(24);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__utils_array__ = __webpack_require__(8);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__utils_object__ = __webpack_require__(6);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__utils_key_codes__ = __webpack_require__(18);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__utils_key_codes__ = __webpack_require__(19);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__utils_bv_event_class__ = __webpack_require__(36);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_7__utils_warn__ = __webpack_require__(12);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_8__utils_dom__ = __webpack_require__(9);
@@ -47653,7 +47653,7 @@ Object(__WEBPACK_IMPORTED_MODULE_6__utils_plugins__["c" /* vueUse */])(VuePlugin
 
 "use strict";
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__utils_range__ = __webpack_require__(488);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__utils_key_codes__ = __webpack_require__(18);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__utils_key_codes__ = __webpack_require__(19);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__utils_dom__ = __webpack_require__(9);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__components_link_link__ = __webpack_require__(13);
 /*
@@ -53548,7 +53548,7 @@ exports.push([module.i, "\n#search {\n    display: none;\n}\n.showModal {\n    c
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__utilities_EventBus_js__ = __webpack_require__(7);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_jquery__ = __webpack_require__(19);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_jquery__ = __webpack_require__(17);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_jquery___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1_jquery__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__detail__ = __webpack_require__(239);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__detail___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_2__detail__);
@@ -53929,7 +53929,7 @@ exports = module.exports = __webpack_require__(2)(false);
 
 
 // module
-exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", ""]);
+exports.push([module.i, "\n.image-commerce {\n  width: 80px;\n  height: 50px;\n  border-radius: 50%;\n}\n", ""]);
 
 // exports
 
@@ -54023,58 +54023,80 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
-	data: function data() {
-		return {
-			commerce: {
-				idcommerce: '',
-				name: '',
-				phone1: '',
-				email: '',
-				commercecategory_idcommercecategory: ''
-			},
-			//countbranchs: '',
-			branchs: []
-			//countDiscounts: 0
-		};
-	},
-	created: function created() {
-		var _this = this;
+  data: function data() {
+    return {
+      commerce: {
+        idcommerce: '',
+        name: '',
+        phone1: '',
+        email: '',
+        commercecategory_idcommercecategory: ''
+      },
+      //countbranchs: '',
+      branchs: [],
+      discounts: []
+    };
+  },
+  created: function created() {
+    var _this = this;
 
-		__WEBPACK_IMPORTED_MODULE_0__utilities_EventBus_js__["a" /* default */].$on('detail_homeinit', function (id) {
-			_this.showCommerce(id);
-		});
-	},
+    __WEBPACK_IMPORTED_MODULE_0__utilities_EventBus_js__["a" /* default */].$on('detail_homeinit', function (id) {
+      _this.showCommerce(id);
+    });
+  },
 
 
-	methods: {
-		showCommerce: function showCommerce(id) {
-			var _this2 = this;
+  methods: {
+    showCommerce: function showCommerce(id) {
+      var _this2 = this;
 
-			this.countDiscounts = 0;
+      axios.get('/api/detail-commerce/' + id + '/random').then(function (response) {
+        _this2.commerce.idcommerce = response.data.data[0].idcommerce;
+        _this2.commerce.name = response.data.data[0].name;
+        _this2.commerce.phone1 = response.data.data[0].phone1;
+        _this2.commerce.email = response.data.data[0].email;
+        _this2.commerce.image = response.data.data[0].image;
+        _this2.commerce.commercecategory_idcommercecategory = response.data.data[0].ccategories.name;
+        _this2.branchs = response.data.data[0].branchs;
+        //this.countbranchs = response.data.data[0].branchs.length;
 
-			axios.get('/api/detail-commerce/' + id + '/random').then(function (response) {
-				_this2.commerce.idcommerce = response.data.data[0].idcommerce;
-				_this2.commerce.name = response.data.data[0].name;
-				_this2.commerce.phone1 = response.data.data[0].phone1;
-				_this2.commerce.email = response.data.data[0].email;
-				_this2.commerce.commercecategory_idcommercecategory = response.data.data[0].ccategories.name;
-				_this2.branchs = response.data.data[0].branchs;
-				//this.countbranchs = response.data.data[0].branchs.length;
+        var unification = []; //Unificacion de descuentos repetidos vacío.
 
-				response.data.data[0].branchs.forEach(function (res) {
-					//this.discounts = response.discounts;
-					if (res.discounts.length > 0) {
-						console.log(res);
-					}
-				});
-			}).catch(function (err) {
-				return console.log(err);
-			});
-		}
-	}
+        response.data.data[0].branchs.forEach(function (res) {
+          unification.push(JSON.stringify(res.discounts)); //Se unifican.
+        });
+
+        var ids = []; //Variables id para comparar
+        var clean = []; //Variable de descuentos sin repetir vacía.
+
+        $.each(unification, function (index, value) {
+          if ($.inArray(value.iddiscount, ids) == -1) //Comparamos el id con los del array.
+            {
+              ids.push(value.iddiscount); //Sino se repiten lo guardamos en el array ids.
+              clean.push(value); // Y guardamos todo la data en clean.
+            }
+        });
+
+        _this2.discounts = JSON.parse(clean); //Parseamos y añadimos a discounts para mostrarlos.
+      }).catch(function (err) {
+        return console.log(err);
+      });
+    }
+  }
 });
 
 /***/ }),
@@ -54118,17 +54140,32 @@ var render = function() {
                   ])
                 ]),
                 _vm._v(" "),
-                _c("div", { staticClass: "col-lg-12" }, [
+                _c("div", { staticClass: "col-lg-9" }, [
                   _c("label", [_c("strong", [_vm._v("Correo Electrónico")])]),
                   _vm._v(" "),
                   _c("p", [_vm._v(_vm._s(_vm.commerce.email))])
+                ]),
+                _vm._v(" "),
+                _c("div", { staticClass: "col-lg-6" }, [
+                  _c("div", { staticClass: "form-group" }, [
+                    _c("label", { staticClass: "font-weight-bold" }, [
+                      _vm._v("Imagen")
+                    ]),
+                    _vm._v(" "),
+                    _c("p", [
+                      _c("img", {
+                        staticClass: "image-commerce",
+                        attrs: { src: "images/commerce/" + _vm.commerce.image }
+                      })
+                    ])
+                  ])
                 ]),
                 _vm._v(" "),
                 _c("div", { staticClass: "col-lg-12" }, [
                   _c("label", [
                     _c("strong", [
                       _vm._v(
-                        "\n                        \t\tSucursales\n                        \t"
+                        "\n                          Sucursales\n                        "
                       )
                     ])
                   ]),
@@ -54142,13 +54179,13 @@ var render = function() {
                           { key: branch.idbranch, staticClass: "pl-2" },
                           [
                             _vm._v(
-                              "\n                              " +
+                              "\n                            " +
                                 _vm._s(branch.name) +
                                 " - " +
                                 _vm._s(branch.phone1) +
                                 " - " +
                                 _vm._s(branch.address) +
-                                "\n                            "
+                                "\n                          "
                             )
                           ]
                         )
@@ -54173,7 +54210,7 @@ var render = function() {
                                 },
                                 [
                                   _vm._v(
-                                    "\n                                Leer más\n                              "
+                                    "\n                              Leer más\n                            "
                                   )
                                 ]
                               )
@@ -54191,7 +54228,7 @@ var render = function() {
                   _c("label", [
                     _c("strong", [
                       _vm._v(
-                        "\n                        \t Descuentos\n                        \t"
+                        "\n                         Descuentos\n                        "
                       )
                     ])
                   ]),
@@ -54200,56 +54237,45 @@ var render = function() {
                     _c(
                       "ul",
                       [
-                        _vm._l(_vm.branchs, function(branch) {
-                          return [
-                            _vm._l(branch.discounts, function(discount) {
-                              return _c(
-                                "li",
-                                {
-                                  key: discount.iddiscount,
-                                  staticClass: "pl-2"
-                                },
+                        _vm._l(_vm.discounts, function(discount) {
+                          return _c("li", { staticClass: "pl-2" }, [
+                            _vm._v(
+                              "\n                              " +
+                                _vm._s(discount.title) +
+                                " - $" +
+                                _vm._s(discount.amountapproved) +
+                                "\n                            "
+                            )
+                          ])
+                        }),
+                        _vm._v(" "),
+                        _vm.discounts.length > 1
+                          ? _c("span", { staticClass: "pl-2" }, [
+                              _c(
+                                "a",
+                                { attrs: { href: "#" } },
                                 [
-                                  _vm._v(
-                                    "\n                                " +
-                                      _vm._s(discount.title) +
-                                      " - $" +
-                                      _vm._s(discount.amountapproved) +
-                                      "\n                              "
-                                  )
-                                ]
-                              )
-                            }),
-                            _vm._v(" "),
-                            branch.discounts.length > 1
-                              ? _c("span", { staticClass: "pl-2" }, [
                                   _c(
-                                    "a",
-                                    { attrs: { href: "#" } },
+                                    "router-link",
+                                    {
+                                      attrs: {
+                                        to:
+                                          "/commerce/" +
+                                          _vm.commerce.idcommerce +
+                                          "/discounts"
+                                      }
+                                    },
                                     [
-                                      _c(
-                                        "router-link",
-                                        {
-                                          attrs: {
-                                            to:
-                                              "/commerce/" +
-                                              _vm.commerce.idcommerce +
-                                              "/discounts"
-                                          }
-                                        },
-                                        [
-                                          _vm._v(
-                                            "\n                                    Leer más\n                                  "
-                                          )
-                                        ]
+                                      _vm._v(
+                                        "\n                                  Leer más\n                                "
                                       )
-                                    ],
-                                    1
+                                    ]
                                   )
-                                ])
-                              : _vm._e()
-                          ]
-                        })
+                                ],
+                                1
+                              )
+                            ])
+                          : _vm._e()
                       ],
                       2
                     )
@@ -54272,11 +54298,7 @@ var render = function() {
                         staticClass: "btn btn-primary btn-sm",
                         attrs: { href: "#" }
                       },
-                      [
-                        _vm._v(
-                          "\n  \t               Detalle\n  \t              "
-                        )
-                      ]
+                      [_vm._v("\n                 Detalle\n                ")]
                     )
                   ]
                 )
@@ -54510,7 +54532,7 @@ var render = function() {
                   },
                   [
                     _vm._v(
-                      "\n                  \n                    COMERCIOS\n                "
+                      "\n                  \n                    TIENDAS\n                "
                     )
                   ]
                 )
@@ -55081,12 +55103,16 @@ exports.push([module.i, "\n.image-commerce {\n  width: 80px;\n  height: 50px;\n 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__utilities_EventBus_js__ = __webpack_require__(7);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_jquery__ = __webpack_require__(19);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_jquery__ = __webpack_require__(17);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_jquery___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1_jquery__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__modal_detail_discount__ = __webpack_require__(251);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__modal_detail_discount___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_2__modal_detail_discount__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__utilities_paginator__ = __webpack_require__(27);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__utilities_paginator___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_3__utilities_paginator__);
+//
+//
+//
+//
 //
 //
 //
@@ -55350,7 +55376,9 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 
       console.log(data);
 
-      axios.post('api/all-discounts?page=' + page, data).then(function (response) {
+      //axios.post('api/all-discounts?page=' + page, data).then(response => {
+      axios.post('api/search', data).then(function (response) {
+        console.log(response);
         _this5.discounts = response.data.discount.data;
         _this5.pagination = response.data.paginate;
       }).catch(function (err) {
@@ -55446,7 +55474,7 @@ exports = module.exports = __webpack_require__(2)(false);
 
 
 // module
-exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", ""]);
+exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", ""]);
 
 // exports
 
@@ -55458,6 +55486,12 @@ exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__utilities_EventBus_js__ = __webpack_require__(7);
+//
+//
+//
+//
+//
+//
 //
 //
 //
@@ -55536,7 +55570,8 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
         description: ''
       },
       countbranchs: '',
-      branchs: []
+      branchs: [],
+      commerce: []
     };
   },
   created: function created() {
@@ -55564,6 +55599,9 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
         _this2.discount.description = response.data.data[0].description;
         _this2.countbranchs = response.data.data[0].branchs.length;
         _this2.branchs = response.data.data[0].branchs;
+        _this2.commerce = response.data.data[0].branchs[0].commerces;
+
+        console.log(response);
       }).catch(function (err) {
         return console.log(err);
       });
@@ -55625,6 +55663,21 @@ var render = function() {
                   _vm._v(" "),
                   _c("p", [_vm._v(_vm._s(_vm.discount.enddate))])
                 ]),
+                _vm._v(" "),
+                _c(
+                  "div",
+                  { staticClass: "col-lg-6" },
+                  [
+                    _c("label", [_c("strong", [_vm._v("Comercio")])]),
+                    _vm._v(" "),
+                    _c(
+                      "router-link",
+                      { attrs: { to: "/commerce/" + _vm.commerce.idcommerce } },
+                      [_c("p", [_vm._v(_vm._s(_vm.commerce.name))])]
+                    )
+                  ],
+                  1
+                ),
                 _vm._v(" "),
                 _c("div", { staticClass: "col-lg-12" }, [
                   _c("label", [
@@ -56041,14 +56094,37 @@ var render = function() {
                                           },
                                           [
                                             discount.branchs.length > 0
-                                              ? _c("h6", [
-                                                  _vm._v(
-                                                    _vm._s(
-                                                      discount.branchs[0]
-                                                        .commerces.name
+                                              ? _c(
+                                                  "h6",
+                                                  [
+                                                    _c(
+                                                      "router-link",
+                                                      {
+                                                        attrs: {
+                                                          to:
+                                                            "/commerce/" +
+                                                            discount.branchs[0]
+                                                              .commerces
+                                                              .idcommerce
+                                                        }
+                                                      },
+                                                      [
+                                                        _c("span", [
+                                                          _vm._v(
+                                                            " " +
+                                                              _vm._s(
+                                                                discount
+                                                                  .branchs[0]
+                                                                  .commerces
+                                                                  .name
+                                                              )
+                                                          )
+                                                        ])
+                                                      ]
                                                     )
-                                                  )
-                                                ])
+                                                  ],
+                                                  1
+                                                )
                                               : _vm._e(),
                                             _vm._v(" "),
                                             discount.branchs.length < 1
@@ -56292,7 +56368,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__Show___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_2__Show__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__Edit__ = __webpack_require__(289);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__Edit___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_3__Edit__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4_axios__ = __webpack_require__(17);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4_axios__ = __webpack_require__(18);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_4_axios___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_4_axios__);
 //
 //
@@ -56526,9 +56602,9 @@ exports.push([module.i, "\n.avatar {\n    width: 150px;\n}\nfieldset[disabled] .
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_axios__ = __webpack_require__(17);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_axios__ = __webpack_require__(18);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_axios___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_axios__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_jquery__ = __webpack_require__(19);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_jquery__ = __webpack_require__(17);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_jquery___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1_jquery__);
 //
 //
@@ -58819,7 +58895,7 @@ exports.push([module.i, "\n.image-commerce[data-v-57cd6390] {\n  width: 80px;\n 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__utilities_EventBus__ = __webpack_require__(7);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_jquery__ = __webpack_require__(19);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_jquery__ = __webpack_require__(17);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_jquery___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1_jquery__);
 //
 //
@@ -64751,7 +64827,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__Show___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_2__Show__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__Edit__ = __webpack_require__(339);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__Edit___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_3__Edit__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4_axios__ = __webpack_require__(17);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4_axios__ = __webpack_require__(18);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_4_axios___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_4_axios__);
 //
 //
@@ -64960,7 +65036,7 @@ exports.push([module.i, "\n.avatar {\n  width: 150px;\n}\n", ""]);
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_axios__ = __webpack_require__(17);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_axios__ = __webpack_require__(18);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_axios___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_axios__);
 //
 //
@@ -66051,7 +66127,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__Create___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1__Create__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__Edit__ = __webpack_require__(355);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__Edit___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_2__Edit__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_axios__ = __webpack_require__(17);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_axios__ = __webpack_require__(18);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_axios___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_3_axios__);
 //
 //
@@ -66228,7 +66304,7 @@ exports.push([module.i, "\n.avatar {\n  width: 150px;\n}\n", ""]);
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_axios__ = __webpack_require__(17);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_axios__ = __webpack_require__(18);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_axios___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_axios__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__utilities_Functions__ = __webpack_require__(353);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__utilities_Functions___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1__utilities_Functions__);
@@ -66950,6 +67026,13 @@ exports.push([module.i, "\n.image-commerce {\n  width: 80px;\n  height: 50px;\n 
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_jquery__ = __webpack_require__(17);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_jquery___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_jquery__);
+//
+//
+//
+//
+//
 //
 //
 //
@@ -67199,6 +67282,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 
+
 /* harmony default export */ __webpack_exports__["default"] = ({
     data: function data() {
         return {
@@ -67217,7 +67301,8 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
                 commercecategory_idcommercecategory: ''
             },
             branchs: [],
-            tags: []
+            tags: [],
+            discounts: []
         };
     },
     mounted: function mounted() {
@@ -67243,6 +67328,25 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
                 _this.commerce.commercecategory_idcommercecategory = response.data.data[0].ccategories.name;
                 _this.branchs = response.data.data[0].branchs;
                 _this.tags = response.data.data[0].tags;
+
+                var unification = []; //Unificacion de descuentos repetidos vacío.
+
+                response.data.data[0].branchs.forEach(function (res) {
+                    unification.push(JSON.stringify(res.discounts)); //Se unifican.
+                });
+
+                var ids = []; //Variables id para comparar
+                var clean = []; //Variable de descuentos sin repetir vacía.
+
+                __WEBPACK_IMPORTED_MODULE_0_jquery___default.a.each(unification, function (index, value) {
+                    if (__WEBPACK_IMPORTED_MODULE_0_jquery___default.a.inArray(value.iddiscount, ids) == -1) //Comparamos el id con los del array.
+                        {
+                            ids.push(value.iddiscount); //Sino se repiten lo guardamos en el array ids.
+                            clean.push(value); // Y guardamos todo la data en clean.
+                        }
+                });
+
+                _this.discounts = JSON.parse(clean); //Parseamos y añadimos a discounts para mostrarlos.
             }).catch(function (err) {
                 return console.log(err);
             });
@@ -67269,7 +67373,7 @@ var render = function() {
           attrs: { type: "button" },
           on: {
             click: function($event) {
-              _vm.$router.push("/")
+              _vm.$router.go(-1)
             }
           }
         },
@@ -67453,34 +67557,27 @@ var render = function() {
               _c(
                 "ul",
                 { staticClass: "theme-details-list" },
-                [
-                  _vm._l(_vm.branchs, function(branch) {
-                    return _vm._l(branch.discounts, function(discount) {
-                      return _c(
-                        "li",
+                _vm._l(_vm.discounts, function(discount) {
+                  return _c(
+                    "li",
+                    [
+                      _c(
+                        "router-link",
+                        { attrs: { to: "/discount/" + discount.iddiscount } },
                         [
-                          _c(
-                            "router-link",
-                            {
-                              attrs: { to: "/discount/" + discount.iddiscount }
-                            },
-                            [
-                              _vm._v(
-                                "\n                                " +
-                                  _vm._s(discount.title) +
-                                  " - $" +
-                                  _vm._s(discount.amountapproved) +
-                                  "\n                            "
-                              )
-                            ]
+                          _vm._v(
+                            "\n                                " +
+                              _vm._s(discount.title) +
+                              " - $" +
+                              _vm._s(discount.amountapproved) +
+                              "\n                            "
                           )
-                        ],
-                        1
+                        ]
                       )
-                    })
-                  })
-                ],
-                2
+                    ],
+                    1
+                  )
+                })
               )
             ]),
             _vm._v(" "),
@@ -68514,6 +68611,14 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
@@ -68537,6 +68642,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
         discountcategory_iddiscountcategory: ''
       },
       branchs: [],
+      commerce: [],
       tags: []
     };
   },
@@ -68567,8 +68673,9 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 
         _this.branchs = response.data.data.branchs;
         _this.tags = response.data.data.tags;
+        _this.commerce = response.data.data.branchs[0].commerces;
 
-        console.log(response.data.data);
+        // console.log(response.data.data)
       }).catch(function (err) {
         return console.log(err);
       });
@@ -68810,6 +68917,21 @@ var render = function() {
                   _vm._v("Destacado")
                 ])
               ]
+            ),
+            _vm._v(" "),
+            _c(
+              "div",
+              { staticClass: "single-sidebar theme-details" },
+              [
+                _c("h6", [_vm._v("Comercio")]),
+                _vm._v(" "),
+                _c(
+                  "router-link",
+                  { attrs: { to: "/commerce/" + _vm.commerce.idcommerce } },
+                  [_c("span", [_vm._v(_vm._s(_vm.commerce.name))])]
+                )
+              ],
+              1
             ),
             _vm._v(" "),
             _c("div", { staticClass: "single-sidebar theme-details" }, [
@@ -70303,6 +70425,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
 
 
 
@@ -70586,9 +70709,9 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 
       var precio = this.tmpDiscount.normalprice;
 
-      var result = this.tmpDiscount.discountprice * 100 / precio;
+      var result = 100 * this.tmpDiscount.discountprice / this.tmpDiscount.normalprice;
 
-      this.tmpDiscount.discountpercentage = result;
+      this.tmpDiscount.discountpercentage = 100 - result;
     },
     getBranchDiscount: function getBranchDiscount(value) {
       var _this11 = this;
@@ -70671,6 +70794,12 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
       cadena = cadena.replace(/ñ/gi, "n");
 
       return cadena;
+    },
+    onHidden: function onHidden(evt) {
+      // Return focus to our Open Modal button
+      // See accessibility below for additional return-focus methods
+      // this.$refs.btnShow.$el.focus()
+      this.cargarDiscount();
     }
   }
 });
@@ -71220,7 +71349,7 @@ exports = module.exports = __webpack_require__(2)(false);
 
 
 // module
-exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", ""]);
+exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", ""]);
 
 // exports
 
@@ -71306,6 +71435,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
         discounthours: '',
         amountapproved: ''
       },
+      edit: false,
       errorsDiscount: {},
       show: false,
       branchs: {},
@@ -71322,8 +71452,9 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
       _this.$refs.branchDiscountModal.show();
     });
     __WEBPACK_IMPORTED_MODULE_0__utilities_EventBus__["a" /* default */].$on('branch_discount_add', function (response) {
+      _this.edit = true;
       _this.form.discount_iddiscount = response.iddiscount;
-      _this.getDiscountBranch();
+      _this.getDiscountBranchSelected(_this.form.discount_iddiscount);
       _this.$refs.branchDiscountModal.show();
     });
   },
@@ -71338,29 +71469,45 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
         return console.log(err);
       });
     },
-    saveBranchDiscount: function saveBranchDiscount() {
+    getDiscountBranchSelected: function getDiscountBranchSelected(id) {
       var _this3 = this;
+
+      axios.get('api/branch-select/' + id).then(function (data) {
+        _this3.branchs = data.data.data;
+        console.log(data);
+      }).catch(function (err) {
+        return console.log(err);
+      });
+    },
+    saveBranchDiscount: function saveBranchDiscount() {
+      var _this4 = this;
 
       axios.post('api/branch-discount', this.form).then(function (response) {
         console.log(response);
-        _this3.form = {
+        _this4.form = {
           discount_iddiscount: '',
           sucursales: [],
           discounthours: '',
           amountapproved: ''
-        }, _this3.all = true;
-        _this3.one = false;
+        }, _this4.all = true;
+        _this4.one = false;
         $('#formBranchDiscount').trigger("reset");
-        _this3.$refs.branchDiscountModal.hide();
+        _this4.$refs.branchDiscountModal.hide();
         console.log('bien');
         swal({
           title: "Creado",
           text: "Registro Descuento por sucursales con exito",
           icon: "success"
         });
+        if (_this4.edit) {
+          // console.log(this.$parent.$parent)
+          // this.$parent.$parent.cargarDiscount()
+          _this4.$root.$emit('bv::show::modal', 'editModal');
+          _this4.edit = false;
+        }
       }).catch(function (error) {
         console.log(error.response.data);
-        _this3.errorsDiscount = error.response.data.errors;
+        _this4.errorsDiscount = error.response.data.errors;
       });
     },
     onChange: function onChange(e) {
@@ -71396,6 +71543,9 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
         }
       }
       return null;
+    },
+    onHidden: function onHidden(evt) {
+      this.$parent.$parent.cargarDiscount();
     }
   }
 
@@ -71421,6 +71571,7 @@ var render = function() {
             title: "Sucursales Descuentos",
             "hide-footer": ""
           },
+          on: { hidden: _vm.onHidden },
           model: {
             value: _vm.show,
             callback: function($$v) {
@@ -72725,7 +72876,12 @@ var render = function() {
         "b-modal",
         {
           ref: "editModal",
-          attrs: { title: "Editar Descuento", "hide-footer": "" },
+          attrs: {
+            id: "editModal",
+            title: "Editar Descuento",
+            "hide-footer": ""
+          },
+          on: { hidden: _vm.onHidden },
           model: {
             value: _vm.showEdit,
             callback: function($$v) {
@@ -74690,7 +74846,7 @@ Object(__WEBPACK_IMPORTED_MODULE_1__utils_plugins__["c" /* vueUse */])(VuePlugin
 
 "use strict";
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__utils_dom__ = __webpack_require__(9);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__utils_key_codes__ = __webpack_require__(18);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__utils_key_codes__ = __webpack_require__(19);
 
 
 
@@ -75176,7 +75332,7 @@ Object(__WEBPACK_IMPORTED_MODULE_2__utils_plugins__["c" /* vueUse */])(VuePlugin
 
 "use strict";
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__utils_observe_dom__ = __webpack_require__(25);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__utils_key_codes__ = __webpack_require__(18);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__utils_key_codes__ = __webpack_require__(19);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__utils_dom__ = __webpack_require__(9);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__mixins_id__ = __webpack_require__(10);
 
@@ -79810,7 +79966,7 @@ Object(__WEBPACK_IMPORTED_MODULE_1__utils_plugins__["c" /* vueUse */])(VuePlugin
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_lodash_get___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1_lodash_get__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__utils_loose_equal__ = __webpack_require__(42);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__utils_stable_sort__ = __webpack_require__(500);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__utils_key_codes__ = __webpack_require__(18);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__utils_key_codes__ = __webpack_require__(19);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__utils_warn__ = __webpack_require__(12);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__utils_object__ = __webpack_require__(6);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_7__utils_array__ = __webpack_require__(8);
@@ -82387,7 +82543,7 @@ Object(__WEBPACK_IMPORTED_MODULE_2__utils_plugins__["c" /* vueUse */])(VuePlugin
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__utils_key_codes__ = __webpack_require__(18);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__utils_key_codes__ = __webpack_require__(19);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__utils_observe_dom__ = __webpack_require__(25);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__mixins_id__ = __webpack_require__(10);
 function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
@@ -84844,7 +85000,7 @@ window.Popper = __webpack_require__(21).default;
  */
 
 try {
-  window.$ = window.jQuery = __webpack_require__(19);
+  window.$ = window.jQuery = __webpack_require__(17);
 
   __webpack_require__(521);
 } catch (e) {}
@@ -84855,7 +85011,7 @@ try {
  * CSRF token as a header based on the value of the "XSRF" token cookie.
  */
 
-window.axios = __webpack_require__(17);
+window.axios = __webpack_require__(18);
 
 window.axios.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest';
 
@@ -102015,7 +102171,7 @@ if (token) {
   * Licensed under MIT (https://github.com/twbs/bootstrap/blob/master/LICENSE)
   */
 (function (global, factory) {
-   true ? factory(exports, __webpack_require__(19), __webpack_require__(21)) :
+   true ? factory(exports, __webpack_require__(17), __webpack_require__(21)) :
   typeof define === 'function' && define.amd ? define(['exports', 'jquery', 'popper.js'], factory) :
   (factory((global.bootstrap = {}),global.jQuery,global.Popper));
 }(this, (function (exports,$,Popper) { 'use strict';

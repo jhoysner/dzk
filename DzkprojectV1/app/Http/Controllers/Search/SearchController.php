@@ -175,7 +175,8 @@ class SearchController extends Controller
 	 			$paginate = $this->getPaginate($query, $limit);
 
 				$resultado = [];
-				foreach ($query as $value) {
+
+				foreach ($query as $key => $value) {
 		      		$resultado[$value->idbranch] =$value;	
 		      	}
 
@@ -189,8 +190,10 @@ class SearchController extends Controller
 		    		
 		    	}
 
-		    	$data=[];
-		    	$data['commerces'] = $branchs;
+//		    	$data=[];
+//		    	$data['commerces'] = $branchs;
+
+		    	$data = $branchs;
 
 //		    	$pagination = $this->getPagination($branchs, $limit);
 				
@@ -246,7 +249,7 @@ class SearchController extends Controller
 
 	    		$resultado = [];
 				foreach ($query as $value) {
-		      		$resultado[$value->idbranch] =$value;	
+		      		$resultado[$value->idbranch] = $value;	
 		      	}
 
 		      	//Ordena el resultado obtenido por distancia ASC
@@ -255,12 +258,12 @@ class SearchController extends Controller
 		    			unset($branchs[$key]);
 		    		} else {
 		    			$value->discount = $resultado[$value->idbranch]['discounts'];
-		    		}
-		    		
+		    		}		    		
 		    	}
 
-		    	$data=[];
-		    	$data['discounts'] = $branchs;
+//		    	$data=[];
+//		    	$data['discounts'] = $branchs;
+		    	$data = $branchs;
 
 //		    	$pagination = $this->getPagination($branchs, $limit);
 				

@@ -255,7 +255,9 @@ import paginator from '../../utilities/paginator';
 
         console.log(data);
 
-        axios.post('api/all-discounts?page=' + page, data).then(response => {
+        //axios.post('api/all-discounts?page=' + page, data).then(response => {
+        axios.post('api/search', data).then(response => {
+          console.log(response)
           this.discounts = response.data.discount.data;
           this.pagination = response.data.paginate;
         })

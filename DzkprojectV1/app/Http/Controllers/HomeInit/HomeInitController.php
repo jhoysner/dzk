@@ -229,7 +229,7 @@ class HomeInitController extends Controller
 
     public function listUserHasDiscount()
     {
-        $uhd = UserHasDiscount::where('commerce_idcommerce', 'e1C1ug06cTODmclayIKnzKHpRdRlBkS7nIMJ')->paginate(2); //Selecciono los descuentos que sean igual al comercio conectado. Por ahora, estatico.
+        $uhd = UserHasDiscount::where('commerce_idcommerce', 'c26a0461-caa4-11e8-89ee-74c63b1404ed')->paginate(2); //Selecciono los descuentos que sean igual al comercio conectado. Por ahora, estatico.
 
         return response()->json([
             'paginate' => [

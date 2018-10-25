@@ -8,6 +8,7 @@ use App\Discount;
 use App\Http\Controllers\Controller;
 use App\UserHasDiscount;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
 use LaravelQRCode\Facades\QRCode;
 
 class HomeInitController extends Controller
@@ -209,9 +210,13 @@ class HomeInitController extends Controller
 
         $fields['charcode'] = str_random(4);
 
-        // $file = QRCode::text($fields['charcode'])->png();
+        $name = str_random(20).'.png';
 
-        $fields['qrcode'] = 'qrblod';
+        $file =  storage_path('app/public/qr/'.$name);
+
+        QRCode::text($fields['charcode'])->setSize(8)->setOutfile($file)->png();
+
+        $fields['qrcode'] = $name;
 
         $user_has_discount = UserHasDiscount::create($fields);
 

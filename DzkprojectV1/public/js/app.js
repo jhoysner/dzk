@@ -49135,7 +49135,7 @@ var content = __webpack_require__(213);
 if(typeof content === 'string') content = [[module.i, content, '']];
 if(content.locals) module.exports = content.locals;
 // add the styles to the DOM
-var update = __webpack_require__(4)("7186d799", content, false, {});
+var update = __webpack_require__(4)("42b3474c", content, false, {});
 // Hot Module Replacement
 if(false) {
  // When the styles change, update the <style> tags
@@ -49673,7 +49673,7 @@ var content = __webpack_require__(219);
 if(typeof content === 'string') content = [[module.i, content, '']];
 if(content.locals) module.exports = content.locals;
 // add the styles to the DOM
-var update = __webpack_require__(4)("d7fa6742", content, false, {});
+var update = __webpack_require__(4)("117cc268", content, false, {});
 // Hot Module Replacement
 if(false) {
  // When the styles change, update the <style> tags
@@ -49890,7 +49890,7 @@ var content = __webpack_require__(224);
 if(typeof content === 'string') content = [[module.i, content, '']];
 if(content.locals) module.exports = content.locals;
 // add the styles to the DOM
-var update = __webpack_require__(4)("5030e3f7", content, false, {});
+var update = __webpack_require__(4)("215d53aa", content, false, {});
 // Hot Module Replacement
 if(false) {
  // When the styles change, update the <style> tags
@@ -50407,7 +50407,7 @@ var content = __webpack_require__(229);
 if(typeof content === 'string') content = [[module.i, content, '']];
 if(content.locals) module.exports = content.locals;
 // add the styles to the DOM
-var update = __webpack_require__(4)("273fd098", content, false, {});
+var update = __webpack_require__(4)("a30ab1be", content, false, {});
 // Hot Module Replacement
 if(false) {
  // When the styles change, update the <style> tags
@@ -50562,6 +50562,18 @@ var render = function() {
                       _vm._v(
                         "\n                    Dashboard\n                  "
                       )
+                    ])
+                  ])
+                ],
+                1
+              ),
+              _vm._v(" "),
+              _c(
+                "li",
+                [
+                  _c("router-link", { attrs: { to: "/cliente" } }, [
+                    _c("a", [
+                      _vm._v("\n                  cliente\n                ")
                     ])
                   ])
                 ],
@@ -50748,19 +50760,19 @@ if (false) {
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_7__components_params_index_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_7__components_params_index_vue__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_8__components_tags_index_vue__ = __webpack_require__(345);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_8__components_tags_index_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_8__components_tags_index_vue__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_9__components_discounts_postulated_index_vue__ = __webpack_require__(576);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_9__components_discounts_postulated_index_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_9__components_discounts_postulated_index_vue__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_10__components_home_commerce_detail__ = __webpack_require__(361);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_10__components_home_commerce_detail___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_10__components_home_commerce_detail__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_11__components_home_branch_detail__ = __webpack_require__(366);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_11__components_home_branch_detail___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_11__components_home_branch_detail__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_12__components_home_discount_detail__ = __webpack_require__(371);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_12__components_home_discount_detail___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_12__components_home_discount_detail__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_13__components_home_commerce_detail_branchs__ = __webpack_require__(376);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_13__components_home_commerce_detail_branchs___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_13__components_home_commerce_detail_branchs__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_14__components_home_commerce_detail_discounts__ = __webpack_require__(381);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_14__components_home_commerce_detail_discounts___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_14__components_home_commerce_detail_discounts__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_15__components_discount_router__ = __webpack_require__(386);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_9__components_home_commerce_detail__ = __webpack_require__(361);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_9__components_home_commerce_detail___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_9__components_home_commerce_detail__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_10__components_home_branch_detail__ = __webpack_require__(366);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_10__components_home_branch_detail___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_10__components_home_branch_detail__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_11__components_home_discount_detail__ = __webpack_require__(371);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_11__components_home_discount_detail___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_11__components_home_discount_detail__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_12__components_home_commerce_detail_branchs__ = __webpack_require__(376);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_12__components_home_commerce_detail_branchs___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_12__components_home_commerce_detail_branchs__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_13__components_home_commerce_detail_discounts__ = __webpack_require__(381);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_13__components_home_commerce_detail_discounts___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_13__components_home_commerce_detail_discounts__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_14__components_discount_router__ = __webpack_require__(386);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_15__components_cliente_index__ = __webpack_require__(576);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_15__components_cliente_index___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_15__components_cliente_index__);
 
 
 
@@ -50790,6 +50802,9 @@ var baseRoutes = [{
 }, {
     path: '/tags',
     component: __WEBPACK_IMPORTED_MODULE_8__components_tags_index_vue___default.a
+}, {
+    path: '/cliente',
+    component: __WEBPACK_IMPORTED_MODULE_15__components_cliente_index___default.a
 }, {
     path: '/params',
     component: __WEBPACK_IMPORTED_MODULE_7__components_params_index_vue___default.a
@@ -53544,7 +53559,7 @@ var content = __webpack_require__(237);
 if(typeof content === 'string') content = [[module.i, content, '']];
 if(content.locals) module.exports = content.locals;
 // add the styles to the DOM
-var update = __webpack_require__(4)("683ebe78", content, false, {});
+var update = __webpack_require__(4)("213487a5", content, false, {});
 // Hot Module Replacement
 if(false) {
  // When the styles change, update the <style> tags
@@ -53943,7 +53958,7 @@ var content = __webpack_require__(241);
 if(typeof content === 'string') content = [[module.i, content, '']];
 if(content.locals) module.exports = content.locals;
 // add the styles to the DOM
-var update = __webpack_require__(4)("2808d3be", content, false, {});
+var update = __webpack_require__(4)("e4679f9e", content, false, {});
 // Hot Module Replacement
 if(false) {
  // When the styles change, update the <style> tags
@@ -55105,7 +55120,7 @@ var content = __webpack_require__(249);
 if(typeof content === 'string') content = [[module.i, content, '']];
 if(content.locals) module.exports = content.locals;
 // add the styles to the DOM
-var update = __webpack_require__(4)("32243c1c", content, false, {});
+var update = __webpack_require__(4)("0c531b65", content, false, {});
 // Hot Module Replacement
 if(false) {
  // When the styles change, update the <style> tags
@@ -55427,8 +55442,8 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 
       console.log(data);
 
-      //axios.post('api/all-discounts?page=' + page, data).then(response => {
-      axios.post('api/search', data).then(function (response) {
+      axios.post('api/all-discounts?page=' + page, data).then(function (response) {
+        // axios.post('api/search', data).then(response => {
         console.log(response);
         _this5.discounts = response.data.discount.data;
         _this5.pagination = response.data.paginate;
@@ -55460,6 +55475,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
           text: "Se obtuvo Descuento Satifactoriamente",
           icon: "success"
         });
+        console.log(response);
       }).catch(function (error) {
         console.log(error.response.data);
       });
@@ -55529,7 +55545,7 @@ var content = __webpack_require__(253);
 if(typeof content === 'string') content = [[module.i, content, '']];
 if(content.locals) module.exports = content.locals;
 // add the styles to the DOM
-var update = __webpack_require__(4)("4784e4e2", content, false, {});
+var update = __webpack_require__(4)("cf454688", content, false, {});
 // Hot Module Replacement
 if(false) {
  // When the styles change, update the <style> tags
@@ -56410,7 +56426,7 @@ var content = __webpack_require__(259);
 if(typeof content === 'string') content = [[module.i, content, '']];
 if(content.locals) module.exports = content.locals;
 // add the styles to the DOM
-var update = __webpack_require__(4)("4d0275e9", content, false, {});
+var update = __webpack_require__(4)("0ab52bd6", content, false, {});
 // Hot Module Replacement
 if(false) {
  // When the styles change, update the <style> tags
@@ -56651,7 +56667,7 @@ var content = __webpack_require__(263);
 if(typeof content === 'string') content = [[module.i, content, '']];
 if(content.locals) module.exports = content.locals;
 // add the styles to the DOM
-var update = __webpack_require__(4)("aad5900e", content, false, {});
+var update = __webpack_require__(4)("b98d80a8", content, false, {});
 // Hot Module Replacement
 if(false) {
  // When the styles change, update the <style> tags
@@ -58545,7 +58561,7 @@ var content = __webpack_require__(286);
 if(typeof content === 'string') content = [[module.i, content, '']];
 if(content.locals) module.exports = content.locals;
 // add the styles to the DOM
-var update = __webpack_require__(4)("6236a28c", content, false, {});
+var update = __webpack_require__(4)("8785f1a6", content, false, {});
 // Hot Module Replacement
 if(false) {
  // When the styles change, update the <style> tags
@@ -58943,7 +58959,7 @@ var content = __webpack_require__(291);
 if(typeof content === 'string') content = [[module.i, content, '']];
 if(content.locals) module.exports = content.locals;
 // add the styles to the DOM
-var update = __webpack_require__(4)("b5b0b048", content, false, {});
+var update = __webpack_require__(4)("daffff62", content, false, {});
 // Hot Module Replacement
 if(false) {
  // When the styles change, update the <style> tags
@@ -60198,7 +60214,7 @@ var content = __webpack_require__(297);
 if(typeof content === 'string') content = [[module.i, content, '']];
 if(content.locals) module.exports = content.locals;
 // add the styles to the DOM
-var update = __webpack_require__(4)("3d4a2cbc", content, false, {});
+var update = __webpack_require__(4)("404f90e2", content, false, {});
 // Hot Module Replacement
 if(false) {
  // When the styles change, update the <style> tags
@@ -60438,7 +60454,7 @@ var content = __webpack_require__(301);
 if(typeof content === 'string') content = [[module.i, content, '']];
 if(content.locals) module.exports = content.locals;
 // add the styles to the DOM
-var update = __webpack_require__(4)("cf6826d6", content, false, {});
+var update = __webpack_require__(4)("69785c48", content, false, {});
 // Hot Module Replacement
 if(false) {
  // When the styles change, update the <style> tags
@@ -60462,7 +60478,7 @@ exports = module.exports = __webpack_require__(2)(false);
 
 
 // module
-exports.push([module.i, "\n.html5Map {\r\n  margin-top: 15px;\r\n  width: 100%;\r\n  height: 200px;\r\n  display: none;\n}\n.mapPicker {\r\n  margin-top: 15px;\r\n  width: 100%;\r\n  height: 200px;\n}\n.textLocation {\r\n  margin-top: 15px;\r\n  width: 100%;\r\n  height: 200px;\r\n  display: none;\n}\n.geolocation {\r\n  cursor: pointer;\r\n  color: #FFF !important;\n}\n.geolocation:hover {\r\n  color: #42b0f2 !important;\n}\n#textMap {\r\n  display: none;\n}\n.input-map {\r\n  display: none;\n}\n.avatar {\r\n  width: 150px;\n}\r\n", ""]);
+exports.push([module.i, "\n.html5Map {\n  margin-top: 15px;\n  width: 100%;\n  height: 200px;\n  display: none;\n}\n.mapPicker {\n  margin-top: 15px;\n  width: 100%;\n  height: 200px;\n}\n.textLocation {\n  margin-top: 15px;\n  width: 100%;\n  height: 200px;\n  display: none;\n}\n.geolocation {\n  cursor: pointer;\n  color: #FFF !important;\n}\n.geolocation:hover {\n  color: #42b0f2 !important;\n}\n#textMap {\n  display: none;\n}\n.input-map {\n  display: none;\n}\n.avatar {\n  width: 150px;\n}\n", ""]);
 
 // exports
 
@@ -61543,7 +61559,7 @@ var content = __webpack_require__(306);
 if(typeof content === 'string') content = [[module.i, content, '']];
 if(content.locals) module.exports = content.locals;
 // add the styles to the DOM
-var update = __webpack_require__(4)("264c6787", content, false, {});
+var update = __webpack_require__(4)("79b1b00c", content, false, {});
 // Hot Module Replacement
 if(false) {
  // When the styles change, update the <style> tags
@@ -61904,7 +61920,7 @@ var content = __webpack_require__(311);
 if(typeof content === 'string') content = [[module.i, content, '']];
 if(content.locals) module.exports = content.locals;
 // add the styles to the DOM
-var update = __webpack_require__(4)("1a4e90f2", content, false, {});
+var update = __webpack_require__(4)("e099100c", content, false, {});
 // Hot Module Replacement
 if(false) {
  // When the styles change, update the <style> tags
@@ -63238,7 +63254,7 @@ var content = __webpack_require__(317);
 if(typeof content === 'string') content = [[module.i, content, '']];
 if(content.locals) module.exports = content.locals;
 // add the styles to the DOM
-var update = __webpack_require__(4)("ae416c20", content, false, {});
+var update = __webpack_require__(4)("09dbf2a3", content, false, {});
 // Hot Module Replacement
 if(false) {
  // When the styles change, update the <style> tags
@@ -63262,7 +63278,7 @@ exports = module.exports = __webpack_require__(2)(false);
 
 
 // module
-exports.push([module.i, "\n#section-profile: {\r\n margin-top: 100px;\n}\nimg {\r\n  width: 30%;\n}\r\n", ""]);
+exports.push([module.i, "\n#section-profile: {\n margin-top: 100px;\n}\nimg {\n  width: 30%;\n}\n", ""]);
 
 // exports
 
@@ -63473,7 +63489,7 @@ var content = __webpack_require__(321);
 if(typeof content === 'string') content = [[module.i, content, '']];
 if(content.locals) module.exports = content.locals;
 // add the styles to the DOM
-var update = __webpack_require__(4)("38d04cda", content, false, {});
+var update = __webpack_require__(4)("235db6c6", content, false, {});
 // Hot Module Replacement
 if(false) {
  // When the styles change, update the <style> tags
@@ -63497,7 +63513,7 @@ exports = module.exports = __webpack_require__(2)(false);
 
 
 // module
-exports.push([module.i, "\n.html5Map {\r\n  margin-top: 15px;\r\n  width: 100%;\r\n  height: 200px;\r\n  display: none;\n}\n.mapPicker {\r\n  margin-top: 15px;\r\n  width: 100%;\r\n  height: 200px;\n}\n.textLocation {\r\n  margin-top: 15px;\r\n  width: 100%;\r\n  height: 200px;\r\n  display: none;\n}\n.geolocation {\r\n  cursor: pointer;\r\n  color: #FFF !important;\n}\n.geolocation:hover {\r\n  color: #42b0f2 !important;\n}\n#textMap {\r\n  display: none;\n}\n.input-map {\r\n  display: none;\n}\nimg {\r\n  width: 30%;\n}\r\n", ""]);
+exports.push([module.i, "\n.html5Map {\n  margin-top: 15px;\n  width: 100%;\n  height: 200px;\n  display: none;\n}\n.mapPicker {\n  margin-top: 15px;\n  width: 100%;\n  height: 200px;\n}\n.textLocation {\n  margin-top: 15px;\n  width: 100%;\n  height: 200px;\n  display: none;\n}\n.geolocation {\n  cursor: pointer;\n  color: #FFF !important;\n}\n.geolocation:hover {\n  color: #42b0f2 !important;\n}\n#textMap {\n  display: none;\n}\n.input-map {\n  display: none;\n}\nimg {\n  width: 30%;\n}\n", ""]);
 
 // exports
 
@@ -64869,7 +64885,7 @@ var content = __webpack_require__(327);
 if(typeof content === 'string') content = [[module.i, content, '']];
 if(content.locals) module.exports = content.locals;
 // add the styles to the DOM
-var update = __webpack_require__(4)("baa43e4c", content, false, {});
+var update = __webpack_require__(4)("5ea74207", content, false, {});
 // Hot Module Replacement
 if(false) {
  // When the styles change, update the <style> tags
@@ -65085,7 +65101,7 @@ var content = __webpack_require__(331);
 if(typeof content === 'string') content = [[module.i, content, '']];
 if(content.locals) module.exports = content.locals;
 // add the styles to the DOM
-var update = __webpack_require__(4)("7511045d", content, false, {});
+var update = __webpack_require__(4)("3843c8d0", content, false, {});
 // Hot Module Replacement
 if(false) {
  // When the styles change, update the <style> tags
@@ -65426,7 +65442,7 @@ var content = __webpack_require__(336);
 if(typeof content === 'string') content = [[module.i, content, '']];
 if(content.locals) module.exports = content.locals;
 // add the styles to the DOM
-var update = __webpack_require__(4)("6480bc3e", content, false, {});
+var update = __webpack_require__(4)("331ffd1e", content, false, {});
 // Hot Module Replacement
 if(false) {
  // When the styles change, update the <style> tags
@@ -65652,7 +65668,7 @@ var content = __webpack_require__(341);
 if(typeof content === 'string') content = [[module.i, content, '']];
 if(content.locals) module.exports = content.locals;
 // add the styles to the DOM
-var update = __webpack_require__(4)("5524ea0e", content, false, {});
+var update = __webpack_require__(4)("51d7a17e", content, false, {});
 // Hot Module Replacement
 if(false) {
  // When the styles change, update the <style> tags
@@ -66171,7 +66187,7 @@ var content = __webpack_require__(347);
 if(typeof content === 'string') content = [[module.i, content, '']];
 if(content.locals) module.exports = content.locals;
 // add the styles to the DOM
-var update = __webpack_require__(4)("6fc7cf14", content, false, {});
+var update = __webpack_require__(4)("28bd9841", content, false, {});
 // Hot Module Replacement
 if(false) {
  // When the styles change, update the <style> tags
@@ -66353,7 +66369,7 @@ var content = __webpack_require__(351);
 if(typeof content === 'string') content = [[module.i, content, '']];
 if(content.locals) module.exports = content.locals;
 // add the styles to the DOM
-var update = __webpack_require__(4)("47d8df36", content, false, {});
+var update = __webpack_require__(4)("41d6ecd8", content, false, {});
 // Hot Module Replacement
 if(false) {
  // When the styles change, update the <style> tags
@@ -66673,7 +66689,7 @@ var content = __webpack_require__(357);
 if(typeof content === 'string') content = [[module.i, content, '']];
 if(content.locals) module.exports = content.locals;
 // add the styles to the DOM
-var update = __webpack_require__(4)("25d02687", content, false, {});
+var update = __webpack_require__(4)("659603ba", content, false, {});
 // Hot Module Replacement
 if(false) {
  // When the styles change, update the <style> tags
@@ -67075,7 +67091,7 @@ var content = __webpack_require__(363);
 if(typeof content === 'string') content = [[module.i, content, '']];
 if(content.locals) module.exports = content.locals;
 // add the styles to the DOM
-var update = __webpack_require__(4)("4950a1d8", content, false, {});
+var update = __webpack_require__(4)("5edad276", content, false, {});
 // Hot Module Replacement
 if(false) {
  // When the styles change, update the <style> tags
@@ -67823,7 +67839,7 @@ var content = __webpack_require__(368);
 if(typeof content === 'string') content = [[module.i, content, '']];
 if(content.locals) module.exports = content.locals;
 // add the styles to the DOM
-var update = __webpack_require__(4)("7a4b3c14", content, false, {});
+var update = __webpack_require__(4)("396f8841", content, false, {});
 // Hot Module Replacement
 if(false) {
  // When the styles change, update the <style> tags
@@ -68439,7 +68455,7 @@ var content = __webpack_require__(373);
 if(typeof content === 'string') content = [[module.i, content, '']];
 if(content.locals) module.exports = content.locals;
 // add the styles to the DOM
-var update = __webpack_require__(4)("0febacef", content, false, {});
+var update = __webpack_require__(4)("d1a4bc48", content, false, {});
 // Hot Module Replacement
 if(false) {
  // When the styles change, update the <style> tags
@@ -69182,7 +69198,7 @@ var content = __webpack_require__(378);
 if(typeof content === 'string') content = [[module.i, content, '']];
 if(content.locals) module.exports = content.locals;
 // add the styles to the DOM
-var update = __webpack_require__(4)("7a99f41e", content, false, {});
+var update = __webpack_require__(4)("a3faa7ea", content, false, {});
 // Hot Module Replacement
 if(false) {
  // When the styles change, update the <style> tags
@@ -69647,7 +69663,7 @@ var content = __webpack_require__(383);
 if(typeof content === 'string') content = [[module.i, content, '']];
 if(content.locals) module.exports = content.locals;
 // add the styles to the DOM
-var update = __webpack_require__(4)("129696e4", content, false, {});
+var update = __webpack_require__(4)("1a61b58a", content, false, {});
 // Hot Module Replacement
 if(false) {
  // When the styles change, update the <style> tags
@@ -70131,7 +70147,7 @@ var content = __webpack_require__(389);
 if(typeof content === 'string') content = [[module.i, content, '']];
 if(content.locals) module.exports = content.locals;
 // add the styles to the DOM
-var update = __webpack_require__(4)("6f4fe7f4", content, false, {});
+var update = __webpack_require__(4)("0f4278b2", content, false, {});
 // Hot Module Replacement
 if(false) {
  // When the styles change, update the <style> tags
@@ -70950,7 +70966,7 @@ var content = __webpack_require__(393);
 if(typeof content === 'string') content = [[module.i, content, '']];
 if(content.locals) module.exports = content.locals;
 // add the styles to the DOM
-var update = __webpack_require__(4)("13d6a1d8", content, false, {});
+var update = __webpack_require__(4)("d382636a", content, false, {});
 // Hot Module Replacement
 if(false) {
  // When the styles change, update the <style> tags
@@ -71128,7 +71144,8 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
         normalprice: '',
         discountprice: '',
         discountpercentage: '',
-        discountcategory_iddiscountcategory: ''
+        discountcategory_iddiscountcategory: '',
+        currency_idcurrency: '4d88d876-d868-11e8-8010-74c63b1404ed'
       },
       url: '/discount',
       errorsDiscount: {},
@@ -71200,7 +71217,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
         _this2.form.outstanding = false;
         _this2.form.amountavailable = 0;
         _this2.form.amountredeemed = 0;
-        _this2.value = [];
+        _this2.form.currency_idcurrency = '4d88d876-d868-11e8-8010-74c63b1404ed', _this2.value = [];
 
         _this2.$parent.cargarDiscount();
         $('#createModal').trigger("reset");
@@ -71409,7 +71426,7 @@ var content = __webpack_require__(397);
 if(typeof content === 'string') content = [[module.i, content, '']];
 if(content.locals) module.exports = content.locals;
 // add the styles to the DOM
-var update = __webpack_require__(4)("1df4c864", content, false, {});
+var update = __webpack_require__(4)("2d80b57e", content, false, {});
 // Hot Module Replacement
 if(false) {
  // When the styles change, update the <style> tags
@@ -106306,47 +106323,47 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
-	mounted: function mounted() {
-		console.log('Login Mounted.');
-	},
-	data: function data() {
-		return {
-			errors: {},
-			'email': "",
-			'password': "",
-			'reg': /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,24}))$/
-		};
-	},
+				mounted: function mounted() {
+								console.log('Login Mounted.');
+				},
+				data: function data() {
+								return {
+												errors: {},
+												'email': "",
+												'password': "",
+												'reg': /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,24}))$/
+								};
+				},
 
-	methods: {
-		submitLogin: function submitLogin() {
-			var _this = this;
+				methods: {
+								submitLogin: function submitLogin() {
+												var _this = this;
 
-			this.errors = [];
-			if (!this.email) this.errors.password = 'El Correo Electrónico es requerido.';
-			if (!this.validEmail(this.email)) this.errors.emailvalid = 'Se requiere un correo válido.';
-			if (!this.password) this.errors.password = 'La contraseña es requerido.';
+												this.errors = [];
+												if (!this.email) this.errors.password = 'El Correo Electrónico es requerido.';
+												if (!this.validEmail(this.email)) this.errors.emailvalid = 'Se requiere un correo válido.';
+												if (!this.password) this.errors.password = 'La contraseña es requerido.';
 
-			if (this.validEmail(this.email) && this.password) {
-				var params = {
-					email: this.email,
-					password: this.password
-				};
+												if (this.validEmail(this.email) && this.password) {
+																var params = {
+																				email: this.email,
+																				password: this.password
+																};
 
-				axios.post('/api/login', params).then(function (response) {
-					localStorage.setItem('userdata', JSON.stringify(response.data.user.id));
-					console.log(response.data.user.id);
-					window.location.href = '/';
-				}).catch(function (error) {
-					_this.errors.push(error.response.data.error);
-				});
-			}
-		},
+																axios.post('/api/login', params).then(function (response) {
+																				localStorage.setItem('userdata', JSON.stringify(response.data.user.id));
+																				console.log(response.data.user.id);
+																				window.location.href = '/';
+																}).catch(function (error) {
+																				_this.errors.push(error.response.data.error);
+																});
+												}
+								},
 
-		validEmail: function validEmail(email) {
-			return this.reg.test(email);
-		}
-	}
+								validEmail: function validEmail(email) {
+												return this.reg.test(email);
+								}
+				}
 });
 
 /***/ }),
@@ -106417,7 +106434,7 @@ var content = __webpack_require__(527);
 if(typeof content === 'string') content = [[module.i, content, '']];
 if(content.locals) module.exports = content.locals;
 // add the styles to the DOM
-var update = __webpack_require__(4)("1cb5a15a", content, false, {});
+var update = __webpack_require__(4)("92562968", content, false, {});
 // Hot Module Replacement
 if(false) {
  // When the styles change, update the <style> tags
@@ -106619,7 +106636,7 @@ var content = __webpack_require__(531);
 if(typeof content === 'string') content = [[module.i, content, '']];
 if(content.locals) module.exports = content.locals;
 // add the styles to the DOM
-var update = __webpack_require__(4)("b6a6a370", content, false, {});
+var update = __webpack_require__(4)("2bd3cb81", content, false, {});
 // Hot Module Replacement
 if(false) {
  // When the styles change, update the <style> tags
@@ -107333,7 +107350,7 @@ var content = __webpack_require__(541);
 if(typeof content === 'string') content = [[module.i, content, '']];
 if(content.locals) module.exports = content.locals;
 // add the styles to the DOM
-var update = __webpack_require__(4)("09ba2804", content, false, {});
+var update = __webpack_require__(4)("6f5ad49e", content, false, {});
 // Hot Module Replacement
 if(false) {
  // When the styles change, update the <style> tags
@@ -107357,7 +107374,7 @@ exports = module.exports = __webpack_require__(2)(false);
 
 
 // module
-exports.push([module.i, "\n#section-register[data-v-7a6797a6]{\r\n    margin-top: 70px;\n}\r\n", ""]);
+exports.push([module.i, "\n#section-register[data-v-7a6797a6]{\n    margin-top: 70px;\n}\n", ""]);
 
 // exports
 
@@ -107589,7 +107606,7 @@ var render = function() {
                           [_vm._v("×")]
                         ),
                         _vm._v(
-                          "\r\n                          " + _vm._s(error) + " "
+                          "\n                          " + _vm._s(error) + " "
                         ),
                         _c("br"),
                         _vm._v(" "),
@@ -108047,7 +108064,7 @@ var content = __webpack_require__(546);
 if(typeof content === 'string') content = [[module.i, content, '']];
 if(content.locals) module.exports = content.locals;
 // add the styles to the DOM
-var update = __webpack_require__(4)("7fc889e4", content, false, {});
+var update = __webpack_require__(4)("e783da38", content, false, {});
 // Hot Module Replacement
 if(false) {
  // When the styles change, update the <style> tags
@@ -108071,7 +108088,7 @@ exports = module.exports = __webpack_require__(2)(false);
 
 
 // module
-exports.push([module.i, "\n#section-register {\r\n    margin-top: 120px;\r\n    margin-bottom: 100px;\n}\r\n", ""]);
+exports.push([module.i, "\n#section-register {\n    margin-top: 120px;\n    margin-bottom: 100px;\n}\n", ""]);
 
 // exports
 
@@ -108392,7 +108409,7 @@ var content = __webpack_require__(551);
 if(typeof content === 'string') content = [[module.i, content, '']];
 if(content.locals) module.exports = content.locals;
 // add the styles to the DOM
-var update = __webpack_require__(4)("2f762a9a", content, false, {});
+var update = __webpack_require__(4)("9c9c7ccc", content, false, {});
 // Hot Module Replacement
 if(false) {
  // When the styles change, update the <style> tags
@@ -108416,7 +108433,7 @@ exports = module.exports = __webpack_require__(2)(false);
 
 
 // module
-exports.push([module.i, "\n#section-register {\r\n    margin-top: 120px;\r\n    margin-bottom: 100px;\n}\r\n", ""]);
+exports.push([module.i, "\n#section-register {\n    margin-top: 120px;\n    margin-bottom: 100px;\n}\n", ""]);
 
 // exports
 
@@ -108730,7 +108747,7 @@ var content = __webpack_require__(556);
 if(typeof content === 'string') content = [[module.i, content, '']];
 if(content.locals) module.exports = content.locals;
 // add the styles to the DOM
-var update = __webpack_require__(4)("18531f44", content, false, {});
+var update = __webpack_require__(4)("54ef7144", content, false, {});
 // Hot Module Replacement
 if(false) {
  // When the styles change, update the <style> tags
@@ -108754,7 +108771,7 @@ exports = module.exports = __webpack_require__(2)(false);
 
 
 // module
-exports.push([module.i, "\n#section-register {\r\n    margin-top: 120px;\r\n    margin-bottom: 100px;\n}\r\n", ""]);
+exports.push([module.i, "\n#section-register {\n    margin-top: 120px;\n    margin-bottom: 100px;\n}\n", ""]);
 
 // exports
 
@@ -109062,7 +109079,7 @@ var content = __webpack_require__(561);
 if(typeof content === 'string') content = [[module.i, content, '']];
 if(content.locals) module.exports = content.locals;
 // add the styles to the DOM
-var update = __webpack_require__(4)("0b868a1d", content, false, {});
+var update = __webpack_require__(4)("17fc131d", content, false, {});
 // Hot Module Replacement
 if(false) {
  // When the styles change, update the <style> tags
@@ -109086,7 +109103,7 @@ exports = module.exports = __webpack_require__(2)(false);
 
 
 // module
-exports.push([module.i, "\n#section-reset {\r\n\tmargin-top: 100px;\r\n\tmargin-bottom: 60px;\n}\r\n", ""]);
+exports.push([module.i, "\n#section-reset {\n\tmargin-top: 100px;\n\tmargin-bottom: 60px;\n}\n", ""]);
 
 // exports
 
@@ -109253,9 +109270,9 @@ var render = function() {
                             [_vm._v("×")]
                           ),
                           _vm._v(
-                            "\r\n                              " +
+                            "\n                              " +
                               _vm._s(error) +
-                              "\r\n                            "
+                              "\n                            "
                           )
                         ]
                       )
@@ -109286,7 +109303,7 @@ var render = function() {
                             [_vm._v("×")]
                           ),
                           _vm._v(
-                            "\r\n                              " + _vm._s(tmp)
+                            "\n                              " + _vm._s(tmp)
                           ),
                           _c("br"),
                           _vm._v(" "),
@@ -109497,7 +109514,7 @@ var content = __webpack_require__(566);
 if(typeof content === 'string') content = [[module.i, content, '']];
 if(content.locals) module.exports = content.locals;
 // add the styles to the DOM
-var update = __webpack_require__(4)("26290d4c", content, false, {});
+var update = __webpack_require__(4)("2983905a", content, false, {});
 // Hot Module Replacement
 if(false) {
  // When the styles change, update the <style> tags
@@ -109521,7 +109538,7 @@ exports = module.exports = __webpack_require__(2)(false);
 
 
 // module
-exports.push([module.i, "\n#section-activation {\r\n    margin-top: 120px;\r\n    margin-bottom: 100px;\n}\r\n", ""]);
+exports.push([module.i, "\n#section-activation {\n    margin-top: 120px;\n    margin-bottom: 100px;\n}\n", ""]);
 
 // exports
 
@@ -109805,7 +109822,7 @@ var content = __webpack_require__(571);
 if(typeof content === 'string') content = [[module.i, content, '']];
 if(content.locals) module.exports = content.locals;
 // add the styles to the DOM
-var update = __webpack_require__(4)("72c05614", content, false, {});
+var update = __webpack_require__(4)("48db6bf6", content, false, {});
 // Hot Module Replacement
 if(false) {
  // When the styles change, update the <style> tags
@@ -109829,7 +109846,7 @@ exports = module.exports = __webpack_require__(2)(false);
 
 
 // module
-exports.push([module.i, "\n#section-activation {\r\n    margin-top: 120px;\r\n    margin-bottom: 100px;\n}\r\n", ""]);
+exports.push([module.i, "\n#section-activation {\n    margin-top: 120px;\n    margin-bottom: 100px;\n}\n", ""]);
 
 // exports
 
@@ -110088,7 +110105,7 @@ var Component = normalizeComponent(
   __vue_scopeId__,
   __vue_module_identifier__
 )
-Component.options.__file = "resources/assets/js/components/discounts-postulated/index.vue"
+Component.options.__file = "resources/assets/js/components/cliente/index.vue"
 
 /* hot reload */
 if (false) {(function () {
@@ -110097,9 +110114,9 @@ if (false) {(function () {
   if (!hotAPI.compatible) return
   module.hot.accept()
   if (!module.hot.data) {
-    hotAPI.createRecord("data-v-5bc0effe", Component.options)
+    hotAPI.createRecord("data-v-faa5fd14", Component.options)
   } else {
-    hotAPI.reload("data-v-5bc0effe", Component.options)
+    hotAPI.reload("data-v-faa5fd14", Component.options)
   }
   module.hot.dispose(function (data) {
     disposed = true
@@ -110120,13 +110137,13 @@ var content = __webpack_require__(578);
 if(typeof content === 'string') content = [[module.i, content, '']];
 if(content.locals) module.exports = content.locals;
 // add the styles to the DOM
-var update = __webpack_require__(4)("c6ffe934", content, false, {});
+var update = __webpack_require__(4)("50cc91ea", content, false, {});
 // Hot Module Replacement
 if(false) {
  // When the styles change, update the <style> tags
  if(!content.locals) {
-   module.hot.accept("!!../../../../../node_modules/css-loader/index.js!../../../../../node_modules/vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-5bc0effe\",\"scoped\":false,\"hasInlineConfig\":true}!../../../../../node_modules/vue-loader/lib/selector.js?type=styles&index=0!./index.vue", function() {
-     var newContent = require("!!../../../../../node_modules/css-loader/index.js!../../../../../node_modules/vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-5bc0effe\",\"scoped\":false,\"hasInlineConfig\":true}!../../../../../node_modules/vue-loader/lib/selector.js?type=styles&index=0!./index.vue");
+   module.hot.accept("!!../../../../../node_modules/css-loader/index.js!../../../../../node_modules/vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-faa5fd14\",\"scoped\":false,\"hasInlineConfig\":true}!../../../../../node_modules/vue-loader/lib/selector.js?type=styles&index=0!./index.vue", function() {
+     var newContent = require("!!../../../../../node_modules/css-loader/index.js!../../../../../node_modules/vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-faa5fd14\",\"scoped\":false,\"hasInlineConfig\":true}!../../../../../node_modules/vue-loader/lib/selector.js?type=styles&index=0!./index.vue");
      if(typeof newContent === 'string') newContent = [[module.id, newContent, '']];
      update(newContent);
    });
@@ -110144,7 +110161,7 @@ exports = module.exports = __webpack_require__(2)(false);
 
 
 // module
-exports.push([module.i, "\n.btn-d {\n    margin-top: 5px;\n}\n.btn-d:hover {\n    color: #FFF !important;\n}\n", ""]);
+exports.push([module.i, "\n.image-commerce {\n  width: 80px;\n  height: 50px;\n  border-radius: 50%;\n}\n.thumb-img {\n  width: 250px;\n  height: 125px;\n}\n.view-branch:hover .link-branch {\n  color: #FFF;\n}\n", ""]);
 
 // exports
 
@@ -110155,8 +110172,9 @@ exports.push([module.i, "\n.btn-d {\n    margin-top: 5px;\n}\n.btn-d:hover {\n  
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__utilities_paginator__ = __webpack_require__(27);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__utilities_paginator___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0__utilities_paginator__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__utilities_EventBus_js__ = __webpack_require__(7);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__utilities_paginator__ = __webpack_require__(27);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__utilities_paginator___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1__utilities_paginator__);
 //
 //
 //
@@ -110231,61 +110249,46 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
+
 
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
-	components: { paginator: __WEBPACK_IMPORTED_MODULE_0__utilities_paginator___default.a },
-	data: function data() {
-		return {
-			discounts: [],
-			pagination: {
-				'total': 0,
-				'current_page': 0,
-				'per_page': 0,
-				'last_page': 0,
-				'from': 0,
-				'to': 0
-			},
-			offset: 2
-		};
-	},
-	mounted: function mounted() {
-		var _this = this;
-
-		this.index();
+  components: { paginator: __WEBPACK_IMPORTED_MODULE_1__utilities_paginator___default.a },
+  data: function data() {
+    return {
+      pagination: {
+        'total': 0,
+        'current_page': 0,
+        'per_page': 0,
+        'last_page': 0,
+        'from': 0,
+        'to': 0
+      },
+      discounts: []
+    };
+  },
+  mounted: function mounted() {
+    this.index();
+  },
 
 		Bus.$on('change_page', function (page) {
 			_this.index(page);
 		});
 	},
 
+  methods: {
+    index: function index() {
+      var _this = this;
 
-	methods: {
-		index: function index(page) {
-			var _this2 = this;
-
-			axios.get('api/user-has-discount?page=' + page).then(function (response) {
-				_this2.discounts = response.data.data.data;
-				_this2.pagination = response.data.paginate;
-			}).catch(function (err) {
-				return console.log(err);
-			});
-		}
-	}
+      axios.get('api/client').then(function (response) {
+        console.log(response);
+        _this.discounts = response.data.data;
+      }).catch(function (error) {
+        console.log(error.response.data);
+      });
+    }
+  }
 });
 
 /***/ }),
@@ -110298,129 +110301,183 @@ var render = function() {
   var _c = _vm._self._c || _h
   return _c(
     "div",
+    { staticClass: "settings-content", attrs: { id: "section-profile" } },
     [
-      _c("div", { staticClass: "col-lg-12" }, [
-        _c("div", [
-          _c("div", { staticClass: "settings-content" }, [
-            _c("ul", { staticClass: "nav nav-tabs" }, [
-              _c("li", { staticClass: "nav-item" }, [
-                _c(
-                  "a",
-                  {
-                    staticClass: "nav-link active",
-                    attrs: { href: "" },
-                    on: {
-                      click: function($event) {
-                        _vm.$router.push("/")
-                      }
-                    }
-                  },
-                  [
-                    _vm._v(
-                      "\n                  \n                    Solcicitudes para descuento\n                "
-                    )
-                  ]
-                )
-              ]),
-              _vm._v(" "),
+      _c(
+        "button",
+        {
+          staticClass: "btn btn-outline-dark pull-right",
+          attrs: { type: "button" },
+          on: {
+            click: function($event) {
+              _vm.$router.push("/")
+            }
+          }
+        },
+        [_vm._v("Atras")]
+      ),
+      _vm._v(" "),
+      _c("br"),
+      _vm._v(" "),
+      _c("h3", { staticClass: "mt-4" }, [_vm._v("Descuentos sin Redimir")]),
+      _vm._v(" "),
+      _c(
+        "div",
+        { staticClass: "row justify-content-center stat-table-wrap" },
+        [
+          _c("div", { staticClass: "col-lg-12 stat-wrap-container" }, [
+            _c("div", { staticClass: "stat-wrap" }, [
               _c(
-                "li",
-                { staticClass: "nav-item" },
-                [
-                  _c(
-                    "router-link",
+                "div",
+                { staticClass: "row pb-120 pt-80" },
+                _vm._l(_vm.discounts, function(discount) {
+                  return _c(
+                    "div",
                     {
-                      staticClass: "nav-link",
-                      attrs: { to: "/home-discounts" }
+                      key: discount.iddiscount,
+                      staticClass: "col-lg-3 col-md-6"
                     },
                     [
-                      _vm._v(
-                        "\n                    Redimir un descuento\n                 "
+                      _c(
+                        "div",
+                        {
+                          staticClass:
+                            "single-image-thumb single-feature-item relative"
+                        },
+                        [
+                          _c("div", { staticClass: "thumb relative" }, [
+                            discount.image == null
+                              ? _c(
+                                  "div",
+                                  { staticClass: "thumb-img relative" },
+                                  [
+                                    _c("div", {
+                                      staticClass: "overlay overlay-bg"
+                                    }),
+                                    _vm._v(" "),
+                                    _c("img", {
+                                      staticClass: "img-fluid",
+                                      attrs: { src: "/img/f5.jpg", alt: "" }
+                                    })
+                                  ]
+                                )
+                              : _c(
+                                  "div",
+                                  { staticClass: "thumb-img relative" },
+                                  [
+                                    _c("div", {
+                                      staticClass: "overlay overlay-bg"
+                                    }),
+                                    _vm._v(" "),
+                                    _c("img", {
+                                      staticClass: "img-fluid",
+                                      attrs: {
+                                        src:
+                                          "/images/discount/" + discount.image,
+                                        alt: ""
+                                      }
+                                    })
+                                  ]
+                                ),
+                            _vm._v(" "),
+                            _vm._m(0, true)
+                          ]),
+                          _vm._v(" "),
+                          _c("div", { staticClass: "details pb-10 pt-20" }, [
+                            _c(
+                              "div",
+                              {
+                                staticClass:
+                                  "title d-flex flex-row justify-content-between"
+                              },
+                              [
+                                _c("a", [
+                                  _c(
+                                    "h6",
+                                    [
+                                      _c(
+                                        "router-link",
+                                        {
+                                          attrs: {
+                                            to:
+                                              "/discount/" + discount.iddiscount
+                                          }
+                                        },
+                                        [
+                                          _vm._v(
+                                            "\n                                          " +
+                                              _vm._s(discount.title) +
+                                              "\n                                        "
+                                          )
+                                        ]
+                                      )
+                                    ],
+                                    1
+                                  )
+                                ])
+                              ]
+                            )
+                          ]),
+                          _vm._v(" "),
+                          _c("div", { staticClass: "details pb-10 pt-20" }, [
+                            _c(
+                              "div",
+                              {
+                                staticClass:
+                                  "title d-flex flex-row justify-content-between"
+                              },
+                              [
+                                _c("h6", [
+                                  _vm._v(
+                                    "\n                                        " +
+                                      _vm._s(discount.normalprice) +
+                                      "                                     \n                                    "
+                                  )
+                                ]),
+                                _vm._v(" "),
+                                _c("h6", [
+                                  _vm._v(_vm._s(discount.discountprice))
+                                ])
+                              ]
+                            )
+                          ]),
+                          _vm._v(" "),
+                          _c("div", { staticClass: "details pb-10 pt-20" }, [
+                            _c(
+                              "div",
+                              {
+                                staticClass:
+                                  "title d-flex flex-row justify-content-between"
+                              },
+                              [
+                                _c("h6", [
+                                  _vm._v(
+                                    "\n                                        " +
+                                      _vm._s(discount.startdate) +
+                                      "                                     \n                                    "
+                                  )
+                                ]),
+                                _vm._v(" "),
+                                _c("h6", [_vm._v(_vm._s(discount.enddate))])
+                              ]
+                            )
+                          ]),
+                          _vm._v(" "),
+                          _c("div", { staticClass: "meta d-flex flex-row" })
+                        ]
                       )
                     ]
                   )
-                ],
-                1
+                })
               )
             ])
           ]),
           _vm._v(" "),
-          _c(
-            "div",
-            { staticClass: "row pb-120 pt-80" },
-            _vm._l(_vm.discounts, function(discount) {
-              return _c("div", { staticClass: "col-lg-3 col-md-6" }, [
-                _c(
-                  "div",
-                  {
-                    staticClass:
-                      "single-image-thumb single-feature-item relative"
-                  },
-                  [
-                    _vm._m(0, true),
-                    _vm._v(" "),
-                    _vm._m(1, true),
-                    _vm._v(" "),
-                    _c("div", { staticClass: "details pb-10 pt-20" }, [
-                      _c(
-                        "div",
-                        {
-                          staticClass:
-                            "title d-flex flex-row justify-content-between"
-                        },
-                        [
-                          _c("a", { attrs: { href: "theme-details.html" } }, [
-                            _c("h6", [
-                              _vm._v("Precio: $" + _vm._s(discount.normalprice))
-                            ])
-                          ]),
-                          _vm._v(" "),
-                          _c("h6", { staticClass: "price" }, [
-                            _vm._v(
-                              "Con descuento: $" +
-                                _vm._s(discount.discountprice)
-                            )
-                          ])
-                        ]
-                      )
-                    ]),
-                    _vm._v(" "),
-                    _c("div", { staticClass: "details pb-10 pt-20" }, [
-                      _c(
-                        "div",
-                        {
-                          staticClass:
-                            "title d-flex flex-row justify-content-between"
-                        },
-                        [
-                          _c("a", { attrs: { href: "theme-details.html" } }, [
-                            _c("h6", [
-                              _vm._v(
-                                "Estado: " +
-                                  _vm._s(
-                                    discount.userhasdiscountstatus_iduserhasdiscountstatus
-                                  )
-                              )
-                            ])
-                          ])
-                        ]
-                      )
-                    ]),
-                    _vm._v(" "),
-                    _vm._m(2, true),
-                    _vm._v(" "),
-                    _vm._m(3, true)
-                  ]
-                )
-              ])
-            })
-          )
-        ])
-      ]),
-      _vm._v(" "),
-      _c("paginator", { attrs: { pagination: _vm.pagination } })
-    ],
-    1
+          _c("paginator", { attrs: { pagination: _vm.pagination } })
+        ],
+        1
+      )
+    ]
   )
 }
 var staticRenderFns = [
@@ -110428,56 +110485,9 @@ var staticRenderFns = [
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "thumb relative" }, [
-      _c("div", { staticClass: "thumb-img relative" }, [
-        _c("div", { staticClass: "overlay overlay-bg" }),
-        _vm._v(" "),
-        _c("img", {
-          staticClass: "img-fluid",
-          attrs: { src: "img/f5.jpg", alt: "" }
-        })
-      ]),
-      _vm._v(" "),
-      _c("div", { staticClass: "link" }, [
-        _c("a", { staticClass: "relative" }, [
-          _c("i", { staticClass: "icons icon-eye" })
-        ])
-      ])
-    ])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "details pb-10 pt-20" }, [
-      _c(
-        "div",
-        { staticClass: "title d-flex flex-row justify-content-between" },
-        [
-          _c("a", [_c("h6", [_vm._v("Nombre del descuento")])]),
-          _vm._v(" "),
-          _c("i", { staticClass: "icons icon-share" })
-        ]
-      )
-    ])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "meta d-flex flex-row" }, [
-      _c("a", { staticClass: "btn btn-outline-warning btn-d btn-block" }, [
-        _vm._v("\n                    \tNo autorizar\n                    ")
-      ])
-    ])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "meta d-flex flex-row" }, [
-      _c("a", { staticClass: "btn btn-outline-danger btn-d btn-block" }, [
-        _vm._v("\n                    \tCancelar\n                    ")
+    return _c("div", { staticClass: "link" }, [
+      _c("a", { staticClass: "relative" }, [
+        _c("i", { staticClass: "icons icon-eye" })
       ])
     ])
   }
@@ -110487,7 +110497,7 @@ module.exports = { render: render, staticRenderFns: staticRenderFns }
 if (false) {
   module.hot.accept()
   if (module.hot.data) {
-    require("vue-hot-reload-api")      .rerender("data-v-5bc0effe", module.exports)
+    require("vue-hot-reload-api")      .rerender("data-v-faa5fd14", module.exports)
   }
 }
 

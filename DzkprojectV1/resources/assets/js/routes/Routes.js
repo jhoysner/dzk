@@ -15,6 +15,7 @@ import DetailDiscount from '../components/home/discount-detail';
 import DetailCommerceBranch from '../components/home/commerce-detail-branchs';
 import DetailCommerceDisocount from '../components/home/commerce-detail-discounts';
 import discountRoutes from '../components/discount/router'
+import Cliente from '../components/cliente/index'
 
 
 Vue.use(Router);
@@ -31,6 +32,10 @@ const baseRoutes = [
         {
             path: '/tags',
             component: Tags
+        },        
+        {
+            path: '/cliente',
+            component: Cliente
         },
         {
             path: '/params',

@@ -33,6 +33,12 @@ class SearchController extends Controller
     	return $param;	
     }
 
+    protected function getPerPage()
+    {
+		$param = Params::where('key','search_paginate')->first();
+    	return $param;	
+    }
+
     protected function getAlphaNumeric($cadena)
     {
     	$cadenaLimpia = preg_replace('([^A-Za-z0-9 ])', '', $cadena);	     					
@@ -85,6 +91,7 @@ class SearchController extends Controller
             return response()->json(['error'=>$validator->errors()], 422);
         }
 
+        //Limite de sucursales a devolver
 		$limit = $this->getLimit();
 		$limit = intval($limit->val);
 
@@ -96,6 +103,7 @@ class SearchController extends Controller
 		//Obtiene la latitud y logitud del cliente 
       	$local_user = $this->getLocalizationUser();
       	      	
+		
 		//Obtiene los rangos de busqueda de distancia
 		$range = $this->getSearchRange();
 		
@@ -375,8 +383,12 @@ class SearchController extends Controller
         ]);
     }
 
-    protected function getPagination($array,$limit)
+    protected function getPagination($array)
     {
+    	//Numero de registro a mostrar por pagina 
+      	$perPag = $this->getPerPage();
+      	$perPag = intval($perPag->val);
+
     	// Get current page form url e.x. &page=1
         $currentPage = LengthAwarePaginator::resolveCurrentPage();
  
@@ -384,7 +396,7 @@ class SearchController extends Controller
         $itemCollection = collect($array);
  
         // Define how many items we want to be visible in each page
-        $perPage = $limit; //1;
+        $perPage = $perPag; //1;
  
         // Slice the collection to get the items to display in current page
         $currentPageItems = $itemCollection->slice(($currentPage * $perPage) - $perPage, $perPage)->all();

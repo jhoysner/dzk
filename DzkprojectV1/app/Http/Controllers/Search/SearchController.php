@@ -93,7 +93,6 @@ class SearchController extends Controller
 		} else {
 			$offset = $request->offset;
 		}
-
 		//Obtiene la latitud y logitud del cliente 
       	$local_user = $this->getLocalizationUser();
       	      	
@@ -180,15 +179,32 @@ class SearchController extends Controller
 		      		$resultado[$value->idbranch] =$value;	
 		      	}
 
+		      	$commerces= [];
+		      	$k=1;
 				//Ordena el resultado obtenido por distancia
 		    	foreach ($branchs as $key => $value) {
 		    		if($resultado[$value->idbranch]['commerces'] == ""){
 		    			unset($branchs[$key]);
 		    		} else {
-		    			$value->commerce = $resultado[$value->idbranch]['commerces'];
+		    			if($request->tags) {
+		    				$com = $resultado[$value->idbranch]['commerces'];
+	    					if($com->tags->count() > 0) {
+				    			$commerces[$k] = $resultado[$value->idbranch]['commerces'];
+	    					} else {
+	    						unset($branchs[$key]);
+	    					}
+		    			} else {
+			    			$commerces[$k] = $resultado[$value->idbranch]['commerces'];
+		    			}
+
+		    			//$value->commerce = $resultado[$value->idbranch]['commerces'];
+		    			//$commerces[$k] = $resultado[$value->idbranch]['commerces'];
+		    			$k++;
 		    		}
 		    		
 		    	}
+
+/*		    			return $commerces;
 
 		    	$branchs['total'] = $paginate['total'];
 		    	$branchs['current_page'] = $paginate['current_page'];
@@ -196,19 +212,19 @@ class SearchController extends Controller
 		    	$branchs['last_page'] = $paginate['last_page'];
 		    	$branchs['from'] = $paginate['from'];
 		    	$branchs['to'] = $paginate['to'];
-		    	
+*/		    	
 //		    	$data=[];
 //		    	$data['commerces'] = $branchs;
 
-		    	$data = $branchs;
+//		    	$data = $branchs;
 
-//		    	$pagination = $this->getPagination($branchs, $limit);
+		    	$pagination = $this->getPagination($commerces, $limit);
 				
 				return response()->json([
 										'success'    => true, 
-										'data'       => $data,
+										//'data'       => $data,
 										//'paginate'   => $paginate,
-//										'data' =>$pagination
+										'data' =>$pagination
 										], 200);
 				break;
 
@@ -259,32 +275,50 @@ class SearchController extends Controller
 				foreach ($query as $value) {
 		      		$resultado[$value->idbranch] = $value;	
 		      	}
-		      	$dis=[];
+		      	
+		      	$discounts=[];
 		      	$k = 1;
 		      	//Ordena el resultado obtenido por distancia ASC
 		    	foreach ($branchs as $key => $value) {
 		    		if($resultado[$value->idbranch]['discounts']->count() == 0){
 		    			unset($branchs[$key]);
 		    		} else {
-		    			$value->discount = $resultado[$value->idbranch]['discounts'];
-		    			array_push($dis,array($k=>$resultado[$value->idbranch]['discounts']));
+		    			//$value->discount = $resultado[$value->idbranch]['discounts'];
+		    			if($request->tags) {
+		    				$dis = $resultado[$value->idbranch]['discounts'];
+		    				foreach ($dis as $k => $val) {
+		    					if($val->tags->count() > 0) {
+		    						$discounts[$k] = $resultado[$value->idbranch]['discounts'];
+		    					} else {
+		    						unset($branchs[$key]);
+		    					}
+		    				}	
+		    			} else {
+			    			$discounts[$k] = $resultado[$value->idbranch]['discounts'];
+		    			}
+		    			
 		    			$k++;
 		    		}		    		
 		    	}
-
-		    	return $dis;
+				
+				/*$discounts['total'] = $paginate['total'];
+		    	$discounts['current_page'] = $paginate['current_page'];
+		    	$discounts['per_page'] = $paginate['per_page'];
+		    	$discounts['last_page'] = $paginate['last_page'];
+		    	$discounts['from'] = $paginate['from'];
+		    	$discounts['to'] = $paginate['to'];
+		    	*/
 
 //		    	$data=[];
 //		    	$data['discounts'] = $branchs;
-		    	$data = $branchs;
-
-//		    	$pagination = $this->getPagination($branchs, $limit);
+		    	//$data = $discounts;
+		    	$pagination = $this->getPagination($discounts, $limit);
 				
 				return response()->json([
 										'success'    => true, 
-										'data' 	     => $data,
-										'paginate' 	 => $paginate,
-										//'data' => $pagination
+										//'data' 	     => $data,
+										//'paginate' 	 => $paginate,
+										'data' => $pagination
 										], 200);
 	    		break;
 	    
@@ -337,6 +371,7 @@ class SearchController extends Controller
             'type'  => 'required|string',
             'tags' 	=> 'array',
             'word'  => 'string',
+            'offset'=> 'integer'
         ]);
     }
 
@@ -358,7 +393,7 @@ class SearchController extends Controller
         $paginatedItems= new LengthAwarePaginator($currentPageItems , count($itemCollection), $perPage);
  
         // set url path for generted links
-        //$paginatedItems->setPath($request->url());
+        $paginatedItems->setPath(\Config::get('app.url').'/api/search');
  
         return $paginatedItems;
     }

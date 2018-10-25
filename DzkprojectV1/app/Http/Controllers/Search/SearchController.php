@@ -75,7 +75,6 @@ class SearchController extends Controller
 		$word = $this->getComodin($word);
 		//split quitar espacio 
 		$word = preg_split("/[\s,]+/", $word);
-
 		//retirar los articulos (el, los, la, las, un, una, unos, unas, de, del, en)
 		$word = $this->getQuitElement($word);
 
@@ -304,7 +303,6 @@ class SearchController extends Controller
 		    			} else {
 			    			$discounts[$k] = $resultado[$value->idbranch]['discounts'];
 		    			}
-		    			
 		    			$k++;
 		    		}		    		
 		    	}
@@ -378,7 +376,7 @@ class SearchController extends Controller
         return Validator::make($data, [
             'type'  => 'required|string',
             'tags' 	=> 'array',
-            'word'  => 'string',
+            'word'  => 'nullable|string',
             'offset'=> 'integer'
         ]);
     }

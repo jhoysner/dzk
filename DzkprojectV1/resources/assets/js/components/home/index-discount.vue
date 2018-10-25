@@ -260,7 +260,7 @@ import paginator from '../../utilities/paginator';
 
       filtering(page) {
         let data = {
-          category_discount: this.category,
+          category_discount: this.category? this.category:"",
           tags: this.tags,
           word: this.search,
           type: 'discount'

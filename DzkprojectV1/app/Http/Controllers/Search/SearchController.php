@@ -300,10 +300,9 @@ class SearchController extends Controller
 	    		$val_ant = 0;
 
 				foreach ($query as $key => $value) {
-
 					foreach($value->branchs as $temp){
 						$r = array_search($temp->idbranch, $branchsOrder);
-						if($r) {
+						if($r >= 0) {
 							if($val_ant>$r || $val_ant == $r) {
 								unset($resultado[$val_ant]);
 								$resultado[$r] = $value;
@@ -316,7 +315,6 @@ class SearchController extends Controller
 					}
 		      		//$resultado[$value->idbranch] =$value;	
 		      	}
-
 
 /*	    		$k=1;
 				foreach ($query as $key => $value) {

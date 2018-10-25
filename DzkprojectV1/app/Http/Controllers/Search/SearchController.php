@@ -301,7 +301,7 @@ class SearchController extends Controller
 
 				foreach ($query as $key => $value) {
 					foreach($value->branchs as $temp){
-						$r = array_search('9e55ba03-caa5-11e8-89ee-74c63b1404ed', $branchsOrder);
+						$r = array_search($temp->idbranch, $branchsOrder);
 						if($r >= 0) {
 							if($val_ant>$r || $val_ant == $r) {
 								unset($resultado[$val_ant]);

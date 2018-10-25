@@ -53871,6 +53871,12 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
       }).catch(function (err) {
         return console.log(err);
       });
+      /*axios.post('api/search?page=' + page, data).then(response => {
+        console.log(response);
+        this.commerces = response.data.data.data;
+        this.pagination = response.data.paginate;
+      })
+      .catch(err => console.log(err));*/
     }
   }
 });

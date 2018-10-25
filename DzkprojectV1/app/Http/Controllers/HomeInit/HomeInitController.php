@@ -221,4 +221,23 @@ class HomeInitController extends Controller
         return response()->json(['data'=> $user_has_discount], 201);
 
     }
+
+    public function listUserHasDiscount()
+    {
+        $uhd = UserHasDiscount::where('commerce_idcommerce', 'e1C1ug06cTODmclayIKnzKHpRdRlBkS7nIMJ')->paginate(2); //Selecciono los descuentos que sean igual al comercio conectado. Por ahora, estatico.
+
+        return response()->json([
+            'paginate' => [
+                'total'         =>  $uhd->total(),
+                'current_page'  =>  $uhd->currentPage(),
+                'per_page'      =>  $uhd->perPage(),
+                'last_page'     =>  $uhd->lastPage(),
+                'from'          =>  $uhd->firstItem(),
+                'to'            =>  $uhd->lastPage()
+            ],
+
+            'data' => $uhd
+
+        ],200);
+    }
 }

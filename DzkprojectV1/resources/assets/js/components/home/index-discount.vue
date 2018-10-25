@@ -285,7 +285,7 @@ import paginator from '../../utilities/paginator';
          this.form.discountprice = discount.discountprice;
          this.form.discountpercentage = discount.discountpercentage;
          this.form.discount_iddiscount = discount.iddiscount;
-         this.form.userhasdiscountstatus_iduserhasdiscountstatus = 'eada8935-d7cc-11e8-86bd-74c63b1404ed';
+         this.form.userhasdiscountstatus_iduserhasdiscountstatus = '2';
          this.form.commerce_idcommerce = discount.branchs[0].commerce_idcommerce;
          this.form.branch_idbranch = discount.branchs[0].idbranch;
          this.form.users_id = 'abcd1234';

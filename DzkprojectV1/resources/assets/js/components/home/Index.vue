@@ -272,6 +272,12 @@ import paginator from '../../utilities/paginator';
           this.pagination = response.data.paginate;
         })
         .catch(err => console.log(err));
+        /*axios.post('api/search?page=' + page, data).then(response => {
+          console.log(response);
+          this.commerces = response.data.data.data;
+          this.pagination = response.data.paginate;
+        })
+        .catch(err => console.log(err));*/
       }
     },
   }

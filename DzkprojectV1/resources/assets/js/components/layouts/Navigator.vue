@@ -12,12 +12,19 @@
                 </router-link>
             </li>
             <li>
+              <router-link to='/cliente'>
+                  <a>
+                    cliente
+                  </a>
+              </router-link>
+            </li>
+            <li>
               <router-link to='/tags'>
                   <a>
                     Tags
                   </a>
               </router-link>
-            </li>
+            </li>            
             <li>
               <router-link to='/params'>
                   <a>

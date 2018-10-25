@@ -89,3 +89,4 @@ Route::post('search', 'Search\SearchController@getSearch');
 
 
 Route::post('user-has-discount','HomeInit\HomeInitController@saveUserHasDiscount');
+Route::get('client', 'Cliente\ClienteController@index');

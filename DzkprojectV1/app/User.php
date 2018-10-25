@@ -57,4 +57,7 @@ class User extends Authenticatable
       return $this->belongsTo('App\City', 'city_idcity', 'idcity');
     }
 
+    public function  discounts(){
+        return $this->belongsToMany('App\Discount','users_has_discount','users_id')->withPivot('idusers_has_discount','charcode', 'qrcode','validfrom','validto','userhasdiscountstatus_iduserhasdiscountstatus' )->whereNull('users_has_discount.deleted_at');
+    }
 }

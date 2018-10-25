@@ -137,6 +137,7 @@
                   discountprice: '', 
                   discountpercentage: '', 
                   discountcategory_iddiscountcategory: '', 
+                  currency_idcurrency: '4d88d876-d868-11e8-8010-74c63b1404ed', 
                 },
                 url: '/discount',
                 errorsDiscount: {},
@@ -203,6 +204,7 @@
                     this.form.outstanding = false
                     this.form.amountavailable= 0 
                     this.form.amountredeemed= 0
+                    this.form.currency_idcurrency= '4d88d876-d868-11e8-8010-74c63b1404ed', 
                     this.value = []
 
                     this.$parent.cargarDiscount()

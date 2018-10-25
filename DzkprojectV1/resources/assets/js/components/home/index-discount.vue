@@ -268,8 +268,8 @@ import paginator from '../../utilities/paginator';
 
         console.log(data);
 
-        //axios.post('api/all-discounts?page=' + page, data).then(response => {
-        axios.post('api/search', data).then(response => {
+        axios.post('api/all-discounts?page=' + page, data).then(response => {
+        // axios.post('api/search', data).then(response => {
           console.log(response)
           this.discounts = response.data.discount.data;
           this.pagination = response.data.paginate;
@@ -285,7 +285,7 @@ import paginator from '../../utilities/paginator';
          this.form.discountprice = discount.discountprice;
          this.form.discountpercentage = discount.discountpercentage;
          this.form.discount_iddiscount = discount.iddiscount;
-         this.form.userhasdiscountstatus_iduserhasdiscountstatus = 'eada8935-d7cc-11e8-86bd-74c63b1404ed';
+         this.form.userhasdiscountstatus_iduserhasdiscountstatus = '2';
          this.form.commerce_idcommerce = discount.branchs[0].commerce_idcommerce;
          this.form.branch_idbranch = discount.branchs[0].idbranch;
          this.form.users_id = 'abcd1234';
@@ -300,6 +300,7 @@ import paginator from '../../utilities/paginator';
                 text: "Se obtuvo Descuento Satifactoriamente",
                 icon: "success",
               })
+             console.log(response);
           })
           .catch(error => {
             console.log(error.response.data)

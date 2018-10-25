@@ -49,16 +49,23 @@
             </li>            
             <li>
               <router-link to='/discount'>
-                  <a>
-                    Descuentos
-                  </a>
+                <a>
+                  Descuentos
+                </a>
               </router-link>
             </li>
             <li>
               <router-link to='/profile'>
-                  <a>
-                    Perfil
-                  </a>
+                <a>
+                  Perfil
+                </a>
+              </router-link>
+            </li>
+            <li>
+              <router-link to='/discounts-postulated'>
+                <a>
+                  Descuentos postulados <span class="badge badge-dark">0</span>
+                </a>
               </router-link>
             </li>
             <li>

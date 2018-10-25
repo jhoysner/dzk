@@ -50633,7 +50633,7 @@ var render = function() {
                 [
                   _c("router-link", { attrs: { to: "/discount" } }, [
                     _c("a", [
-                      _vm._v("\n                  Descuentos\n                ")
+                      _vm._v("\n                Descuentos\n              ")
                     ])
                   ])
                 ],
@@ -50645,9 +50645,28 @@ var render = function() {
                 [
                   _c("router-link", { attrs: { to: "/profile" } }, [
                     _c("a", [
-                      _vm._v("\n                  Perfil\n                ")
+                      _vm._v("\n                Perfil\n              ")
                     ])
                   ])
+                ],
+                1
+              ),
+              _vm._v(" "),
+              _c(
+                "li",
+                [
+                  _c(
+                    "router-link",
+                    { attrs: { to: "/discounts-postulated" } },
+                    [
+                      _c("a", [
+                        _vm._v("\n                Descuentos postulados "),
+                        _c("span", { staticClass: "badge badge-dark" }, [
+                          _vm._v("0")
+                        ])
+                      ])
+                    ]
+                  )
                 ],
                 1
               ),
@@ -50794,27 +50813,30 @@ var baseRoutes = [{
     component: __WEBPACK_IMPORTED_MODULE_4__components_commerces_index_vue___default.a
 }, {
     path: '/commerce/:id',
-    component: __WEBPACK_IMPORTED_MODULE_9__components_home_commerce_detail___default.a
+    component: __WEBPACK_IMPORTED_MODULE_10__components_home_commerce_detail___default.a
 
 }, {
     path: '/commerce/:id/branchs',
-    component: __WEBPACK_IMPORTED_MODULE_12__components_home_commerce_detail_branchs___default.a
+    component: __WEBPACK_IMPORTED_MODULE_13__components_home_commerce_detail_branchs___default.a
 
 }, {
     path: '/commerce/:id/discounts',
-    component: __WEBPACK_IMPORTED_MODULE_13__components_home_commerce_detail_discounts___default.a
+    component: __WEBPACK_IMPORTED_MODULE_14__components_home_commerce_detail_discounts___default.a
 
 }, {
     path: '/branch/:id',
-    component: __WEBPACK_IMPORTED_MODULE_10__components_home_branch_detail___default.a
+    component: __WEBPACK_IMPORTED_MODULE_11__components_home_branch_detail___default.a
 
 }, {
     path: '/discount/:id',
-    component: __WEBPACK_IMPORTED_MODULE_11__components_home_discount_detail___default.a
+    component: __WEBPACK_IMPORTED_MODULE_12__components_home_discount_detail___default.a
 
 }, {
     path: '/branchs',
     component: __WEBPACK_IMPORTED_MODULE_5__components_branchs_index_vue___default.a
+}, {
+    path: '/discounts-postulated',
+    component: __WEBPACK_IMPORTED_MODULE_9__components_discounts_postulated_index_vue___default.a
 }, {
     path: '/profile',
     component: __WEBPACK_IMPORTED_MODULE_6__components_User_ProfileComponent_vue___default.a
@@ -50839,7 +50861,7 @@ var baseRoutes = [{
 
 // })
 
-var routes = baseRoutes.concat(__WEBPACK_IMPORTED_MODULE_14__components_discount_router__["a" /* default */]);
+var routes = baseRoutes.concat(__WEBPACK_IMPORTED_MODULE_15__components_discount_router__["a" /* default */]);
 /* harmony default export */ __webpack_exports__["a"] = (new __WEBPACK_IMPORTED_MODULE_1_vue_router__["a" /* default */]({
     mode: 'history',
     routes: routes
@@ -53864,6 +53886,12 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
       }).catch(function (err) {
         return console.log(err);
       });
+      /*axios.post('api/search?page=' + page, data).then(response => {
+        console.log(response);
+        this.commerces = response.data.data.data;
+        this.pagination = response.data.paginate;
+      })
+      .catch(err => console.log(err));*/
     }
   }
 });
@@ -110244,6 +110272,10 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
     this.index();
   },
 
+		Bus.$on('change_page', function (page) {
+			_this.index(page);
+		});
+	},
 
   methods: {
     index: function index() {

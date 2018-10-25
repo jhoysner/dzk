@@ -8,6 +8,7 @@ import Branchs from '../components/branchs/index.vue'
 import Profile from '../components/User/ProfileComponent.vue'
 import Params from '../components/params/index.vue'
 import Tags from '../components/tags/index.vue'
+import Discountsp from '../components/discounts-postulated/index.vue'
 import DetailCommerce from '../components/home/commerce-detail';
 import DetailBranch from '../components/home/branch-detail';
 import DetailDiscount from '../components/home/discount-detail';
@@ -73,6 +74,10 @@ const baseRoutes = [
         {
             path: '/branchs',
             component: Branchs
+        },
+        {
+            path: '/discounts-postulated',
+            component: Discountsp
         },
         {
             path: '/profile',

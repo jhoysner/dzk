@@ -190,6 +190,13 @@ class SearchController extends Controller
 		    		
 		    	}
 
+		    	$branchs['total'] = $paginate['total'];
+		    	$branchs['current_page'] = $paginate['current_page'];
+		    	$branchs['per_page'] = $paginate['per_page'];
+		    	$branchs['last_page'] = $paginate['last_page'];
+		    	$branchs['from'] = $paginate['from'];
+		    	$branchs['to'] = $paginate['to'];
+		    	
 //		    	$data=[];
 //		    	$data['commerces'] = $branchs;
 
@@ -200,7 +207,7 @@ class SearchController extends Controller
 				return response()->json([
 										'success'    => true, 
 										'data'       => $data,
-										'paginate'   => $paginate,
+										//'paginate'   => $paginate,
 //										'data' =>$pagination
 										], 200);
 				break;
@@ -248,18 +255,24 @@ class SearchController extends Controller
 	    		$paginate = $this->getPaginate($query);
 
 	    		$resultado = [];
+
 				foreach ($query as $value) {
 		      		$resultado[$value->idbranch] = $value;	
 		      	}
-
+		      	$dis=[];
+		      	$k = 1;
 		      	//Ordena el resultado obtenido por distancia ASC
 		    	foreach ($branchs as $key => $value) {
 		    		if($resultado[$value->idbranch]['discounts']->count() == 0){
 		    			unset($branchs[$key]);
 		    		} else {
 		    			$value->discount = $resultado[$value->idbranch]['discounts'];
+		    			array_push($dis,array($k=>$resultado[$value->idbranch]['discounts']));
+		    			$k++;
 		    		}		    		
 		    	}
+
+		    	return $dis;
 
 //		    	$data=[];
 //		    	$data['discounts'] = $branchs;

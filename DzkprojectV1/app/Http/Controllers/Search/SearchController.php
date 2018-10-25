@@ -183,14 +183,26 @@ class SearchController extends Controller
 	    		$paginate = $this->getPaginate($query);
 
 				$resultado = [];
+				$val_ant = 0;
 
 				foreach ($query as $key => $value) {
 					foreach($value->branchs as $temp){
 						$r = array_search($temp->idbranch, $branchsOrder);
-						$resultado[$r] = $value;
+						if($r) {
+							if($val_ant>$r || $val_ant == $r) {
+								unset($resultado[$val_ant]);
+								$resultado[$r] = $value;
+								$val_ant = $r;
+							} else {
+								$resultado[$r] = $value;
+								$val_ant = $r;
+							}							
+						}
+						//$resultado[$r] = $value;
 					}
 		      		//$resultado[$value->idbranch] =$value;	
 		      	}
+
 
 
 /*		      	$commerces= [];
@@ -285,7 +297,6 @@ class SearchController extends Controller
 	    		$paginate = $this->getPaginate($query);
 
 	    		$resultado = [];
-	    		$encontrado = false;
 	    		$val_ant = 0;
 
 				foreach ($query as $key => $value) {

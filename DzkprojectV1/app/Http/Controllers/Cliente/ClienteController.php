@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Cliente;
 
 use App\Http\Controllers\Controller;
 use App\User;
+use App\UserHasDiscount;
 use Illuminate\Http\Request;
 
 class ClienteController extends Controller
@@ -14,7 +15,13 @@ class ClienteController extends Controller
 
       $data = $user->discounts;
 
-
       return response()->json(['data'=> $data], 200);
+    }
+
+    public function detailUserDiscount($id){
+
+       $data = UserHasDiscount::find($id)->with('discounts')->first();
+
+       return response()->json(['data'=> $data], 200);
     }
 }

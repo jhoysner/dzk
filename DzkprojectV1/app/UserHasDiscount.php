@@ -45,4 +45,9 @@ class UserHasDiscount extends Model
     {
         return $this->belongsTo('App\Discount', 'discount_iddiscount', 'iddiscount');
     }
+
+    public function discountsStatus()
+    {
+        return $this->belongsTo('App\UserHasDiscountStatus', 'userhasdiscountstatus_iduserhasdiscountstatus', 'iduserhasdiscountstatus');
+    }
 }

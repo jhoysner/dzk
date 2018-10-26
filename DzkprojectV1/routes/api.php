@@ -90,4 +90,10 @@ Route::post('search', 'Search\SearchController@getSearch');
 
 Route::post('user-has-discount','HomeInit\HomeInitController@saveUserHasDiscount');
 Route::get('client', 'Cliente\ClienteController@index');
+
 Route::get('user-has-discount', 'UserHasDiscountController@listUserHasDiscount');
+Route::get('authorize-discount/{id}', 'UserHasDiscountController@authorizeDiscount');
+Route::get('not-authorize-discount/{id}', 'UserHasDiscountController@notAuthorize');
+Route::get('cancel-discount/{id}', 'UserHasDiscountController@cancelDiscount');
+Route::get('search-charcode/{charcode}', 'UserHasDiscountController@searchCharcode');
+Route::get('redeemed-discount/{id}', 'UserHasDiscountController@redeemedDiscount');

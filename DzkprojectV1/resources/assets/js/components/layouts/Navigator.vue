@@ -64,7 +64,7 @@
             <li>
               <router-link to='/discounts-postulated'>
                 <a>
-                  Descuentos postulados <span class="badge badge-dark">0</span>
+                  Descuentos postulados <!--<span class="badge badge-dark">0</span> -->
                 </a>
               </router-link>
             </li>

@@ -5,20 +5,33 @@
           <div class="settings-content">
             <ul class="nav nav-tabs">
               <li class="nav-item">
-                <router-link class="nav-link active" to='/discounts-postulated'>
+                <router-link class="nav-link" to='/discounts-postulated'>
                   
                     Solcicitudes para descuento
                 </router-link>
               </li>
               <li class="nav-item">
-                 <router-link to="/discounts-redeemed" class="nav-link">
+                 <router-link class="nav-link active" to="/discounts-redeemed">
                     Redimir un descuento
                  </router-link>
               </li>
             </ul>
+
+            <div class="container my-4">
+              <div class="row">
+                <div class="col-lg-12">
+                  <div class="form-group">
+                    <input type="text" class="form-control" id="charcode" placeholder="Ingresa Charcode" v-model="charcode">
+                  </div>
+                  <div class="form-group">
+                    <button class="btn btn-primary btn-block" @click="sendCharcode">Buscar</button>
+                  </div>
+                </div>
+              </div>
+            </div>
           </div>
 
-          <div class="row pb-120 pt-80">    <!-- Aqui empieza -->           
+          <div class="row pb-120 pt-80 item-redeemed">    <!-- Aqui empieza -->           
             <div class="col-lg-3 col-md-6" v-for="discount in discounts">
               <div class="single-image-thumb single-feature-item relative">   
                   <div class="thumb relative">
@@ -79,133 +92,91 @@
                     </div>
                   </div>
                   <div class="meta d-flex flex-row">
-                    <a class="btn btn-outline-primary btn-d btn-block" v-if="discount.discounts_status.name == 'ACTIVE' " @click="authorize(discount.idusers_has_discount)">
-                      Autorizar descuento
+                    <a class="btn btn-outline-primary btn-d btn-block" v-if="discount.discounts_status.name == 'AUTHORIZED' " @click="redeemed(discount.idusers_has_discount)">
+                      Redimir descuento
                     </a>
                   </div> 
-                  <div class="meta d-flex flex-row">
-                    <a class="btn btn-outline-warning btn-d btn-block" v-if="discount.discounts_status.name == 'AUTHORIZED'" @click="notAuthorize(discount.idusers_has_discount)">
-                      No autorizar
-                    </a>
-                  </div>
-
-                  <div class="meta d-flex flex-row">
-                    <a class="btn btn-outline-danger btn-d btn-block" v-if="discount.discounts_status.name == 'AUTHORIZED' || discount.discounts_status.name == 'ACTIVE'" @click="cancel(discount.idusers_has_discount)">
-                      Cancelar
-                    </a>
-                  </div>
               </div>
             </div>
           </div> <!-- Aqui termina -->
       </div>
     </div>
-    <paginator :pagination="pagination"></paginator>
   </div>
 </template>
 
 <script>
-import Bus from '../../utilities/EventBus.js';
-import paginator from '../../utilities/paginator';
+import $ from 'jquery';
 
   export default {
-    components: { paginator},
     data() {
       return {
+        charcode: '',
         discounts: [],
-        pagination: {
-            'total': 0,
-            'current_page': 0,
-            'per_page': 0,
-            'last_page': 0,
-            'from': 0,
-            'to': 0
-        },
-        offset: 2,
       }
     },
 
     mounted() {
-      this.index();
-
-      Bus.$on('change_page', (page) => {
-        this.index(page);
-      });
+      
     },
 
     methods: {
-      index(page) {
-        axios.get('api/user-has-discount?page=' + page).then(response => {
-          this.discounts = response.data.data.data;
-          this.pagination = response.data.paginate;
+
+      sendCharcode() {
+
+        if(!this.charcodeSize()) {
+          swal({
+            title: 'El charcode debe ser de 4 caracteres',
+            icon: "warning",
+          });
+          $('.item-redeemed').css('display', 'none');
+          return false;
+        }
+
+        axios.get('api/search-charcode/' + this.charcode).then(response => {
+          console.log(response.data);
+          if(!response.data.success) {
+            swal({
+              title: response.data.msg,
+              icon: "warning",
+            });
+            this.charcode = '';
+            $('.item-redeemed').css('display', 'none');
+            return false;
+          }
+
+          $('.item-redeemed').css('display', 'block');
+          swal({
+            title: response.data.msg,
+            icon: "success",
+          });
+          this.discounts = response.data.data;
         })
         .catch(err => console.log(err))
       },
 
-      authorize(id) {
-        swal({
-          title: "¿Estas seguro de autorizar esta solicitud?",
-          icon: "warning",
-          buttons: true,
-          dangerMode: true,
-        })
-        .then((will) => {
-          if (will) {
-            axios.get('api/authorize-discount/' + id).then(response => {
-              swal({
-                title: response.data.msg,
-                icon: "success",
-              });
-              this.index();
-            })
-            .catch(err => console.log(err))
-          }
-        });
-        
+      charcodeSize() {
+        let code = $('#charcode').val();
+        if(code.length !== 4 ) {
+          return false
+        } else {
+          return true;
+        }
       },
 
-      notAuthorize(id) {
-        swal({
-          title: "¿Estas seguro de no autorizar esta solicitud?",
-          icon: "warning",
-          buttons: true,
-          dangerMode: true,
-        })
-        .then((will) => {
-          if (will) {
-            axios.get('api/not-authorize-discount/' + id).then(response => {
-              swal({
-                title: response.data.msg,
-                icon: "success",
-              });
-              this.index();
-            })
-            .catch(err => console.log(err))
-          }
-        });
-        
-      },
+      redeemed(id) {
+        axios.get('api/redeemed-discount/' + id).then(response => {
+          swal({
+            title: response.data.msg,
+            icon: "success",
+          });
 
-      cancel(id) {
-        swal({
-          title: "¿Estas seguro de cancelar esta solicitud?",
-          icon: "warning",
-          buttons: true,
-          dangerMode: true,
+          this.$router.push('/discounts-postulated');
         })
-        .then((will) => {
-          if (will) {
-            axios.get('api/cancel-discount/' + id).then(response => {
-              swal({
-                title: response.data.msg,
-                icon: "success",
-              });
-              this.index();
-            })
-            .catch(err => console.log(err))
-          }
-        });
+        .catch(err => console.log(err))
       }
     }
+
+  
   }
 </script>
 
@@ -217,8 +188,8 @@ import paginator from '../../utilities/paginator';
   .btn-d:hover {
     color: #FFF !important;
   }
-
-  .img-fluid {
-    height: 125px;
+  
+  .item-redeemed {
+    style: none;
   }
 </style>

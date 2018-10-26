@@ -68,7 +68,6 @@ class SearchController extends Controller
 
     protected function getWord($cadena)
     {
-    	$word = "";
 		//Limpiar caracteres solo alfanumericos
 		$word = $this->getAlphaNumeric($cadena);
 		//conversion a minusculas
@@ -140,11 +139,9 @@ class SearchController extends Controller
       		$branchsOrder[$key] = $value->idbranch;
       	}
 
-
 		switch ($request->type) {
 	    	case 'commerce':      	
-
- 				$query = Commerce::with('ccategories','tags')
+	    		$query = Commerce::with('ccategories','tags')
  						->with('branchs'); 						
 
  				$query->whereHas('branchs', function($q) use($branch) {
@@ -163,7 +160,8 @@ class SearchController extends Controller
 					foreach ($word as $value) {
 						if($value === reset($word)){
 							$query->where('name','like','%'.$value.'%');
-						} else {
+						} 
+						if($value !== reset($word)) {
 							$query->orWhere('name','like','%'.$value.'%');
 						}
 					}
@@ -172,17 +170,18 @@ class SearchController extends Controller
                 if($request->tags && count($request->tags) > 0) {
                 	$tags = $request->tags;
                     foreach ($tags as $value) {
-                       $query->WhereHas('tags', function ($query) use ($value) {
-                                $query->where('idtags',$value);
+                       $query->WhereHas('tags', function ($q) use ($value) {
+                             $q->orWhere('idtags',$value);
                         });
                     }
                 }
 
+
 	    		$query = $query->paginate($limit);
 	    		
 	    		$paginate = $this->getPaginate($query);
-
-				$resultado = [];
+//return $query;
+/*				$resultado = [];
 				$val_ant = 0;
 
 
@@ -203,6 +202,32 @@ class SearchController extends Controller
 						//$resultado[$r] = $value;
 					}
 		      		//$resultado[$key] =$value;	
+		      	}
+*/
+	    		$resultado = [];
+	    		$val_ant = 0;
+	    		$agregado = false;
+
+				foreach ($query as $key => $value) {
+					$resultado[$key] = $value;
+					//Ordenado
+					/*$agregado = false;	
+					foreach($value->branchs as $temp){
+						$r = array_search($temp->idbranch, $branchsOrder);
+												
+						if($r >= 0 && $val_ant >= $r) {
+							unset($resultado[$val_ant]);
+							$resultado[$r] = $value;
+							$val_ant = $r;
+							$agregado = true;
+						} 
+						if($agregado == false){
+							$resultado[$r] = $value;
+							$val_ant = 0;
+						}
+
+					}*/
+		      		//$resultado[$value->idbranch] =$value;	
 		      	}
 
 
@@ -259,6 +284,18 @@ class SearchController extends Controller
 
 	    	case 'discount':
  				$query = Discount::with('categories','tags')
+ 						/*->with(['tags' => function($query) use($request) {
+					  		if($request->tags) {
+					  			$tags = $request->tags;
+					  			foreach ($tags as $value) {
+					  				if($value === reset($tags)){
+										$query->where('idtags',$value);
+									} else {
+										$query->orWhere('idtags',$value);
+									}		
+					  			}
+					  		}
+ 						}])*/
  						->with(['branchs' =>function ($query) {
                             $query->with('commerces');
                         }]);
@@ -279,7 +316,8 @@ class SearchController extends Controller
 					foreach ($word as $value) {
 						if($value === reset($word)){
 							$query->where('title','like','%'.$value.'%');
-						} else {
+						} 
+						if($value !== reset($word)){
 							$query->orWhere('title','like','%'.$value.'%');
 						}
 					}
@@ -288,42 +326,49 @@ class SearchController extends Controller
                 if($request->tags && count($request->tags) > 0) {
                 	$tags = $request->tags;
                     foreach ($tags as $value) {
-                       $query->WhereHas('tags', function ($query) use ($value) {
-                                            $query->where('idtags',$value);
-                                        });
+                       $query->WhereHas('tags', function ($q) use ($value, $tags) {
+                           /*if($value == reset($tags)){
+								$query->where('idtags','=',$value);
+							} 
+							if($value != reset($tags)){
+								$query->orWhere('idtags','=',$value);
+							}*/
+							
+							$q->orWhere('idtags',$value);
+                        });
                     }
                 }
-
+//return $query->toSql();
 	    		$query = $query->paginate($limit);
-	    		
-	    		$paginate = $this->getPaginate($query);
+//return $query;
 
-	    		$res = [];
+	    		//$paginate = $this->getPaginate($query);
+
 	    		$resultado = [];
 	    		$val_ant = 0;
+	    		$agregado = false;
 
 				foreach ($query as $key => $value) {
+					$resultado[$key]=$value;
+					//Ordenado
+					/*$agregado = false;	
 					foreach($value->branchs as $temp){
-						
 						$r = array_search($temp->idbranch, $branchsOrder);
-						
-						$res[$temp->idbranch] = $r;
-						
-						/*if($r >= 0) {
-							if($val_ant>$r || $val_ant == $r) {
-								unset($resultado[$val_ant]);
-								$resultado[$r] = $value;
-								$val_ant = $r;
-							} else {
-								$resultado[$r] = $value;
-								$val_ant = $r;
-							}
-						}*/
+												
+						if($r >= 0 && $val_ant >= $r) {
+							unset($resultado[$val_ant]);
+							$resultado[$r] = $value;
+							$val_ant = $r;
+							$agregado = true;
+						} 
+						if($agregado == false){
+							$resultado[$r] = $value;
+							$val_ant = 0;
+						}
 
-					}
+					}*/
 		      		//$resultado[$value->idbranch] =$value;	
 		      	}
-return $res;
 /*	    		$k=1;
 				foreach ($query as $key => $value) {
 					if($value->branchs->count() > 0) {
@@ -442,7 +487,7 @@ $discounts;*/
         return Validator::make($data, [
             'type'  => 'required|string',
             'tags' 	=> 'array',
-            'word'  => 'nullable|string',
+            //'word'  => 'nullable|string',
             'offset'=> 'integer'
         ]);
     }

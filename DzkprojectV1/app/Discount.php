@@ -57,4 +57,9 @@ class Discount extends Model
        return $this->belongsTo('App\DiscountCategory', 'discountcategory_iddiscountcategory', 'iddiscountcategory');
     }
 
+    public function userhasdiscounts()
+    {
+        return $this->hasMany('App\UserHasDiscount');
+    }
+
 }

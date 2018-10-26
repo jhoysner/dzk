@@ -192,7 +192,7 @@ import paginator from '../../utilities/paginator';
     },
 
     mounted() {
-      this.index();
+      //this.index();
       this.getTags();
       this.getCommerceCategories();
 
@@ -231,14 +231,14 @@ import paginator from '../../utilities/paginator';
         })
         .catch(err => console.log(err))
       },
-      index(page) {
+      /*index(page) {
         axios.get('api/all-commerces?page=' + page).then(response => {
           //console.log(response);
           this.commerces = response.data.commerce.data;
           this.pagination = response.data.paginate;
         })
         .catch(err => console.log(err))
-      },
+      },*/
 
       toggleSearch() {
         $('#search').toggle();
@@ -262,22 +262,22 @@ import paginator from '../../utilities/paginator';
           category_commerce: this.category,
           tags: this.tags,
           work: this.search,
-          type: 'commerce'
+          type: 'commerce',
+          offset: 0
         };
 
         // console.log(data);
 
-        axios.post('api/all-commerces?page=' + page, data).then(response => {
+        /*axios.post('api/all-commerces?page=' + page, data).then(response => {
           this.commerces = response.data.commerce.data;
           this.pagination = response.data.paginate;
         })
-        .catch(err => console.log(err));
-        /*axios.post('api/search?page=' + page, data).then(response => {
-          console.log(response);
-          this.commerces = response.data.data.data;
-          this.pagination = response.data.paginate;
-        })
         .catch(err => console.log(err));*/
+        axios.post('api/search?page=' + page, data).then(response => {
+          this.commerces = response.data.data.data;
+          this.pagination = response.data.paginate; 
+        })
+        .catch(err => console.log(err));
       }
     },
   }

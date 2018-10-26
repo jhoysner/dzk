@@ -170,8 +170,8 @@ class SearchController extends Controller
                 if($request->tags && count($request->tags) > 0) {
                 	$tags = $request->tags;
                     foreach ($tags as $value) {
-                       $query->WhereHas('tags', function ($q) use ($value) {
-                             $q->orWhere('idtags',$value);
+                       $query->WhereHas('tags', function ($query) use ($value) {
+                             $query->where('idtags',$value);
                         });
                     }
                 }
@@ -326,7 +326,7 @@ class SearchController extends Controller
                 if($request->tags && count($request->tags) > 0) {
                 	$tags = $request->tags;
                     foreach ($tags as $value) {
-                       $query->WhereHas('tags', function ($q) use ($value, $tags) {
+                       $query->WhereHas('tags', function ($query) use ($value) {
                            /*if($value == reset($tags)){
 								$query->where('idtags','=',$value);
 							} 
@@ -334,7 +334,7 @@ class SearchController extends Controller
 								$query->orWhere('idtags','=',$value);
 							}*/
 							
-							$q->orWhere('idtags',$value);
+							$query->where('idtags',$value);
                         });
                     }
                 }

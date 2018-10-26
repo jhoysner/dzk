@@ -252,7 +252,7 @@ class SearchController extends Controller
 				return response()->json([
 										'success'    => true, 
 										//'data'       => $data,
-										//'paginate'   => $paginate,
+										'paginate'   => $paginate,
 										'data' =>$pagination
 										], 200);
 				break;

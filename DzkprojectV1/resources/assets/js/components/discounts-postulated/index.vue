@@ -1,5 +1,5 @@
 <template>
-	<div>
+  <div>
     <div class="col-lg-12">
       <div>
           <div class="settings-content">
@@ -16,9 +16,9 @@
                  </router-link>
               </li>
             </ul>
-	     		</div>
+          </div>
 
-	     		<div class="row pb-120 pt-80">    <!-- Aqui empieza -->           
+          <div class="row pb-120 pt-80">    <!-- Aqui empieza -->           
             <div class="col-lg-3 col-md-6" v-for="discount in discounts">
               <div class="single-image-thumb single-feature-item relative">   
                   <div class="thumb relative">
@@ -39,7 +39,7 @@
                   <div class="details pb-10 pt-20">
                       <div class="title d-flex flex-row justify-content-between">
                           <a>
-                           <h6>Nombre del descuento</h6>
+                           <h6>{{ discount.discounts.title }}</h6>
                           </a>
                           <!--<h6 class="price">$59</h6> -->
                           <i class="icons icon-share"></i>
@@ -62,71 +62,72 @@
                   </div>
                   <!--<div class="meta d-flex flex-row">
                     <a class="btn btn-outline-primary btn-d btn-block">
-                    	Autorizar descuento
+                      Autorizar descuento
                     </a>
                   </div> -->
                   <div class="meta d-flex flex-row">
                     <a class="btn btn-outline-warning btn-d btn-block">
-                    	No autorizar
+                      No autorizar
                     </a>
                   </div>
 
                   <div class="meta d-flex flex-row">
                     <a class="btn btn-outline-danger btn-d btn-block">
-                    	Cancelar
+                      Cancelar
                     </a>
                   </div>
               </div>
             </div>
           </div> <!-- Aqui termina -->
-	    </div>
-	  </div>
-	  <paginator :pagination="pagination"></paginator>
-	</div>
+      </div>
+    </div>
+    <paginator :pagination="pagination"></paginator>
+  </div>
 </template>
 
 <script>
+import Bus from '../../utilities/EventBus.js';
 import paginator from '../../utilities/paginator';
 
-	export default {
-		components: { paginator},
-		data() {
-			return {
-				discounts: [],
-				pagination: {
-	          'total': 0,
-	          'current_page': 0,
-	          'per_page': 0,
-	          'last_page': 0,
-	          'from': 0,
-	          'to': 0
-	      },
-	      offset: 2,
-			}
-		},
+  export default {
+    components: { paginator},
+    data() {
+      return {
+        discounts: [],
+        pagination: {
+            'total': 0,
+            'current_page': 0,
+            'per_page': 0,
+            'last_page': 0,
+            'from': 0,
+            'to': 0
+        },
+        offset: 2,
+      }
+    },
 
-		mounted() {
-			this.index();
+    mounted() {
+      this.index();
 
-			Bus.$on('change_page', (page) => {
+      Bus.$on('change_page', (page) => {
         this.index(page);
       });
-		},
+    },
 
-		methods: {
-			index(page) {
-				axios.get('api/user-has-discount?page=' + page).then(response => {
+    methods: {
+      index(page) {
+        axios.get('api/user-has-discount?page=' + page).then(response => {
           this.discounts = response.data.data.data;
           this.pagination = response.data.paginate;
         })
         .catch(err => console.log(err))
-			}
-		}
-	}
+      }
+    }
+  }
 </script>
 
 <style>
-	.btn-d {
+  .btn-d {
     margin-top: 5px;
   }
 

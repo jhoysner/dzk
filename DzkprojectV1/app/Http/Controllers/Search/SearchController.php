@@ -171,7 +171,7 @@ class SearchController extends Controller
                 	$tags = $request->tags;
                     foreach ($tags as $value) {
                        $query->WhereHas('tags', function ($query) use ($value) {
-                             $query->orWhere('idtags',$value);
+                             $query->where('idtags',$value);
                         });
                     }
                 }
@@ -334,7 +334,7 @@ class SearchController extends Controller
 								$query->orWhere('idtags','=',$value);
 							}*/
 							
-							$query->orWhere('idtags',$value);
+							$query->where('idtags',$value);
                         });
                     }
                 }

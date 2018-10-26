@@ -151,9 +151,9 @@ class SearchController extends Controller
                 	$q->whereIn('idbranch',$branch);
                 });
 
-				if($request->category_discount) {
-					$category_discount = $request->category_discount;
-                    $query->where('discountcategory_iddiscountcategory', $request->category_discount);
+				if($request->category_commerce) {
+					$category_commerce = $request->category_commerce;
+                    $query->where('commercecategory_idcommercecategory', $category_commerce);
                 }
 
                 if($request->word) {			  					
@@ -185,7 +185,9 @@ class SearchController extends Controller
 				$resultado = [];
 				$val_ant = 0;
 
+
 				foreach ($query as $key => $value) {
+					
 					foreach($value->branchs as $temp){
 						$r = array_search($temp->idbranch, $branchsOrder);
 						if($r) {
@@ -200,7 +202,7 @@ class SearchController extends Controller
 						}
 						//$resultado[$r] = $value;
 					}
-		      		//$resultado[$value->idbranch] =$value;	
+		      		//$resultado[$key] =$value;	
 		      	}
 
 
@@ -296,13 +298,18 @@ class SearchController extends Controller
 	    		
 	    		$paginate = $this->getPaginate($query);
 
+	    		$res = [];
 	    		$resultado = [];
 	    		$val_ant = 0;
 
 				foreach ($query as $key => $value) {
 					foreach($value->branchs as $temp){
+						
 						$r = array_search($temp->idbranch, $branchsOrder);
-						if($r >= 0) {
+						
+						$res[$temp->idbranch] = $r;
+						
+						/*if($r >= 0) {
 							if($val_ant>$r || $val_ant == $r) {
 								unset($resultado[$val_ant]);
 								$resultado[$r] = $value;
@@ -311,11 +318,12 @@ class SearchController extends Controller
 								$resultado[$r] = $value;
 								$val_ant = $r;
 							}
-						}
+						}*/
+
 					}
 		      		//$resultado[$value->idbranch] =$value;	
 		      	}
-
+return $res;
 /*	    		$k=1;
 				foreach ($query as $key => $value) {
 					if($value->branchs->count() > 0) {

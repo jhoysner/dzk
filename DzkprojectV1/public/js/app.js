@@ -53807,6 +53807,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
     var _this = this;
 
     //this.index();
+    this.filtering();
     this.getTags();
     this.getCommerceCategories();
 

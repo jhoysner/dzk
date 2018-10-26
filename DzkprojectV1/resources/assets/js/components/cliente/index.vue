@@ -58,9 +58,10 @@
                          
                             <div class="meta d-flex flex-row">
                                 <!--<div class="user-img"><img src="img/user-img.png" alt=""></div> -->
-<!--                                 <router-link class="btn btn-outline-primary btn-block view-discount" :to="`/commerce/${commerce.idcommerce}/discounts`">
-                                  Ver descuentos activos
-                                </router-link> -->
+                                <router-link class="btn btn-outline-primary btn-block view-discount" :to="`/client-discount/${discount.pivot.idusers_has_discount}`">
+                                  <!-- {{discount.pivot.idusers_has_discount}} -->
+                                  ver
+                                </router-link>
                             </div>
                         </div>
                       </div>

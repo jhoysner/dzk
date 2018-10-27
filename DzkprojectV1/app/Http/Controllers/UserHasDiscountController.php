@@ -18,7 +18,7 @@ class UserHasDiscountController extends Controller
     {
         $uhd = UserHasDiscount::with('discounts')
                 ->with('discountsStatus')
-                    ->where('commerce_idcommerce', 'e1C1ug06cTODmclayIKnzKHpRdRlBkS7nIMJ')->paginate(2); //Selecciono los descuentos que sean igual al comercio conectado. Por ahora, estatico. Luego, será a través de una relación usuario conectado con la tabla users_has_commerce.
+                    ->where('commerce_idcommerce', 'c26a0461-caa4-11e8-89ee-74c63b1404ed')->paginate(2); //Selecciono los descuentos que sean igual al comercio conectado. Por ahora, estatico. Luego, será a través de una relación usuario conectado con la tabla users_has_commerce.
 
         return response()->json([
             'paginate' => [

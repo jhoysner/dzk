@@ -17,6 +17,7 @@ import DetailCommerceBranch from '../components/home/commerce-detail-branchs';
 import DetailCommerceDisocount from '../components/home/commerce-detail-discounts';
 import discountRoutes from '../components/discount/router'
 import Cliente from '../components/cliente/index'
+import DescuentosRedimidos from '../components/cliente/cliente-descuentos-redimidos'
 import DetailClienteDiscount from '../components/cliente/detail-discount'
 
 
@@ -38,6 +39,10 @@ const baseRoutes = [
         {
             path: '/cliente',
             component: Cliente
+        },        
+        {
+            path: '/cliente-descuentos-redimidos',
+            component: DescuentosRedimidos
         },
         {
             path: '/params',

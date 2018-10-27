@@ -6,7 +6,7 @@
               <ul class="nav nav-tabs">
                 <li class="nav-item">
                   <router-link to="/" class="nav-link">
-                      COMERCIOS
+                      TIENDAS
                   </router-link>
                 </li>
                 <li class="nav-item">

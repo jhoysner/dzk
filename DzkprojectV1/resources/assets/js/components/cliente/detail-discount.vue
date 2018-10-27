@@ -1,7 +1,7 @@
 <template>
   <div id="section-profile" class="settings-content">
         <button type="button" class="btn btn-outline-dark pull-right" @click="$router.go(-1)">Atras</button>
-            <h3 class="my-4">{{ discount.title }}</h3>
+            <h3 class="my-4">Descuento: {{ discount.title }}</h3>
      
         <div class="container">
             <div class="row">
@@ -14,7 +14,7 @@
                                     <img class="img-fluid" :src="'../images/discount/'+discount.image" />
                                 </div>
                                 <div class="other-details">
-                                    <h4 class="text-uppercase">Informacion</h4>
+                                    <h4 class="text-uppercase">Descripcion</h4>
                                     <p>
                                         {{discount.description}}
                                     </p>
@@ -29,25 +29,13 @@
                                     <p>
                                          <img class="img-fluid" :src="'/storage/qr/'+discount.qr" />
                                     </p>
-                                </div>
+                                </div>         
                                 <div class="other-details">
-                                    <h4 class="text-uppercase">Categoria</h4>
+                                    <h4 class="text-uppercase">Sucursal</h4>
                                     <div class="row">
-                                        <div class="col-lg-6">
-                                            <ul class="support-list">
-                                                <li>
-                                                    <img src="/img/bullet.png" alt="">{{discount.discountcategory_iddiscountcategory}}
-                                                </li>
-
-                                            </ul>
-                                        </div>
-                                        <div class="col-lg-6">
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="other-details">
-                                    <h4 class="text-uppercase">Sucursales</h4>
-                                    <div class="row">
+                                      <router-link :to="`/branch/${branch.idbranch}`">
+                                          <span>{{branch.name}}</span>
+                                      </router-link>                                    
                                     </div>
                                 </div>
 
@@ -83,15 +71,15 @@
                     <div class="single-sidebar theme-details">
                         <h6>Detalle Fecha</h6>
                         <ul class="theme-details-list">
-                            <li> <i class="icons icon-tag"></i> {{discount.startdate}}</li>
-                            <li> <i class="icons icon-tag"></i> {{discount.enddate}}</li>
+                            <li> <i class="icons icon-tag"></i>Desde: {{discount.startdate}}</li>
+                            <li> <i class="icons icon-tag"></i>Hasta: {{discount.enddate}}</li>
                         </ul>
                     </div>
 
                     <div class="single-sidebar theme-tags">
-                        <h6>Tags</h6>
-  
-            
+                        <h6>Estado</h6>
+                        {{discount.state}}
+              
                     </div>
                 </div>
             </div>
@@ -119,8 +107,10 @@
               discountprice: '',
               charcode: '',
               qr: '',
+              state: '',
           },
-        commerce:[],
+        commerce:{},
+        branch:{},
       }
     },
 
@@ -144,6 +134,9 @@
 
                 this.discount.charcode = response.data.data.charcode;
                 this.discount.qr = response.data.data.qrcode;
+                this.discount.state = response.data.data.discounts_status.name;
+                this.commerce = response.data.data.commerce;
+                this.branch = response.data.data.branch;
 
                 // this.branchs = response.data.data.branchs;
                 // this.tags = response.data.data.tags;

@@ -7,6 +7,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Pagination\LengthAwarePaginator;
+use Helper;
 use App\Params;
 use App\User;
 use App\Branch;
@@ -32,12 +33,6 @@ class SearchController extends Controller
     protected function getLimit()
     {
 		$param = Params::where('key','search_limit_row')->first();
-    	return $param;	
-    }
-
-    protected function getPerPage()
-    {
-		$param = Params::where('key','search_paginate')->first();
     	return $param;	
     }
 
@@ -139,6 +134,10 @@ class SearchController extends Controller
       		$branchsOrder[$key] = $value->idbranch;
       	}
 
+      	//Valor paginacion
+      	$perPag = Helper::getPaginate();
+      	$perPag = intval($perPag);
+
 		switch ($request->type) {
 	    	case 'commerce':      	
 	    		$query = Commerce::with('ccategories','tags')
@@ -170,6 +169,7 @@ class SearchController extends Controller
                 if($request->tags && count($request->tags) > 0) {
                 	$tags = $request->tags;
                     foreach ($tags as $value) {
+                       
                        $query->WhereHas('tags', function ($query) use ($value) {
                              $query->where('idtags',$value);
                         });
@@ -177,7 +177,7 @@ class SearchController extends Controller
                 }
 
 
-	    		$query = $query->paginate($limit);
+	    		$query = $query->paginate($perPag);
 	    		
 	    		$paginate = $this->getPaginate($query);
 //return $query;
@@ -205,8 +205,8 @@ class SearchController extends Controller
 		      	}
 */
 	    		$resultado = [];
-	    		$val_ant = 0;
-	    		$agregado = false;
+//	    		$val_ant = 0;
+//	    		$agregado = false;
 
 				foreach ($query as $key => $value) {
 					$resultado[$key] = $value;
@@ -272,13 +272,13 @@ class SearchController extends Controller
 //		    	$data = $branchs;
 
 //		    	$pagination = $this->getPagination($commerces, $limit);
-		    	$pagination = $this->getPagination($resultado, $limit);
+		    	//$pagination = $this->getPagination($resultado, $limit);
 				
 				return response()->json([
 										'success'    => true, 
-										//'data'       => $data,
+										'data'       => $query,
 										'paginate'   => $paginate,
-										'data' =>$pagination
+										//'data' =>$pagination
 										], 200);
 				break;
 
@@ -339,14 +339,14 @@ class SearchController extends Controller
                     }
                 }
 //return $query->toSql();
-	    		$query = $query->paginate($limit);
+	    		$query = $query->paginate($perPag);
 //return $query;
 
-	    		//$paginate = $this->getPaginate($query);
+	    		$paginate = $this->getPaginate($query);
 
 	    		$resultado = [];
-	    		$val_ant = 0;
-	    		$agregado = false;
+//	    		$val_ant = 0;
+//	    		$agregado = false;
 
 				foreach ($query as $key => $value) {
 					$resultado[$key]=$value;
@@ -433,11 +433,12 @@ $discounts;*/
 				
 				return response()->json([
 										'success'    => true, 
-										//'data' 	     => $data,
-										//'paginate' 	 => $paginate,
-										'data' => $pagination
+										'data' 	     => $query,
+										'paginate' 	 => $paginate,
+										//'data' => $pagination
 										], 200);
 	    		break;
+
 	    
 	    	default:
 	      		return response()->json(['error' => 'Se requiere el tipo de busqueda a realizar'], 422);
@@ -495,8 +496,8 @@ $discounts;*/
     protected function getPagination($array)
     {
     	//Numero de registro a mostrar por pagina 
-      	$perPag = $this->getPerPage();
-      	$perPag = intval($perPag->val);
+      	$perPag = Helper::getPaginate();
+      	$perPag = intval($perPag);
 
     	// Get current page form url e.x. &page=1
         $currentPage = LengthAwarePaginator::resolveCurrentPage();

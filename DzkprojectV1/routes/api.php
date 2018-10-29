@@ -22,20 +22,18 @@ Route::post('login', 'Auth\LoginController@authenticate');
 //Logout
 Route::get('logout', 'UserController@logout');
 
-//Usuario
+//Profile
 Route::group(["prefix" => "profile"], function () {
 	Route::get('/{id}', 'UserController@userDetail');
 	Route::post('/', 'UserController@updateProfile');
 });
 
 //Parametros
-Route::group(["prefix" => "params"], function () {
-	Route::get('/', 'Params\ParamsController@index');
-	Route::get('/{id}', 'Params\ParamsController@show');
-	Route::delete('/{id}', 'Params\ParamsController@destroy');
-	Route::post('/', 'Params\ParamsController@store');
-	Route::put('/', 'Params\ParamsController@update');
-});
+Route::resource('params','Params\ParamsController',
+	['except' => ['create','edit','update']
+]);
+Route::put('/params', 'Params\ParamsController@update');
+
 
 //Tags
 Route::group(["prefix" => "tags"], function () {
@@ -51,6 +49,20 @@ Route::get('tags-discount/{id}', 'Discount\DiscountController@getTagsDiscount');
 
 //Commerce-tags
 Route::get('tags-commerce/{id}', 'Commerce\CommercesController@getTagsCommerce');
+
+//Users
+Route::resource('users','UserController',
+	['except' => ['create','edit']
+]);
+//Roles
+Route::resource('roles', 'RoleController',
+	['except' => ['create','edit']
+]);
+
+//Permissions
+Route::get('/permissionsroles/{id}','RoleController@getPermisosRoles');
+Route::get('/permissionsuser/{id}','UserController@getPermisosUser');
+Route::put('/assignpermissionsuser/{id}','UserController@asignaPermisosUser');
 
 Route::resource('discount','Discount\DiscountController');
 Route::resource('discount-categories','DiscountCategory\DiscountCategoryController');

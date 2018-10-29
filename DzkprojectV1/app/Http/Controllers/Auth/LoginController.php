@@ -98,7 +98,14 @@ class LoginController extends Controller
         } 
 
         if (Auth::attempt($credentials)) {
-            return response()->json(['state'=>'Active','success'=>'Successful session start','user' => Auth::user()], 200);
+            $user = $this->guard()->user();
+            $role = auth()->user()->getRoleNames();
+            $permissions =  Auth::user()->permissions()->pluck('name')->toArray();
+            return response()->json(['state'=>'Active','success'=>'Successful session start',
+                    'user' => $user, 
+                    'role'=> $role, 
+                    'permissions'=> $permissions
+                ], 200);
         } 
 
         return response()->json(['state'=>'Invalid','error'=>\Lang::get('messages.credential_invalid')], 422);            

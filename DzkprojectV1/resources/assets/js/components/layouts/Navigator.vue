@@ -55,6 +55,20 @@
               </router-link>
             </li>
             <li>
+              <router-link to='/users'>
+                <a>
+                  Usuarios
+                </a>
+              </router-link>
+            </li>
+            <li>
+              <router-link to='/roles'>
+                <a>
+                  Grupos
+                </a>
+              </router-link>
+            </li>
+            <li>
               <router-link to='/profile'>
                 <a>
                   Perfil

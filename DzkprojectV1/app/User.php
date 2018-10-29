@@ -5,10 +5,11 @@ namespace App;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Database\Eloquent\SoftDeletes;
+use Spatie\Permission\Traits\HasRoles;
 
 class User extends Authenticatable
 {
-    use Notifiable;
+    use Notifiable,HasRoles;
 
     //softdeletes
     use SoftDeletes;
@@ -19,15 +20,15 @@ class User extends Authenticatable
      *
      * @var array
      */
+    public $incrementing = false;
     
-    protected $primarykey = ['id'];
+    protected $primarykey = 'id';
     protected $fillable = [
-        'firstname', 'middlename', 'lastname', 'birthday', 'phone', 'image', 'email', 'password', 
+        'id','firstname', 'middlename', 'lastname', 'birthday', 'phone', 'image', 'email', 'password', 
         'address', 'latitude', 'longitude', 'provider', 'provider_id', 'access_token', 'lastlogin', 
-        'attemps', 'status', 'city_idcity', 'state_idstate', 'country_idcountry','password'
+        'attemps', 'status', 'city_idcity', 'state_idstate', 'country_idcountry'
     ];
 
-    public $incrementing = false;
 
 
 
@@ -38,7 +39,7 @@ class User extends Authenticatable
      * @var array
      */
     protected $hidden = [
-         'remember_token',
+         'remember_token','password'
     ];
 
 
@@ -60,4 +61,5 @@ class User extends Authenticatable
     public function  discounts(){
         return $this->belongsToMany('App\Discount','users_has_discount','users_id')->withPivot('idusers_has_discount','charcode', 'qrcode','validfrom','validto','userhasdiscountstatus_iduserhasdiscountstatus' )->whereNull('users_has_discount.deleted_at');
     }
+
 }

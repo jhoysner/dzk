@@ -16,7 +16,8 @@ import DetailCommerceBranch from '../components/home/commerce-detail-branchs';
 import DetailCommerceDisocount from '../components/home/commerce-detail-discounts';
 import discountRoutes from '../components/discount/router'
 import Cliente from '../components/cliente/index'
-
+import Users from '../components/user/index'
+import Roles from '../components/groups/index'
 
 Vue.use(Router);
 
@@ -83,6 +84,14 @@ const baseRoutes = [
             path: '/profile',
             component: Profile
         },
+        {
+            path: '/users',
+            component: Users
+        },
+        {
+            path: '/roles',
+            component: Roles
+        },
  
 ];
 
@@ -107,7 +116,10 @@ const baseRoutes = [
 // })
 
 const routes = baseRoutes.concat(discountRoutes);
-export default new Router({
+
+const router = new Router({
   mode: 'history',
   routes,
-});
+})
+
+export default router

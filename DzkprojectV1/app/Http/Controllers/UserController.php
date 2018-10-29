@@ -6,13 +6,19 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Http\Request;
+use Helper;
 use App\User;
 use App\Params;
+use App\Role;
+use App\Permission;
+use App\Authorizable;
 use Storage;
 use Lang;
+use DB;
 
 class UserController extends Controller
 {
+    //use Authorizable;
     /**
      * Create a new controller instance.
      *
@@ -23,6 +29,119 @@ class UserController extends Controller
         //$this->middleware('auth');
     }
 
+    public function index()
+    {
+        $paginate = Helper::getPaginate();
+
+        $users = User::latest()->paginate($paginate);
+        return response()->json(['users'=>$users], 200);
+    }
+
+    public function store(Request $request)
+    {
+        $validator = Validator::make($request->all(), [
+            'firstname' => 'required|string|max:255',
+            'middlename' => 'string|max:255',
+            'lastname' => 'required|string|max:255',
+            'email' => 'required|string|email|max:255|unique:users,email',
+            'password' => 'min:6|string|required',
+            'country_idcountry' => 'required|string',
+            'state_idstate' => 'required|string',
+            'city_idcity' => 'required|string'
+        ]);
+
+        if($validator->fails()) {
+            return response()->json(['error'=>$validator->errors()], 422);
+        }
+        
+       $data = [
+                    'id' => str_random(36),
+                    'firstname'  => $request->firstname,
+                    'lastname'   => $request->lastname,
+                    'email'      => $request->email,
+                    'password'   => Hash::make($request->password),
+                    'country_idcountry'=> $request->country_idcountry,
+                    'state_idstate'    => $request->state_idstate,
+                    'city_idcity'      => $request->city_idcity,
+                ];
+
+
+        $user = User::create($data);
+
+        if( !$user ) {
+            return response()->json(['error'=>'No se pudo guardar el usuario'], 422);
+        }
+
+        if($user) {
+            if($request->roles && count($request->roles) > 0) {
+                $roles = $request->roles;
+                foreach ($roles as $value) {
+                    $role = Role::where('id', '=', $value)->first();
+                    $user->assignRole($role);    
+                }
+            }   
+        }
+         
+        return response()->json(['success'=>\Lang::get('messages.user_create')], 200);
+
+    }
+
+    public function show($id) 
+    {
+        $user = User::where('id','=',$id)
+                    ->with('countries')
+                    ->with('states')
+                    ->with('cities')
+                    ->first();
+
+        $roles = $user->roles; 
+
+        if( !$user ) {
+            return response()->json(['error'=>'No se pudo guardar el usuario'], 422);
+        }
+
+        return response()->json(['user'=>$user,'rol'=>$roles], 200);
+
+    }
+
+    public function update(Request $request, $id)
+    {
+        $validator = Validator::make($request->all(), [
+            'firstname' => 'required|string|max:255',
+            'lastname' => 'required|string|max:255',
+            'email' => 'required|string|email|max:255|unique:users,email,'.$id,
+            'password' => 'min:6',
+            'country_idcountry' => 'required|string',
+            'state_idstate' => 'required|string',
+            'city_idcity' => 'required|string'
+        ]);
+
+        if($validator->fails()) {
+            return response()->json(['error'=>$validator->errors()], 422);
+        }
+
+        $user = User::find($id);
+
+        if( !$user ) {
+            return response()->json(['error'=>'No se pudo guardar el usuario'], 422);
+        }
+
+        $user->fill($request->except('rol', 'password'));
+
+        if($request->password) {
+            $user->password = bcrypt($request->password);
+        }
+
+        if($request->roles && count($request->roles) > 0 ) {
+            $roles = $request->roles;
+                $user->syncRoles($roles);
+        }
+
+        $user->save();
+
+        return response()->json(['success'=>\Lang::get('messages.user_update')], 200);
+
+    }
 
     public function showProfileForm()
     {
@@ -48,7 +167,7 @@ class UserController extends Controller
             'middlename' => 'string|max:255',
             'lastname' => 'required|string|max:255',
             'email' => 'required|string|email|max:255',
-            'password' => 'confirmed',
+            'password' => 'min:6|confirmed',
             'phone'=> 'string|max:20',
             'address'=> 'string|max:512',
             'country_idcountry' => 'required|string',
@@ -129,5 +248,68 @@ class UserController extends Controller
         return response()->json(['success'=>'Logout User']);
     }
 
+    public function destroy($id)
+    {
+        $user = User::destroy($id);
+
+        if(!$user){
+            return response()->json(['error' => 'No existe el usuario'], 422);
+        }
+
+        return response()->json(['state'=>'Delete','success'=>\Lang::get('messages.user_delete'),'user'=>$user], 200);
+    }
+
+    public function getPermisosUser($id)
+    {
+        $user = User::find($id);
+
+        if(!$user){
+            return response()->json(['error' => 'No existe el usuario'], 422);
+        }
+
+        $permissions = $user->permissions;
+
+        if(!$permissions){
+            return response()->json(['success'=>'Error al consultar los permisos'], 422);
+        }        
+
+         $perm = [];
+
+        foreach ($permissions as $key => $value) {
+            $permiso = $user->hasPermissionTo($value->name);            
+            
+            if($permiso) {
+                $perm[] = $value->id;
+            }
+        }
+
+        return $perm;
+
+    }
+
+    public function asignaPermisosUser(Request $request, $id)
+    {
+        $user = User::find($id);
+
+        if(!$user){
+            return response()->json(['error' => 'No existe el usuario'], 422);
+        }
+
+         $permisos = $request->all();
+
+         $perm = [];
+
+         foreach ($permisos as $key => $value) {
+            $permiso = Permission::find($value);
+            if($permiso) {
+                $perm[] = $permiso->name;
+            }
+         }
+
+         $user->syncPermissions($perm);
+
+         return response()->json(['success'=>\Lang::get('messages.user_permissions')], 200);
+
+    }
 
 }

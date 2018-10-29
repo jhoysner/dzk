@@ -214,7 +214,7 @@ class HomeInitController extends Controller
 
         $file =  storage_path('app/public/qr/'.$name);
 
-        QRCode::text($fields['charcode'])->setSize(8)->setOutfile($file)->png();
+        QRCode::url($request->root().'/qrcode/'.$fields['charcode'])->setSize(8)->setOutfile($file)->png();
 
         $fields['qrcode'] = $name;
 

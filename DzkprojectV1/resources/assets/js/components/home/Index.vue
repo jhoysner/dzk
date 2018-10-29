@@ -193,6 +193,7 @@ import paginator from '../../utilities/paginator';
 
     mounted() {
       //this.index();
+      this.filtering();
       this.getTags();
       this.getCommerceCategories();
 

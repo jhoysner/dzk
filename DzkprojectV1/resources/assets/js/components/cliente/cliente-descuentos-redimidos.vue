@@ -2,12 +2,12 @@
     <div id="section-profile" class="settings-content">
         <ul class="nav nav-tabs">
           <li class="nav-item">
-            <a href="" class="nav-link active" to="/clientes">
+            <router-link to="/cliente" class="nav-link">
                 Descuentos sin redimir
-            </a>
+            </router-link>
           </li>
           <li class="nav-item">
-             <router-link to="/cliente-descuentos-redimidos" class="nav-link">
+             <router-link to="/cliente-descuentos-redimidos" class="nav-link active">
                  Descuentos Redimidos
              </router-link>
           </li>
@@ -15,7 +15,7 @@
         <button type="button" class="btn btn-outline-dark pull-right mt-2" @click="$router.push('/')">Atras</button>
         <br />
         </ul>
-        <h3 class="mt-4">Descuentos sin Redimir</h3>
+        <h3 class="mt-4">Descuentos Redimidos</h3>
         <!-- <h5 v-if="branchs.length < 1">Este comercio aún no posee sucursales.</h5>     -->
         <div class="row justify-content-center stat-table-wrap">
             <div class="col-lg-12 stat-wrap-container">
@@ -114,7 +114,8 @@ import paginator from '../../utilities/paginator';
     },
     computed: {
         filter() {
-           return this.discounts.filter((item) => item.pivot.userhasdiscountstatus_iduserhasdiscountstatus == 2);
+          // const search = this.search.toLowerCase();
+           return this.discounts.filter((item) => item.pivot.userhasdiscountstatus_iduserhasdiscountstatus == 3);
         }
     },
     methods: {     

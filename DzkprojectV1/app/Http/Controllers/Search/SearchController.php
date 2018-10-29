@@ -205,8 +205,8 @@ class SearchController extends Controller
 		      	}
 */
 	    		$resultado = [];
-	    		$val_ant = 0;
-	    		$agregado = false;
+//	    		$val_ant = 0;
+//	    		$agregado = false;
 
 				foreach ($query as $key => $value) {
 					$resultado[$key] = $value;
@@ -345,8 +345,8 @@ class SearchController extends Controller
 	    		$paginate = $this->getPaginate($query);
 
 	    		$resultado = [];
-	    		$val_ant = 0;
-	    		$agregado = false;
+//	    		$val_ant = 0;
+//	    		$agregado = false;
 
 				foreach ($query as $key => $value) {
 					$resultado[$key]=$value;
@@ -438,6 +438,7 @@ $discounts;*/
 										//'data' => $pagination
 										], 200);
 	    		break;
+
 	    
 	    	default:
 	      		return response()->json(['error' => 'Se requiere el tipo de busqueda a realizar'], 422);

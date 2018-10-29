@@ -19,6 +19,8 @@ import discountRoutes from '../components/discount/router'
 import Cliente from '../components/cliente/index'
 import DescuentosRedimidos from '../components/cliente/cliente-descuentos-redimidos'
 import DetailClienteDiscount from '../components/cliente/detail-discount'
+import Users from '../components/user/Index'
+import Roles from '../components/groups/Index'
 
 
 Vue.use(Router);
@@ -94,6 +96,14 @@ const baseRoutes = [
             path: '/discounts-redeemed',
             component: Discountsrd
         },
+        {
+            path: '/users',
+            component: Users
+        },
+        {
+            path: '/roles',
+            component: Roles
+        },
         
         {
             path: '/profile',
@@ -123,7 +133,9 @@ const baseRoutes = [
 // })
 
 const routes = baseRoutes.concat(discountRoutes);
-export default new Router({
+ router = new Router({
   mode: 'history',
   routes,
 });
+
+ export default router

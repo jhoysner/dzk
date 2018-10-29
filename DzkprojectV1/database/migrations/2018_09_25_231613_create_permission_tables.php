@@ -13,7 +13,7 @@ class CreatePermissionTables extends Migration
      */
     public function up()
     {
-        $tableNames = config('permission.table_names');
+        /*$tableNames = config('permission.table_names');
         $columnNames = config('permission.column_names');
 
         Schema::create($tableNames['permissions'], function (Blueprint $table) {
@@ -80,6 +80,7 @@ class CreatePermissionTables extends Migration
 
             app('cache')->forget('spatie.permission.cache');
         });
+        */
     }
 
     /**
@@ -89,12 +90,12 @@ class CreatePermissionTables extends Migration
      */
     public function down()
     {
-        $tableNames = config('permission.table_names');
+        /*$tableNames = config('permission.table_names');
 
         Schema::drop($tableNames['role_has_permissions']);
         Schema::drop($tableNames['model_has_roles']);
         Schema::drop($tableNames['model_has_permissions']);
         Schema::drop($tableNames['roles']);
-        Schema::drop($tableNames['permissions']);
+        Schema::drop($tableNames['permissions']);*/
     }
 }

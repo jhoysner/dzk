@@ -2,6 +2,7 @@
 
 namespace App;
 
+use Laravel\Passport\HasApiTokens;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Database\Eloquent\SoftDeletes;
@@ -9,7 +10,7 @@ use Spatie\Permission\Traits\HasRoles;
 
 class User extends Authenticatable
 {
-    use Notifiable,HasRoles;
+    use HasApiTokens,Notifiable,HasRoles;
 
     //softdeletes
     use SoftDeletes;
@@ -28,9 +29,6 @@ class User extends Authenticatable
         'address', 'latitude', 'longitude', 'provider', 'provider_id', 'access_token', 'lastlogin', 
         'attemps', 'status', 'city_idcity', 'state_idstate', 'country_idcountry'
     ];
-
-
-
 
 
     /**

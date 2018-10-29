@@ -55305,37 +55305,6 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
 
 
 
@@ -55467,10 +55436,10 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 
       console.log(data);
 
-      axios.post('api/all-discounts?page=' + page, data).then(function (response) {
-        // axios.post('api/search', data).then(response => {
+      // axios.post('api/all-discounts?page=' + page, data).then(response => {
+      axios.post('api/search', data).then(function (response) {
         console.log(response);
-        _this5.discounts = response.data.discount.data;
+        _this5.discounts = response.data.data.data;
         _this5.pagination = response.data.paginate;
       }).catch(function (err) {
         return console.log(err);

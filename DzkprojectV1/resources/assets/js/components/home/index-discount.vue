@@ -43,37 +43,6 @@
                             </div>
                           </div>
                         </div>
-                      <!--     <table class="table table-striped mt-40 stat-table">
-                            <thead>
-                              <tr>
-                                  <th>ID Descuento</th>
-                                  <th>Titulo</th>
-                                  <th>Descripcion</th>
-                                  <th>Inicio</th>
-                                  <th>Fin</th>
-                                  <th>Destacado</th>
-                                  <th>Options</th>
-                              </tr>
-                            </thead>
-                            <tbody>
-                              <tr  v-for="discount in filter">
-                                  <td>{{ discount.iddiscount}}</td>
-                                  <td>{{ discount.title }}</td>
-                                  <td class="text-center">{{ discount.description }}</td>
-                                  <td class="text-center">{{ discount.startdate }}</td>
-                                  <td class="text-center">{{ discount.enddate }}</td>
-                                  <td class="text-center">
-                                    {{ discount.outstanding ? "Si" : "No" }}
-                                  </td>
-                                  <td>
-                                    <b-btn variant="primary" size="sm" v-b-modal.showModal  @click="detail(discount.iddiscount)">
-                                      Ver Detalles
-                                     </b-btn>
-                                  </td>
-                              </tr>
-                           
-                            </tbody>
-                        </table> -->
                         <div class="row pb-120 pt-80">    <!-- Aqui empieza -->           
                           <div class="col-lg-3 col-md-6" v-for="discount in discounts" :key="discount.iddiscount">
                             <div class="single-image-thumb single-feature-item relative">   
@@ -191,7 +160,8 @@ import paginator from '../../utilities/paginator';
     },
 
     mounted() {
-      this.index();
+      // this.index();
+      this.filtering();
       this.getTags();
       this.getDiscountCategories();
 
@@ -229,16 +199,16 @@ import paginator from '../../utilities/paginator';
         })
         .catch(err => console.log(err))
       },
-      index(page) {
-        axios.get('api/all-discounts?page=' + page).then(response => {
-          //console.log(response);
-          this.discounts = response.data.discount.data;
-          this.pagination = response.data.paginate;
-          // this.commerce = response.data.discount.data[0].branchs[0].commerces.name;
-          // console.log(response)
-        })
-        .catch(err => console.log(err))
-      },
+      // index(page) {
+      //   axios.get('api/all-discounts?page=' + page).then(response => {
+      //     //console.log(response);
+      //     this.discounts = response.data.discount.data;
+      //     this.pagination = response.data.paginate;
+      //     // this.commerce = response.data.discount.data[0].branchs[0].commerces.name;
+      //     // console.log(response)
+      //   })
+      //   .catch(err => console.log(err))
+      // },
 
       toggleSearch() {
         $('#search').toggle();
@@ -267,11 +237,11 @@ import paginator from '../../utilities/paginator';
         };
 
         console.log(data);
-
-        axios.post('api/all-discounts?page=' + page, data).then(response => {
-        // axios.post('api/search', data).then(response => {
+        
+        // axios.post('api/all-discounts?page=' + page, data).then(response => {
+        axios.post('api/search?page='+page, data).then(response => {
           console.log(response)
-          this.discounts = response.data.discount.data;
+          this.discounts = response.data.data.data;
           this.pagination = response.data.paginate;
         })
         .catch(err => console.log(err));

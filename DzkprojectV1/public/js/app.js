@@ -55343,37 +55343,6 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
 
 
 
@@ -55419,7 +55388,8 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
   mounted: function mounted() {
     var _this = this;
 
-    this.index();
+    // this.index();
+    this.filtering();
     this.getTags();
     this.getDiscountCategories();
 
@@ -55462,19 +55432,18 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
         return console.log(err);
       });
     },
-    index: function index(page) {
-      var _this3 = this;
 
-      axios.get('api/all-discounts?page=' + page).then(function (response) {
-        //console.log(response);
-        _this3.discounts = response.data.discount.data;
-        _this3.pagination = response.data.paginate;
-        // this.commerce = response.data.discount.data[0].branchs[0].commerces.name;
-        // console.log(response)
-      }).catch(function (err) {
-        return console.log(err);
-      });
-    },
+    // index(page) {
+    //   axios.get('api/all-discounts?page=' + page).then(response => {
+    //     //console.log(response);
+    //     this.discounts = response.data.discount.data;
+    //     this.pagination = response.data.paginate;
+    //     // this.commerce = response.data.discount.data[0].branchs[0].commerces.name;
+    //     // console.log(response)
+    //   })
+    //   .catch(err => console.log(err))
+    // },
+
     toggleSearch: function toggleSearch() {
       __WEBPACK_IMPORTED_MODULE_1_jquery___default()('#search').toggle();
     },
@@ -55482,19 +55451,19 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
       __WEBPACK_IMPORTED_MODULE_0__utilities_EventBus_js__["a" /* default */].$emit('detail_homeinit-discount', id);
     },
     getDiscountCategories: function getDiscountCategories() {
-      var _this4 = this;
+      var _this3 = this;
 
       axios.get('api/discount-categories').then(function (data) {
         // console.log(data)
-        _this4.categorydiscount = data.data.data;
-        _this4.categorydiscount.unshift({ iddiscountcategory: null, name: 'Seleccione una opcion' });
-        _this4.category = data.data.data[0].iddiscountcategory;
+        _this3.categorydiscount = data.data.data;
+        _this3.categorydiscount.unshift({ iddiscountcategory: null, name: 'Seleccione una opcion' });
+        _this3.category = data.data.data[0].iddiscountcategory;
       }).catch(function (err) {
         return console.log(err);
       });
     },
     filtering: function filtering(page) {
-      var _this5 = this;
+      var _this4 = this;
 
       var data = {
         category_discount: this.category ? this.category : "",
@@ -55505,17 +55474,17 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 
       console.log(data);
 
-      axios.post('api/all-discounts?page=' + page, data).then(function (response) {
-        // axios.post('api/search', data).then(response => {
+      // axios.post('api/all-discounts?page=' + page, data).then(response => {
+      axios.post('api/search?page=' + page, data).then(function (response) {
         console.log(response);
-        _this5.discounts = response.data.discount.data;
-        _this5.pagination = response.data.paginate;
+        _this4.discounts = response.data.data.data;
+        _this4.pagination = response.data.paginate;
       }).catch(function (err) {
         return console.log(err);
       });
     },
     obtenerDescuento: function obtenerDescuento(discount) {
-      var _this6 = this;
+      var _this5 = this;
 
       this.form.validfrom = discount.startdate;
       this.form.validto = discount.enddate;
@@ -55532,7 +55501,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
       console.log(discount);
 
       axios.post('api/user-has-discount', this.form).then(function (response) {
-        _this6.form = {};
+        _this5.form = {};
         swal({
           title: "Obtenido",
           text: "Se obtuvo Descuento Satifactoriamente",

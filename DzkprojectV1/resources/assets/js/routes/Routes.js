@@ -21,9 +21,8 @@ import DescuentosRedimidos from '../components/cliente/cliente-descuentos-redimi
 import DetailClienteDiscount from '../components/cliente/detail-discount'
 import Users from '../components/user/Index'
 import Roles from '../components/groups/Index'
+import Permissions from '../components/permissions/Index'
 import Logout from '../components/auth/Logout'
-
-
 
 Vue.use(Router);
 
@@ -32,14 +31,14 @@ const baseRoutes = [
             path: '/',
             component: Index,
             meta: { 
-                requiresAuth: true
+                requiresAuth: false
             }
         },        
         {
             path: '/home-discounts',
             component: IndexDiscount,
             meta: { 
-                requiresAuth: true
+                requiresAuth: false
             }
         },
         {
@@ -53,7 +52,7 @@ const baseRoutes = [
             path: '/cliente',
             component: Cliente,
             meta: { 
-                requiresAuth: true
+                requiresAuth: false
             }
         },        
         {
@@ -65,34 +64,37 @@ const baseRoutes = [
         },
         {
             path: '/params',
-            component: Params
+            component: Params,
+            meta: { 
+                requiresAuth: true
+            }
         },
         {
             path: '/commerces',
             component: Commerces,
             meta: { 
-                requiresAuth: true
+                requiresAuth: false
             }
         },      
         {
             path: '/commerce/:id',
             component: DetailCommerce,
             meta: { 
-                requiresAuth: true
+                requiresAuth: false
             }
         },        
         {
             path: '/commerce/:id/branchs',
             component: DetailCommerceBranch,
             meta: { 
-                requiresAuth: true
+                requiresAuth: false
             }
         },        
         {
             path: '/commerce/:id/discounts',
             component: DetailCommerceDisocount,
             meta: { 
-                requiresAuth: true
+                requiresAuth: false
             }
         },
         {
@@ -104,7 +106,7 @@ const baseRoutes = [
             path: '/discount/:id',
             component: DetailDiscount,
             meta: { 
-                requiresAuth: true
+                requiresAuth: false
             }
         }, 
 
@@ -112,28 +114,28 @@ const baseRoutes = [
             path: '/branchs',
             component: Branchs,
             meta: { 
-                requiresAuth: true
+                requiresAuth: false
             }
         },
         {
             path: '/discounts-postulated',
             component: Discountsp,
             meta: { 
-                requiresAuth: true
+                requiresAuth: false
             }
         },       
         {
             path: '/client-discount/:id',
             component: DetailClienteDiscount,
             meta: { 
-                requiresAuth: true
+                requiresAuth: false
             }
         },
         {
             path: '/discounts-redeemed',
             component: Discountsrd,
             meta: { 
-                requiresAuth: true
+                requiresAuth: false
             }
         },
         {
@@ -146,6 +148,13 @@ const baseRoutes = [
         {
             path: '/roles',
             component: Roles,
+            meta: { 
+                requiresAuth: true
+            }
+        },
+        {
+            path: '/permissions',
+            component: Permissions,
             meta: { 
                 requiresAuth: true
             }

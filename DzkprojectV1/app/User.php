@@ -74,15 +74,6 @@ class User extends Authenticatable
         return $this->createToken('API')->accessToken;
     }
 
-    /**
-     * Get token
-     *
-     * @return bool
-     */
-    public function getToken()
-    {
-        return $this->token();
-    }
 
 
 

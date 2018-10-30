@@ -2,10 +2,9 @@
   <div>
     <div class="col-lg-12">
         <div>
-            <b-btn v-b-modal.createModal>Crear Usuario</b-btn>
+            <b-btn v-b-modal.createModal v-can="'add_users'">Crear Usuario</b-btn>
             <div class="settings-content">
                 <h4>Lista de Usuarios</h4>
-              <!-- <spinner :show="loadingProductos"></spinner> -->
                 <div class="responsive">
                   <div class="table-responsive">
                       <table class="table table-hover table-bordered table-striped table-condensed">
@@ -22,11 +21,11 @@
                               <td >{{ user.firstname }} {{ user.middlename }} {{ user.lastname }}</td>
                               <td >{{ user.email }}</td>
                               <td >{{ user.status }}</td>
-                              <td class="text-right">
-                                  <b-btn v-b-modal="'permissionsModal'" @click="permissions(user.id)" class="btn btn-default btn-sm" title="Permisos Adicionales"><i class="fa fa-cogs"></i></b-btn>
-                                  <b-btn v-b-modal="'showModal'" @click="show(user.id)" class="btn btn-sm" variant="default"><i class=""></i> Detalle</b-btn>
-                                  <b-btn v-b-modal="'editModal'" @click="edit(user.id)" class="btn btn-sm" variant="warning"><i class=""></i> Editar</b-btn>
-                                  <button type="button" @click="confirm(user.id)" class="btn btn-sm btn-danger" title="Eliminar"><i class=""></i>Eliminar</button>
+                              <td width="25%" class="text-right">
+                                  <b-btn v-b-modal="'permissionsModal'" @click="permissions(user.id)" v-can="'edit_users'" class="btn btn-default btn-sm" title="Permisos Adicionales"><i class="fa fa-cogs"></i></b-btn>
+                                  <b-btn v-b-modal="'showModal'" @click="show(user.id)" v-can="'view_users'" class="btn btn-sm" variant="default"><i class=""></i> Detalle</b-btn>
+                                  <b-btn v-b-modal="'editModal'" @click="edit(user.id)" v-can="'edit_users'" class="btn btn-sm" variant="warning"><i class=""></i> Editar</b-btn>
+                                  <button type="button" @click="confirm(user.id)" v-can="'delete_users'" class="btn btn-sm btn-danger" title="Eliminar"><i class=""></i>Eliminar</button>
                               </td>
                               </th>
                             </tr>
@@ -49,9 +48,10 @@ import Bus from '../../utilities/EventBus';
 import create from './Create';
 import edit from './Edita';
 import show from './Show';
-import permissions from './Permissions';
+import permissions from './permissions';
 
 import axios from 'axios';
+var cryptobject;
 
 export default {
   name: 'index',

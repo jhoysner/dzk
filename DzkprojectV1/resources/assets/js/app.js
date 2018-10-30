@@ -16,6 +16,7 @@ require('./bootstrap');
 
 window.Vue = require('vue');
 
+
 // Authorization header
 axios.interceptors.request.use(function (config) {
   var token = localStorage.getItem('access_token')
@@ -28,20 +29,32 @@ axios.interceptors.request.use(function (config) {
 
 //Unauthorized
 axios.interceptors.response.use(
-  (response) => {
-    return response
-  },
-  (error) => {
-    const originalRequest = error.config
+    (response) => {
+      return response
+    },
+    (error) => {
+      const originalRequest = error.config
 
-    // token expired
-    if (error.response.status === 401 && error.response.data.error == "token_expired") {
-      window.location.href = '/login'
+      // token expired
+      if (error.response.status === 401 && error.response.data.error == "token_expired") {
+        window.location.href = '/login'
+      }
+
+      return Promise.reject(error)
     }
-
-    return Promise.reject(error)
-  }
 )
+
+Vue.directive('can', function (el, binding) {
+    el.style.display = 'none'
+    let permissions = (localStorage.getItem('permissions'))
+    permissions = permissions.split(",")
+    let perm = binding.expression.replace(/[']/g, "")
+    if(permissions.indexOf(perm) !== -1) {
+      el.style.display = 'inline'
+    }
+  })
+
+  
 
   Vue.component('login-component', require('./components/User/Login/LoginComponent.vue'));
   Vue.component('sider-component', require('./components/User/Login/SiderComponent.vue'));

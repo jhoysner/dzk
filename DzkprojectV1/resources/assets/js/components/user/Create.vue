@@ -50,9 +50,9 @@
                           </div>
                           <div class="col-lg-12">
                             <div class="sorting">Estatus
-                              <select  v-model="user.status" class="form-control common-input">
-                                  <option value="0">Inactivo</option>
-                                  <option value="1" selected>Activo</option>
+                              <select v-model="user.status" class="form-control common-input">
+                                  <option value="0" >Inactivo</option>
+                                  <option value="1" >Activo</option>
                               </select>
                              </div> 
                           </div>
@@ -92,6 +92,7 @@
         mounted(){
           this.getRoles();
           this.getCountries();
+          this.user.status= 1
         },
         methods: {
             saveUser() {
@@ -106,13 +107,12 @@
 
                 axios.post('api'+this.url,this.user)
                 .then(response => { 
-                    this.$parent.index
+                    this.$parent.index()
                     $('#createModal').trigger("reset");
                     this.$refs.createtModal.hide()
-                    console.log('bien')
                     swal({
                       title: "",
-                      text: response.data.sucess,
+                      text: response.data.success,
                       icon: "success",
                     })
                 })

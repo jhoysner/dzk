@@ -2,8 +2,12 @@
   <div>
     <div class="col-lg-12">
         <div>
-            <b-btn v-b-modal.createModal>Crear Grupo</b-btn>
-            <a class="btn btn-primary" href="">Permisos</a>
+            <b-btn v-b-modal.createModal v-can="'add_roles'">Crear Grupo</b-btn>
+            <router-link to='/permissions'>
+                  <a v-can="'permissions'" class="btn white-btn">
+                    Permisos
+                  </a>
+              </router-link>
             <div class="settings-content">
                 <h4>Lista de Grupos de Usuarios y Permisos</h4>
               <!-- <spinner :show="loadingProductos"></spinner> -->
@@ -18,8 +22,8 @@
                               <strong>{{rol.name}}</strong>
                             </a>
                             <i class="pull-right">
-                              <b-btn v-b-modal="'editModal'" size="sm" @click="edit(rol.id)" variant="warning"><i class="fa fa-edit"></i></b-btn>
-                              <button class="btn btn-danger btn-sm" @click="confirm(rol.id)" title="Eliminar"><i class="fa fa-trash"></i></button>
+                              <b-btn v-b-modal="'editModal'" v-can="'edit_roles'" size="sm" @click="edit(rol.id)" variant="warning"><i class="fa fa-edit"></i></b-btn>
+                              <button v-can="'delete_roles'" class="btn btn-danger btn-sm" @click="confirm(rol.id)" title="Eliminar"><i class="fa fa-trash"></i></button>
                             </i>
                           </div>
                         </b-card-header>
@@ -36,7 +40,7 @@
                                                          aria-label="Individual flavours"
                                   ></b-form-checkbox-group>
                                 </b-form-group>
-                              <button type="button" @click="updatePermission(rol.id,selected)" class="btn btn-primary btn-sm  btn-default"> Actualizar</button>
+                              <button v-can="'edit_roles'" type="button" @click="updatePermission(rol.id,selected)" class="btn btn-primary btn-sm  btn-default"> Actualizar</button>
                               
                             </div>
                           </b-card-body>

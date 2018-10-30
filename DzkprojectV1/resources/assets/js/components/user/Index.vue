@@ -48,10 +48,9 @@ import Bus from '../../utilities/EventBus';
 import create from './Create';
 import edit from './Edita';
 import show from './Show';
-import permissions from './permissions';
+import permissions from './Permissions';
 
 import axios from 'axios';
-var cryptobject;
 
 export default {
   name: 'index',
@@ -107,14 +106,10 @@ export default {
 
     destroy(id) {
       axios.delete('api' + this.url + '/' + id).then(data => {
-        console.log(data);
         this.index();
       })
       .catch(err => console.log(err))
     }
-
-
-
   }
 }
 </script>

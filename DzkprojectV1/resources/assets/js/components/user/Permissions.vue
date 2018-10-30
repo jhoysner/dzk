@@ -35,7 +35,7 @@ export default {
       user: [],
       error: [],
       permissions: [],
-      flavours: ["1","2"],
+      flavours: [],
       selected: [],
       permisos: [],
     }

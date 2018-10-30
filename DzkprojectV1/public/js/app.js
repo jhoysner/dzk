@@ -77397,6 +77397,8 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__Show__ = __webpack_require__(442);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__Show___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_3__Show__);
 throw new Error("Cannot find module \"./permissions\"");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__Permissions__ = __webpack_require__(637);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__Permissions___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_4__Permissions__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_5_axios__ = __webpack_require__(11);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_5_axios___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_5_axios__);
 //
@@ -77452,12 +77454,11 @@ throw new Error("Cannot find module \"./permissions\"");
 
 
 
-var cryptobject;
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: 'index',
   components: {
-    create: __WEBPACK_IMPORTED_MODULE_1__Create___default.a, permissions: __WEBPACK_IMPORTED_MODULE_4__permissions___default.a, edit: __WEBPACK_IMPORTED_MODULE_2__Edita___default.a, show: __WEBPACK_IMPORTED_MODULE_3__Show___default.a
+    create: __WEBPACK_IMPORTED_MODULE_1__Create___default.a, permissions: __WEBPACK_IMPORTED_MODULE_4__Permissions___default.a, edit: __WEBPACK_IMPORTED_MODULE_2__Edita___default.a, show: __WEBPACK_IMPORTED_MODULE_3__Show___default.a
   },
   data: function data() {
     return {
@@ -77510,7 +77511,6 @@ var cryptobject;
       var _this3 = this;
 
       __WEBPACK_IMPORTED_MODULE_5_axios___default.a.delete('api' + this.url + '/' + id).then(function (data) {
-        console.log(data);
         _this3.index();
       }).catch(function (err) {
         return console.log(err);
@@ -79299,6 +79299,19 @@ if (false) {
 
 /***/ }),
 /* 447 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c(
+    "div",
+    [
+/* 447 */,
+/* 448 */,
+/* 449 */,
+/* 450 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var render = function() {
@@ -116576,6 +116589,263 @@ if (false) {
 /***/ (function(module, exports) {
 
 // removed by extract-text-webpack-plugin
+
+/***/ }),
+/* 636 */,
+/* 637 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var disposed = false
+var normalizeComponent = __webpack_require__(1)
+/* script */
+var __vue_script__ = __webpack_require__(638)
+/* template */
+var __vue_template__ = __webpack_require__(639)
+/* template functional */
+var __vue_template_functional__ = false
+/* styles */
+var __vue_styles__ = null
+/* scopeId */
+var __vue_scopeId__ = null
+/* moduleIdentifier (server only) */
+var __vue_module_identifier__ = null
+var Component = normalizeComponent(
+  __vue_script__,
+  __vue_template__,
+  __vue_template_functional__,
+  __vue_styles__,
+  __vue_scopeId__,
+  __vue_module_identifier__
+)
+Component.options.__file = "resources/assets/js/components/user/Permissions.vue"
+
+/* hot reload */
+if (false) {(function () {
+  var hotAPI = require("vue-hot-reload-api")
+  hotAPI.install(require("vue"), false)
+  if (!hotAPI.compatible) return
+  module.hot.accept()
+  if (!module.hot.data) {
+    hotAPI.createRecord("data-v-058db237", Component.options)
+  } else {
+    hotAPI.reload("data-v-058db237", Component.options)
+  }
+  module.hot.dispose(function (data) {
+    disposed = true
+  })
+})()}
+
+module.exports = Component.exports
+
+
+/***/ }),
+/* 638 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__utilities_EventBus__ = __webpack_require__(6);
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
+
+
+/* harmony default export */ __webpack_exports__["default"] = ({
+  name: 'permissions',
+  data: function data() {
+    return {
+      userId: '',
+      url: '/roles',
+      user: [],
+      error: [],
+      permissions: [],
+      flavours: [],
+      selected: [],
+      permisos: []
+    };
+  },
+  created: function created() {
+    var _this = this;
+
+    __WEBPACK_IMPORTED_MODULE_0__utilities_EventBus__["a" /* default */].$on('user_id', function (data) {
+      _this.userId = data;
+      _this.index();
+      _this.permissionsUser();
+    });
+  },
+
+
+  methods: {
+    index: function index() {
+      var _this2 = this;
+
+      this.flavours = [];
+      axios.get('api/roles').then(function (response) {
+        _this2.permissions = response.data.permissions;
+
+        for (var perm in _this2.permissions) {
+          var option = {
+            text: _this2.permissions[perm]['name'],
+            value: _this2.permissions[perm]['id']
+          };
+          _this2.flavours.push(option);
+        }
+        console.log(_this2.flavours);
+      }).catch(function (err) {
+        return console.log(err);
+      });
+    },
+    permissionsUser: function permissionsUser() {
+      var _this3 = this;
+
+      axios.get('api/permissionsuser/' + this.userId).then(function (response) {
+        _this3.selected = response.data;
+      }).catch(function (err) {
+        return console.log(err);
+      });
+    },
+    updatePermissions: function updatePermissions() {
+      var _this4 = this;
+
+      this.error = {};
+      this.permisos = this.selected;
+      axios.put('api/assignpermissionsuser/' + this.userId, this.permisos).then(function (response) {
+        _this4.$refs.editModal.hide();
+        _this4.$parent.index();
+        swal({
+          title: "",
+          text: response.data.success,
+          icon: "success"
+        });
+      }).catch(function (err) {
+        if (err.response.status === 422) {
+          _this4.error = err.response.data.error;
+        }
+      });
+    }
+  }
+});
+
+/***/ }),
+/* 639 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c(
+    "div",
+    [
+      _c(
+        "b-modal",
+        {
+          ref: "editModal",
+          attrs: {
+            id: "permissionsModal",
+            title: "Permisos Adicionales",
+            "hide-footer": ""
+          }
+        },
+        [
+          _c(
+            "form",
+            {
+              on: {
+                submit: function($event) {
+                  $event.preventDefault()
+                  _vm.updatePermissions()
+                }
+              }
+            },
+            [
+              _c("div", { staticClass: "modal-content" }, [
+                _c("div", { staticClass: "modal-body" }, [
+                  _c(
+                    "div",
+                    { staticClass: "col-lg-12" },
+                    [
+                      _c(
+                        "b-form-group",
+                        [
+                          _c("b-form-checkbox-group", {
+                            staticClass: "ml-4",
+                            attrs: {
+                              id: "flavors",
+                              name: "flavs",
+                              options: _vm.flavours,
+                              "aria-label": "Individual flavours"
+                            },
+                            model: {
+                              value: _vm.selected,
+                              callback: function($$v) {
+                                _vm.selected = $$v
+                              },
+                              expression: "selected"
+                            }
+                          })
+                        ],
+                        1
+                      ),
+                      _vm._v(" "),
+                      _c(
+                        "button",
+                        {
+                          staticClass: "btn btn-primary btn-sm  btn-default",
+                          attrs: { type: "button" },
+                          on: {
+                            click: function($event) {
+                              _vm.updatePermissions(_vm.selected)
+                            }
+                          }
+                        },
+                        [_vm._v(" Actualizar")]
+                      )
+                    ],
+                    1
+                  )
+                ])
+              ])
+            ]
+          )
+        ]
+      )
+    ],
+    1
+  )
+}
+var staticRenderFns = []
+render._withStripped = true
+module.exports = { render: render, staticRenderFns: staticRenderFns }
+if (false) {
+  module.hot.accept()
+  if (module.hot.data) {
+    require("vue-hot-reload-api")      .rerender("data-v-058db237", module.exports)
+  }
+}
 
 /***/ })
 /******/ ]);

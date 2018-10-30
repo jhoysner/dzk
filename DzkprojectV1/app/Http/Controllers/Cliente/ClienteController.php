@@ -11,7 +11,7 @@ class ClienteController extends Controller
 {
     public function index(){
 
-      $user = User::all()->first();
+      $user = User::find('abcd1234');
 
       $data = $user->discounts;
 

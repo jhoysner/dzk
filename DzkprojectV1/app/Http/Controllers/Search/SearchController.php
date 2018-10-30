@@ -176,10 +176,10 @@ class SearchController extends Controller
                     }
                 }
 
-$query->each(function ($item, $index) {
+/*$query->each(function ($item, $index) {
 				$item->phone1 = 100;
-				return $index;
-			});
+			});*/
+
 	    		$query = $query->paginate($perPag);
 	    
 

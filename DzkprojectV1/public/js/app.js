@@ -55501,6 +55501,27 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 
 
@@ -55540,6 +55561,11 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
         'commerce_idcommerce': '',
         'branch_idbranch': '',
         'users_id': ''
+      },
+      show: false,
+      branchs: [],
+      user: {
+        id: ''
       }
     };
   },
@@ -55547,6 +55573,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
     var _this = this;
 
     // this.index();
+    this.auth();
     this.filtering();
     this.getTags();
     this.getDiscountCategories();
@@ -55608,20 +55635,31 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
     detail: function detail(id) {
       __WEBPACK_IMPORTED_MODULE_0__utilities_EventBus_js__["a" /* default */].$emit('detail_homeinit-discount', id);
     },
-    getDiscountCategories: function getDiscountCategories() {
+    auth: function auth() {
       var _this3 = this;
+
+      axios.get('api/profile').then(function (response) {
+        _this3.user.id = response.data.user.id;
+        // console.log(this.user.id);
+        // this.index();
+      }).catch(function (err) {
+        return console.log(err);
+      });
+    },
+    getDiscountCategories: function getDiscountCategories() {
+      var _this4 = this;
 
       axios.get('api/discount-categories').then(function (data) {
         // console.log(data)
-        _this3.categorydiscount = data.data.data;
-        _this3.categorydiscount.unshift({ iddiscountcategory: null, name: 'Seleccione una opcion' });
-        _this3.category = data.data.data[0].iddiscountcategory;
+        _this4.categorydiscount = data.data.data;
+        _this4.categorydiscount.unshift({ iddiscountcategory: null, name: 'Seleccione una opcion' });
+        _this4.category = data.data.data[0].iddiscountcategory;
       }).catch(function (err) {
         return console.log(err);
       });
     },
     filtering: function filtering(page) {
-      var _this4 = this;
+      var _this5 = this;
 
       var data = {
         category_discount: this.category ? this.category : "",
@@ -55635,15 +55673,16 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
       // axios.post('api/all-discounts?page=' + page, data).then(response => {
       axios.post('api/search?page=' + page, data).then(function (response) {
         console.log(response);
-        _this4.discounts = response.data.data.data;
-        _this4.pagination = response.data.paginate;
+        _this5.discounts = response.data.data.data;
+        _this5.pagination = response.data.paginate;
       }).catch(function (err) {
         return console.log(err);
       });
     },
     obtenerDescuento: function obtenerDescuento(discount) {
-      var _this5 = this;
 
+      this.branchs = discount.branchs;
+      this.$refs.showBranchs.show();
       this.form.validfrom = discount.startdate;
       this.form.validto = discount.enddate;
       this.form.amount = 1;
@@ -55654,12 +55693,31 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
       this.form.userhasdiscountstatus_iduserhasdiscountstatus = '2';
       this.form.commerce_idcommerce = discount.branchs[0].commerce_idcommerce;
       this.form.branch_idbranch = discount.branchs[0].idbranch;
-      this.form.users_id = 'abcd1234';
+      this.form.users_id = this.user.id;
 
-      console.log(discount);
+      // console.log(discount)
 
+      // axios.post('api/user-has-discount', this.form).
+      //   then(response => {
+      //       this.form = {};
+      //       swal({
+      //         title: "Obtenido",
+      //         text: "Se obtuvo Descuento Satifactoriamente",
+      //         icon: "success",
+      //       })
+      //      console.log(response);
+      //   })
+      //   .catch(error => {
+      //     console.log(error.response.data)
+
+      //   });
+    },
+    saveUserHasDiscount: function saveUserHasDiscount() {
+      var _this6 = this;
+
+      this.$refs.showBranchs.hide();
       axios.post('api/user-has-discount', this.form).then(function (response) {
-        _this5.form = {};
+        _this6.form = {};
         swal({
           title: "Obtenido",
           text: "Se obtuvo Descuento Satifactoriamente",
@@ -56535,7 +56593,107 @@ var render = function() {
       _vm._v(" "),
       _c("paginator", { attrs: { pagination: _vm.pagination } }),
       _vm._v(" "),
-      _c("detail")
+      _c("detail"),
+      _vm._v(" "),
+      _c(
+        "b-modal",
+        {
+          ref: "showBranchs",
+          attrs: {
+            id: "showBranchs",
+            title: "Elegir Sucursal donde se obtendra el Descuento",
+            "hide-footer": ""
+          },
+          model: {
+            value: _vm.show,
+            callback: function($$v) {
+              _vm.show = $$v
+            },
+            expression: "show"
+          }
+        },
+        [
+          _c("div", { staticClass: "modal-content" }, [
+            _c(
+              "div",
+              { staticClass: "container" },
+              [
+                _c("h3", { staticClass: "my-4" }, [_vm._v("Sucursal:")]),
+                _vm._v(" "),
+                _vm._l(_vm.branchs, function(branch) {
+                  return _c("div", [
+                    _c("input", {
+                      directives: [
+                        {
+                          name: "model",
+                          rawName: "v-model",
+                          value: _vm.form.branch_idbranch,
+                          expression: "form.branch_idbranch"
+                        }
+                      ],
+                      attrs: { type: "radio", id: "branch.name" },
+                      domProps: {
+                        value: branch.idbranch,
+                        checked: _vm._q(
+                          _vm.form.branch_idbranch,
+                          branch.idbranch
+                        )
+                      },
+                      on: {
+                        change: function($event) {
+                          _vm.$set(_vm.form, "branch_idbranch", branch.idbranch)
+                        }
+                      }
+                    }),
+                    _vm._v(" "),
+                    _c("span", [_vm._v(_vm._s(branch.name))]),
+                    _vm._v(" "),
+                    _c("br"),
+                    _c("br")
+                  ])
+                })
+              ],
+              2
+            )
+          ]),
+          _vm._v(" "),
+          _c(
+            "div",
+            { staticClass: "modal-footer" },
+            [
+              _c(
+                "b-btn",
+                {
+                  on: {
+                    click: function($event) {
+                      _vm.show = false
+                    }
+                  }
+                },
+                [_vm._v("Cancelar")]
+              ),
+              _vm._v(" "),
+              _c(
+                "button",
+                {
+                  staticClass: "btn btn-primary",
+                  attrs: { type: "submit" },
+                  on: {
+                    click: function($event) {
+                      _vm.saveUserHasDiscount()
+                    }
+                  }
+                },
+                [
+                  _c("i", { staticClass: "zmdi zmdi-plus" }),
+                  _vm._v(" Obetener")
+                ]
+              )
+            ],
+            1
+          )
+        ]
+      )
     ],
     1
   )
@@ -67441,13 +67599,16 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
         'from': 0,
         'to': 0
       },
-      offset: 2
+      offset: 2,
+      user: {
+        id: ''
+      }
     };
   },
   mounted: function mounted() {
     var _this = this;
 
-    this.index();
+    this.auth();
 
     __WEBPACK_IMPORTED_MODULE_0__utilities_EventBus_js__["a" /* default */].$on('change_page', function (page) {
       _this.index(page);
@@ -67456,18 +67617,29 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 
 
   methods: {
-    index: function index(page) {
+    auth: function auth() {
       var _this2 = this;
 
-      axios.get('api/user-has-discount?page=' + page).then(function (response) {
-        _this2.discounts = response.data.data.data;
-        _this2.pagination = response.data.paginate;
+      axios.get('api/profile').then(function (response) {
+        _this2.user.id = response.data.user.id;
+
+        _this2.index();
+      }).catch(function (err) {
+        return console.log(err);
+      });
+    },
+    index: function index(page) {
+      var _this3 = this;
+
+      axios.get('api/user-has-discount/' + this.user.id + '/?page=' + page).then(function (response) {
+        _this3.discounts = response.data.data.data;
+        _this3.pagination = response.data.paginate;
       }).catch(function (err) {
         return console.log(err);
       });
     },
     authorize: function authorize(id) {
-      var _this3 = this;
+      var _this4 = this;
 
       swal({
         title: "¿Estas seguro de autorizar esta solicitud?",
@@ -67481,7 +67653,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
               title: response.data.msg,
               icon: "success"
             });
-            _this3.index();
+            _this4.index();
           }).catch(function (err) {
             return console.log(err);
           });
@@ -67489,7 +67661,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
       });
     },
     notAuthorize: function notAuthorize(id) {
-      var _this4 = this;
+      var _this5 = this;
 
       swal({
         title: "¿Estas seguro de no autorizar esta solicitud?",
@@ -67503,7 +67675,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
               title: response.data.msg,
               icon: "success"
             });
-            _this4.index();
+            _this5.index();
           }).catch(function (err) {
             return console.log(err);
           });
@@ -67511,7 +67683,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
       });
     },
     cancel: function cancel(id) {
-      var _this5 = this;
+      var _this6 = this;
 
       swal({
         title: "¿Estas seguro de cancelar esta solicitud?",
@@ -67525,7 +67697,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
               title: response.data.msg,
               icon: "success"
             });
-            _this5.index();
+            _this6.index();
           }).catch(function (err) {
             return console.log(err);
           });
@@ -68058,15 +68230,29 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
   data: function data() {
     return {
       charcode: '',
-      discounts: []
+      discounts: [],
+      user: {
+        id: ''
+      }
     };
   },
   mounted: function mounted() {},
 
 
   methods: {
-    sendCharcode: function sendCharcode() {
+    auth: function auth() {
       var _this = this;
+
+      axios.get('api/profile').then(function (response) {
+        _this.user.id = response.data.user.id;
+
+        _this.sendCharcode(_this.user.id);
+      }).catch(function (err) {
+        return console.log(err);
+      });
+    },
+    sendCharcode: function sendCharcode(id) {
+      var _this2 = this;
 
       if (!this.charcodeSize()) {
         swal({
@@ -68077,14 +68263,14 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
         return false;
       }
 
-      axios.get('api/search-charcode/' + this.charcode).then(function (response) {
+      axios.get('api/search-charcode/' + this.charcode + '/' + id).then(function (response) {
         console.log(response.data);
         if (!response.data.success) {
           swal({
             title: response.data.msg,
             icon: "warning"
           });
-          _this.charcode = '';
+          _this2.charcode = '';
           __WEBPACK_IMPORTED_MODULE_0_jquery___default()('.item-redeemed').css('display', 'none');
           return false;
         }
@@ -68094,7 +68280,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
           title: response.data.msg,
           icon: "success"
         });
-        _this.discounts = response.data.data;
+        _this2.discounts = response.data.data;
       }).catch(function (err) {
         return console.log(err);
       });
@@ -68108,7 +68294,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
       }
     },
     redeemed: function redeemed(id) {
-      var _this2 = this;
+      var _this3 = this;
 
       axios.get('api/redeemed-discount/' + id).then(function (response) {
         swal({
@@ -68116,7 +68302,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
           icon: "success"
         });
 
-        _this2.$router.push('/discounts-postulated');
+        _this3.$router.push('/discounts-postulated');
       }).catch(function (err) {
         return console.log(err);
       });
@@ -68215,7 +68401,7 @@ var render = function() {
                     "button",
                     {
                       staticClass: "btn btn-primary btn-block",
-                      on: { click: _vm.sendCharcode }
+                      on: { click: _vm.auth }
                     },
                     [_vm._v("Buscar")]
                   )
@@ -71919,11 +72105,6 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
-//
-//
-//
-//
-//
 
 
 
@@ -74307,9 +74488,9 @@ var render = function() {
                             _vm._v(" "),
                             _c("td", { staticClass: "text-center" }, [
                               _vm._v(
-                                "\n                                      " +
+                                "\n                                    " +
                                   _vm._s(discount.outstanding ? "Si" : "No") +
-                                  "\n                                      "
+                                  "\n                                    "
                               )
                             ]),
                             _vm._v(" "),
@@ -75796,11 +75977,14 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
         'from': 0,
         'to': 0
       },
-      discounts: []
+      discounts: [],
+      user: {
+        id: ''
+      }
     };
   },
   mounted: function mounted() {
-    this.index();
+    this.auth();
   },
 
   computed: {
@@ -75811,12 +75995,24 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
     }
   },
   methods: {
-    index: function index() {
+    auth: function auth() {
       var _this = this;
 
-      axios.get('api/client').then(function (response) {
+      axios.get('api/profile').then(function (response) {
+        _this.user.id = response.data.user.id;
+        _this.index();
+        // this.index();
+      }).catch(function (err) {
+        return console.log(err);
+      });
+    },
+    index: function index() {
+      var _this2 = this;
+
+      // console.log(this.user.id)
+      axios.get('api/client/' + this.user.id).then(function (response) {
         console.log(response);
-        _this.discounts = response.data.data;
+        _this2.discounts = response.data.data;
       }).catch(function (error) {
         console.log(error.response.data);
       });
@@ -76313,11 +76509,14 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
         'from': 0,
         'to': 0
       },
-      discounts: []
+      discounts: [],
+      user: {
+        id: ''
+      }
     };
   },
   mounted: function mounted() {
-    this.index();
+    this.auth();
   },
 
   computed: {
@@ -76329,12 +76528,23 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
     }
   },
   methods: {
-    index: function index() {
+    auth: function auth() {
       var _this = this;
 
-      axios.get('api/client').then(function (response) {
+      axios.get('api/profile').then(function (response) {
+        _this.user.id = response.data.user.id;
+        _this.index();
+        // this.index();
+      }).catch(function (err) {
+        return console.log(err);
+      });
+    },
+    index: function index() {
+      var _this2 = this;
+
+      axios.get('api/client/' + this.user.id).then(function (response) {
         console.log(response);
-        _this.discounts = response.data.data;
+        _this2.discounts = response.data.data;
       }).catch(function (error) {
         console.log(error.response.data);
       });
@@ -77186,8 +77396,8 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__Edita___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_2__Edita__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__Show__ = __webpack_require__(442);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__Show___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_3__Show__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__permissions__ = __webpack_require__(447);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__permissions___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_4__permissions__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__Permissions__ = __webpack_require__(637);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__Permissions___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_4__Permissions__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_5_axios__ = __webpack_require__(11);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_5_axios___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_5_axios__);
 //
@@ -77243,12 +77453,11 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 
 
 
-var cryptobject;
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: 'index',
   components: {
-    create: __WEBPACK_IMPORTED_MODULE_1__Create___default.a, permissions: __WEBPACK_IMPORTED_MODULE_4__permissions___default.a, edit: __WEBPACK_IMPORTED_MODULE_2__Edita___default.a, show: __WEBPACK_IMPORTED_MODULE_3__Show___default.a
+    create: __WEBPACK_IMPORTED_MODULE_1__Create___default.a, permissions: __WEBPACK_IMPORTED_MODULE_4__Permissions___default.a, edit: __WEBPACK_IMPORTED_MODULE_2__Edita___default.a, show: __WEBPACK_IMPORTED_MODULE_3__Show___default.a
   },
   data: function data() {
     return {
@@ -77301,7 +77510,6 @@ var cryptobject;
       var _this3 = this;
 
       __WEBPACK_IMPORTED_MODULE_5_axios___default.a.delete('api' + this.url + '/' + id).then(function (data) {
-        console.log(data);
         _this3.index();
       }).catch(function (err) {
         return console.log(err);
@@ -79089,262 +79297,9 @@ if (false) {
 }
 
 /***/ }),
-/* 447 */
-/***/ (function(module, exports, __webpack_require__) {
-
-var disposed = false
-var normalizeComponent = __webpack_require__(1)
-/* script */
-var __vue_script__ = __webpack_require__(448)
-/* template */
-var __vue_template__ = __webpack_require__(449)
-/* template functional */
-var __vue_template_functional__ = false
-/* styles */
-var __vue_styles__ = null
-/* scopeId */
-var __vue_scopeId__ = null
-/* moduleIdentifier (server only) */
-var __vue_module_identifier__ = null
-var Component = normalizeComponent(
-  __vue_script__,
-  __vue_template__,
-  __vue_template_functional__,
-  __vue_styles__,
-  __vue_scopeId__,
-  __vue_module_identifier__
-)
-Component.options.__file = "resources/assets/js/components/user/permissions.vue"
-
-/* hot reload */
-if (false) {(function () {
-  var hotAPI = require("vue-hot-reload-api")
-  hotAPI.install(require("vue"), false)
-  if (!hotAPI.compatible) return
-  module.hot.accept()
-  if (!module.hot.data) {
-    hotAPI.createRecord("data-v-40fafa57", Component.options)
-  } else {
-    hotAPI.reload("data-v-40fafa57", Component.options)
-  }
-  module.hot.dispose(function (data) {
-    disposed = true
-  })
-})()}
-
-module.exports = Component.exports
-
-
-/***/ }),
-/* 448 */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__utilities_EventBus__ = __webpack_require__(6);
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-
-
-
-/* harmony default export */ __webpack_exports__["default"] = ({
-  name: 'permissions',
-  data: function data() {
-    return {
-      userId: '',
-      url: '/roles',
-      user: [],
-      error: [],
-      permissions: [],
-      flavours: ["1", "2"],
-      selected: [],
-      permisos: []
-    };
-  },
-  created: function created() {
-    var _this = this;
-
-    __WEBPACK_IMPORTED_MODULE_0__utilities_EventBus__["a" /* default */].$on('user_id', function (data) {
-      _this.userId = data;
-      _this.index();
-      _this.permissionsUser();
-    });
-  },
-
-
-  methods: {
-    index: function index() {
-      var _this2 = this;
-
-      this.flavours = [];
-      axios.get('api/roles').then(function (response) {
-        _this2.permissions = response.data.permissions;
-
-        for (var perm in _this2.permissions) {
-          var option = {
-            text: _this2.permissions[perm]['name'],
-            value: _this2.permissions[perm]['id']
-          };
-          _this2.flavours.push(option);
-        }
-        console.log(_this2.flavours);
-      }).catch(function (err) {
-        return console.log(err);
-      });
-    },
-    permissionsUser: function permissionsUser() {
-      var _this3 = this;
-
-      axios.get('api/permissionsuser/' + this.userId).then(function (response) {
-        _this3.selected = response.data;
-      }).catch(function (err) {
-        return console.log(err);
-      });
-    },
-    updatePermissions: function updatePermissions() {
-      var _this4 = this;
-
-      this.error = {};
-      this.permisos = this.selected;
-      axios.put('api/assignpermissionsuser/' + this.userId, this.permisos).then(function (response) {
-        _this4.$refs.editModal.hide();
-        _this4.$parent.index();
-        swal({
-          title: "",
-          text: response.data.success,
-          icon: "success"
-        });
-      }).catch(function (err) {
-        if (err.response.status === 422) {
-          _this4.error = err.response.data.error;
-        }
-      });
-    }
-  }
-});
-
-/***/ }),
-/* 449 */
-/***/ (function(module, exports, __webpack_require__) {
-
-var render = function() {
-  var _vm = this
-  var _h = _vm.$createElement
-  var _c = _vm._self._c || _h
-  return _c(
-    "div",
-    [
-      _c(
-        "b-modal",
-        {
-          ref: "editModal",
-          attrs: {
-            id: "permissionsModal",
-            title: "Permisos Adicionales",
-            "hide-footer": ""
-          }
-        },
-        [
-          _c(
-            "form",
-            {
-              on: {
-                submit: function($event) {
-                  $event.preventDefault()
-                  _vm.updatePermissions()
-                }
-              }
-            },
-            [
-              _c("div", { staticClass: "modal-content" }, [
-                _c("div", { staticClass: "modal-body" }, [
-                  _c(
-                    "div",
-                    { staticClass: "col-lg-12" },
-                    [
-                      _c(
-                        "b-form-group",
-                        [
-                          _c("b-form-checkbox-group", {
-                            staticClass: "ml-4",
-                            attrs: {
-                              id: "flavors",
-                              name: "flavs",
-                              options: _vm.flavours,
-                              "aria-label": "Individual flavours"
-                            },
-                            model: {
-                              value: _vm.selected,
-                              callback: function($$v) {
-                                _vm.selected = $$v
-                              },
-                              expression: "selected"
-                            }
-                          })
-                        ],
-                        1
-                      ),
-                      _vm._v(" "),
-                      _c(
-                        "button",
-                        {
-                          staticClass: "btn btn-primary btn-sm  btn-default",
-                          attrs: { type: "button" },
-                          on: {
-                            click: function($event) {
-                              _vm.updatePermissions(_vm.selected)
-                            }
-                          }
-                        },
-                        [_vm._v(" Actualizar")]
-                      )
-                    ],
-                    1
-                  )
-                ])
-              ])
-            ]
-          )
-        ]
-      )
-    ],
-    1
-  )
-}
-var staticRenderFns = []
-render._withStripped = true
-module.exports = { render: render, staticRenderFns: staticRenderFns }
-if (false) {
-  module.hot.accept()
-  if (module.hot.data) {
-    require("vue-hot-reload-api")      .rerender("data-v-40fafa57", module.exports)
-  }
-}
-
-/***/ }),
+/* 447 */,
+/* 448 */,
+/* 449 */,
 /* 450 */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -116623,6 +116578,263 @@ if (false) {
 /***/ (function(module, exports) {
 
 // removed by extract-text-webpack-plugin
+
+/***/ }),
+/* 636 */,
+/* 637 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var disposed = false
+var normalizeComponent = __webpack_require__(1)
+/* script */
+var __vue_script__ = __webpack_require__(638)
+/* template */
+var __vue_template__ = __webpack_require__(639)
+/* template functional */
+var __vue_template_functional__ = false
+/* styles */
+var __vue_styles__ = null
+/* scopeId */
+var __vue_scopeId__ = null
+/* moduleIdentifier (server only) */
+var __vue_module_identifier__ = null
+var Component = normalizeComponent(
+  __vue_script__,
+  __vue_template__,
+  __vue_template_functional__,
+  __vue_styles__,
+  __vue_scopeId__,
+  __vue_module_identifier__
+)
+Component.options.__file = "resources/assets/js/components/user/Permissions.vue"
+
+/* hot reload */
+if (false) {(function () {
+  var hotAPI = require("vue-hot-reload-api")
+  hotAPI.install(require("vue"), false)
+  if (!hotAPI.compatible) return
+  module.hot.accept()
+  if (!module.hot.data) {
+    hotAPI.createRecord("data-v-058db237", Component.options)
+  } else {
+    hotAPI.reload("data-v-058db237", Component.options)
+  }
+  module.hot.dispose(function (data) {
+    disposed = true
+  })
+})()}
+
+module.exports = Component.exports
+
+
+/***/ }),
+/* 638 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__utilities_EventBus__ = __webpack_require__(6);
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
+
+
+/* harmony default export */ __webpack_exports__["default"] = ({
+  name: 'permissions',
+  data: function data() {
+    return {
+      userId: '',
+      url: '/roles',
+      user: [],
+      error: [],
+      permissions: [],
+      flavours: [],
+      selected: [],
+      permisos: []
+    };
+  },
+  created: function created() {
+    var _this = this;
+
+    __WEBPACK_IMPORTED_MODULE_0__utilities_EventBus__["a" /* default */].$on('user_id', function (data) {
+      _this.userId = data;
+      _this.index();
+      _this.permissionsUser();
+    });
+  },
+
+
+  methods: {
+    index: function index() {
+      var _this2 = this;
+
+      this.flavours = [];
+      axios.get('api/roles').then(function (response) {
+        _this2.permissions = response.data.permissions;
+
+        for (var perm in _this2.permissions) {
+          var option = {
+            text: _this2.permissions[perm]['name'],
+            value: _this2.permissions[perm]['id']
+          };
+          _this2.flavours.push(option);
+        }
+        console.log(_this2.flavours);
+      }).catch(function (err) {
+        return console.log(err);
+      });
+    },
+    permissionsUser: function permissionsUser() {
+      var _this3 = this;
+
+      axios.get('api/permissionsuser/' + this.userId).then(function (response) {
+        _this3.selected = response.data;
+      }).catch(function (err) {
+        return console.log(err);
+      });
+    },
+    updatePermissions: function updatePermissions() {
+      var _this4 = this;
+
+      this.error = {};
+      this.permisos = this.selected;
+      axios.put('api/assignpermissionsuser/' + this.userId, this.permisos).then(function (response) {
+        _this4.$refs.editModal.hide();
+        _this4.$parent.index();
+        swal({
+          title: "",
+          text: response.data.success,
+          icon: "success"
+        });
+      }).catch(function (err) {
+        if (err.response.status === 422) {
+          _this4.error = err.response.data.error;
+        }
+      });
+    }
+  }
+});
+
+/***/ }),
+/* 639 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c(
+    "div",
+    [
+      _c(
+        "b-modal",
+        {
+          ref: "editModal",
+          attrs: {
+            id: "permissionsModal",
+            title: "Permisos Adicionales",
+            "hide-footer": ""
+          }
+        },
+        [
+          _c(
+            "form",
+            {
+              on: {
+                submit: function($event) {
+                  $event.preventDefault()
+                  _vm.updatePermissions()
+                }
+              }
+            },
+            [
+              _c("div", { staticClass: "modal-content" }, [
+                _c("div", { staticClass: "modal-body" }, [
+                  _c(
+                    "div",
+                    { staticClass: "col-lg-12" },
+                    [
+                      _c(
+                        "b-form-group",
+                        [
+                          _c("b-form-checkbox-group", {
+                            staticClass: "ml-4",
+                            attrs: {
+                              id: "flavors",
+                              name: "flavs",
+                              options: _vm.flavours,
+                              "aria-label": "Individual flavours"
+                            },
+                            model: {
+                              value: _vm.selected,
+                              callback: function($$v) {
+                                _vm.selected = $$v
+                              },
+                              expression: "selected"
+                            }
+                          })
+                        ],
+                        1
+                      ),
+                      _vm._v(" "),
+                      _c(
+                        "button",
+                        {
+                          staticClass: "btn btn-primary btn-sm  btn-default",
+                          attrs: { type: "button" },
+                          on: {
+                            click: function($event) {
+                              _vm.updatePermissions(_vm.selected)
+                            }
+                          }
+                        },
+                        [_vm._v(" Actualizar")]
+                      )
+                    ],
+                    1
+                  )
+                ])
+              ])
+            ]
+          )
+        ]
+      )
+    ],
+    1
+  )
+}
+var staticRenderFns = []
+render._withStripped = true
+module.exports = { render: render, staticRenderFns: staticRenderFns }
+if (false) {
+  module.hot.accept()
+  if (module.hot.data) {
+    require("vue-hot-reload-api")      .rerender("data-v-058db237", module.exports)
+  }
+}
 
 /***/ })
 /******/ ]);

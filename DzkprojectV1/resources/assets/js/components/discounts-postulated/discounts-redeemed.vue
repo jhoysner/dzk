@@ -24,7 +24,7 @@
                     <input type="text" class="form-control" id="charcode" placeholder="Ingresa Charcode" v-model="charcode">
                   </div>
                   <div class="form-group">
-                    <button class="btn btn-primary btn-block" @click="sendCharcode">Buscar</button>
+                    <button class="btn btn-primary btn-block" @click="auth">Buscar</button>
                   </div>
                 </div>
               </div>
@@ -112,6 +112,9 @@ import $ from 'jquery';
       return {
         charcode: '',
         discounts: [],
+        user: {
+          id: ''
+        }
       }
     },
 
@@ -121,7 +124,16 @@ import $ from 'jquery';
 
     methods: {
 
-      sendCharcode() {
+      auth() {
+        axios.get('api/profile').then((response) => {
+          this.user.id = response.data.user.id;
+
+          this.sendCharcode(this.user.id);
+        })
+        .catch(err => console.log(err))
+      },
+
+      sendCharcode(id) {
 
         if(!this.charcodeSize()) {
           swal({
@@ -132,7 +144,7 @@ import $ from 'jquery';
           return false;
         }
 
-        axios.get('api/search-charcode/' + this.charcode).then(response => {
+        axios.get('api/search-charcode/' + this.charcode + '/' + id).then(response => {
           console.log(response.data);
           if(!response.data.success) {
             swal({

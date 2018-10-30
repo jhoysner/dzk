@@ -113,6 +113,27 @@
     </div>
     <paginator :pagination="pagination"></paginator>
     <detail></detail>
+
+    <b-modal v-model="show" id="showBranchs" ref="showBranchs" title="Elegir Sucursal donde se obtendra el Descuento" hide-footer>
+        <div class="modal-content">
+          <div class="container">
+                
+              <h3 class="my-4">Sucursal:</h3>   
+              
+              <div v-for="branch in branchs">
+                                      
+                  <input class="" type="radio"  v-model="form.branch_idbranch" id="branch.name" :value="branch.idbranch" >
+                   <span>{{branch.name}}</span>
+                  <br><br>
+              </div>                            
+              
+          </div>
+        </div>
+          <div class="modal-footer">
+              <b-btn @click="show=false">Cancelar</b-btn>
+              <button type="submit" @click="saveUserHasDiscount()" class="btn btn-primary"><i class="zmdi zmdi-plus"></i> Obetener</button>
+          </div>
+    </b-modal> 
   </div>
 </template>
 
@@ -156,11 +177,17 @@ import paginator from '../../utilities/paginator';
           'branch_idbranch': '',
           'users_id': '',
         },
+        show:false, 
+        branchs:[],
+        user:{
+          id: '',
+        }
       }
     },
 
     mounted() {
       // this.index();
+      this.auth();
       this.filtering();
       this.getTags();
       this.getDiscountCategories();
@@ -217,7 +244,14 @@ import paginator from '../../utilities/paginator';
       detail(id) {
         Bus.$emit('detail_homeinit-discount', id);
       },
-
+      auth() {
+        axios.get('api/profile').then((response) => {
+          this.user.id = response.data.user.id;
+          // console.log(this.user.id);
+          // this.index();
+        })
+        .catch(err => console.log(err))
+      },
       getDiscountCategories() {
         axios.get('api/discount-categories').then(data => {
           // console.log(data)
@@ -247,7 +281,9 @@ import paginator from '../../utilities/paginator';
         .catch(err => console.log(err));
       },
       obtenerDescuento(discount){
-
+          
+         this.branchs = discount.branchs;
+         this.$refs.showBranchs.show()
          this.form.validfrom = discount.startdate;
          this.form.validto = discount.enddate;
          this.form.amount = 1;
@@ -258,11 +294,28 @@ import paginator from '../../utilities/paginator';
          this.form.userhasdiscountstatus_iduserhasdiscountstatus = '2';
          this.form.commerce_idcommerce = discount.branchs[0].commerce_idcommerce;
          this.form.branch_idbranch = discount.branchs[0].idbranch;
-         this.form.users_id = 'abcd1234';
+         this.form.users_id = this.user.id;
    
-        console.log(discount)
+        // console.log(discount)
 
-        axios.post('api/user-has-discount', this.form).
+        // axios.post('api/user-has-discount', this.form).
+        //   then(response => {
+        //       this.form = {};
+        //       swal({
+        //         title: "Obtenido",
+        //         text: "Se obtuvo Descuento Satifactoriamente",
+        //         icon: "success",
+        //       })
+        //      console.log(response);
+        //   })
+        //   .catch(error => {
+        //     console.log(error.response.data)
+
+        //   });
+      },
+      saveUserHasDiscount(){
+         this.$refs.showBranchs.hide() 
+         axios.post('api/user-has-discount', this.form).
           then(response => {
               this.form = {};
               swal({
@@ -277,6 +330,7 @@ import paginator from '../../utilities/paginator';
 
           });
       }
+
     },
   }
 </script>

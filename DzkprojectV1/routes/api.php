@@ -121,4 +121,22 @@ Route::group(['middleware' => 'auth:api'], function() {
 });
 
 
+Route::post('user-has-discount','HomeInit\HomeInitController@saveUserHasDiscount');
+Route::get('client/{id}', 'Cliente\ClienteController@index');
+Route::post('user-has-discount','HomeInit\HomeInitController@saveUserHasDiscount');
+Route::get('client', 'Cliente\ClienteController@index');
 
+Route::get('client-user-discount/{id}', 'Cliente\ClienteController@detailUserDiscount');
+Route::get('user-has-discount/{iduser}', 'UserHasDiscountController@listUserHasDiscount');
+Route::get('authorize-discount/{id}', 'UserHasDiscountController@authorizeDiscount');
+Route::get('not-authorize-discount/{id}', 'UserHasDiscountController@notAuthorize');
+Route::get('cancel-discount/{id}', 'UserHasDiscountController@cancelDiscount');
+Route::get('search-charcode/{charcode}/{iduser}', 'UserHasDiscountController@searchCharcode');
+Route::get('redeemed-discount/{id}', 'UserHasDiscountController@redeemedDiscount');
+Route::get('client-user-discount/{id}', 'Cliente\ClienteController@detailUserDiscount');
+Route::get('user-has-discount', 'UserHasDiscountController@listUserHasDiscount');
+Route::get('authorize-discount/{id}', 'UserHasDiscountController@authorizeDiscount');
+Route::get('not-authorize-discount/{id}', 'UserHasDiscountController@notAuthorize');
+Route::get('cancel-discount/{id}', 'UserHasDiscountController@cancelDiscount');
+Route::get('search-charcode/{charcode}', 'UserHasDiscountController@searchCharcode');
+Route::get('redeemed-discount/{id}', 'UserHasDiscountController@redeemedDiscount');

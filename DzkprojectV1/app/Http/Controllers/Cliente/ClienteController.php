@@ -9,9 +9,9 @@ use Illuminate\Http\Request;
 
 class ClienteController extends Controller
 {
-    public function index(){
+    public function index($id){
 
-      $user = User::all()->first();
+      $user = User::find($id);
 
       $data = $user->discounts;
 

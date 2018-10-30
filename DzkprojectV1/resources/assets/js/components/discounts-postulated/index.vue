@@ -121,11 +121,14 @@ import paginator from '../../utilities/paginator';
             'to': 0
         },
         offset: 2,
+        user: {
+          id: ''
+        },
       }
     },
 
     mounted() {
-      this.index();
+      this.auth();
 
       Bus.$on('change_page', (page) => {
         this.index(page);
@@ -133,8 +136,17 @@ import paginator from '../../utilities/paginator';
     },
 
     methods: {
+      auth() {
+        axios.get('api/profile').then((response) => {
+          this.user.id = response.data.user.id;
+
+          this.index();
+        })
+        .catch(err => console.log(err))
+      },
+
       index(page) {
-        axios.get('api/user-has-discount?page=' + page).then(response => {
+        axios.get('api/user-has-discount/'+this.user.id+'/?page=' + page).then(response => {
           this.discounts = response.data.data.data;
           this.pagination = response.data.paginate;
         })
@@ -204,7 +216,7 @@ import paginator from '../../utilities/paginator';
             .catch(err => console.log(err))
           }
         });
-      }
+      },
     }
   }
 </script>

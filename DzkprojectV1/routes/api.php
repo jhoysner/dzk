@@ -103,7 +103,7 @@ Route::post('search', 'Search\SearchController@getSearch');
 
 
 Route::post('user-has-discount','HomeInit\HomeInitController@saveUserHasDiscount');
-Route::get('client', 'Cliente\ClienteController@index');
+Route::get('client/{id}', 'Cliente\ClienteController@index');
 
 Route::get('client-user-discount/{id}', 'Cliente\ClienteController@detailUserDiscount');
 Route::get('user-has-discount/{iduser}', 'UserHasDiscountController@listUserHasDiscount');

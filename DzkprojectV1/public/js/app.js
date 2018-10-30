@@ -55501,13 +55501,17 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
         'users_id': ''
       },
       show: false,
-      branchs: []
+      branchs: [],
+      user: {
+        id: ''
+      }
     };
   },
   mounted: function mounted() {
     var _this = this;
 
     // this.index();
+    this.auth();
     this.filtering();
     this.getTags();
     this.getDiscountCategories();
@@ -55569,20 +55573,31 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
     detail: function detail(id) {
       __WEBPACK_IMPORTED_MODULE_0__utilities_EventBus_js__["a" /* default */].$emit('detail_homeinit-discount', id);
     },
-    getDiscountCategories: function getDiscountCategories() {
+    auth: function auth() {
       var _this3 = this;
+
+      axios.get('api/profile').then(function (response) {
+        _this3.user.id = response.data.user.id;
+        // console.log(this.user.id);
+        // this.index();
+      }).catch(function (err) {
+        return console.log(err);
+      });
+    },
+    getDiscountCategories: function getDiscountCategories() {
+      var _this4 = this;
 
       axios.get('api/discount-categories').then(function (data) {
         // console.log(data)
-        _this3.categorydiscount = data.data.data;
-        _this3.categorydiscount.unshift({ iddiscountcategory: null, name: 'Seleccione una opcion' });
-        _this3.category = data.data.data[0].iddiscountcategory;
+        _this4.categorydiscount = data.data.data;
+        _this4.categorydiscount.unshift({ iddiscountcategory: null, name: 'Seleccione una opcion' });
+        _this4.category = data.data.data[0].iddiscountcategory;
       }).catch(function (err) {
         return console.log(err);
       });
     },
     filtering: function filtering(page) {
-      var _this4 = this;
+      var _this5 = this;
 
       var data = {
         category_discount: this.category ? this.category : "",
@@ -55596,8 +55611,8 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
       // axios.post('api/all-discounts?page=' + page, data).then(response => {
       axios.post('api/search?page=' + page, data).then(function (response) {
         console.log(response);
-        _this4.discounts = response.data.data.data;
-        _this4.pagination = response.data.paginate;
+        _this5.discounts = response.data.data.data;
+        _this5.pagination = response.data.paginate;
       }).catch(function (err) {
         return console.log(err);
       });
@@ -55616,7 +55631,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
       this.form.userhasdiscountstatus_iduserhasdiscountstatus = '2';
       this.form.commerce_idcommerce = discount.branchs[0].commerce_idcommerce;
       this.form.branch_idbranch = discount.branchs[0].idbranch;
-      this.form.users_id = 'abcd1234';
+      this.form.users_id = this.user.id;
 
       // console.log(discount)
 
@@ -55636,11 +55651,11 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
       //   });
     },
     saveUserHasDiscount: function saveUserHasDiscount() {
-      var _this5 = this;
+      var _this6 = this;
 
       this.$refs.showBranchs.hide();
       axios.post('api/user-has-discount', this.form).then(function (response) {
-        _this5.form = {};
+        _this6.form = {};
         swal({
           title: "Obtenido",
           text: "Se obtuvo Descuento Satifactoriamente",
@@ -75899,11 +75914,14 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
         'from': 0,
         'to': 0
       },
-      discounts: []
+      discounts: [],
+      user: {
+        id: ''
+      }
     };
   },
   mounted: function mounted() {
-    this.index();
+    this.auth();
   },
 
   computed: {
@@ -75914,12 +75932,24 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
     }
   },
   methods: {
-    index: function index() {
+    auth: function auth() {
       var _this = this;
 
-      axios.get('api/client').then(function (response) {
+      axios.get('api/profile').then(function (response) {
+        _this.user.id = response.data.user.id;
+        _this.index();
+        // this.index();
+      }).catch(function (err) {
+        return console.log(err);
+      });
+    },
+    index: function index() {
+      var _this2 = this;
+
+      // console.log(this.user.id)
+      axios.get('api/client/' + this.user.id).then(function (response) {
         console.log(response);
-        _this.discounts = response.data.data;
+        _this2.discounts = response.data.data;
       }).catch(function (error) {
         console.log(error.response.data);
       });
@@ -76416,11 +76446,14 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
         'from': 0,
         'to': 0
       },
-      discounts: []
+      discounts: [],
+      user: {
+        id: ''
+      }
     };
   },
   mounted: function mounted() {
-    this.index();
+    this.auth();
   },
 
   computed: {
@@ -76432,12 +76465,23 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
     }
   },
   methods: {
-    index: function index() {
+    auth: function auth() {
       var _this = this;
 
-      axios.get('api/client').then(function (response) {
+      axios.get('api/profile').then(function (response) {
+        _this.user.id = response.data.user.id;
+        _this.index();
+        // this.index();
+      }).catch(function (err) {
+        return console.log(err);
+      });
+    },
+    index: function index() {
+      var _this2 = this;
+
+      axios.get('api/client/' + this.user.id).then(function (response) {
         console.log(response);
-        _this.discounts = response.data.data;
+        _this2.discounts = response.data.data;
       }).catch(function (error) {
         console.log(error.response.data);
       });

@@ -179,11 +179,15 @@ import paginator from '../../utilities/paginator';
         },
         show:false, 
         branchs:[],
+        user:{
+          id: '',
+        }
       }
     },
 
     mounted() {
       // this.index();
+      this.auth();
       this.filtering();
       this.getTags();
       this.getDiscountCategories();
@@ -240,7 +244,14 @@ import paginator from '../../utilities/paginator';
       detail(id) {
         Bus.$emit('detail_homeinit-discount', id);
       },
-
+      auth() {
+        axios.get('api/profile').then((response) => {
+          this.user.id = response.data.user.id;
+          // console.log(this.user.id);
+          // this.index();
+        })
+        .catch(err => console.log(err))
+      },
       getDiscountCategories() {
         axios.get('api/discount-categories').then(data => {
           // console.log(data)
@@ -283,7 +294,7 @@ import paginator from '../../utilities/paginator';
          this.form.userhasdiscountstatus_iduserhasdiscountstatus = '2';
          this.form.commerce_idcommerce = discount.branchs[0].commerce_idcommerce;
          this.form.branch_idbranch = discount.branchs[0].idbranch;
-         this.form.users_id = 'abcd1234';
+         this.form.users_id = this.user.id;
    
         // console.log(discount)
 

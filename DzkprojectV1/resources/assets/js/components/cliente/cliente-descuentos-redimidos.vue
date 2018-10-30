@@ -106,11 +106,14 @@ import paginator from '../../utilities/paginator';
             'to': 0
         },
         discounts:[],
+        user: {
+          id: '',
+        }
       }
     },
 
     mounted() {
-      this.index();
+      this.auth();
     },
     computed: {
         filter() {
@@ -118,9 +121,17 @@ import paginator from '../../utilities/paginator';
            return this.discounts.filter((item) => item.pivot.userhasdiscountstatus_iduserhasdiscountstatus == 3);
         }
     },
-    methods: {     
+    methods: {  
+      auth() {
+        axios.get('api/profile').then((response) => {
+          this.user.id = response.data.user.id;
+          this.index();
+          // this.index();
+        })
+        .catch(err => console.log(err))
+      }, 
       index(){
-        axios.get('api/client').
+        axios.get('api/client/'+this.user.id).
           then(response => {
             console.log(response)
              this.discounts = response.data.data;

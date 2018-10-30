@@ -20,7 +20,7 @@ class ClienteController extends Controller
 
     public function detailUserDiscount($id){
 
-       $data = UserHasDiscount::find($id)->with('discounts','discountsStatus','commerce','branch')->first();
+       $data = UserHasDiscount::where('idusers_has_discount', $id)->with('discounts','discountsStatus','commerce','branch')->first();
 
        return response()->json(['data'=> $data], 200);
     }

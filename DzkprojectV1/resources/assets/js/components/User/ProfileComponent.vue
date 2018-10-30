@@ -98,7 +98,8 @@ import edit from './Edit';
                 axios.get('api'+ this.url)
                     .then(
                         (response) => {
-                            this.user = response.data.user[0];
+                            console.log(response.data)
+                            this.user = response.data.user;
                             this.user.country = this.user.countries.name
                             this.user.state = this.user.states.name
                             this.user.city = this.user.cities.name

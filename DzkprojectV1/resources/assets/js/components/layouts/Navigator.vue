@@ -18,14 +18,14 @@
                   </a>
               </router-link>
             </li>
-            <li>
+            <li v-can="'tags'">
               <router-link to='/tags'>
                   <a>
                     Tags
                   </a>
               </router-link>
             </li>            
-            <li>
+            <li v-can="'params'">
               <router-link to='/params'>
                   <a>
                     Parametros
@@ -54,14 +54,14 @@
                 </a>
               </router-link>
             </li>
-            <li>
+            <li v-can="'users'">
               <router-link to='/users'>
                 <a>
                   Usuarios
                 </a>
               </router-link>
             </li>
-            <li>
+            <li v-can="'roles'">
               <router-link to='/roles'>
                 <a>
                   Grupos

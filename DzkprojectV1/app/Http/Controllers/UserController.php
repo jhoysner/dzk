@@ -18,7 +18,7 @@ use DB;
 
 class UserController extends Controller
 {
-    //use Authorizable;
+    use Authorizable;
     /**
      * Create a new controller instance.
      *
@@ -152,12 +152,11 @@ class UserController extends Controller
     {
         $id = Auth::id();
 
-        $users = User::with('countries')
+        $user = User::with('countries')
                     ->with('states')
                     ->with('cities')
                     ->where('id', $id)
-                    ->get();
-        $user = Auth::user();
+                    ->first();
         return response()->json(['user'=>$user], 200);
 
     }

@@ -53,7 +53,6 @@
 
 	export default {
 		mounted() {
-	 		console.log('Login Mounted.')
 	 	},
 	 	data() {
             return {
@@ -76,10 +75,10 @@
 	 					password: this.password 
 	 				}
 					
+
 					axios.post('/api/login', params)
-                    	.then((response) => {
-                    		console.log(response.data)
-                    		
+                    	.then((response) => {                    		
+							
                     		const accessToken = response.data.access_token
             				localStorage.setItem('access_token', accessToken)
 

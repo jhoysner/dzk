@@ -54045,7 +54045,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
         this.pagination = response.data.paginate;
       })
       .catch(err => console.log(err));*/
-      axios.post('api/search?page=' + (typeof page === 'undefined' ? 1 : page), data).then(function (response) {
+      axios.post('api/search?page=' + page, data).then(function (response) {
         _this4.commerces = response.data.data.data;
         _this4.pagination = response.data.paginate;
       }).catch(function (err) {
@@ -55571,7 +55571,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
       console.log(data);
 
       // axios.post('api/all-discounts?page=' + page, data).then(response => {
-      axios.post('api/search?page=' + (typeof page === 'undefined' ? 1 : page), data).then(function (response) {
+      axios.post('api/search?page=' + page, data).then(function (response) {
         console.log(response);
         _this4.discounts = response.data.data.data;
         _this4.pagination = response.data.paginate;

@@ -274,7 +274,7 @@ import paginator from '../../utilities/paginator';
           this.pagination = response.data.paginate;
         })
         .catch(err => console.log(err));*/
-        axios.post('api/search?page=' + page, data).then(response => {
+        axios.post('api/search?page=' + (typeof page === 'undefined' ? 1 : page), data).then(response => {
           this.commerces = response.data.data.data;
           this.pagination = response.data.paginate; 
         })

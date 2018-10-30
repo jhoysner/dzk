@@ -51,8 +51,6 @@
 
 <script>
 
-import Notify from 'vue-notify-me'
-
 	export default {
 		mounted() {
 	 		console.log('Login Mounted.')
@@ -81,9 +79,17 @@ import Notify from 'vue-notify-me'
 					axios.post('/api/login', params)
                     	.then((response) => {
                     		console.log(response.data)
-                            localStorage.setItem('userdata',JSON.stringify(response.data.user.id));
-							console.log(response.data.user.id)
-							//window.location.href = '/';
+                    		
+                    		const accessToken = response.data.access_token
+            				localStorage.setItem('access_token', accessToken)
+
+            				const role = response.data.role
+            				localStorage.setItem('roles', role)
+
+            				const permissions = response.data.permissions
+            				localStorage.setItem('permissions', permissions)
+
+            				window.location.href = '/';
 
                         }).catch((error) => {
                             this.errors.push(error.response.data.error);

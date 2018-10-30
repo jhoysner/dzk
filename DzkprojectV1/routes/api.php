@@ -20,13 +20,15 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 //Login
 Route::post('login', 'Auth\LoginController@authenticate');
 //Logout
-Route::get('logout', 'UserController@logout');
+Route::post('logout', 'UserController@logout');
 
 //Profile
 Route::group(["prefix" => "profile"], function () {
-	Route::get('/{id}', 'UserController@userDetail');
+	Route::get('/', 'UserController@userDetail');
 	Route::post('/', 'UserController@updateProfile');
 });
+
+Route::middleware('auth:api')->get('profile','UserController@userDetail');
 
 //Parametros
 Route::resource('params','Params\ParamsController',

@@ -83,7 +83,11 @@
               </router-link>
             </li>
             <li>
-                <a href="author-account-settings.html">Cerrar Sesión</a>
+              <router-link to='/logout'>
+                <a>
+                  Salir
+                </a>
+              </router-link>
             </li>
           <!--  <li>
                 <a href="author-account-download.html">Downloads</a>

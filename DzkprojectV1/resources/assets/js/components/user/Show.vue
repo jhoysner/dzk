@@ -81,7 +81,7 @@ export default {
   methods: {
     edit(id) {
       axios.get('api' + this.url + '/' + id ).then(response => {   
-        this.user = response.data.user;
+        this.user = response.data.user
         this.user.country = this.user.countries.name
         this.user.state = this.user.states.name
         this.user.city = this.user.cities.name

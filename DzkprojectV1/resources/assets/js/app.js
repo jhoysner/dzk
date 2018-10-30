@@ -1,27 +1,10 @@
-
-/**
- * First we will load all of this project's JavaScript dependencies which
- * includes Vue and other libraries. It is a great starting point when
- * building robust, powerful web applications using Vue and Laravel.
- */
- import Vue from 'vue';
-/**
- * First we will load all of this project's JavaScript dependencies which
- * includes Vue and other libraries. It is a great starting point when
- * building robust, powerful web applications using Vue and Laravel.
- */
-//import Vue from 'vue'
-
+import Vue from 'vue';
 import mainDashboard from './components/main.vue'
-
 import router from './routes/Routes.js'
-
 import BootstrapVue from 'bootstrap-vue'
-
 import swal from 'sweetalert';
 import ToggleButton from 'vue-js-toggle-button'
 import Multiselect from 'vue-multiselect'
-
 
 Vue.use(ToggleButton)
 
@@ -32,6 +15,33 @@ Vue.component('multiselect', Multiselect)
 require('./bootstrap');
 
 window.Vue = require('vue');
+
+// Authorization header
+axios.interceptors.request.use(function (config) {
+  var token = localStorage.getItem('access_token')
+  config['headers'] = {
+    Authorization: 'Bearer ' + token,
+    Accept: 'application/json',
+  }
+  return config
+}, error => Promise.reject(error))
+
+//Unauthorized
+axios.interceptors.response.use(
+  (response) => {
+    return response
+  },
+  (error) => {
+    const originalRequest = error.config
+
+    // token expired
+    if (error.response.status === 401 && error.response.data.error == "token_expired") {
+      window.location.href = '/login'
+    }
+
+    return Promise.reject(error)
+  }
+)
 
   Vue.component('login-component', require('./components/User/Login/LoginComponent.vue'));
   Vue.component('sider-component', require('./components/User/Login/SiderComponent.vue'));

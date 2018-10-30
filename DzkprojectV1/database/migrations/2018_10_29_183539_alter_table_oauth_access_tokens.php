@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreatePasswordResetsTable extends Migration
+class AlterTableOauthAccessTokens extends Migration
 {
     /**
      * Run the migrations.
@@ -13,11 +13,12 @@ class CreatePasswordResetsTable extends Migration
      */
     public function up()
     {
-        /*Schema::create('password_resets', function (Blueprint $table) {
-            $table->string('email')->index();
-            $table->string('token');
-            $table->timestamp('created_at')->nullable();
-        });*/
+        Schema::table('oauth_access_tokens', function (Blueprint $table) {
+            $table->dropColumn('user_id');
+        });
+        Schema::table('oauth_access_tokens', function (Blueprint $table) {
+            $table->uuid('user_id')->index()->nullable();
+        });
     }
 
     /**
@@ -27,6 +28,6 @@ class CreatePasswordResetsTable extends Migration
      */
     public function down()
     {
-       // Schema::dropIfExists('password_resets');
+        //
     }
 }

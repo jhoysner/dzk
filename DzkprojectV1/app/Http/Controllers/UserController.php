@@ -148,14 +148,16 @@ class UserController extends Controller
         return view('user.profile');
     }
 
-    public function userDetail($id) 
+    public function userDetail() 
     {
-        $user = User::with('countries')
+        $id = Auth::id();
+
+        $users = User::with('countries')
                     ->with('states')
                     ->with('cities')
                     ->where('id', $id)
                     ->get();
-
+        $user = Auth::user();
         return response()->json(['user'=>$user], 200);
 
     }
@@ -243,7 +245,17 @@ class UserController extends Controller
 
     public function logout(Request $request)
     {
-        Auth::logout();
+        $token = $request->token;
+
+        $user = Auth::user();
+
+        DB::table('oauth_access_tokens')
+            ->where('id', $token)
+            ->update([
+                'revoked' => true
+            ]);
+
+        //$user->revoke();
 
         return response()->json(['success'=>'Logout User']);
     }

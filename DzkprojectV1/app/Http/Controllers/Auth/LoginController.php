@@ -100,11 +100,13 @@ class LoginController extends Controller
         if (Auth::attempt($credentials)) {
             $user = $this->guard()->user();
             $role = auth()->user()->getRoleNames();
-            $permissions =  Auth::user()->permissions()->pluck('name')->toArray();
+            $permissions = $user->getAllPermissions()->pluck('name')->toArray(); 
+            
             return response()->json(['state'=>'Active','success'=>'Successful session start',
                     'user' => $user, 
                     'role'=> $role, 
-                    'permissions'=> $permissions
+                    'permissions'=> $permissions,
+                    'access_token'=> $user->makeApiToken()
                 ], 200);
         } 
 

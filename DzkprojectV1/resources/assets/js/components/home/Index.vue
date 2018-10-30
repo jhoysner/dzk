@@ -262,7 +262,7 @@ import paginator from '../../utilities/paginator';
         let data = {
           category_commerce: this.category,
           tags: this.tags,
-          work: this.search,
+          word: this.search,
           type: 'commerce',
           offset: 0
         };

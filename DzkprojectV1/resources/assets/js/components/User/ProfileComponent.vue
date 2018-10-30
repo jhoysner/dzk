@@ -34,15 +34,15 @@
                     </div>
                     <div class="col-lg-6">
                         <label><strong>País</strong></label>
-                        <p>{{user.countries.name}}</p>
+                        <p>{{user.country}}</p>
                     </div>
                     <div class="col-lg-6">
                         <label><strong>Estado</strong></label>
-                        <p>{{user.states.name}}</p>
+                        <p>{{user.state}}</p>
                     </div>
                     <div class="col-lg-6">
                         <label><strong>Ciudad</strong></label>
-                        <p>{{user.cities.name}}</p>
+                        <p>{{user.city}}</p>
                     </div>
                     <div class="col-lg-12 form-group">
                         <label class="font-weight-bold">Latitud y Logintud</label>
@@ -94,11 +94,14 @@ import edit from './Edit';
         },
         methods: {
             index() {
-                this.data = JSON.parse(localStorage.getItem('userdata'));
-                axios.get('api'+ this.url + '/'+ this.data)
+                //this.data = JSON.parse(localStorage.getItem('userdata'));
+                axios.get('api'+ this.url)
                     .then(
                         (response) => {
                             this.user = response.data.user[0];
+                            this.user.country = this.user.countries.name
+                            this.user.state = this.user.states.name
+                            this.user.city = this.user.cities.name
                         }   
                     )
             },

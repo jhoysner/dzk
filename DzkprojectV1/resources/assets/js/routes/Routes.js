@@ -19,6 +19,10 @@ import discountRoutes from '../components/discount/router'
 import Cliente from '../components/cliente/index'
 import DescuentosRedimidos from '../components/cliente/cliente-descuentos-redimidos'
 import DetailClienteDiscount from '../components/cliente/detail-discount'
+import Users from '../components/user/Index'
+import Roles from '../components/groups/Index'
+import Logout from '../components/auth/Logout'
+
 
 
 Vue.use(Router);
@@ -26,23 +30,38 @@ Vue.use(Router);
 const baseRoutes = [
         {
             path: '/',
-            component: Index
+            component: Index,
+            meta: { 
+                requiresAuth: true
+            }
         },        
         {
             path: '/home-discounts',
-            component: IndexDiscount
+            component: IndexDiscount,
+            meta: { 
+                requiresAuth: true
+            }
         },
         {
             path: '/tags',
-            component: Tags
+            component: Tags,
+            meta: { 
+                requiresAuth: true
+            }
         },        
         {
             path: '/cliente',
-            component: Cliente
+            component: Cliente,
+            meta: { 
+                requiresAuth: true
+            }
         },        
         {
             path: '/cliente-descuentos-redimidos',
-            component: DescuentosRedimidos
+            component: DescuentosRedimidos,
+            meta: { 
+                requiresAuth: true
+            }
         },
         {
             path: '/params',
@@ -50,22 +69,31 @@ const baseRoutes = [
         },
         {
             path: '/commerces',
-            component: Commerces
+            component: Commerces,
+            meta: { 
+                requiresAuth: true
+            }
         },      
         {
             path: '/commerce/:id',
             component: DetailCommerce,
-            
+            meta: { 
+                requiresAuth: true
+            }
         },        
         {
             path: '/commerce/:id/branchs',
             component: DetailCommerceBranch,
-
+            meta: { 
+                requiresAuth: true
+            }
         },        
         {
             path: '/commerce/:id/discounts',
             component: DetailCommerceDisocount,
-
+            meta: { 
+                requiresAuth: true
+            }
         },
         {
             path: '/branch/:id',
@@ -75,30 +103,66 @@ const baseRoutes = [
         {
             path: '/discount/:id',
             component: DetailDiscount,
-            
+            meta: { 
+                requiresAuth: true
+            }
         }, 
 
         {
             path: '/branchs',
-            component: Branchs
+            component: Branchs,
+            meta: { 
+                requiresAuth: true
+            }
         },
         {
             path: '/discounts-postulated',
-            component: Discountsp
+            component: Discountsp,
+            meta: { 
+                requiresAuth: true
+            }
         },       
         {
             path: '/client-discount/:id',
-            component: DetailClienteDiscount
+            component: DetailClienteDiscount,
+            meta: { 
+                requiresAuth: true
+            }
         },
         {
             path: '/discounts-redeemed',
-            component: Discountsrd
+            component: Discountsrd,
+            meta: { 
+                requiresAuth: true
+            }
         },
-        
+        {
+            path: '/users',
+            component: Users,
+            meta: { 
+                requiresAuth: true
+            }
+        },
+        {
+            path: '/roles',
+            component: Roles,
+            meta: { 
+                requiresAuth: true
+            }
+        },
         {
             path: '/profile',
-            component: Profile
+            component: Profile,
+            meta: { 
+                requiresAuth: true
+            }
         },
+        {
+            path: '/logout', 
+            component: Logout 
+        }
+
+
  
 ];
 
@@ -123,7 +187,27 @@ const baseRoutes = [
 // })
 
 const routes = baseRoutes.concat(discountRoutes);
-export default new Router({
+
+const router = new Router({
   mode: 'history',
   routes,
+})
+
+router.beforeEach((to, from, next) => {
+    if(to.matched.some(record => record.meta.requiresAuth)) {
+
+        const token = window.localStorage.getItem('access_token') 
+        
+        if( !token || token  == null ) {
+            next(
+                window.location.href = '/login'
+                )
+        } else {
+            next()
+        }
+    } else {
+        next()
+    }
 });
+
+export default router

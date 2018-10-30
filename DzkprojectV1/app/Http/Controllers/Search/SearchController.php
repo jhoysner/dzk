@@ -450,7 +450,7 @@ $discounts;*/
 
     protected function getLocalizationUser()
     {
-    	$id_user = 1;//"851e91410915be4dbd49";
+    	$id_user = Auth::id();
 
   		$user= User::find($id_user); 
 

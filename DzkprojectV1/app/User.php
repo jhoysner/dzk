@@ -2,6 +2,7 @@
 
 namespace App;
 
+use Laravel\Passport\HasApiTokens;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Database\Eloquent\SoftDeletes;
@@ -9,7 +10,7 @@ use Spatie\Permission\Traits\HasRoles;
 
 class User extends Authenticatable
 {
-    use Notifiable,HasRoles;
+    use HasApiTokens,Notifiable,HasRoles;
 
     //softdeletes
     use SoftDeletes;
@@ -28,9 +29,6 @@ class User extends Authenticatable
         'address', 'latitude', 'longitude', 'provider', 'provider_id', 'access_token', 'lastlogin', 
         'attemps', 'status', 'city_idcity', 'state_idstate', 'country_idcountry'
     ];
-
-
-
 
 
     /**
@@ -61,5 +59,26 @@ class User extends Authenticatable
     public function  discounts(){
         return $this->belongsToMany('App\Discount','users_has_discount','users_id')->withPivot('idusers_has_discount','charcode', 'qrcode','validfrom','validto','userhasdiscountstatus_iduserhasdiscountstatus' )->whereNull('users_has_discount.deleted_at');
     }
+
+    //Helpers
+        /**
+     * Get existing or make new access token
+     */
+    public function makeApiToken()
+    {
+        return $this->createToken('API')->accessToken;
+    }
+
+    /**
+     * Get token
+     *
+     * @return bool
+     */
+    public function getToken()
+    {
+        return $this->token();
+    }
+
+
 
 }

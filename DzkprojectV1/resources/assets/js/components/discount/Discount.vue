@@ -2,8 +2,6 @@
   <div>
       <div class="col-lg-12">
           <div>
-<!--               <router-link :to="{name: 'discount.create'}" class="btn btn-success mb-4">Create Discount</router-link>
- -->              
                   <b-btn v-b-modal.createModal>Crear Descuento</b-btn>
 
                   <div class="settings-content mt-4">
@@ -45,9 +43,6 @@
                               </tbody>
                           </table>
                       </div>
-
-                      <!-- <pagination :pag="pagination" @anterior="cargarProductos(...arguments)" @siguiente="cargarProductos(...arguments)"></pagination> -->
-                    
                 </div>
               </div>
           </div>

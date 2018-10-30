@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 
+use App\UserHasCommerce;
 use App\Branch;
 use App\Commerce;
 use App\Discount;
@@ -12,13 +13,18 @@ use App\UserHasDiscount;
 use Illuminate\Support\Facades\Storage;
 use LaravelQRCode\Facades\QRCode;
 
+use Auth;
+
 class UserHasDiscountController extends Controller
 {
-    public function listUserHasDiscount()
+    public function listUserHasDiscount($iduser)
     {
+
+        $idcommerce = UserHasCommerce::where('users_id', $iduser)->pluck('commerce_idcommerce');
+
         $uhd = UserHasDiscount::with('discounts')
                 ->with('discountsStatus')
-                    ->where('commerce_idcommerce', 'c26a0461-caa4-11e8-89ee-74c63b1404ed')->paginate(2); //Selecciono los descuentos que sean igual al comercio conectado. Por ahora, estatico. Luego, será a través de una relación usuario conectado con la tabla users_has_commerce.
+                    ->where('commerce_idcommerce', $idcommerce)->paginate(2); //Selecciono los descuentos que sean igual al comercio conectado. Por ahora, estatico. Luego, será a través de una relación usuario conectado con la tabla users_has_commerce.
 
         return response()->json([
             'paginate' => [
@@ -33,6 +39,8 @@ class UserHasDiscountController extends Controller
             'data' => $uhd
 
         ],200);
+
+        
     }
 
     public function authorizeDiscount($id)
@@ -71,15 +79,19 @@ class UserHasDiscountController extends Controller
         ]);
     }
 
-    public function searchCharcode($charcode)
+    public function searchCharcode($charcode, $iduser)
     {
+        $idcommerce = UserHasCommerce::where('users_id', $iduser)->pluck('commerce_idcommerce');
+
         $count = UserHasDiscount::with('discounts')
                 ->with('discountsStatus')
-                    ->where('charcode', 'LIKE', '%'.$charcode.'%')->count();
+                    ->where('commerce_idcommerce', $idcommerce)
+                        ->where('charcode', 'LIKE', '%'.$charcode.'%')->count();
 
         $uhd = UserHasDiscount::with('discounts')
                 ->with('discountsStatus')
-                    ->where('charcode', 'LIKE', '%'.$charcode.'%')->get();
+                    ->where('commerce_idcommerce', $idcommerce)
+                        ->where('charcode', 'LIKE', '%'.$charcode.'%')->get();
 
 
         if($count > 0) {

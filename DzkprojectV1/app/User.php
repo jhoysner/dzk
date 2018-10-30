@@ -60,6 +60,11 @@ class User extends Authenticatable
         return $this->belongsToMany('App\Discount','users_has_discount','users_id')->withPivot('idusers_has_discount','charcode', 'qrcode','validfrom','validto','userhasdiscountstatus_iduserhasdiscountstatus' )->whereNull('users_has_discount.deleted_at');
     }
 
+    public function commercesUser()
+    {
+        return $this->hasMany('App\UserHasCommerce');
+    }
+
     //Helpers
         /**
      * Get existing or make new access token

@@ -20,6 +20,8 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 //Login
 Route::post('login', 'Auth\LoginController@authenticate');
 
+Route::post('search', 'Search\SearchController@getSearch');
+
 Route::group(['middleware' => 'auth:api'], function() {
 
 	//Logout
@@ -95,30 +97,30 @@ Route::group(['middleware' => 'auth:api'], function() {
 	Route::get('user-ext', 'Params\ParamsController@getUserType');
 	Route::get('tag-num', 'Params\ParamsController@getTagNum');
 
-	//Route::get('all-commerces', 'HomeInit\HomeInitController@allCommerce');
-	Route::match(array('GET', 'POST'), 'all-commerces', 'HomeInit\HomeInitController@allCommerce');
-	// Route::get('all-discounts', 'HomeInit\HomeInitController@allDiscount');s
-	Route::match(array('GET', 'POST'), 'all-discounts', 'HomeInit\HomeInitController@allDiscount');
-	Route::get('detail-commerce/{id}', 'HomeInit\HomeInitController@commerce_detail');
-	Route::get('detail-commerce/{id}/random', 'HomeInit\HomeInitController@commerce_detail_random');
-	Route::get('detail-discount/{id}', 'HomeInit\HomeInitController@discount_detail');
-	Route::get('commerce-detail-branchs/{id}', 'HomeInit\HomeInitController@commerce_detail_branchs');
-	Route::get('commerce-detail-discounts/{id}', 'HomeInit\HomeInitController@commerce_detail_discount');
-	Route::post('search', 'Search\SearchController@getSearch');
-
-
-	Route::post('user-has-discount','HomeInit\HomeInitController@saveUserHasDiscount');
-	Route::get('client', 'Cliente\ClienteController@index');
-
-	Route::get('client-user-discount/{id}', 'Cliente\ClienteController@detailUserDiscount');
-	Route::get('user-has-discount', 'UserHasDiscountController@listUserHasDiscount');
-	Route::get('authorize-discount/{id}', 'UserHasDiscountController@authorizeDiscount');
-	Route::get('not-authorize-discount/{id}', 'UserHasDiscountController@notAuthorize');
-	Route::get('cancel-discount/{id}', 'UserHasDiscountController@cancelDiscount');
-	Route::get('search-charcode/{charcode}', 'UserHasDiscountController@searchCharcode');
-	Route::get('redeemed-discount/{id}', 'UserHasDiscountController@redeemedDiscount');
 
 });
+
+//Route::get('all-commerces', 'HomeInit\HomeInitController@allCommerce');
+Route::match(array('GET', 'POST'), 'all-commerces', 'HomeInit\HomeInitController@allCommerce');
+// Route::get('all-discounts', 'HomeInit\HomeInitController@allDiscount');s
+Route::match(array('GET', 'POST'), 'all-discounts', 'HomeInit\HomeInitController@allDiscount');
+Route::get('detail-commerce/{id}', 'HomeInit\HomeInitController@commerce_detail');
+Route::get('detail-commerce/{id}/random', 'HomeInit\HomeInitController@commerce_detail_random');
+Route::get('detail-discount/{id}', 'HomeInit\HomeInitController@discount_detail');
+Route::get('commerce-detail-branchs/{id}', 'HomeInit\HomeInitController@commerce_detail_branchs');
+Route::get('commerce-detail-discounts/{id}', 'HomeInit\HomeInitController@commerce_detail_discount');
+
+
+Route::post('user-has-discount','HomeInit\HomeInitController@saveUserHasDiscount');
+Route::get('client', 'Cliente\ClienteController@index');
+
+Route::get('client-user-discount/{id}', 'Cliente\ClienteController@detailUserDiscount');
+Route::get('user-has-discount', 'UserHasDiscountController@listUserHasDiscount');
+Route::get('authorize-discount/{id}', 'UserHasDiscountController@authorizeDiscount');
+Route::get('not-authorize-discount/{id}', 'UserHasDiscountController@notAuthorize');
+Route::get('cancel-discount/{id}', 'UserHasDiscountController@cancelDiscount');
+Route::get('search-charcode/{charcode}', 'UserHasDiscountController@searchCharcode');
+Route::get('redeemed-discount/{id}', 'UserHasDiscountController@redeemedDiscount');
 
 
 Route::post('user-has-discount','HomeInit\HomeInitController@saveUserHasDiscount');

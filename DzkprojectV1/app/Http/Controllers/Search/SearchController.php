@@ -7,6 +7,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Pagination\LengthAwarePaginator;
+use Carbon\Carbon;
 use Helper;
 use App\Params;
 use App\User;
@@ -303,7 +304,8 @@ class SearchController extends Controller
  						}])*/
  						->with(['branchs' =>function ($query) {
                             $query->with('commerces');
-                        }]);
+                        }])
+                        ->where('startdate','>=',Carbon::today());
  				
  				$query->whereHas('branchs', function($q) use($branch) {
                 	$q->whereIn('idbranch',$branch);

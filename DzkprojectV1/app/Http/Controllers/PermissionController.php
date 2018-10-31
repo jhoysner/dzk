@@ -41,11 +41,16 @@ class PermissionController extends Controller
     {
         $input = $request->all();
 
-        $permission = Permission::create($input);
+        $permission = new Permission();
+        $permission->name = $request->name;
+        $permission->guard_name = 'web';
+        //$permission = Permission::create($input);
 
-        if(!$permission) {
+        if(!$permission->save()) {
           return response()->json(['error' => 'Error al guardar.'], 422);
         }
+
+        $permission->save();
 
         return response()->json(['success'=>'Permiso guardado correctamente'],201);
     }

@@ -100,7 +100,7 @@
                                 </div>
                                 <div class="meta d-flex flex-row">
                                     <!--<div class="user-img"><img src="img/user-img.png" alt=""></div> -->
-                                       <button type="button" class="btn btn-outline-primary" @click="obtenerDescuento(discount)" >Obetener este Descuento</button>
+                                       <button type="button" :disabled="userHaveDiscount(discount.iddiscount)" :class="{ userHaveDiscount: userHaveDiscount(discount.iddiscount) }" class="btn btn-outline-primary" @click="obtenerDescuento(discount)" >Obetener este Descuento</button>
                                 </div>
                             </div>
                           </div>
@@ -113,7 +113,7 @@
     </div>
     <paginator :pagination="pagination"></paginator>
     <detail></detail>
-
+    <!-- modal branchs user has discount -->
     <b-modal v-model="show" id="showBranchs" ref="showBranchs" title="Elegir Sucursal donde se obtendra el Descuento" hide-footer>
         <div class="modal-content">
           <div class="container">
@@ -206,9 +206,7 @@ import paginator from '../../utilities/paginator';
         show:false, 
         showTC:false, 
         branchs:[],
-        user:{
-          id: '',
-        },
+        user:{},
         discount:{},
       }
     },
@@ -274,8 +272,8 @@ import paginator from '../../utilities/paginator';
       },
       auth() {
         axios.get('api/profile').then((response) => {
-          this.user.id = response.data.user.id;
-          console.log(this.user.id);
+          this.user = response.data.user;
+          // console.log(this.user.id);
           // this.index();
         })
         .catch(err => console.log(err))
@@ -349,6 +347,15 @@ import paginator from '../../utilities/paginator';
 
           });
 
+      },
+      userHaveDiscount(id){
+          var i = this.user.discounts.length;
+          while (i--) {
+             if (this.user.discounts[i].pivot.discount_iddiscount === id) {
+                 return true;
+             }
+          }
+          return false;
       }
 
     },
@@ -356,6 +363,12 @@ import paginator from '../../utilities/paginator';
 </script>
 
 <style>
+  .userHaveDiscount{
+    color: #dc3545 !important;
+    background-color: transparent !important;
+    background-image: none !important;
+    border-color: #dc3545 !important;
+  }
   .image-commerce {
     width: 80px;
     height: 50px;

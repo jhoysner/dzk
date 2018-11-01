@@ -70178,7 +70178,7 @@ exports = module.exports = __webpack_require__(2)(false);
 
 
 // module
-exports.push([module.i, "\n.image-discount {\n  width: 80px;\n  height: 50px;\n  border-radius: 50%;\n}\n", ""]);
+exports.push([module.i, "\n.userHaveDiscount{\n    color: #dc3545 !important;\n    background-color: transparent !important;\n    background-image: none !important;\n    border-color: #dc3545 !important;\n}\n.image-discount {\n\t  width: 80px;\n\t  height: 50px;\n\t  border-radius: 50%;\n}\n", ""]);
 
 // exports
 
@@ -70189,6 +70189,32 @@ exports.push([module.i, "\n.image-discount {\n  width: 80px;\n  height: 50px;\n 
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 //
 //
 //
@@ -70370,6 +70396,9 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
       commerce: [],
       tags: [],
       show: false,
+      showTCD: false,
+      showB: false,
+      length: '',
       form: {
         'validfrom': '',
         'validto': '',
@@ -70383,14 +70412,11 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
         'branch_idbranch': '',
         'users_id': ''
       },
-      user: {
-        'id': ''
-      }
+      user: {}
     };
   },
   mounted: function mounted() {
     this.auth();
-    this.index();
   },
 
 
@@ -70424,47 +70450,65 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
       });
     },
     auth: function auth() {
-      axios.get('api/profile').then(function (response) {
-        // this.user.id = response.data.user.id;
+      var _this2 = this;
+
+      axios.get('/api/profile').then(function (response) {
         console.log(response);
-        // this.index();
+        _this2.user = response.data.user;
+        _this2.length = _this2.user.discounts.length;
+        _this2.index();
+        // this.sendCharcode(this.user.id);
       }).catch(function (err) {
         return console.log(err);
       });
     },
     obtenerDescuento: function obtenerDescuento(discount) {
-      console.log("listo");
+      // console.log("listo");   
       // console.log(discount)
-      // // this.branchs = discount.branchs;}
-      // this.$refs.showBranchs.show()
-      // this.form.validfrom = discount.startdate;
-      // this.form.validto = discount.enddate;
-      // this.form.amount = 1;
-      // this.form.normalprice = discount.normalprice;
-      // this.form.discountprice = discount.discountprice;
-      // this.form.discountpercentage = discount.discountpercentage;
-      // this.form.discount_iddiscount = discount.iddiscount;
-      // this.form.userhasdiscountstatus_iduserhasdiscountstatus = '2';
-      // this.form.commerce_idcommerce = discount.branchs[0].commerce_idcommerce;
-      // // this.form.branch_idbranch = discount.branchs[0].idbranch;
-      // this.form.users_id = this.user.id;
+      // this.branchs = discount.branchs;}
+      this.$refs.showBranchs.show();
+      this.form.validfrom = discount.startdate;
+      this.form.validto = discount.enddate;
+      this.form.amount = 1;
+      this.form.normalprice = discount.normalprice;
+      this.form.discountprice = discount.discountprice;
+      this.form.discountpercentage = discount.discountpercentage;
+      this.form.discount_iddiscount = discount.iddiscount;
+      this.form.userhasdiscountstatus_iduserhasdiscountstatus = '2';
+      this.form.commerce_idcommerce = this.commerce.idcommerce;
+      this.form.branch_idbranch = this.branchs[0].idbranch;
+      this.form.users_id = this.user.id;
+    },
+    acceptTerms: function acceptTerms() {
+      this.$refs.showBranchs.hide();
+      this.$refs.terminosCondicionesdetail.show();
     },
     saveUserHasDiscount: function saveUserHasDiscount() {
-      // this.$refs.showBranchs.hide() 
-      // axios.post('api/user-has-discount', this.form).
-      //   then(response => {
-      //       this.form = {};
-      //       swal({
-      //         title: "Obtenido",
-      //         text: "Se obtuvo Descuento Satifactoriamente",
-      //         icon: "success",
-      //       })
-      //      console.log(response);
-      // })
-      // .catch(error => {
-      //     console.log(error.response.data)
+      var _this3 = this;
 
-      // });
+      this.$refs.terminosCondicionesdetail.hide();
+      axios.post('/api/user-has-discount', this.form).then(function (response) {
+        var id = response.data.data.idusers_has_discount;
+        _this3.form = {};
+        swal({
+          title: "Obtenido",
+          text: "Se obtuvo Descuento Satifactoriamente",
+          icon: "success"
+        });
+        _this3.$router.push({ path: '/client-discount/' + id });
+      }).catch(function (error) {
+        console.log(error);
+      });
+    },
+    userHaveDiscount: function userHaveDiscount(id) {
+      var i = this.length;
+      // console.log(i)
+      while (i--) {
+        if (this.user.discounts[i].pivot.discount_iddiscount === id) {
+          return true;
+        }
+      }
+      return false;
     }
   }
 });
@@ -70687,7 +70731,15 @@ var render = function() {
                 "button",
                 {
                   staticClass: "btn btn-outline-primary",
-                  attrs: { type: "button" },
+                  class: {
+                    userHaveDiscount: _vm.userHaveDiscount(
+                      _vm.discount.iddiscount
+                    )
+                  },
+                  attrs: {
+                    type: "button",
+                    disabled: _vm.userHaveDiscount(_vm.discount.iddiscount)
+                  },
                   on: {
                     click: function($event) {
                       _vm.obtenerDescuento(_vm.discount)
@@ -70778,11 +70830,11 @@ var render = function() {
             "hide-footer": ""
           },
           model: {
-            value: _vm.show,
+            value: _vm.showB,
             callback: function($$v) {
-              _vm.show = $$v
+              _vm.showB = $$v
             },
-            expression: "show"
+            expression: "showB"
           }
         },
         [
@@ -70839,7 +70891,89 @@ var render = function() {
                 {
                   on: {
                     click: function($event) {
-                      _vm.show = false
+                      _vm.showB = false
+                    }
+                  }
+                },
+                [_vm._v("Cancelar")]
+              ),
+              _vm._v(" "),
+              _c(
+                "button",
+                {
+                  staticClass: "btn btn-primary",
+                  attrs: { type: "submit" },
+                  on: {
+                    click: function($event) {
+                      _vm.acceptTerms()
+                    }
+                  }
+                },
+                [
+                  _c("i", { staticClass: "zmdi zmdi-plus" }),
+                  _vm._v(" Obetener")
+                ]
+              )
+            ],
+            1
+          )
+        ]
+      ),
+      _vm._v(" "),
+      _c(
+        "b-modal",
+        {
+          ref: "terminosCondicionesdetail",
+          attrs: {
+            id: "terminosCondicionesdetail",
+            title: "Aceptar Terminos y Condiciones",
+            "hide-footer": ""
+          },
+          model: {
+            value: _vm.showTCD,
+            callback: function($$v) {
+              _vm.showTCD = $$v
+            },
+            expression: "showTCD"
+          }
+        },
+        [
+          _c("div", { staticClass: "modal-content" }, [
+            _c("div", { staticClass: "container" }, [
+              _vm.discount.conditions
+                ? _c("h3", { staticClass: "my-4" }, [_vm._v("Condiciones")])
+                : _vm._e(),
+              _vm._v(" "),
+              _c("p", [_vm._v(_vm._s(_vm.discount.conditions))]),
+              _vm._v(" "),
+              _vm.discount.restrictions
+                ? _c("h3", { staticClass: "my-4" }, [_vm._v("Restriccion")])
+                : _vm._e(),
+              _vm._v(" "),
+              _c("p", [_vm._v(_vm._s(_vm.discount.restrictions))]),
+              _vm._v(" "),
+              !_vm.discount.conditions && !_vm.discount.restrictions
+                ? _c("div", [
+                    _c("p", [
+                      _vm._v(
+                        "\n                       Si esta de acuerdo en aceptar los terminos y condiciones presentadas por el descuento continue.\n                    "
+                      )
+                    ])
+                  ])
+                : _vm._e()
+            ])
+          ]),
+          _vm._v(" "),
+          _c(
+            "div",
+            { staticClass: "modal-footer" },
+            [
+              _c(
+                "b-btn",
+                {
+                  on: {
+                    click: function($event) {
+                      _vm.showTCD = false
                     }
                   }
                 },
@@ -70859,7 +70993,7 @@ var render = function() {
                 },
                 [
                   _c("i", { staticClass: "zmdi zmdi-plus" }),
-                  _vm._v(" Obetener")
+                  _vm._v(" Continuar")
                 ]
               )
             ],

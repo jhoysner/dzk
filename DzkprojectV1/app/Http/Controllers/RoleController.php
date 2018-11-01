@@ -43,11 +43,16 @@ class RoleController extends Controller
             return response()->json(['error'=>$validator->errors()], 422);
         }
 
-        $role = Role::create($request->only('name'));
+        //$role = Role::create($request->only('name'));
+        $role = new Roles();
+        $role->name = $request->name;
+        $role->guard_name = 'web';
 
-        if( !$role ) {
+        if( !$role->save() ) {
             return response()->json(['error' => \Lang::get('messages.role_error_create')], 422);
         }
+
+        $role->save();
         
         return response()->json(['success'=>\Lang::get('messages.role_create')], 200);
     }

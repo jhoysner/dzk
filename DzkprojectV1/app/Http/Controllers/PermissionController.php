@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Http\Requests\PermissionRequest;
 use App\Permission;
+use App\Role;
 
 class PermissionController extends Controller
 {
@@ -40,17 +41,25 @@ class PermissionController extends Controller
     public function store(PermissionRequest $request)
     {
         $input = $request->all();
-
+        $id =  1; // Admin
         $permission = new Permission();
         $permission->name = $request->name;
         $permission->guard_name = 'web';
         //$permission = Permission::create($input);
+
 
         if(!$permission->save()) {
           return response()->json(['error' => 'Error al guardar.'], 422);
         }
 
         $permission->save();
+
+        if($role = Role::findOrFail($id)) {
+            if($role->name == 'Admin') {
+                $role->syncPermissions(Permission::all());
+            }
+        } 
+
 
         return response()->json(['success'=>'Permiso guardado correctamente'],201);
     }

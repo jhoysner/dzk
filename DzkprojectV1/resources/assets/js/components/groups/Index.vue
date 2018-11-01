@@ -36,12 +36,10 @@
                                                          v-model="selected"
                                                          name="flavs"
                                                          :options="flavours"
-                                                         class="ml-4"
-                                                         aria-label="Individual flavours"
+                                                         aria-label="Permisos"
                                   ></b-form-checkbox-group>
                                 </b-form-group>
                               <button v-can="'edit_roles'" type="button" @click="updatePermission(rol.id,selected)" class="btn btn-primary btn-sm  btn-default"> Actualizar</button>
-                              
                             </div>
                           </b-card-body>
                         </b-collapse>

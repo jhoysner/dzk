@@ -159,7 +159,7 @@ export default {
   methods: {
     edit(id) {
       axios.get('api' + this.url ).then(response => {
-        this.user = response.data.user[0];
+        this.user = response.data.user;
         this.datemax = new Date(this.fecha(-5320)).toISOString().slice(0,10);
         this.country(this.user.country_idcountry)
         this.state(this.user.state_idstate)

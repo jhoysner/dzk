@@ -7,6 +7,7 @@
                 <h4>Lista de Permisos</h4>
               <!-- <spinner :show="loadingProductos"></spinner> -->
                 <div class="responsive">
+
                   <div class="table-responsive">
                       <table class="table table-hover table-bordered table-striped table-condensed">
                           <thead>
@@ -22,6 +23,7 @@
                           </tbody>
                       </table>
                   </div>
+
               </div>
             </div>
         </div>
@@ -47,6 +49,8 @@ export default {
     return {
       url: '/permissions',
       permissions: [],
+      flavours: [],
+      selected: [],
     }
   },
 
@@ -58,6 +62,15 @@ export default {
     index() {
       axios.get('api' + this.url).then(response => {        
         this.permissions= response.data.permissions
+
+        for(let perm in this.permissions) {
+          const option = {
+                text: this.permissions[perm]['name'],
+                value: this.permissions[perm]['id']
+              }
+          this.flavours.push(option)
+        }        
+
       })
       .catch(err => console.log(err))
     },

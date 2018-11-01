@@ -45,10 +45,6 @@
 	</div>
 
 </template>
-
-
-
-
 <script>
 
 	export default {
@@ -83,10 +79,10 @@
             				localStorage.setItem('access_token', accessToken)
 
             				const role = response.data.role
-            				localStorage.setItem('roles', role)
+            				localStorage.setItem('roles', (role))
 
             				const permissions = response.data.permissions
-            				localStorage.setItem('permissions', permissions)
+            				localStorage.setItem('permissions', (permissions))
 
             				window.location.href = '/';
 
@@ -98,6 +94,11 @@
 	 		},
 	 		validEmail:function(email) {
       			return (this.reg.test(email))
+			},
+			encriptar(valor) {
+				let CryptoJS = require("crypto-js");
+				let enc = CryptoJS.AES.encrypt(valor, 'dzkproject');
+				return enc;
 			}
 	 	}
 	}

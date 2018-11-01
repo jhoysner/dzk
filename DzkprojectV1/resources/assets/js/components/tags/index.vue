@@ -2,7 +2,7 @@
   <div>
     <div class="col-lg-12">
         <div>
-            <b-btn v-b-modal.createModal>Crear Tag</b-btn>
+            <b-btn v-b-modal.createModal v-can="'add_tags'">Crear Tag</b-btn>
             <div class="settings-content">
                 <h4>Lista de Tags</h4>
               <!-- <spinner :show="loadingProductos"></spinner> -->
@@ -61,8 +61,6 @@ export default {
   methods: {
     index() {
       axios.get('api' + this.url).then(response => {
-        console.log(response.data.tags)
-        
         this.tags= response.data.tags
       })
       .catch(err => console.log(err))

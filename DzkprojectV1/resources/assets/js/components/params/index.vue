@@ -2,7 +2,7 @@
   <div>
     <div class="col-lg-12">
         <div>
-            <b-btn v-b-modal.createModal>Crear Parametro</b-btn>
+            <b-btn v-b-modal.createModal v-can="'add_params'">Crear Parametro</b-btn>
             <div class="settings-content">
                 <h4>Lista de Parametros</h4>
               <!-- <spinner :show="loadingProductos"></spinner> -->
@@ -21,9 +21,9 @@
                               <td>{{ param.key }}</td>
                               <td>{{ param.val }}</td>
                               <td class="text-right">
-                                  <b-btn v-b-modal="'showModal'" @click="show(param.idparams)" class="btn btn-sm" variant="default">Detalle</b-btn>
-                                  <b-btn v-b-modal="'editModal'" @click="edit(param.idparams)" class="btn btn-sm" variant="warning">Editar</b-btn>
-                                  <button type="button" @click="eliminar(param.idparams)" class="btn btn-sm  btn-danger">Eliminar</button>
+                                  <b-btn v-can="'view_params'" v-b-modal="'showModal'" @click="show(param.idparams)" class="btn btn-sm" variant="default">Detalle</b-btn>
+                                  <b-btn v-can="'edit_params'" v-b-modal="'editModal'" @click="edit(param.idparams)" class="btn btn-sm" variant="warning">Editar</b-btn>
+                                  <button v-can="'delete_params'" type="button" @click="eliminar(param.idparams)" class="btn btn-sm  btn-danger">Eliminar</button>
                               </td>
                               </th>
                             </tr>

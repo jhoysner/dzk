@@ -76,9 +76,12 @@
 <script>
 import Bus from '../../utilities/EventBus';
 import edit from './Edit';
+import { Logged } from '../../utilities/Logged'
+
 
     export default {
         name: "profile",
+        mixins:[Logged],
         mounted() {
             this.index();
         },
@@ -94,11 +97,11 @@ import edit from './Edit';
         },
         methods: {
             index() {
+
                 //this.data = JSON.parse(localStorage.getItem('userdata'));
                 axios.get('api'+ this.url)
                     .then(
                         (response) => {
-                            console.log(response.data)
                             this.user = response.data.user;
                             this.user.country = this.user.countries.name
                             this.user.state = this.user.states.name

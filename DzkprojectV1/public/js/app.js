@@ -55640,7 +55640,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 
       axios.get('api/profile').then(function (response) {
         _this3.user.id = response.data.user.id;
-        // console.log(this.user.id);
+        console.log(_this3.user.id);
         // this.index();
       }).catch(function (err) {
         return console.log(err);
@@ -55694,23 +55694,6 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
       this.form.commerce_idcommerce = discount.branchs[0].commerce_idcommerce;
       this.form.branch_idbranch = discount.branchs[0].idbranch;
       this.form.users_id = this.user.id;
-
-      // console.log(discount)
-
-      // axios.post('api/user-has-discount', this.form).
-      //   then(response => {
-      //       this.form = {};
-      //       swal({
-      //         title: "Obtenido",
-      //         text: "Se obtuvo Descuento Satifactoriamente",
-      //         icon: "success",
-      //       })
-      //      console.log(response);
-      //   })
-      //   .catch(error => {
-      //     console.log(error.response.data)
-
-      //   });
     },
     saveUserHasDiscount: function saveUserHasDiscount() {
       var _this6 = this;
@@ -70229,80 +70212,6 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
@@ -70327,10 +70236,28 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
       },
       branchs: [],
       commerce: [],
-      tags: []
+      tags: [],
+      show: false,
+      form: {
+        'validfrom': '',
+        'validto': '',
+        'amount': '',
+        'normalprice': '',
+        'discountprice': '',
+        'discountpercentage': '',
+        'discount_iddiscount': '',
+        'userhasdiscountstatus_iduserhasdiscountstatus': '',
+        'commerce_idcommerce': '',
+        'branch_idbranch': '',
+        'users_id': ''
+      },
+      user: {
+        'id': ''
+      }
     };
   },
   mounted: function mounted() {
+    this.auth();
     this.index();
   },
 
@@ -70363,6 +70290,49 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
       }).catch(function (err) {
         return console.log(err);
       });
+    },
+    auth: function auth() {
+      axios.get('api/profile').then(function (response) {
+        // this.user.id = response.data.user.id;
+        console.log(response);
+        // this.index();
+      }).catch(function (err) {
+        return console.log(err);
+      });
+    },
+    obtenerDescuento: function obtenerDescuento(discount) {
+      console.log("listo");
+      // console.log(discount)
+      // // this.branchs = discount.branchs;}
+      // this.$refs.showBranchs.show()
+      // this.form.validfrom = discount.startdate;
+      // this.form.validto = discount.enddate;
+      // this.form.amount = 1;
+      // this.form.normalprice = discount.normalprice;
+      // this.form.discountprice = discount.discountprice;
+      // this.form.discountpercentage = discount.discountpercentage;
+      // this.form.discount_iddiscount = discount.iddiscount;
+      // this.form.userhasdiscountstatus_iduserhasdiscountstatus = '2';
+      // this.form.commerce_idcommerce = discount.branchs[0].commerce_idcommerce;
+      // // this.form.branch_idbranch = discount.branchs[0].idbranch;
+      // this.form.users_id = this.user.id;
+    },
+    saveUserHasDiscount: function saveUserHasDiscount() {
+      // this.$refs.showBranchs.hide() 
+      // axios.post('api/user-has-discount', this.form).
+      //   then(response => {
+      //       this.form = {};
+      //       swal({
+      //         title: "Obtenido",
+      //         text: "Se obtuvo Descuento Satifactoriamente",
+      //         icon: "success",
+      //       })
+      //      console.log(response);
+      // })
+      // .catch(error => {
+      //     console.log(error.response.data)
+
+      // });
     }
   }
 });
@@ -70393,7 +70363,9 @@ var render = function() {
         [_vm._v("Atras")]
       ),
       _vm._v(" "),
-      _c("h3", { staticClass: "my-4" }, [_vm._v(_vm._s(_vm.discount.title))]),
+      _c("h3", { staticClass: "my-4" }, [
+        _vm._v(_vm._s(_vm.discount.title) + " ")
+      ]),
       _vm._v(" "),
       _c("div", { staticClass: "container" }, [
         _c("div", { staticClass: "row" }, [
@@ -70579,9 +70551,19 @@ var render = function() {
                 ]
               ),
               _vm._v(" "),
-              _c("a", { staticClass: "primary-btn", attrs: { href: "#" } }, [
-                _vm._v("purchase only")
-              ])
+              _c(
+                "button",
+                {
+                  staticClass: "btn btn-outline-primary",
+                  attrs: { type: "button" },
+                  on: {
+                    click: function($event) {
+                      _vm.obtenerDescuento(_vm.discount)
+                    }
+                  }
+                },
+                [_vm._v("Obtener Descuento")]
+              )
             ]),
             _vm._v(" "),
             _c(
@@ -70652,8 +70634,109 @@ var render = function() {
             ])
           ])
         ])
-      ])
-    ]
+      ]),
+      _vm._v(" "),
+      _c(
+        "b-modal",
+        {
+          ref: "showBranchs",
+          attrs: {
+            id: "showBranchs",
+            title: "Elegir Sucursal donde se obtendra el Descuento",
+            "hide-footer": ""
+          },
+          model: {
+            value: _vm.show,
+            callback: function($$v) {
+              _vm.show = $$v
+            },
+            expression: "show"
+          }
+        },
+        [
+          _c("div", { staticClass: "modal-content" }, [
+            _c(
+              "div",
+              { staticClass: "container" },
+              [
+                _c("h3", { staticClass: "my-4" }, [_vm._v("Sucursal:")]),
+                _vm._v(" "),
+                _vm._l(_vm.branchs, function(branch) {
+                  return _c("div", [
+                    _c("input", {
+                      directives: [
+                        {
+                          name: "model",
+                          rawName: "v-model",
+                          value: _vm.form.branch_idbranch,
+                          expression: "form.branch_idbranch"
+                        }
+                      ],
+                      attrs: { type: "radio", id: "branch.name" },
+                      domProps: {
+                        value: branch.idbranch,
+                        checked: _vm._q(
+                          _vm.form.branch_idbranch,
+                          branch.idbranch
+                        )
+                      },
+                      on: {
+                        change: function($event) {
+                          _vm.$set(_vm.form, "branch_idbranch", branch.idbranch)
+                        }
+                      }
+                    }),
+                    _vm._v(" "),
+                    _c("span", [_vm._v(_vm._s(branch.name))]),
+                    _vm._v(" "),
+                    _c("br"),
+                    _c("br")
+                  ])
+                })
+              ],
+              2
+            )
+          ]),
+          _vm._v(" "),
+          _c(
+            "div",
+            { staticClass: "modal-footer" },
+            [
+              _c(
+                "b-btn",
+                {
+                  on: {
+                    click: function($event) {
+                      _vm.show = false
+                    }
+                  }
+                },
+                [_vm._v("Cancelar")]
+              ),
+              _vm._v(" "),
+              _c(
+                "button",
+                {
+                  staticClass: "btn btn-primary",
+                  attrs: { type: "submit" },
+                  on: {
+                    click: function($event) {
+                      _vm.saveUserHasDiscount()
+                    }
+                  }
+                },
+                [
+                  _c("i", { staticClass: "zmdi zmdi-plus" }),
+                  _vm._v(" Obetener")
+                ]
+              )
+            ],
+            1
+          )
+        ]
+      )
+    ],
+    1
   )
 }
 var staticRenderFns = [
@@ -77017,6 +77100,13 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
@@ -77037,6 +77127,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
         charcode: '',
         qr: '',
         state: ''
+
       },
       commerce: {},
       branch: {}
@@ -77053,7 +77144,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 
       axios.get('/api/client-user-discount/' + this.id).then(function (response) {
         console.log(response.data.data);
-        // this.discount.iddiscount = response.data.data.iddiscount;
+        _this.discount.iddiscount = response.data.data.discounts.iddiscount;
         _this.discount.title = response.data.data.discounts.title;
         _this.discount.description = response.data.data.discounts.description;
         _this.discount.image = response.data.data.discounts.image;
@@ -77107,9 +77198,25 @@ var render = function() {
         [_vm._v("Atras")]
       ),
       _vm._v(" "),
-      _c("h3", { staticClass: "my-4" }, [
-        _vm._v("Descuento: " + _vm._s(_vm.discount.title))
-      ]),
+      _c(
+        "h3",
+        { staticClass: "my-4" },
+        [
+          _vm._v("Descuento:\n            "),
+          _c(
+            "router-link",
+            { attrs: { to: "/discount/" + _vm.discount.iddiscount } },
+            [
+              _vm._v(
+                "\n              " +
+                  _vm._s(_vm.discount.title) +
+                  "\n            "
+              )
+            ]
+          )
+        ],
+        1
+      ),
       _vm._v(" "),
       _c("div", { staticClass: "container" }, [
         _c("div", { staticClass: "row" }, [
@@ -77179,10 +77286,18 @@ var render = function() {
                             "router-link",
                             { attrs: { to: "/branch/" + _vm.branch.idbranch } },
                             [_c("span", [_vm._v(_vm._s(_vm.branch.name))])]
-                          )
+                          ),
+                          _vm._v(" "),
+                          _c("br")
                         ],
                         1
-                      )
+                      ),
+                      _vm._v(" "),
+                      _c("div", { staticClass: "row" }, [
+                        _c("p", [
+                          _vm._v("Direccion : " + _vm._s(_vm.branch.address))
+                        ])
+                      ])
                     ])
                   ])
                 ]
@@ -77211,11 +77326,7 @@ var render = function() {
                     _vm._v(_vm._s(_vm.discount.discountpercentage) + "%")
                   ])
                 ]
-              ),
-              _vm._v(" "),
-              _c("a", { staticClass: "primary-btn", attrs: { href: "#" } }, [
-                _vm._v("purchase only")
-              ])
+              )
             ]),
             _vm._v(" "),
             _c(

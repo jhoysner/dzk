@@ -247,7 +247,7 @@ import paginator from '../../utilities/paginator';
       auth() {
         axios.get('api/profile').then((response) => {
           this.user.id = response.data.user.id;
-          // console.log(this.user.id);
+          console.log(this.user.id);
           // this.index();
         })
         .catch(err => console.log(err))
@@ -295,23 +295,7 @@ import paginator from '../../utilities/paginator';
          this.form.commerce_idcommerce = discount.branchs[0].commerce_idcommerce;
          this.form.branch_idbranch = discount.branchs[0].idbranch;
          this.form.users_id = this.user.id;
-   
-        // console.log(discount)
-
-        // axios.post('api/user-has-discount', this.form).
-        //   then(response => {
-        //       this.form = {};
-        //       swal({
-        //         title: "Obtenido",
-        //         text: "Se obtuvo Descuento Satifactoriamente",
-        //         icon: "success",
-        //       })
-        //      console.log(response);
-        //   })
-        //   .catch(error => {
-        //     console.log(error.response.data)
-
-        //   });
+  
       },
       saveUserHasDiscount(){
          this.$refs.showBranchs.hide() 

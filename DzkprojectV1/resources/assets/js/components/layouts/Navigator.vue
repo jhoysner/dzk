@@ -18,7 +18,7 @@
                   </a>
               </router-link>
             </li>
-            <li v-can="'tags'">
+            <li v-can="'tags'" >
               <router-link to='/tags'>
                   <a>
                     Tags
@@ -61,14 +61,14 @@
                 </a>
               </router-link>
             </li>
-            <li v-can="'roles'">
+            <li v-can="'roles'" v-if="isLogged">
               <router-link to='/roles'>
                 <a>
                   Grupos
                 </a>
               </router-link>
             </li>
-            <li>
+            <li v-if="isLogged">
               <router-link to='/profile'>
                 <a>
                   Perfil
@@ -82,7 +82,7 @@
                 </a>
               </router-link>
             </li>
-            <li>
+            <li v-if="isLogged">
               <router-link to='/logout'>
                 <a>
                   Salir
@@ -107,11 +107,40 @@
   </div>
 </template>
 <script>
-export default {
+  
+export default {  
   name: "",
-  data: () => ({
+  data() {
+    return {
+      isLogged: '',
+    }
+  },
+  mounted() {
+    this.isLogged = false
+    this.index()
+  },
+  methods: {
+    index() {
+      const token = localStorage.getItem('access_token')
 
-  })
+      if( !token) {
+        this.isLogged = false
+      }
+
+      if(token) {
+        axios.get('api/profile', {timeout: 5000}).then(response => {
+        console.log(response)        
+            this.isLogged = true            
+          })
+          .catch(err => {
+            this.isLogged = false
+          }) 
+      }
+
+    }
+    
+    
+  }
 }
 </script>
 <style lang="scss" scoped>

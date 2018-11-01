@@ -45,13 +45,20 @@ axios.interceptors.response.use(
 )
 
 Vue.directive('can', function (el, binding) {
-    el.style.display = 'none'
-    let permissions = (localStorage.getItem('permissions'))
-    permissions = permissions.split(",")
-    let perm = binding.expression.replace(/[']/g, "")
-    if(permissions.indexOf(perm) !== -1) {
-      el.style.display = 'inline'
+    if(el) {
+      el.style.display = 'none' 
+
+      let permissions = (localStorage.getItem('permissions'))
+      if(permissions) {
+        permissions = permissions.split(",")
+        let perm = binding.expression.replace(/[']/g, "")  
+        
+        if(permissions.indexOf(perm) !== -1) {
+          el.style.display = 'inline'
+        }
+      }
     }
+    
   })
 
   

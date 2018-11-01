@@ -9,7 +9,7 @@
                 <div class="col-lg-7 text-center">
                     <p class="text-white mb-0">{{ subtitle }}</p>
                     <h1 class="text-white text-uppercase pt-30 pb-30">
-                      {{ title }}
+                      {{ title }} Prueba
                     </h1>
                     <div class="input-group col-lg-8 mx-auto">
                         <input class="form-control py-2" placeholder="Search themes & templates" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Search themes & templates'" type="search">

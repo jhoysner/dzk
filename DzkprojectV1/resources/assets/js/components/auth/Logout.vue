@@ -19,23 +19,31 @@
       logout() {
         this.token = localStorage.getItem('access_token')
         
-        axios.post('/api/logout', this.token)
-          .then((response) => {
-            
-            console.log(response.data)
-            
+        swal({
+          title: "Desea Salir?",
+          text: "",
+          icon: "warning",
+          buttons: true,
+          dangerMode: true,
+          showCancelButton: true,
+          confirmButtonColor: '#3085d6',
+          cancelButtonColor: '#d33',
+          confirmButtonText: 'Si!'
+        })
+        .then((result) => {
+                if (result) {
+                    axios.post('/api/logout', this.token)
+                      .then((response) => {
+                        localStorage.removeItem('access_token')
+                        localStorage.removeItem('roles')
+                        localStorage.removeItem('permissions')
+                        window.location.href = '/';
 
-            localStorage.removeItem('access_token')
-
-            localStorage.removeItem('roles')
-
-            localStorage.removeItem('permissions')
-
-            window.location.href = '/login';
-
-          }).catch((error) => {
-            console.log(error)  
-          })
+                      }).catch((error) => {
+                        console.log(error)  
+                      })
+                }
+        });      
       }
     }
   }

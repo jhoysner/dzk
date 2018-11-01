@@ -163,7 +163,7 @@ const baseRoutes = [
             path: '/profile',
             component: Profile,
             meta: { 
-                requiresAuth: true
+                requiresAuth: false
             }
         },
         {

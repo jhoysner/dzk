@@ -11,7 +11,7 @@
                             <small class="text-danger" v-if="error.name">{{ error.name[0] }}</small>
                         </div>
                         <div class="col-lg-12 text-right">
-                            <button type="submit" class="btn btn-primary"><i class="zmdi zmdi-plus"></i> Guardar</button>
+                            <button type="submit" class="btn btn-primary" v-can="'add_tags'"><i class="zmdi zmdi-plus"></i> Guardar</button>
                         </div>
                       </div>
                       

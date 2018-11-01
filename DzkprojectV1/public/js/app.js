@@ -58751,7 +58751,7 @@ exports = module.exports = __webpack_require__(2)(false);
 
 
 // module
-exports.push([module.i, "\n.image-commerce {\n  width: 80px;\n  height: 50px;\n  border-radius: 50%;\n}\n#search {\n  display: none;\n}\n.showModal {\n  cursor: pointer;\n}\n.thumb-img {\n  width: 250px;\n  height: 125px;\n}\n.branch-link {\n  color: #333;\n}\n.view-branch {\n  margin-top: 5px;\n}\n.view-branch:hover {\n  color: #FFF;\n}\nfieldset[disabled] .multiselect {\npointer-events: none;\n}\n.multiselect__spinner {\n  position: absolute;\n  right: 1px;\n  top: 1px;\n  width: 48px;\n  height: 35px;\n  background: #fff;\n  display: block;\n}\n.multiselect__spinner:before,\n.multiselect__spinner:after {\n  position: absolute;\n  content: \"\";\n  top: 50%;\n  left: 50%;\n  margin: -8px 0 0 -8px;\n  width: 16px;\n  height: 16px;\n  border-radius: 100%;\n  border-color: #41B883 transparent transparent;\n  border-style: solid;\n  border-width: 2px;\n  -webkit-box-shadow: 0 0 0 1px transparent;\n          box-shadow: 0 0 0 1px transparent;\n}\n.multiselect__spinner:before {\n  -webkit-animation: spinning 2.4s cubic-bezier(0.41, 0.26, 0.2, 0.62);\n          animation: spinning 2.4s cubic-bezier(0.41, 0.26, 0.2, 0.62);\n  -webkit-animation-iteration-count: infinite;\n          animation-iteration-count: infinite;\n}\n.multiselect__spinner:after {\n  -webkit-animation: spinning 2.4s cubic-bezier(0.51, 0.09, 0.21, 0.8);\n          animation: spinning 2.4s cubic-bezier(0.51, 0.09, 0.21, 0.8);\n  -webkit-animation-iteration-count: infinite;\n          animation-iteration-count: infinite;\n}\n.multiselect__loading-enter-active,\n.multiselect__loading-leave-active {\n  -webkit-transition: opacity 0.4s ease-in-out;\n  transition: opacity 0.4s ease-in-out;\n  opacity: 1;\n}\n.multiselect__loading-enter,\n.multiselect__loading-leave-active {\n  opacity: 0;\n}\n.multiselect,\n.multiselect__input,\n.multiselect__single {\n  font-family: inherit;\n  font-size: 14px;\n  -ms-touch-action: manipulation;\n      touch-action: manipulation;\n}\n.multiselect {\n  -webkit-box-sizing: content-box;\n          box-sizing: content-box;\n  display: block;\n  position: relative;\n  width: 100%;\n  min-height: 40px;\n  text-align: left;\n  color: #35495E;\n}\n.multiselect * {\n  -webkit-box-sizing: border-box;\n          box-sizing: border-box;\n}\n.multiselect:focus {\n  outline: none;\n}\n.multiselect--disabled {\n  pointer-events: none;\n  opacity: 0.6;\n}\n.multiselect--active {\n  z-index: 50;\n}\n.multiselect--active:not(.multiselect--above) .multiselect__current,\n.multiselect--active:not(.multiselect--above) .multiselect__input,\n.multiselect--active:not(.multiselect--above) .multiselect__tags {\n  border-bottom-left-radius: 0;\n  border-bottom-right-radius: 0;\n}\n.multiselect--active .multiselect__select {\n  -webkit-transform: rotateZ(180deg);\n          transform: rotateZ(180deg);\n}\n.multiselect--above.multiselect--active .multiselect__current,\n.multiselect--above.multiselect--active .multiselect__input,\n.multiselect--above.multiselect--active .multiselect__tags {\n  border-top-left-radius: 0;\n  border-top-right-radius: 0;\n}\n.multiselect__input,\n.multiselect__single {\n  position: relative;\n  display: inline-block;\n  min-height: 20px;\n  line-height: 20px;\n  border: none;\n  border-radius: 5px;\n  background: #fff;\n  padding: 1px 0 0 5px;\n  width: calc(100%);\n  -webkit-transition: border 0.1s ease;\n  transition: border 0.1s ease;\n  -webkit-box-sizing: border-box;\n          box-sizing: border-box;\n  margin-bottom: 8px;\n  vertical-align: top;\n}\n.multiselect__tag ~ .multiselect__input,\n.multiselect__tag ~ .multiselect__single {\n  width: auto;\n}\n.multiselect__input:hover,\n.multiselect__single:hover {\n  border-color: #cfcfcf;\n}\n.multiselect__input:focus,\n.multiselect__single:focus {\n  border-color: #a8a8a8;\n  outline: none;\n}\n.multiselect__single {\n  padding-left: 6px;\n  margin-bottom: 8px;\n}\n.multiselect__tags-wrap {\n  display: inline\n}\n.multiselect__tags {\n  min-height: 40px;\n  display: block;\n  padding: 8px 40px 0 8px;\n  border-radius: 5px;\n  border: 1px solid #E8E8E8;\n  background: #fff;\n}\n.multiselect__tag {\n  position: relative;\n  display: inline-block;\n  padding: 4px 26px 4px 10px;\n  border-radius: 5px;\n  margin-right: 10px;\n  color: #fff;\n  line-height: 1;\n  background: #5240b8;\n  margin-bottom: 5px;\n  white-space: nowrap;\n  overflow: hidden;\n  max-width: 100%;\n  text-overflow: ellipsis;\n}\n.multiselect__tag-icon {\n  cursor: pointer;\n  margin-left: 7px;\n  position: absolute;\n  right: 0;\n  top: 0;\n  bottom: 0;\n  font-weight: 700;\n  font-style: initial;\n  width: 22px;\n  text-align: center;\n  line-height: 22px;\n  -webkit-transition: all 0.2s ease;\n  transition: all 0.2s ease;\n  border-radius: 5px;\n}\n.multiselect__tag-icon:after {\n  content: \"\\D7\";\n  color: #266d4d;\n  font-size: 14px;\n}\n.multiselect__tag-icon:focus,\n.multiselect__tag-icon:hover {\n  background: #369a6e;\n}\n.multiselect__tag-icon:focus:after,\n.multiselect__tag-icon:hover:after {\n  color: white;\n}\n.multiselect__current {\n  line-height: 16px;\n  min-height: 40px;\n  -webkit-box-sizing: border-box;\n          box-sizing: border-box;\n  display: block;\n  overflow: hidden;\n  padding: 8px 12px 0;\n  padding-right: 30px;\n  white-space: nowrap;\n  margin: 0;\n  text-decoration: none;\n  border-radius: 5px;\n  border: 1px solid #E8E8E8;\n  cursor: pointer;\n}\n.multiselect__select {\n  line-height: 16px;\n  display: block;\n  position: absolute;\n  -webkit-box-sizing: border-box;\n          box-sizing: border-box;\n  width: 40px;\n  height: 38px;\n  right: 1px;\n  top: 1px;\n  padding: 4px 8px;\n  margin: 0;\n  text-decoration: none;\n  text-align: center;\n  cursor: pointer;\n  -webkit-transition: -webkit-transform 0.2s ease;\n  transition: -webkit-transform 0.2s ease;\n  transition: transform 0.2s ease;\n  transition: transform 0.2s ease, -webkit-transform 0.2s ease;\n}\n.multiselect__select:before {\n  position: relative;\n  right: 0;\n  top: 65%;\n  color: #999;\n  margin-top: 4px;\n  border-style: solid;\n  border-width: 5px 5px 0 5px;\n  border-color: #999999 transparent transparent transparent;\n  content: \"\";\n}\n.multiselect__placeholder {\n  color: #ADADAD;\n  display: inline-block;\n  margin-bottom: 10px;\n  padding-top: 2px;\n}\n.multiselect--active .multiselect__placeholder {\n  display: none;\n}\n.multiselect__content-wrapper {\n  position: absolute;\n  display: block;\n  background: #fff;\n  width: 100%;\n  max-height: 240px;\n  overflow: auto;\n  border: 1px solid #E8E8E8;\n  border-top: none;\n  border-bottom-left-radius: 5px;\n  border-bottom-right-radius: 5px;\n  z-index: 50;\n  -webkit-overflow-scrolling: touch;\n}\n.multiselect__content {\n  list-style: none;\n  display: inline-block;\n  padding: 0;\n  margin: 0;\n  min-width: 100%;\n  vertical-align: top;\n}\n.multiselect--above .multiselect__content-wrapper {\n  bottom: 100%;\n  border-bottom-left-radius: 0;\n  border-bottom-right-radius: 0;\n  border-top-left-radius: 5px;\n  border-top-right-radius: 5px;\n  border-bottom: none;\n  border-top: 1px solid #E8E8E8;\n}\n.multiselect__content::webkit-scrollbar {\n  display: none;\n}\n.multiselect__element {\n  display: block;\n}\n.multiselect__option {\n  display: block;\n  padding: 12px;\n  min-height: 40px;\n  line-height: 16px;\n  text-decoration: none;\n  text-transform: none;\n  vertical-align: middle;\n  position: relative;\n  cursor: pointer;\n  white-space: nowrap;\n}\n.multiselect__option:after {\n  top: 0;\n  right: 0;\n  position: absolute;\n  line-height: 40px;\n  padding-right: 12px;\n  padding-left: 20px;\n}\n.multiselect__option--highlight {\n  background: #41B883;\n  outline: none;\n  color: white;\n}\n.multiselect__option--highlight:after {\n  content: attr(data-select);\n  background: #41B883;\n  color: white;\n}\n.multiselect__option--selected {\n  background: #F3F3F3;\n  color: #35495E;\n  font-weight: bold;\n}\n.multiselect__option--selected:after {\n  content: attr(data-selected);\n  color: silver;\n}\n.multiselect__option--selected.multiselect__option--highlight {\n  background: #FF6A6A;\n  color: #fff;\n}\n.multiselect__option--selected.multiselect__option--highlight:after {\n  background: #FF6A6A;\n  content: attr(data-deselect);\n  color: #fff;\n}\n.multiselect--disabled {\n  background: #ededed;\n  pointer-events: none;\n}\n.multiselect--disabled .multiselect__current,\n.multiselect--disabled .multiselect__select {\n  background: #ededed;\n  color: #a6a6a6;\n}\n.multiselect__option--disabled {\n  background: #ededed;\n  color: #a6a6a6;\n  cursor: text;\n  pointer-events: none;\n}\n.multiselect__option--disabled.multiselect__option--highlight {\n  background: #dedede !important;\n}\n.multiselect-enter-active,\n.multiselect-leave-active {\n  -webkit-transition: all 0.15s ease;\n  transition: all 0.15s ease;\n}\n.multiselect-enter,\n.multiselect-leave-active {\n  opacity: 0;\n}\n.multiselect__strong {\n  margin-bottom: 10px;\n  display: inline-block\n}\n*[dir=\"rtl\"] .multiselect {\n    text-align: right;\n}\n*[dir=\"rtl\"] .multiselect__select {\n    right: auto;\n    left: 1px;\n}\n*[dir=\"rtl\"] .multiselect__tags {\n    padding: 8px 8px 0px 40px;\n}\n*[dir=\"rtl\"] .multiselect__content {\n    text-align: right;\n}\n*[dir=\"rtl\"] .multiselect__option:after {\n    right: auto;\n    left: 0;\n}\n*[dir=\"rtl\"] .multiselect__clear {\n    right: auto;\n    left: 12px;\n}\n*[dir=\"rtl\"] .multiselect__spinner {\n    right: auto;\n    left: 1px;\n}\n@-webkit-keyframes spinning {\nfrom { -webkit-transform:rotate(0); transform:rotate(0)\n}\nto { -webkit-transform:rotate(2turn); transform:rotate(2turn)\n}\n}\n@keyframes spinning {\nfrom { -webkit-transform:rotate(0); transform:rotate(0)\n}\nto { -webkit-transform:rotate(2turn); transform:rotate(2turn)\n}\n}\n\n", ""]);
+exports.push([module.i, "\n.userHaveDiscount{\n  color: #dc3545 !important;\n  background-color: transparent !important;\n  background-image: none !important;\n  border-color: #dc3545 !important;\n}\n.image-commerce {\n  width: 80px;\n  height: 50px;\n  border-radius: 50%;\n}\n#search {\n  display: none;\n}\n.showModal {\n  cursor: pointer;\n}\n.thumb-img {\n  width: 250px;\n  height: 125px;\n}\n.branch-link {\n  color: #333;\n}\n.view-branch {\n  margin-top: 5px;\n}\n.view-branch:hover {\n  color: #FFF;\n}\nfieldset[disabled] .multiselect {\npointer-events: none;\n}\n.multiselect__spinner {\n  position: absolute;\n  right: 1px;\n  top: 1px;\n  width: 48px;\n  height: 35px;\n  background: #fff;\n  display: block;\n}\n.multiselect__spinner:before,\n.multiselect__spinner:after {\n  position: absolute;\n  content: \"\";\n  top: 50%;\n  left: 50%;\n  margin: -8px 0 0 -8px;\n  width: 16px;\n  height: 16px;\n  border-radius: 100%;\n  border-color: #41B883 transparent transparent;\n  border-style: solid;\n  border-width: 2px;\n  -webkit-box-shadow: 0 0 0 1px transparent;\n          box-shadow: 0 0 0 1px transparent;\n}\n.multiselect__spinner:before {\n  -webkit-animation: spinning 2.4s cubic-bezier(0.41, 0.26, 0.2, 0.62);\n          animation: spinning 2.4s cubic-bezier(0.41, 0.26, 0.2, 0.62);\n  -webkit-animation-iteration-count: infinite;\n          animation-iteration-count: infinite;\n}\n.multiselect__spinner:after {\n  -webkit-animation: spinning 2.4s cubic-bezier(0.51, 0.09, 0.21, 0.8);\n          animation: spinning 2.4s cubic-bezier(0.51, 0.09, 0.21, 0.8);\n  -webkit-animation-iteration-count: infinite;\n          animation-iteration-count: infinite;\n}\n.multiselect__loading-enter-active,\n.multiselect__loading-leave-active {\n  -webkit-transition: opacity 0.4s ease-in-out;\n  transition: opacity 0.4s ease-in-out;\n  opacity: 1;\n}\n.multiselect__loading-enter,\n.multiselect__loading-leave-active {\n  opacity: 0;\n}\n.multiselect,\n.multiselect__input,\n.multiselect__single {\n  font-family: inherit;\n  font-size: 14px;\n  -ms-touch-action: manipulation;\n      touch-action: manipulation;\n}\n.multiselect {\n  -webkit-box-sizing: content-box;\n          box-sizing: content-box;\n  display: block;\n  position: relative;\n  width: 100%;\n  min-height: 40px;\n  text-align: left;\n  color: #35495E;\n}\n.multiselect * {\n  -webkit-box-sizing: border-box;\n          box-sizing: border-box;\n}\n.multiselect:focus {\n  outline: none;\n}\n.multiselect--disabled {\n  pointer-events: none;\n  opacity: 0.6;\n}\n.multiselect--active {\n  z-index: 50;\n}\n.multiselect--active:not(.multiselect--above) .multiselect__current,\n.multiselect--active:not(.multiselect--above) .multiselect__input,\n.multiselect--active:not(.multiselect--above) .multiselect__tags {\n  border-bottom-left-radius: 0;\n  border-bottom-right-radius: 0;\n}\n.multiselect--active .multiselect__select {\n  -webkit-transform: rotateZ(180deg);\n          transform: rotateZ(180deg);\n}\n.multiselect--above.multiselect--active .multiselect__current,\n.multiselect--above.multiselect--active .multiselect__input,\n.multiselect--above.multiselect--active .multiselect__tags {\n  border-top-left-radius: 0;\n  border-top-right-radius: 0;\n}\n.multiselect__input,\n.multiselect__single {\n  position: relative;\n  display: inline-block;\n  min-height: 20px;\n  line-height: 20px;\n  border: none;\n  border-radius: 5px;\n  background: #fff;\n  padding: 1px 0 0 5px;\n  width: calc(100%);\n  -webkit-transition: border 0.1s ease;\n  transition: border 0.1s ease;\n  -webkit-box-sizing: border-box;\n          box-sizing: border-box;\n  margin-bottom: 8px;\n  vertical-align: top;\n}\n.multiselect__tag ~ .multiselect__input,\n.multiselect__tag ~ .multiselect__single {\n  width: auto;\n}\n.multiselect__input:hover,\n.multiselect__single:hover {\n  border-color: #cfcfcf;\n}\n.multiselect__input:focus,\n.multiselect__single:focus {\n  border-color: #a8a8a8;\n  outline: none;\n}\n.multiselect__single {\n  padding-left: 6px;\n  margin-bottom: 8px;\n}\n.multiselect__tags-wrap {\n  display: inline\n}\n.multiselect__tags {\n  min-height: 40px;\n  display: block;\n  padding: 8px 40px 0 8px;\n  border-radius: 5px;\n  border: 1px solid #E8E8E8;\n  background: #fff;\n}\n.multiselect__tag {\n  position: relative;\n  display: inline-block;\n  padding: 4px 26px 4px 10px;\n  border-radius: 5px;\n  margin-right: 10px;\n  color: #fff;\n  line-height: 1;\n  background: #5240b8;\n  margin-bottom: 5px;\n  white-space: nowrap;\n  overflow: hidden;\n  max-width: 100%;\n  text-overflow: ellipsis;\n}\n.multiselect__tag-icon {\n  cursor: pointer;\n  margin-left: 7px;\n  position: absolute;\n  right: 0;\n  top: 0;\n  bottom: 0;\n  font-weight: 700;\n  font-style: initial;\n  width: 22px;\n  text-align: center;\n  line-height: 22px;\n  -webkit-transition: all 0.2s ease;\n  transition: all 0.2s ease;\n  border-radius: 5px;\n}\n.multiselect__tag-icon:after {\n  content: \"\\D7\";\n  color: #266d4d;\n  font-size: 14px;\n}\n.multiselect__tag-icon:focus,\n.multiselect__tag-icon:hover {\n  background: #369a6e;\n}\n.multiselect__tag-icon:focus:after,\n.multiselect__tag-icon:hover:after {\n  color: white;\n}\n.multiselect__current {\n  line-height: 16px;\n  min-height: 40px;\n  -webkit-box-sizing: border-box;\n          box-sizing: border-box;\n  display: block;\n  overflow: hidden;\n  padding: 8px 12px 0;\n  padding-right: 30px;\n  white-space: nowrap;\n  margin: 0;\n  text-decoration: none;\n  border-radius: 5px;\n  border: 1px solid #E8E8E8;\n  cursor: pointer;\n}\n.multiselect__select {\n  line-height: 16px;\n  display: block;\n  position: absolute;\n  -webkit-box-sizing: border-box;\n          box-sizing: border-box;\n  width: 40px;\n  height: 38px;\n  right: 1px;\n  top: 1px;\n  padding: 4px 8px;\n  margin: 0;\n  text-decoration: none;\n  text-align: center;\n  cursor: pointer;\n  -webkit-transition: -webkit-transform 0.2s ease;\n  transition: -webkit-transform 0.2s ease;\n  transition: transform 0.2s ease;\n  transition: transform 0.2s ease, -webkit-transform 0.2s ease;\n}\n.multiselect__select:before {\n  position: relative;\n  right: 0;\n  top: 65%;\n  color: #999;\n  margin-top: 4px;\n  border-style: solid;\n  border-width: 5px 5px 0 5px;\n  border-color: #999999 transparent transparent transparent;\n  content: \"\";\n}\n.multiselect__placeholder {\n  color: #ADADAD;\n  display: inline-block;\n  margin-bottom: 10px;\n  padding-top: 2px;\n}\n.multiselect--active .multiselect__placeholder {\n  display: none;\n}\n.multiselect__content-wrapper {\n  position: absolute;\n  display: block;\n  background: #fff;\n  width: 100%;\n  max-height: 240px;\n  overflow: auto;\n  border: 1px solid #E8E8E8;\n  border-top: none;\n  border-bottom-left-radius: 5px;\n  border-bottom-right-radius: 5px;\n  z-index: 50;\n  -webkit-overflow-scrolling: touch;\n}\n.multiselect__content {\n  list-style: none;\n  display: inline-block;\n  padding: 0;\n  margin: 0;\n  min-width: 100%;\n  vertical-align: top;\n}\n.multiselect--above .multiselect__content-wrapper {\n  bottom: 100%;\n  border-bottom-left-radius: 0;\n  border-bottom-right-radius: 0;\n  border-top-left-radius: 5px;\n  border-top-right-radius: 5px;\n  border-bottom: none;\n  border-top: 1px solid #E8E8E8;\n}\n.multiselect__content::webkit-scrollbar {\n  display: none;\n}\n.multiselect__element {\n  display: block;\n}\n.multiselect__option {\n  display: block;\n  padding: 12px;\n  min-height: 40px;\n  line-height: 16px;\n  text-decoration: none;\n  text-transform: none;\n  vertical-align: middle;\n  position: relative;\n  cursor: pointer;\n  white-space: nowrap;\n}\n.multiselect__option:after {\n  top: 0;\n  right: 0;\n  position: absolute;\n  line-height: 40px;\n  padding-right: 12px;\n  padding-left: 20px;\n}\n.multiselect__option--highlight {\n  background: #41B883;\n  outline: none;\n  color: white;\n}\n.multiselect__option--highlight:after {\n  content: attr(data-select);\n  background: #41B883;\n  color: white;\n}\n.multiselect__option--selected {\n  background: #F3F3F3;\n  color: #35495E;\n  font-weight: bold;\n}\n.multiselect__option--selected:after {\n  content: attr(data-selected);\n  color: silver;\n}\n.multiselect__option--selected.multiselect__option--highlight {\n  background: #FF6A6A;\n  color: #fff;\n}\n.multiselect__option--selected.multiselect__option--highlight:after {\n  background: #FF6A6A;\n  content: attr(data-deselect);\n  color: #fff;\n}\n.multiselect--disabled {\n  background: #ededed;\n  pointer-events: none;\n}\n.multiselect--disabled .multiselect__current,\n.multiselect--disabled .multiselect__select {\n  background: #ededed;\n  color: #a6a6a6;\n}\n.multiselect__option--disabled {\n  background: #ededed;\n  color: #a6a6a6;\n  cursor: text;\n  pointer-events: none;\n}\n.multiselect__option--disabled.multiselect__option--highlight {\n  background: #dedede !important;\n}\n.multiselect-enter-active,\n.multiselect-leave-active {\n  -webkit-transition: all 0.15s ease;\n  transition: all 0.15s ease;\n}\n.multiselect-enter,\n.multiselect-leave-active {\n  opacity: 0;\n}\n.multiselect__strong {\n  margin-bottom: 10px;\n  display: inline-block\n}\n*[dir=\"rtl\"] .multiselect {\n    text-align: right;\n}\n*[dir=\"rtl\"] .multiselect__select {\n    right: auto;\n    left: 1px;\n}\n*[dir=\"rtl\"] .multiselect__tags {\n    padding: 8px 8px 0px 40px;\n}\n*[dir=\"rtl\"] .multiselect__content {\n    text-align: right;\n}\n*[dir=\"rtl\"] .multiselect__option:after {\n    right: auto;\n    left: 0;\n}\n*[dir=\"rtl\"] .multiselect__clear {\n    right: auto;\n    left: 12px;\n}\n*[dir=\"rtl\"] .multiselect__spinner {\n    right: auto;\n    left: 1px;\n}\n@-webkit-keyframes spinning {\nfrom { -webkit-transform:rotate(0); transform:rotate(0)\n}\nto { -webkit-transform:rotate(2turn); transform:rotate(2turn)\n}\n}\n@keyframes spinning {\nfrom { -webkit-transform:rotate(0); transform:rotate(0)\n}\nto { -webkit-transform:rotate(2turn); transform:rotate(2turn)\n}\n}\n\n", ""]);
 
 // exports
 
@@ -58769,6 +58769,31 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__modal_detail_discount___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_2__modal_detail_discount__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__utilities_paginator__ = __webpack_require__(21);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__utilities_paginator___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_3__utilities_paginator__);
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 //
 //
 //
@@ -58949,10 +58974,10 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
         'users_id': ''
       },
       show: false,
+      showTC: false,
       branchs: [],
-      user: {
-        id: ''
-      }
+      user: {},
+      discount: {}
     };
   },
   mounted: function mounted() {
@@ -59025,7 +59050,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
       var _this3 = this;
 
       axios.get('api/profile').then(function (response) {
-        _this3.user.id = response.data.user.id;
+        _this3.user = response.data.user;
         // console.log(this.user.id);
         // this.index();
       }).catch(function (err) {
@@ -59080,39 +59105,37 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
       this.form.commerce_idcommerce = discount.branchs[0].commerce_idcommerce;
       this.form.branch_idbranch = discount.branchs[0].idbranch;
       this.form.users_id = this.user.id;
-
-      // console.log(discount)
-
-      // axios.post('api/user-has-discount', this.form).
-      //   then(response => {
-      //       this.form = {};
-      //       swal({
-      //         title: "Obtenido",
-      //         text: "Se obtuvo Descuento Satifactoriamente",
-      //         icon: "success",
-      //       })
-      //      console.log(response);
-      //   })
-      //   .catch(error => {
-      //     console.log(error.response.data)
-
-      //   });
+      this.discount = discount;
+    },
+    acceptTerms: function acceptTerms() {
+      this.$refs.showBranchs.hide();
+      this.$refs.terminosCondiciones.show();
     },
     saveUserHasDiscount: function saveUserHasDiscount() {
       var _this6 = this;
 
-      this.$refs.showBranchs.hide();
+      this.$refs.terminosCondiciones.hide();
       axios.post('api/user-has-discount', this.form).then(function (response) {
+        var id = response.data.data.idusers_has_discount;
         _this6.form = {};
         swal({
           title: "Obtenido",
           text: "Se obtuvo Descuento Satifactoriamente",
           icon: "success"
         });
-        console.log(response);
+        _this6.$router.push({ path: '/client-discount/' + id });
       }).catch(function (error) {
-        console.log(error.response.data);
+        console.log(error);
       });
+    },
+    userHaveDiscount: function userHaveDiscount(id) {
+      var i = this.user.discounts.length;
+      while (i--) {
+        if (this.user.discounts[i].pivot.discount_iddiscount === id) {
+          return true;
+        }
+      }
+      return false;
     }
   }
 });
@@ -59952,7 +59975,17 @@ var render = function() {
                                       "button",
                                       {
                                         staticClass: "btn btn-outline-primary",
-                                        attrs: { type: "button" },
+                                        class: {
+                                          userHaveDiscount: _vm.userHaveDiscount(
+                                            discount.iddiscount
+                                          )
+                                        },
+                                        attrs: {
+                                          type: "button",
+                                          disabled: _vm.userHaveDiscount(
+                                            discount.iddiscount
+                                          )
+                                        },
                                         on: {
                                           click: function($event) {
                                             _vm.obtenerDescuento(discount)
@@ -60066,13 +60099,95 @@ var render = function() {
                   attrs: { type: "submit" },
                   on: {
                     click: function($event) {
-                      _vm.saveUserHasDiscount()
+                      _vm.acceptTerms()
                     }
                   }
                 },
                 [
                   _c("i", { staticClass: "zmdi zmdi-plus" }),
                   _vm._v(" Obetener")
+                ]
+              )
+            ],
+            1
+          )
+        ]
+      ),
+      _vm._v(" "),
+      _c(
+        "b-modal",
+        {
+          ref: "terminosCondiciones",
+          attrs: {
+            id: "terminosCondiciones",
+            title: "Aceptar Terminos y Condiciones",
+            "hide-footer": ""
+          },
+          model: {
+            value: _vm.showTC,
+            callback: function($$v) {
+              _vm.showTC = $$v
+            },
+            expression: "showTC"
+          }
+        },
+        [
+          _c("div", { staticClass: "modal-content" }, [
+            _c("div", { staticClass: "container" }, [
+              _vm.discount.conditions
+                ? _c("h3", { staticClass: "my-4" }, [_vm._v("Condiciones")])
+                : _vm._e(),
+              _vm._v(" "),
+              _c("p", [_vm._v(_vm._s(_vm.discount.conditions))]),
+              _vm._v(" "),
+              _vm.discount.restrictions
+                ? _c("h3", { staticClass: "my-4" }, [_vm._v("Restriccion")])
+                : _vm._e(),
+              _vm._v(" "),
+              _c("p", [_vm._v(_vm._s(_vm.discount.restrictions))]),
+              _vm._v(" "),
+              !_vm.discount.conditions && !_vm.discount.restrictions
+                ? _c("div", [
+                    _c("p", [
+                      _vm._v(
+                        "\n                 Si esta de acuerdo en aceptar los terminos y condiciones presentadas por el descuento continue.\n              "
+                      )
+                    ])
+                  ])
+                : _vm._e()
+            ])
+          ]),
+          _vm._v(" "),
+          _c(
+            "div",
+            { staticClass: "modal-footer" },
+            [
+              _c(
+                "b-btn",
+                {
+                  on: {
+                    click: function($event) {
+                      _vm.showTC = false
+                    }
+                  }
+                },
+                [_vm._v("Cancelar")]
+              ),
+              _vm._v(" "),
+              _c(
+                "button",
+                {
+                  staticClass: "btn btn-primary",
+                  attrs: { type: "submit" },
+                  on: {
+                    click: function($event) {
+                      _vm.saveUserHasDiscount()
+                    }
+                  }
+                },
+                [
+                  _c("i", { staticClass: "zmdi zmdi-plus" }),
+                  _vm._v(" Continuar")
                 ]
               )
             ],
@@ -73663,80 +73778,6 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
@@ -73761,10 +73802,28 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
       },
       branchs: [],
       commerce: [],
-      tags: []
+      tags: [],
+      show: false,
+      form: {
+        'validfrom': '',
+        'validto': '',
+        'amount': '',
+        'normalprice': '',
+        'discountprice': '',
+        'discountpercentage': '',
+        'discount_iddiscount': '',
+        'userhasdiscountstatus_iduserhasdiscountstatus': '',
+        'commerce_idcommerce': '',
+        'branch_idbranch': '',
+        'users_id': ''
+      },
+      user: {
+        'id': ''
+      }
     };
   },
   mounted: function mounted() {
+    this.auth();
     this.index();
   },
 
@@ -73797,6 +73856,49 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
       }).catch(function (err) {
         return console.log(err);
       });
+    },
+    auth: function auth() {
+      axios.get('api/profile').then(function (response) {
+        // this.user.id = response.data.user.id;
+        console.log(response);
+        // this.index();
+      }).catch(function (err) {
+        return console.log(err);
+      });
+    },
+    obtenerDescuento: function obtenerDescuento(discount) {
+      console.log("listo");
+      // console.log(discount)
+      // // this.branchs = discount.branchs;}
+      // this.$refs.showBranchs.show()
+      // this.form.validfrom = discount.startdate;
+      // this.form.validto = discount.enddate;
+      // this.form.amount = 1;
+      // this.form.normalprice = discount.normalprice;
+      // this.form.discountprice = discount.discountprice;
+      // this.form.discountpercentage = discount.discountpercentage;
+      // this.form.discount_iddiscount = discount.iddiscount;
+      // this.form.userhasdiscountstatus_iduserhasdiscountstatus = '2';
+      // this.form.commerce_idcommerce = discount.branchs[0].commerce_idcommerce;
+      // // this.form.branch_idbranch = discount.branchs[0].idbranch;
+      // this.form.users_id = this.user.id;
+    },
+    saveUserHasDiscount: function saveUserHasDiscount() {
+      // this.$refs.showBranchs.hide() 
+      // axios.post('api/user-has-discount', this.form).
+      //   then(response => {
+      //       this.form = {};
+      //       swal({
+      //         title: "Obtenido",
+      //         text: "Se obtuvo Descuento Satifactoriamente",
+      //         icon: "success",
+      //       })
+      //      console.log(response);
+      // })
+      // .catch(error => {
+      //     console.log(error.response.data)
+
+      // });
     }
   }
 });
@@ -73827,7 +73929,9 @@ var render = function() {
         [_vm._v("Atras")]
       ),
       _vm._v(" "),
-      _c("h3", { staticClass: "my-4" }, [_vm._v(_vm._s(_vm.discount.title))]),
+      _c("h3", { staticClass: "my-4" }, [
+        _vm._v(_vm._s(_vm.discount.title) + " ")
+      ]),
       _vm._v(" "),
       _c("div", { staticClass: "container" }, [
         _c("div", { staticClass: "row" }, [
@@ -74013,9 +74117,19 @@ var render = function() {
                 ]
               ),
               _vm._v(" "),
-              _c("a", { staticClass: "primary-btn", attrs: { href: "#" } }, [
-                _vm._v("purchase only")
-              ])
+              _c(
+                "button",
+                {
+                  staticClass: "btn btn-outline-primary",
+                  attrs: { type: "button" },
+                  on: {
+                    click: function($event) {
+                      _vm.obtenerDescuento(_vm.discount)
+                    }
+                  }
+                },
+                [_vm._v("Obtener Descuento")]
+              )
             ]),
             _vm._v(" "),
             _c(
@@ -74086,8 +74200,109 @@ var render = function() {
             ])
           ])
         ])
-      ])
-    ]
+      ]),
+      _vm._v(" "),
+      _c(
+        "b-modal",
+        {
+          ref: "showBranchs",
+          attrs: {
+            id: "showBranchs",
+            title: "Elegir Sucursal donde se obtendra el Descuento",
+            "hide-footer": ""
+          },
+          model: {
+            value: _vm.show,
+            callback: function($$v) {
+              _vm.show = $$v
+            },
+            expression: "show"
+          }
+        },
+        [
+          _c("div", { staticClass: "modal-content" }, [
+            _c(
+              "div",
+              { staticClass: "container" },
+              [
+                _c("h3", { staticClass: "my-4" }, [_vm._v("Sucursal:")]),
+                _vm._v(" "),
+                _vm._l(_vm.branchs, function(branch) {
+                  return _c("div", [
+                    _c("input", {
+                      directives: [
+                        {
+                          name: "model",
+                          rawName: "v-model",
+                          value: _vm.form.branch_idbranch,
+                          expression: "form.branch_idbranch"
+                        }
+                      ],
+                      attrs: { type: "radio", id: "branch.name" },
+                      domProps: {
+                        value: branch.idbranch,
+                        checked: _vm._q(
+                          _vm.form.branch_idbranch,
+                          branch.idbranch
+                        )
+                      },
+                      on: {
+                        change: function($event) {
+                          _vm.$set(_vm.form, "branch_idbranch", branch.idbranch)
+                        }
+                      }
+                    }),
+                    _vm._v(" "),
+                    _c("span", [_vm._v(_vm._s(branch.name))]),
+                    _vm._v(" "),
+                    _c("br"),
+                    _c("br")
+                  ])
+                })
+              ],
+              2
+            )
+          ]),
+          _vm._v(" "),
+          _c(
+            "div",
+            { staticClass: "modal-footer" },
+            [
+              _c(
+                "b-btn",
+                {
+                  on: {
+                    click: function($event) {
+                      _vm.show = false
+                    }
+                  }
+                },
+                [_vm._v("Cancelar")]
+              ),
+              _vm._v(" "),
+              _c(
+                "button",
+                {
+                  staticClass: "btn btn-primary",
+                  attrs: { type: "submit" },
+                  on: {
+                    click: function($event) {
+                      _vm.saveUserHasDiscount()
+                    }
+                  }
+                },
+                [
+                  _c("i", { staticClass: "zmdi zmdi-plus" }),
+                  _vm._v(" Obetener")
+                ]
+              )
+            ],
+            1
+          )
+        ]
+      )
+    ],
+    1
   )
 }
 var staticRenderFns = [
@@ -80451,6 +80666,13 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
@@ -80471,6 +80693,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
         charcode: '',
         qr: '',
         state: ''
+
       },
       commerce: {},
       branch: {}
@@ -80487,7 +80710,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 
       axios.get('/api/client-user-discount/' + this.id).then(function (response) {
         console.log(response.data.data);
-        // this.discount.iddiscount = response.data.data.iddiscount;
+        _this.discount.iddiscount = response.data.data.discounts.iddiscount;
         _this.discount.title = response.data.data.discounts.title;
         _this.discount.description = response.data.data.discounts.description;
         _this.discount.image = response.data.data.discounts.image;
@@ -80541,9 +80764,25 @@ var render = function() {
         [_vm._v("Atras")]
       ),
       _vm._v(" "),
-      _c("h3", { staticClass: "my-4" }, [
-        _vm._v("Descuento: " + _vm._s(_vm.discount.title))
-      ]),
+      _c(
+        "h3",
+        { staticClass: "my-4" },
+        [
+          _vm._v("Descuento:\n            "),
+          _c(
+            "router-link",
+            { attrs: { to: "/discount/" + _vm.discount.iddiscount } },
+            [
+              _vm._v(
+                "\n              " +
+                  _vm._s(_vm.discount.title) +
+                  "\n            "
+              )
+            ]
+          )
+        ],
+        1
+      ),
       _vm._v(" "),
       _c("div", { staticClass: "container" }, [
         _c("div", { staticClass: "row" }, [
@@ -80613,10 +80852,18 @@ var render = function() {
                             "router-link",
                             { attrs: { to: "/branch/" + _vm.branch.idbranch } },
                             [_c("span", [_vm._v(_vm._s(_vm.branch.name))])]
-                          )
+                          ),
+                          _vm._v(" "),
+                          _c("br")
                         ],
                         1
-                      )
+                      ),
+                      _vm._v(" "),
+                      _c("div", { staticClass: "row" }, [
+                        _c("p", [
+                          _vm._v("Direccion : " + _vm._s(_vm.branch.address))
+                        ])
+                      ])
                     ])
                   ])
                 ]
@@ -80645,11 +80892,7 @@ var render = function() {
                     _vm._v(_vm._s(_vm.discount.discountpercentage) + "%")
                   ])
                 ]
-              ),
-              _vm._v(" "),
-              _c("a", { staticClass: "primary-btn", attrs: { href: "#" } }, [
-                _vm._v("purchase only")
-              ])
+              )
             ]),
             _vm._v(" "),
             _c(

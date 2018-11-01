@@ -155,6 +155,7 @@ class UserController extends Controller
         $user = User::with('countries')
                     ->with('states')
                     ->with('cities')
+                    ->with('discounts')
                     ->where('id', $id)
                     ->first();
         return response()->json(['user'=>$user], 200);

@@ -1,102 +1,9 @@
 <template>
 	<div id="section-profile" class="settings-content">
         <button type="button" class="btn btn-outline-dark pull-right" @click="$router.go(-1)">Atras</button>
-<!--         <h2 class="my-4">Descuento: {{discount.iddiscount}}</h2>
- -->
-            <h3 class="my-4">{{ discount.title }}</h3>
-        <!--     <div>
-                <div class="row pt-30">
-                    <div class="col-lg-6">
-                        <label><strong>ID Descuento</strong></label>
-                        <p>{{discount.iddiscount}}</p>
-                    </div>
-                    <div class="col-lg-6">
-                        <label><strong>Descripción</strong></label>
-                        <p>{{discount.description}}</p>
-                    </div>
-                    <div class="col-lg-6">
-                        <label><strong>Inicio</strong></label>
-                        <p>{{discount.startdate}}</p>
-                    </div>
-                    <div class="col-lg-6">
-                        <label><strong>Fin</strong></label>
-                        <p>{{discount.enddate}}</p>
-                    </div>
-                    <div class="col-lg-6">
-                        <label><strong>Destacado</strong></label>
-                        <p> {{ discount.outstanding ? "Si" : "No" }}</p>
-                    </div>
-                    <div class="col-lg-6">
-                        <label><strong>Imagen</strong></label>
-                        <p>
-		                  <img class="image-discount" :src="'images/discount/'+discount.image" />
-		                </p>
-                    </div>
-                    <div class="col-lg-6">
-                        <label><strong>Condición</strong></label>
-                        <p>{{discount.condition}}</p>
-                    </div>
-                    <div class="col-lg-6">
-                        <label><strong>Restricciones</strong></label>
-                        <p>{{discount.restrictions}}</p>
-                    </div>                    
-                    <div class="col-lg-6">
-                        <label><strong>Normal Precio</strong></label>
-                        <p>{{discount.normalprice}}</p>
-                    </div>
-                    <div class="col-lg-6">
-                        <label><strong>Precio Descuento</strong></label>
-                        <p>{{discount.discountprice}}</p>
-                    </div>                    
-                    <div class="col-lg-6">
-                        <label><strong>Porcetaje Descuento</strong></label>
-                        <p>{{discount.discountpercentage}} %</p>
-                    </div>
 
-                    <div class="clearfix"></div>
-                    <br>
-              
-                </div>
-                <div>
-                    <h3 class="mt-4">Sucursales</h3>    
-                    <div class="row justify-content-center stat-table-wrap">
-                        <div class="col-lg-12 stat-wrap-container">
-                            <div class="stat-wrap">
-                                <table class="table table-striped mt-40 stat-table">
-                                    <thead>
-                                      <tr>
-                                        <th>ID Sucursal</th>
-                                        <th>Nombre</th>
-                                        <th>Imagen</th>
-                                        <th>Latitud y Longitud</th>
-                                        <th>Options</th>
-                                      </tr>
-                                    </thead>
-                                    <tbody>
-                                      <tr v-for="branch in branchs" >
-                                        <td>{{ branch.idbranch }}</td>
-                                        <td>{{ branch.name }}</td>
-                                        <td>
-                                          <img class="image-branch" v-if="branch.image != null" :src="'images/branch/'+branch.image" />
-                                          <p v-if="branch.image == null">No posee imagen.</p>
-                                        </td>
-                                        <td>{{ branch.latitude }} - {{ branch.longitude }}</td>
-                                        <td>
-                                          <router-link :to="`/branch/${branch.idbranch}`">
-                                            <a href="#" class="btn btn-primary btn-sm">
-                                            Detalle
-                                            </a>     
-                                          </router-link>
-                                        </td>
-                                        
-                                      </tr>
-                                    </tbody>
-                                </table>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div> -->
+        <h3 class="my-4">{{ discount.title}} </h3>
+
         <div class="container">
             <div class="row">
                 <div class="col-lg-9">
@@ -176,11 +83,8 @@
                             <h4><s>{{discount.normalprice}}</s></h4>
                             <h6>{{discount.discountpercentage}}%</h6>
                         </div>
-  <!--                       <ul>
-                            <li>01 year theme support</li>
-                            <li>01 year theme updates</li>
-                        </ul> -->
-                        <a href="#" class="primary-btn">purchase only</a>
+
+                    <button type="button" class="btn btn-outline-primary" @click="obtenerDescuento(discount)" >Obtener Descuento</button>
                     </div>
 
                     <div v-show="discount.outstanding">
@@ -224,6 +128,28 @@
             </div>
 
         </div>
+
+        <!-- modal sucursal -->
+        <b-modal v-model="show" id="showBranchs" ref="showBranchs" title="Elegir Sucursal donde se obtendra el Descuento" hide-footer>
+        <div class="modal-content">
+          <div class="container">
+                
+              <h3 class="my-4">Sucursal:</h3>   
+              
+              <div v-for="branch in branchs">
+                                      
+                  <input class="" type="radio"  v-model="form.branch_idbranch" id="branch.name" :value="branch.idbranch" >
+                   <span>{{branch.name}}</span>
+                  <br><br>
+              </div>                            
+              
+          </div>
+        </div>
+          <div class="modal-footer">
+              <b-btn @click="show=false">Cancelar</b-btn>
+              <button type="submit" @click="saveUserHasDiscount()" class="btn btn-primary"><i class="zmdi zmdi-plus"></i> Obetener</button>
+          </div>
+        </b-modal> 
     </div>
 </template>
 
@@ -252,11 +178,29 @@
                 branchs:[],
                 commerce:[],
                 tags:[],
-			}
+                show:false, 
+                form: { 
+                  'validfrom': '',
+                  'validto':'',
+                  'amount':'',
+                  'normalprice':'',
+                  'discountprice':'',
+                  'discountpercentage': '',
+                  'discount_iddiscount': '',
+                  'userhasdiscountstatus_iduserhasdiscountstatus': '',
+                  'commerce_idcommerce': '',
+                  'branch_idbranch': '',
+                  'users_id': '',
+                },
+                user: {
+                    'id': '',
+                }
+        	}
 		},
 
 		mounted() {
-			this.index();
+            this.auth();
+            this.index();
 		},
 
 		methods: {
@@ -284,7 +228,50 @@
                 // console.log(response.data.data)
               })
               .catch(err => console.log(err))
-            },			
+            },
+            auth() {
+                axios.get('api/profile').then((response) => {
+                  // this.user.id = response.data.user.id;
+                  console.log(response);
+                  // this.index();
+                })
+                .catch(err => console.log(err))
+            },
+            obtenerDescuento(discount){
+                 console.log("listo");   
+                 // console.log(discount)
+                 // // this.branchs = discount.branchs;}
+                 // this.$refs.showBranchs.show()
+                 // this.form.validfrom = discount.startdate;
+                 // this.form.validto = discount.enddate;
+                 // this.form.amount = 1;
+                 // this.form.normalprice = discount.normalprice;
+                 // this.form.discountprice = discount.discountprice;
+                 // this.form.discountpercentage = discount.discountpercentage;
+                 // this.form.discount_iddiscount = discount.iddiscount;
+                 // this.form.userhasdiscountstatus_iduserhasdiscountstatus = '2';
+                 // this.form.commerce_idcommerce = discount.branchs[0].commerce_idcommerce;
+                 // // this.form.branch_idbranch = discount.branchs[0].idbranch;
+                 // this.form.users_id = this.user.id;
+          
+            },
+            saveUserHasDiscount(){
+                // this.$refs.showBranchs.hide() 
+                // axios.post('api/user-has-discount', this.form).
+                //   then(response => {
+                //       this.form = {};
+                //       swal({
+                //         title: "Obtenido",
+                //         text: "Se obtuvo Descuento Satifactoriamente",
+                //         icon: "success",
+                //       })
+                //      console.log(response);
+                // })
+                // .catch(error => {
+                //     console.log(error.response.data)
+
+                // });
+            }			
 
 		}
 	}

@@ -1,7 +1,11 @@
 <template>
   <div id="section-profile" class="settings-content">
         <button type="button" class="btn btn-outline-dark pull-right" @click="$router.go(-1)">Atras</button>
-            <h3 class="my-4">Descuento: {{ discount.title }}</h3>
+            <h3 class="my-4">Descuento:
+              <router-link :to="`/discount/${discount.iddiscount}`">
+                {{ discount.title }}
+              </router-link>
+           </h3>
      
         <div class="container">
             <div class="row">
@@ -35,7 +39,12 @@
                                     <div class="row">
                                       <router-link :to="`/branch/${branch.idbranch}`">
                                           <span>{{branch.name}}</span>
-                                      </router-link>                                    
+                                      </router-link>    
+                                      <br> 
+                                    </div>
+                                    <div class="row">
+                                      
+                                      <p>Direccion : {{branch.address}}</p>                          
                                     </div>
                                 </div>
 
@@ -51,8 +60,6 @@
                             <h4><s>{{discount.normalprice}}</s></h4>
                             <h6>{{discount.discountpercentage}}%</h6>
                         </div>
-
-                        <a href="#" class="primary-btn">purchase only</a>
                     </div>
 
                     <div v-show="discount.outstanding">
@@ -94,7 +101,7 @@
       return {
         id: this.$route.params.id,
           discount: {
-            iddiscount: '',
+              iddiscount: '',
               title: '',
               description: '',
               image: '',
@@ -108,6 +115,7 @@
               charcode: '',
               qr: '',
               state: '',
+
           },
         commerce:{},
         branch:{},
@@ -122,7 +130,7 @@
             index() {
               axios.get('/api/client-user-discount/' +this.id).then(response => {
                 console.log(response.data.data)
-                // this.discount.iddiscount = response.data.data.iddiscount;
+                this.discount.iddiscount = response.data.data.discounts.iddiscount;
                 this.discount.title = response.data.data.discounts.title;
                 this.discount.description = response.data.data.discounts.description;
                 this.discount.image = response.data.data.discounts.image;

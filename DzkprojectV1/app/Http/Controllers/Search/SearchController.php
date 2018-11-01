@@ -31,12 +31,6 @@ class SearchController extends Controller
     	return $param;	
     }
 
-    protected function getLimit()
-    {
-		$param = Params::where('key','search_limit_row')->first();
-    	return $param;	
-    }
-
     protected function getAlphaNumeric($cadena)
     {
     	$cadenaLimpia = preg_replace('([^A-Za-z0-9 ])', '', $cadena);	     					
@@ -87,19 +81,9 @@ class SearchController extends Controller
             return response()->json(['error'=>$validator->errors()], 422);
         }
 
-        //Limite de sucursales a devolver
-		$limit = $this->getLimit();
-		$limit = intval($limit->val);
-
-		if(!$request->offset) {
-			$offset = 0;
-		} else {
-			$offset = $request->offset;
-		}
 		//Obtiene la latitud y logitud del cliente 
       	$local_user = $this->getLocalizationUser();
-      	      	
-		
+      	      			
 		//Obtiene los rangos de busqueda de distancia
 		$range = $this->getSearchRange();
 		
@@ -119,7 +103,7 @@ class SearchController extends Controller
 				$rango2 = null;
 			}
 
-			$branchs = DB::select('call sp_getbranch_from_location(?,?,?,?,?,?)', array($local_user['latitude'],$local_user['longitude'],$rango1,$rango2,$limit,$offset));
+			$branchs = DB::select('call sp_getbranch_from_location(?,?,?,?)', array($local_user['latitude'],$local_user['longitude'],$rango1,$rango2));
 
 			if(count($branchs) > 0) {
 				break;
@@ -302,10 +286,10 @@ class SearchController extends Controller
 					  			}
 					  		}
  						}])*/
-            ->with(['branchs' =>function ($query) {
+            	->with(['branchs' =>function ($query) {
                             $query->with('commerces');
                         }])
-                        ->where('enddate','<=',Carbon::today());
+                        ->where('enddate','>=',Carbon::today());
  				
  				$query->whereHas('branchs', function($q) use($branch) {
                 	$q->whereIn('idbranch',$branch);
@@ -436,7 +420,7 @@ $discounts;*/
 //		    	$data['discounts'] = $branchs;
 		    	//$data = $discounts;
 		    	//$pagination = $this->getPagination($discounts, $limit);
-		    	$pagination = $this->getPagination($resultado, $limit);
+		    	//$pagination = $this->getPagination($resultado, $limit);
 				
 				return response()->json([
 										'success'    => true, 

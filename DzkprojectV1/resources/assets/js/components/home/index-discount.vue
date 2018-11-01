@@ -274,7 +274,7 @@ import paginator from '../../utilities/paginator';
       auth() {
         axios.get('api/profile').then((response) => {
           this.user = response.data.user;
-          this.length = this.user.discounts.length;
+          this.length = this.user.discounts.length
           // console.log(this.user.id);
           // this.index();
         })

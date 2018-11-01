@@ -50,7 +50,6 @@ Route::group(['middleware' => 'auth:api'], function() {
 
 	//Tags
 	Route::group(["prefix" => "tags"], function () {
-		Route::get('/', 'Tags\TagsController@index');
 		Route::get('/{id}', 'Tags\TagsController@show');
 		Route::delete('/{id}', 'Tags\TagsController@destroy');
 		Route::post('/', 'Tags\TagsController@store');
@@ -68,6 +67,8 @@ Route::group(['middleware' => 'auth:api'], function() {
 	Route::get('/permissionsuser/{id}','UserController@getPermisosUser');
 	Route::put('/assignpermissionsuser/{id}','UserController@asignaPermisosUser');
 });
+
+Route::get('/tags', 'Tags\TagsController@index');
 
 Route::resource('discount','Discount\DiscountController');
 Route::resource('discount-categories','DiscountCategory\DiscountCategoryController');

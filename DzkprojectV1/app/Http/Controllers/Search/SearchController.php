@@ -306,7 +306,6 @@ class SearchController extends Controller
                             $query->with('commerces');
                         }])
                         ->where('enddate','<=',Carbon::today());
-        
  				
  				$query->whereHas('branchs', function($q) use($branch) {
                 	$q->whereIn('idbranch',$branch);
@@ -610,9 +609,6 @@ $discounts;*/
                 }
 
                 return $query->get();
-                
-
-                
     }
 
 

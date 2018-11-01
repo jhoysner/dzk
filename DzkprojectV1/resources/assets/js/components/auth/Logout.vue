@@ -35,11 +35,8 @@
                     axios.post('/api/logout', this.token)
                       .then((response) => {
                         localStorage.removeItem('access_token')
-
                         localStorage.removeItem('roles')
-
                         localStorage.removeItem('permissions')
-
                         window.location.href = '/';
 
                       }).catch((error) => {

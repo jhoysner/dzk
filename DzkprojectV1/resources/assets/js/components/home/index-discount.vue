@@ -131,7 +131,32 @@
         </div>
           <div class="modal-footer">
               <b-btn @click="show=false">Cancelar</b-btn>
-              <button type="submit" @click="saveUserHasDiscount()" class="btn btn-primary"><i class="zmdi zmdi-plus"></i> Obetener</button>
+              <button type="submit" @click="acceptTerms()" class="btn btn-primary"><i class="zmdi zmdi-plus"></i> Obetener</button>
+          </div>
+    </b-modal>    
+    <!-- terminos y condiciones  -->
+    <b-modal v-model="showTC" id="terminosCondiciones" ref="terminosCondiciones" title="Aceptar Terminos y Condiciones" hide-footer>
+        <div class="modal-content">
+          <div class="container">
+                
+              <h3 class="my-4" v-if="discount.conditions">Condiciones</h3>
+              <p>{{discount.conditions}}</p>   
+
+              <h3 class="my-4" v-if="discount.restrictions">Restriccion</h3>
+              <p>{{discount.restrictions}}</p> 
+              
+              <div v-if="!discount.conditions && !discount.restrictions">   
+                <p>
+                   Si esta de acuerdo en aceptar los terminos y condiciones presentadas por el descuento continue.
+                </p>               
+              </div>  
+                                     
+              
+          </div>
+        </div>
+          <div class="modal-footer">
+              <b-btn @click="showTC=false">Cancelar</b-btn>
+              <button type="submit" @click="saveUserHasDiscount()" class="btn btn-primary"><i class="zmdi zmdi-plus"></i> Continuar</button>
           </div>
     </b-modal> 
   </div>
@@ -142,6 +167,7 @@ import Bus from '../../utilities/EventBus.js';
 import $ from 'jquery';
 import detail from './modal-detail-discount';
 import paginator from '../../utilities/paginator';
+
 
   export default {
     components: { detail, paginator},
@@ -178,10 +204,12 @@ import paginator from '../../utilities/paginator';
           'users_id': '',
         },
         show:false, 
+        showTC:false, 
         branchs:[],
         user:{
           id: '',
-        }
+        },
+        discount:{},
       }
     },
 
@@ -295,24 +323,32 @@ import paginator from '../../utilities/paginator';
          this.form.commerce_idcommerce = discount.branchs[0].commerce_idcommerce;
          this.form.branch_idbranch = discount.branchs[0].idbranch;
          this.form.users_id = this.user.id;
+         this.discount = discount;
   
       },
+
+      acceptTerms(){
+        this.$refs.showBranchs.hide()
+        this.$refs.terminosCondiciones.show()
+      },
       saveUserHasDiscount(){
-         this.$refs.showBranchs.hide() 
+         this.$refs.terminosCondiciones.hide() 
          axios.post('api/user-has-discount', this.form).
           then(response => {
+             const id = response.data.data.idusers_has_discount 
               this.form = {};
               swal({
                 title: "Obtenido",
                 text: "Se obtuvo Descuento Satifactoriamente",
                 icon: "success",
               })
-             console.log(response);
+            this.$router.push({ path: `/client-discount/${id}` })
           })
           .catch(error => {
-            console.log(error.response.data)
+            console.log(error)
 
           });
+
       }
 
     },

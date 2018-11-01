@@ -302,10 +302,11 @@ class SearchController extends Controller
 					  			}
 					  		}
  						}])*/
- 						->with(['branchs' =>function ($query) {
+            ->with(['branchs' =>function ($query) {
                             $query->with('commerces');
                         }])
-                        ->where('enddate','>=',Carbon::today());
+                        ->where('enddate','<=',Carbon::today());
+        
  				
  				$query->whereHas('branchs', function($q) use($branch) {
                 	$q->whereIn('idbranch',$branch);

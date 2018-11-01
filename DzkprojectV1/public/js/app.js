@@ -55522,6 +55522,31 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 
 
@@ -55563,10 +55588,12 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
         'users_id': ''
       },
       show: false,
+      showTC: false,
       branchs: [],
       user: {
         id: ''
-      }
+      },
+      discount: {}
     };
   },
   mounted: function mounted() {
@@ -55694,21 +55721,27 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
       this.form.commerce_idcommerce = discount.branchs[0].commerce_idcommerce;
       this.form.branch_idbranch = discount.branchs[0].idbranch;
       this.form.users_id = this.user.id;
+      this.discount = discount;
+    },
+    acceptTerms: function acceptTerms() {
+      this.$refs.showBranchs.hide();
+      this.$refs.terminosCondiciones.show();
     },
     saveUserHasDiscount: function saveUserHasDiscount() {
       var _this6 = this;
 
-      this.$refs.showBranchs.hide();
+      this.$refs.terminosCondiciones.hide();
       axios.post('api/user-has-discount', this.form).then(function (response) {
+        var id = response.data.data.idusers_has_discount;
         _this6.form = {};
         swal({
           title: "Obtenido",
           text: "Se obtuvo Descuento Satifactoriamente",
           icon: "success"
         });
-        console.log(response);
+        _this6.$router.push({ path: '/client-discount/' + id });
       }).catch(function (error) {
-        console.log(error.response.data);
+        console.log(error);
       });
     }
   }
@@ -56663,13 +56696,95 @@ var render = function() {
                   attrs: { type: "submit" },
                   on: {
                     click: function($event) {
-                      _vm.saveUserHasDiscount()
+                      _vm.acceptTerms()
                     }
                   }
                 },
                 [
                   _c("i", { staticClass: "zmdi zmdi-plus" }),
                   _vm._v(" Obetener")
+                ]
+              )
+            ],
+            1
+          )
+        ]
+      ),
+      _vm._v(" "),
+      _c(
+        "b-modal",
+        {
+          ref: "terminosCondiciones",
+          attrs: {
+            id: "terminosCondiciones",
+            title: "Aceptar Terminos y Condiciones",
+            "hide-footer": ""
+          },
+          model: {
+            value: _vm.showTC,
+            callback: function($$v) {
+              _vm.showTC = $$v
+            },
+            expression: "showTC"
+          }
+        },
+        [
+          _c("div", { staticClass: "modal-content" }, [
+            _c("div", { staticClass: "container" }, [
+              _vm.discount.conditions
+                ? _c("h3", { staticClass: "my-4" }, [_vm._v("Condiciones")])
+                : _vm._e(),
+              _vm._v(" "),
+              _c("p", [_vm._v(_vm._s(_vm.discount.conditions))]),
+              _vm._v(" "),
+              _vm.discount.restrictions
+                ? _c("h3", { staticClass: "my-4" }, [_vm._v("Restriccion")])
+                : _vm._e(),
+              _vm._v(" "),
+              _c("p", [_vm._v(_vm._s(_vm.discount.restrictions))]),
+              _vm._v(" "),
+              !_vm.discount.conditions && !_vm.discount.restrictions
+                ? _c("div", [
+                    _c("p", [
+                      _vm._v(
+                        "\n                 Si esta de acuerdo en aceptar los terminos y condiciones presentadas por el descuento continue.\n              "
+                      )
+                    ])
+                  ])
+                : _vm._e()
+            ])
+          ]),
+          _vm._v(" "),
+          _c(
+            "div",
+            { staticClass: "modal-footer" },
+            [
+              _c(
+                "b-btn",
+                {
+                  on: {
+                    click: function($event) {
+                      _vm.showTC = false
+                    }
+                  }
+                },
+                [_vm._v("Cancelar")]
+              ),
+              _vm._v(" "),
+              _c(
+                "button",
+                {
+                  staticClass: "btn btn-primary",
+                  attrs: { type: "submit" },
+                  on: {
+                    click: function($event) {
+                      _vm.saveUserHasDiscount()
+                    }
+                  }
+                },
+                [
+                  _c("i", { staticClass: "zmdi zmdi-plus" }),
+                  _vm._v(" Continuar")
                 ]
               )
             ],

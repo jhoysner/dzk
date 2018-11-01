@@ -205,6 +205,7 @@ import paginator from '../../utilities/paginator';
         },
         show:false, 
         showTC:false, 
+        length:'', 
         branchs:[],
         user:{},
         discount:{},
@@ -273,6 +274,7 @@ import paginator from '../../utilities/paginator';
       auth() {
         axios.get('api/profile').then((response) => {
           this.user = response.data.user;
+          this.length = this.user.discounts.length;
           // console.log(this.user.id);
           // this.index();
         })
@@ -349,7 +351,7 @@ import paginator from '../../utilities/paginator';
 
       },
       userHaveDiscount(id){
-          var i = this.user.discounts.length;
+          var i = this.length;
           while (i--) {
              if (this.user.discounts[i].pivot.discount_iddiscount === id) {
                  return true;

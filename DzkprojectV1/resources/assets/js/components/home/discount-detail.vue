@@ -84,7 +84,7 @@
                             <h6>{{discount.discountpercentage}}%</h6>
                         </div>
 
-                    <button type="button" class="btn btn-outline-primary" @click="obtenerDescuento(discount)" >Obtener Descuento</button>
+                    <button type="button" :disabled="userHaveDiscount(discount.iddiscount)" :class="{ userHaveDiscount: userHaveDiscount(discount.iddiscount) }"  class="btn btn-outline-primary" @click="obtenerDescuento(discount)" >Obtener Descuento</button>
                     </div>
 
                     <div v-show="discount.outstanding">
@@ -130,26 +130,52 @@
         </div>
 
         <!-- modal sucursal -->
-        <b-modal v-model="show" id="showBranchs" ref="showBranchs" title="Elegir Sucursal donde se obtendra el Descuento" hide-footer>
-        <div class="modal-content">
-          <div class="container">
+        <b-modal v-model="showB" id="showBranchs" ref="showBranchs" title="Elegir Sucursal donde se obtendra el Descuento" hide-footer>
+          <div class="modal-content">
+            <div class="container">
+                  
+                <h3 class="my-4">Sucursal:</h3>   
                 
-              <h3 class="my-4">Sucursal:</h3>   
-              
-              <div v-for="branch in branchs">
-                                      
-                  <input class="" type="radio"  v-model="form.branch_idbranch" id="branch.name" :value="branch.idbranch" >
-                   <span>{{branch.name}}</span>
-                  <br><br>
-              </div>                            
-              
+                <div v-for="branch in branchs">
+                                        
+                    <input class="" type="radio"  v-model="form.branch_idbranch" id="branch.name" :value="branch.idbranch" >
+                     <span>{{branch.name}}</span>
+                    <br><br>
+                </div>                            
+                
+            </div>
           </div>
-        </div>
           <div class="modal-footer">
-              <b-btn @click="show=false">Cancelar</b-btn>
-              <button type="submit" @click="saveUserHasDiscount()" class="btn btn-primary"><i class="zmdi zmdi-plus"></i> Obetener</button>
+                <b-btn @click="showB=false">Cancelar</b-btn>
+              <button type="submit"  @click="acceptTerms()" class="btn btn-primary"><i class="zmdi zmdi-plus"></i> Obetener</button>
           </div>
         </b-modal> 
+        <!-- terminos y condiciones  -->
+        <b-modal v-model="showTCD" id="terminosCondicionesdetail" ref="terminosCondicionesdetail" title="Aceptar Terminos y Condiciones" hide-footer>
+            <div class="modal-content">
+              <div class="container">
+                    
+                  <h3 class="my-4" v-if="discount.conditions">Condiciones</h3>
+                  <p>{{discount.conditions}}</p>   
+
+                  <h3 class="my-4" v-if="discount.restrictions">Restriccion</h3>
+                  <p>{{discount.restrictions}}</p> 
+                  
+                  <div v-if="!discount.conditions && !discount.restrictions">   
+                    <p>
+                       Si esta de acuerdo en aceptar los terminos y condiciones presentadas por el descuento continue.
+                    </p>               
+                  </div>  
+                                         
+                  
+              </div>
+            </div>
+              <div class="modal-footer">
+                  <b-btn @click="showTCD=false">Cancelar</b-btn>
+                  <button type="submit" @click="saveUserHasDiscount()" class="btn btn-primary"><i class="zmdi zmdi-plus"></i> Continuar</button>
+              </div>
+        </b-modal> 
+
     </div>
 </template>
 
@@ -179,6 +205,9 @@
                 commerce:[],
                 tags:[],
                 show:false, 
+                showTCD:false, 
+                showB:false, 
+                length:'', 
                 form: { 
                   'validfrom': '',
                   'validto':'',
@@ -192,92 +221,118 @@
                   'branch_idbranch': '',
                   'users_id': '',
                 },
-                user: {
-                    'id': '',
-                }
+                user: {}
         	}
 		},
 
 		mounted() {
-            this.auth();
-            this.index();
+        this.auth();
+  
 		},
 
 		methods: {
-            index() {
-              axios.get('/api/discount/' +this.id).then(response => {
-                // console.log(response)
-                this.discount.iddiscount = response.data.data.iddiscount;
-                this.discount.title = response.data.data.title;
-                this.discount.description = response.data.data.description;
-                this.discount.image = response.data.data.image;
-                this.discount.startdate = response.data.data.startdate;
-                this.discount.enddate = response.data.data.enddate;
-                this.discount.outstanding = response.data.data.outstanding;
-                this.discount.conditions = response.data.data.conditions;
-                this.discount.restrictions = response.data.data.restrictions;
-                this.discount.normalprice = response.data.data.normalprice;
-                this.discount.discountprice = response.data.data.discountprice;
-                this.discount.discountpercentage = response.data.data.discountpercentage;
-                this.discount.discountcategory_iddiscountcategory = response.data.data.categories.name;
+        index() {
+          axios.get('/api/discount/' +this.id).then(response => {
+            // console.log(response)
+            this.discount.iddiscount = response.data.data.iddiscount;
+            this.discount.title = response.data.data.title;
+            this.discount.description = response.data.data.description;
+            this.discount.image = response.data.data.image;
+            this.discount.startdate = response.data.data.startdate;
+            this.discount.enddate = response.data.data.enddate;
+            this.discount.outstanding = response.data.data.outstanding;
+            this.discount.conditions = response.data.data.conditions;
+            this.discount.restrictions = response.data.data.restrictions;
+            this.discount.normalprice = response.data.data.normalprice;
+            this.discount.discountprice = response.data.data.discountprice;
+            this.discount.discountpercentage = response.data.data.discountpercentage;
+            this.discount.discountcategory_iddiscountcategory = response.data.data.categories.name;
 
-                this.branchs = response.data.data.branchs;
-                this.tags = response.data.data.tags;
-                this.commerce = response.data.data.branchs[0].commerces;
+            this.branchs = response.data.data.branchs;
+            this.tags = response.data.data.tags;
+            this.commerce = response.data.data.branchs[0].commerces;
 
-                // console.log(response.data.data)
-              })
-              .catch(err => console.log(err))
-            },
-            auth() {
-                axios.get('api/profile').then((response) => {
-                  // this.user.id = response.data.user.id;
-                  console.log(response);
-                  // this.index();
+            // console.log(response.data.data)
+          })
+          .catch(err => console.log(err))
+        },
+        auth() {
+          axios.get('/api/profile').then((response) => {
+            console.log(response)
+            this.user = response.data.user;
+            this.length = this.user.discounts.length;
+            this.index();
+            // this.sendCharcode(this.user.id);
+          })
+          .catch(err => console.log(err))
+        },
+
+        obtenerDescuento(discount){
+             // console.log("listo");   
+             // console.log(discount)
+             // this.branchs = discount.branchs;}
+             this.$refs.showBranchs.show()
+             this.form.validfrom = discount.startdate;
+             this.form.validto = discount.enddate;
+             this.form.amount = 1;
+             this.form.normalprice = discount.normalprice;
+             this.form.discountprice = discount.discountprice;
+             this.form.discountpercentage = discount.discountpercentage;
+             this.form.discount_iddiscount = discount.iddiscount;
+             this.form.userhasdiscountstatus_iduserhasdiscountstatus = '2';
+             this.form.commerce_idcommerce = this.commerce.idcommerce;
+             this.form.branch_idbranch = this.branchs[0].idbranch;
+             this.form.users_id = this.user.id;
+      
+        },
+
+        acceptTerms(){
+          this.$refs.showBranchs.hide()
+          this.$refs.terminosCondicionesdetail.show()
+        },
+        saveUserHasDiscount(){
+         this.$refs.terminosCondicionesdetail.hide() 
+           axios.post('/api/user-has-discount', this.form).
+            then(response => {
+               const id = response.data.data.idusers_has_discount 
+                this.form = {};
+                swal({
+                  title: "Obtenido",
+                  text: "Se obtuvo Descuento Satifactoriamente",
+                  icon: "success",
                 })
-                .catch(err => console.log(err))
-            },
-            obtenerDescuento(discount){
-                 console.log("listo");   
-                 // console.log(discount)
-                 // // this.branchs = discount.branchs;}
-                 // this.$refs.showBranchs.show()
-                 // this.form.validfrom = discount.startdate;
-                 // this.form.validto = discount.enddate;
-                 // this.form.amount = 1;
-                 // this.form.normalprice = discount.normalprice;
-                 // this.form.discountprice = discount.discountprice;
-                 // this.form.discountpercentage = discount.discountpercentage;
-                 // this.form.discount_iddiscount = discount.iddiscount;
-                 // this.form.userhasdiscountstatus_iduserhasdiscountstatus = '2';
-                 // this.form.commerce_idcommerce = discount.branchs[0].commerce_idcommerce;
-                 // // this.form.branch_idbranch = discount.branchs[0].idbranch;
-                 // this.form.users_id = this.user.id;
-          
-            },
-            saveUserHasDiscount(){
-                // this.$refs.showBranchs.hide() 
-                // axios.post('api/user-has-discount', this.form).
-                //   then(response => {
-                //       this.form = {};
-                //       swal({
-                //         title: "Obtenido",
-                //         text: "Se obtuvo Descuento Satifactoriamente",
-                //         icon: "success",
-                //       })
-                //      console.log(response);
-                // })
-                // .catch(error => {
-                //     console.log(error.response.data)
+              this.$router.push({ path: `/client-discount/${id}` })
+            })
+            .catch(error => {
+              console.log(error)
 
-                // });
-            }			
+            });
+
+        },
+        userHaveDiscount(id){
+            var i = this.length;
+            // console.log(i)
+            while (i--) {
+               if (this.user.discounts[i].pivot.discount_iddiscount === id) {
+                   return true;
+               }
+            }
+            return false;
+        }
+			
 
 		}
 	}
 </script>
 
 <style>
+
+  .userHaveDiscount{
+    color: #dc3545 !important;
+    background-color: transparent !important;
+    background-image: none !important;
+    border-color: #dc3545 !important;
+  }
 	.image-discount {
 	  width: 80px;
 	  height: 50px;

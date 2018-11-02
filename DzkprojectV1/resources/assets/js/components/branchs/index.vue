@@ -2,7 +2,7 @@
   <div>
     <div class="col-lg-12">
         <div>
-            <b-btn v-b-modal.createModal>Crear Sucursal</b-btn>
+            <b-btn v-b-modal.createModal v-can="'add_branchs'">Crear Sucursal</b-btn>
             <div class="settings-content">
                 <h4>Lista de sucursales</h4>
               <!-- <spinner :show="loadingProductos"></spinner> -->
@@ -45,9 +45,9 @@
                                 <td>{{ branch.states.name }}</td>
                                 <td>{{ branch.cities.name }}</td> -->
                                 <td class="text-right">
-                                    <b-btn v-b-modal="'showModal'" size="sm" @click="show(branch.idbranch)" variant="default">Detalle</b-btn>
-                                    <b-btn v-b-modal="'editModal'" size="sm" @click="edit(branch.idbranch)" variant="warning">Editar</b-btn>
-                                    <button type="button" @click="confirm(branch.idbranch)" class="btn btn-sm  btn-danger">Eliminar</button>
+                                    <b-btn v-b-modal="'showModal'" v-can="'view_branchs'" size="sm" @click="show(branch.idbranch)" variant="default">Detalle</b-btn>
+                                    <b-btn v-b-modal="'editModal'" v-can="'edit_branchs'" size="sm" @click="edit(branch.idbranch)" variant="warning">Editar</b-btn>
+                                    <button type="button" v-can="'delete_branchs'" @click="confirm(branch.idbranch)" class="btn btn-sm  btn-danger">Eliminar</button>
                                 </td>
                               </tr>
                             </tbody>

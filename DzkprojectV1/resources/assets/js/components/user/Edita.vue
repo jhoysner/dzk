@@ -65,7 +65,7 @@
                         <br>
                         <div class="col-lg-12 text-right">
                             <br>
-                            <button type="button" @click.prevent="update" class="btn btn-primary"><i class="zmdi zmdi-plus"></i> Guardar</button>
+                            <button type="button" @click.prevent="update" v-can="'edit_users'" class="btn btn-primary"><i class="zmdi zmdi-plus"></i> Guardar</button>
                         </div>
                       </div>
                   </div>     

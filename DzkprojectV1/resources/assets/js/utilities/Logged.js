@@ -14,7 +14,7 @@ export const Logged = {
 			}
 			
 			if(token) {
-				axios.get('api/profile', {timeout: 5000}).then(response => {
+				axios.get('api/profile').then(response => {
 				console.log(response)        
 			    	this.logged = true		        
 			        return this.logged

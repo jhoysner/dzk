@@ -60,8 +60,6 @@ Vue.directive('can', function (el, binding) {
     
   })
 
-  
-
   Vue.component('login-component', require('./components/User/Login/LoginComponent.vue'));
   Vue.component('sider-component', require('./components/User/Login/SiderComponent.vue'));
   Vue.component('register-component', require('./components/User/RegisterComponent.vue'));

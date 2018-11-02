@@ -103,7 +103,7 @@
                             </div>
                         </div>
                         <div class="col-lg-12 text-right">
-                            <button type="button" @click.prevent="update" class="btn btn-primary"><i class="zmdi zmdi-plus"></i> Guardar</button>
+                            <button type="button" v-can="'edit_branchs'" @click.prevent="update" class="btn btn-primary"><i class="zmdi zmdi-plus"></i> Guardar</button>
                         </div>
                       </div>
                   </div>     

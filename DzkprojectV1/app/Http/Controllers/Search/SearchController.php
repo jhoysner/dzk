@@ -73,7 +73,179 @@ class SearchController extends Controller
     }
 
 
-	public function getSearch(Request $request)
+	public function getSearch(Request $request, $key_range=null)
+	{
+		$validator = $this->validator($request->all());
+
+        if($validator->fails()) {
+            return response()->json(['error'=>$validator->errors()], 422);
+        }
+
+		//Obtiene la latitud y logitud del cliente 
+      	$local_user = $this->getLocalizationUser();
+      	      			
+		//Obtiene los rangos de busqueda de distancia
+		$range = $this->getSearchRange();
+		
+		if(is_null($range)){
+			$val_range = [0,500];
+		} else {
+			$val_range = explode(',', trim($range->val,'{}'));
+		}
+		
+		if(!is_null($key_range)) {
+			$ri = $key_range;
+		} else {
+			$ri = 0;
+		}
+
+		$num_range = count($val_range); 
+		//Recorre los rangos hasta encontrar Branchs
+		while($ri < $num_range) {
+			$rango1 = $val_range[$ri];
+			if(isset($val_range[$ri+1])) {
+				$rango2 = $val_range[$ri+1];
+			} else {
+				$rango2 = null;
+			}
+
+			$branchs = DB::select('call sp_getbranch_from_location(?,?,?,?)', array($local_user['latitude'],$local_user['longitude'],$rango1,$rango2));
+
+			if(count($branchs) > 0) {
+				if(isset($key_range)) {
+					$key_range = $ri;
+				}
+				break;
+			}
+
+			$ri++;
+		}
+
+      	$branch = array();
+      	$branchsOrder = array();
+      	foreach ($branchs as $key => $value) {
+      		$branch[] = $value->idbranch; 
+      		$branchsOrder[$key] = $value->idbranch;
+      	}
+
+      	$perPag = Helper::getPaginate();
+      	$perPag = intval($perPag);
+
+		switch ($request->type) {
+	    	case 'commerce':      	
+	    		$query = Commerce::with('ccategories','tags')
+ 						->with('branchs'); 						
+
+ 				$query->whereHas('branchs', function($q) use($branch) {
+                	$q->whereIn('idbranch',$branch);
+                });
+
+				if($request->category_commerce) {
+					$category_commerce = $request->category_commerce;
+                    $query->where('commercecategory_idcommercecategory', $category_commerce);
+                }
+
+                if($request->word) {			  					
+					$word = $this->getWord($request->word);
+
+					foreach ($word as $value) {
+						if($value === reset($word)){
+							$query->where('name','like','%'.$value.'%');
+						} 
+						if($value !== reset($word)) {
+							$query->orWhere('name','like','%'.$value.'%');
+						}
+					}
+			  	}
+
+                if($request->tags && count($request->tags) > 0) {
+                	$tags = $request->tags;
+                    foreach ($tags as $value) {
+                       
+                       $query->WhereHas('tags', function ($query) use ($value) {
+                             $query->where('idtags',$value);
+                        });
+                    }
+                }
+
+	    		$query = $query->paginate($perPag);
+	    
+
+	    		$paginate = $this->getPaginate($query);
+				
+	    		
+	    		if($paginate['total'] < $perPag && $num_range < $key_range) {
+	    			search($request->all(),$key_range);
+	    		} else {
+	    			return response()->json([
+										'success'    => true, 
+										'data'       => $query,
+										'paginate'   => $paginate,
+										], 200);
+					break;
+	    		}
+
+				
+	    	case 'discount':
+ 				$query = Discount::with('categories','tags')
+            	->with(['branchs' =>function ($query) {
+                            $query->with('commerces');
+                        }])
+                        ->where('enddate','>=',Carbon::today());
+ 				
+ 				$query->whereHas('branchs', function($q) use($branch) {
+                	$q->whereIn('idbranch',$branch);
+                });
+
+                if($request->category_discount) {
+					$category_discount = $request->category_discount;
+                    $query->where('discountcategory_iddiscountcategory', $request->category_discount);
+                }
+
+                if($request->word) {			  					
+					$word = $this->getWord($request->word);
+					foreach ($word as $value) {
+						if($value === reset($word)){
+							$query->where('title','like','%'.$value.'%');
+						} 
+						if($value !== reset($word)){
+							$query->orWhere('title','like','%'.$value.'%');
+						}
+					}
+			  	}
+
+                if($request->tags && count($request->tags) > 0) {
+                	$tags = $request->tags;
+                    foreach ($tags as $value) {
+                       $query->WhereHas('tags', function ($query) use ($value) {
+							$query->where('idtags',$value);
+                        });
+                    }
+                }
+	    		$query = $query->paginate($perPag);
+
+	    		$paginate = $this->getPaginate($query);
+
+	    		if($paginate['total'] < $perPag && $num_range < $key_range) {
+	    			search($request->all(),$key_range);
+	    		} else {
+					return response()->json([
+											'success'    => true, 
+											'data' 	     => $query,
+											'paginate' 	 => $paginate,
+											], 200);
+		    		break;
+		    	}
+	    
+	    	default:
+	      		return response()->json(['error' => 'Se requiere el tipo de busqueda a realizar'], 422);
+	      		break;
+	    }
+
+	}
+
+
+	public function getSearch1(Request $request)
 	{
 		$validator = $this->validator($request->all());
 

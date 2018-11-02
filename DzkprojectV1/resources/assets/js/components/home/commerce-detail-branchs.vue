@@ -21,6 +21,7 @@
           </li>
         </ul> -->
         <h3 class="mt-4">Sucursales</h3>
+        <h5>Tienda: {{ commerce.name }}</h5>
         <h5 v-if="branchs.length < 1">Este comercio aún no posee sucursales.</h5>    
         <div class="row justify-content-center stat-table-wrap">
             <div class="col-lg-12 stat-wrap-container">
@@ -124,6 +125,7 @@ import paginator from '../../utilities/paginator';
         id: this.$route.params.id,
         commerce: {
           idcommerce: '',
+          name: '',
         },
         branchs:[],
         pagination: {
@@ -150,6 +152,7 @@ import paginator from '../../utilities/paginator';
       getCommerce() {
         axios.get('/api/detail-commerce/' + this.$route.params.id).then(data => {
           this.commerce.idcommerce = data.data.data[0].idcommerce;
+          this.commerce.name = data.data.data[0].name;
         })
         .catch(err => console.log(err))
       },

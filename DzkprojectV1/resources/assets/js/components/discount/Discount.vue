@@ -12,7 +12,6 @@
                           <table class="table table-hover table-bordered table-striped table-condensed">
                               <thead>
                                   <tr>
-                                      <th class="text-center">ID Descuento</th>
                                       <th class="text-center">Titulo</th>
                                       <th class="text-center">Descripcion</th>
                                       <th class="text-center">Inicio</th>
@@ -23,7 +22,6 @@
                               </thead>
                               <tbody>
                                   <tr v-for="discount in discounts">
-                                      <td>{{ discount.iddiscount}}</td>
                                       <td>{{ discount.title }}</td>
                                       <td class="text-center">{{ discount.description }}</td>
                                       <td class="text-center">{{ discount.startdate }}</td>

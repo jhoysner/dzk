@@ -81,7 +81,7 @@
                                         </a>
                                         <h6 class="price"><s>${{ discount.normalprice }}</s></h6>
                                     </div>
-                                </div>
+                                </div>                                
                                 <div class="details pb-10 pt-20">
                                     <div class="title d-flex flex-row justify-content-between">
                                         <a href="theme-details.html">
@@ -98,9 +98,18 @@
                                         <span v-if="discount.tags.length < 1"> Sin Tags</span>
                                     </div>
                                 </div>
+                                <div class="details pb-10 pt-20">
+                                    <div class="title d-flex flex-row justify-content-between">
+                                          <h6>Vence:<span class="vence"> {{formatDateHuman(discount.enddate)}}</span> </h6> 
+                                      
+                                        <h6 class="price">%{{ discount.discountpercentage}}</h6>
+                                    </div>
+                                </div>
                                 <div class="meta d-flex flex-row">
                                     <!--<div class="user-img"><img src="img/user-img.png" alt=""></div> -->
-                                       <button type="button" :disabled="userHaveDiscount(discount.iddiscount)" :class="{ userHaveDiscount: userHaveDiscount(discount.iddiscount) }" class="btn btn-outline-primary" @click="obtenerDescuento(discount)" >Obetener este Descuento</button>
+                                      <button type="button" :disabled="userHaveDiscount(discount.iddiscount)" :class="{ userHaveDiscount: userHaveDiscount(discount.iddiscount) }" class="btn btn-outline-primary" @click="obtenerDescuento(discount)">
+                                          {{ userHaveDiscount(discount.iddiscount) ? 'Ya aplicaste a este descuento': 'Obetener este Descuento'}} 
+                                     </button>
                                 </div>
                             </div>
                           </div>
@@ -138,7 +147,12 @@
     <b-modal v-model="showTC" id="terminosCondiciones" ref="terminosCondiciones" title="Aceptar Terminos y Condiciones" hide-footer>
         <div class="modal-content">
           <div class="container">
-                
+              <h4 class="mt-4">Descuento :  <span class="subtitle1"> {{discount.title}}</span></h4>  
+              <p>Vence  <span class="vence">{{formatDateHuman(discount.enddate)}}</span> </p>
+
+              <h4>Sucursal :<span class="subtitle1" > {{branch.name}}</span> </h4>
+              <p> Direccion {{branch.address}}</p>  
+              <hr>
               <h3 class="my-4" v-if="discount.conditions">Condiciones</h3>
               <p>{{discount.conditions}}</p>   
 
@@ -167,7 +181,8 @@ import Bus from '../../utilities/EventBus.js';
 import $ from 'jquery';
 import detail from './modal-detail-discount';
 import paginator from '../../utilities/paginator';
-
+import moment from 'moment';
+moment.locale('es');
 
   export default {
     components: { detail, paginator},
@@ -207,6 +222,7 @@ import paginator from '../../utilities/paginator';
         showTC:false, 
         length:'', 
         branchs:[],
+        branch:{},
         user:{},
         discount:{},
       }
@@ -241,7 +257,9 @@ import paginator from '../../utilities/paginator';
         });
         this.tags = list;
       },
-
+      formatDateHuman(value){
+        return  moment(value).endOf('day').fromNow()
+      },
       //Muestra Listado de Tag
       getTags() {
          axios.get('api/tags').then(response => {
@@ -329,6 +347,14 @@ import paginator from '../../utilities/paginator';
 
       acceptTerms(){
         this.$refs.showBranchs.hide()
+
+          var i = this.branchs.length;
+          while (i--) {
+             if (this.branchs[i].idbranch === this.form.branch_idbranch) {
+                this.branch = this.branchs[i]
+             }
+          }
+
         this.$refs.terminosCondiciones.show()
       },
       saveUserHasDiscount(){
@@ -365,6 +391,20 @@ import paginator from '../../utilities/paginator';
 </script>
 
 <style>
+  .vence{
+    color: red !important;
+    font-family: "Poppins", sans-serif !important;
+    font-size: 14px !important;
+    font-weight: 400 !important;
+    line-height: 24px !important;
+  }  
+  h4 .subtitle1{
+    color: #777777 !important;
+    font-family: "Poppins", sans-serif !important;
+    font-size: 14px !important;
+    font-weight: 400 !important;
+    line-height: 24px !important;
+  }
   .userHaveDiscount{
     color: #dc3545 !important;
     background-color: transparent !important;

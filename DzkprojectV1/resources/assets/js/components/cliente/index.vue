@@ -26,18 +26,10 @@
                         <div class="single-image-thumb single-feature-item relative">   
                             <div class="thumb relative">
                               <div class="thumb-img relative" v-if="discount.image == null">
-                                  <div class="overlay overlay-bg"></div>
                                   <img class="img-fluid" src="/img/f5.jpg" alt="">
                               </div>
                               <div class="thumb-img relative" v-else>
-                                  <div class="overlay overlay-bg"></div>
                                   <img class="img-fluid" :src="'/images/discount/'+discount.image" alt="">
-                              </div>
-                              <div class="link">
-                                  <a class="relative">
-                                    <i class="icons icon-eye"></i>
-                                  </a>
-
                               </div>
                             </div>
                             <div class="details pb-10 pt-20">
@@ -66,9 +58,9 @@
                             <div class="details pb-10 pt-20">
                                 <div class="title d-flex flex-row justify-content-between">
                                     <h6>
-                                        {{ discount.startdate }}                                     
+                                       Vence: <span class="vence">{{formatDateHuman(discount.enddate)}}</span>                                 
                                     </h6>
-                                    <h6>{{discount.enddate}}</h6> 
+                           
                                 </div>
                             </div>                            
                          
@@ -78,6 +70,12 @@
                                   <!-- {{discount.pivot.idusers_has_discount}} -->
                                   ver
                                 </router-link>
+
+                            </div>
+                            <div class="meta d-flex flex-row">
+                              <a class="btn btn-outline-danger btn-d btn-block" @click="cancel(discount.idusers_has_discount)">
+                                Cancelar
+                              </a>
                             </div>
                         </div>
                       </div>
@@ -92,6 +90,9 @@
 <script>
 import Bus from '../../utilities/EventBus.js';
 import paginator from '../../utilities/paginator';
+import moment from 'moment';
+moment.locale('es');
+
 
   export default {
     components: { paginator },
@@ -139,7 +140,10 @@ import paginator from '../../utilities/paginator';
             console.log(error.response.data)
 
           });
-      }
+      },
+      formatDateHuman(value){
+        return  moment(value).endOf('day').fromNow()
+      },
     }
   }
 </script>
@@ -158,5 +162,20 @@ import paginator from '../../utilities/paginator';
 
   .view-branch:hover .link-branch {
     color: #FFF;
+  }
+
+  .vence{
+    color: red !important;
+    font-family: "Poppins", sans-serif !important;
+    font-size: 14px !important;
+    font-weight: 400 !important;
+    line-height: 24px !important;
+  }  
+  .btn-d {
+    margin-top: 5px;
+  }
+
+  .btn-d:hover {
+    color: #FFF !important;
   }
 </style>

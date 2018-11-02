@@ -4,10 +4,6 @@
           <div class="modal-content">
               <div class="modal-body">
                 <div class="row pt-30">
-                  <div class="col-lg-12">
-                        <label><strong>ID Detail</strong></label>
-                        <p>{{discount.iddiscount}}</p>
-                    </div>
                     <div class="col-lg-6">
                         <label><strong>Descripcion</strong></label>
                         <p>{{discount.description}}</p>
@@ -38,7 +34,11 @@
                         </label>
                         <p>
                           <ul v-for="branch in branchs">
-                            <li class="pl-2">{{ branch.name }}</li>
+                            <li class="pl-2">
+                              <router-link :to="`/branch/${branch.idbranch}`">
+                                  {{ branch.name }}
+                              </router-link>
+                            </li>
                           </ul>
                         </p>
                         <hr>

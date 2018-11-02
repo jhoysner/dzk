@@ -126,10 +126,9 @@ class HomeInitController extends Controller
             ->with('states')
               ->with('cities')
                 ->with('ccategories')
-                    ->with('tags')
-                        ->with(['branchs' =>function ($query) {
-                                $query->with('discounts');
-                            }])->get();
+                    ->with(['branchs' =>function ($query) {
+                            $query->with('discounts');
+                        }])->get();
 
         return response()->json(['data'=> $commerce], 200);
 
@@ -183,9 +182,11 @@ class HomeInitController extends Controller
     public function commerce_detail_discount($id)
     {
 
-        $branchs = Branch::where('commerce_idcommerce', $id)->with('discounts')->paginate(1);
+        $branchs = Branch::where('commerce_idcommerce', $id)
+            ->with(['discounts' => function($q) {
+                $q->with('categories','tags');
+             }])->paginate(1);
                   
-
         return response()->json([
             'paginate' => [
                 'total'         =>  $branchs->total(),

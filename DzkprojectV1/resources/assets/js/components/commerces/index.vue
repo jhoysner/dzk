@@ -42,7 +42,7 @@
                               <td>{{ commerce.cities.name }}</td> -->
                               <td>{{ commerce.ccategories.name }}</td>
                               <td class="text-right">
-                                  <b-btn v-b-modal="'showModal'" v-can="'view_commerces'" size="sm" @click="show(commerce.idcommerce)" variant="default">Detalle</b-btn>
+                                  <b-btn v-b-modal="'showModal'" size="sm" @click="show(commerce.idcommerce)" variant="default">Detalle</b-btn>
                                   <b-btn v-b-modal="'editModal'" v-can="'edit_commerces'" size="sm" @click="edit(commerce.idcommerce)" variant="warning">Editar</b-btn>
                                   <button type="button" v-can="'delete_commerces'" @click="confirm(commerce.idcommerce)" class="btn btn-sm  btn-danger">Eliminar</button>
                               </td>

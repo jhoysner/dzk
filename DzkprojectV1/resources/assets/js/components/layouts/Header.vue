@@ -72,7 +72,7 @@
                           <div class="proceed-btn text-center"><a href="checkout.html" class="primary-btn primary-btn-wr"><span>Proceed to checkout</span></a></div>
                       </div>
                   </div>
-                  <a class="login-btn" href="/login">Login</a>
+                  <!--<a class="login-btn" href="/login">Login</a>-->
               </div>
               <!-- #nav-menu-container -->
           </div>

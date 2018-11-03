@@ -108,7 +108,7 @@
                                 <div class="meta d-flex flex-row">
                                     <!--<div class="user-img"><img src="img/user-img.png" alt=""></div> -->
                                       <button type="button" :disabled="userHaveDiscount(discount.iddiscount)" :class="{ userHaveDiscount: userHaveDiscount(discount.iddiscount) }" class="btn btn-outline-primary" @click="obtenerDescuento(discount)">
-                                          {{ userHaveDiscount(discount.iddiscount) ? 'Ya aplicaste a este descuento': 'Obetener este Descuento'}} 
+                                          {{ userHaveDiscount(discount.iddiscount) ? 'Ya aplicaste a este descuento': 'Obtener este Descuento'}} 
                                      </button>
                                 </div>
                             </div>

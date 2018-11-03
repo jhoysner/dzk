@@ -253,12 +253,20 @@ class DiscountController extends Controller
 
         return response()->json(['data'=> $relacion], 201);
     }       
+    public function getBranchCommerce($id)
+    {
 
-    public function getBranchDiscountSelect($id)
+        $branchs = Branch::where('commerce_idcommerce',$id)->get();
+
+        // $relacion = $discount->branchs;
+        return response()->json(['data'=> $branchs], 201);
+    }       
+
+    public function getBranchDiscountSelect($id, $commerce)
     {
 
         $used = BranchDiscount::where('discount_iddiscount', $id)->pluck('branch_idbranch');
-        $branchs = Branch::whereNotIn('idbranch', $used)->get();
+        $branchs = Branch::where('commerce_idcommerce',$commerce)->whereNotIn('idbranch', $used)->get();
 
         return response()->json(['data'=> $branchs], 201);
     }    

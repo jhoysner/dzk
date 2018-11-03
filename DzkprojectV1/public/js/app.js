@@ -52504,7 +52504,7 @@ var content = __webpack_require__(223);
 if(typeof content === 'string') content = [[module.i, content, '']];
 if(content.locals) module.exports = content.locals;
 // add the styles to the DOM
-var update = __webpack_require__(3)("7186d799", content, false, {});
+var update = __webpack_require__(3)("42b3474c", content, false, {});
 // Hot Module Replacement
 if(false) {
  // When the styles change, update the <style> tags
@@ -53036,7 +53036,7 @@ var content = __webpack_require__(229);
 if(typeof content === 'string') content = [[module.i, content, '']];
 if(content.locals) module.exports = content.locals;
 // add the styles to the DOM
-var update = __webpack_require__(3)("d7fa6742", content, false, {});
+var update = __webpack_require__(3)("117cc268", content, false, {});
 // Hot Module Replacement
 if(false) {
  // When the styles change, update the <style> tags
@@ -53253,7 +53253,7 @@ var content = __webpack_require__(234);
 if(typeof content === 'string') content = [[module.i, content, '']];
 if(content.locals) module.exports = content.locals;
 // add the styles to the DOM
-var update = __webpack_require__(3)("5030e3f7", content, false, {});
+var update = __webpack_require__(3)("215d53aa", content, false, {});
 // Hot Module Replacement
 if(false) {
  // When the styles change, update the <style> tags
@@ -53770,7 +53770,7 @@ var content = __webpack_require__(239);
 if(typeof content === 'string') content = [[module.i, content, '']];
 if(content.locals) module.exports = content.locals;
 // add the styles to the DOM
-var update = __webpack_require__(3)("273fd098", content, false, {});
+var update = __webpack_require__(3)("a30ab1be", content, false, {});
 // Hot Module Replacement
 if(false) {
  // When the styles change, update the <style> tags
@@ -57172,7 +57172,7 @@ var content = __webpack_require__(247);
 if(typeof content === 'string') content = [[module.i, content, '']];
 if(content.locals) module.exports = content.locals;
 // add the styles to the DOM
-var update = __webpack_require__(3)("683ebe78", content, false, {});
+var update = __webpack_require__(3)("213487a5", content, false, {});
 // Hot Module Replacement
 if(false) {
  // When the styles change, update the <style> tags
@@ -57571,7 +57571,7 @@ var content = __webpack_require__(251);
 if(typeof content === 'string') content = [[module.i, content, '']];
 if(content.locals) module.exports = content.locals;
 // add the styles to the DOM
-var update = __webpack_require__(3)("2808d3be", content, false, {});
+var update = __webpack_require__(3)("e4679f9e", content, false, {});
 // Hot Module Replacement
 if(false) {
  // When the styles change, update the <style> tags
@@ -58733,7 +58733,7 @@ var content = __webpack_require__(259);
 if(typeof content === 'string') content = [[module.i, content, '']];
 if(content.locals) module.exports = content.locals;
 // add the styles to the DOM
-var update = __webpack_require__(3)("32243c1c", content, false, {});
+var update = __webpack_require__(3)("0c531b65", content, false, {});
 // Hot Module Replacement
 if(false) {
  // When the styles change, update the <style> tags
@@ -59240,7 +59240,7 @@ var content = __webpack_require__(263);
 if(typeof content === 'string') content = [[module.i, content, '']];
 if(content.locals) module.exports = content.locals;
 // add the styles to the DOM
-var update = __webpack_require__(3)("4784e4e2", content, false, {});
+var update = __webpack_require__(3)("cf454688", content, false, {});
 // Hot Module Replacement
 if(false) {
  // When the styles change, update the <style> tags
@@ -60353,7 +60353,7 @@ var render = function() {
                                                 discount.iddiscount
                                               )
                                                 ? "Ya aplicaste a este descuento"
-                                                : "Obetener este Descuento"
+                                                : "Obtener este Descuento"
                                             ) +
                                             " \n                                   "
                                         )
@@ -60661,7 +60661,7 @@ var content = __webpack_require__(270);
 if(typeof content === 'string') content = [[module.i, content, '']];
 if(content.locals) module.exports = content.locals;
 // add the styles to the DOM
-var update = __webpack_require__(3)("4d0275e9", content, false, {});
+var update = __webpack_require__(3)("0ab52bd6", content, false, {});
 // Hot Module Replacement
 if(false) {
  // When the styles change, update the <style> tags
@@ -60902,7 +60902,7 @@ var content = __webpack_require__(274);
 if(typeof content === 'string') content = [[module.i, content, '']];
 if(content.locals) module.exports = content.locals;
 // add the styles to the DOM
-var update = __webpack_require__(3)("aad5900e", content, false, {});
+var update = __webpack_require__(3)("b98d80a8", content, false, {});
 // Hot Module Replacement
 if(false) {
  // When the styles change, update the <style> tags
@@ -62796,7 +62796,7 @@ var content = __webpack_require__(297);
 if(typeof content === 'string') content = [[module.i, content, '']];
 if(content.locals) module.exports = content.locals;
 // add the styles to the DOM
-var update = __webpack_require__(3)("6236a28c", content, false, {});
+var update = __webpack_require__(3)("8785f1a6", content, false, {});
 // Hot Module Replacement
 if(false) {
  // When the styles change, update the <style> tags
@@ -63194,7 +63194,7 @@ var content = __webpack_require__(302);
 if(typeof content === 'string') content = [[module.i, content, '']];
 if(content.locals) module.exports = content.locals;
 // add the styles to the DOM
-var update = __webpack_require__(3)("b5b0b048", content, false, {});
+var update = __webpack_require__(3)("daffff62", content, false, {});
 // Hot Module Replacement
 if(false) {
  // When the styles change, update the <style> tags
@@ -64483,7 +64483,7 @@ var content = __webpack_require__(308);
 if(typeof content === 'string') content = [[module.i, content, '']];
 if(content.locals) module.exports = content.locals;
 // add the styles to the DOM
-var update = __webpack_require__(3)("3d4a2cbc", content, false, {});
+var update = __webpack_require__(3)("404f90e2", content, false, {});
 // Hot Module Replacement
 if(false) {
  // When the styles change, update the <style> tags
@@ -64723,7 +64723,7 @@ var content = __webpack_require__(312);
 if(typeof content === 'string') content = [[module.i, content, '']];
 if(content.locals) module.exports = content.locals;
 // add the styles to the DOM
-var update = __webpack_require__(3)("cf6826d6", content, false, {});
+var update = __webpack_require__(3)("69785c48", content, false, {});
 // Hot Module Replacement
 if(false) {
  // When the styles change, update the <style> tags
@@ -64747,7 +64747,7 @@ exports = module.exports = __webpack_require__(2)(false);
 
 
 // module
-exports.push([module.i, "\n.html5Map {\r\n  margin-top: 15px;\r\n  width: 100%;\r\n  height: 200px;\r\n  display: none;\n}\n.mapPicker {\r\n  margin-top: 15px;\r\n  width: 100%;\r\n  height: 200px;\n}\n.textLocation {\r\n  margin-top: 15px;\r\n  width: 100%;\r\n  height: 200px;\r\n  display: none;\n}\n.geolocation {\r\n  cursor: pointer;\r\n  color: #FFF !important;\n}\n.geolocation:hover {\r\n  color: #42b0f2 !important;\n}\n#textMap {\r\n  display: none;\n}\n.input-map {\r\n  display: none;\n}\n.avatar {\r\n  width: 150px;\n}\r\n", ""]);
+exports.push([module.i, "\n.html5Map {\n  margin-top: 15px;\n  width: 100%;\n  height: 200px;\n  display: none;\n}\n.mapPicker {\n  margin-top: 15px;\n  width: 100%;\n  height: 200px;\n}\n.textLocation {\n  margin-top: 15px;\n  width: 100%;\n  height: 200px;\n  display: none;\n}\n.geolocation {\n  cursor: pointer;\n  color: #FFF !important;\n}\n.geolocation:hover {\n  color: #42b0f2 !important;\n}\n#textMap {\n  display: none;\n}\n.input-map {\n  display: none;\n}\n.avatar {\n  width: 150px;\n}\n", ""]);
 
 // exports
 
@@ -65836,7 +65836,7 @@ var content = __webpack_require__(317);
 if(typeof content === 'string') content = [[module.i, content, '']];
 if(content.locals) module.exports = content.locals;
 // add the styles to the DOM
-var update = __webpack_require__(3)("264c6787", content, false, {});
+var update = __webpack_require__(3)("79b1b00c", content, false, {});
 // Hot Module Replacement
 if(false) {
  // When the styles change, update the <style> tags
@@ -66197,7 +66197,7 @@ var content = __webpack_require__(322);
 if(typeof content === 'string') content = [[module.i, content, '']];
 if(content.locals) module.exports = content.locals;
 // add the styles to the DOM
-var update = __webpack_require__(3)("1a4e90f2", content, false, {});
+var update = __webpack_require__(3)("e099100c", content, false, {});
 // Hot Module Replacement
 if(false) {
  // When the styles change, update the <style> tags
@@ -67565,7 +67565,7 @@ var content = __webpack_require__(328);
 if(typeof content === 'string') content = [[module.i, content, '']];
 if(content.locals) module.exports = content.locals;
 // add the styles to the DOM
-var update = __webpack_require__(3)("ae416c20", content, false, {});
+var update = __webpack_require__(3)("09dbf2a3", content, false, {});
 // Hot Module Replacement
 if(false) {
  // When the styles change, update the <style> tags
@@ -67589,7 +67589,7 @@ exports = module.exports = __webpack_require__(2)(false);
 
 
 // module
-exports.push([module.i, "\n#section-profile: {\r\n margin-top: 100px;\n}\nimg {\r\n  width: 30%;\n}\r\n", ""]);
+exports.push([module.i, "\n#section-profile: {\n margin-top: 100px;\n}\nimg {\n  width: 30%;\n}\n", ""]);
 
 // exports
 
@@ -67806,7 +67806,7 @@ var content = __webpack_require__(332);
 if(typeof content === 'string') content = [[module.i, content, '']];
 if(content.locals) module.exports = content.locals;
 // add the styles to the DOM
-var update = __webpack_require__(3)("38d04cda", content, false, {});
+var update = __webpack_require__(3)("235db6c6", content, false, {});
 // Hot Module Replacement
 if(false) {
  // When the styles change, update the <style> tags
@@ -67830,7 +67830,7 @@ exports = module.exports = __webpack_require__(2)(false);
 
 
 // module
-exports.push([module.i, "\n.html5Map {\r\n  margin-top: 15px;\r\n  width: 100%;\r\n  height: 200px;\r\n  display: none;\n}\n.mapPicker {\r\n  margin-top: 15px;\r\n  width: 100%;\r\n  height: 200px;\n}\n.textLocation {\r\n  margin-top: 15px;\r\n  width: 100%;\r\n  height: 200px;\r\n  display: none;\n}\n.geolocation {\r\n  cursor: pointer;\r\n  color: #FFF !important;\n}\n.geolocation:hover {\r\n  color: #42b0f2 !important;\n}\n#textMap {\r\n  display: none;\n}\n.input-map {\r\n  display: none;\n}\nimg {\r\n  width: 30%;\n}\r\n", ""]);
+exports.push([module.i, "\n.html5Map {\n  margin-top: 15px;\n  width: 100%;\n  height: 200px;\n  display: none;\n}\n.mapPicker {\n  margin-top: 15px;\n  width: 100%;\n  height: 200px;\n}\n.textLocation {\n  margin-top: 15px;\n  width: 100%;\n  height: 200px;\n  display: none;\n}\n.geolocation {\n  cursor: pointer;\n  color: #FFF !important;\n}\n.geolocation:hover {\n  color: #42b0f2 !important;\n}\n#textMap {\n  display: none;\n}\n.input-map {\n  display: none;\n}\nimg {\n  width: 30%;\n}\n", ""]);
 
 // exports
 
@@ -69239,7 +69239,7 @@ var content = __webpack_require__(339);
 if(typeof content === 'string') content = [[module.i, content, '']];
 if(content.locals) module.exports = content.locals;
 // add the styles to the DOM
-var update = __webpack_require__(3)("baa43e4c", content, false, {});
+var update = __webpack_require__(3)("5ea74207", content, false, {});
 // Hot Module Replacement
 if(false) {
  // When the styles change, update the <style> tags
@@ -69455,7 +69455,7 @@ var content = __webpack_require__(343);
 if(typeof content === 'string') content = [[module.i, content, '']];
 if(content.locals) module.exports = content.locals;
 // add the styles to the DOM
-var update = __webpack_require__(3)("7511045d", content, false, {});
+var update = __webpack_require__(3)("3843c8d0", content, false, {});
 // Hot Module Replacement
 if(false) {
  // When the styles change, update the <style> tags
@@ -69796,7 +69796,7 @@ var content = __webpack_require__(348);
 if(typeof content === 'string') content = [[module.i, content, '']];
 if(content.locals) module.exports = content.locals;
 // add the styles to the DOM
-var update = __webpack_require__(3)("6480bc3e", content, false, {});
+var update = __webpack_require__(3)("331ffd1e", content, false, {});
 // Hot Module Replacement
 if(false) {
  // When the styles change, update the <style> tags
@@ -70022,7 +70022,7 @@ var content = __webpack_require__(353);
 if(typeof content === 'string') content = [[module.i, content, '']];
 if(content.locals) module.exports = content.locals;
 // add the styles to the DOM
-var update = __webpack_require__(3)("5524ea0e", content, false, {});
+var update = __webpack_require__(3)("51d7a17e", content, false, {});
 // Hot Module Replacement
 if(false) {
  // When the styles change, update the <style> tags
@@ -70567,7 +70567,7 @@ var content = __webpack_require__(359);
 if(typeof content === 'string') content = [[module.i, content, '']];
 if(content.locals) module.exports = content.locals;
 // add the styles to the DOM
-var update = __webpack_require__(3)("6fc7cf14", content, false, {});
+var update = __webpack_require__(3)("28bd9841", content, false, {});
 // Hot Module Replacement
 if(false) {
  // When the styles change, update the <style> tags
@@ -70747,7 +70747,7 @@ var content = __webpack_require__(363);
 if(typeof content === 'string') content = [[module.i, content, '']];
 if(content.locals) module.exports = content.locals;
 // add the styles to the DOM
-var update = __webpack_require__(3)("47d8df36", content, false, {});
+var update = __webpack_require__(3)("41d6ecd8", content, false, {});
 // Hot Module Replacement
 if(false) {
  // When the styles change, update the <style> tags
@@ -71075,7 +71075,7 @@ var content = __webpack_require__(369);
 if(typeof content === 'string') content = [[module.i, content, '']];
 if(content.locals) module.exports = content.locals;
 // add the styles to the DOM
-var update = __webpack_require__(3)("25d02687", content, false, {});
+var update = __webpack_require__(3)("659603ba", content, false, {});
 // Hot Module Replacement
 if(false) {
  // When the styles change, update the <style> tags
@@ -71497,7 +71497,7 @@ var content = __webpack_require__(375);
 if(typeof content === 'string') content = [[module.i, content, '']];
 if(content.locals) module.exports = content.locals;
 // add the styles to the DOM
-var update = __webpack_require__(3)("c6ffe934", content, false, {});
+var update = __webpack_require__(3)("8a2ad6da", content, false, {});
 // Hot Module Replacement
 if(false) {
  // When the styles change, update the <style> tags
@@ -72138,7 +72138,7 @@ var content = __webpack_require__(380);
 if(typeof content === 'string') content = [[module.i, content, '']];
 if(content.locals) module.exports = content.locals;
 // add the styles to the DOM
-var update = __webpack_require__(3)("484b37ab", content, false, {});
+var update = __webpack_require__(3)("69f880c4", content, false, {});
 // Hot Module Replacement
 if(false) {
  // When the styles change, update the <style> tags
@@ -72733,7 +72733,7 @@ var content = __webpack_require__(385);
 if(typeof content === 'string') content = [[module.i, content, '']];
 if(content.locals) module.exports = content.locals;
 // add the styles to the DOM
-var update = __webpack_require__(3)("4950a1d8", content, false, {});
+var update = __webpack_require__(3)("5edad276", content, false, {});
 // Hot Module Replacement
 if(false) {
  // When the styles change, update the <style> tags
@@ -73481,7 +73481,7 @@ var content = __webpack_require__(390);
 if(typeof content === 'string') content = [[module.i, content, '']];
 if(content.locals) module.exports = content.locals;
 // add the styles to the DOM
-var update = __webpack_require__(3)("7a4b3c14", content, false, {});
+var update = __webpack_require__(3)("396f8841", content, false, {});
 // Hot Module Replacement
 if(false) {
  // When the styles change, update the <style> tags
@@ -74097,7 +74097,7 @@ var content = __webpack_require__(395);
 if(typeof content === 'string') content = [[module.i, content, '']];
 if(content.locals) module.exports = content.locals;
 // add the styles to the DOM
-var update = __webpack_require__(3)("0febacef", content, false, {});
+var update = __webpack_require__(3)("d1a4bc48", content, false, {});
 // Hot Module Replacement
 if(false) {
  // When the styles change, update the <style> tags
@@ -75074,7 +75074,7 @@ var content = __webpack_require__(400);
 if(typeof content === 'string') content = [[module.i, content, '']];
 if(content.locals) module.exports = content.locals;
 // add the styles to the DOM
-var update = __webpack_require__(3)("7a99f41e", content, false, {});
+var update = __webpack_require__(3)("a3faa7ea", content, false, {});
 // Hot Module Replacement
 if(false) {
  // When the styles change, update the <style> tags
@@ -75544,7 +75544,7 @@ var content = __webpack_require__(405);
 if(typeof content === 'string') content = [[module.i, content, '']];
 if(content.locals) module.exports = content.locals;
 // add the styles to the DOM
-var update = __webpack_require__(3)("129696e4", content, false, {});
+var update = __webpack_require__(3)("1a61b58a", content, false, {});
 // Hot Module Replacement
 if(false) {
  // When the styles change, update the <style> tags
@@ -76589,7 +76589,7 @@ var content = __webpack_require__(411);
 if(typeof content === 'string') content = [[module.i, content, '']];
 if(content.locals) module.exports = content.locals;
 // add the styles to the DOM
-var update = __webpack_require__(3)("6f4fe7f4", content, false, {});
+var update = __webpack_require__(3)("0f4278b2", content, false, {});
 // Hot Module Replacement
 if(false) {
  // When the styles change, update the <style> tags
@@ -77401,7 +77401,7 @@ var content = __webpack_require__(415);
 if(typeof content === 'string') content = [[module.i, content, '']];
 if(content.locals) module.exports = content.locals;
 // add the styles to the DOM
-var update = __webpack_require__(3)("13d6a1d8", content, false, {});
+var update = __webpack_require__(3)("d382636a", content, false, {});
 // Hot Module Replacement
 if(false) {
  // When the styles change, update the <style> tags
@@ -77555,6 +77555,14 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
 
 
 
@@ -77580,7 +77588,8 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
         discountprice: '',
         discountpercentage: '',
         discountcategory_iddiscountcategory: '',
-        currency_idcurrency: '4d88d876-d868-11e8-8010-74c63b1404ed'
+        currency_idcurrency: '4d88d876-d868-11e8-8010-74c63b1404ed',
+        commerce_idcommerce: ''
       },
       url: '/discount',
       errorsDiscount: {},
@@ -77593,7 +77602,9 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
       options: [],
       value: [],
       discountTagNum: null,
-      tagError: ''
+      tagError: '',
+      user: {},
+      commerces: []
 
     };
   },
@@ -77601,9 +77612,23 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
     this.getDiscountCategories();
     this.getTags();
     this.getTagsNum();
+    this.auth();
   },
 
   methods: {
+    auth: function auth() {
+      var _this = this;
+
+      axios.get('api/profile').then(function (response) {
+        _this.user = response.data.user;
+        _this.commerces = response.data.user.commerces;
+        // this.index();
+        // this.index();
+      }).catch(function (err) {
+        return console.log(err);
+      });
+    },
+
     //Guarda tag
     addTag: function addTag(newTag) {
       var tag = {
@@ -77621,12 +77646,12 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 
     //Muestra Listado de Tag
     getTags: function getTags() {
-      var _this = this;
+      var _this2 = this;
 
       axios.get('api/tags').then(function (response) {
-        _this.options = [];
-        _this.options = response.data.tags;
-        _this.options.forEach(function (item) {
+        _this2.options = [];
+        _this2.options = response.data.tags;
+        _this2.options.forEach(function (item) {
           item.code = item.idtags;
         });
       }).catch(function (err) {
@@ -77634,7 +77659,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
       });
     },
     saveDiscount: function saveDiscount() {
-      var _this2 = this;
+      var _this3 = this;
 
       this.errorsDiscount = {};
       this.errorInicio = '';
@@ -77650,15 +77675,15 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
       this.form.amountavailable = this.form.amountapproved;
 
       axios.post('api/discount', this.form).then(function (response) {
-        _this2.form = {};
-        _this2.form.outstanding = false;
-        _this2.form.amountavailable = '';
-        _this2.form.amountredeemed = 0;
-        _this2.form.currency_idcurrency = '4d88d876-d868-11e8-8010-74c63b1404ed', _this2.value = [];
+        _this3.form = {};
+        _this3.form.outstanding = false;
+        _this3.form.amountavailable = '';
+        _this3.form.amountredeemed = 0;
+        _this3.form.currency_idcurrency = '4d88d876-d868-11e8-8010-74c63b1404ed', _this3.value = [];
 
-        _this2.$parent.cargarDiscount();
+        _this3.$parent.cargarDiscount();
         $('#createModal').trigger("reset");
-        _this2.$refs.createtModal.hide();
+        _this3.$refs.createtModal.hide();
         console.log('bien');
         swal({
           title: "Creado",
@@ -77668,25 +77693,25 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
         __WEBPACK_IMPORTED_MODULE_1__utilities_EventBus__["a" /* default */].$emit('branch_discount', response);
       }).catch(function (error) {
         console.log(error.response.data);
-        _this2.errorsDiscount = error.response.data.errors;
+        _this3.errorsDiscount = error.response.data.errors;
       });
     },
     getImage: function getImage(e) {
-      var _this3 = this;
+      var _this4 = this;
 
       var image = e.target.files[0];
       var reader = new FileReader();
 
       reader.readAsDataURL(image);
       reader.onload = function (e) {
-        _this3.form.image = e.target.result;
+        _this4.form.image = e.target.result;
       };
     },
     getDiscountCategories: function getDiscountCategories() {
-      var _this4 = this;
+      var _this5 = this;
 
       axios.get('api/discount-categories').then(function (data) {
-        _this4.discountCategories = data.data.data;
+        _this5.discountCategories = data.data.data;
       }).catch(function (err) {
         return console.log(err);
       });
@@ -77735,7 +77760,8 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 
       // console.log(result) 
 
-      this.form.discountprice = precio - result;
+      // this.form.discountprice = precio-result;
+      this.form.discountprice = parseFloat(precio - result).toFixed(2);
     },
     handleChangePrecioDescuento: function handleChangePrecioDescuento(e) {
       this.errorpreciodescuento = '';
@@ -77751,16 +77777,20 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 
       var result = 100 * this.form.discountprice / this.form.normalprice;
 
-      this.form.discountpercentage = 100 - result;
+      this.form.discountpercentage = parseFloat(100 - result).toFixed(2);
+    },
+    handleChangePrecioNormal: function handleChangePrecioNormal(e) {
+      this.form.discountprice = '';
+      this.form.discountpercentage = '';
     },
     getTagsNum: function getTagsNum() {
-      var _this5 = this;
+      var _this6 = this;
 
       axios.get('api/tag-num').then(function (data) {
         var value = data.data[0].val;
         var val = JSON.parse(value);
 
-        _this5.discountTagNum = val.discount;
+        _this6.discountTagNum = val.discount;
       }).catch(function (err) {
         return console.log(err);
       });
@@ -77863,7 +77893,7 @@ var content = __webpack_require__(419);
 if(typeof content === 'string') content = [[module.i, content, '']];
 if(content.locals) module.exports = content.locals;
 // add the styles to the DOM
-var update = __webpack_require__(3)("1df4c864", content, false, {});
+var update = __webpack_require__(3)("2d80b57e", content, false, {});
 // Hot Module Replacement
 if(false) {
  // When the styles change, update the <style> tags
@@ -77887,7 +77917,7 @@ exports = module.exports = __webpack_require__(2)(false);
 
 
 // module
-exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", ""]);
+exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", ""]);
 
 // exports
 
@@ -77985,32 +78015,34 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
     var _this = this;
 
     __WEBPACK_IMPORTED_MODULE_0__utilities_EventBus__["a" /* default */].$on('branch_discount', function (response) {
+      console.log(response);
       _this.form.discount_iddiscount = response.data.data.iddiscount;
-      _this.getDiscountBranch();
+      _this.getDiscountBranch(response.data.data.commerce_idcommerce);
       _this.$refs.branchDiscountModal.show();
     });
     __WEBPACK_IMPORTED_MODULE_0__utilities_EventBus__["a" /* default */].$on('branch_discount_add', function (response) {
+      console.log(response);
       _this.edit = true;
       _this.form.discount_iddiscount = response.iddiscount;
-      _this.getDiscountBranchSelected(_this.form.discount_iddiscount);
+      _this.getDiscountBranchSelected(_this.form.discount_iddiscount, response.commerce_idcommerce);
       _this.$refs.branchDiscountModal.show();
     });
   },
 
   methods: {
-    getDiscountBranch: function getDiscountBranch() {
+    getDiscountBranch: function getDiscountBranch(id) {
       var _this2 = this;
 
-      axios.get('api/branch').then(function (data) {
+      axios.get('api/branch-commerce/' + id).then(function (data) {
         _this2.branchs = data.data.data;
       }).catch(function (err) {
         return console.log(err);
       });
     },
-    getDiscountBranchSelected: function getDiscountBranchSelected(id) {
+    getDiscountBranchSelected: function getDiscountBranchSelected(id, commerce) {
       var _this3 = this;
 
-      axios.get('api/branch-select/' + id).then(function (data) {
+      axios.get('api/branch-select/' + id + '/' + commerce).then(function (data) {
         _this3.branchs = data.data.data;
         console.log(data);
       }).catch(function (err) {
@@ -78394,6 +78426,63 @@ var render = function() {
               _c("div", { staticClass: "modal-content" }, [
                 _c("div", { staticClass: "modal-body" }, [
                   _c("div", { staticClass: "form-group" }, [
+                    _c("label", [_vm._v("Elegir Comercio")]),
+                    _vm._v(" "),
+                    _c(
+                      "select",
+                      {
+                        directives: [
+                          {
+                            name: "model",
+                            rawName: "v-model",
+                            value: _vm.form.commerce_idcommerce,
+                            expression: "form.commerce_idcommerce"
+                          }
+                        ],
+                        staticClass: "form-control",
+                        on: {
+                          change: function($event) {
+                            var $$selectedVal = Array.prototype.filter
+                              .call($event.target.options, function(o) {
+                                return o.selected
+                              })
+                              .map(function(o) {
+                                var val = "_value" in o ? o._value : o.value
+                                return val
+                              })
+                            _vm.$set(
+                              _vm.form,
+                              "commerce_idcommerce",
+                              $event.target.multiple
+                                ? $$selectedVal
+                                : $$selectedVal[0]
+                            )
+                          }
+                        }
+                      },
+                      _vm._l(_vm.commerces, function(commerce) {
+                        return _c(
+                          "option",
+                          { domProps: { value: commerce.idcommerce } },
+                          [_vm._v(_vm._s(commerce.name))]
+                        )
+                      })
+                    ),
+                    _vm._v(" "),
+                    !!_vm.errorsDiscount.commerce_idcommerce
+                      ? _c("span", { staticClass: "text-danger" }, [
+                          _vm._v(
+                            " " +
+                              _vm._s(
+                                _vm.errorsDiscount.commerce_idcommerce[0]
+                              ) +
+                              " "
+                          )
+                        ])
+                      : _vm._e()
+                  ]),
+                  _vm._v(" "),
+                  _c("div", { staticClass: "form-group" }, [
                     _c("label", [_vm._v("Titulo")]),
                     _vm._v(" "),
                     _c("input", {
@@ -78739,6 +78828,9 @@ var render = function() {
                       },
                       domProps: { value: _vm.form.normalprice },
                       on: {
+                        change: function($event) {
+                          _vm.handleChangePrecioNormal($event)
+                        },
                         input: function($event) {
                           if ($event.target.composing) {
                             return
@@ -80464,7 +80556,7 @@ var content = __webpack_require__(426);
 if(typeof content === 'string') content = [[module.i, content, '']];
 if(content.locals) module.exports = content.locals;
 // add the styles to the DOM
-var update = __webpack_require__(3)("4dc72dc4", content, false, {});
+var update = __webpack_require__(3)("50cc91ea", content, false, {});
 // Hot Module Replacement
 if(false) {
  // When the styles change, update the <style> tags
@@ -81037,7 +81129,7 @@ var content = __webpack_require__(431);
 if(typeof content === 'string') content = [[module.i, content, '']];
 if(content.locals) module.exports = content.locals;
 // add the styles to the DOM
-var update = __webpack_require__(3)("5751ff61", content, false, {});
+var update = __webpack_require__(3)("219f56d4", content, false, {});
 // Hot Module Replacement
 if(false) {
  // When the styles change, update the <style> tags
@@ -81565,7 +81657,7 @@ var content = __webpack_require__(436);
 if(typeof content === 'string') content = [[module.i, content, '']];
 if(content.locals) module.exports = content.locals;
 // add the styles to the DOM
-var update = __webpack_require__(3)("142f78ea", content, false, {});
+var update = __webpack_require__(3)("5da2cd38", content, false, {});
 // Hot Module Replacement
 if(false) {
  // When the styles change, update the <style> tags
@@ -82055,7 +82147,7 @@ var content = __webpack_require__(441);
 if(typeof content === 'string') content = [[module.i, content, '']];
 if(content.locals) module.exports = content.locals;
 // add the styles to the DOM
-var update = __webpack_require__(3)("1d03e9f8", content, false, {});
+var update = __webpack_require__(3)("ab18579e", content, false, {});
 // Hot Module Replacement
 if(false) {
  // When the styles change, update the <style> tags
@@ -82281,7 +82373,7 @@ var content = __webpack_require__(445);
 if(typeof content === 'string') content = [[module.i, content, '']];
 if(content.locals) module.exports = content.locals;
 // add the styles to the DOM
-var update = __webpack_require__(3)("5cdeab70", content, false, {});
+var update = __webpack_require__(3)("7abbf03a", content, false, {});
 // Hot Module Replacement
 if(false) {
  // When the styles change, update the <style> tags
@@ -82305,7 +82397,7 @@ exports = module.exports = __webpack_require__(2)(false);
 
 
 // module
-exports.push([module.i, "\nfieldset[disabled] .multiselect {\r\n  pointer-events: none;\n}\n.multiselect__spinner {\r\n  position: absolute;\r\n  right: 1px;\r\n  top: 1px;\r\n  width: 48px;\r\n  height: 35px;\r\n  background: #fff;\r\n  display: block;\n}\n.multiselect__spinner:before,\r\n.multiselect__spinner:after {\r\n  position: absolute;\r\n  content: \"\";\r\n  top: 50%;\r\n  left: 50%;\r\n  margin: -8px 0 0 -8px;\r\n  width: 16px;\r\n  height: 16px;\r\n  border-radius: 100%;\r\n  border-color: #41B883 transparent transparent;\r\n  border-style: solid;\r\n  border-width: 2px;\r\n  -webkit-box-shadow: 0 0 0 1px transparent;\r\n          box-shadow: 0 0 0 1px transparent;\n}\n.multiselect__spinner:before {\r\n  -webkit-animation: spinning 2.4s cubic-bezier(0.41, 0.26, 0.2, 0.62);\r\n          animation: spinning 2.4s cubic-bezier(0.41, 0.26, 0.2, 0.62);\r\n  -webkit-animation-iteration-count: infinite;\r\n          animation-iteration-count: infinite;\n}\n.multiselect__spinner:after {\r\n  -webkit-animation: spinning 2.4s cubic-bezier(0.51, 0.09, 0.21, 0.8);\r\n          animation: spinning 2.4s cubic-bezier(0.51, 0.09, 0.21, 0.8);\r\n  -webkit-animation-iteration-count: infinite;\r\n          animation-iteration-count: infinite;\n}\n.multiselect__loading-enter-active,\r\n.multiselect__loading-leave-active {\r\n  -webkit-transition: opacity 0.4s ease-in-out;\r\n  transition: opacity 0.4s ease-in-out;\r\n  opacity: 1;\n}\n.multiselect__loading-enter,\r\n.multiselect__loading-leave-active {\r\n  opacity: 0;\n}\n.multiselect,\r\n.multiselect__input,\r\n.multiselect__single {\r\n  font-family: inherit;\r\n  font-size: 14px;\r\n  -ms-touch-action: manipulation;\r\n      touch-action: manipulation;\n}\n.multiselect {\r\n  -webkit-box-sizing: content-box;\r\n          box-sizing: content-box;\r\n  display: block;\r\n  position: relative;\r\n  width: 100%;\r\n  min-height: 40px;\r\n  text-align: left;\r\n  color: #35495E;\n}\n.multiselect * {\r\n  -webkit-box-sizing: border-box;\r\n          box-sizing: border-box;\n}\n.multiselect:focus {\r\n  outline: none;\n}\n.multiselect--disabled {\r\n  pointer-events: none;\r\n  opacity: 0.6;\n}\n.multiselect--active {\r\n  z-index: 50;\n}\n.multiselect--active:not(.multiselect--above) .multiselect__current,\r\n.multiselect--active:not(.multiselect--above) .multiselect__input,\r\n.multiselect--active:not(.multiselect--above) .multiselect__tags {\r\n  border-bottom-left-radius: 0;\r\n  border-bottom-right-radius: 0;\n}\n.multiselect--active .multiselect__select {\r\n  -webkit-transform: rotateZ(180deg);\r\n          transform: rotateZ(180deg);\n}\n.multiselect--above.multiselect--active .multiselect__current,\r\n.multiselect--above.multiselect--active .multiselect__input,\r\n.multiselect--above.multiselect--active .multiselect__tags {\r\n  border-top-left-radius: 0;\r\n  border-top-right-radius: 0;\n}\n.multiselect__input,\r\n.multiselect__single {\r\n  position: relative;\r\n  display: inline-block;\r\n  min-height: 20px;\r\n  line-height: 20px;\r\n  border: none;\r\n  border-radius: 5px;\r\n  background: #fff;\r\n  padding: 1px 0 0 5px;\r\n  width: calc(100%);\r\n  -webkit-transition: border 0.1s ease;\r\n  transition: border 0.1s ease;\r\n  -webkit-box-sizing: border-box;\r\n          box-sizing: border-box;\r\n  margin-bottom: 8px;\r\n  vertical-align: top;\n}\n.multiselect__tag ~ .multiselect__input,\r\n.multiselect__tag ~ .multiselect__single {\r\n  width: auto;\n}\n.multiselect__input:hover,\r\n.multiselect__single:hover {\r\n  border-color: #cfcfcf;\n}\n.multiselect__input:focus,\r\n.multiselect__single:focus {\r\n  border-color: #a8a8a8;\r\n  outline: none;\n}\n.multiselect__single {\r\n  padding-left: 6px;\r\n  margin-bottom: 8px;\n}\n.multiselect__tags-wrap {\r\n  display: inline\n}\n.multiselect__tags {\r\n  min-height: 40px;\r\n  display: block;\r\n  padding: 8px 40px 0 8px;\r\n  border-radius: 5px;\r\n  border: 1px solid #E8E8E8;\r\n  background: #fff;\n}\n.multiselect__tag {\r\n  position: relative;\r\n  display: inline-block;\r\n  padding: 4px 26px 4px 10px;\r\n  border-radius: 5px;\r\n  margin-right: 10px;\r\n  color: #fff;\r\n  line-height: 1;\r\n  background: #5240b8;\r\n  margin-bottom: 5px;\r\n  white-space: nowrap;\r\n  overflow: hidden;\r\n  max-width: 100%;\r\n  text-overflow: ellipsis;\n}\n.multiselect__tag-icon {\r\n  cursor: pointer;\r\n  margin-left: 7px;\r\n  position: absolute;\r\n  right: 0;\r\n  top: 0;\r\n  bottom: 0;\r\n  font-weight: 700;\r\n  font-style: initial;\r\n  width: 22px;\r\n  text-align: center;\r\n  line-height: 22px;\r\n  -webkit-transition: all 0.2s ease;\r\n  transition: all 0.2s ease;\r\n  border-radius: 5px;\n}\n.multiselect__tag-icon:after {\r\n  content: \"\\D7\";\r\n  color: #266d4d;\r\n  font-size: 14px;\n}\n.multiselect__tag-icon:focus,\r\n.multiselect__tag-icon:hover {\r\n  background: #369a6e;\n}\n.multiselect__tag-icon:focus:after,\r\n.multiselect__tag-icon:hover:after {\r\n  color: white;\n}\n.multiselect__current {\r\n  line-height: 16px;\r\n  min-height: 40px;\r\n  -webkit-box-sizing: border-box;\r\n          box-sizing: border-box;\r\n  display: block;\r\n  overflow: hidden;\r\n  padding: 8px 12px 0;\r\n  padding-right: 30px;\r\n  white-space: nowrap;\r\n  margin: 0;\r\n  text-decoration: none;\r\n  border-radius: 5px;\r\n  border: 1px solid #E8E8E8;\r\n  cursor: pointer;\n}\n.multiselect__select {\r\n  line-height: 16px;\r\n  display: block;\r\n  position: absolute;\r\n  -webkit-box-sizing: border-box;\r\n          box-sizing: border-box;\r\n  width: 40px;\r\n  height: 38px;\r\n  right: 1px;\r\n  top: 1px;\r\n  padding: 4px 8px;\r\n  margin: 0;\r\n  text-decoration: none;\r\n  text-align: center;\r\n  cursor: pointer;\r\n  -webkit-transition: -webkit-transform 0.2s ease;\r\n  transition: -webkit-transform 0.2s ease;\r\n  transition: transform 0.2s ease;\r\n  transition: transform 0.2s ease, -webkit-transform 0.2s ease;\n}\n.multiselect__select:before {\r\n  position: relative;\r\n  right: 0;\r\n  top: 65%;\r\n  color: #999;\r\n  margin-top: 4px;\r\n  border-style: solid;\r\n  border-width: 5px 5px 0 5px;\r\n  border-color: #999999 transparent transparent transparent;\r\n  content: \"\";\n}\n.multiselect__placeholder {\r\n  color: #ADADAD;\r\n  display: inline-block;\r\n  margin-bottom: 10px;\r\n  padding-top: 2px;\n}\n.multiselect--active .multiselect__placeholder {\r\n  display: none;\n}\n.multiselect__content-wrapper {\r\n  position: absolute;\r\n  display: block;\r\n  background: #fff;\r\n  width: 100%;\r\n  max-height: 240px;\r\n  overflow: auto;\r\n  border: 1px solid #E8E8E8;\r\n  border-top: none;\r\n  border-bottom-left-radius: 5px;\r\n  border-bottom-right-radius: 5px;\r\n  z-index: 50;\r\n  -webkit-overflow-scrolling: touch;\n}\n.multiselect__content {\r\n  list-style: none;\r\n  display: inline-block;\r\n  padding: 0;\r\n  margin: 0;\r\n  min-width: 100%;\r\n  vertical-align: top;\n}\n.multiselect--above .multiselect__content-wrapper {\r\n  bottom: 100%;\r\n  border-bottom-left-radius: 0;\r\n  border-bottom-right-radius: 0;\r\n  border-top-left-radius: 5px;\r\n  border-top-right-radius: 5px;\r\n  border-bottom: none;\r\n  border-top: 1px solid #E8E8E8;\n}\n.multiselect__content::webkit-scrollbar {\r\n  display: none;\n}\n.multiselect__element {\r\n  display: block;\n}\n.multiselect__option {\r\n  display: block;\r\n  padding: 12px;\r\n  min-height: 40px;\r\n  line-height: 16px;\r\n  text-decoration: none;\r\n  text-transform: none;\r\n  vertical-align: middle;\r\n  position: relative;\r\n  cursor: pointer;\r\n  white-space: nowrap;\n}\n.multiselect__option:after {\r\n  top: 0;\r\n  right: 0;\r\n  position: absolute;\r\n  line-height: 40px;\r\n  padding-right: 12px;\r\n  padding-left: 20px;\n}\n.multiselect__option--highlight {\r\n  background: #41B883;\r\n  outline: none;\r\n  color: white;\n}\n.multiselect__option--highlight:after {\r\n  content: attr(data-select);\r\n  background: #41B883;\r\n  color: white;\n}\n.multiselect__option--selected {\r\n  background: #F3F3F3;\r\n  color: #35495E;\r\n  font-weight: bold;\n}\n.multiselect__option--selected:after {\r\n  content: attr(data-selected);\r\n  color: silver;\n}\n.multiselect__option--selected.multiselect__option--highlight {\r\n  background: #FF6A6A;\r\n  color: #fff;\n}\n.multiselect__option--selected.multiselect__option--highlight:after {\r\n  background: #FF6A6A;\r\n  content: attr(data-deselect);\r\n  color: #fff;\n}\n.multiselect--disabled {\r\n  background: #ededed;\r\n  pointer-events: none;\n}\n.multiselect--disabled .multiselect__current,\r\n.multiselect--disabled .multiselect__select {\r\n  background: #ededed;\r\n  color: #a6a6a6;\n}\n.multiselect__option--disabled {\r\n  background: #ededed;\r\n  color: #a6a6a6;\r\n  cursor: text;\r\n  pointer-events: none;\n}\n.multiselect__option--disabled.multiselect__option--highlight {\r\n  background: #dedede !important;\n}\n.multiselect-enter-active,\r\n.multiselect-leave-active {\r\n  -webkit-transition: all 0.15s ease;\r\n  transition: all 0.15s ease;\n}\n.multiselect-enter,\r\n.multiselect-leave-active {\r\n  opacity: 0;\n}\n.multiselect__strong {\r\n  margin-bottom: 10px;\r\n  display: inline-block\n}\n*[dir=\"rtl\"] .multiselect {\r\n    text-align: right;\n}\n*[dir=\"rtl\"] .multiselect__select {\r\n    right: auto;\r\n    left: 1px;\n}\n*[dir=\"rtl\"] .multiselect__tags {\r\n    padding: 8px 8px 0px 40px;\n}\n*[dir=\"rtl\"] .multiselect__content {\r\n    text-align: right;\n}\n*[dir=\"rtl\"] .multiselect__option:after {\r\n    right: auto;\r\n    left: 0;\n}\n*[dir=\"rtl\"] .multiselect__clear {\r\n    right: auto;\r\n    left: 12px;\n}\n*[dir=\"rtl\"] .multiselect__spinner {\r\n    right: auto;\r\n    left: 1px;\n}\n@-webkit-keyframes spinning {\nfrom { -webkit-transform:rotate(0); transform:rotate(0)\n}\nto { -webkit-transform:rotate(2turn); transform:rotate(2turn)\n}\n}\n@keyframes spinning {\nfrom { -webkit-transform:rotate(0); transform:rotate(0)\n}\nto { -webkit-transform:rotate(2turn); transform:rotate(2turn)\n}\n}\r\n", ""]);
+exports.push([module.i, "\nfieldset[disabled] .multiselect {\n  pointer-events: none;\n}\n.multiselect__spinner {\n  position: absolute;\n  right: 1px;\n  top: 1px;\n  width: 48px;\n  height: 35px;\n  background: #fff;\n  display: block;\n}\n.multiselect__spinner:before,\n.multiselect__spinner:after {\n  position: absolute;\n  content: \"\";\n  top: 50%;\n  left: 50%;\n  margin: -8px 0 0 -8px;\n  width: 16px;\n  height: 16px;\n  border-radius: 100%;\n  border-color: #41B883 transparent transparent;\n  border-style: solid;\n  border-width: 2px;\n  -webkit-box-shadow: 0 0 0 1px transparent;\n          box-shadow: 0 0 0 1px transparent;\n}\n.multiselect__spinner:before {\n  -webkit-animation: spinning 2.4s cubic-bezier(0.41, 0.26, 0.2, 0.62);\n          animation: spinning 2.4s cubic-bezier(0.41, 0.26, 0.2, 0.62);\n  -webkit-animation-iteration-count: infinite;\n          animation-iteration-count: infinite;\n}\n.multiselect__spinner:after {\n  -webkit-animation: spinning 2.4s cubic-bezier(0.51, 0.09, 0.21, 0.8);\n          animation: spinning 2.4s cubic-bezier(0.51, 0.09, 0.21, 0.8);\n  -webkit-animation-iteration-count: infinite;\n          animation-iteration-count: infinite;\n}\n.multiselect__loading-enter-active,\n.multiselect__loading-leave-active {\n  -webkit-transition: opacity 0.4s ease-in-out;\n  transition: opacity 0.4s ease-in-out;\n  opacity: 1;\n}\n.multiselect__loading-enter,\n.multiselect__loading-leave-active {\n  opacity: 0;\n}\n.multiselect,\n.multiselect__input,\n.multiselect__single {\n  font-family: inherit;\n  font-size: 14px;\n  -ms-touch-action: manipulation;\n      touch-action: manipulation;\n}\n.multiselect {\n  -webkit-box-sizing: content-box;\n          box-sizing: content-box;\n  display: block;\n  position: relative;\n  width: 100%;\n  min-height: 40px;\n  text-align: left;\n  color: #35495E;\n}\n.multiselect * {\n  -webkit-box-sizing: border-box;\n          box-sizing: border-box;\n}\n.multiselect:focus {\n  outline: none;\n}\n.multiselect--disabled {\n  pointer-events: none;\n  opacity: 0.6;\n}\n.multiselect--active {\n  z-index: 50;\n}\n.multiselect--active:not(.multiselect--above) .multiselect__current,\n.multiselect--active:not(.multiselect--above) .multiselect__input,\n.multiselect--active:not(.multiselect--above) .multiselect__tags {\n  border-bottom-left-radius: 0;\n  border-bottom-right-radius: 0;\n}\n.multiselect--active .multiselect__select {\n  -webkit-transform: rotateZ(180deg);\n          transform: rotateZ(180deg);\n}\n.multiselect--above.multiselect--active .multiselect__current,\n.multiselect--above.multiselect--active .multiselect__input,\n.multiselect--above.multiselect--active .multiselect__tags {\n  border-top-left-radius: 0;\n  border-top-right-radius: 0;\n}\n.multiselect__input,\n.multiselect__single {\n  position: relative;\n  display: inline-block;\n  min-height: 20px;\n  line-height: 20px;\n  border: none;\n  border-radius: 5px;\n  background: #fff;\n  padding: 1px 0 0 5px;\n  width: calc(100%);\n  -webkit-transition: border 0.1s ease;\n  transition: border 0.1s ease;\n  -webkit-box-sizing: border-box;\n          box-sizing: border-box;\n  margin-bottom: 8px;\n  vertical-align: top;\n}\n.multiselect__tag ~ .multiselect__input,\n.multiselect__tag ~ .multiselect__single {\n  width: auto;\n}\n.multiselect__input:hover,\n.multiselect__single:hover {\n  border-color: #cfcfcf;\n}\n.multiselect__input:focus,\n.multiselect__single:focus {\n  border-color: #a8a8a8;\n  outline: none;\n}\n.multiselect__single {\n  padding-left: 6px;\n  margin-bottom: 8px;\n}\n.multiselect__tags-wrap {\n  display: inline\n}\n.multiselect__tags {\n  min-height: 40px;\n  display: block;\n  padding: 8px 40px 0 8px;\n  border-radius: 5px;\n  border: 1px solid #E8E8E8;\n  background: #fff;\n}\n.multiselect__tag {\n  position: relative;\n  display: inline-block;\n  padding: 4px 26px 4px 10px;\n  border-radius: 5px;\n  margin-right: 10px;\n  color: #fff;\n  line-height: 1;\n  background: #5240b8;\n  margin-bottom: 5px;\n  white-space: nowrap;\n  overflow: hidden;\n  max-width: 100%;\n  text-overflow: ellipsis;\n}\n.multiselect__tag-icon {\n  cursor: pointer;\n  margin-left: 7px;\n  position: absolute;\n  right: 0;\n  top: 0;\n  bottom: 0;\n  font-weight: 700;\n  font-style: initial;\n  width: 22px;\n  text-align: center;\n  line-height: 22px;\n  -webkit-transition: all 0.2s ease;\n  transition: all 0.2s ease;\n  border-radius: 5px;\n}\n.multiselect__tag-icon:after {\n  content: \"\\D7\";\n  color: #266d4d;\n  font-size: 14px;\n}\n.multiselect__tag-icon:focus,\n.multiselect__tag-icon:hover {\n  background: #369a6e;\n}\n.multiselect__tag-icon:focus:after,\n.multiselect__tag-icon:hover:after {\n  color: white;\n}\n.multiselect__current {\n  line-height: 16px;\n  min-height: 40px;\n  -webkit-box-sizing: border-box;\n          box-sizing: border-box;\n  display: block;\n  overflow: hidden;\n  padding: 8px 12px 0;\n  padding-right: 30px;\n  white-space: nowrap;\n  margin: 0;\n  text-decoration: none;\n  border-radius: 5px;\n  border: 1px solid #E8E8E8;\n  cursor: pointer;\n}\n.multiselect__select {\n  line-height: 16px;\n  display: block;\n  position: absolute;\n  -webkit-box-sizing: border-box;\n          box-sizing: border-box;\n  width: 40px;\n  height: 38px;\n  right: 1px;\n  top: 1px;\n  padding: 4px 8px;\n  margin: 0;\n  text-decoration: none;\n  text-align: center;\n  cursor: pointer;\n  -webkit-transition: -webkit-transform 0.2s ease;\n  transition: -webkit-transform 0.2s ease;\n  transition: transform 0.2s ease;\n  transition: transform 0.2s ease, -webkit-transform 0.2s ease;\n}\n.multiselect__select:before {\n  position: relative;\n  right: 0;\n  top: 65%;\n  color: #999;\n  margin-top: 4px;\n  border-style: solid;\n  border-width: 5px 5px 0 5px;\n  border-color: #999999 transparent transparent transparent;\n  content: \"\";\n}\n.multiselect__placeholder {\n  color: #ADADAD;\n  display: inline-block;\n  margin-bottom: 10px;\n  padding-top: 2px;\n}\n.multiselect--active .multiselect__placeholder {\n  display: none;\n}\n.multiselect__content-wrapper {\n  position: absolute;\n  display: block;\n  background: #fff;\n  width: 100%;\n  max-height: 240px;\n  overflow: auto;\n  border: 1px solid #E8E8E8;\n  border-top: none;\n  border-bottom-left-radius: 5px;\n  border-bottom-right-radius: 5px;\n  z-index: 50;\n  -webkit-overflow-scrolling: touch;\n}\n.multiselect__content {\n  list-style: none;\n  display: inline-block;\n  padding: 0;\n  margin: 0;\n  min-width: 100%;\n  vertical-align: top;\n}\n.multiselect--above .multiselect__content-wrapper {\n  bottom: 100%;\n  border-bottom-left-radius: 0;\n  border-bottom-right-radius: 0;\n  border-top-left-radius: 5px;\n  border-top-right-radius: 5px;\n  border-bottom: none;\n  border-top: 1px solid #E8E8E8;\n}\n.multiselect__content::webkit-scrollbar {\n  display: none;\n}\n.multiselect__element {\n  display: block;\n}\n.multiselect__option {\n  display: block;\n  padding: 12px;\n  min-height: 40px;\n  line-height: 16px;\n  text-decoration: none;\n  text-transform: none;\n  vertical-align: middle;\n  position: relative;\n  cursor: pointer;\n  white-space: nowrap;\n}\n.multiselect__option:after {\n  top: 0;\n  right: 0;\n  position: absolute;\n  line-height: 40px;\n  padding-right: 12px;\n  padding-left: 20px;\n}\n.multiselect__option--highlight {\n  background: #41B883;\n  outline: none;\n  color: white;\n}\n.multiselect__option--highlight:after {\n  content: attr(data-select);\n  background: #41B883;\n  color: white;\n}\n.multiselect__option--selected {\n  background: #F3F3F3;\n  color: #35495E;\n  font-weight: bold;\n}\n.multiselect__option--selected:after {\n  content: attr(data-selected);\n  color: silver;\n}\n.multiselect__option--selected.multiselect__option--highlight {\n  background: #FF6A6A;\n  color: #fff;\n}\n.multiselect__option--selected.multiselect__option--highlight:after {\n  background: #FF6A6A;\n  content: attr(data-deselect);\n  color: #fff;\n}\n.multiselect--disabled {\n  background: #ededed;\n  pointer-events: none;\n}\n.multiselect--disabled .multiselect__current,\n.multiselect--disabled .multiselect__select {\n  background: #ededed;\n  color: #a6a6a6;\n}\n.multiselect__option--disabled {\n  background: #ededed;\n  color: #a6a6a6;\n  cursor: text;\n  pointer-events: none;\n}\n.multiselect__option--disabled.multiselect__option--highlight {\n  background: #dedede !important;\n}\n.multiselect-enter-active,\n.multiselect-leave-active {\n  -webkit-transition: all 0.15s ease;\n  transition: all 0.15s ease;\n}\n.multiselect-enter,\n.multiselect-leave-active {\n  opacity: 0;\n}\n.multiselect__strong {\n  margin-bottom: 10px;\n  display: inline-block\n}\n*[dir=\"rtl\"] .multiselect {\n    text-align: right;\n}\n*[dir=\"rtl\"] .multiselect__select {\n    right: auto;\n    left: 1px;\n}\n*[dir=\"rtl\"] .multiselect__tags {\n    padding: 8px 8px 0px 40px;\n}\n*[dir=\"rtl\"] .multiselect__content {\n    text-align: right;\n}\n*[dir=\"rtl\"] .multiselect__option:after {\n    right: auto;\n    left: 0;\n}\n*[dir=\"rtl\"] .multiselect__clear {\n    right: auto;\n    left: 12px;\n}\n*[dir=\"rtl\"] .multiselect__spinner {\n    right: auto;\n    left: 1px;\n}\n@-webkit-keyframes spinning {\nfrom { -webkit-transform:rotate(0); transform:rotate(0)\n}\nto { -webkit-transform:rotate(2turn); transform:rotate(2turn)\n}\n}\n@keyframes spinning {\nfrom { -webkit-transform:rotate(0); transform:rotate(0)\n}\nto { -webkit-transform:rotate(2turn); transform:rotate(2turn)\n}\n}\n", ""]);
 
 // exports
 
@@ -82984,7 +83076,7 @@ var content = __webpack_require__(450);
 if(typeof content === 'string') content = [[module.i, content, '']];
 if(content.locals) module.exports = content.locals;
 // add the styles to the DOM
-var update = __webpack_require__(3)("35accbc6", content, false, {});
+var update = __webpack_require__(3)("c3c1396c", content, false, {});
 // Hot Module Replacement
 if(false) {
  // When the styles change, update the <style> tags
@@ -83718,7 +83810,7 @@ var content = __webpack_require__(455);
 if(typeof content === 'string') content = [[module.i, content, '']];
 if(content.locals) module.exports = content.locals;
 // add the styles to the DOM
-var update = __webpack_require__(3)("8a04dc90", content, false, {});
+var update = __webpack_require__(3)("0a79222a", content, false, {});
 // Hot Module Replacement
 if(false) {
  // When the styles change, update the <style> tags
@@ -84563,7 +84655,7 @@ var content = __webpack_require__(464);
 if(typeof content === 'string') content = [[module.i, content, '']];
 if(content.locals) module.exports = content.locals;
 // add the styles to the DOM
-var update = __webpack_require__(3)("725cb527", content, false, {});
+var update = __webpack_require__(3)("2e561654", content, false, {});
 // Hot Module Replacement
 if(false) {
  // When the styles change, update the <style> tags
@@ -84829,7 +84921,7 @@ var content = __webpack_require__(468);
 if(typeof content === 'string') content = [[module.i, content, '']];
 if(content.locals) module.exports = content.locals;
 // add the styles to the DOM
-var update = __webpack_require__(3)("5fbe751a", content, false, {});
+var update = __webpack_require__(3)("22f1398d", content, false, {});
 // Hot Module Replacement
 if(false) {
  // When the styles change, update the <style> tags
@@ -85735,7 +85827,7 @@ var content = __webpack_require__(479);
 if(typeof content === 'string') content = [[module.i, content, '']];
 if(content.locals) module.exports = content.locals;
 // add the styles to the DOM
-var update = __webpack_require__(3)("9f97b114", content, false, {});
+var update = __webpack_require__(3)("5e6c71ae", content, false, {});
 // Hot Module Replacement
 if(false) {
  // When the styles change, update the <style> tags
@@ -122248,7 +122340,7 @@ var content = __webpack_require__(637);
 if(typeof content === 'string') content = [[module.i, content, '']];
 if(content.locals) module.exports = content.locals;
 // add the styles to the DOM
-var update = __webpack_require__(3)("09ba2804", content, false, {});
+var update = __webpack_require__(3)("6f5ad49e", content, false, {});
 // Hot Module Replacement
 if(false) {
  // When the styles change, update the <style> tags
@@ -122272,7 +122364,7 @@ exports = module.exports = __webpack_require__(2)(false);
 
 
 // module
-exports.push([module.i, "\n#section-register[data-v-7a6797a6]{\r\n    margin-top: 70px;\n}\r\n", ""]);
+exports.push([module.i, "\n#section-register[data-v-7a6797a6]{\n    margin-top: 70px;\n}\n", ""]);
 
 // exports
 
@@ -122504,7 +122596,7 @@ var render = function() {
                           [_vm._v("×")]
                         ),
                         _vm._v(
-                          "\r\n                          " + _vm._s(error) + " "
+                          "\n                          " + _vm._s(error) + " "
                         ),
                         _c("br"),
                         _vm._v(" "),
@@ -122962,7 +123054,7 @@ var content = __webpack_require__(642);
 if(typeof content === 'string') content = [[module.i, content, '']];
 if(content.locals) module.exports = content.locals;
 // add the styles to the DOM
-var update = __webpack_require__(3)("7fc889e4", content, false, {});
+var update = __webpack_require__(3)("e783da38", content, false, {});
 // Hot Module Replacement
 if(false) {
  // When the styles change, update the <style> tags
@@ -122986,7 +123078,7 @@ exports = module.exports = __webpack_require__(2)(false);
 
 
 // module
-exports.push([module.i, "\n#section-register {\r\n    margin-top: 120px;\r\n    margin-bottom: 100px;\n}\r\n", ""]);
+exports.push([module.i, "\n#section-register {\n    margin-top: 120px;\n    margin-bottom: 100px;\n}\n", ""]);
 
 // exports
 
@@ -123307,7 +123399,7 @@ var content = __webpack_require__(647);
 if(typeof content === 'string') content = [[module.i, content, '']];
 if(content.locals) module.exports = content.locals;
 // add the styles to the DOM
-var update = __webpack_require__(3)("2f762a9a", content, false, {});
+var update = __webpack_require__(3)("9c9c7ccc", content, false, {});
 // Hot Module Replacement
 if(false) {
  // When the styles change, update the <style> tags
@@ -123331,7 +123423,7 @@ exports = module.exports = __webpack_require__(2)(false);
 
 
 // module
-exports.push([module.i, "\n#section-register {\r\n    margin-top: 120px;\r\n    margin-bottom: 100px;\n}\r\n", ""]);
+exports.push([module.i, "\n#section-register {\n    margin-top: 120px;\n    margin-bottom: 100px;\n}\n", ""]);
 
 // exports
 
@@ -123645,7 +123737,7 @@ var content = __webpack_require__(652);
 if(typeof content === 'string') content = [[module.i, content, '']];
 if(content.locals) module.exports = content.locals;
 // add the styles to the DOM
-var update = __webpack_require__(3)("18531f44", content, false, {});
+var update = __webpack_require__(3)("54ef7144", content, false, {});
 // Hot Module Replacement
 if(false) {
  // When the styles change, update the <style> tags
@@ -123669,7 +123761,7 @@ exports = module.exports = __webpack_require__(2)(false);
 
 
 // module
-exports.push([module.i, "\n#section-register {\r\n    margin-top: 120px;\r\n    margin-bottom: 100px;\n}\r\n", ""]);
+exports.push([module.i, "\n#section-register {\n    margin-top: 120px;\n    margin-bottom: 100px;\n}\n", ""]);
 
 // exports
 
@@ -123977,7 +124069,7 @@ var content = __webpack_require__(657);
 if(typeof content === 'string') content = [[module.i, content, '']];
 if(content.locals) module.exports = content.locals;
 // add the styles to the DOM
-var update = __webpack_require__(3)("0b868a1d", content, false, {});
+var update = __webpack_require__(3)("17fc131d", content, false, {});
 // Hot Module Replacement
 if(false) {
  // When the styles change, update the <style> tags
@@ -124001,7 +124093,7 @@ exports = module.exports = __webpack_require__(2)(false);
 
 
 // module
-exports.push([module.i, "\n#section-reset {\r\n\tmargin-top: 100px;\r\n\tmargin-bottom: 60px;\n}\r\n", ""]);
+exports.push([module.i, "\n#section-reset {\n\tmargin-top: 100px;\n\tmargin-bottom: 60px;\n}\n", ""]);
 
 // exports
 
@@ -124168,9 +124260,9 @@ var render = function() {
                             [_vm._v("×")]
                           ),
                           _vm._v(
-                            "\r\n                              " +
+                            "\n                              " +
                               _vm._s(error) +
-                              "\r\n                            "
+                              "\n                            "
                           )
                         ]
                       )
@@ -124201,7 +124293,7 @@ var render = function() {
                             [_vm._v("×")]
                           ),
                           _vm._v(
-                            "\r\n                              " + _vm._s(tmp)
+                            "\n                              " + _vm._s(tmp)
                           ),
                           _c("br"),
                           _vm._v(" "),
@@ -124412,7 +124504,7 @@ var content = __webpack_require__(662);
 if(typeof content === 'string') content = [[module.i, content, '']];
 if(content.locals) module.exports = content.locals;
 // add the styles to the DOM
-var update = __webpack_require__(3)("26290d4c", content, false, {});
+var update = __webpack_require__(3)("2983905a", content, false, {});
 // Hot Module Replacement
 if(false) {
  // When the styles change, update the <style> tags
@@ -124436,7 +124528,7 @@ exports = module.exports = __webpack_require__(2)(false);
 
 
 // module
-exports.push([module.i, "\n#section-activation {\r\n    margin-top: 120px;\r\n    margin-bottom: 100px;\n}\r\n", ""]);
+exports.push([module.i, "\n#section-activation {\n    margin-top: 120px;\n    margin-bottom: 100px;\n}\n", ""]);
 
 // exports
 
@@ -124720,7 +124812,7 @@ var content = __webpack_require__(667);
 if(typeof content === 'string') content = [[module.i, content, '']];
 if(content.locals) module.exports = content.locals;
 // add the styles to the DOM
-var update = __webpack_require__(3)("72c05614", content, false, {});
+var update = __webpack_require__(3)("48db6bf6", content, false, {});
 // Hot Module Replacement
 if(false) {
  // When the styles change, update the <style> tags
@@ -124744,7 +124836,7 @@ exports = module.exports = __webpack_require__(2)(false);
 
 
 // module
-exports.push([module.i, "\n#section-activation {\r\n    margin-top: 120px;\r\n    margin-bottom: 100px;\n}\r\n", ""]);
+exports.push([module.i, "\n#section-activation {\n    margin-top: 120px;\n    margin-bottom: 100px;\n}\n", ""]);
 
 // exports
 

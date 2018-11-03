@@ -58,6 +58,9 @@ class User extends Authenticatable
 
     public function  discounts(){
         return $this->belongsToMany('App\Discount','users_has_discount','users_id')->withPivot('idusers_has_discount','charcode', 'qrcode','validfrom','validto','userhasdiscountstatus_iduserhasdiscountstatus' )->whereNull('users_has_discount.deleted_at');
+    }    
+    public function  commerces(){
+        return $this->belongsToMany('App\Commerce','users_has_commerce','users_id')->withPivot('idusers_has_commerce','users_id', 'commerce_idcommerce')->whereNull('users_has_commerce.deleted_at');
     }
 
     public function commercesUser()

@@ -16,7 +16,7 @@
                               <strong>permiso_nombre del módulo</strong></p>
                         </div>
                         <div class="col-lg-12 text-right">
-                            <button type="submit" class="btn btn-primary"><i class="zmdi zmdi-plus"></i> Guardar</button>
+                            <button type="submit" class="btn btn-primary" v-can="'add_permissions'"><i class="zmdi zmdi-plus"></i> Guardar</button>
                         </div>
                       </div>
                       

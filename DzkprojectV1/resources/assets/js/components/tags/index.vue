@@ -19,7 +19,7 @@
                             <tr v-for="tag in tags">
                               <td width="80%">{{ tag.name }}</td>
                               <td class="text-right">
-                                  <b-btn v-b-modal="'editModal'" @click="edit(tag.idtags)" class="btn btn-sm" variant="warning">Editar</b-btn>
+                                  <b-btn v-b-modal="'editModal'" v-can="'edit_tags'" @click="edit(tag.idtags)" class="btn btn-sm" variant="warning">Editar</b-btn>
                               </td>
                               </th>
                             </tr>

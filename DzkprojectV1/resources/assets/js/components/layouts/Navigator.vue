@@ -89,6 +89,11 @@
                 </a>
               </router-link>
             </li>
+            <li v-if="!isLogged">
+              <a href="/login">
+                Login
+              </a>
+            </li>
           <!--  <li>
                 <a href="author-account-download.html">Downloads</a>
             </li>

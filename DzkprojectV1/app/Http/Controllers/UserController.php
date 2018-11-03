@@ -231,6 +231,7 @@ class UserController extends Controller
         $user->save();
         return response()->json(['state'=>'Update','success'=>\Lang::get('messages.user_update'),'user'=>$user], 200);
      
+     
     }
 
     public function desactivateAccount($id) 

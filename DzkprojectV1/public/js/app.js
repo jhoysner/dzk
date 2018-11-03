@@ -53919,6 +53919,11 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
+//
+//
+//
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
@@ -54170,6 +54175,14 @@ var render = function() {
                     ],
                     1
                   )
+                : _vm._e(),
+              _vm._v(" "),
+              !_vm.isLogged
+                ? _c("li", [
+                    _c("a", { attrs: { href: "/login" } }, [
+                      _vm._v("\n              Login\n            ")
+                    ])
+                  ])
                 : _vm._e()
             ]
           )
@@ -65691,6 +65704,14 @@ var render = function() {
                   _c(
                     "button",
                     {
+                      directives: [
+                        {
+                          name: "can",
+                          rawName: "v-can",
+                          value: "add_branchs",
+                          expression: "'add_branchs'"
+                        }
+                      ],
                       staticClass: "btn btn-primary",
                       attrs: { type: "button" },
                       on: {
@@ -67197,6 +67218,14 @@ var render = function() {
                     _c(
                       "button",
                       {
+                        directives: [
+                          {
+                            name: "can",
+                            rawName: "v-can",
+                            value: "edit_branchs",
+                            expression: "'edit_branchs'"
+                          }
+                        ],
                         staticClass: "btn btn-primary",
                         attrs: { type: "button" },
                         on: {
@@ -67255,6 +67284,12 @@ var render = function() {
                     name: "b-modal",
                     rawName: "v-b-modal.createModal",
                     modifiers: { createModal: true }
+                  },
+                  {
+                    name: "can",
+                    rawName: "v-can",
+                    value: "add_branchs",
+                    expression: "'add_branchs'"
                   }
                 ]
               },
@@ -67318,6 +67353,12 @@ var render = function() {
                                         rawName: "v-b-modal",
                                         value: "showModal",
                                         expression: "'showModal'"
+                                      },
+                                      {
+                                        name: "can",
+                                        rawName: "v-can",
+                                        value: "view_branchs",
+                                        expression: "'view_branchs'"
                                       }
                                     ],
                                     attrs: { size: "sm", variant: "default" },
@@ -67339,6 +67380,12 @@ var render = function() {
                                         rawName: "v-b-modal",
                                         value: "editModal",
                                         expression: "'editModal'"
+                                      },
+                                      {
+                                        name: "can",
+                                        rawName: "v-can",
+                                        value: "edit_branchs",
+                                        expression: "'edit_branchs'"
                                       }
                                     ],
                                     attrs: { size: "sm", variant: "warning" },
@@ -67354,6 +67401,14 @@ var render = function() {
                                 _c(
                                   "button",
                                   {
+                                    directives: [
+                                      {
+                                        name: "can",
+                                        rawName: "v-can",
+                                        value: "delete_branchs",
+                                        expression: "'delete_branchs'"
+                                      }
+                                    ],
                                     staticClass: "btn btn-sm  btn-danger",
                                     attrs: { type: "button" },
                                     on: {
@@ -68844,7 +68899,7 @@ var Logged = {
 			}
 
 			if (token) {
-				axios.get('api/profile', { timeout: 5000 }).then(function (response) {
+				axios.get('api/profile').then(function (response) {
 					console.log(response);
 					_this.logged = true;
 					return _this.logged;
@@ -71286,6 +71341,12 @@ var render = function() {
                                         rawName: "v-b-modal",
                                         value: "editModal",
                                         expression: "'editModal'"
+                                      },
+                                      {
+                                        name: "can",
+                                        rawName: "v-can",
+                                        value: "edit_tags",
+                                        expression: "'edit_tags'"
                                       }
                                     ],
                                     staticClass: "btn btn-sm",
@@ -83478,6 +83539,14 @@ var render = function() {
                     _c(
                       "button",
                       {
+                        directives: [
+                          {
+                            name: "can",
+                            rawName: "v-can",
+                            value: "edit_users",
+                            expression: "'edit_users'"
+                          }
+                        ],
                         staticClass: "btn btn-primary",
                         attrs: { type: "button" },
                         on: {
@@ -85789,6 +85858,14 @@ var render = function() {
                       _c(
                         "button",
                         {
+                          directives: [
+                            {
+                              name: "can",
+                              rawName: "v-can",
+                              value: "add_permissions",
+                              expression: "'add_permissions'"
+                            }
+                          ],
                           staticClass: "btn btn-primary",
                           attrs: { type: "submit" }
                         },

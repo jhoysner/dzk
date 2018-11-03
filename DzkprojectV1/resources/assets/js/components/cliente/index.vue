@@ -73,7 +73,7 @@
 
                             </div>
                             <div class="meta d-flex flex-row">
-                              <a class="btn btn-outline-danger btn-d btn-block" @click="cancel(discount.idusers_has_discount)">
+                              <a class="btn btn-outline-danger btn-d btn-block" @click="cancelUserHasDiscount(discount.pivot.idusers_has_discount)">
                                 Cancelar
                               </a>
                             </div>
@@ -143,6 +143,39 @@ moment.locale('es');
       },
       formatDateHuman(value){
         return  moment(value).endOf('day').fromNow()
+      },      
+      cancelUserHasDiscount(id){
+          swal({
+            title: "Quieres Cancelar este Registro?",
+            icon: "warning",
+            buttons: true,
+            dangerMode: true,
+          })
+          .then((willDelete) => {
+            if (willDelete) {
+                axios.get('api/client/cancel-discount/'+id).
+                  then(response => {
+                    // console.log(response)
+                     // this.discounts = response.data.data;
+                     this.index();
+                  })
+                  .catch(error => {
+                    console.log(error.response.data)
+
+                  });
+            }
+          });
+
+         // axios.get('api/client/cancel-discount/'+id).
+         //  then(response => {
+         //    console.log(response)
+         //     // this.discounts = response.data.data;
+         //     this.index();
+         //  })
+         //  .catch(error => {
+         //    console.log(error.response.data)
+
+         //  });
       },
     }
   }

@@ -206,7 +206,16 @@ class HomeInitController extends Controller
     {
 
         $fields = $request->all();
-        
+    
+        $discount = Discount::find($fields['discount_iddiscount']);
+
+        if ($discount->amountapproved != NULL) {
+           
+           $discount->amountavailable =  $discount->amountavailable - 1;
+
+           $discount->save(); 
+        }
+
         $fields['idusers_has_discount'] = str_random(36);
 
         $fields['charcode'] = str_random(4);
@@ -221,8 +230,6 @@ class HomeInitController extends Controller
 
         QRCode::text($data)->setSize(8)->setOutfile($file)->png();
 
-        // QRCode::url($request->root().'/qrcode/'.$fields['charcode'])->setSize(8)->setOutfile($file)->png();
-
         $fields['qrcode'] = $name;
 
         $user_has_discount = UserHasDiscount::create($fields);
@@ -231,6 +238,7 @@ class HomeInitController extends Controller
             return response()->json(['error' => 'No se pudo guardar el registro'], 422);
 
         return response()->json(['data'=> $user_has_discount], 201);
+
 
     }
 }

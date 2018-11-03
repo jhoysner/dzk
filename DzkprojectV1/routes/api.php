@@ -136,6 +136,7 @@ Route::get('cancel-discount/{id}', 'UserHasDiscountController@cancelDiscount');
 Route::get('search-charcode/{charcode}/{iduser}', 'UserHasDiscountController@searchCharcode');
 Route::get('redeemed-discount/{id}', 'UserHasDiscountController@redeemedDiscount');
 Route::get('client-user-discount/{id}', 'Cliente\ClienteController@detailUserDiscount');
+Route::get('client/cancel-discount/{id}', 'Cliente\ClienteController@cancelUserHasDiscount');
 Route::get('user-has-discount', 'UserHasDiscountController@listUserHasDiscount');
 Route::get('authorize-discount/{id}', 'UserHasDiscountController@authorizeDiscount');
 Route::get('not-authorize-discount/{id}', 'UserHasDiscountController@notAuthorize');

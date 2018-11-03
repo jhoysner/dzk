@@ -368,6 +368,7 @@ moment.locale('es');
                 text: "Se obtuvo Descuento Satifactoriamente",
                 icon: "success",
               })
+            console.log(response)
             this.$router.push({ path: `/client-discount/${id}` })
           })
           .catch(error => {

@@ -3,17 +3,17 @@
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Database\Eloquent\SoftDeletes;
+// use Illuminate\Database\Eloquent\SoftDeletes;
 
 class UserHasDiscount extends Model
 {
-    use SoftDeletes;
+    // use SoftDeletes;
     
     protected $table = 'users_has_discount';
 
     protected $primaryKey = 'idusers_has_discount';
     public $incrementing = false;
-    protected $dates = ['deleted_at'];
+    // protected $dates = ['deleted_at'];
 
     protected $fillable = [
         'idusers_has_discount',

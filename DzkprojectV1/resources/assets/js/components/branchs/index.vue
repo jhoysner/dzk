@@ -45,7 +45,7 @@
                                 <td>{{ branch.states.name }}</td>
                                 <td>{{ branch.cities.name }}</td> -->
                                 <td class="text-right">
-                                    <b-btn v-b-modal="'showModal'" v-can="'view_branchs'" size="sm" @click="show(branch.idbranch)" variant="default">Detalle</b-btn>
+                                    <b-btn v-b-modal="'showModal'" size="sm" @click="show(branch.idbranch)" variant="default">Detalle</b-btn>
                                     <b-btn v-b-modal="'editModal'" v-can="'edit_branchs'" size="sm" @click="edit(branch.idbranch)" variant="warning">Editar</b-btn>
                                     <button type="button" v-can="'delete_branchs'" @click="confirm(branch.idbranch)" class="btn btn-sm  btn-danger">Eliminar</button>
                                 </td>

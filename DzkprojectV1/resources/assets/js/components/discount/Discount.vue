@@ -30,7 +30,7 @@
                                       {{ discount.outstanding ? "Si" : "No" }}
                                       </td>
                                       <td class="text-right">
-                                          <button type="button" v-can="'view_discounts'" @click="detailsDiscount(discount)" class="btn btn-sm  btn-default"> Detalles</button>
+                                          <button type="button" @click="detailsDiscount(discount)" class="btn btn-sm  btn-default"> Detalles</button>
  
                                           <button type="button" v-can="'edit_discounts'" @click="editDiscount(discount)" class="btn  btn-sm  btn-info"> Editar</button>
                                       

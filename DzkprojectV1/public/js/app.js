@@ -64299,12 +64299,6 @@ var render = function() {
                                         rawName: "v-b-modal",
                                         value: "showModal",
                                         expression: "'showModal'"
-                                      },
-                                      {
-                                        name: "can",
-                                        rawName: "v-can",
-                                        value: "view_commerces",
-                                        expression: "'view_commerces'"
                                       }
                                     ],
                                     attrs: { size: "sm", variant: "default" },
@@ -67381,12 +67375,6 @@ var render = function() {
                                         rawName: "v-b-modal",
                                         value: "showModal",
                                         expression: "'showModal'"
-                                      },
-                                      {
-                                        name: "can",
-                                        rawName: "v-can",
-                                        value: "view_branchs",
-                                        expression: "'view_branchs'"
                                       }
                                     ],
                                     attrs: { size: "sm", variant: "default" },
@@ -79192,14 +79180,6 @@ var render = function() {
                               _c(
                                 "button",
                                 {
-                                  directives: [
-                                    {
-                                      name: "can",
-                                      rawName: "v-can",
-                                      value: "view_discounts",
-                                      expression: "'view_discounts'"
-                                    }
-                                  ],
                                   staticClass: "btn btn-sm  btn-default",
                                   attrs: { type: "button" },
                                   on: {

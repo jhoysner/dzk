@@ -2,7 +2,7 @@
   <div>
       <div class="col-lg-12">
           <div>
-                  <b-btn v-b-modal.createModal>Crear Descuento</b-btn>
+                  <b-btn v-b-modal.createModal v-can="'add_discounts'">Crear Descuento</b-btn>
 
                   <div class="settings-content mt-4">
                   <h4>LISTA DE DESCUENTOS</h4>
@@ -30,12 +30,12 @@
                                       {{ discount.outstanding ? "Si" : "No" }}
                                       </td>
                                       <td class="text-right">
-                                          <button type="button" @click="detailsDiscount(discount)" class="btn btn-sm  btn-default"> Detalles</button>
+                                          <button type="button" v-can="'view_discounts'" @click="detailsDiscount(discount)" class="btn btn-sm  btn-default"> Detalles</button>
  
-                                          <button type="button" @click="editDiscount(discount)" class="btn  btn-sm  btn-info"> Editar</button>
+                                          <button type="button" v-can="'edit_discounts'" @click="editDiscount(discount)" class="btn  btn-sm  btn-info"> Editar</button>
                                       
 
-                                          <button type="button" @click="confirm(discount)" class="btn btn-sm  btn-danger">Eliminar</button>
+                                          <button type="button" v-can="'delete_discounts'" @click="confirm(discount)" class="btn btn-sm  btn-danger">Eliminar</button>
                                       </td>
                                   </tr>
                               </tbody>
@@ -179,8 +179,8 @@
                             
                         </div>
                         <div class="modal-footer">
-                            <b-btn  @click="showEdit=false">Cerrar</b-btn>
-                            <button type="submit" class="btn btn-primary"><i class="zmdi zmdi-plus"></i> Actualizar Descuento</button>
+                            <b-btn @click="showEdit=false">Cerrar</b-btn>
+                            <button type="submit" v-can="'edit_discounts'" class="btn btn-primary"><i class="zmdi zmdi-plus"></i> Actualizar Descuento</button>
                         </div>
                     </div>
                 </form>

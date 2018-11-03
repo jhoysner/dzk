@@ -86,7 +86,7 @@
                       </div> 
                       
                       <div class="col-lg-12 text-right">
-                          <button type="submit" class="btn btn-primary"><i class="zmdi zmdi-plus"></i> Guardar</button>
+                          <button type="submit" v-can="'edit_commerces'" class="btn btn-primary"><i class="zmdi zmdi-plus"></i> Guardar</button>
                       </div>
                     </div>
                   </div>     

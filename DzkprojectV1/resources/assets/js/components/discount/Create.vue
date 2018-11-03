@@ -103,7 +103,7 @@
                         </div>
                         <div class="modal-footer">
                             <b-btn  @click="show=false">Cerrar</b-btn>
-                            <button type="submit" class="btn btn-primary"><i class="zmdi zmdi-plus"></i> Guardar Descuento</button>
+                            <button type="submit" v-can="'add_discounts'" class="btn btn-primary"><i class="zmdi zmdi-plus"></i> Guardar Descuento</button>
                         </div>
                     </div>
                 </form>

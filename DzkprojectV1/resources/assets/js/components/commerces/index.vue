@@ -2,7 +2,7 @@
   <div>
     <div class="col-lg-12">
         <div>
-            <b-btn v-b-modal.createModal>Crear Comercio</b-btn>
+            <b-btn v-b-modal.createModal v-can="'add_commerces'">Crear Comercio</b-btn>
             <div class="settings-content">
                 <h4>Lista de comercios</h4>
               <!-- <spinner :show="loadingProductos"></spinner> -->
@@ -42,9 +42,9 @@
                               <td>{{ commerce.cities.name }}</td> -->
                               <td>{{ commerce.ccategories.name }}</td>
                               <td class="text-right">
-                                  <b-btn v-b-modal="'showModal'" size="sm" @click="show(commerce.idcommerce)" variant="default">Detalle</b-btn>
-                                  <b-btn v-b-modal="'editModal'" size="sm" @click="edit(commerce.idcommerce)" variant="warning">Editar</b-btn>
-                                  <button type="button" @click="confirm(commerce.idcommerce)" class="btn btn-sm  btn-danger">Eliminar</button>
+                                  <b-btn v-b-modal="'showModal'" v-can="'view_commerces'" size="sm" @click="show(commerce.idcommerce)" variant="default">Detalle</b-btn>
+                                  <b-btn v-b-modal="'editModal'" v-can="'edit_commerces'" size="sm" @click="edit(commerce.idcommerce)" variant="warning">Editar</b-btn>
+                                  <button type="button" v-can="'delete_commerces'" @click="confirm(commerce.idcommerce)" class="btn btn-sm  btn-danger">Eliminar</button>
                               </td>
                             </tr>
                           </tbody>

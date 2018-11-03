@@ -54,6 +54,11 @@ class Commerce extends Model
       return $this->belongsTo('App\CommerceCategory', 'commercecategory_idcommercecategory', 'idcommercecategory');
     }
 
+    public function commercetags()
+    {
+      return $this->hasMany('App\CommerceTags');
+    }
+
     public function branchs()
     {
       return $this->hasMany('App\Branch');

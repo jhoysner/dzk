@@ -11,6 +11,8 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 use LaravelQRCode\Facades\QRCode;
 
+use App\CommerceTags;
+
 class HomeInitController extends Controller
 {
     public function allCommerce(Request $request)
@@ -184,7 +186,7 @@ class HomeInitController extends Controller
 
         $branchs = Branch::where('commerce_idcommerce', $id)
             ->with(['discounts' => function($q) {
-                $q->with('categories','tags');
+                $q->groupBy('iddiscount')->with('categories','tags');
              }])->paginate(1);
                   
         return response()->json([
@@ -240,5 +242,26 @@ class HomeInitController extends Controller
         return response()->json(['data'=> $user_has_discount], 201);
 
 
+    }
+
+    public function filterTagsCommerce($id)
+    {
+        $tags = CommerceTags::with(['commerces' => function ($query) {
+                        $query->with('ccategories', 'tags');
+                    }])->where('tags_idtags', $id)->paginate(2);
+
+        return response()->json([
+            'paginate' => [
+                'total'         =>  $tags->total(),
+                'current_page'  =>  $tags->currentPage(),
+                'per_page'      =>  $tags->perPage(),
+                'last_page'     =>  $tags->lastPage(),
+                'from'          =>  $tags->firstItem(),
+                'to'            =>  $tags->lastPage()
+            ],
+
+            'tags' => $tags
+
+        ],200);
     }
 }

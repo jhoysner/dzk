@@ -111,6 +111,7 @@ Route::get('detail-discount/{id}', 'HomeInit\HomeInitController@discount_detail'
 Route::get('commerce-detail-branchs/{id}', 'HomeInit\HomeInitController@commerce_detail_branchs');
 Route::get('commerce-detail-discounts/{id}', 'HomeInit\HomeInitController@commerce_detail_discount');
 Route::get('filter-tags/{id}', 'HomeInit\HomeInitController@filterTagsCommerce');
+Route::get('filter-tags-discount/{id}', 'HomeInit\HomeInitController@filterTagsDiscount');
 
 
 Route::post('user-has-discount','HomeInit\HomeInitController@saveUserHasDiscount');

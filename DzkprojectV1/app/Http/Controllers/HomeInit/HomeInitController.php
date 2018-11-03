@@ -4,14 +4,14 @@ namespace App\Http\Controllers\HomeInit;
 
 use App\Branch;
 use App\Commerce;
+use App\CommerceTags;
 use App\Discount;
+use App\DiscountTags;
 use App\Http\Controllers\Controller;
 use App\UserHasDiscount;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 use LaravelQRCode\Facades\QRCode;
-
-use App\CommerceTags;
 
 class HomeInitController extends Controller
 {
@@ -248,6 +248,27 @@ class HomeInitController extends Controller
     {
         $tags = CommerceTags::with(['commerces' => function ($query) {
                         $query->with('ccategories', 'tags');
+                    }])->where('tags_idtags', $id)->paginate(2);
+
+        return response()->json([
+            'paginate' => [
+                'total'         =>  $tags->total(),
+                'current_page'  =>  $tags->currentPage(),
+                'per_page'      =>  $tags->perPage(),
+                'last_page'     =>  $tags->lastPage(),
+                'from'          =>  $tags->firstItem(),
+                'to'            =>  $tags->lastPage()
+            ],
+
+            'tags' => $tags
+
+        ],200);
+    }    
+
+    public function filterTagsDiscount($id)
+    {
+        $tags = DiscountTags::with(['discounts' => function ($query) {
+                        $query->with('categories', 'tags');
                     }])->where('tags_idtags', $id)->paginate(2);
 
         return response()->json([

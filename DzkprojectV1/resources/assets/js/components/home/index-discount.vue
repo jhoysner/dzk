@@ -93,7 +93,11 @@
                                 <div class="details pb-10 pt-20">
                                     <div class="title d-flex flex-row justify-content-between">
                                         <div v-for="tag in discount.tags"> 
-                                          <span class="badge badge-secondary">{{tag.name}}</span>
+                                          <span class="badge badge-secondary">
+                                              <!-- <router-link class="tag" :to="`/discount/${tag.idtags}/tag`"> -->
+                                                {{tag.name}}
+                                              <!-- </router-link> -->
+                                         </span>
                                         </div>
                                         <span v-if="discount.tags.length < 1"> Sin Tags</span>
                                     </div>

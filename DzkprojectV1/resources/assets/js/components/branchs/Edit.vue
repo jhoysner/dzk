@@ -72,7 +72,7 @@
                                 <small class="text-danger" v-if="error.commerce_idcommerce">{{ error.commerce_idcommerce[0] }}</small>
                             </div>
                         </div>
-                        <div class="col-lg-12">
+                        <!--<div class="col-lg-12">
                           <div class="sorting"> País
                               <select class="form-control common-input" v-model="branch.country_idcountry" @change="getStates()">
                                   <option v-for="country in countries" :value="country.id">
@@ -81,9 +81,9 @@
                               </select>
                               <small class="text-danger" v-if="error.country_idcountry">{{ error.country_idcountry[0] }}</small>
                           </div>
-                        </div>
+                        </div> -->
                         <div class="col-lg-12">
-                            <div class="sorting"> Estado
+                            <div class="sorting"> Departamento
                                 <select class="form-control common-input" v-model="branch.state_idstate" @change="getCities()">
                                   <option v-for="state in states" :value="state.id">
                                     {{ state.name }}

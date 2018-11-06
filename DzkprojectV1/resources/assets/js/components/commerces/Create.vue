@@ -30,7 +30,7 @@
                             <input type="text" placeholder="Web" v-model="form.web" class="common-input">
                             <small class="text-danger" v-if="error.web">{{ error.web[0] }}</small>
                         </div>
-                        <div class="col-lg-12">
+                        <!--<div class="col-lg-12">
                             <div class="sorting"> País
                                 <select class="form-control common-input" v-model="form.country_idcountry" @change="getStates()">
                                     <option v-for="country in countries" :value="country.id">
@@ -39,10 +39,10 @@
                                 </select>
                                 <small class="text-danger" v-if="error.country_idcountry">{{ error.country_idcountry[0] }}</small>
                             </div>
-                        </div>
+                        </div> -->
 
                         <div class="col-lg-12">
-                            <div class="sorting"> Estado
+                            <div class="sorting"> Departamento
                                 <select class="form-control common-input" v-model="form.state_idstate" @change="getCities()">
                                   <option v-for="state in states" :value="state.id">
                                     {{ state.name }}
@@ -110,7 +110,8 @@ import $ from 'jquery';
                 country_idcountry: '',
                 state_idstate: '',
                 city_idcity: '',
-                commercecategory_idcommercecategory: ''
+                commercecategory_idcommercecategory: '',
+                idUser: '',
               },
               url: '/commerce',
               error: {},
@@ -131,7 +132,9 @@ import $ from 'jquery';
         },
 
         created() {
+          this.auth();
           this.getCountries();
+          this.getStates();
           this.getCommerceCategories();
           this.getCommercesSize();
           this.getCommercesExt();
@@ -173,6 +176,16 @@ import $ from 'jquery';
             reader.onload = e => {
               this.form.image = e.target.result;
             }
+          },
+
+          auth() {
+            axios.get('/api/profile').then((response) => {
+              console.log(response.data.user.id);
+              this.form.idUser = response.data.user.id;
+              // console.log(this.user.id);
+              // this.index();
+            })
+            .catch(err => console.log(err))
           },
 
           store() {
@@ -253,13 +266,14 @@ import $ from 'jquery';
           getCountries() {
             axios.get('api/countries').then(data => {
               this.countries = data.data;
-              this.form.country_idcountry = data.data[0].id;
+              this.form.country_idcountry = data.data[49].id;
             })
             .catch(err => console.log(err))
           },
 
           getStates() {
-            axios.get('api/states/' + this.form.country_idcountry).then(data => {
+            //this.form.country_idcountry
+            axios.get('api/states/' + 'CO').then(data => {
               this.states = data.data;
               this.form.state_idstate = data.data[0].id;
             })

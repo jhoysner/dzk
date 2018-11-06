@@ -128,9 +128,10 @@ class HomeInitController extends Controller
             ->with('states')
               ->with('cities')
                 ->with('ccategories')
-                    ->with(['branchs' =>function ($query) {
-                            $query->with('discounts');
-                        }])->get();
+                    ->with('tags')
+                        ->with(['branchs' =>function ($query) {
+                                $query->with('discounts');
+                            }])->get();
 
         return response()->json(['data'=> $commerce], 200);
 

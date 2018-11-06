@@ -11,7 +11,7 @@
                       <table class="table table-striped mt-40 stat-table">
                           <thead>
                             <tr>
-                                <th class="text-center">ID Comercio</th>
+                                <!--<th class="text-center">ID Comercio</th> -->
                                 <th class="text-center">Nombre</th>
                                 <!--<th class="text-center">Teléfono principal</th>
                                 <th class="text-center">Teléfono alternativo</th>-->
@@ -27,12 +27,12 @@
                           </thead>
                           <tbody>
                             <tr v-for="commerce in commerces">
-                              <td>{{ commerce.idcommerce }}</td>
-                              <td>{{ commerce.name }}</td>
+                              <!--<td>{{ commerce.idcommerce }}</td> -->
+                              <td class="text-center">{{ commerce.name }}</td>
                               <!--<td>{{ commerce.phone1 }}</td>
                               <td>{{ commerce.phone2 }}</td> -->
-                              <td>{{ commerce.email }}</td>
-                              <td>
+                              <td class="text-center">{{ commerce.email }}</td>
+                              <td class="text-center">
                                 <img class="image-commerce" v-if="commerce.image != null" :src="'images/commerce/'+commerce.image" />
                                   <p v-if="commerce.image == null">No posee imagen.</p>
                               </td>
@@ -40,7 +40,7 @@
                               <td>{{ commerce.countries.name }}</td>
                               <td>{{ commerce.states.name }}</td>
                               <td>{{ commerce.cities.name }}</td> -->
-                              <td>{{ commerce.ccategories.name }}</td>
+                              <td class="text-center">{{ commerce.ccategories.name }}</td>
                               <td class="text-right">
                                   <b-btn v-b-modal="'showModal'" size="sm" @click="show(commerce.idcommerce)" variant="default">Detalle</b-btn>
                                   <b-btn v-b-modal="'editModal'" v-can="'edit_commerces'" size="sm" @click="edit(commerce.idcommerce)" variant="warning">Editar</b-btn>

@@ -179,7 +179,11 @@
                     <div class="single-sidebar theme-tags">
                         <h6>Tags</h6>
                         <ul class="tag-list">
-                            <li v-for="tag in tags"> <i class="icons icon-tag"></i> {{tag.name}}</li>
+                            <li v-for="tag in tags"> 
+                                <router-link class="tag" :to="`/commerce/${tag.idtags}/tag`">
+                                    <i class="icons icon-tag"></i> {{tag.name}}
+                                </router-link>
+                            </li>
                         </ul>
                         <div class="sidebar-social">
                             <ul>
@@ -296,6 +300,7 @@ import $ from 'jquery';
                 this.commerce.commercecategory_idcommercecategory = response.data.data[0].ccategories.name;
                 this.branchs = response.data.data[0].branchs;
                 this.tags = response.data.data[0].tags;
+
 
                 let unification = []; //Unificacion de descuentos repetidos vacío.
 

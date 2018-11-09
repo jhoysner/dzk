@@ -257,14 +257,14 @@
           .catch(err => console.log(err))
         },
         auth() {
+          this.index();
           axios.get('/api/profile').then((response) => {
             console.log(response)
             this.user = response.data.user;
             this.length = this.user.discounts.length;
-            this.index();
             // this.sendCharcode(this.user.id);
           })
-          .catch(err => console.log(err))
+          .catch(err => console.log(err.response))
         },
 
         obtenerDescuento(discount){

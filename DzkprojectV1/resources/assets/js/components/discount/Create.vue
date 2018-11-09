@@ -6,6 +6,14 @@
                         <div class="modal-body">
 
                             <div class="form-group">
+                                <label>Elegir Comercio</label>
+                                  <select class="form-control" v-model="form.commerce_idcommerce" >
+                                      <option v-for="commerce in commerces" :value="commerce.idcommerce">{{commerce.name}}</option>
+                                  </select>
+                                <span class="text-danger" v-if="!!errorsDiscount.commerce_idcommerce"> {{errorsDiscount.commerce_idcommerce[0]}} </span>
+                            </div>
+
+                            <div class="form-group">
                                 <label>Titulo</label>
                                 <input type="text" class="form-control" v-model="form.title" >
                                 <span class="text-danger" v-if="!!errorsDiscount.title"> {{errorsDiscount.title[0]}} </span>
@@ -67,7 +75,7 @@
                             
                             <div class="form-group">
                                 <label>Precio Normal</label>
-                                <input type="number" step='0.01' value='0.00' placeholder='0.00'  class="form-control" v-model="form.normalprice">
+                                <input type="number" step='0.01' value='0.00' placeholder='0.00'  class="form-control" v-model="form.normalprice" @change="handleChangePrecioNormal($event)">
                                 <span class="text-danger" v-if="!!errorsDiscount.normalprice"> {{errorsDiscount.normalprice[0]}} </span>  
                             </div>
 
@@ -138,6 +146,7 @@
                   discountpercentage: '', 
                   discountcategory_iddiscountcategory: '', 
                   currency_idcurrency: '4d88d876-d868-11e8-8010-74c63b1404ed', 
+                  commerce_idcommerce: '', 
                 },
                 url: '/discount',
                 errorsDiscount: {},
@@ -151,6 +160,8 @@
                 value: [],
                 discountTagNum : null,
                 tagError: '',
+                user:{},
+                commerces:[],
 
             }
         },
@@ -158,8 +169,19 @@
           this.getDiscountCategories();
           this.getTags();
           this.getTagsNum();
+          this.auth();
         },
         methods: {
+
+            auth() {
+              axios.get('api/profile').then((response) => {
+                this.user = response.data.user;
+                this.commerces = response.data.user.commerces;
+                // this.index();
+                // this.index();
+              })
+              .catch(err => console.log(err))
+            }, 
             //Guarda tag
             addTag (newTag) {
               const tag = {
@@ -289,8 +311,10 @@
               
                // console.log(result) 
 
-              this.form.discountprice = precio-result;
-              
+              // this.form.discountprice = precio-result;
+              this.form.discountprice = parseFloat(precio-result).toFixed(2);
+
+
             },              
             handleChangePrecioDescuento(e){
               this.errorpreciodescuento = ''
@@ -306,8 +330,12 @@
 
               var result =  100*this.form.discountprice/this.form.normalprice
               
-              this.form.discountpercentage = 100-result;
+              this.form.discountpercentage = parseFloat(100-result).toFixed(2);
             
+            },            
+            handleChangePrecioNormal(e){
+              this.form.discountprice = ''
+              this.form.discountpercentage = ''
             },
             getTagsNum() {
               axios.get('api/tag-num').then(data => {

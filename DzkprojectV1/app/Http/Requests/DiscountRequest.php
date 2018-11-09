@@ -40,6 +40,7 @@ class DiscountRequest extends FormRequest
             'discountprice' => 'required',
             'discountpercentage' => 'required',
             'discountcategory_iddiscountcategory' => 'required',
+            'commerce_idcommerce' => 'required',
         ];
     }
 }

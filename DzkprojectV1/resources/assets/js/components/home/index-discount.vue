@@ -98,7 +98,11 @@
                                 <div class="details pb-10 pt-20">
                                     <div class="title d-flex flex-row justify-content-between">
                                         <div v-for="tag in discount.tags"> 
-                                          <span class="badge badge-secondary">{{tag.name}}</span>
+                                          <span class="badge badge-secondary">
+                                              <!-- <router-link class="tag" :to="`/discount/${tag.idtags}/tag`"> -->
+                                                {{tag.name}}
+                                              <!-- </router-link> -->
+                                         </span>
                                         </div>
                                         <span v-if="discount.tags.length < 1"> Sin Tags</span>
                                     </div>
@@ -113,7 +117,7 @@
                                 <div class="meta d-flex flex-row">
                                     <!--<div class="user-img"><img src="img/user-img.png" alt=""></div> -->
                                       <button type="button" :disabled="userHaveDiscount(discount.iddiscount)" :class="{ userHaveDiscount: userHaveDiscount(discount.iddiscount) }" class="btn btn-outline-primary" @click="obtenerDescuento(discount)">
-                                          {{ userHaveDiscount(discount.iddiscount) ? 'Ya aplicaste a este descuento': 'Obetener este Descuento'}} 
+                                          {{ userHaveDiscount(discount.iddiscount) ? 'Ya aplicaste a este descuento': 'Obtener este Descuento'}} 
                                      </button>
                                 </div>
                             </div>

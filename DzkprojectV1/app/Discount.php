@@ -35,7 +35,8 @@ class Discount extends Model
         'discountprice',
         'discountpercentage',
         'discountcategory_iddiscountcategory',
-        'currency_idcurrency'
+        'currency_idcurrency',
+        'commerce_idcommerce',
     ];
 
     protected $hidden  = [

@@ -82,26 +82,28 @@
         },
         created(){
            Bus.$on('branch_discount', (response) => {
+              console.log(response)
               this.form.discount_iddiscount = response.data.data.iddiscount;
-              this.getDiscountBranch()
+              this.getDiscountBranch(response.data.data.commerce_idcommerce)
               this.$refs.branchDiscountModal.show()
           });           
            Bus.$on('branch_discount_add', (response) => {
+              console.log(response)
               this.edit = true;
               this.form.discount_iddiscount = response.iddiscount;
-              this.getDiscountBranchSelected(this.form.discount_iddiscount)
+              this.getDiscountBranchSelected(this.form.discount_iddiscount, response.commerce_idcommerce )
               this.$refs.branchDiscountModal.show()
           });
         },
         methods: {
-          getDiscountBranch() {
-            axios.get('api/branch').then(data => {
+          getDiscountBranch(id) {
+            axios.get('api/branch-commerce/'+id).then(data => {
               this.branchs = data.data.data;
             })
             .catch(err => console.log(err))
           },          
-          getDiscountBranchSelected(id) {
-            axios.get('api/branch-select/'+id).then(data => {
+          getDiscountBranchSelected(id, commerce) {
+            axios.get('api/branch-select/'+id+'/'+commerce).then(data => {
               this.branchs = data.data.data;
               console.log(data);
             })

@@ -4,10 +4,10 @@
         <div class="modal-content">
             <div class="modal-body">
               
-              <div class="form-group">
+              <!--<div class="form-group">
                   <label class="font-weight-bold">ID comercio</label>
                   <p>{{ commerce.idcommerce }}</p>
-              </div>
+              </div> -->
 
               <div class="form-group">
                   <label class="font-weight-bold">Télefono principal</label>
@@ -42,7 +42,7 @@
               </div>
 
               <div class="form-group">
-                  <label class="font-weight-bold">Estado</label>
+                  <label class="font-weight-bold">Departamento</label>
                   <p>{{ commerce.state_idstate }}</p>
               </div>
 

@@ -134,12 +134,16 @@
                                     </div>
                                 </div>
                                 <div class="details pb-10 pt-20">
-                                    <div class="title d-flex flex-row justify-content-between">
-                                        <div v-for="tag in commerce.tags"> 
-                                          <span class="badge badge-secondary">{{tag.name}}</span>
-                                        </div>
-                                        <span v-if="commerce.tags.length < 1"> Sin Tags</span>
-                                    </div>
+                                  <div class="title d-flex flex-row justify-content-between">
+                                      <div v-for="tag in commerce.tags"> 
+                                        <span class="badge badge-secondary">
+                                          <router-link class="tag" :to="`/commerce/${tag.idtags}/tag`">
+                                            {{tag.name}}
+                                          </router-link>
+                                        </span>
+                                      </div>
+                                      <span v-if="commerce.tags.length < 1"> Sin Tags</span>
+                                  </div>
                                 </div>
                                 <div class="meta d-flex flex-row">
                                   <router-link class="btn btn-outline-primary btn-block view-branch":to="`/commerce/${commerce.idcommerce}/branchs`">
@@ -313,6 +317,14 @@ import paginator from '../../utilities/paginator';
   }
 
   .view-branch:hover {
+    color: #FFF;
+  }
+
+  .tag {
+    color: #FFF;
+  }
+
+  .tag:hover {
     color: #FFF;
   }
 

@@ -11,7 +11,7 @@
                         <table class="table table-striped mt-40 stat-table">
                             <thead>
                                 <tr>
-                                    <th class="text-center">ID Sucursal</th>
+                                    <!--<th class="text-center">ID Sucursal</th> -->
                                     <th class="text-center">Nombre</th>
                                     <!--<th class="text-center">Dirección</th>
                                     <th class="text-center">Horario de atención</th>
@@ -28,18 +28,18 @@
                             </thead>
                             <tbody>
                               <tr v-for="branch in branchs">
-                                <td>{{ branch.idbranch }}</td>
-                                <td>{{ branch.name }}</td>
+                                <!--<td>{{ branch.idbranch }}</td> -->
+                                <td class="text-center">{{ branch.name }}</td>
                                 <!--<td>{{ branch.address }}</td>
                                 <td>{{ branch.schedule }}</td>
                                 <td>{{ branch.phone1 }}</td>
                                 <td>{{ branch.phone2 }}</td> -->
-                                <td>
+                                <td class="text-center">
                                   <img class="image-branch" v-if="branch.image != null" :src="'images/branch/'+branch.image" />
                                   <p v-if="branch.image == null">No posee imagen.</p>
                                 </td>
-                                <td v-if="branch.latitude != null">{{ branch.latitude }} - {{ branch.longitude }}</td>
-                                <td v-else>No posee</td>
+                                <td v-if="branch.latitude != null" class="text-center">{{ branch.latitude }} - {{ branch.longitude }}</td>
+                                <td v-else class="text-center">No posee</td>
                                 <!--<td>{{ branch.commerces.name }}</td>
                                 <td>{{ branch.countries.name }}</td>
                                 <td>{{ branch.states.name }}</td>

@@ -3,10 +3,10 @@
         <b-modal id="showModal" ref="createtModal" :title="branch.name" hide-footer>
           <div class="modal-content">
               <div class="modal-body">
-                <div class="form-group">
+              <!--<div class="form-group">
                   <label class="font-weight-bold">ID Sucursal</label>
                   <p>{{ branch.idbranch }}</p>
-              </div>
+              </div> -->
 
               <div class="form-group">
                   <label class="font-weight-bold">Dirección</label>
@@ -46,7 +46,7 @@
               </div>
 
               <div class="form-group">
-                  <label class="font-weight-bold">Estado</label>
+                  <label class="font-weight-bold">Departamento</label>
                   <p>{{ branch.state_idstate }}</p>
               </div>
 

@@ -4,7 +4,9 @@ namespace App\Http\Controllers\HomeInit;
 
 use App\Branch;
 use App\Commerce;
+use App\CommerceTags;
 use App\Discount;
+use App\DiscountTags;
 use App\Http\Controllers\Controller;
 use App\UserHasDiscount;
 use Illuminate\Http\Request;
@@ -126,9 +128,10 @@ class HomeInitController extends Controller
             ->with('states')
               ->with('cities')
                 ->with('ccategories')
-                    ->with(['branchs' =>function ($query) {
-                            $query->with('discounts');
-                        }])->get();
+                    ->with('tags')
+                        ->with(['branchs' =>function ($query) {
+                                $query->with('discounts');
+                            }])->get();
 
         return response()->json(['data'=> $commerce], 200);
 
@@ -184,7 +187,7 @@ class HomeInitController extends Controller
 
         $branchs = Branch::where('commerce_idcommerce', $id)
             ->with(['discounts' => function($q) {
-                $q->with('categories','tags');
+                $q->groupBy('iddiscount')->with('categories','tags');
              }])->paginate(1);
                   
         return response()->json([
@@ -240,5 +243,47 @@ class HomeInitController extends Controller
         return response()->json(['data'=> $user_has_discount], 201);
 
 
+    }
+
+    public function filterTagsCommerce($id)
+    {
+        $tags = CommerceTags::with(['commerces' => function ($query) {
+                        $query->with('ccategories', 'tags');
+                    }])->where('tags_idtags', $id)->paginate(2);
+
+        return response()->json([
+            'paginate' => [
+                'total'         =>  $tags->total(),
+                'current_page'  =>  $tags->currentPage(),
+                'per_page'      =>  $tags->perPage(),
+                'last_page'     =>  $tags->lastPage(),
+                'from'          =>  $tags->firstItem(),
+                'to'            =>  $tags->lastPage()
+            ],
+
+            'tags' => $tags
+
+        ],200);
+    }    
+
+    public function filterTagsDiscount($id)
+    {
+        $tags = DiscountTags::with(['discounts' => function ($query) {
+                        $query->with('categories', 'tags');
+                    }])->where('tags_idtags', $id)->paginate(2);
+
+        return response()->json([
+            'paginate' => [
+                'total'         =>  $tags->total(),
+                'current_page'  =>  $tags->currentPage(),
+                'per_page'      =>  $tags->perPage(),
+                'last_page'     =>  $tags->lastPage(),
+                'from'          =>  $tags->firstItem(),
+                'to'            =>  $tags->lastPage()
+            ],
+
+            'tags' => $tags
+
+        ],200);
     }
 }

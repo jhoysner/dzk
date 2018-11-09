@@ -10,6 +10,8 @@ use App\Commerce;
 use App\CommerceTags;
 use App\Http\Requests\CommerceRequest;
 
+use App\UserHasCommerce;
+
 class CommercesController extends Controller
 {
     /**
@@ -79,6 +81,12 @@ class CommercesController extends Controller
       ];
 
       $commerce = Commerce::create($data);
+
+      UserHasCommerce::create([
+        'idusers_has_commerce'  => str_random(36),
+        'users_id'  =>  $request->idUser,
+        'commerce_idcommerce' => $commerce->idcommerce
+      ]);
 
       if(count($request->tags) > 0) {
         foreach ($request->tags as $value) { 

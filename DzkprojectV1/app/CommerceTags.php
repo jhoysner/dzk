@@ -24,4 +24,9 @@ class CommerceTags extends Model
     protected $hidden  = [
         'created_at', 'updated_at', 'deleted_at',
     ];
+
+    public function commerces()
+    {
+      return $this->belongsTo('App\Commerce', 'commerce_idcommerce', 'idcommerce');
+    }
 }

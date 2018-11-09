@@ -24,4 +24,9 @@ class DiscountTags extends Model
     protected $hidden  = [
         'created_at', 'updated_at', 'deleted_at',
     ];
+
+    public function discounts()
+    {
+      return $this->belongsTo('App\Discount', 'discount_iddiscount', 'iddiscount');
+    }
 }

@@ -81,7 +81,8 @@ Route::resource('commerce-categories', 'CommerceCategory\CommerceCategoriesContr
 
 Route::post('branch-discount', 'Discount\DiscountController@branchDiscount');
 Route::get('branch-discount/{id}', 'Discount\DiscountController@getBranchDiscount');
-Route::get('branch-select/{id}', 'Discount\DiscountController@getBranchDiscountSelect');
+Route::get('branch-commerce/{id}', 'Discount\DiscountController@getBranchCommerce');
+Route::get('branch-select/{id}/{commerce}', 'Discount\DiscountController@getBranchDiscountSelect');
 Route::get('branch-discount-update/{discount}/{id}', 'Discount\DiscountController@editBranchDiscount');
 Route::patch('branch-discount-update/{discount}/{id}', 'Discount\DiscountController@updateBranchDiscount');
 Route::delete('branch-discount-update/{discount}/{id}', 'Discount\DiscountController@branchDiscountDelete');
@@ -112,6 +113,8 @@ Route::get('detail-commerce/{id}/random', 'HomeInit\HomeInitController@commerce_
 Route::get('detail-discount/{id}', 'HomeInit\HomeInitController@discount_detail');
 Route::get('commerce-detail-branchs/{id}', 'HomeInit\HomeInitController@commerce_detail_branchs');
 Route::get('commerce-detail-discounts/{id}', 'HomeInit\HomeInitController@commerce_detail_discount');
+Route::get('filter-tags/{id}', 'HomeInit\HomeInitController@filterTagsCommerce');
+Route::get('filter-tags-discount/{id}', 'HomeInit\HomeInitController@filterTagsDiscount');
 
 
 Route::post('user-has-discount','HomeInit\HomeInitController@saveUserHasDiscount');

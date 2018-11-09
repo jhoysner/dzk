@@ -14,6 +14,8 @@ import Discountsrd from '../components/discounts-postulated/discounts-redeemed.v
 import DetailCommerce from '../components/home/commerce-detail';
 import DetailBranch from '../components/home/branch-detail';
 import DetailDiscount from '../components/home/discount-detail';
+import CommerceTag from '../components/home/commerce-tag';
+import DiscountTag from '../components/home/discount-tag';
 import DetailCommerceBranch from '../components/home/commerce-detail-branchs';
 import DetailCommerceDisocount from '../components/home/commerce-detail-discounts';
 import discountRoutes from '../components/discount/router'
@@ -132,7 +134,21 @@ const baseRoutes = [
             meta: { 
                 requiresAuth: false
             }
-        },       
+        },   
+        {
+            path: '/commerce/:idtag/tag',
+            component: CommerceTag,
+            meta: { 
+                requiresAuth: false
+            }
+        },        
+        {
+            path: '/discount/:idtag/tag',
+            component:DiscountTag,
+            meta: { 
+                requiresAuth: false
+            }
+        },         
         {
             path: '/client-discount/:id',
             component: DetailClienteDiscount,

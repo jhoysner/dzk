@@ -66,6 +66,9 @@ Route::group(['middleware' => 'auth:api'], function() {
 	Route::get('/permissionsroles/{id}','RoleController@getPermisosRoles');
 	Route::get('/permissionsuser/{id}','UserController@getPermisosUser');
 	Route::put('/assignpermissionsuser/{id}','UserController@asignaPermisosUser');
+
+	Route::get('/branchs-near','Branch\BranchsController@getBranchs');
+
 });
 
 Route::get('/tags', 'Tags\TagsController@index');

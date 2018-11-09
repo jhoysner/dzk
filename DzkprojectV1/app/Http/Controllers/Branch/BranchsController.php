@@ -5,9 +5,13 @@ namespace App\Http\Controllers\Branch;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Facades\Auth;
 
 use App\Http\Requests\BranchRequest;
 use App\Branch;
+use App\User;
+use Helper;
+use DB;
 
 class BranchsController extends Controller
 {
@@ -195,5 +199,72 @@ class BranchsController extends Controller
       }
 
       return response()->json(['msg' => 'Sucursal eliminada satisfactoriamente.'], 201);
+    }
+
+    protected function getLocalizationUser()
+    {
+      $id_user = Auth::id();
+
+      $user= User::find($id_user); 
+
+      $localization = [];
+
+      if(isset($user)) {
+        $localization['latitude']  = $user->latitude;
+        $localization['longitude'] = $user->longitude;        
+      } else {
+        $coord = Helper::getCoordenateDefault(); //$this->getCoordenateDefault();
+        $coord = json_decode($coord['val'], true);
+
+        $localization['latitude']  = $coord['latitud'];
+        $localization['longitude'] = $coord['longitud'];                
+      }
+      
+      return $localization;
+    }
+
+    public function getBranchs()
+    {
+      //Obtiene la latitud y logitud del cliente 
+      $local_user = $this->getLocalizationUser();
+                    
+      //Obtiene los rangos de busqueda de distancia
+      $range = Helper::getSearchRange();
+
+      if(is_null($range)){
+        $val_range = [0,500];
+      } else {
+        $val_range = explode(',', trim($range->val,'{}'));
+      }
+
+      $ri = 0;
+      $num_range = count($val_range);
+      //Recorre los rangos hasta encontrar Branchs
+      while($ri < $num_range) {
+        $rango1 = $val_range[$ri];
+        if(isset($val_range[$ri+1])) {
+          $rango2 = $val_range[$ri+1];
+        } else {
+          $rango2 = null;
+        }
+
+        $branchs = DB::select('call sp_getbranch_from_location(?,?,?,?)', array($local_user['latitude'],$local_user['longitude'],$rango1,$rango2));
+
+        if(count($branchs) > 0) {
+          break;
+        }
+
+        $ri++;
+      }
+
+      $branch_detail = array();
+      foreach($branchs as $b) {
+        $branch = Branch::select('idbranch','name','latitude','longitude')
+                    ->where('idbranch',$b->idbranch)
+                      ->first();
+        $branch_detail[] = $branch;
+       
+      }
+      return response()->json(['data'=> $branch_detail], 200);
     }
 }

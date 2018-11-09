@@ -156,6 +156,11 @@
                                     </ul>
                                 </div>
                             </div>
+
+                            <div class="single-sidebar">
+                                <h6>Ubicacion</h6>
+                                <div class="col-lg-12 branchsMap" id="branchsMap"></div>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -206,6 +211,8 @@
 </template>
 
 <script>
+import GoogleMapsLoader from 'google-maps'
+
     export default {
         data() {
 			return {
@@ -251,7 +258,54 @@
                 this.branch.commerce_idcommerce = response.data.data[0].commerces.name;
                 this.discounts = response.data.data[0].discounts;
 
-                console.log(response)
+                //console.log(response)
+                GoogleMapsLoader.load(function(google) {
+                    var bounds = new google.maps.LatLngBounds();
+                    var map = new google.maps.Map(document.getElementById('branchsMap'), {
+                        //zoom: 8
+                    })
+
+                    var markers = [];
+                    markers = response.data.data
+
+                    var infoWindow = new google.maps.InfoWindow(), marker, i;
+
+                    for(let i=0; i < markers.length; i++ ) {
+                        var position = new google.maps.LatLng(markers[i]['latitude'],markers[i]['longitude']);
+                        var pos = i+1;
+                        bounds.extend(position);
+                        var marker = new google.maps.Marker({
+                            position: position,
+                            map: map,
+                            title: markers[i]['name']
+                        });
+
+                        //marker.setIcon('../images/branch/'+markes[i]['image']);
+
+                         google.maps.event.addListener(marker, 'click', (function(marker, i) {
+                            return function() {
+                                infoWindow.setContent('<p>'+markers[i]['name']+'</p>');
+                                infoWindow.open(map, marker);
+                            }
+                        })(marker, i));
+
+                        map.fitBounds(bounds);
+                    }
+
+                    var boundsListener = google.maps.event.addListener((map), 'bounds_changed', function(event) {
+                        this.setZoom(9);
+                        google.maps.event.removeListener(boundsListener);
+                    });
+
+                    if (navigator.geolocation) {                    
+                        navigator.geolocation.getCurrentPosition(function(position) {
+                        var lat = position.coords.latitude;
+                        var lng = position.coords.longitude;
+                        console.log(lat +' '+lng)
+                    });
+                  } 
+                })
+
               })
               .catch(err => console.log(err))
             },	
@@ -266,4 +320,11 @@
 	  height: 50px;
 	  border-radius: 50%;
 	}
+    .branchsMap {
+        margin-top: 15px;
+        width: 100%;
+        height: 400px;
+        margin: 0 auto;
+    }
+
 </style>

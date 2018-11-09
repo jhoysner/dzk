@@ -10,9 +10,15 @@
                       TIENDAS
                   </a>
                 </li>
+
                 <li class="nav-item">
                    <router-link to="/home-discounts" class="nav-link">
                       DESCUENTOS
+                   </router-link>
+                </li>
+                <li class="nav-item">
+                   <router-link to="/branchs-map" class="nav-link">
+                      SUCURSALES
                    </router-link>
                 </li>
               </ul>

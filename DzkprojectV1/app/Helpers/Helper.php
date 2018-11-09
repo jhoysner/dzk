@@ -12,5 +12,17 @@ class Helper {
 		return $paginate->val;
 	}
 
+	public static function getCoordenateDefault()
+    {
+		$param = Params::where('key','coordenates_default')->first();
+    	return $param;	
+    }
+
+    public static function getSearchRange()
+    {
+    	$param = Params::where('key','search_distance_ranges')->first();
+    	return $param;
+    }
+
 
 }

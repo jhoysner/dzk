@@ -37,6 +37,8 @@
                         localStorage.removeItem('access_token')
                         localStorage.removeItem('roles')
                         localStorage.removeItem('permissions')
+                        localStorage.removeItem('redirect')
+
                         window.location.href = '/';
 
                       }).catch((error) => {

@@ -19,18 +19,6 @@ use DB;
 
 class SearchController extends Controller
 {
-    protected function getSearchRange()
-    {
-    	$param = Params::where('key','search_distance_ranges')->first();
-    	return $param;
-    }
-
-    protected function getCoordenateDefault()
-    {
-		$param = Params::where('key','coordenates_default')->first();
-    	return $param;	
-    }
-
     protected function getAlphaNumeric($cadena)
     {
     	$cadenaLimpia = preg_replace('([^A-Za-z0-9 ])', '', $cadena);	     					
@@ -85,7 +73,7 @@ class SearchController extends Controller
       	$local_user = $this->getLocalizationUser();
       	      			
 		//Obtiene los rangos de busqueda de distancia
-		$range = $this->getSearchRange();
+		$range = Helper::getSearchRange(); 
 		
 		if(is_null($range)){
 			$val_range = [0,500];
@@ -623,7 +611,7 @@ $discounts;*/
 		  	$localization['latitude']  = $user->latitude;
 		  	$localization['longitude'] = $user->longitude;	  		
 	  	} else {
-	  		$coord = $this->getCoordenateDefault();
+	  		$coord = Helper::getCoordenateDefault();
 	  		$coord = json_decode($coord['val'], true);
 
 		  	$localization['latitude']  = $coord['latitud'];

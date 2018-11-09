@@ -3,6 +3,7 @@ import Vue from 'vue'
 import Router from 'vue-router'
 import Index from '../components/home/Index'
 import IndexDiscount from '../components/home/index-discount.vue'
+import IndexBranchsMap from '../components/home/Branchs-map'
 import Commerces from '../components/commerces/index.vue'
 import Branchs from '../components/branchs/index.vue'
 import Profile from '../components/User/ProfileComponent.vue'
@@ -39,6 +40,14 @@ const baseRoutes = [
             component: IndexDiscount,
             meta: { 
                 requiresAuth: false
+            }
+        },
+        {
+            path: '/branchs-map',
+            component: IndexBranchsMap,
+            meta: { 
+                requiresAuth: true,
+                redirectAuth: true
             }
         },
         {
@@ -204,6 +213,10 @@ const router = new Router({
 
 router.beforeEach((to, from, next) => {
     if(to.matched.some(record => record.meta.requiresAuth)) {
+
+        if(to.matched.some(record => record.meta.redirectAuth)) {
+            localStorage.setItem('redirect', to.fullPath)
+        }
 
         const token = window.localStorage.getItem('access_token') 
         

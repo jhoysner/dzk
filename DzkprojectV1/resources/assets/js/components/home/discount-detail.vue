@@ -111,7 +111,6 @@
                     <div class="single-sidebar theme-tags">
                         <h6>Tags</h6>
                         <ul class="tag-list">
-                           
                             <li v-for="tag in tags"> <i class="icons icon-tag"></i> {{tag.name}}</li>
                         </ul>
                         <div class="sidebar-social">
@@ -123,6 +122,11 @@
                                 <li><a href="#"><i class="fa fa-dribbble" aria-hidden="true"></i></a></li>
                             </ul>
                         </div>
+                    </div>
+
+                    <div class="single-sidebar">
+                        <h6>Ubicacion</h6>
+                        <div class="col-lg-12 branchsMap" id="branchsMap"></div>
                     </div>
                 </div>
             </div>
@@ -180,6 +184,8 @@
 </template>
 
 <script>
+import GoogleMapsLoader from 'google-maps'
+
 	export default {
 		data() {
 			return {
@@ -252,7 +258,44 @@
             this.tags = response.data.data.tags;
             this.commerce = response.data.data.branchs[0].commerces;
 
-            // console.log(response.data.data)
+             //console.log(response.data.data.branchs)
+             GoogleMapsLoader.load(function(google) {
+                var bounds = new google.maps.LatLngBounds();
+                var map = new google.maps.Map(document.getElementById('branchsMap'), {
+                    //zoom: 8
+                })
+
+                var markers = [];
+                markers = response.data.data.branchs
+
+                var infoWindow = new google.maps.InfoWindow(), marker, i;
+
+                for(let i=0; i < markers.length; i++ ) {
+                    var position = new google.maps.LatLng(markers[i]['latitude'],markers[i]['longitude']);
+                    var pos = i+1;
+                    bounds.extend(position);
+                    var marker = new google.maps.Marker({
+                        position: position,
+                        map: map,
+                        title: markers[i]['name']
+                    });
+
+                     google.maps.event.addListener(marker, 'click', (function(marker, i) {
+                        return function() {
+                            infoWindow.setContent('<p>'+markers[i]['name']+'</p>');
+                            infoWindow.open(map, marker);
+                        }
+                    })(marker, i));
+
+                    map.fitBounds(bounds);
+                }
+
+                var boundsListener = google.maps.event.addListener((map), 'bounds_changed', function(event) {
+                    this.setZoom(9);
+                    google.maps.event.removeListener(boundsListener);
+                });
+              })
+
           })
           .catch(err => console.log(err))
         },
@@ -338,4 +381,10 @@
 	  height: 50px;
 	  border-radius: 50%;
 	}
+  .branchsMap {
+        margin-top: 15px;
+        width: 100%;
+        height: 400px;
+        margin: 0 auto;
+    }
 </style>

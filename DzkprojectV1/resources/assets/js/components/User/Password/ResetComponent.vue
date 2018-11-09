@@ -38,7 +38,7 @@
 			            </div>
 			            
 			            <div class="col-lg-12 text-right" >
-			                <button class="primary-btn">Resetear Contraseña </button>
+			                <button class="primary-btn"><i class="fa fa-spinner fa-spin"></i> Resetear Contraseña </button>
 			            </div>
 			        </div>
 			    </form>

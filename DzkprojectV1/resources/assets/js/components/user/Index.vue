@@ -1,7 +1,7 @@
 <template>
   <div>
     <div class="col-lg-12">
-        <div>
+        <div >
             <b-btn v-b-modal.createModal v-can="'add_users'">Crear Usuario</b-btn>
             <div class="settings-content">
                 <h4>Lista de Usuarios</h4>

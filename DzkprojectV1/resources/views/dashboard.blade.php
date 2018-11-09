@@ -59,6 +59,8 @@
     <script async defer
         src="https://maps.googleapis.com/maps/api/js?key=AIzaSyARjJet0cEb9j1zlP0rFo1sW7jRN0s8f_4">
     </script>
+    <script src="{{ asset('/js/Google.js') }}"></script>
+
 </body>
 
 </html>

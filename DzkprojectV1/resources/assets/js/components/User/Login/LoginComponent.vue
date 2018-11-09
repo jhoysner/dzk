@@ -84,7 +84,13 @@
             				const permissions = response.data.permissions
             				localStorage.setItem('permissions', (permissions))
 
-            				window.location.href = '/';
+            				if(localStorage.getItem('redirect')) {
+	            				let redirect = localStorage.getItem('redirect')
+	            				window.location.href = redirect;
+            				} else {
+	            				window.location.href = '/';
+            				}
+
 
                         }).catch((error) => {
                             this.errors.push(error.response.data.error);

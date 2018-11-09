@@ -14,6 +14,11 @@
                       DESCUENTOS
                    </router-link>
                 </li>
+                <li class="nav-item">
+                   <router-link to="/branchs-map" class="nav-link">
+                      SUCURSALES
+                   </router-link>
+                </li>
               </ul>
               <!-- <spinner :show="loadingProductos"></spinner> -->
               <div class="row justify-content-center stat-table-wrap">

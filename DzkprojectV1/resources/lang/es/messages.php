@@ -26,7 +26,8 @@ return [
     'role_delete'=> 'Grupo borrado correctamente',
     'user_create'=> 'Usuario creado correctamente',
     'user_error_create'=> 'Error al crear usuario',
-    'user_permissions'=> 'Permisos del Usuario actualizados'
+    'user_permissions'=> 'Permisos del Usuario actualizados',
+    'user_loc_update'=> 'Ubicación actualizada'
 
 
 

@@ -33,6 +33,9 @@ Route::group(['middleware' => 'auth:api'], function() {
 		Route::post('/', 'UserController@updateProfile');
 	});
 
+	//Localizacion 
+	Route::get('/localization/{lat}/{lng}','UserController@updateLocalization');
+
 	//Parametros
 	Route::resource('params','Params\ParamsController',
 		['except' => ['create','edit','update']

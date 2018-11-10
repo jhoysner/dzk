@@ -326,4 +326,22 @@ class UserController extends Controller
 
     }
 
+    public function updateLocalization($lat,$long)
+    {
+        $id = Auth::id();
+
+        $user = User::find($id);
+
+        if(!$user){
+            return response()->json(['error' => 'No existe el usuario'], 422);
+        }
+
+        $user->latitude = (string)$lat; 
+        $user->longitude = (string)$long;
+        $user->save();
+
+        return response()->json(['success'=>\Lang::get('messages.user_loc_update')], 200);
+
+    }
+
 }

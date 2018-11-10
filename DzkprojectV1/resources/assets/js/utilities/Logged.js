@@ -13,16 +13,25 @@ export const Logged = {
 				return this.logged
 			}
 			
-			if(token) {
-				axios.get('api/profile').then(response => {
+			axios.get('/api/profile').then(response => {
 				console.log(response)        
-			    	this.logged = true		        
+			    	this.logged = true		
 			        return this.logged
 			    })
 			    .catch(err => {
 			    	return this.logged = false
 			    }) 
-			}
+			    
+/*			if(token) {
+				axios.get('/api/profile').then(response => {
+				console.log(response)        
+			    	this.logged = true		
+			        return this.logged
+			    })
+			    .catch(err => {
+			    	return this.logged = false
+			    }) 
+			}*/
 		}		
 		
 	}

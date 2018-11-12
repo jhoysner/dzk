@@ -134,7 +134,7 @@ export default {
 
       if(token) {
         axios.get('api/profile', {timeout: 5000}).then(response => {
-        console.log(response)        
+        // console.log(response)        
             this.isLogged = true            
           })
           .catch(err => {

@@ -18,15 +18,12 @@
                           <li><a href="category.html">Category</a></li>
                           <li><a href="user-account-profile.html">User Profile</a></li>
                           <li><a href="author-account-profile.html">Author Profile</a></li>
-                          <li class="menu-has-children"><a href="">Pages</a>
-                              <ul>
-                                  <li><a href="upload-item.html">Upload Item</a></li>
-                                  <li><a href="theme-details-subscriber.html">Theme Details Subscriber</a></li>
-                                  <li><a href="cart.html">Cart</a></li>
-                                  <li><a href="checkout.html">Checkout</a></li>
-                                  <li><a href="confirmation.html">Confirmation</a></li>
-                                  <li><a href="coupon-all.html">Coupon</a></li>
-                              </ul>
+                          <li class="menu-has-children"> 
+                              <router-link to='/imbox'>
+                                  <a>
+                                    Mensajes
+                                  </a>
+                              </router-link>
                           </li>
                       </ul>
                   </nav>

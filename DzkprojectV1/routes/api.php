@@ -149,3 +149,8 @@ Route::get('not-authorize-discount/{id}', 'UserHasDiscountController@notAuthoriz
 Route::get('cancel-discount/{id}', 'UserHasDiscountController@cancelDiscount');
 Route::get('search-charcode/{charcode}', 'UserHasDiscountController@searchCharcode');
 Route::get('redeemed-discount/{id}', 'UserHasDiscountController@redeemedDiscount');
+
+Route::post('message-send', 'Message\MessageController@messageSend');
+Route::get('all-messages/{id}', 'Message\MessageController@index');
+Route::get('all-messages/{id}', 'Message\MessageController@index');
+Route::get('find-thread/{id}', 'Message\MessageController@find');

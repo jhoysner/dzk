@@ -88596,13 +88596,7 @@ var render = function() {
                       _vm._v(" "),
                       _c("div", { staticClass: "received_msg" }, [
                         _c("div", { staticClass: "received_withd_msg" }, [
-                          _c("p", [
-                            _vm._v(
-                              _vm._s(message.message) +
-                                " " +
-                                _vm._s(message.users_id_from)
-                            )
-                          ]),
+                          _c("p", [_vm._v(_vm._s(message.message))]),
                           _vm._v(" "),
                           _c("span", { staticClass: "time_date" }, [
                             _vm._v(
@@ -88617,13 +88611,7 @@ var render = function() {
                 _vm.UserSend(message)
                   ? _c("div", { staticClass: "outgoing_msg" }, [
                       _c("div", { staticClass: "sent_msg" }, [
-                        _c("p", [
-                          _vm._v(
-                            _vm._s(message.message) +
-                              " " +
-                              _vm._s(message.users_id_from)
-                          )
-                        ]),
+                        _c("p", [_vm._v(_vm._s(message.message))]),
                         _vm._v(" "),
                         _c("span", { staticClass: "time_date" }, [
                           _vm._v(

@@ -11,14 +11,14 @@
                       </div>
                       <div class="received_msg" >
                         <div class="received_withd_msg">
-                          <p>{{message.message}} {{message.users_id_from}}</p>
+                          <p>{{message.message}}</p>
                           <span class="time_date"> {{formatDate(message.created_at)}}</span>
                         </div>
                       </div>
                     </div>
                     <div v-if="UserSend(message)"  class="outgoing_msg">
                       <div class="sent_msg">
-                        <p>{{message.message}} {{message.users_id_from}}</p>
+                        <p>{{message.message}}</p>
                         <span class="time_date"> {{formatDate(message.created_at)}}</span>
                       </div>
                     </div>

@@ -88106,6 +88106,8 @@ exports.push([module.i, "\n#section-mailbox: {\n margin-top: 100px;\n}\nimg {\n 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__utilities_EventBus__ = __webpack_require__(6);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_moment__ = __webpack_require__(0);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_moment___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1_moment__);
 //
 //
 //
@@ -88161,6 +88163,8 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 
 
+
+__WEBPACK_IMPORTED_MODULE_1_moment___default.a.locale('es');
 
 /* harmony default export */ __webpack_exports__["default"] = ({
     data: function data() {
@@ -88198,6 +88202,9 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
         select: function select(item) {
             // console.log(item)
             this.$router.push('/imbox/' + item.thread);
+        },
+        formatDate: function formatDate(value) {
+            return __WEBPACK_IMPORTED_MODULE_1_moment___default()(value).format('LT a | MMMM D');
         }
     }
 });
@@ -88221,63 +88228,83 @@ var render = function() {
             { staticClass: "panel panel-default widget col-sm-8 offset-2 " },
             [
               _c("div", { staticClass: "panel-body" }, [
-                _c(
-                  "ul",
-                  { staticClass: "list-group" },
-                  _vm._l(_vm.messages, function(item) {
-                    return _c(
-                      "li",
-                      {
-                        staticClass: "list-group-item mb",
-                        on: {
-                          click: function($event) {
-                            _vm.select(item)
-                          }
-                        }
-                      },
-                      [
-                        _c("div", { staticClass: "row" }, [
-                          _vm._m(0, true),
-                          _vm._v(" "),
-                          _c("div", { staticClass: "col-xs-10 col-md-10" }, [
-                            _c("div", [
-                              _c("br"),
+                _vm.messages
+                  ? _c(
+                      "ul",
+                      { staticClass: "list-group" },
+                      _vm._l(_vm.messages, function(item) {
+                        return _c(
+                          "li",
+                          {
+                            staticClass: "list-group-item mb",
+                            on: {
+                              click: function($event) {
+                                _vm.select(item)
+                              }
+                            }
+                          },
+                          [
+                            _c("div", { staticClass: "row" }, [
+                              _vm._m(0, true),
                               _vm._v(" "),
-                              _c("p", { staticStyle: { color: "blue" } }, [
-                                _vm._v(
-                                  "\n                                                Asunto: " +
-                                    _vm._s(
-                                      item.subject ? item.subject : "sin asunto"
-                                    ) +
-                                    " "
-                                ),
-                                _c("br")
-                              ]),
-                              _vm._v(
-                                "\n                                            " +
-                                  _vm._s(item.message) +
-                                  "\n                                            "
-                              ),
-                              _c("a", { attrs: { href: "#" } }),
-                              _vm._v(" "),
-                              _c("div", { staticClass: "action pull-right" }, [
-                                _vm._v(
-                                  "\n                                                   " +
-                                    _vm._s(item.created_at) +
-                                    "\n                                         \n                                            "
-                                )
-                              ]),
-                              _vm._v(" "),
-                              _c("br"),
-                              _vm._v(" "),
-                              _c("div", { staticClass: "mic-info" })
+                              _c(
+                                "div",
+                                { staticClass: "col-xs-10 col-md-10" },
+                                [
+                                  _c("div", [
+                                    _c("br"),
+                                    _vm._v(" "),
+                                    _c(
+                                      "p",
+                                      { staticStyle: { color: "blue" } },
+                                      [
+                                        _vm._v(
+                                          "\n                                                Asunto: " +
+                                            _vm._s(
+                                              item.subject
+                                                ? item.subject
+                                                : "sin asunto"
+                                            ) +
+                                            " "
+                                        ),
+                                        _c("br")
+                                      ]
+                                    ),
+                                    _vm._v(
+                                      "\n                                            " +
+                                        _vm._s(item.message) +
+                                        "\n                                            "
+                                    ),
+                                    _c("a", { attrs: { href: "#" } }),
+                                    _vm._v(" "),
+                                    _c(
+                                      "div",
+                                      { staticClass: "action pull-right" },
+                                      [
+                                        _vm._v(
+                                          "\n                                                   " +
+                                            _vm._s(
+                                              _vm.formatDate(item.created_at)
+                                            ) +
+                                            "\n                                         \n                                            "
+                                        )
+                                      ]
+                                    ),
+                                    _vm._v(" "),
+                                    _c("br"),
+                                    _vm._v(" "),
+                                    _c("div", { staticClass: "mic-info" })
+                                  ])
+                                ]
+                              )
                             ])
-                          ])
-                        ])
-                      ]
+                          ]
+                        )
+                      })
                     )
-                  })
-                )
+                  : _vm._e(),
+                _vm._v(" "),
+                _vm.messages.length == 0 ? _c("div", [_vm._m(1)]) : _vm._e()
               ])
             ]
           )
@@ -88298,6 +88325,14 @@ var staticRenderFns = [
           alt: "sunil"
         }
       })
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", [
+      _c("h3", { staticClass: "text-center" }, [_vm._v("No tiene mensajes")])
     ])
   }
 ]
@@ -88396,7 +88431,7 @@ exports = module.exports = __webpack_require__(2)(false);
 
 
 // module
-exports.push([module.i, "\n#section-mailbox: {\n margin-top: 100px;\n}\nimg {\n  width: 200%;\n}\n.container{max-width:1170px; margin:auto;\n}\nimg{ max-width:100%;\n}\n.inbox_people {\n  background: #f8f8f8 none repeat scroll 0 0;\n  float: left;\n  overflow: hidden;\n  width: 40%; border-right:1px solid #c4c4c4;\n}\n.inbox_msg {\n  border: 1px solid #c4c4c4;\n  clear: both;\n  overflow: hidden;\n}\n.top_spac{ margin: 20px 0 0;\n}\n.recent_heading {float: left; width:40%;\n}\n.srch_bar {\n  display: inline-block;\n  text-align: right;\n  width: 60%; padding:\n}\n.headind_srch{ padding:10px 29px 10px 20px; overflow:hidden; border-bottom:1px solid #c4c4c4;\n}\n.recent_heading h4 {\n  color: #05728f;\n  font-size: 21px;\n  margin: auto;\n}\n.srch_bar input{ border:1px solid #cdcdcd; border-width:0 0 1px 0; width:80%; padding:2px 0 4px 6px; background:none;\n}\n.srch_bar .input-group-addon button {\n  background: rgba(0, 0, 0, 0) none repeat scroll 0 0;\n  border: medium none;\n  padding: 0;\n  color: #707070;\n  font-size: 18px;\n}\n.srch_bar .input-group-addon { margin: 0 0 0 -27px;\n}\n.chat_ib h5{ font-size:15px; color:#464646; margin:0 0 8px 0;\n}\n.chat_ib h5 span{ font-size:13px; float:right;\n}\n.chat_ib p{ font-size:14px; color:#989898; margin:auto\n}\n.chat_img {\n  float: left;\n  width: 11%;\n}\n.chat_ib {\n  float: left;\n  padding: 0 0 0 15px;\n  width: 88%;\n}\n.chat_people{ overflow:hidden; clear:both;\n}\n.chat_list {\n  border-bottom: 1px solid #c4c4c4;\n  margin: 0;\n  padding: 18px 16px 10px;\n}\n.inbox_chat { height: 550px; overflow-y: scroll;\n}\n.active_chat{ background:#ebebeb;\n}\n.incoming_msg_img {\n  display: inline-block;\n  width: 6%;\n}\n.received_msg {\n  display: inline-block;\n  padding: 0 0 0 10px;\n  vertical-align: top;\n  width: 92%;\n}\n.received_withd_msg p {\n  background: #ebebeb none repeat scroll 0 0;\n  border-radius: 3px;\n  color: #646464;\n  font-size: 14px;\n  margin: 0;\n  padding: 5px 10px 5px 12px;\n  width: 100%;\n}\n.time_date {\n  color: #747474;\n  display: block;\n  font-size: 12px;\n  margin: 8px 0 0;\n}\n.received_withd_msg { width: 57%;\n}\n.mesgs {\n  float: left;\n  padding: 30px 15px 0 25px;\n  width: 60%;\n}\n.sent_msg p {\n  background: #05728f none repeat scroll 0 0;\n  border-radius: 3px;\n  font-size: 14px;\n  margin: 0; color:#fff;\n  padding: 5px 10px 5px 12px;\n  width:100%;\n}\n.outgoing_msg{ overflow:hidden; margin:26px 0 26px;\n}\n.sent_msg {\n  float: right;\n  width: 46%;\n}\n.input_msg_write input {\n  background: rgba(0, 0, 0, 0) none repeat scroll 0 0;\n  border: medium none;\n  color: #4c4c4c;\n  font-size: 15px;\n  min-height: 48px;\n  width: 100%;\n}\n.type_msg {border-top: 1px solid #c4c4c4;position: relative;\n}\n.msg_send_btn {\n  background: #05728f none repeat scroll 0 0;\n  border: medium none;\n  border-radius: 50%;\n  color: #fff;\n  cursor: pointer;\n  font-size: 17px;\n  height: 33px;\n  position: absolute;\n  right: 0;\n  top: 11px;\n  width: 33px;\n}\n.messaging { padding: 0 0 50px 0;\n}\n.msg_history {\n  height: 516px;\n  overflow-y: auto;\n}\n", ""]);
+exports.push([module.i, "\n#section-mailbox: {\n margin-top: 100px;\n}\nimg{ max-width:100%;\n}\n.incoming_msg_img {\n  display: inline-block;\n  width: 6%;\n}\n.received_msg {\n  display: inline-block;\n  padding: 0 0 0 10px;\n  vertical-align: top;\n  width: 92%;\n}\n.received_withd_msg p {\n  background: #ebebeb none repeat scroll 0 0;\n  border-radius: 3px;\n  color: #646464;\n  font-size: 14px;\n  margin: 0;\n  padding: 5px 10px 5px 12px;\n  width: 100%;\n}\n.time_date {\n  color: #747474;\n  display: block;\n  font-size: 12px;\n  margin: 0 0 0;\n}\n.received_withd_msg { width: 57%;\n}\n.mesgs {\n  float: left;\n  padding: 30px 15px 0 25px;\n  width: 60%;\n}\n.sent_msg p {\n  background: #05728f none repeat scroll 0 0;\n  border-radius: 3px;\n  font-size: 14px;\n  margin: 0; color:#fff;\n  padding: 5px 10px 5px 12px;\n  width:100%;\n}\n.outgoing_msg{ overflow:hidden; margin:26px 0 26px;\n}\n.sent_msg {\n  float: right;\n  width: 46%;\n}\n.input_msg_write input {\n  background: rgba(0, 0, 0, 0) none repeat scroll 0 0;\n  border: medium none;\n  color: #4c4c4c;\n  font-size: 15px;\n  min-height: 48px;\n  width: 100%;\n}\n.type_msg {border-top: 1px solid #c4c4c4;position: relative;\n}\n.msg_send_btn {\n  background: #05728f none repeat scroll 0 0;\n  border: medium none;\n  border-radius: 50%;\n  color: #fff;\n  cursor: pointer;\n  font-size: 17px;\n  height: 33px;\n  position: absolute;\n  right: 0;\n  top: 11px;\n  width: 33px;\n}\n.messaging { padding: 0 0 50px 0;\n}\n.msg_history {\n  height: 516px;\n  overflow-y: auto;\n}\n", ""]);
 
 // exports
 
@@ -88408,6 +88443,13 @@ exports.push([module.i, "\n#section-mailbox: {\n margin-top: 100px;\n}\nimg {\n 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__utilities_EventBus__ = __webpack_require__(6);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_moment__ = __webpack_require__(0);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_moment___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1_moment__);
+//
+//
+//
+//
+//
 //
 //
 //
@@ -88445,6 +88487,9 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 
+
+
+__WEBPACK_IMPORTED_MODULE_1_moment___default.a.locale('es');
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   props: ['id'],
@@ -88459,7 +88504,8 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
         commerce_idcommerce: '',
         messengerservicetopic_idmessengerservicetopic: '1'
       },
-      commerce: {}
+      commerce: {},
+      user: {}
     };
   },
   created: function created() {
@@ -88475,6 +88521,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
       axios.get('/api/profile').then(function (response) {
         console.log(response);
         _this.form.users_id_from = response.data.user.id;
+        _this.user = response.data.user;
         // this.index();
       }).catch(function (err) {
         return console.log(err);
@@ -88498,11 +88545,24 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 
       axios.post('/api/message-send', this.form).then(function (response) {
         _this3.form.message = '';
+        _this3.findThread();
+
         console.log(response);
       }).catch(function (err) {
         return console.log(err);
       });
+    },
+    formatDate: function formatDate(value) {
+      return __WEBPACK_IMPORTED_MODULE_1_moment___default()(value).format('LT a | MMMM D');
+    },
+
+    UserReceive: function UserReceive(message) {
+      return message.users_id_from != this.user.id;
+    },
+    UserSend: function UserSend(message) {
+      return message.users_id_from == this.user.id;
     }
+
   },
   watch: {
     id: function id() {
@@ -88527,21 +88587,56 @@ var render = function() {
         _c(
           "div",
           { staticClass: "msg_history" },
-          _vm._l(_vm.messages, function(message) {
-            return _c("div", { staticClass: "incoming_msg mb-2" }, [
-              _vm._m(0, true),
-              _vm._v(" "),
-              _c("div", { staticClass: "received_msg" }, [
-                _c("div", { staticClass: "received_withd_msg" }, [
-                  _c("p", [_vm._v(_vm._s(message.message))]),
-                  _vm._v(" "),
-                  _c("span", { staticClass: "time_date" }, [
-                    _vm._v(" " + _vm._s(message.created_at))
-                  ])
-                ])
-              ])
-            ])
-          })
+          [
+            _vm._l(_vm.messages, function(message) {
+              return [
+                _vm.UserReceive(message)
+                  ? _c("div", { staticClass: "incoming_msg mb-2" }, [
+                      _vm._m(0, true),
+                      _vm._v(" "),
+                      _c("div", { staticClass: "received_msg" }, [
+                        _c("div", { staticClass: "received_withd_msg" }, [
+                          _c("p", [
+                            _vm._v(
+                              _vm._s(message.message) +
+                                " " +
+                                _vm._s(message.users_id_from)
+                            )
+                          ]),
+                          _vm._v(" "),
+                          _c("span", { staticClass: "time_date" }, [
+                            _vm._v(
+                              " " + _vm._s(_vm.formatDate(message.created_at))
+                            )
+                          ])
+                        ])
+                      ])
+                    ])
+                  : _vm._e(),
+                _vm._v(" "),
+                _vm.UserSend(message)
+                  ? _c("div", { staticClass: "outgoing_msg" }, [
+                      _c("div", { staticClass: "sent_msg" }, [
+                        _c("p", [
+                          _vm._v(
+                            _vm._s(message.message) +
+                              " " +
+                              _vm._s(message.users_id_from)
+                          )
+                        ]),
+                        _vm._v(" "),
+                        _c("span", { staticClass: "time_date" }, [
+                          _vm._v(
+                            " " + _vm._s(_vm.formatDate(message.created_at))
+                          )
+                        ])
+                      ])
+                    ])
+                  : _vm._e()
+              ]
+            })
+          ],
+          2
         ),
         _vm._v(" "),
         _c("div", { staticClass: "type_msg" }, [

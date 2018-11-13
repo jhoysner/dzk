@@ -2,49 +2,49 @@
     <div>
         <div id="section-mailbox" class="settings-content">
             <div class="row">
-            <div class="panel panel-default widget col-sm-8 offset-2 ">
-                <div class="panel-body">
-                    <ul class="list-group">
-                            <li  @click="select(item)" class="list-group-item mb" v-for="item in messages">
-                                <div class="row">
-                                    <div class="col-xs-2 col-md-2">
-                                       <img src="https://ptetutorials.com/images/user-profile.png" alt="sunil"> 
-                                    </div>
-                                    <div class="col-xs-10 col-md-10">
-                                        <div>
-                                            <br>
-                                            <p style="color:blue">
-                                                Asunto: {{item.subject ? item.subject : 'sin asunto' }} <br>
-                                            </p>
-                                            {{item.message}}
-                                            <a href="#" >
-                                                <!-- {{$notification->data['text']}} -->
-                                            </a>
-                                            <div class="action pull-right">
-                                                    <!-- <span class="glyphicon glyphicon-ok"></span> -->
-                                                   {{item.created_at}}
-                                         
-                                            </div>
-                                            <br>
-                                            <div class="mic-info">
-                                                <!-- {{$notification->created_at->diffForHumans()}} -->
-                                            </div>
+                <div class="panel panel-default widget col-sm-8 offset-2 ">
+                    <div class="panel-body">
+                        <ul class="list-group" v-if="messages">
+                                <li  @click="select(item)" class="list-group-item mb" v-for="item in messages">
+                                    <div class="row">
+                                        <div class="col-xs-2 col-md-2">
+                                           <img src="https://ptetutorials.com/images/user-profile.png" alt="sunil"> 
                                         </div>
+                                        <div class="col-xs-10 col-md-10">
+                                            <div>
+                                                <br>
+                                                <p style="color:blue">
+                                                    Asunto: {{item.subject ? item.subject : 'sin asunto' }} <br>
+                                                </p>
+                                                {{item.message}}
+                                                <a href="#" >
+                                                    <!-- {{$notification->data['text']}} -->
+                                                </a>
+                                                <div class="action pull-right">
+                                                        <!-- <span class="glyphicon glyphicon-ok"></span> -->
+                                                       {{formatDate(item.created_at)}}
+                                             
+                                                </div>
+                                                <br>
+                                                <div class="mic-info">
+                                                    <!-- {{$notification->created_at->diffForHumans()}} -->
+                                                </div>
+                                            </div>
 
+                                        </div>
                                     </div>
-                                </div>
-                            </li>
-                    </ul>
-                </div>
-            </div>            
-<!--             <div class="panel panel-default widget col-sm-8 ">
-                <div class="card">
-                    <div class="card-body">
-                        <router-view></router-view>
+                                </li>
+                        </ul>
+                        <div v-if="messages.length == 0">
+                            <div >
+                                
+                                <h3 class="text-center">No tiene mensajes</h3>
+                            </div>
+                        </div>
                     </div>
-                </div>
-            </div> -->
+                </div>            
             </div>
+         
 
         </div>
     </div>
@@ -52,7 +52,10 @@
 </template>
 
 <script>
-import Bus from '../../utilities/EventBus';
+    import Bus from '../../utilities/EventBus';
+    import moment from 'moment';
+     moment.locale('es');
+
 
     export default {
         data() {
@@ -77,14 +80,18 @@ import Bus from '../../utilities/EventBus';
                 // console.log(response)      
 
                 this.messages = response.data.data
-             
+
+
               })
               .catch(err => console.log(err))
             },
             select(item){
                 // console.log(item)
                 this.$router.push('/imbox/'+item.thread)
-            }
+            },
+            formatDate(value){
+                return  moment(value).format('LT a | MMMM D');
+            },
           
         }
     }

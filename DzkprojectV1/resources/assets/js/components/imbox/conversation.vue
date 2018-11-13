@@ -4,21 +4,26 @@
           <div class="col-md-12 offset-2">
            <div class="mesgs">
                 <div class="msg_history">
-                  <div class="incoming_msg mb-2" v-for="message in messages">
-                    <div class="incoming_msg_img"> <img src="https://ptetutorials.com/images/user-profile.png" alt="sunil"> </div>
-                    <div class="received_msg">
-                      <div class="received_withd_msg">
-                        <p>{{message.message}}</p>
-                        <span class="time_date"> {{message.created_at}}</span></div>
+                  <template v-for="message in messages">
+                    <div v-if="UserReceive(message)" class="incoming_msg mb-2">
+                      <div  class="incoming_msg_img">
+                        <img src="https://ptetutorials.com/images/user-profile.png" alt="sunil">
+                      </div>
+                      <div class="received_msg" >
+                        <div class="received_withd_msg">
+                          <p>{{message.message}} {{message.users_id_from}}</p>
+                          <span class="time_date"> {{formatDate(message.created_at)}}</span>
+                        </div>
+                      </div>
                     </div>
-                  </div>
-  <!--                 <div class="outgoing_msg">
-                    <div class="sent_msg">
-                      <p>Test which is a new approach to have all
-                        solutions</p>
-                      <span class="time_date"> 11:01 AM    |    June 9</span> </div>
-                  </div>
-               -->
+                    <div v-if="UserSend(message)"  class="outgoing_msg">
+                      <div class="sent_msg">
+                        <p>{{message.message}} {{message.users_id_from}}</p>
+                        <span class="time_date"> {{formatDate(message.created_at)}}</span>
+                      </div>
+                    </div>
+                
+                  </template>
                 </div>
                 <div class="type_msg">
                   <div class="input_msg_write">
@@ -36,6 +41,9 @@
 
   <script>
   import Bus from '../../utilities/EventBus';
+  import moment from 'moment';
+  moment.locale('es');
+
       export default {
       props:['id'],
       data() {
@@ -50,6 +58,7 @@
                 messengerservicetopic_idmessengerservicetopic: '1',
               },  
               commerce: {},
+              user:{}
           }
       },
       created(){
@@ -63,6 +72,7 @@
             axios.get('/api/profile').then((response) => {
               console.log(response)
               this.form.users_id_from = response.data.user.id;
+              this.user = response.data.user;
               // this.index();
             })
             .catch(err => console.log(err))
@@ -81,16 +91,28 @@
           send(){
             axios.post('/api/message-send', this.form).then(response => {
               this.form.message = ''
+              this.findThread()
+
               console.log(response)
             })
             .catch(err => console.log(err));
           },
+          formatDate(value){
+              return  moment(value).format('LT a | MMMM D');
+          },     
+          UserReceive: function (message) {
+            return message.users_id_from != this.user.id
+          },          
+          UserSend: function (message) {
+            return message.users_id_from == this.user.id
+          },
+
       },
       watch:{
           id: function() { // watch it
             this.findThread();
           }
-      }    
+      }, 
 
 
       }
@@ -99,72 +121,9 @@
   #section-mailbox: {
    margin-top: 100px;
   }
-  img {
-    width: 200%;
-  }
 
 
-  .container{max-width:1170px; margin:auto;}
   img{ max-width:100%;}
-  .inbox_people {
-    background: #f8f8f8 none repeat scroll 0 0;
-    float: left;
-    overflow: hidden;
-    width: 40%; border-right:1px solid #c4c4c4;
-  }
-  .inbox_msg {
-    border: 1px solid #c4c4c4;
-    clear: both;
-    overflow: hidden;
-  }
-  .top_spac{ margin: 20px 0 0;}
-
-
-  .recent_heading {float: left; width:40%;}
-  .srch_bar {
-    display: inline-block;
-    text-align: right;
-    width: 60%; padding:
-  }
-  .headind_srch{ padding:10px 29px 10px 20px; overflow:hidden; border-bottom:1px solid #c4c4c4;}
-
-  .recent_heading h4 {
-    color: #05728f;
-    font-size: 21px;
-    margin: auto;
-  }
-  .srch_bar input{ border:1px solid #cdcdcd; border-width:0 0 1px 0; width:80%; padding:2px 0 4px 6px; background:none;}
-  .srch_bar .input-group-addon button {
-    background: rgba(0, 0, 0, 0) none repeat scroll 0 0;
-    border: medium none;
-    padding: 0;
-    color: #707070;
-    font-size: 18px;
-  }
-  .srch_bar .input-group-addon { margin: 0 0 0 -27px;}
-
-  .chat_ib h5{ font-size:15px; color:#464646; margin:0 0 8px 0;}
-  .chat_ib h5 span{ font-size:13px; float:right;}
-  .chat_ib p{ font-size:14px; color:#989898; margin:auto}
-  .chat_img {
-    float: left;
-    width: 11%;
-  }
-  .chat_ib {
-    float: left;
-    padding: 0 0 0 15px;
-    width: 88%;
-  }
-
-  .chat_people{ overflow:hidden; clear:both;}
-  .chat_list {
-    border-bottom: 1px solid #c4c4c4;
-    margin: 0;
-    padding: 18px 16px 10px;
-  }
-  .inbox_chat { height: 550px; overflow-y: scroll;}
-
-  .active_chat{ background:#ebebeb;}
 
   .incoming_msg_img {
     display: inline-block;
@@ -189,7 +148,7 @@
     color: #747474;
     display: block;
     font-size: 12px;
-    margin: 8px 0 0;
+    margin: 0 0 0;
   }
   .received_withd_msg { width: 57%;}
   .mesgs {

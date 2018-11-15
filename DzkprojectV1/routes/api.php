@@ -154,3 +154,4 @@ Route::post('message-send', 'Message\MessageController@messageSend');
 Route::get('all-messages/{id}', 'Message\MessageController@index');
 Route::get('all-messages/{id}', 'Message\MessageController@index');
 Route::get('find-thread/{id}', 'Message\MessageController@find');
+Route::get('message-read/{id}', 'Message\MessageController@read');

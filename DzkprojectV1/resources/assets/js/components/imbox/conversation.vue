@@ -84,6 +84,7 @@
               this.form.commerce_idcommerce = response.data.data[0].commerce_idcommerce
               this.form.thread = response.data.data[0].thread
               this.form.subject = response.data.data[0].subject
+              // this.form.users_id_to = response.data.data[0].users_id_from
            
             })
             .catch(err => console.log(err))
@@ -92,8 +93,7 @@
             axios.post('/api/message-send', this.form).then(response => {
               this.form.message = ''
               this.findThread()
-
-              console.log(response)
+              Bus.$emit('header-message-send') 
             })
             .catch(err => console.log(err));
           },

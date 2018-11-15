@@ -52764,7 +52764,7 @@ exports = module.exports = __webpack_require__(2)(false);
 
 
 // module
-exports.push([module.i, "", ""]);
+exports.push([module.i, "\n.badge-danger[data-v-3c07614a] {\n  color: #dc3545;\n}\n.top-message .badge[data-v-3c07614a] {\n  position: absolute;\n  color: #42b0f2;\n  font-weight: 300;\n  border-radius: 20px;\n  padding: -13px;\n  line-height: initial;\n  top: 0px;\n  right: 13px;\n  height: 10px;\n  width: 10px;\n}\n.top-message[data-v-3c07614a] {\n  margin-left: 40px;\n  color: #fff;\n  padding: 6px 10px;\n  border-radius: 50px;\n}\n.icon-envelope[data-v-3c07614a] {\n  font-size: 20px;\n}\n", ""]);
 
 // exports
 
@@ -52808,6 +52808,15 @@ module.exports = function listToStyles (parentId, list) {
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__utilities_EventBus_js__ = __webpack_require__(6);
+//
+//
+//
+//
+//
+//
+//
+//
 //
 //
 //
@@ -52888,11 +52897,70 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 
+
+
 /* harmony default export */ __webpack_exports__["default"] = ({
-  name: "",
-  data: function data() {
-    return {};
-  }
+    data: function data() {
+
+        return {
+            'user': {},
+            'messages': [],
+            'messageTrue': false,
+            'length': ''
+        };
+    },
+    mounted: function mounted() {
+        var _this = this;
+
+        __WEBPACK_IMPORTED_MODULE_0__utilities_EventBus_js__["a" /* default */].$on('header-mesasge-false', function () {
+            _this.messageTrue = false;
+        });
+        __WEBPACK_IMPORTED_MODULE_0__utilities_EventBus_js__["a" /* default */].$on('header-message-true', function () {
+            _this.messageTrue = true;
+        });
+        __WEBPACK_IMPORTED_MODULE_0__utilities_EventBus_js__["a" /* default */].$on('header-message-send', function () {
+            _this.index();
+        });
+        this.auth();
+    },
+
+    methods: {
+        auth: function auth() {
+            var _this2 = this;
+
+            axios.get('api/profile').then(function (response) {
+                _this2.user = response.data.user;
+                _this2.index();
+            }).catch(function (err) {
+                return console.log(err);
+            });
+        },
+        index: function index() {
+            var _this3 = this;
+
+            axios.get('api/all-messages/' + this.user.id).then(function (response) {
+                _this3.messages = response.data.data;
+
+                for (var key in _this3.messages) {
+                    _this3.messageState(_this3.messages[key]);
+                }
+            }).catch(function (err) {
+                return console.log(err);
+            });
+        },
+        messageState: function messageState(item) {
+
+            if (item.users_id_from != this.user.id) {
+
+                if (item.read_at == null) {
+
+                    this.messageTrue = true;
+                }
+            }
+            // return this.message = false;
+        }
+    }
+
 });
 
 /***/ }),
@@ -52931,20 +52999,28 @@ var render = function() {
                     _vm._v(" "),
                     _vm._m(4),
                     _vm._v(" "),
-                    _c(
-                      "li",
-                      { staticClass: "menu-has-children" },
-                      [
-                        _c("router-link", { attrs: { to: "/imbox" } }, [
-                          _c("a", [
-                            _vm._v(
-                              "\n                                Mensajes\n                              "
-                            )
-                          ])
-                        ])
-                      ],
-                      1
-                    )
+                    _c("li", [
+                      _c(
+                        "div",
+                        { staticClass: "top-message mr-0" },
+                        [
+                          _c("router-link", { attrs: { to: "/imbox" } }, [
+                            _c("a", [
+                              _c("span", { staticClass: "icons icon-envelope" })
+                            ])
+                          ]),
+                          _vm._v(" "),
+                          _vm.messageTrue
+                            ? _c(
+                                "span",
+                                { staticClass: "badge badge-danger" },
+                                [_vm._v("_")]
+                              )
+                            : _vm._e()
+                        ],
+                        1
+                      )
+                    ])
                   ])
                 ]
               ),
@@ -88094,7 +88170,7 @@ exports = module.exports = __webpack_require__(2)(false);
 
 
 // module
-exports.push([module.i, "\n#section-mailbox: {\n margin-top: 100px;\n}\nimg {\n  width: 100%;\n}\n", ""]);
+exports.push([module.i, "\n#section-mailbox: {\n margin-top: 100px;\n}\nimg {\n  width: 100%;\n}\n.unread{\n    background:#ebebeb;\n}\n.unread-text{\n    color: red;\n}\n\n", ""]);
 
 // exports
 
@@ -88108,6 +88184,8 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__utilities_EventBus__ = __webpack_require__(6);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_moment__ = __webpack_require__(0);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_moment___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1_moment__);
+//
+//
 //
 //
 //
@@ -88192,19 +88270,36 @@ __WEBPACK_IMPORTED_MODULE_1_moment___default.a.locale('es');
             var _this2 = this;
 
             axios.get('api/all-messages/' + this.user.id).then(function (response) {
-                // console.log(response)      
-
                 _this2.messages = response.data.data;
             }).catch(function (err) {
                 return console.log(err);
             });
         },
         select: function select(item) {
-            // console.log(item)
+            axios.get('/api/message-read/' + item.idmessengerservice).then(function (response) {
+                console.log(response);
+            }).catch(function (err) {
+                return console.log(err);
+            });
+
+            __WEBPACK_IMPORTED_MODULE_0__utilities_EventBus__["a" /* default */].$emit('header-mesasge-false');
+
             this.$router.push('/imbox/' + item.thread);
         },
         formatDate: function formatDate(value) {
             return __WEBPACK_IMPORTED_MODULE_1_moment___default()(value).format('LT a | MMMM D');
+        },
+        messageState: function messageState(item) {
+
+            if (item.users_id_from != this.user.id) {
+
+                if (item.read_at == null) {
+
+                    __WEBPACK_IMPORTED_MODULE_0__utilities_EventBus__["a" /* default */].$emit('header-message-true');
+                    return true;
+                }
+            }
+            return false;
         }
     }
 });
@@ -88232,75 +88327,96 @@ var render = function() {
                   ? _c(
                       "ul",
                       { staticClass: "list-group" },
-                      _vm._l(_vm.messages, function(item) {
-                        return _c(
-                          "li",
-                          {
-                            staticClass: "list-group-item mb",
-                            on: {
-                              click: function($event) {
-                                _vm.select(item)
-                              }
-                            }
-                          },
-                          [
-                            _c("div", { staticClass: "row" }, [
-                              _vm._m(0, true),
-                              _vm._v(" "),
-                              _c(
-                                "div",
-                                { staticClass: "col-xs-10 col-md-10" },
-                                [
-                                  _c("div", [
-                                    _c("br"),
-                                    _vm._v(" "),
-                                    _c(
-                                      "p",
-                                      { staticStyle: { color: "blue" } },
-                                      [
-                                        _vm._v(
-                                          "\n                                                Asunto: " +
-                                            _vm._s(
-                                              item.subject
-                                                ? item.subject
-                                                : "sin asunto"
-                                            ) +
-                                            " "
+                      [
+                        _vm._l(_vm.messages, function(item) {
+                          return [
+                            _c(
+                              "li",
+                              {
+                                staticClass: "list-group-item mb ",
+                                class: { unread: _vm.messageState(item) },
+                                on: {
+                                  click: function($event) {
+                                    _vm.select(item)
+                                  }
+                                }
+                              },
+                              [
+                                _c("div", { staticClass: "row" }, [
+                                  _vm._m(0, true),
+                                  _vm._v(" "),
+                                  _c(
+                                    "div",
+                                    { staticClass: "col-xs-10 col-md-10" },
+                                    [
+                                      _vm.messageState(item)
+                                        ? _c(
+                                            "div",
+                                            { staticClass: "pull-right" },
+                                            [
+                                              _c(
+                                                "span",
+                                                {
+                                                  staticClass:
+                                                    "badge badge-info"
+                                                },
+                                                [_vm._v(" Leer ")]
+                                              )
+                                            ]
+                                          )
+                                        : _vm._e(),
+                                      _vm._v(" "),
+                                      _c("div", [
+                                        _c("br"),
+                                        _vm._v(" "),
+                                        _c(
+                                          "p",
+                                          { staticStyle: { color: "blue" } },
+                                          [
+                                            _vm._v(
+                                              "\n                                                Asunto: " +
+                                                _vm._s(
+                                                  item.subject
+                                                    ? item.subject
+                                                    : "sin asunto"
+                                                ) +
+                                                " "
+                                            ),
+                                            _c("br")
+                                          ]
                                         ),
-                                        _c("br")
-                                      ]
-                                    ),
-                                    _vm._v(
-                                      "\n                                            " +
-                                        _vm._s(item.message) +
-                                        "\n                                            "
-                                    ),
-                                    _c("a", { attrs: { href: "#" } }),
-                                    _vm._v(" "),
-                                    _c(
-                                      "div",
-                                      { staticClass: "action pull-right" },
-                                      [
                                         _vm._v(
-                                          "\n                                                   " +
-                                            _vm._s(
-                                              _vm.formatDate(item.created_at)
-                                            ) +
-                                            "\n                                         \n                                            "
-                                        )
-                                      ]
-                                    ),
-                                    _vm._v(" "),
-                                    _c("br"),
-                                    _vm._v(" "),
-                                    _c("div", { staticClass: "mic-info" })
-                                  ])
-                                ]
-                              )
-                            ])
+                                          "\n                                            " +
+                                            _vm._s(item.message) +
+                                            "\n                                           \n\n                                            "
+                                        ),
+                                        _c(
+                                          "div",
+                                          { staticClass: "action pull-right" },
+                                          [
+                                            _vm._v(
+                                              "\n                                                   " +
+                                                _vm._s(
+                                                  _vm.formatDate(
+                                                    item.created_at
+                                                  )
+                                                ) +
+                                                "\n                                            "
+                                            )
+                                          ]
+                                        ),
+                                        _vm._v(" "),
+                                        _c("br")
+                                      ])
+                                    ]
+                                  )
+                                ])
+                              ]
+                            )
                           ]
-                        )
-                      })
+                        })
+                      ],
+                      2
                     )
                   : _vm._e(),
                 _vm._v(" "),
@@ -88536,6 +88652,7 @@ __WEBPACK_IMPORTED_MODULE_1_moment___default.a.locale('es');
         _this2.form.commerce_idcommerce = response.data.data[0].commerce_idcommerce;
         _this2.form.thread = response.data.data[0].thread;
         _this2.form.subject = response.data.data[0].subject;
+        // this.form.users_id_to = response.data.data[0].users_id_from
       }).catch(function (err) {
         return console.log(err);
       });
@@ -88546,8 +88663,7 @@ __WEBPACK_IMPORTED_MODULE_1_moment___default.a.locale('es');
       axios.post('/api/message-send', this.form).then(function (response) {
         _this3.form.message = '';
         _this3.findThread();
-
-        console.log(response);
+        __WEBPACK_IMPORTED_MODULE_0__utilities_EventBus__["a" /* default */].$emit('header-message-send');
       }).catch(function (err) {
         return console.log(err);
       });

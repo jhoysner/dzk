@@ -38,7 +38,7 @@ class MessageController extends Controller
       }
       else{
        
-        $messages = MessengerService::where('users_id_from', $id)->orWhere('users_id_to', $id)->orderBy('created_at', 'DES')->get()->unique('thread');
+        $messages = MessengerService::where('users_id_from', $id)->orWhere('users_id_from', '!=', $id)->orderBy('created_at', 'DES')->get()->unique('thread');
       }
 
 
@@ -51,6 +51,18 @@ class MessageController extends Controller
       $messages = MessengerService::where('thread', $id)->orderBy('created_at', 'ASC')->get();
 
       return response()->json(['data'=> $messages], 200);
+
+    }    
+
+    public function read($id){
+
+      $message = MessengerService::find($id);
+
+      $message->read_at = 1;
+
+      $message->save();
+
+      return response()->json(['data'=> $message], 200);
 
     }
 }

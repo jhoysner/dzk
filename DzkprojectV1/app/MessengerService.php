@@ -23,6 +23,7 @@ class MessengerService extends Model
         'commerce_idcommerce',
         'branch_idbranch',
         'messengerservicetopic_idmessengerservicetopic',
+        'read_at',
     ];
 
     protected $hidden  = [

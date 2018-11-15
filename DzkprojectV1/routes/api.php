@@ -151,7 +151,9 @@ Route::get('search-charcode/{charcode}', 'UserHasDiscountController@searchCharco
 Route::get('redeemed-discount/{id}', 'UserHasDiscountController@redeemedDiscount');
 
 Route::post('message-send', 'Message\MessageController@messageSend');
+Route::post('message-send-conversation', 'Message\MessageController@messageSendConversation');
 Route::get('all-messages/{id}', 'Message\MessageController@index');
 Route::get('all-messages/{id}', 'Message\MessageController@index');
 Route::get('find-thread/{id}', 'Message\MessageController@find');
 Route::get('message-read/{id}', 'Message\MessageController@read');
+	

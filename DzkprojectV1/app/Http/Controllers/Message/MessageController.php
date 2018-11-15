@@ -26,22 +26,32 @@ class MessageController extends Controller
 
       return response()->json(['data'=> $message], 200);
 
+    }        
+    public function messageSendConversation(Request $request){
+
+      $fields = $request->all();
+
+      $fields['idmessengerservice'] = str_random(36);
+
+      $message = MessengerService::create($fields);
+
+      return response()->json(['data'=> $message], 200);
+
     }    
 
     public function index($id){
 
       $data = UserHasCommerce::where('users_id', $id)->first();
 
-      if($data){       
+      $messages = MessengerService::where('users_id_from', $id)->orWhere('users_id_to', $id)->orderBy('created_at', 'DES');
 
-        $messages = MessengerService::where('commerce_idcommerce', $data->commerce_idcommerce)->orderBy('created_at', 'DES')->get()->unique('thread');
-      }
-      else{
-       
-        $messages = MessengerService::where('users_id_from', $id)->orWhere('users_id_from', '!=', $id)->orderBy('created_at', 'DES')->get()->unique('thread');
+      if($data){
+
+       $messages =  $messages->orWhere('commerce_idcommerce', $data->commerce_idcommerce);
       }
 
-
+      $messages = $messages->with(['from', 'commerce'])->get()->unique('thread');
+   
       return response()->json(['data'=> $messages], 200);
 
     }    
@@ -64,5 +74,6 @@ class MessageController extends Controller
 
       return response()->json(['data'=> $message], 200);
 
-    }
+    }   
+
 }

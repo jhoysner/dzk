@@ -17,7 +17,9 @@
                                                    <span class="badge badge-info"> Leer </span>
                                             </div>                                    
                                             <div>
-                                                <br>
+                                                <span class="badge badge-secondary"> Cliente ({{ item.from.firstname}} ) - Tienda ({{ item.commerce.name}})
+                                                 </span>
+
                                                 <p style="color:blue">
                                                     Asunto: {{item.subject ? item.subject : 'sin asunto' }} <br>
                                                 </p>
@@ -79,6 +81,7 @@
             },
             index() {
               axios.get('api/all-messages/' + this.user.id).then(response => {  
+                console.log(response)
                 this.messages = response.data.data
               })
               .catch(err => console.log(err))
@@ -108,9 +111,9 @@
                 }
                 return false;
 
-            }, 
+            },             
           
-        }
+        },
     }
 </script>
 <style>

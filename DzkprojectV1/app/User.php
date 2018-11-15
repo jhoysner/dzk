@@ -63,6 +63,11 @@ class User extends Authenticatable
         return $this->belongsToMany('App\Commerce','users_has_commerce','users_id')->withPivot('idusers_has_commerce','users_id', 'commerce_idcommerce')->whereNull('users_has_commerce.deleted_at');
     }
 
+    public function messagesService()
+    {
+        return $this->hasMany('App\MessengerService', 'users_id_from', 'id')->orderBy('created_at', 'DES');
+    }  
+
     public function commercesUser()
     {
         return $this->hasMany('App\UserHasCommerce');
@@ -75,7 +80,8 @@ class User extends Authenticatable
     public function makeApiToken()
     {
         return $this->createToken('API')->accessToken;
-    }
+    }    
+
 
 
 

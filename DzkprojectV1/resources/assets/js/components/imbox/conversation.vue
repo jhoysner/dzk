@@ -62,18 +62,16 @@
           }
       },
       created(){
-          this.findThread()
           this.auth()
-
       },
         
       methods: {
           auth() {
             axios.get('/api/profile').then((response) => {
-              console.log(response)
-              this.form.users_id_from = response.data.user.id;
               this.user = response.data.user;
-              // this.index();
+              this.form.users_id_from = response.data.user.id;
+              this.findThread()
+
             })
             .catch(err => console.log(err))
           },
@@ -84,16 +82,27 @@
               this.form.commerce_idcommerce = response.data.data[0].commerce_idcommerce
               this.form.thread = response.data.data[0].thread
               this.form.subject = response.data.data[0].subject
-              // this.form.users_id_to = response.data.data[0].users_id_from
-           
+
+               var array = this.messages;
+               var val = array[array.length - 1]; // 6
+            
+             if( this.user.id !=  val.users_id_from  && val.users_id_to == null ) {
+                this.form.users_id_to = val.users_id_from
+             }            
+             else if( this.user.id !=  val.users_id_from) {
+                this.form.users_id_to = val.users_id_from
+             }
+             else{
+                this.form.users_id_to = val.users_id_to
+             }
+
             })
             .catch(err => console.log(err))
           },
           send(){
-            axios.post('/api/message-send', this.form).then(response => {
+            axios.post('/api/message-send-conversation', this.form).then(response => {
               this.form.message = ''
               this.findThread()
-              Bus.$emit('header-message-send') 
             })
             .catch(err => console.log(err));
           },

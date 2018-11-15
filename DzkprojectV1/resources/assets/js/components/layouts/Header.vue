@@ -107,10 +107,6 @@ export default {
          this.messageTrue = true;
 
       });      
-      Bus.$on('header-message-send', () => {
-         this.index();
-
-      });
       this.auth();
   },
   methods: {

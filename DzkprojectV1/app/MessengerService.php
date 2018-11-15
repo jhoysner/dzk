@@ -32,4 +32,13 @@ class MessengerService extends Model
         'deleted_at',
     ];
 
+    public function from()
+    {
+      return $this->belongsTo('App\User', 'users_id_from', 'id');
+    }    
+    public function commerce()
+    {
+      return $this->belongsTo('App\Commerce', 'commerce_idcommerce', 'idcommerce');
+    }
+
 }

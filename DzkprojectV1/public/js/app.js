@@ -74881,6 +74881,9 @@ exports.push([module.i, "\n.userHaveDiscount{\n    color: #dc3545 !important;\n 
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_google_maps__ = __webpack_require__(39);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_google_maps___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_google_maps__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__utilities_EventBus_js__ = __webpack_require__(5);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__message_message__ = __webpack_require__(393);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__message_message___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_2__message_message__);
 //
 //
 //
@@ -75066,10 +75069,18 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
+//
+//
+//
+
+
 
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
+  components: { message: __WEBPACK_IMPORTED_MODULE_2__message_message___default.a },
   data: function data() {
     return {
       id: this.$route.params.id,
@@ -75245,6 +75256,15 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
         }
       }
       return false;
+    },
+    contact: function contact(commerce) {
+      var data = {
+        client: this.user.id,
+        commerce: commerce
+      };
+
+      console.log(data);
+      __WEBPACK_IMPORTED_MODULE_1__utilities_EventBus_js__["a" /* default */].$emit('contact', data);
     }
   }
 });
@@ -75553,6 +75573,29 @@ var render = function() {
               _vm._m(0)
             ]),
             _vm._v(" "),
+            _c("div", { staticClass: "single-sidebar theme-tags" }, [
+              _c(
+                "button",
+                {
+                  directives: [
+                    {
+                      name: "b-modal",
+                      rawName: "v-b-modal.showMessage",
+                      modifiers: { showMessage: true }
+                    }
+                  ],
+                  staticClass: "btn btn-outline-primary",
+                  attrs: { type: "button" },
+                  on: {
+                    click: function($event) {
+                      _vm.contact(_vm.commerce)
+                    }
+                  }
+                },
+                [_vm._v("Contactar")]
+              )
+            ]),
+            _vm._v(" "),
             _vm._m(1)
           ])
         ])
@@ -75738,7 +75781,9 @@ var render = function() {
             1
           )
         ]
-      )
+      ),
+      _vm._v(" "),
+      _c("message")
     ],
     1
   )

@@ -72,7 +72,21 @@ Route::group(['middleware' => 'auth:api'], function() {
 
 	Route::get('/branchs-near','Branch\BranchsController@getBranchs');
 
+	//Productos
+	Route::resource('products','Product\ProductController',
+		['except' => ['create','edit','update']
+	]);
+
+	Route::post('/products/{id}', 'Product\ProductController@update');
+
+	//Tipos Productos
+	Route::get('type-products','Product\ProductController@getTiposProductos');
+
+	//Comercios por usuarios
+	Route::get('commerces-user','UserController@getUserCommerces');
+
 });
+
 
 Route::get('/tags', 'Tags\TagsController@index');
 

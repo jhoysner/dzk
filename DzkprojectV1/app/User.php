@@ -65,7 +65,7 @@ class User extends Authenticatable
 
     public function commercesUser()
     {
-        return $this->hasMany('App\UserHasCommerce');
+        return $this->hasMany('App\UserHasCommerce','users_id');
     }
 
     //Helpers

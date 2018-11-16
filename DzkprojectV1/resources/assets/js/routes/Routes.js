@@ -26,6 +26,7 @@ import Users from '../components/user/Index'
 import Roles from '../components/groups/Index'
 import Permissions from '../components/permissions/Index'
 import Logout from '../components/auth/Logout'
+import Products from '../components/products/Index'
 
 Vue.use(Router);
 
@@ -184,6 +185,14 @@ const baseRoutes = [
                 requiresAuth: true
             }
         },
+        {
+            path: '/products',
+            component: Products,
+            meta: { 
+                requiresAuth: true
+            }
+        },
+
         {
             path: '/profile',
             component: Profile,

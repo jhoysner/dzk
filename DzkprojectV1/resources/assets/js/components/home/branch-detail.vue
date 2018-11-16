@@ -274,54 +274,46 @@ import localization from '../maps/Map';
                 this.branch.city_idcity = response.data.data[0].cities.name;
                 this.branch.commerce_idcommerce = response.data.data[0].commerces.name;
                 this.discounts = response.data.data[0].discounts;
-                
+                })
+                .catch(err => console.log(err))
 
                 var isLogged = this.checkLogin();
 
-                if(isLogged) {
-                    axios.get('/api/profile').then(response => {
-                        this.user = response.data.user
-                        console.log(1)
-                    })
-                      .catch(err => {
-                        //this.isLogged = false
-                    })
-                } 
-
-                    
-                //console.log(response)
                 GoogleMapsLoader.load(function(google) {
+
                     var bounds = new google.maps.LatLngBounds();
 
-                    var map = new google.maps.Map(document.getElementById('branchsMap'), {
-                        //zoom: 8
-                    })
+                    var map = new google.maps.Map(document.getElementById('branchsMap'), {})
                     
                     var markers = [];
 
                     let row={}
                     
                     if(isLogged) {
-                        console.log(2)
-                        //var latuser = user.latitude
-                        //var lnguser = user.longitude
+                        axios.get('/api/profile').then(response => {
+                            this.user = response.data.user
+                            console.log(1)
+                        })
+                        
+                        var latuser = this.user.latitude
+                        var lnguser = this.user.longitude
 
-                        //row.latitude = latuser
-                        //row.longitude = lnguser
+                        row.latitude = latuser
+                        row.longitude = lnguser
                         row.name = "Mi Ubicación"
                         markers.push(row)
                         row={}
-                     }
-                                        
+                    
+                    var gLatlng = new google.maps.LatLng(latuser,lnguser)
+
+                    }
+
                     row.latitude = response.data.data[0].latitude
                     row.longitude = response.data.data[0].longitude
                     row.name = response.data.data[0].name
                     markers.push(row)
 
                     console.log(markers)
-
-                    
-                    var gLatlng = new google.maps.LatLng(latuser,lnguser)
 
                     var infoWindow = new google.maps.InfoWindow(), marker, i;
 
@@ -355,35 +347,33 @@ import localization from '../maps/Map';
                         google.maps.event.removeListener(boundsListener);
                     });
 
-                    var objConfigDR = {
-                        map: map
-                    }
+                    if(isLogged) {
+                        var objConfigDR = {
+                            map: map
+                        }
 
-                    var objConfigDS = {
-                        origin: gLatlng,
-                        destination: gLatlng,
-                        travelMode: google.maps.TravelMode.DRIVING
-                    }
+                        var objConfigDS = {
+                            origin: gLatlng,
+                            destination: gLatlng,
+                            travelMode: google.maps.TravelMode.DRIVING
+                        }
 
-                    var ds= new google.maps.DirectionsService()
+                        var ds= new google.maps.DirectionsService()
 
-                    var dr= new google.maps.DirectionsRenderer( objConfigDR )
+                        var dr= new google.maps.DirectionsRenderer( objConfigDR )
 
-                    ds.route( objConfigDS, fnRutear )
+                        ds.route( objConfigDS, fnRutear )
 
-                    function fnRutear(resultados, status) {
-                        if( status == 'OK' ) {
-                            dr.setDirections( resultados )
-                        } else {
-                            console.log( status )
+                        function fnRutear(resultados, status) {
+                            if( status == 'OK' ) {
+                                dr.setDirections( resultados )
+                            } else {
+                                console.log( status )
+                            }
                         }
                     }
 
-                    
                 })
-
-              })
-              .catch(err => console.log(err))
             },	
             checkLogin() {
               const token = localStorage.getItem('access_token')

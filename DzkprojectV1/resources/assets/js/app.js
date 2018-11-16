@@ -5,11 +5,10 @@ import BootstrapVue from 'bootstrap-vue'
 import swal from 'sweetalert';
 import ToggleButton from 'vue-js-toggle-button'
 import Multiselect from 'vue-multiselect'
-import Spinner from 'vue-simple-spinner'
 
 Vue.use(ToggleButton)
 
-Vue.use(BootstrapVue);
+Vue.use(BootstrapVue)
 
 Vue.component('multiselect', Multiselect)
 
@@ -78,7 +77,7 @@ Vue.directive('can', function (el, binding) {
 const app = new Vue({
     el: '#app',
     components: {
-    	mainDashboard,Spinner,
+    	mainDashboard
     },
     router
 });

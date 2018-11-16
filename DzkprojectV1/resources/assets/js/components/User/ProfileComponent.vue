@@ -2,7 +2,8 @@
     <div>
         <div id="section-profile" class="settings-content">
             <h1>Perfil de Usuario</h1>
-            <div>
+            <pulse-loader id="spinner" :loading="loading" :color="color" :size="size"></pulse-loader>
+            <div v-if="!loading">
                 <div class="row pt-30">
                     <div class="col-lg-6">
                         <label><strong>Primer Nombre</strong></label>
@@ -77,6 +78,7 @@
 import Bus from '../../utilities/EventBus';
 import edit from './Edit';
 import { Logged } from '../../utilities/Logged'
+import PulseLoader from 'vue-spinner/src/PulseLoader.vue'
 
 
     export default {
@@ -86,19 +88,20 @@ import { Logged } from '../../utilities/Logged'
             this.index();
         },
         components : {
-            edit
+            PulseLoader,edit
         },
         data() {
             return {
-                'url': '/profile',
-                'user' : { },
-                'countries.name' : ""
+                url: '/profile',
+                user : { },
+                loading: false,
+                color: '#5bc0de',
+                size:'30px',
             }
         },
         methods: {
             index() {
-
-                //this.data = JSON.parse(localStorage.getItem('userdata'));
+                this.loading = true
                 axios.get('api'+ this.url)
                     .then(
                         (response) => {
@@ -106,6 +109,7 @@ import { Logged } from '../../utilities/Logged'
                             this.user.country = this.user.countries.name
                             this.user.state = this.user.states.name
                             this.user.city = this.user.cities.name
+                            this.loading = false
                         }   
                     )
             },
@@ -143,10 +147,15 @@ import { Logged } from '../../utilities/Logged'
     }
 </script>
 <style>
-#section-profile: {
- margin-top: 100px;
-}
-img {
-  width: 30%;
-}
+    #section-profile {
+     margin-top: 100px;
+    }
+    img {
+      width: 30%;
+    }
+    #spinner {
+        text-align: center;
+        padding-top: 10vh;
+        height: 80vh;
+    }
 </style>

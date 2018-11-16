@@ -1,14 +1,23 @@
 <template>
+  <pulse-loader id="spinner" :loading="loading" :color="color" :size="size"></pulse-loader>
 </template>
 
 <script>
+import PulseLoader from 'vue-spinner/src/PulseLoader.vue'
+
   export default {
     name: 'logout',
 
     data: () => {
       return {
-        token:''
+        token:'',
+        loading: false,
+        color: '#5bc0de',
+        size:'30px',
       }
+    },
+    components: {
+      PulseLoader
     },
 
     mounted () {
@@ -17,8 +26,7 @@
 
     methods: {
       logout() {
-        this.token = localStorage.getItem('access_token')
-        
+        this.token = localStorage.getItem('access_token')   
         swal({
           title: "Desea Salir?",
           text: "",
@@ -32,16 +40,19 @@
         })
         .then((result) => {
                 if (result) {
+                    this.loading = true
                     axios.post('/api/logout', this.token)
                       .then((response) => {
                         localStorage.removeItem('access_token')
                         localStorage.removeItem('roles')
                         localStorage.removeItem('permissions')
                         localStorage.removeItem('redirect')
+                        this.loading = false
 
                         window.location.href = '/';
 
                       }).catch((error) => {
+                        this.loading = false
                         console.log(error)  
                       })
                 }
@@ -50,3 +61,11 @@
     }
   }
 </script>
+<style>
+  #spinner {
+    text-align: center;
+    padding-top: 10vh;
+    height: 80vh;
+  }
+
+</style>

@@ -12,6 +12,7 @@ use App\Params;
 use App\Role;
 use App\Permission;
 use App\Authorizable;
+use App\UserHasCommerce;
 use Storage;
 use Lang;
 use DB;
@@ -342,6 +343,21 @@ class UserController extends Controller
 
         return response()->json(['success'=>\Lang::get('messages.user_loc_update')], 200);
 
+    }
+
+    public function getUserCommerces()
+    {
+        $id = Auth::id();
+
+        $user = User::find($id);
+
+        $commerces = User::with(['commercesUser' => function($query) {
+                                    $query->with('commerces');
+                        }])
+                        ->where('id',$id)->get(['id']); //$user->commercesUser;  
+
+        return response()->json(['success'=>true, 'data'=>$commerces], 200);
+        
     }
 
 }

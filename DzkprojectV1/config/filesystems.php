@@ -66,6 +66,10 @@ return [
             'driver' => 'local',
             'root' =>  public_path() . '/images/branch/',
         ],
+        'product' => [
+            'driver' => 'local',
+            'root' =>  public_path() . '/images/product/',
+        ],
 
         's3' => [
             'driver' => 's3',

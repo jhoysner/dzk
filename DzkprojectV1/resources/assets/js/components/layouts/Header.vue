@@ -18,15 +18,20 @@
                           <li><a href="category.html">Category</a></li>
                           <li><a href="user-account-profile.html">User Profile</a></li>
                           <li><a href="author-account-profile.html">Author Profile</a></li>
-                          <li class="menu-has-children"><a href="">Pages</a>
-                              <ul>
-                                  <li><a href="upload-item.html">Upload Item</a></li>
-                                  <li><a href="theme-details-subscriber.html">Theme Details Subscriber</a></li>
-                                  <li><a href="cart.html">Cart</a></li>
-                                  <li><a href="checkout.html">Checkout</a></li>
-                                  <li><a href="confirmation.html">Confirmation</a></li>
-                                  <li><a href="coupon-all.html">Coupon</a></li>
-                              </ul>
+                          <li> 
+  <!--                             <router-link to='/imbox'>
+                                  <a>
+                                    Mensajes
+                                  </a>
+                              </router-link> -->
+                                <div class="top-message mr-0">
+                                  <router-link to='/imbox'>
+                                    <a>
+                                      <span class="icons icon-envelope"></span>
+                                    </a>
+                                  </router-link> 
+                                  <span  v-if="messageTrue" class="badge badge-danger">_</span>
+                                </div>
                           </li>
                       </ul>
                   </nav>
@@ -81,12 +86,91 @@
     <!-- start Header Area -->
 </template>
 <script>
-export default {
-  name: "",
-  data: () => ({
+import Bus from '../../utilities/EventBus.js';
 
-  })
+export default {
+  data() {
+
+      return {
+         'user': {},
+         'messages': [],
+         'messageTrue': false,
+         'length': '',
+      }
+
+  },
+  mounted(){
+      Bus.$on('header-mesasge-false', () => {
+          this.messageTrue = false;
+      });      
+      Bus.$on('header-message-true', () => {
+         this.messageTrue = true;
+
+      });      
+      this.auth();
+  },
+  methods: {
+      auth() {
+          axios.get('api/profile').then((response) => {
+            this.user = response.data.user;
+            this.index();
+          })
+          .catch(err => console.log(err))
+      },
+      index() {
+        axios.get('api/all-messages/' + this.user.id).then(response => {  
+          this.messages = response.data.data
+          
+          for (var key in this.messages) {
+             this.messageState(this.messages[key]);
+          }          
+        })
+        .catch(err => console.log(err))
+      },
+      messageState(item) {
+
+          if (item.users_id_from != this.user.id){
+
+              if (item.read_at == null ){
+
+                this.messageTrue = true; 
+              }
+          }
+          // return this.message = false;
+      }, 
+     
+  },
+
 }
 </script>
 <style lang="scss" scoped>
+
+.badge-danger{
+  color: #dc3545;
+}
+
+.top-message .badge {
+    position: absolute;
+    color: #42b0f2;
+    font-weight: 300;
+    border-radius: 20px;
+    padding: -13px;
+    line-height: initial;
+    top: 0px;
+    right: 13px ;
+    height: 10px;
+    width: 10px;
+}
+
+.top-message {
+    margin-left: 40px;
+    color: #fff;
+    // border: 1px solid rgba(255, 255, 255, 0.25);
+    padding: 6px 10px;
+    border-radius: 50px;
+}
+
+.icon-envelope {
+  font-size :20px;
+}
 </style>

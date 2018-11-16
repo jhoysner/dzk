@@ -134,7 +134,7 @@
 <script>
 import Bus from '../../utilities/EventBus.js';
 import $ from 'jquery';
-import message from './message';
+import message from '../message/message';
 
     export default {
         components: { message},

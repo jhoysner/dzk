@@ -33,10 +33,11 @@ import Bus from '../../utilities/EventBus.js';
     data() {
         return {
           form: {
-            user_id_from: '',
+            users_id_from: '',
             subject: '',
             message: '',
             commerce_idcommerce: '',
+            messengerservicetopic_idmessengerservicetopic: '1',
           },  
           commerce: {},
         }
@@ -46,14 +47,25 @@ import Bus from '../../utilities/EventBus.js';
     created() {
         Bus.$on('contact', (data) => {
           this.commerce = data.commerce
-          this.form.user_id_from = data.client
+          this.form.users_id_from = data.client
           this.form.commerce_idcommerce = this.commerce.idcommerce
         });
     },
 
     methods: {
         send(){
-            console.log(this.form)
+          axios.post('/api/message-send', this.form).then(response => {
+            console.log(response)
+            this.form.subject = ''
+            this.form.message = ''
+            this.$refs.showMessage.hide()
+            swal({
+                title: "Mensaje Enviado",
+                text: "Mensaje evniado con exito",
+                icon: "success",
+            })
+          })
+          .catch(err => console.log(err));
 
         },
         hideModal () {

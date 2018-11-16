@@ -32,6 +32,7 @@
         "vue-notify-me": "^1.1.0",
         "vue-router": "^3.0.1",
         "vue-simple-spinner": "^1.2.8",
+        "vue-spinner": "^1.0.3",
         "vue-strap": "^1.1.40"
     }
 }

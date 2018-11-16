@@ -12,6 +12,7 @@ use App\Params;
 use App\Role;
 use App\Permission;
 use App\Authorizable;
+use App\UserHasCommerce;
 use Storage;
 use Lang;
 use DB;
@@ -324,6 +325,39 @@ class UserController extends Controller
 
          return response()->json(['success'=>\Lang::get('messages.user_permissions')], 200);
 
+    }
+
+    public function updateLocalization($lat,$long)
+    {
+        $id = Auth::id();
+
+        $user = User::find($id);
+
+        if(!$user){
+            return response()->json(['error' => 'No existe el usuario'], 422);
+        }
+
+        $user->latitude = (string)$lat; 
+        $user->longitude = (string)$long;
+        $user->save();
+
+        return response()->json(['success'=>\Lang::get('messages.user_loc_update')], 200);
+
+    }
+
+    public function getUserCommerces()
+    {
+        $id = Auth::id();
+
+        $user = User::find($id);
+
+        $commerces = User::with(['commercesUser' => function($query) {
+                                    $query->with('commerces');
+                        }])
+                        ->where('id',$id)->get(['id']); //$user->commercesUser;  
+
+        return response()->json(['success'=>true, 'data'=>$commerces], 200);
+        
     }
 
 }

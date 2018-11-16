@@ -1,7 +1,7 @@
 <template>
     <div>
         <b-modal id="createModal" ref="createModal" title="Crear Permiso" hide-footer>
-          <form @submit.prevent="submitForm()">
+          <form  @submit.prevent="submitForm()">
               <div class="modal-content">
                   <div class="modal-body">
                     <div class="row pt-30">
@@ -41,11 +41,9 @@ import axios from 'axios';
               error: {},
             }
         },
-
         methods: {
           submitForm() {
             this.error = {};
-
             axios.post('api' + this.url, this.form)
             .then(response => {          
               this.$refs.createModal.hide();

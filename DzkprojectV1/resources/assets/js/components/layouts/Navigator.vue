@@ -68,6 +68,13 @@
                 </a>
               </router-link>
             </li>
+            <li v-can="'products'" v-if="isLogged">
+              <router-link to='/products'>
+                <a>
+                  Productos
+                </a>
+              </router-link>
+            </li>
             <li v-if="isLogged">
               <router-link to='/profile'>
                 <a>
@@ -94,6 +101,7 @@
                 Login
               </a>
             </li>
+            
           <!--  <li>
                 <a href="author-account-download.html">Downloads</a>
             </li>
@@ -133,8 +141,8 @@ export default {
       }
 
       if(token) {
-        axios.get('api/profile', {timeout: 5000}).then(response => {
-        // console.log(response)        
+        axios.get('api/profile').then(response => {
+        //console.log(response)        
             this.isLogged = true            
           })
           .catch(err => {

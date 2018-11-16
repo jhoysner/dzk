@@ -20,10 +20,11 @@
                    </router-link>
                 </li>
               </ul>
-              <!-- <spinner :show="loadingProductos"></spinner> -->
+              
               <div class="row justify-content-center stat-table-wrap">
                 <div class="col-lg-12 stat-wrap-container">
                     <div class="stat-wrap my-4">
+                        <pulse-loader id="spinner" :loading="loading" :color="color" :size="size"></pulse-loader>
                         <div class="col-lg-12 branchsMap" id="branchsMap"></div>
                     </div>
                 </div>
@@ -36,23 +37,31 @@
 
 
 <script>
+import PulseLoader from 'vue-spinner/src/PulseLoader.vue'
 import GoogleMapsLoader from 'google-maps'
 
     export default {
         data() {
 			return {
-                 branchs:[],
+        branchs:[],
+        loading: false,
+        color: '#5bc0de',
+        size:'30px',
 			}
 		},
-
+    components: {
+      PulseLoader
+    },
 		mounted() {
 			this.index();
 		},
 
 		methods: {
             index() {
+                this.loading = true
                 axios.get('api/branchs-near').then(response => {
-                    var branchs = response.data.data
+                  var branchs = response.data.data
+                  this.loading = false
                 
                     GoogleMapsLoader.load(function(google) {
                         var bounds = new google.maps.LatLngBounds();
@@ -96,7 +105,6 @@ import GoogleMapsLoader from 'google-maps'
                         });
 */
                       })
-
                 })
                 .catch(err => console.log(err))
 
@@ -113,11 +121,16 @@ import GoogleMapsLoader from 'google-maps'
 	  height: 50px;
 	  border-radius: 50%;
 	}
-    .branchsMap {
-        margin-top: 15px;
-        width: 100%;
-        height: 400px;
-        margin: 0 auto;
-    }
+  .branchsMap {
+    margin-top: 15px;
+    width: 100%;
+    height: 400px;
+    margin: 0 auto;
+   }
+  #spinner {
+    text-align: center;
+    padding-top: 10vh;
+    height: 80vh;
+  }
 
 </style>

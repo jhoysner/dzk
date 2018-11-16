@@ -26,7 +26,7 @@
             </ul>
         </div>
        
-			<form action="" class="pt-30" v-on:submit.prevent="submitLogin()" novalidate>
+			<form class="pt-30" v-on:submit.prevent="submitLogin()" novalidate>
 				<div class="form-group">
 					<label class="text-uppercase">Correo Eléctronico</label>
 					<input type="email" placeholder="Correo Electrónico" onfocus="this.placeholder=''" onblur="this.placeholder = 'Correo Electrónico'" required class="common-input mt-10" v-model="email"><small class="text-danger" v-if="errors.email">{{ errors.email }}</small><small class="text-danger" v-if="errors.emailvalid">{{ errors.emailvalid }}</small>
@@ -36,7 +36,12 @@
 					<input type="password" placeholder="Contraseña" onfocus="this.placeholder=''" onblur="this.placeholder = 'Contraseña'" required class="common-input mt-10" v-model="password"><small class="text-danger" v-if="errors.password">{{ errors.password }}</small>
 					
 				</div>
-				<button class="primary-btn view-btn mt-20 mr-20"><span>Ingresar</span></button>
+				<button type="submit" :disabled="loading" class="primary-btn view-btn mt-20 mr-20">
+    					<span>
+    						Ingresar
+    						<pulse-loader id="spinner" :loading="loading" :color="color" :size="size"></pulse-loader> 
+    					</span>
+    			</button>
     			<div class="mt-20 pull-right"><a class="" href="password/reset">Olvidó Contraseña</a></div>
 
 			</form>
@@ -46,6 +51,7 @@
 
 </template>
 <script>
+import PulseLoader from 'vue-spinner/src/PulseLoader.vue'
 
 	export default {
 		mounted() {
@@ -53,11 +59,18 @@
 	 	data() {
             return {
             	errors:{},
+            	loading: false,
+        		color: '#5bc0de',
+        		size:'8px',
                 'email':"",
                 'password':"",
                 'reg': /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,24}))$/
             }
         },
+        components: {
+      		PulseLoader
+    	},
+
 	 	methods: {
 	 		submitLogin() {
 	 			this.errors = [];
@@ -70,7 +83,7 @@
 	 					email: this.email,
 	 					password: this.password 
 	 				}
-					
+                    this.loading = true
 
 					axios.post('/api/login', params)
                     	.then((response) => {                    		
@@ -83,6 +96,8 @@
 
             				const permissions = response.data.permissions
             				localStorage.setItem('permissions', (permissions))
+                    		
+                    		this.loading = false
 
             				if(localStorage.getItem('redirect')) {
 	            				let redirect = localStorage.getItem('redirect')
@@ -93,8 +108,9 @@
 
 
                         }).catch((error) => {
-                            this.errors.push(error.response.data.error);
-							
+                            this.errors.push(error.response.data.error)
+                    		this.loading = false
+
                         })
 	 			}
 	 		},
@@ -109,3 +125,5 @@
 	 	}
 	}
 </script>
+<style>
+</style>

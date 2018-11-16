@@ -28,4 +28,9 @@ class UserHasCommerce extends Model
     {
       return $this->belongsTo('App\User', 'users_id', 'id');
     }
+
+    public function commerces()
+    {
+      return $this->belongsTo('App\Commerce', 'commerce_idcommerce', 'idcommerce');
+    }
 }

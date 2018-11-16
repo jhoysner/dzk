@@ -57,8 +57,9 @@
     <!--<script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?v3&key=AIzaSyBnSDDT8mnv1_cDX_iZmaEaYy6qp63be1E"></script>-->
     <script src="{{ asset('js/app.js') }}"></script>
     <script async defer
-        src="https://maps.googleapis.com/maps/api/js?key=AIzaSyARjJet0cEb9j1zlP0rFo1sW7jRN0s8f_4">
+        src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCCUeS7GGTS8TL0iJQ_pfxZW3QNIlpTlwU">
     </script>
+    <!-- AIzaSyARjJet0cEb9j1zlP0rFo1sW7jRN0s8f_4 -->
     <script src="{{ asset('/js/Google.js') }}"></script>
 
 </body>

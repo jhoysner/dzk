@@ -37,5 +37,6 @@ return [
         'firstname' => 'primer nombre',
         'lastname' => 'apellidos',
         'description' => 'descripción',
+        'producttype_idprodcuttype' => 'Tipo Producto'
     ],
 ];

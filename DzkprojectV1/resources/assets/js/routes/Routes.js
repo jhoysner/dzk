@@ -25,9 +25,8 @@ import DetailClienteDiscount from '../components/cliente/detail-discount'
 import Users from '../components/user/Index'
 import Roles from '../components/groups/Index'
 import Permissions from '../components/permissions/Index'
-import Logout from '../components/auth/Logout';
-import Imbox from '../components/imbox/Index';
-import ImboxConversation from '../components/imbox/conversation';
+import Logout from '../components/auth/Logout'
+import Products from '../components/products/Index'
 
 Vue.use(Router);
 
@@ -187,6 +186,14 @@ const baseRoutes = [
             }
         },
         {
+            path: '/products',
+            component: Products,
+            meta: { 
+                requiresAuth: true
+            }
+        },
+
+        {
             path: '/profile',
             component: Profile,
             meta: { 
@@ -196,17 +203,6 @@ const baseRoutes = [
         {
             path: '/logout', 
             component: Logout 
-        },        
-        {
-            path: '/imbox', 
-            component: Imbox,
-          
-        },        
-        {
-            path: '/imbox/:id', 
-            component: ImboxConversation,
-            props: true,
-
         }
 
 

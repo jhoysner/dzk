@@ -26,7 +26,12 @@ return [
     'role_delete'=> 'Group Deleted',
     'user_create'=> 'User Create',
     'user_error_create'=> 'User Error Create',
-    'user_permissions'=> 'Permissions User Update'
+    'user_permissions'=> 'Permissions User Update',
+    'user_loc_update'=> 'Localization Update',
+    'product_save'=> 'Product Create',
+    'product_update'=> 'Product Update',
+    'product_delete'=> 'Product Delete',
+
 
 
 

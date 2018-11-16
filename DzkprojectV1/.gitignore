@@ -3,6 +3,7 @@
 /public/storage
 /public/img/profiles
 /public/images/profiles
+/public/images/product
 /public/images/commerce
 /public/images/branch
 /storage/*.key

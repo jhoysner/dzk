@@ -27,18 +27,4 @@ class BranchHasProduct extends Model
         'created_at', 'updated_at', 'deleted_at',
     ];
 
-    public function products()
-    {
-        return $this->belongsTo('App\Product', 'product_idproduct', 'idproduct');
-    }    
-    public function branch()
-    {
-        return $this->belongsTo('App\Branch', 'branch_idbranch', 'idbranch');
-    }
-
-    public function commerce()
-    {
-        return $this->belongsTo('App\Commerce', 'commerce_idcommerce', 'idcommerce');
-    }    
-
 }

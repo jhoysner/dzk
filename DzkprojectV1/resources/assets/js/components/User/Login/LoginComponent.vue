@@ -52,7 +52,6 @@
 </template>
 <script>
 import PulseLoader from 'vue-spinner/src/PulseLoader.vue'
-
 	export default {
 		mounted() {
 	 	},
@@ -68,7 +67,7 @@ import PulseLoader from 'vue-spinner/src/PulseLoader.vue'
             }
         },
         components: {
-      		PulseLoader
+      		PulseLoader,Vue
     	},
 
 	 	methods: {
@@ -97,14 +96,16 @@ import PulseLoader from 'vue-spinner/src/PulseLoader.vue'
             				const permissions = response.data.permissions
             				localStorage.setItem('permissions', (permissions))
                     		
-                    		this.loading = false
 
-            				if(localStorage.getItem('redirect')) {
+                            if(localStorage.getItem('redirect')) {
 	            				let redirect = localStorage.getItem('redirect')
 	            				window.location.href = redirect;
             				} else {
 	            				window.location.href = '/';
             				}
+
+                            this.loading = false
+
 
 
                         }).catch((error) => {

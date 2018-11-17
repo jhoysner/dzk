@@ -35,6 +35,9 @@
                         <div class="form-group">
                             <label>Maneja Stock</label>&nbsp;
                             <toggle-button :value="form.usestock" v-model="form.usestock" :sync="true"/>
+                            &nbsp;
+                            <span v-if="form.usestock == true"><strong>SI</strong></span>
+                            <span v-if="form.usestock == false"><strong>NO</strong></span>
                         </div>
                       </div>
                       <div class="col-lg-12">

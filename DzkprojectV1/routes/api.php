@@ -85,6 +85,10 @@ Route::group(['middleware' => 'auth:api'], function() {
 	//Comercios por usuarios
 	Route::get('commerces-user','UserController@getUserCommerces');
 
+	Route::get('product-commerces/{commerce}/{producto}','Product\ProductController@getCommercesProduct');
+	Route::post('update-stock','Product\ProductController@updateStock');
+	Route::get('total-products','Product\ProductController@getTotalProducts');
+
 });
 
 

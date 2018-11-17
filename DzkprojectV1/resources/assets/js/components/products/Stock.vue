@@ -6,11 +6,30 @@
                   <div class="modal-body">
                     <div class="row pt-30">
                       <div class="col-lg-12">
-                          <label><i class="required">*</i>Cantidad</label>
-                          <input type="number" min="0" v-model="product.stock" class="common-input">
-                          <small class="text-danger" v-if="error.stock">{{ error.stock[0] }}</small>
+                        <small  class="text-danger" v-if="error !=''">{{error}}</small>
+                        <table class="table table-hover ">
+                          <thead>
+                            <tr>
+                              <th width="60%" class="text-center">Sucursal</th>
+                              <th class="text-center">Cantidad</th>
+                            </tr>
+                          </thead>
+                          <tbody v-if="sucursales.length > 0">
+                              <tr v-for="branch in sucursales">
+                                <td width="60%">{{branch.name}}</td>
+                                <td class="text-right"><input type="number" min="0" class="form-control text-right" @change="actTotal(branch.stock)" v-model="branch.stock"></td>
+                              </tr>
+                              <tr>
+                                <td width="60%"><h4>Total</h4></td>
+                                <td class="text-center"><input type="number" class="form-control text-right" v-model="total" readonly></td>
+                              </tr>
+                          </tbody>
+                          <tbody v-else>
+                            <tr>No tiene sucursal</tr>
+                          </tbody>
+                        </table>
                       </div>
-                      <div class="col-lg-12 text-right">
+                      <div v-if="sucursales.length > 0" class="col-lg-12 text-right">
                           <button type="submit" class="btn btn-primary"><i class="zmdi zmdi-plus"></i> Guardar</button>
                       </div>
                     </div>
@@ -23,99 +42,90 @@
 
 <script>
 import axios from 'axios';
+import Bus from '../../utilities/EventBus'
 
     export default {
-      name: 'create',
+      name: 'stock',
         data() {
             return {
-              product: [],
-              form: {
-                name: '',
-                reference: '',
-                image: '',
-                usestock: false,
-                producttype_idproducttype: ''
-              },
-              imageError: '',
-              url: '/products',
-              types: [],
-              commerces: [],
-              error: {},
+              productId: '',
+              commerceId: '',
+              error: [],
+              sucursales: [],
+              total: 0,
+              branchs: {},
             }
         },
         created() {
-          this.index();
+          Bus.$on('product_id', (data) => {
+            this.productId = data;
+          });
+          Bus.$on('commerce_id', (data) => {
+            this.commerceId = data;
+            this.stock(this.productId,this.commerceId);
+          });
+          
         },
         methods: {
-          index() {
-            axios.get('api/type-products')
-              .then(response => {
-                this.types = response.data.data          
-              })
-              .catch(err => {
-                  console.log(err.response)
-              })
-            axios.get('api/commerces-user')
-              .then(response => {
-                this.commerces = response.data.data[0].commerces_user          
-              })
-              .catch(err => {
-                  console.log(err.response)
-              })                        
-          },
-          submitForm() {
-            this.error = {};
+          stock(product,commerce) {
+            this.total = 0
 
-            let params = new FormData()
-
-            _.each(this.form, function(val,key) {
-              params.append(key,val)
+            axios.get('api/product-commerces/'+commerce+'/'+product)
+              .then(response => {
+                this.products = response.data.data          
             })
 
-            let input = document.querySelector('input[type=file]')                
-            let file = (input.files[0] ? input.files[0]: null)
-            if(file !== undefined || file !== NULL || file.type.match(/image.*/)) params.append('image', file);
-            
-            axios.post('api' + this.url, params)
-            .then(response => {          
-              this.$refs.createModal.hide();
-              this.form = {};
-              this.form.image = null
-              this.$refs.image.value = null
-              this.$parent.index()
-              swal({
-                title: "",
-                text: response.data.success,
-                icon: "success",
-              })
-            })
-            .catch(err => {
-              if(err.response.status === 422) {
-                  this.error = err.response.data.errors;
-              }
-            });
-          },
-          previewImage: function(event) {
-            let input = event.target
+            axios.get('api/branch-commerce/'+commerce)
+              .then(response => {
+                this.sucursales = response.data.data          
 
-            if(input.files && input.files[0]) {
-                let reader = new FileReader();
+              for(let i=0; i<this.sucursales.length; i++) {
+                var idbranch = this.sucursales[i].idbranch
+                var prod = this.products.filter(function(operation) {
+                  return operation.branch_idbranch==idbranch
+                })
 
-                reader.onload = (e) => {
-                    this.form.image = e.target.result
+                if(Object.keys(prod).length === 0) {
+                    this.sucursales[i].stock = 0  
+                } else {
+                  this.sucursales[i].stock = prod[0].stock  
                 }
 
-                reader.readAsDataURL(input.files[0])
+                this.total+=parseInt(this.sucursales[i].stock)
+              } 
+
+            })
+          },
+          actTotal(cant) {
+            this.total = 0
+            for(let i=0; i<this.sucursales.length; i++) {
+              this.total+=parseInt(this.sucursales[i].stock)
             }
           },
+          submitForm() {
+            this.branchs.productId = this.productId
+            this.branchs.branchs = this.sucursales 
 
+            axios.post('api/update-stock', this.branchs)
+              .then(response => {          
+                this.$refs.stockModal.hide();
+                this.sucursales = {};
+                this.$parent.index()
+                swal({
+                  title: "",
+                  text: response.data.success,
+                  icon: "success",
+                })
+              })
+              .catch(err => {
+                console.log(err)
+                if(err.response.status === 422) {
+                    this.error = err.response.data.errors;
+                }
+              });
+
+          },
         }
 
     }
 </script>
-
-<style media="screen">
-  img {
-    width: 30%;
-  }
-</style>

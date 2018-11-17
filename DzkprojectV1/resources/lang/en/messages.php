@@ -31,6 +31,7 @@ return [
     'product_save'=> 'Product Create',
     'product_update'=> 'Product Update',
     'product_delete'=> 'Product Delete',
+    'product_stock_update'=> 'Stock Update',
 
 
 

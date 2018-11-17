@@ -31,5 +31,7 @@ return [
     'product_save'=> 'Producto creado correctamente',
     'product_update'=> 'Producto actualizado correctamente',
     'product_delete'=> 'Producto borrado correctamente',
+    'product_stock_update'=> 'Stock actualizado correctamente',
+
 
 ];

@@ -206,7 +206,6 @@ import paginator from '../../utilities/paginator';
       this.filtering();
       this.getTags();
       this.getCommerceCategories();
-
       Bus.$on('change_page', (page) => {
         this.filtering(page);
       });

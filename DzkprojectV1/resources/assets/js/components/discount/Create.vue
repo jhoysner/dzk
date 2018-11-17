@@ -192,9 +192,6 @@
               this.value.push(tag)
               this.options.push(tag)
 
-              axios.post('api/tags', tag).then(response =>{
-                //console.log(response)
-              })
             },
             //Muestra Listado de Tag
             getTags() {

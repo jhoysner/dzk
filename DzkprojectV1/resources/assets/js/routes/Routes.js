@@ -27,6 +27,8 @@ import Roles from '../components/groups/Index'
 import Permissions from '../components/permissions/Index'
 import Logout from '../components/auth/Logout'
 import Products from '../components/products/Index'
+import Imbox from '../components/imbox/Index';
+import ImboxConversation from '../components/imbox/conversation';
 
 Vue.use(Router);
 
@@ -203,6 +205,17 @@ const baseRoutes = [
         {
             path: '/logout', 
             component: Logout 
+        },
+        {
+            path: '/imbox', 
+            component: Imbox,
+          
+        },        
+        {
+            path: '/imbox/:id', 
+            component: ImboxConversation,
+            props: true,
+
         }
 
 

@@ -123,11 +123,15 @@
                             </ul>
                         </div>
                     </div>
+                    <div class="single-sidebar theme-tags">
+                      <button type="button" class="btn btn-outline-primary"  v-b-modal.showMessage @click="contact(commerce)" >Contactar</button>
+                    </div>
 
                     <div class="single-sidebar">
                         <h6>Ubicacion</h6>
                         <div class="col-lg-12 branchsMap" id="branchsMap"></div>
                     </div>
+
                 </div>
             </div>
 
@@ -179,14 +183,18 @@
                   <button type="submit" @click="saveUserHasDiscount()" class="btn btn-primary"><i class="zmdi zmdi-plus"></i> Continuar</button>
               </div>
         </b-modal> 
+        <message></message> 
 
     </div>
 </template>
 
 <script>
 import GoogleMapsLoader from 'google-maps'
+import Bus from '../../utilities/EventBus.js';
+import message from '../message/message';
 
 	export default {
+    components: { message},
 		data() {
 			return {
 				id: this.$route.params.id,
@@ -361,7 +369,16 @@ import GoogleMapsLoader from 'google-maps'
                }
             }
             return false;
-        }
+        },
+        contact(commerce) {
+            let data = {
+                  client: this.user.id,
+                  commerce: commerce,
+                };
+            
+            console.log(data)
+            Bus.$emit('contact', data);
+        },
 			
 
 		}

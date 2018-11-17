@@ -55,7 +55,7 @@
 <script>
 
 import Bus from '../../utilities/EventBus'
-import { userIsAdmin } from '../../utilities/isAdmin'
+import { userIsAdmin } from '../../utilities/IsAdmin'
 import PulseLoader from 'vue-spinner/src/PulseLoader.vue'
 import create from './Create'
 import edit from './Edit'

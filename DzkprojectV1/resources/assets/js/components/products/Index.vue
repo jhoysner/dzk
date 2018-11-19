@@ -91,19 +91,18 @@ export default {
 
       axios.get('api' + this.url).then(response => {
         this.productos = response.data.data
-        
       })
       .catch(err => console.log(err))
 
       axios.get('api/total-products').then(response => {
-        this.totalProd = response.data.data
-      })
-      .catch(err => console.log(err))
+          this.totalProd = response.data.data
+        })
+        .catch(err => console.log(err))
 
       axios.get('api/commerces-user')
         .then(response => {
           this.commerces = response.data.data[0].commerces_user
-          
+         
           for(let i=0; i<this.productos.length; i++) {
             let productoId = this.productos[i].idproduct
             let commerceId = this.productos[i].commerce_idcommerce 
@@ -130,6 +129,7 @@ export default {
 
             this.productos.stock = stock
           }
+         
           this.products = this.productos
           
           this.loading = false

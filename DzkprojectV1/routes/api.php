@@ -91,7 +91,6 @@ Route::group(['middleware' => 'auth:api'], function() {
 
 });
 
-
 Route::get('/tags', 'Tags\TagsController@index');
 
 Route::resource('discount','Discount\DiscountController');

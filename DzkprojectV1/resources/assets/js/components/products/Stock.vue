@@ -4,8 +4,10 @@
           <form @submit.prevent="submitForm()">
               <div class="modal-content">
                   <div class="modal-body">
+                   <pulse-loader id="spinner" :loading="loading" :color="color" :size="size"></pulse-loader>
+
                     <div class="row pt-30">
-                      <div class="col-lg-12">
+                      <div class="col-lg-12" v-if="!loading">
                         <small  class="text-danger" v-if="error !=''">{{error}}</small>
                         <table class="table table-hover ">
                           <thead>
@@ -30,7 +32,12 @@
                         </table>
                       </div>
                       <div v-if="sucursales.length > 0" class="col-lg-12 text-right">
-                          <button type="submit" class="btn btn-primary"><i class="zmdi zmdi-plus"></i> Guardar</button>
+                          <button type="submit" class="btn btn-primary"><i class="zmdi zmdi-plus"></i> 
+                            <span v-if="!loading">Guardar</span>
+                            <span v-if="loading">
+                              Guardando<pulse-loader id="spinner" :loading="loading" :color="color" :size="size"></pulse-loader>
+                            </span>
+                          </button>
                       </div>
                     </div>
                   </div>
@@ -43,6 +50,7 @@
 <script>
 import axios from 'axios';
 import Bus from '../../utilities/EventBus'
+import PulseLoader from 'vue-spinner/src/PulseLoader.vue'
 
     export default {
       name: 'stock',
@@ -54,7 +62,13 @@ import Bus from '../../utilities/EventBus'
               sucursales: [],
               total: 0,
               branchs: {},
+              loading: false,
+              color: '#5bc0de',
+              size:'15px',
             }
+        },
+        components: {
+          PulseLoader
         },
         created() {
           Bus.$on('product_id', (data) => {
@@ -69,6 +83,8 @@ import Bus from '../../utilities/EventBus'
         methods: {
           stock(product,commerce) {
             this.total = 0
+            
+            this.loading = true
 
             axios.get('api/product-commerces/'+commerce+'/'+product)
               .then(response => {
@@ -78,7 +94,7 @@ import Bus from '../../utilities/EventBus'
             axios.get('api/branch-commerce/'+commerce)
               .then(response => {
                 this.sucursales = response.data.data          
-
+                console.log(this.sucursales)
               for(let i=0; i<this.sucursales.length; i++) {
                 var idbranch = this.sucursales[i].idbranch
                 var prod = this.products.filter(function(operation) {
@@ -92,9 +108,15 @@ import Bus from '../../utilities/EventBus'
                 }
 
                 this.total+=parseInt(this.sucursales[i].stock)
-              } 
+              
+              }
 
-            })
+              this.loading = false
+
+            }).catch(err => {
+                console.log(err)
+                this.loading = false
+              })
           },
           actTotal(cant) {
             this.total = 0
@@ -129,3 +151,9 @@ import Bus from '../../utilities/EventBus'
 
     }
 </script>
+<style>
+  #spinner {
+    text-align: center;
+  }
+
+</style>

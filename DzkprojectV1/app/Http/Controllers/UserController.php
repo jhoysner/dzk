@@ -347,20 +347,15 @@ class UserController extends Controller
 
     public function getUserCommerces()
     {
-        $id = Auth::id(); //Auth::user()->id;
 
-        if($id) {
-            $user = User::find($id);
+        $id = Auth::id();
 
-            $commerces = User::with(['commercesUser' => function($query) {
-                                        $query->with('commerces');
-                            }])
-                            ->where('id',$id)->get(['id']); //$user->commercesUser;      
+        $commerces = User::with(['commercesUser' => function($query) {
+                                    $query->with('commerces');
+                        }])
+                        ->where('id',$id)->get(['id']); //$user->commercesUser;      
         
-            return response()->json(['success'=>true, 'data'=>$commerces], 200);
-        } else {
-            return response()->json(['error' => 'No usuario','id'=>$id], 422);
-        }
+        return response()->json(['success'=>true, 'data'=>$commerces], 200);
         
         
         

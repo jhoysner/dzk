@@ -89151,8 +89151,6 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__Edit___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_4__Edit__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__Stock__ = __webpack_require__(534);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__Stock___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_5__Stock__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6_axios__ = __webpack_require__(13);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6_axios___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_6_axios__);
 //
 //
 //
@@ -89207,7 +89205,6 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
-
 
 
 
@@ -89230,6 +89227,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
     return {
       url: '/products',
       isAdmin: __WEBPACK_IMPORTED_MODULE_1__utilities_IsAdmin__["a" /* userIsAdmin */].admin,
+      userId: '',
       products: [],
       totalProd: [],
       commerces: [],
@@ -89249,22 +89247,19 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 
       this.loading = true;
 
-      __WEBPACK_IMPORTED_MODULE_6_axios___default.a.get('api' + this.url).then(function (response) {
+      axios.get('api' + this.url).then(function (response) {
         _this.productos = response.data.data;
-      }).catch(function (err) {
-        return console.log(err);
       });
 
-      __WEBPACK_IMPORTED_MODULE_6_axios___default.a.get('api/total-products').then(function (response) {
+      axios.get('api/total-products').then(function (response) {
         _this.totalProd = response.data.data;
-      }).catch(function (err) {
-        return console.log(err);
       });
 
-      __WEBPACK_IMPORTED_MODULE_6_axios___default.a.get('api/commerces-user').then(function (response) {
+      axios.get('api/commerces-user').then(function (response) {
         _this.commerces = response.data.data[0].commerces_user;
 
         var _loop = function _loop(i) {
+
           var productoId = _this.productos[i].idproduct;
           var commerceId = _this.productos[i].commerce_idcommerce;
 
@@ -89303,7 +89298,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
         _this.loading = false;
       }).catch(function (err) {
         _this.loading = false;
-        console.log(err.response);
+        console.log('E');
       });
     },
     edit: function edit(id) {
@@ -89325,7 +89320,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
         confirmButtonText: 'Si!'
       }).then(function (result) {
         if (result) {
-          __WEBPACK_IMPORTED_MODULE_6_axios___default.a.delete('api' + _this2.url + '/' + id).then(function (response) {
+          axios.delete('api' + _this2.url + '/' + id).then(function (response) {
             _this2.index();
             swal(response.data.success, {
               icon: "success"
@@ -90568,6 +90563,10 @@ if (false) {
 /***/ (function(module, exports, __webpack_require__) {
 
 var disposed = false
+function injectStyle (ssrContext) {
+  if (disposed) return
+  __webpack_require__(737)
+}
 var normalizeComponent = __webpack_require__(1)
 /* script */
 var __vue_script__ = __webpack_require__(535)
@@ -90576,7 +90575,7 @@ var __vue_template__ = __webpack_require__(536)
 /* template functional */
 var __vue_template_functional__ = false
 /* styles */
-var __vue_styles__ = null
+var __vue_styles__ = injectStyle
 /* scopeId */
 var __vue_scopeId__ = null
 /* moduleIdentifier (server only) */
@@ -90619,6 +90618,8 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_axios__ = __webpack_require__(13);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_axios___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_axios__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__utilities_EventBus__ = __webpack_require__(4);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_vue_spinner_src_PulseLoader_vue__ = __webpack_require__(30);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_vue_spinner_src_PulseLoader_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_2_vue_spinner_src_PulseLoader_vue__);
 //
 //
 //
@@ -90661,6 +90662,14 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+
 
 
 
@@ -90674,8 +90683,15 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
       error: [],
       sucursales: [],
       total: 0,
-      branchs: {}
+      branchs: {},
+      loading: false,
+      color: '#5bc0de',
+      size: '15px'
     };
+  },
+
+  components: {
+    PulseLoader: __WEBPACK_IMPORTED_MODULE_2_vue_spinner_src_PulseLoader_vue___default.a
   },
   created: function created() {
     var _this = this;
@@ -90695,13 +90711,15 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 
       this.total = 0;
 
+      this.loading = true;
+
       __WEBPACK_IMPORTED_MODULE_0_axios___default.a.get('api/product-commerces/' + commerce + '/' + product).then(function (response) {
         _this2.products = response.data.data;
       });
 
       __WEBPACK_IMPORTED_MODULE_0_axios___default.a.get('api/branch-commerce/' + commerce).then(function (response) {
         _this2.sucursales = response.data.data;
-
+        console.log(_this2.sucursales);
         for (var i = 0; i < _this2.sucursales.length; i++) {
           var idbranch = _this2.sucursales[i].idbranch;
           var prod = _this2.products.filter(function (operation) {
@@ -90716,6 +90734,11 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 
           _this2.total += parseInt(_this2.sucursales[i].stock);
         }
+
+        _this2.loading = false;
+      }).catch(function (err) {
+        console.log(err);
+        _this2.loading = false;
       });
     },
     actTotal: function actTotal(cant) {
@@ -90784,131 +90807,193 @@ var render = function() {
             },
             [
               _c("div", { staticClass: "modal-content" }, [
-                _c("div", { staticClass: "modal-body" }, [
-                  _c("div", { staticClass: "row pt-30" }, [
-                    _c("div", { staticClass: "col-lg-12" }, [
-                      _vm.error != ""
-                        ? _c("small", { staticClass: "text-danger" }, [
-                            _vm._v(_vm._s(_vm.error))
+                _c(
+                  "div",
+                  { staticClass: "modal-body" },
+                  [
+                    _c("pulse-loader", {
+                      attrs: {
+                        id: "spinner",
+                        loading: _vm.loading,
+                        color: _vm.color,
+                        size: _vm.size
+                      }
+                    }),
+                    _vm._v(" "),
+                    _c("div", { staticClass: "row pt-30" }, [
+                      !_vm.loading
+                        ? _c("div", { staticClass: "col-lg-12" }, [
+                            _vm.error != ""
+                              ? _c("small", { staticClass: "text-danger" }, [
+                                  _vm._v(_vm._s(_vm.error))
+                                ])
+                              : _vm._e(),
+                            _vm._v(" "),
+                            _c("table", { staticClass: "table table-hover " }, [
+                              _c("thead", [
+                                _c("tr", [
+                                  _c(
+                                    "th",
+                                    {
+                                      staticClass: "text-center",
+                                      attrs: { width: "60%" }
+                                    },
+                                    [_vm._v("Sucursal")]
+                                  ),
+                                  _vm._v(" "),
+                                  _c("th", { staticClass: "text-center" }, [
+                                    _vm._v("Cantidad")
+                                  ])
+                                ])
+                              ]),
+                              _vm._v(" "),
+                              _vm.sucursales.length > 0
+                                ? _c(
+                                    "tbody",
+                                    [
+                                      _vm._l(_vm.sucursales, function(branch) {
+                                        return _c("tr", [
+                                          _c(
+                                            "td",
+                                            { attrs: { width: "60%" } },
+                                            [_vm._v(_vm._s(branch.name))]
+                                          ),
+                                          _vm._v(" "),
+                                          _c(
+                                            "td",
+                                            { staticClass: "text-right" },
+                                            [
+                                              _c("input", {
+                                                directives: [
+                                                  {
+                                                    name: "model",
+                                                    rawName: "v-model",
+                                                    value: branch.stock,
+                                                    expression: "branch.stock"
+                                                  }
+                                                ],
+                                                staticClass:
+                                                  "form-control text-right",
+                                                attrs: {
+                                                  type: "number",
+                                                  min: "0"
+                                                },
+                                                domProps: {
+                                                  value: branch.stock
+                                                },
+                                                on: {
+                                                  change: function($event) {
+                                                    _vm.actTotal(branch.stock)
+                                                  },
+                                                  input: function($event) {
+                                                    if (
+                                                      $event.target.composing
+                                                    ) {
+                                                      return
+                                                    }
+                                                    _vm.$set(
+                                                      branch,
+                                                      "stock",
+                                                      $event.target.value
+                                                    )
+                                                  }
+                                                }
+                                              })
+                                            ]
+                                          )
+                                        ])
+                                      }),
+                                      _vm._v(" "),
+                                      _c("tr", [
+                                        _c("td", { attrs: { width: "60%" } }, [
+                                          _c("h4", [_vm._v("Total")])
+                                        ]),
+                                        _vm._v(" "),
+                                        _c(
+                                          "td",
+                                          { staticClass: "text-center" },
+                                          [
+                                            _c("input", {
+                                              directives: [
+                                                {
+                                                  name: "model",
+                                                  rawName: "v-model",
+                                                  value: _vm.total,
+                                                  expression: "total"
+                                                }
+                                              ],
+                                              staticClass:
+                                                "form-control text-right",
+                                              attrs: {
+                                                type: "number",
+                                                readonly: ""
+                                              },
+                                              domProps: { value: _vm.total },
+                                              on: {
+                                                input: function($event) {
+                                                  if ($event.target.composing) {
+                                                    return
+                                                  }
+                                                  _vm.total =
+                                                    $event.target.value
+                                                }
+                                              }
+                                            })
+                                          ]
+                                        )
+                                      ])
+                                    ],
+                                    2
+                                  )
+                                : _c("tbody", [
+                                    _c("tr", [_vm._v("No tiene sucursal")])
+                                  ])
+                            ])
                           ])
                         : _vm._e(),
                       _vm._v(" "),
-                      _c("table", { staticClass: "table table-hover " }, [
-                        _c("thead", [
-                          _c("tr", [
+                      _vm.sucursales.length > 0
+                        ? _c("div", { staticClass: "col-lg-12 text-right" }, [
                             _c(
-                              "th",
+                              "button",
                               {
-                                staticClass: "text-center",
-                                attrs: { width: "60%" }
+                                staticClass: "btn btn-primary",
+                                attrs: { type: "submit" }
                               },
-                              [_vm._v("Sucursal")]
-                            ),
-                            _vm._v(" "),
-                            _c("th", { staticClass: "text-center" }, [
-                              _vm._v("Cantidad")
-                            ])
-                          ])
-                        ]),
-                        _vm._v(" "),
-                        _vm.sucursales.length > 0
-                          ? _c(
-                              "tbody",
                               [
-                                _vm._l(_vm.sucursales, function(branch) {
-                                  return _c("tr", [
-                                    _c("td", { attrs: { width: "60%" } }, [
-                                      _vm._v(_vm._s(branch.name))
-                                    ]),
-                                    _vm._v(" "),
-                                    _c("td", { staticClass: "text-right" }, [
-                                      _c("input", {
-                                        directives: [
-                                          {
-                                            name: "model",
-                                            rawName: "v-model",
-                                            value: branch.stock,
-                                            expression: "branch.stock"
-                                          }
-                                        ],
-                                        staticClass: "form-control text-right",
-                                        attrs: { type: "number", min: "0" },
-                                        domProps: { value: branch.stock },
-                                        on: {
-                                          change: function($event) {
-                                            _vm.actTotal(branch.stock)
-                                          },
-                                          input: function($event) {
-                                            if ($event.target.composing) {
-                                              return
-                                            }
-                                            _vm.$set(
-                                              branch,
-                                              "stock",
-                                              $event.target.value
-                                            )
-                                          }
-                                        }
-                                      })
-                                    ])
-                                  ])
-                                }),
+                                _c("i", { staticClass: "zmdi zmdi-plus" }),
                                 _vm._v(" "),
-                                _c("tr", [
-                                  _c("td", { attrs: { width: "60%" } }, [
-                                    _c("h4", [_vm._v("Total")])
-                                  ]),
-                                  _vm._v(" "),
-                                  _c("td", { staticClass: "text-center" }, [
-                                    _c("input", {
-                                      directives: [
-                                        {
-                                          name: "model",
-                                          rawName: "v-model",
-                                          value: _vm.total,
-                                          expression: "total"
-                                        }
-                                      ],
-                                      staticClass: "form-control text-right",
-                                      attrs: { type: "number", readonly: "" },
-                                      domProps: { value: _vm.total },
-                                      on: {
-                                        input: function($event) {
-                                          if ($event.target.composing) {
-                                            return
+                                !_vm.loading
+                                  ? _c("span", [_vm._v("Guardar")])
+                                  : _vm._e(),
+                                _vm._v(" "),
+                                _vm.loading
+                                  ? _c(
+                                      "span",
+                                      [
+                                        _vm._v(
+                                          "\n                          Guardando"
+                                        ),
+                                        _c("pulse-loader", {
+                                          attrs: {
+                                            id: "spinner",
+                                            loading: _vm.loading,
+                                            color: _vm.color,
+                                            size: _vm.size
                                           }
-                                          _vm.total = $event.target.value
-                                        }
-                                      }
-                                    })
-                                  ])
-                                ])
-                              ],
-                              2
+                                        })
+                                      ],
+                                      1
+                                    )
+                                  : _vm._e()
+                              ]
                             )
-                          : _c("tbody", [
-                              _c("tr", [_vm._v("No tiene sucursal")])
-                            ])
-                      ])
-                    ]),
-                    _vm._v(" "),
-                    _vm.sucursales.length > 0
-                      ? _c("div", { staticClass: "col-lg-12 text-right" }, [
-                          _c(
-                            "button",
-                            {
-                              staticClass: "btn btn-primary",
-                              attrs: { type: "submit" }
-                            },
-                            [
-                              _c("i", { staticClass: "zmdi zmdi-plus" }),
-                              _vm._v(" Guardar")
-                            ]
-                          )
-                        ])
-                      : _vm._e()
-                  ])
-                ])
+                          ])
+                        : _vm._e()
+                    ])
+                  ],
+                  1
+                )
               ])
             ]
           )
@@ -130837,6 +130922,48 @@ if (false) {
 /***/ (function(module, exports) {
 
 // removed by extract-text-webpack-plugin
+
+/***/ }),
+/* 735 */,
+/* 736 */,
+/* 737 */
+/***/ (function(module, exports, __webpack_require__) {
+
+// style-loader: Adds some css to the DOM by adding a <style> tag
+
+// load the styles
+var content = __webpack_require__(738);
+if(typeof content === 'string') content = [[module.i, content, '']];
+if(content.locals) module.exports = content.locals;
+// add the styles to the DOM
+var update = __webpack_require__(3)("1008aad5", content, false, {});
+// Hot Module Replacement
+if(false) {
+ // When the styles change, update the <style> tags
+ if(!content.locals) {
+   module.hot.accept("!!../../../../../node_modules/css-loader/index.js!../../../../../node_modules/vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-6b06cee2\",\"scoped\":false,\"hasInlineConfig\":true}!../../../../../node_modules/vue-loader/lib/selector.js?type=styles&index=0!./Stock.vue", function() {
+     var newContent = require("!!../../../../../node_modules/css-loader/index.js!../../../../../node_modules/vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-6b06cee2\",\"scoped\":false,\"hasInlineConfig\":true}!../../../../../node_modules/vue-loader/lib/selector.js?type=styles&index=0!./Stock.vue");
+     if(typeof newContent === 'string') newContent = [[module.id, newContent, '']];
+     update(newContent);
+   });
+ }
+ // When the module is disposed, remove the <style> tags
+ module.hot.dispose(function() { update(); });
+}
+
+/***/ }),
+/* 738 */
+/***/ (function(module, exports, __webpack_require__) {
+
+exports = module.exports = __webpack_require__(2)(false);
+// imports
+
+
+// module
+exports.push([module.i, "\n#spinner {\n  text-align: center;\n}\n\n", ""]);
+
+// exports
+
 
 /***/ })
 /******/ ]);

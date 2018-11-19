@@ -76,6 +76,8 @@ export default {
       url: '/products',
       isAdmin: userIsAdmin.admin,
       products: [],
+      totalProd: [],
+      commerces: [],
       loading: false,
       color: '#5bc0de',
       size:'30px',

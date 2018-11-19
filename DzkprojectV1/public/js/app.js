@@ -89231,6 +89231,8 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
       url: '/products',
       isAdmin: __WEBPACK_IMPORTED_MODULE_1__utilities_IsAdmin__["a" /* userIsAdmin */].admin,
       products: [],
+      totalProd: [],
+      commerces: [],
       loading: false,
       color: '#5bc0de',
       size: '30px'

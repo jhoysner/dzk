@@ -120,6 +120,12 @@ import axios from 'axios';
               params.append(key,val)
             })
 
+            if(this.form.usestock == true) {
+              params.append('usestock',1)
+            } else {
+              params.append('usestock',0)
+            }
+
             let input = document.querySelector('input[type=file]')                
             let file = (input.files[0] ? input.files[0]: null)
             if(file !== undefined || file !== NULL || file.type.match(/image.*/)) params.append('image', file);

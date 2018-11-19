@@ -89582,6 +89582,12 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
         params.append(key, val);
       });
 
+      if (this.form.usestock == true) {
+        params.append('usestock', 1);
+      } else {
+        params.append('usestock', 0);
+      }
+
       var input = document.querySelector('input[type=file]');
       var file = input.files[0] ? input.files[0] : null;
       if (file !== undefined || file !== NULL || file.type.match(/image.*/)) params.append('image', file);
@@ -90685,6 +90691,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
       total: 0,
       branchs: {},
       loading: false,
+      saving: false,
       color: '#5bc0de',
       size: '15px'
     };
@@ -90750,6 +90757,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
     submitForm: function submitForm() {
       var _this3 = this;
 
+      this.saving = true;
       this.branchs.productId = this.productId;
       this.branchs.branchs = this.sucursales;
 
@@ -90764,6 +90772,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
         });
       }).catch(function (err) {
         console.log(err);
+        _this3.saving = false;
         if (err.response.status === 422) {
           _this3.error = err.response.data.errors;
         }
@@ -90967,13 +90976,10 @@ var render = function() {
                                   ? _c("span", [_vm._v("Guardar")])
                                   : _vm._e(),
                                 _vm._v(" "),
-                                _vm.loading
+                                _vm.loading && _vm.saving
                                   ? _c(
                                       "span",
                                       [
-                                        _vm._v(
-                                          "\n                          Guardando"
-                                        ),
                                         _c("pulse-loader", {
                                           attrs: {
                                             id: "spinner",

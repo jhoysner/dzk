@@ -34,8 +34,8 @@
                       <div v-if="sucursales.length > 0" class="col-lg-12 text-right">
                           <button type="submit" class="btn btn-primary"><i class="zmdi zmdi-plus"></i> 
                             <span v-if="!loading">Guardar</span>
-                            <span v-if="loading">
-                              Guardando<pulse-loader id="spinner" :loading="loading" :color="color" :size="size"></pulse-loader>
+                            <span v-if="loading && saving">
+                              <pulse-loader id="spinner" :loading="loading" :color="color" :size="size"></pulse-loader>
                             </span>
                           </button>
                       </div>
@@ -63,6 +63,7 @@ import PulseLoader from 'vue-spinner/src/PulseLoader.vue'
               total: 0,
               branchs: {},
               loading: false,
+              saving: false,
               color: '#5bc0de',
               size:'15px',
             }
@@ -125,6 +126,7 @@ import PulseLoader from 'vue-spinner/src/PulseLoader.vue'
             }
           },
           submitForm() {
+            this.saving = true
             this.branchs.productId = this.productId
             this.branchs.branchs = this.sucursales 
 
@@ -141,9 +143,11 @@ import PulseLoader from 'vue-spinner/src/PulseLoader.vue'
               })
               .catch(err => {
                 console.log(err)
+                this.saving = false
                 if(err.response.status === 422) {
                     this.error = err.response.data.errors;
                 }
+
               });
 
           },

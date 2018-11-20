@@ -124,7 +124,12 @@ class LoginController extends Controller
                 return response()->json(['state'=>'Not Found','error'=>'Usuario'], 422);            
             }
 
-            return response()->json(['state'=>'Attempts','success'=>'Usuario Autenticado por ID','data' => $loggedByID], 200);            
+            return response()->json(['state'=>'Attempts','success'=>'Usuario Autenticado por ID',
+                'user' => $loggedByID
+                'role'=> $role, 
+                'permissions'=> $permissions,
+                'access_token'=> $user->makeApiToken()
+                ], 200);            
         } else {
                 return response()->json(['state'=>'Not Found','error'=>'Es necesario el ID del Usuario'], 422);            
         }

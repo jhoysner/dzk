@@ -37,4 +37,9 @@ class Product extends Model
     {
       return $this->belongsTo('App\Commerce', 'commerce_idcommerce', 'idcommerce');
     }
+
+    public function branchs()
+    {
+        return $this->belongsToMany('App\Branch','branch_has_product')->withPivot('idbranch_has_product','stock','commerce_idcommerce', 'product_idproduct','branch_idbranch')->whereNull('branch_has_product.deleted_at');
+    }
 }

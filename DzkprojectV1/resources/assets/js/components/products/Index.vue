@@ -60,7 +60,6 @@ import PulseLoader from 'vue-spinner/src/PulseLoader.vue'
 import create from './Create'
 import edit from './Edit'
 import stock from './Stock'
-import axios from 'axios'
 
 export default {
   name: 'index',
@@ -75,7 +74,10 @@ export default {
     return {
       url: '/products',
       isAdmin: userIsAdmin.admin,
+      userId: '',
       products: [],
+      totalProd: [],
+      commerces: [],
       loading: false,
       color: '#5bc0de',
       size:'30px',
@@ -88,23 +90,21 @@ export default {
   methods: {
     index() {
       this.loading = true
-
+      
       axios.get('api' + this.url).then(response => {
-        this.productos = response.data.data
-        
+        this.productos = response.data.data;
       })
-      .catch(err => console.log(err))
-
+      
       axios.get('api/total-products').then(response => {
-        this.totalProd = response.data.data
-      })
-      .catch(err => console.log(err))
+          this.totalProd = response.data.data;
+        })
 
       axios.get('api/commerces-user')
         .then(response => {
           this.commerces = response.data.data[0].commerces_user
-          
+
           for(let i=0; i<this.productos.length; i++) {
+
             let productoId = this.productos[i].idproduct
             let commerceId = this.productos[i].commerce_idcommerce 
 
@@ -119,7 +119,7 @@ export default {
             }
 
             var stock = this.totalProd.filter(function(operation) {
-              return operation.product_idproduct == productoId && operation.commerce_idcommerce == commerceId
+              return (operation.product_idproduct == productoId && operation.commerce_idcommerce == commerceId);
             })
 
             if(Object.keys(stock).length === 0) {
@@ -129,13 +129,16 @@ export default {
             }
 
             this.productos.stock = stock
+
           }
+         
           this.products = this.productos
           
           this.loading = false
         })
         .catch(err => {
-          console.log(err.response)
+          this.loading = false
+          console.log('E')
         })                 
     },
 

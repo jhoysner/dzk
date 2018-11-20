@@ -21,7 +21,16 @@ class ProductController extends Controller
     {
     	$productos = Product::with('commerces')
     					->with('type')
-    						->get();
+    						->orderBy('name','ASC')
+                            ->get();
+
+        /*$productos = Product::with('commerces')
+                        ->with('type')
+                            ->with(['branchs'=>function($query){
+                                        $query->select(DB::raw('SUM(stock) as total'));
+                                        $query->groupBy('product_idproduct','branch_has_product.commerce_idcommerce');
+                                    }])
+                                ->get();*/
 
     	return response()->json(['success'=>true, 'data'=>$productos], 200);
     }

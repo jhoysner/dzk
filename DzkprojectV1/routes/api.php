@@ -93,7 +93,6 @@ Route::group(['middleware' => 'auth:api'], function() {
 
 Route::get('existEmail/{email}', 'Auth\LoginController@existEmail');
 
-
 Route::get('/tags', 'Tags\TagsController@index');
 
 Route::resource('discount','Discount\DiscountController');

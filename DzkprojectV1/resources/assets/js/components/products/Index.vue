@@ -90,11 +90,7 @@ export default {
   methods: {
     index() {
       this.loading = true
-      
-      axios.get('api' + this.url).then(response => {
-        this.productos = response.data.data;
-      })
-      
+            
       axios.get('api/total-products').then(response => {
           this.totalProd = response.data.data;
         })
@@ -102,9 +98,12 @@ export default {
       axios.get('api/commerces-user')
         .then(response => {
           this.commerces = response.data.data[0].commerces_user
+        })
+
+        axios.get('api' + this.url).then(response => {
+          this.productos = response.data.data;
 
           for(let i=0; i<this.productos.length; i++) {
-
             let productoId = this.productos[i].idproduct
             let commerceId = this.productos[i].commerce_idcommerce 
 
@@ -131,15 +130,15 @@ export default {
             this.productos.stock = stock
 
           }
-         
+  
           this.products = this.productos
           
-          this.loading = false
+          this.loading = false   
         })
         .catch(err => {
           this.loading = false
-          console.log('E')
-        })                 
+        })              
+
     },
 
     edit(id) {

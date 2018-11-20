@@ -114,6 +114,32 @@ class LoginController extends Controller
         
     }
 
+    public function authenticateID(Request $request)
+    {
+        if($request->id) {
+            $id = $request->id;
+
+            $loggedByID = Auth::loginUsingId($id);
+            
+            $role = $loggedByID->getRoleNames();
+            
+            $permissions = $loggedByID->getAllPermissions()->pluck('name')->toArray(); 
+
+            if( !$loggedByID ) {
+                return response()->json(['state'=>'Not Found','error'=>'Usuario'], 422);            
+            }
+
+            return response()->json(['state'=>'Logged','success'=>'Usuario Autenticado por ID',
+                'user' => $loggedByID,
+                'role'=> $role, 
+                'permissions'=> $permissions,
+                'access_token'=> $loggedByID->makeApiToken()
+                ], 200);            
+        } else {
+                return response()->json(['state'=>'Not Found','error'=>'Es necesario el ID del Usuario'], 422);            
+        }
+    }
+
     public function authenticateold(Request $request)
     {
         dd($request->all());
@@ -121,6 +147,27 @@ class LoginController extends Controller
             return redirect('home');
         }
         return redirect('login');
+    }
+
+    public function existEmail($email)
+    {
+        $count = User::where('email', $email)->count();
+
+        if($count > 0) {
+            $user = User::where('email', $email)->get();
+
+            return response()->json(
+                [
+                    'msg'      =>  '¡Felicidades! Tu correo ha sido vinculado a este equipo.',
+                    'success'  =>  true,
+                    'user'     => $user], 200);     
+        }
+
+        return response()->json(
+                [
+                    'msg'      =>  'Correo no registrado en nuestra web.',
+                    'success'  =>  false], 200);   
+
     }
     
 }

@@ -55,7 +55,10 @@ import axios from 'axios';
 export default {
   name: 'index',
   components: {
-    create, permissions, edit, show
+    create, 
+    permissions, 
+    edit, 
+    show
   },
   data() {
     return {
@@ -71,7 +74,8 @@ export default {
   methods: {
     index() {
       axios.get('api' + this.url).then(response => {        
-        this.users= response.data.users.data
+        this.users= response.data.users
+
         this.users.forEach(function(item) {
           (item.status == 0)? item.status = "Inactivo":item.status = "Activo";
         })

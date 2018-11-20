@@ -9,6 +9,7 @@ use App\Http\Requests\ProductCreateRequest;
 use App\Http\Requests\ProductUpdateRequest;
 use App\Product;
 use App\ProductType;
+use App\ProductUnitOfMeasurement;
 use App\Branch;
 use App\Commerce;
 use App\BranchHasProduct;
@@ -21,8 +22,9 @@ class ProductController extends Controller
     {
     	$productos = Product::with('commerces')
     					->with('type')
-    						->orderBy('name','ASC')
-                            ->get();
+                            ->with('units')
+    						  ->orderBy('name','ASC')
+                                ->get();
 
         /*$productos = Product::with('commerces')
                         ->with('type')
@@ -49,11 +51,16 @@ class ProductController extends Controller
         $product = new Product();
         $product->idproduct = str_random(36);
         $product->name = $request->name;
+        if($request->price)
+        $product->price = $request->price;
+        if($request->taxpercentage)
+        $product->taxpercentage = $request->taxpercentage; 
         if($request->reference)
             $product->reference = $request->reference;
         $product->usestock = $request->usestock;
         $product->producttype_idproducttype = $request->producttype_idproducttype;
         $product->commerce_idcommerce = $request->commerce_idcommerce;
+        $product->productunitofmeasurement_idproductunitofmeasurement = $request->productunitofmeasurement_idproductunitofmeasurement;
         if($request->hasFile('image'))
             $product->image = "images/product/".$fullname;
         $product->save();
@@ -86,7 +93,7 @@ class ProductController extends Controller
             return response()->json(['error' => 'No encontrado'], 422);
         }
 
-    	if($request->image != $product->image) {
+    	if($request->image !== $product->image && $request->image != "null") {
             Storage::disk('product')->delete($product->image);
 
             $exploded = explode(',', $request->image);
@@ -135,6 +142,17 @@ class ProductController extends Controller
     
     	return response()->json(['success'=>true, 'data'=>$tipos], 200);
     }
+
+    public function getUnidadesMedidas()
+    {
+        $unidadesMed = ProductUnitOfMeasurement::select('idproductunitofmeasurement','name')
+                                ->orderBy('name','ASC')
+                                    ->get();
+    
+        return response()->json(['success'=>true, 'data'=>$unidadesMed], 200);
+    }
+
+    
 
     public function getCommercesProduct($idcommerce,$idproduct)
     {

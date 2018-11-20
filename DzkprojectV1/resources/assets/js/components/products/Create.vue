@@ -13,7 +13,25 @@
                       <div class="col-lg-12">
                           <label>Referencia</label>
                           <input type="text" placeholder="Referencia" v-model="form.reference" class="common-input">
-                          <small class="text-danger" v-if="error.name">{{ error.name[0] }}</small>
+                      </div>
+                      <div class="col-lg-12">
+                          <label>Precio</label>
+                          <input type="number" min="0" step="0.01" placeholder="Precio" v-model="form.price" class="common-input">
+                          <small class="text-danger" v-if="error.price">{{ error.price[0] }}</small>
+                      </div>
+                      <div class="col-lg-12">
+                          <label>Impuesto</label>
+                          <input type="number" min="0" step="0.01" placeholder="Impuesto" v-model="form.taxpercentage" class="common-input">
+                          <small class="text-danger" v-if="error.price">{{ error.price[0] }}</small>
+                      </div>
+                      
+                      <div class="col-lg-12">
+                        <div class="sorting"><i class="required">*</i> Unidad de Medida
+                          <select v-model="form.productunitofmeasurement_idproductunitofmeasurement" required class="form-control common-input">
+                            <option v-for="option in units" :value="option.idproductunitofmeasurement">{{option.name}}</option>
+                          </select>
+                          <small class="text-danger" v-if="error.productunitofmeasurement_idproductunitofmeasurement">{{ error.productunitofmeasurement_idproductunitofmeasurement[0] }}</small>
+                         </div> 
                       </div>
                       <div class="col-lg-12">
                         <div class="sorting"><i class="required">*</i> Tipo
@@ -87,6 +105,7 @@ import axios from 'axios';
               url: '/products',
               types: [],
               commerces: [],
+              units: [],
               error: {},
             }
         },
@@ -95,6 +114,14 @@ import axios from 'axios';
         },
         methods: {
           index() {
+            axios.get('api/unit-products')
+              .then(response => {
+                this.units = response.data.data          
+              })
+              .catch(err => {
+                  console.log(err.response)
+              })
+
             axios.get('api/type-products')
               .then(response => {
                 this.types = response.data.data          

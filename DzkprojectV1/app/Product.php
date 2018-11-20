@@ -19,9 +19,12 @@ class Product extends Model
         'name', 
         'reference', 
         'usestock',
+        'price',
+        'taxpercentage',
         'image',
         'producttype_idproductype',
-        'commerce_idcommerce'
+        'commerce_idcommerce',
+        'productunitofmeasurement_idproductunitofmeasurement'
     ];
 
     protected $hidden  = [
@@ -31,6 +34,11 @@ class Product extends Model
 	public function type()
     {
       return $this->belongsTo('App\ProductType', 'producttype_idproducttype', 'idproducttype');
+    }
+
+    public function units()
+    {
+      return $this->belongsTo('App\ProductUnitOfMeasurement', 'productunitofmeasurement_idproductunitofmeasurement', 'idproductunitofmeasurement');
     }
 
     public function commerces()

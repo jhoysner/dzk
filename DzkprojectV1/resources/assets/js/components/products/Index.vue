@@ -8,12 +8,14 @@
                 <pulse-loader id="spinner" :loading="loading" :color="color" :size="size"></pulse-loader>
                 <div class="responsive" v-if="!loading">
                   <div class="table-responsive">
-                      <table class="table table-hover table-bordered table-condensed table-responsive">
+                      <table class="table table-hover table-bordered table-condensed table-responsive" width="100%">
                           <thead>
                             <tr>
                                 <th class="text-center">Nombre</th>
                                 <th class="text-center">Referencia</th>
+                                <th class="text-center">Und. Medida</th>
                                 <th class="text-center">Tipo</th>
+                                <th class="text-center">Precio</th>
                                 <th class="text-center">Tienda</th>
                                 <th class="text-center">Stock (Total)</th>
                                 <th class="text-center">Imagen</th>
@@ -24,7 +26,9 @@
                             <tr v-for="product in products">
                               <td>{{ product.name }}</td>
                               <td>{{ product.reference }}</td>
+                              <td>{{ product.units.name }}</td>
                               <td>{{ product.type.name }}</td>
+                              <td class="text-right">{{ product.price }}</td>
                               <td>{{ product.commerces.name }}</td>
                               <td class="text-right" v-if="product.usestock">{{product.stock}}</td>
                               <td class="text-center" v-else><span class="fa fa-info-circle fa-2x" title="Este producto no maneja stock"></span></td>
@@ -102,6 +106,8 @@ export default {
 
         axios.get('api' + this.url).then(response => {
           this.productos = response.data.data;
+console.log(1)
+console.log(this.productos)
 
           for(let i=0; i<this.productos.length; i++) {
             let productoId = this.productos[i].idproduct

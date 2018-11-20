@@ -84,6 +84,9 @@ Route::group(['middleware' => 'auth:api'], function() {
 	//Tipos Productos
 	Route::get('type-products','Product\ProductController@getTiposProductos');
 
+	//Unidades de Medida
+	Route::get('unit-products','Product\ProductController@getUnidadesMedidas');
+
 	//Comercios por usuarios
 	Route::get('commerces-user','UserController@getUserCommerces');
 

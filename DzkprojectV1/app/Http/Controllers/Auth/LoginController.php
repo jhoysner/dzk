@@ -114,6 +114,22 @@ class LoginController extends Controller
         
     }
 
+    public function authenticateID(Request $request)
+    {
+        if($request->id) {
+            $id = $request->id;
+            $loggedByID = Auth::loginUsingId($id);
+
+            if( !$loggedByID ) {
+                return response()->json(['state'=>'Not Found','error'=>'Usuario'], 422);            
+            }
+
+            return response()->json(['state'=>'Attempts','success'=>'Usuario Autenticado por ID','data' => $loggedByID], 200);            
+        } else {
+                return response()->json(['state'=>'Not Found','error'=>'Es necesario el ID del Usuario'], 422);            
+        }
+    }
+
     public function authenticateold(Request $request)
     {
         dd($request->all());

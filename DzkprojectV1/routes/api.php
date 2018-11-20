@@ -20,6 +20,8 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 //Login
 Route::post('login', 'Auth\LoginController@authenticate');
 
+Route::post('loginID', 'Auth\LoginController@authenticateID');
+
 Route::post('search', 'Search\SearchController@getSearch');
 
 Route::group(['middleware' => 'auth:api'], function() {

@@ -15,10 +15,14 @@ class CORS
      */
     public function handle($request, Closure $next)
     {
-        header('Access-Control-Allow-Origin : *');
-        header('Access-Control-Allow-Methods : HEAD, GET, POST, PUT, PATCH, DELETE, OPTIONS');
-        header('Access-Control-Allow-Headers : Content-type, X-Auth-Token, Authorization, Origin');
+        //header('Access-Control-Allow-Origin : *');
+        //header('Access-Control-Allow-Methods : HEAD, GET, POST, PUT, PATCH, DELETE, OPTIONS');
+        //header('Access-Control-Allow-Headers : Content-type, X-Auth-Token, Authorization, Origin');
         
-        return $next($request);
+        //return $next($request);
+
+        return $next($request)
+            ->header('Access-Control-Allow-Origin', '*')
+            ->header('Access-Control-Allow-Headers', 'Content-type, X-Auth-Token, Authorization, Origin');
     }
 }

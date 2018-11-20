@@ -84963,7 +84963,10 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: 'index',
   components: {
-    create: __WEBPACK_IMPORTED_MODULE_1__Create___default.a, permissions: __WEBPACK_IMPORTED_MODULE_4__Permissions___default.a, edit: __WEBPACK_IMPORTED_MODULE_2__Edita___default.a, show: __WEBPACK_IMPORTED_MODULE_3__Show___default.a
+    create: __WEBPACK_IMPORTED_MODULE_1__Create___default.a,
+    permissions: __WEBPACK_IMPORTED_MODULE_4__Permissions___default.a,
+    edit: __WEBPACK_IMPORTED_MODULE_2__Edita___default.a,
+    show: __WEBPACK_IMPORTED_MODULE_3__Show___default.a
   },
   data: function data() {
     return {
@@ -84981,7 +84984,8 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
       var _this = this;
 
       __WEBPACK_IMPORTED_MODULE_5_axios___default.a.get('api' + this.url).then(function (response) {
-        _this.users = response.data.users.data;
+        _this.users = response.data.users;
+
         _this.users.forEach(function (item) {
           item.status == 0 ? item.status = "Inactivo" : item.status = "Activo";
         });
@@ -89257,49 +89261,48 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 
       axios.get('api/commerces-user').then(function (response) {
         _this.commerces = response.data.data[0].commerces_user;
-
-        var _loop = function _loop(i) {
-
-          var productoId = _this.productos[i].idproduct;
-          var commerceId = _this.productos[i].commerce_idcommerce;
-
-          var pos = _this.commerces.map(function (e) {
-            return e.commerce_idcommerce;
-          }).indexOf(_this.productos[i].commerce_idcommerce);
-
-          if (pos == -1) {
-            _this.productos[i].pert = false;
-          } else {
-            _this.productos[i].pert = true;
-          }
-
-          stock = _this.totalProd.filter(function (operation) {
-            return operation.product_idproduct == productoId && operation.commerce_idcommerce == commerceId;
-          });
-
-
-          if (Object.keys(stock).length === 0) {
-            _this.productos[i].stock = 0;
-          } else {
-            _this.productos[i].stock = stock[0].total;
-          }
-
-          _this.productos.stock = stock;
-        };
-
-        for (var i = 0; i < _this.productos.length; i++) {
-          var stock;
-
-          _loop(i);
-        }
-
-        _this.products = _this.productos;
-
-        _this.loading = false;
       }).catch(function (err) {
         _this.loading = false;
-        console.log('E');
       });
+
+      var _loop = function _loop(i) {
+
+        var productoId = _this.productos[i].idproduct;
+        var commerceId = _this.productos[i].commerce_idcommerce;
+
+        var pos = _this.commerces.map(function (e) {
+          return e.commerce_idcommerce;
+        }).indexOf(_this.productos[i].commerce_idcommerce);
+
+        if (pos == -1) {
+          _this.productos[i].pert = false;
+        } else {
+          _this.productos[i].pert = true;
+        }
+
+        stock = _this.totalProd.filter(function (operation) {
+          return operation.product_idproduct == productoId && operation.commerce_idcommerce == commerceId;
+        });
+
+
+        if (Object.keys(stock).length === 0) {
+          _this.productos[i].stock = 0;
+        } else {
+          _this.productos[i].stock = stock[0].total;
+        }
+
+        _this.productos.stock = stock;
+      };
+
+      for (var i = 0; i < this.productos.length; i++) {
+        var stock;
+
+        _loop(i);
+      }
+
+      this.products = this.productos;
+
+      this.loading = false;
     },
     edit: function edit(id) {
       __WEBPACK_IMPORTED_MODULE_0__utilities_EventBus__["a" /* default */].$emit('edit_id', id);

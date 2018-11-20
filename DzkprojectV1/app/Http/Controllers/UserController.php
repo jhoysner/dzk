@@ -32,9 +32,9 @@ class UserController extends Controller
 
     public function index()
     {
-        $paginate = Helper::getPaginate();
+        //$paginate = Helper::getPaginate();
 
-        $users = User::latest()->paginate($paginate);
+        $users = User::latest()->get(); //paginate($paginate);
         return response()->json(['users'=>$users], 200);
     }
 

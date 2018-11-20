@@ -102,44 +102,43 @@ export default {
       axios.get('api/commerces-user')
         .then(response => {
           this.commerces = response.data.data[0].commerces_user
-
-          for(let i=0; i<this.productos.length; i++) {
-
-            let productoId = this.productos[i].idproduct
-            let commerceId = this.productos[i].commerce_idcommerce 
-
-            let pos = this.commerces.map( function(e) {
-              return (e.commerce_idcommerce)
-            }).indexOf(this.productos[i].commerce_idcommerce)
-
-            if(pos == -1 ) {
-              this.productos[i].pert = false
-            } else {
-              this.productos[i].pert = true
-            }
-
-            var stock = this.totalProd.filter(function(operation) {
-              return (operation.product_idproduct == productoId && operation.commerce_idcommerce == commerceId);
-            })
-
-            if(Object.keys(stock).length === 0) {
-              this.productos[i].stock = 0  
-            } else {
-              this.productos[i].stock = stock[0].total  
-            }
-
-            this.productos.stock = stock
-
-          }
-         
-          this.products = this.productos
-          
-          this.loading = false
         })
         .catch(err => {
           this.loading = false
-          console.log('E')
-        })                 
+        })              
+
+        for(let i=0; i<this.productos.length; i++) {
+
+          let productoId = this.productos[i].idproduct
+          let commerceId = this.productos[i].commerce_idcommerce 
+
+          let pos = this.commerces.map( function(e) {
+            return (e.commerce_idcommerce)
+          }).indexOf(this.productos[i].commerce_idcommerce)
+
+          if(pos == -1 ) {
+            this.productos[i].pert = false
+          } else {
+            this.productos[i].pert = true
+          }
+
+          var stock = this.totalProd.filter(function(operation) {
+            return (operation.product_idproduct == productoId && operation.commerce_idcommerce == commerceId);
+          })
+
+          if(Object.keys(stock).length === 0) {
+            this.productos[i].stock = 0  
+          } else {
+            this.productos[i].stock = stock[0].total  
+          }
+
+          this.productos.stock = stock
+
+        }
+       
+        this.products = this.productos
+        
+        this.loading = false   
     },
 
     edit(id) {

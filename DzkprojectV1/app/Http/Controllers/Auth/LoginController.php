@@ -118,17 +118,22 @@ class LoginController extends Controller
     {
         if($request->id) {
             $id = $request->id;
+
             $loggedByID = Auth::loginUsingId($id);
+            
+            $role = $loggedByID->getRoleNames();
+            
+            $permissions = $loggedByID->getAllPermissions()->pluck('name')->toArray(); 
 
             if( !$loggedByID ) {
                 return response()->json(['state'=>'Not Found','error'=>'Usuario'], 422);            
             }
 
-            return response()->json(['state'=>'Attempts','success'=>'Usuario Autenticado por ID',
-                'user' => $loggedByID
+            return response()->json(['state'=>'Logged','success'=>'Usuario Autenticado por ID',
+                'user' => $loggedByID,
                 'role'=> $role, 
                 'permissions'=> $permissions,
-                'access_token'=> $user->makeApiToken()
+                'access_token'=> $loggedByID->makeApiToken()
                 ], 200);            
         } else {
                 return response()->json(['state'=>'Not Found','error'=>'Es necesario el ID del Usuario'], 422);            

@@ -81,7 +81,7 @@
                           </div>
                         </div>
                         <div class="col-lg-12 text-right">
-                            <button type="submit" class="btn btn-primary"><i class="zmdi zmdi-plus"></i>
+                            <button type="submit" :disabled="saving" class="btn btn-primary"><i class="zmdi zmdi-plus"></i>
                              Guardar</button>
                         </div>
                       </div>
@@ -109,6 +109,7 @@ import PulseLoader from 'vue-spinner/src/PulseLoader.vue'
               commerces: [],
               units: [],
               error: {},
+              saving: false,
               loading: false,
               color: '#5bc0de',
               size:'15px',
@@ -171,6 +172,8 @@ import PulseLoader from 'vue-spinner/src/PulseLoader.vue'
           submitForm() {
             this.error = {};
 
+            this.saving = true
+
             let params = new FormData()
             
             _.each(this.product, function(val,key) {
@@ -203,6 +206,8 @@ import PulseLoader from 'vue-spinner/src/PulseLoader.vue'
               if(err.response.status === 422) {
                   this.error = err.response.data.errors;
               }
+
+              this.saving = false
             });
           },
           previewImage: function(event) {

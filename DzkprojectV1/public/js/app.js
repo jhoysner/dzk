@@ -90341,6 +90341,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
       commerces: [],
       units: [],
       error: {},
+      saving: false,
       loading: false,
       color: '#5bc0de',
       size: '15px'
@@ -90400,6 +90401,8 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 
       this.error = {};
 
+      this.saving = true;
+
       var params = new FormData();
 
       _.each(this.product, function (val, key) {
@@ -90430,6 +90433,8 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
         if (err.response.status === 422) {
           _this3.error = err.response.data.errors;
         }
+
+        _this3.saving = false;
       });
     },
 
@@ -90991,7 +90996,10 @@ var render = function() {
                                 "button",
                                 {
                                   staticClass: "btn btn-primary",
-                                  attrs: { type: "submit" }
+                                  attrs: {
+                                    type: "submit",
+                                    disabled: _vm.saving
+                                  }
                                 },
                                 [
                                   _c("i", { staticClass: "zmdi zmdi-plus" }),
@@ -91172,9 +91180,6 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
-//
-//
-//
 
 
 
@@ -91258,6 +91263,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
       var _this3 = this;
 
       this.saving = true;
+
       this.branchs.productId = this.productId;
       this.branchs.branchs = this.sucursales;
 
@@ -91276,6 +91282,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
         if (err.response.status === 422) {
           _this3.error = err.response.data.errors;
         }
+        _this3.saving = false;
       });
     }
   }
@@ -91467,31 +91474,13 @@ var render = function() {
                               "button",
                               {
                                 staticClass: "btn btn-primary",
-                                attrs: { type: "submit" }
+                                attrs: { type: "submit", disabled: _vm.saving }
                               },
                               [
                                 _c("i", { staticClass: "zmdi zmdi-plus" }),
-                                _vm._v(" "),
-                                !_vm.loading
-                                  ? _c("span", [_vm._v("Guardar")])
-                                  : _vm._e(),
-                                _vm._v(" "),
-                                _vm.loading && _vm.saving
-                                  ? _c(
-                                      "span",
-                                      [
-                                        _c("pulse-loader", {
-                                          attrs: {
-                                            id: "spinner",
-                                            loading: _vm.loading,
-                                            color: _vm.color,
-                                            size: _vm.size
-                                          }
-                                        })
-                                      ],
-                                      1
-                                    )
-                                  : _vm._e()
+                                _vm._v(
+                                  " \n                        Guardar\n                      "
+                                )
                               ]
                             )
                           ])

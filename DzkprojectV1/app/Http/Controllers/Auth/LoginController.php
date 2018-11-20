@@ -122,5 +122,26 @@ class LoginController extends Controller
         }
         return redirect('login');
     }
+
+    public function existEmail($email)
+    {
+        $count = User::where('email', $email)->count();
+
+        if($count > 0) {
+            $user = User::where('email', $email)->get();
+
+            return response()->json(
+                [
+                    'msg'      =>  '¡Felicidades! Tu correo ha sido vinculado a este equipo.',
+                    'success'  =>  true,
+                    'user'     => $user], 200);     
+        }
+
+        return response()->json(
+                [
+                    'msg'      =>  'Correo no registrado en nuestra web.',
+                    'success'  =>  false], 200);   
+
+    }
     
 }

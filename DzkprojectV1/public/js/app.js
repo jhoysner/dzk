@@ -89251,58 +89251,57 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 
       this.loading = true;
 
-      axios.get('api' + this.url).then(function (response) {
-        _this.productos = response.data.data;
-      });
-
       axios.get('api/total-products').then(function (response) {
         _this.totalProd = response.data.data;
       });
 
       axios.get('api/commerces-user').then(function (response) {
         _this.commerces = response.data.data[0].commerces_user;
+      });
+
+      axios.get('api' + this.url).then(function (response) {
+        _this.productos = response.data.data;
+
+        var _loop = function _loop(i) {
+          var productoId = _this.productos[i].idproduct;
+          var commerceId = _this.productos[i].commerce_idcommerce;
+
+          var pos = _this.commerces.map(function (e) {
+            return e.commerce_idcommerce;
+          }).indexOf(_this.productos[i].commerce_idcommerce);
+
+          if (pos == -1) {
+            _this.productos[i].pert = false;
+          } else {
+            _this.productos[i].pert = true;
+          }
+
+          stock = _this.totalProd.filter(function (operation) {
+            return operation.product_idproduct == productoId && operation.commerce_idcommerce == commerceId;
+          });
+
+
+          if (Object.keys(stock).length === 0) {
+            _this.productos[i].stock = 0;
+          } else {
+            _this.productos[i].stock = stock[0].total;
+          }
+
+          _this.productos.stock = stock;
+        };
+
+        for (var i = 0; i < _this.productos.length; i++) {
+          var stock;
+
+          _loop(i);
+        }
+
+        _this.products = _this.productos;
+
+        _this.loading = false;
       }).catch(function (err) {
         _this.loading = false;
       });
-
-      var _loop = function _loop(i) {
-
-        var productoId = _this.productos[i].idproduct;
-        var commerceId = _this.productos[i].commerce_idcommerce;
-
-        var pos = _this.commerces.map(function (e) {
-          return e.commerce_idcommerce;
-        }).indexOf(_this.productos[i].commerce_idcommerce);
-
-        if (pos == -1) {
-          _this.productos[i].pert = false;
-        } else {
-          _this.productos[i].pert = true;
-        }
-
-        stock = _this.totalProd.filter(function (operation) {
-          return operation.product_idproduct == productoId && operation.commerce_idcommerce == commerceId;
-        });
-
-
-        if (Object.keys(stock).length === 0) {
-          _this.productos[i].stock = 0;
-        } else {
-          _this.productos[i].stock = stock[0].total;
-        }
-
-        _this.productos.stock = stock;
-      };
-
-      for (var i = 0; i < this.productos.length; i++) {
-        var stock;
-
-        _loop(i);
-      }
-
-      this.products = this.productos;
-
-      this.loading = false;
     },
     edit: function edit(id) {
       __WEBPACK_IMPORTED_MODULE_0__utilities_EventBus__["a" /* default */].$emit('edit_id', id);

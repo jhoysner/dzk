@@ -90,11 +90,7 @@ export default {
   methods: {
     index() {
       this.loading = true
-      
-      axios.get('api' + this.url).then(response => {
-        this.productos = response.data.data;
-      })
-      
+            
       axios.get('api/total-products').then(response => {
           this.totalProd = response.data.data;
         })
@@ -103,42 +99,46 @@ export default {
         .then(response => {
           this.commerces = response.data.data[0].commerces_user
         })
+
+        axios.get('api' + this.url).then(response => {
+          this.productos = response.data.data;
+
+          for(let i=0; i<this.productos.length; i++) {
+            let productoId = this.productos[i].idproduct
+            let commerceId = this.productos[i].commerce_idcommerce 
+
+            let pos = this.commerces.map( function(e) {
+              return (e.commerce_idcommerce)
+            }).indexOf(this.productos[i].commerce_idcommerce)
+
+            if(pos == -1 ) {
+              this.productos[i].pert = false
+            } else {
+              this.productos[i].pert = true
+            }
+
+            var stock = this.totalProd.filter(function(operation) {
+              return (operation.product_idproduct == productoId && operation.commerce_idcommerce == commerceId);
+            })
+
+            if(Object.keys(stock).length === 0) {
+              this.productos[i].stock = 0  
+            } else {
+              this.productos[i].stock = stock[0].total  
+            }
+
+            this.productos.stock = stock
+
+          }
+  
+          this.products = this.productos
+          
+          this.loading = false   
+        })
         .catch(err => {
           this.loading = false
         })              
 
-        for(let i=0; i<this.productos.length; i++) {
-
-          let productoId = this.productos[i].idproduct
-          let commerceId = this.productos[i].commerce_idcommerce 
-
-          let pos = this.commerces.map( function(e) {
-            return (e.commerce_idcommerce)
-          }).indexOf(this.productos[i].commerce_idcommerce)
-
-          if(pos == -1 ) {
-            this.productos[i].pert = false
-          } else {
-            this.productos[i].pert = true
-          }
-
-          var stock = this.totalProd.filter(function(operation) {
-            return (operation.product_idproduct == productoId && operation.commerce_idcommerce == commerceId);
-          })
-
-          if(Object.keys(stock).length === 0) {
-            this.productos[i].stock = 0  
-          } else {
-            this.productos[i].stock = stock[0].total  
-          }
-
-          this.productos.stock = stock
-
-        }
-       
-        this.products = this.productos
-        
-        this.loading = false   
     },
 
     edit(id) {

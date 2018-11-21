@@ -189,4 +189,6 @@ Route::get('follow/{id}/{commerce}', 'Follow\FollowController@follow');
 Route::get('unfollow/{id}/{commerce}', 'Follow\FollowController@unfollow');
 Route::get('follow-state/{id}/{commerce}', 'Follow\FollowController@userStateFollow');
 Route::get('user-follower/{id}', 'Follow\FollowController@userFollowers');
+Route::get('user-follower-block/{id}/{commerce}', 'Follow\FollowController@userFollowerBlock');
+Route::get('user-follower-unlock/{id}/{commerce}', 'Follow\FollowController@userFollowerUnlock');
 	

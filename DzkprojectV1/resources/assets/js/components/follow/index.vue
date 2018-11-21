@@ -13,9 +13,7 @@
                         <div class="card-body">
                           <h5 class="card-title">{{commerce.commerces.name}}</h5>
                           <h6 class="card-subtitle mb-2 text-muted">{{commerce.commerces.email}}</h6>
-                          <!-- <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p> -->
-<!--                           <a href="#" class="card-link">Card link</a>
-                          <a href="#" class="card-link">Another link</a> -->
+
                         </div>
                       </div>
                     </template>
@@ -32,18 +30,28 @@
                     <h3 class="text-center my-4">Seguidores de la Tienda : {{commerceSelect.name}}</h3>
                     <div class="row">
                         <template v-for="follower in followers">                           
-                            <div class="card ml-2">
+                            <div class="card ml-2"   :class="follower.locked == 1 ?  'border border-danger' :  ''">
                                 <div class="card-body">
-                                   <img class="card-img-top" src="https://ptetutorials.com/images/user-profile.png" alt="sunil"> 
+                                   <img class="rounded mx-auto d-block" src="https://ptetutorials.com/images/user-profile.png" alt="sunil"> 
                                        
-                                    <div class="col-xs-10 col-md-10">
+                                    <div class="col-xs-12 col-md-12">
                                         <center>
-                                            <span class="badge badge-info">{{follower.user.firstname}} </span>
+                                            <span class="badge badge-info">{{follower.user.firstname}} </span><br>
                                             <span class="badge badge-secondary">{{follower.user.email}}</span>
                                         </center>
                                     </div>
                                     <div class="card-footer bg-transparent border-success">
-                                       <button class="card-link btn btn-danger btn-sm pull-left"> Bloquear</button>
+                                       <button  v-if="follower.locked == 1" class="card-link btn  btn-sm pull-left btn-success"
+                                               @click="unlock(follower.user.id, commerceSelect.idcommerce)"> 
+                                              Desbloquear
+                                       </button>                                      
+
+                                        <button v-if="follower.locked == 0" class="card-link btn  btn-sm pull-left  btn-danger"
+                                                @click="block(follower.user.id, commerceSelect.idcommerce)"> 
+                                                Bloquear
+                                       </button>
+
+
                                        <button class="card-link btn btn-info btn-sm pull-right" v-b-modal.showMessage @click="contact(follower.user.id ,commerceSelect.idcommerce)"> Contactar</button>
                                     </div>
                                 </div>
@@ -126,6 +134,24 @@
                     };
               
                 Bus.$emit('contact_follower', data);
+            },             
+            block(id , commerce) {
+               axios.get('api/user-follower-block/'+id+'/'+commerce)
+                  .then(response => {
+                    this.findFollower(this.commerceSelect.idcommerce)
+                  })
+                  .catch(err => {
+                      console.log(err.response)
+                  })   
+            },             
+            unlock(id , commerce) {
+               axios.get('api/user-follower-unlock/'+id+'/'+commerce)
+                  .then(response => {
+                    this.findFollower(this.commerceSelect.idcommerce)
+                  })
+                  .catch(err => {
+                      console.log(err.response)
+                  })   
             }, 
 
         }    
@@ -136,7 +162,10 @@
  margin-top: 100px;
 }
 img {
-  width: 100%;
+  width: 50%;
+}
+.card-image{
+  margin: 0 auto;
 }
 
 </style>

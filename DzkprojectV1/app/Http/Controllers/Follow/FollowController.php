@@ -55,5 +55,27 @@ class FollowController extends Controller
       $followers = Follower::where('commerce_idcommerce', $id)->with(['user', 'commerce'])->get();
 
       return response()->json(['data' => $followers],  201);
+    }    
+
+    public function userFollowerBlock($id, $commerce){
+      
+      $follower = Follower::where('users_id', $id)->where('commerce_idcommerce', $commerce)->first();
+
+      $follower->locked = 1;
+
+      $follower->save();
+
+      return response()->json(['data' => $follower],  201);
+    }    
+
+    public function userFollowerUnlock($id, $commerce){
+      
+      $follower = Follower::where('users_id', $id)->where('commerce_idcommerce', $commerce)->first();
+
+      $follower->locked = 0;
+
+      $follower->save();
+
+      return response()->json(['data' => $follower],  201);
     }
 }

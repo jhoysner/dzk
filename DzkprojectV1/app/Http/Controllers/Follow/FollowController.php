@@ -52,7 +52,7 @@ class FollowController extends Controller
 
     public function userFollowers($id){
       
-      $followers = Follower::where('commerce_idcommerce', $id)->with('user')->get();
+      $followers = Follower::where('commerce_idcommerce', $id)->with(['user', 'commerce'])->get();
 
       return response()->json(['data' => $followers],  201);
     }

@@ -30,5 +30,9 @@ class Follower extends Model
     {
         return $this->belongsTo('App\User', 'users_id', 'id');
     }
+    public function commerce()
+    {
+        return $this->belongsTo('App\Commerce', 'commerce_idcommerce', 'idcommerce');
+    }
 
 }

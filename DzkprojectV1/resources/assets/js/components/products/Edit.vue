@@ -4,63 +4,86 @@
           <form @submit.prevent="submitForm()">
               <div class="modal-content">
                   <div class="modal-body">
-                    <div class="row pt-30">
-                      <div class="col-lg-12">
-                          <label><i class="required">*</i> Nombre</label>
-                          <input type="text" placeholder="Nombre" v-model="product.name" class="common-input">
-                          <small class="text-danger" v-if="error.name">{{ error.name[0] }}</small>
-                      </div>
-                      <div class="col-lg-12">
-                          <label>Referencia</label>
-                          <input type="text" placeholder="Referencia" v-model="product.reference" class="common-input">
-                          <small class="text-danger" v-if="error.reference">{{ error.reference[0] }}</small>
-                      </div>
-                      <div class="col-lg-12">
-                        <div class="sorting"><i class="required">*</i> Tipo
-                          <select v-model="product.producttype_idproducttype" required class="form-control common-input">
-                            <option v-for="option in types" :value="option.idproducttype">{{option.name}}</option>
-                          </select>
-                          <small class="text-danger" v-if="error.producttype_idproducttype">{{ error.producttype_idproducttype[0] }}</small>
-                         </div> 
-                      </div>
-                      <div class="col-lg-12">
-                        <div class="sorting"><i class="required">*</i> Tienda
-                          <select v-model="product.commerce_idcommerce" required class="form-control common-input">
-                            <option v-for="option in commerces" :value="option.commerce_idcommerce">{{option.commerces.name}}</option>
-                          </select>
-                          <small class="text-danger" v-if="error.commerce_idcommerce">{{ error.commerce_idcommerce[0] }}</small>
-                         </div> 
-                      </div>
-                      <div class="col-lg-12">
-                        <div class="form-group">
-                            <label>Maneja Stock</label>&nbsp;
-                            <toggle-button :value="product.usestock" v-model="product.usestock" :sync="true"/>
-                            &nbsp;
-                            <span v-if="product.usestock == true"><strong>SI</strong></span>
-                            <span v-if="product.usestock == false"><strong>NO</strong></span>
+                   <pulse-loader id="spinner" :loading="loading" :color="color" :size="size"></pulse-loader>
+                    
+                    <div class="row pt-30" >
+                      <div v-if="!loading">
+                          
+                        <div class="col-lg-12" >
+                            <label><i class="required">*</i> Nombre</label>
+                            <input type="text" placeholder="Nombre" v-model="product.name" class="common-input">
+                            <small class="text-danger" v-if="error.name">{{ error.name[0] }}</small>
                         </div>
-                      </div>
-                      <div class="col-lg-12">
-                        <div class="upload-fleid"> Seleccionar imagen de Producto
-                          <div class="input-group input-file">
-                            <input class="form-control" type="file" id="image" ref="image" placeholder="Imagen de Producto" accept="image/*" @change="previewImage">
-                            <small class="text-danger" v-if="imageError != '' ">{{ imageError }}</small>
+                        <div class="col-lg-12">
+                            <label>Referencia</label>
+                            <input type="text" placeholder="Referencia" v-model="product.reference" class="common-input">
+                            <small class="text-danger" v-if="error.reference">{{ error.reference[0] }}</small>
+                        </div>
+                        <div class="col-lg-12">
+                            <label>Precio</label>
+                            <input type="number" min="0" step="0.01" placeholder="Precio" v-model="product.price" class="common-input">
+                            <small class="text-danger" v-if="error.price">{{ error.price[0] }}</small>
+                        </div>
+                        <div class="col-lg-12">
+                            <label>Impuesto</label>
+                            <input type="number" min="0" step="0.01" placeholder="Impuesto" v-model="product.taxpercentage" class="common-input">
+                            <small class="text-danger" v-if="error.price">{{ error.price[0] }}</small>
+                        </div>
+                        <div class="col-lg-12">
+                          <div class="sorting"><i class="required">*</i> Unidad de Medida
+                            <select v-model="product.productunitofmeasurement_idproductunitofmeasurement" required class="form-control common-input">
+                              <option v-for="option in units" :value="option.idproductunitofmeasurement">{{option.name}}</option>
+                            </select>
+                            <small class="text-danger" v-if="error.productunitofmeasurement_idproductunitofmeasurement">{{ error.productunitofmeasurement_idproductunitofmeasurement[0] }}</small>
+                           </div> 
+                        </div>
+                        <div class="col-lg-12">
+                          <div class="sorting"><i class="required">*</i> Tipo
+                            <select v-model="product.producttype_idproducttype" required class="form-control common-input">
+                              <option v-for="option in types" :value="option.idproducttype">{{option.name}}</option>
+                            </select>
+                            <small class="text-danger" v-if="error.producttype_idproducttype">{{ error.producttype_idproducttype[0] }}</small>
+                           </div> 
+                        </div>
+                        <div class="col-lg-12">
+                          <div class="sorting"><i class="required">*</i> Tienda
+                            <select v-model="product.commerce_idcommerce" required class="form-control common-input">
+                              <option v-for="option in commerces" :value="option.commerce_idcommerce">{{option.commerces.name}}</option>
+                            </select>
+                            <small class="text-danger" v-if="error.commerce_idcommerce">{{ error.commerce_idcommerce[0] }}</small>
+                           </div> 
+                        </div>
+                        <div class="col-lg-12">
+                          <div class="form-group">
+                              <label>Maneja Stock</label>&nbsp;
+                              <toggle-button :value="product.usestock" v-model="product.usestock" :sync="true"/>
+                              &nbsp;
+                              <span v-if="product.usestock == true"><strong>SI</strong></span>
+                              <span v-if="product.usestock == false"><strong>NO</strong></span>
                           </div>
                         </div>
-                      </div>
-                      <div class="col-lg-12 text-center avatar-wrap">
-                        <div class="avatar-thumb mr-20">
-                            <span v-if="product.image">
-                              <img :src="product.image" alt="" >
-                            </span>
-                            <span v-else>
-                              <i class="fa fa-picture-o fa-5x"></i>
-                            </span>
+                        <div class="col-lg-12">
+                          <div class="upload-fleid"> Seleccionar imagen de Producto
+                            <div class="input-group input-file">
+                              <input class="form-control" type="file" id="image" ref="image" placeholder="Imagen de Producto" accept="image/*" @change="previewImage">
+                              <small class="text-danger" v-if="imageError != '' ">{{ imageError }}</small>
+                            </div>
+                          </div>
                         </div>
-                      </div>
-                      <div class="col-lg-12 text-right">
-                          <button type="submit" class="btn btn-primary"><i class="zmdi zmdi-plus"></i>
-                           Guardar</button>
+                        <div class="col-lg-12 text-center avatar-wrap">
+                          <div class="avatar-thumb mr-20">
+                              <span v-if="product.image && product.image != null">
+                                <img :src="product.image" alt="" >
+                              </span>
+                              <span v-else>
+                                <i class="fa fa-picture-o fa-5x"></i>
+                              </span>
+                          </div>
+                        </div>
+                        <div class="col-lg-12 text-right">
+                            <button type="submit" :disabled="saving" class="btn btn-primary"><i class="zmdi zmdi-plus"></i>
+                             Guardar</button>
+                        </div>
                       </div>
                     </div>
                   </div>
@@ -72,6 +95,7 @@
 
 <script>
 import Bus from '../../utilities/EventBus'
+import PulseLoader from 'vue-spinner/src/PulseLoader.vue'
 
     export default {
       name: 'create',
@@ -83,8 +107,16 @@ import Bus from '../../utilities/EventBus'
               url: '/products',
               types: [],
               commerces: [],
+              units: [],
               error: {},
+              saving: false,
+              loading: false,
+              color: '#5bc0de',
+              size:'15px',
             }
+        },
+        components: {
+          PulseLoader
         },
         created() {
           Bus.$on('edit_id', (data) => {
@@ -94,6 +126,16 @@ import Bus from '../../utilities/EventBus'
         },
         methods: {
           edit(id) {
+            this.loading = true
+
+            axios.get('api/unit-products')
+              .then(response => {
+                this.units = response.data.data          
+              })
+              .catch(err => {
+                  console.log(err.response)
+              })
+
             axios.get('api/type-products')
               .then(response => {
                 this.types = response.data.data          
@@ -117,18 +159,27 @@ import Bus from '../../utilities/EventBus'
                   this.product.usestock=true
                 }
 
+              this.loading = false
+
               })
               .catch(err => {
                   console.log(err.response)
+                  this.loading = false
               })
+              
+
           },
           submitForm() {
             this.error = {};
 
+            this.saving = true
+
             let params = new FormData()
             
             _.each(this.product, function(val,key) {
-              params.append(key,val)
+              if(val != null) {
+                params.append(key,val)
+              }
             })
 
             if(this.product.usestock == true) {
@@ -155,6 +206,8 @@ import Bus from '../../utilities/EventBus'
               if(err.response.status === 422) {
                   this.error = err.response.data.errors;
               }
+
+              this.saving = false
             });
           },
           previewImage: function(event) {
@@ -177,5 +230,8 @@ import Bus from '../../utilities/EventBus'
 <style media="screen">
   img {
     width: 30%;
+  }
+  #spinner {
+    text-align: center;
   }
 </style>

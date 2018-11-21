@@ -32,11 +32,8 @@
                         </table>
                       </div>
                       <div v-if="sucursales.length > 0" class="col-lg-12 text-right">
-                          <button type="submit" class="btn btn-primary"><i class="zmdi zmdi-plus"></i> 
-                            <span v-if="!loading">Guardar</span>
-                            <span v-if="loading && saving">
-                              <pulse-loader id="spinner" :loading="loading" :color="color" :size="size"></pulse-loader>
-                            </span>
+                          <button type="submit" :disabled="saving" class="btn btn-primary"><i class="zmdi zmdi-plus"></i> 
+                            Guardar
                           </button>
                       </div>
                     </div>
@@ -127,6 +124,7 @@ import PulseLoader from 'vue-spinner/src/PulseLoader.vue'
           },
           submitForm() {
             this.saving = true
+
             this.branchs.productId = this.productId
             this.branchs.branchs = this.sucursales 
 
@@ -147,6 +145,7 @@ import PulseLoader from 'vue-spinner/src/PulseLoader.vue'
                 if(err.response.status === 422) {
                     this.error = err.response.data.errors;
                 }
+                this.saving = false
 
               });
 

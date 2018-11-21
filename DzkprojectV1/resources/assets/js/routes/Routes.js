@@ -29,6 +29,7 @@ import Logout from '../components/auth/Logout'
 import Products from '../components/products/Index'
 import Imbox from '../components/imbox/Index';
 import ImboxConversation from '../components/imbox/conversation';
+import Follow from '../components/follow/index';
 
 Vue.use(Router);
 
@@ -216,31 +217,17 @@ const baseRoutes = [
             component: ImboxConversation,
             props: true,
 
+        },        
+        {
+            path: '/followers', 
+            component: Follow,
+
         }
 
 
  
 ];
 
-
-// const baseRoutes = new Router({
-
-//     routes: [
-//         {
-//             path: '/',
-//             component: Dashboard
-//         },
-//         {
-//             path: '/commerces',
-//             component: Commerces
-//         },
-//         {
-//             path: '/branchs',
-//             component: Branchs
-//         },
-//     ],
-
-// })
 
 const routes = baseRoutes.concat(discountRoutes);
 

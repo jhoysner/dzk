@@ -17,6 +17,13 @@
                     cliente
                   </a>
               </router-link>
+            </li>            
+            <li  v-can="'seguidores'">
+              <router-link to='/followers'>
+                  <a>
+                    Seguidores
+                  </a>
+              </router-link>
             </li>
             <li v-can="'tags'" >
               <router-link to='/tags'>

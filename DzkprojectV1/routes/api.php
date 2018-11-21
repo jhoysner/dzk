@@ -182,4 +182,7 @@ Route::get('find-thread/{id}', 'Message\MessageController@find');
 Route::get('message-read/{id}', 'Message\MessageController@read');
 
 Route::get('follow/{id}/{commerce}', 'Follow\FollowController@follow');
+Route::get('unfollow/{id}/{commerce}', 'Follow\FollowController@unfollow');
+Route::get('follow-state/{id}/{commerce}', 'Follow\FollowController@userStateFollow');
+Route::get('user-follower/{id}', 'Follow\FollowController@userFollowers');
 	

@@ -1,6 +1,15 @@
 <template>
     <div>
-        <button type="button" class="btn btn-outline-primary"  @click="seguir()" >Seguir</button>
+
+        <button v-if="!userStateFollow()" type="button" class="btn" :class="classState"  @click="seguir" >
+
+            Seguir
+        </button>        
+
+        <button v-if="userStateFollow()" type="button" class="btn" :class="classState"  @click="dejarSeguir" >
+
+             Siguiendo
+        </button>
     </div>
 
 </template>
@@ -9,36 +18,44 @@
     import Bus from '../../utilities/EventBus';
    
     export default {
-        props: ['user','commerce'],
+        props: ['user','commerce', 'state'],
 
         data() {
             return {
-
+                commerceFollower: [],
             }
         },
-        // created(){
-        //     console.log(this.user)
-        // },
+
         methods: {
             seguir() {
-                axios.get('api/follow/'+this.user.id+'/'+this.commerce).then((response) => {
-                 
+
+                console.log('seguir');
+                axios.get('/api/follow/'+this.user.id+'/'+this.commerce).then((response) => {
+                    this.$parent.followerState();
                 })
                 .catch(err => console.log(err))
-                // console.log('seguir')
-                // console.log(this.user.id)
-                // console.log(this.commerce)
-
+            },            
+            dejarSeguir() {
+                console.log('Dejar seguir');
+                axios.get('/api/unfollow/'+this.user.id+'/'+this.commerce).then((response) => {
+                    this.$parent.followerState();
+                })
+                .catch(err => console.log(err))
             },
-            // index() {
-            //   axios.get('api/all-messages/' + this.user.id).then(response => {  
-            //     console.log(response)
-            //     this.messages = response.data.data
-            //   })
-            //   .catch(err => console.log(err))
-            // },
+            userStateFollow(id){
+
+                return this.state
+            }
             
         },
+        computed: {
+          classState: function () {
+            return {
+              'btn-outline-primary': this.state == false,
+              'btn-primary': this.state == true
+            }
+          }
+        }
     }
 </script>
 <style>
@@ -54,5 +71,11 @@ img {
 .unread-text{
     color: red;
 }
+.unread-text{
+    color: red;
+}
 
+/* #section-profile > div.container > div > div.col-lg-3.sidebar.theme-details-sidebar > div:nth-child(1) > div > button:hover{
+    background-color: red;
+}*/
 </style>

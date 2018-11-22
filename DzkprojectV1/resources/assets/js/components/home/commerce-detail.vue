@@ -3,6 +3,8 @@
         <button type="button" class="btn btn-outline-dark pull-right" @click="$router.go(-1)">
             Atras
         </button>
+
+
         <br />
         <div class="col-lg-12">
             <h2 class="pb-30 semi-bold">{{ commerce.name }}</h2>                   
@@ -70,6 +72,10 @@
 
                 <div class="col-lg-3 sidebar theme-details-sidebar">
                     <div class="single-sidebar">
+                     <buttonfollow :user="user" :commerce="id" :state="followState"> </buttonfollow>
+                    </div>
+
+                    <div class="single-sidebar">
                         <div class="price-title d-flex flex-row justify-content-between">
                             <h6>Nuestra ubicación</h6>
                             <!--<h3 class="price">$39</h3> -->
@@ -86,7 +92,7 @@
                           </li>
                         </ul>
                         <!--<a href="#" class="primary-btn">purchase only</a> -->
-                    </div>
+                    </div>                    
 
                     <div class="single-sidebar theme-details">
                         <h6>Descuentos</h6>
@@ -135,9 +141,10 @@
 import Bus from '../../utilities/EventBus.js';
 import $ from 'jquery';
 import message from '../message/message';
+import buttonfollow from '../follow/button-follow';
 
     export default {
-        components: { message},
+        components: { message, buttonfollow },
         data() {
             return {
                 id: this.$route.params.id,
@@ -158,12 +165,13 @@ import message from '../message/message';
                  tags: [],
                  discounts: [],
                  user:{},
+                 followState: false,
             }
         },
 
         mounted() {
-            this.index();
             this.auth();
+            this.index();
         },
 
         methods: {
@@ -209,6 +217,7 @@ import message from '../message/message';
               axios.get('/api/profile').then((response) => {
                 console.log(response)
                 this.user = response.data.user;
+                this.followerState();
               })
               .catch(err => console.log(err))
             },  
@@ -219,6 +228,13 @@ import message from '../message/message';
                     };
 
                 Bus.$emit('contact', data);
+            },            
+            followerState() {
+                axios.get('/api/follow-state/'+this.user.id+'/'+this.id).then((response) => {
+                 
+                  this.followState = response.data.state
+                })
+                .catch(err => console.log(err))
             },
       
         }

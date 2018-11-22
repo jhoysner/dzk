@@ -181,9 +181,17 @@ Route::get('search-charcode/{charcode}', 'UserHasDiscountController@searchCharco
 Route::get('redeemed-discount/{id}', 'UserHasDiscountController@redeemedDiscount');
 
 Route::post('message-send', 'Message\MessageController@messageSend');
+Route::post('message-send-all', 'Message\MessageController@messageSendAll');
 Route::post('message-send-conversation', 'Message\MessageController@messageSendConversation');
 Route::get('all-messages/{id}', 'Message\MessageController@index');
 Route::get('all-messages/{id}', 'Message\MessageController@index');
 Route::get('find-thread/{id}', 'Message\MessageController@find');
 Route::get('message-read/{id}', 'Message\MessageController@read');
+
+Route::get('follow/{id}/{commerce}', 'Follow\FollowController@follow');
+Route::get('unfollow/{id}/{commerce}', 'Follow\FollowController@unfollow');
+Route::get('follow-state/{id}/{commerce}', 'Follow\FollowController@userStateFollow');
+Route::get('user-follower/{id}', 'Follow\FollowController@userFollowers');
+Route::get('user-follower-block/{id}/{commerce}', 'Follow\FollowController@userFollowerBlock');
+Route::get('user-follower-unlock/{id}/{commerce}', 'Follow\FollowController@userFollowerUnlock');
 	

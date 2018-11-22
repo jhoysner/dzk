@@ -1,6 +1,6 @@
 <template>
   <div>
-        <b-modal  id="showMessage" ref="showMessage" :title="`Mensaje para ${commerce.name}`" hide-footer>
+        <b-modal  id="showMessage" ref="showMessage" :title="`Mensaje para ${all ? 'seguidores' : commerce.name}`" hide-footer>
             <div class="container">
                     <div class="row mb-4">
                         
@@ -20,7 +20,10 @@
                   </div>
                   <div class="modal-footer">
                         <b-btn  @click="hideModal">Cancelar</b-btn>
-                        <button type="submit"  @click="send" class="btn btn-primary"><i class="zmdi zmdi-plus"></i> Enviar</button>
+
+                        <button  v-if="!all" type="submit"  @click="send" class="btn btn-primary"><i class="zmdi zmdi-plus"></i> Enviar</button>
+
+                        <button  v-if="all" type="submit"  @click="sendAll" class="btn btn-primary"><i class="zmdi zmdi-plus"></i> Enviar a Todos</button>
                   </div>
                 </div>
         </b-modal> 
@@ -40,6 +43,7 @@ import Bus from '../../utilities/EventBus.js';
             messengerservicetopic_idmessengerservicetopic: '1',
           },  
           commerce: {},
+          all: false,
         }
    
     },
@@ -49,6 +53,17 @@ import Bus from '../../utilities/EventBus.js';
           this.commerce = data.commerce
           this.form.users_id_from = data.client
           this.form.commerce_idcommerce = this.commerce.idcommerce
+        });        
+        Bus.$on('contact_all', (data) => {
+          this.all = true;
+          this.form.users_id_from = data.client
+          this.form.commerce_idcommerce = data.commerce
+        });        
+
+        Bus.$on('contact_follower', (data) => {
+          this.form.users_id_from = data.client
+          this.form.commerce_idcommerce = data.commerce
+          this.form.users_id_to = data.to
         });
     },
 
@@ -61,7 +76,24 @@ import Bus from '../../utilities/EventBus.js';
             this.$refs.showMessage.hide()
             swal({
                 title: "Mensaje Enviado",
-                text: "Mensaje evniado con exito",
+                text: "Mensaje enviado con exito",
+                icon: "success",
+            })
+          })
+          .catch(err => console.log(err));
+
+        },        
+        sendAll(){
+          this.form.messengerservicetopic_idmessengerservicetopic = '3';
+          axios.post('/api/message-send-all', this.form).then(response => {
+            console.log(response)
+            this.form.subject = ''
+            this.form.message = ''
+            this.form.messengerservicetopic_idmessengerservicetopic = '1'
+            this.$refs.showMessage.hide()
+            swal({
+                title: "Mensaje Enviado",
+                text: "Mensaje enviado con exito",
                 icon: "success",
             })
           })
@@ -71,6 +103,8 @@ import Bus from '../../utilities/EventBus.js';
         hideModal () {
           this.form.subject = ''
           this.form.message = ''
+          this.form.messengerservicetopic_idmessengerservicetopic = '1';
+          this.all = false;
           this.$refs.showMessage.hide()
         }
     }

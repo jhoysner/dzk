@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Message;
 
+use App\Follower;
 use App\Http\Controllers\Controller;
 use App\MessengerService;
 use App\UserHasCommerce;
@@ -26,7 +27,26 @@ class MessageController extends Controller
 
       return response()->json(['data'=> $message], 200);
 
-    }        
+    }      
+    
+    public function messageSendAll(Request $request){
+
+      $fields = $request->all();
+
+      $followers = Follower::where('commerce_idcommerce', $fields['commerce_idcommerce'])->get();
+
+      foreach ($followers as  $follower) {
+        
+          $fields['idmessengerservice'] = str_random(36);
+          $fields['thread'] = str_random(30);
+          $fields['users_id_to'] = $follower->users_id;
+          $message = MessengerService::create($fields);
+      }
+
+      return response()->json(['data'=> 'success'], 200);
+
+    }   
+
     public function messageSendConversation(Request $request){
 
       $fields = $request->all();

@@ -130,6 +130,7 @@ import PulseLoader from 'vue-spinner/src/PulseLoader.vue'
 
             axios.post('api/update-stock', this.branchs)
               .then(response => {          
+                this.saving = false
                 this.$refs.stockModal.hide();
                 this.sucursales = {};
                 this.$parent.index()
@@ -141,7 +142,6 @@ import PulseLoader from 'vue-spinner/src/PulseLoader.vue'
               })
               .catch(err => {
                 console.log(err)
-                this.saving = false
                 if(err.response.status === 422) {
                     this.error = err.response.data.errors;
                 }

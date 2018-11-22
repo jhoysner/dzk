@@ -60,4 +60,10 @@ class Branch extends Model
         return $this->belongsToMany('App\Discount','branch_has_discount')->withPivot('idbranch_has_discount','discounthours', 'amountapproved','amountavailable','amountredeemed')->whereNull('branch_has_discount.deleted_at');
     }
 
+    public function products(){
+        return $this->belongsToMany('App\Product','branch_has_product')->withPivot('idbranch_has_product','stock')->whereNull('branch_has_product.deleted_at');
+    }
+
+
+
 }

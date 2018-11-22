@@ -1,7 +1,7 @@
 <template>
   <div>
     <div class="row justify-content-center">
-      <div class="col-lg-12 usr-menu pb-50" id="usr-menu">
+      <div class="col-lg-12 usr-menu pb-50 menu" id="usr-menu">
         <!-- details Tab navs -->
         <ul class="top-nav d-flex justify-content-center offwhite-color-bg">
             <li>
@@ -18,18 +18,11 @@
                   </a>
               </router-link>
             </li>
-            <li v-can="'tags'" >
-              <router-link to='/tags'>
-                  <a>
-                    Tags
-                  </a>
-              </router-link>
-            </li>            
-            <li v-can="'params'">
-              <router-link to='/params'>
-                  <a>
-                    Parametros
-                  </a>
+            <li>
+              <router-link to='/list-products'>
+                <a>
+                  Listado Productos
+                </a>
               </router-link>
             </li>
             <li>
@@ -54,20 +47,7 @@
                 </a>
               </router-link>
             </li>
-            <li v-can="'users'">
-              <router-link to='/users'>
-                <a>
-                  Usuarios
-                </a>
-              </router-link>
-            </li>
-            <li v-can="'roles'" v-if="isLogged">
-              <router-link to='/roles'>
-                <a>
-                  Grupos
-                </a>
-              </router-link>
-            </li>
+            
             <li v-can="'products'" v-if="isLogged">
               <router-link to='/products'>
                 <a>
@@ -75,6 +55,64 @@
                 </a>
               </router-link>
             </li>
+
+            <li v-if="isLogged">
+              <router-link to=''>
+                <a title="Configuración">
+                  <i class="fa fa-cogs fa-2x"></i>
+                </a>
+              </router-link>
+              <ul>
+                <li v-can="'users'">
+                  <router-link to='/users'>
+                    <a>
+                      Usuarios
+                    </a>
+                  </router-link>
+                </li>
+                <li v-can="'roles'" v-if="isLogged">
+                  <router-link to='/roles'>
+                    <a>
+                      Grupos
+                    </a>
+                  </router-link>
+  
+                </li>    
+                <li v-can="'tags'" >
+                  <router-link to='/tags'>
+                      <a>
+                        Tags
+                      </a>
+                  </router-link>
+                </li>            
+                <li v-can="'params'">
+                  <router-link to='/params'>
+                      <a>
+                        Parametros
+                      </a>
+                  </router-link>
+                </li>
+              </ul>
+
+            </li>
+
+            <li>
+              <router-link to='/shopping-list'>
+                <a title="Lista de Compra">
+                  <i class="fa fa-list-alt fa-2x"></i>
+                  <small></small>
+                </a>
+              </router-link>
+            </li>
+            
+            <li v-can="'orders'" v-if="isLogged">
+              <router-link to='/orders'>
+                <a>
+                  Pedidos
+                </a>
+              </router-link>
+            </li>
+          
             <li v-if="isLogged">
               <router-link to='/profile'>
                 <a>
@@ -82,6 +120,7 @@
                 </a>
               </router-link>
             </li>
+          
             <li>
               <router-link to='/discounts-postulated'>
                 <a>
@@ -89,6 +128,7 @@
                 </a>
               </router-link>
             </li>
+          
             <li v-if="isLogged">
               <router-link to='/logout'>
                 <a>
@@ -96,12 +136,16 @@
                 </a>
               </router-link>
             </li>
-            <li v-if="!isLogged">
+            <li v-else>
+                <a href="/login">
+                  Login
+                </a>
+            </li>
+            <!--<li v-if="!isLogged">
               <a href="/login">
                 Login
               </a>
-            </li>
-            
+            </li>-->
           <!--  <li>
                 <a href="author-account-download.html">Downloads</a>
             </li>
@@ -157,4 +201,51 @@ export default {
 }
 </script>
 <style lang="scss" scoped>
+  .menu ul {
+    list-style: none;
+    margin:0;
+    padding:0;
+  }
+  .menu ul li {
+    background-color:#cccccc;
+    z-index: 100;
+  }
+  .menu ul a {
+   display:block;
+   color:#ccc;
+   text-decoration:none;
+   padding:10px;
+   letter-spacing:1px;
+  }
+  .menu ul li {
+   position:relative;
+   float:left;
+   margin:0;
+   padding:0;
+  }
+  .menu ul li:hover {
+   background:#5b78a7;
+  }
+  .menu ul ul {
+   display:none;
+   position:absolute;
+   top:100%;
+   left:0;
+   background:#ccc;
+   padding:0;
+  }
+  .menu ul ul li {
+   float:none;
+   width:150px;
+  }
+  .menu ul ul a {
+   line-height:120%;
+   padding:10px 15px;
+  }
+  .menu ul li:hover > ul {
+   display:block;
+  }
+  .menu ul li:hover > ul li a:hover {
+   background:#5b78a7;
+  }
 </style>

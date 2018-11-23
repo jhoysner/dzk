@@ -29,7 +29,9 @@ import Logout from '../components/auth/Logout'
 import Products from '../components/products/Index'
 import Imbox from '../components/imbox/Index';
 import ImboxConversation from '../components/imbox/conversation';
-import Follow from '../components/follow/index';
+import ProductList from '../components/home/Index-products'
+import ShoppingList from '../components/cliente/shopping-list'
+
 
 Vue.use(Router);
 
@@ -83,6 +85,14 @@ const baseRoutes = [
             meta: { 
                 requiresAuth: true
             }
+        },
+        {
+            path: '/list-products',
+            component: ProductList
+        },
+        {
+            path: '/shopping-list',
+            component: ShoppingList
         },
         {
             path: '/commerces',
@@ -217,17 +227,31 @@ const baseRoutes = [
             component: ImboxConversation,
             props: true,
 
-        },        
-        {
-            path: '/followers', 
-            component: Follow,
-
         }
 
 
  
 ];
 
+
+// const baseRoutes = new Router({
+
+//     routes: [
+//         {
+//             path: '/',
+//             component: Dashboard
+//         },
+//         {
+//             path: '/commerces',
+//             component: Commerces
+//         },
+//         {
+//             path: '/branchs',
+//             component: Branchs
+//         },
+//     ],
+
+// })
 
 const routes = baseRoutes.concat(discountRoutes);
 

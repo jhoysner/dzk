@@ -111,7 +111,6 @@ class ProductController extends Controller
             $input['image'] = 'images/product/'.$fullname;
         }
 
-
      	$update = $product->update($input);
 
       	if(!$update) {
@@ -197,6 +196,52 @@ class ProductController extends Controller
                                 ->get();
 
         return response()->json(['success'=>true, 'data'=>$products], 200);   
+    }
+
+    public function getProductsBranch($branch=null,$type=null)
+    {
+        if(!is_null($branch) && $branch !='all-branch' && !is_null($type)) {
+            $products = Branch::with(['products'=>function($query) use($type) {
+                                $query->where('usestock',1);
+                                $query->where('producttype_idproducttype',$type);
+                                $query->with('commerces');
+                            }])
+                            ->where('idbranch',$branch)
+                                ->get();
+
+            return response()->json(['success'=>true, 'data'=>$products], 200);   
+
+        } elseif (!is_null($branch) && $branch !='all-branch') {
+            $products = Branch::with(['products'=>function($query) {
+                                $query->where('usestock',1);
+                                $query->with('commerces');
+                            }])
+                            ->where('idbranch',$branch)
+                                ->get();
+
+            return response()->json(['success'=>true, 'data'=>$products], 200);   
+
+        } elseif (!is_null($type) && $branch =='all-branch') {
+            $products = Branch::with(['products'=>function($query) use($type) {
+                                $query->where('usestock',1);
+                                $query->where('producttype_idproducttype',$type);
+                                $query->groupBy('product_idproduct');
+                                $query->with('commerces');
+                            }])
+                                ->get();
+
+            return response()->json(['success'=>true, 'data'=>$products], 200);   
+
+        } else {
+            $products = Product::with('commerces')
+                        ->orderBy('name','ASC')
+                            ->where('usestock',1)
+                                ->get();
+
+            return response()->json(['success'=>true, 'data'=>$products], 200);   
+
+        }
+
     }
 
 }

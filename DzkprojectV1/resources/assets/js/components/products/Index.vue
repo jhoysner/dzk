@@ -106,8 +106,6 @@ export default {
 
         axios.get('api' + this.url).then(response => {
           this.productos = response.data.data;
-console.log(1)
-console.log(this.productos)
 
           for(let i=0; i<this.productos.length; i++) {
             let productoId = this.productos[i].idproduct

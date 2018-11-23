@@ -81,9 +81,6 @@ Route::group(['middleware' => 'auth:api'], function() {
 
 	Route::post('/products/{id}', 'Product\ProductController@update');
 
-	//Tipos Productos
-	Route::get('type-products','Product\ProductController@getTiposProductos');
-
 	//Unidades de Medida
 	Route::get('unit-products','Product\ProductController@getUnidadesMedidas');
 
@@ -95,6 +92,12 @@ Route::group(['middleware' => 'auth:api'], function() {
 	Route::get('total-products','Product\ProductController@getTotalProducts');
 
 });
+
+//Tipos Productos
+Route::get('type-products','Product\ProductController@getTiposProductos');
+
+Route::get('list-products/{branch?}/{type?}', 'Product\ProductController@getProductsBranch');
+
 
 Route::get('existEmail/{email}', 'Auth\LoginController@existEmail');
 

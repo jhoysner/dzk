@@ -175,7 +175,7 @@ import PulseLoader from 'vue-spinner/src/PulseLoader.vue'
             this.saving = true
 
             let params = new FormData()
-            
+            console.log(this.product)
             _.each(this.product, function(val,key) {
               if(val != null) {
                 params.append(key,val)
@@ -188,8 +188,14 @@ import PulseLoader from 'vue-spinner/src/PulseLoader.vue'
               params.append('usestock',0)
             }
 
+for(let i of params.entries())
+{
+  console.log(i[0]+' '+i[1])
+}
+
             axios.post('api' + this.url + '/'+ this.editId, params)
             .then(response => {          
+              this.saving = false
               this.$refs.editModal.hide();
               this.product = {};
               this.product.image = null

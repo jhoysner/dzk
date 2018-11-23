@@ -191,4 +191,9 @@ Route::get('follow-state/{id}/{commerce}', 'Follow\FollowController@userStateFol
 Route::get('user-follower/{id}', 'Follow\FollowController@userFollowers');
 Route::get('user-follower-block/{id}/{commerce}', 'Follow\FollowController@userFollowerBlock');
 Route::get('user-follower-unlock/{id}/{commerce}', 'Follow\FollowController@userFollowerUnlock');
+
+
+Route::get('chat-users/{id}' , 'Message\MessageController@chatUsers');
+Route::post('message-send-chat' , 'Message\MessageController@messageSendChat');
+Route::get('find-thread-chat/{user}/{contact}', 'Message\MessageController@findThreadChat');
 	

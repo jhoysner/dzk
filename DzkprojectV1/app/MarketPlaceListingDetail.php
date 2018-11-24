@@ -10,6 +10,7 @@ class MarketPlaceListingDetail extends Model
 
     protected $primaryKey = 'idmarketplacelistingdetail';
     public $incrementing = false;
+    public $timestamps = false;
 
     protected $fillable = [
         'idmarketplacelistingdetail',
@@ -21,8 +22,15 @@ class MarketPlaceListingDetail extends Model
         'product_idproduct',
         'productunitofmeasurement_idproductunitofmeasurement',
         'commerce_idcommerce',
+        'branch_idbranch',
         'users_id',
         'statelisting_idstatelisting'
     ];
+
+
+    public function state()
+    {
+      return $this->belongsTo('App\StateListing', 'statelisting_idstatelisting', 'idstatelisting');
+    }
 
 }

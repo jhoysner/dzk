@@ -78,7 +78,6 @@ Route::group(['middleware' => 'auth:api'], function() {
 	Route::resource('products','Product\ProductController',
 		['except' => ['create','edit','update']
 	]);
-
 	Route::post('/products/{id}', 'Product\ProductController@update');
 
 	//Unidades de Medida
@@ -90,6 +89,12 @@ Route::group(['middleware' => 'auth:api'], function() {
 	Route::get('product-commerces/{commerce}/{producto}','Product\ProductController@getCommercesProduct');
 	Route::post('update-stock','Product\ProductController@updateStock');
 	Route::get('total-products','Product\ProductController@getTotalProducts');
+
+	//Lista de Compra
+	Route::resource('marketplace','MarketPlaceListing\MarketPlaceListingController',
+		['except' => ['create','edit']
+	]);
+	Route::get('marketplace-active/{user}','MarketPlaceListing\MarketPlaceListingController@getActive');
 
 });
 

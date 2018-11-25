@@ -66,7 +66,7 @@
                                   </div>
 
                                   <div class="link">
-                                      <a class="relative" @click="addOrder(product.idproduct)" title="Agregar a Lista de Compra"><i class="icons icon-basket-loaded"></i></a>
+                                      <a class="relative" @click="addOrder(product)" title="Agregar a Lista de Compra"><i class="icons icon-basket-loaded"></i></a>
                                   </div>
                               </div>
                               <div class="details pb-10 pt-20">
@@ -172,6 +172,7 @@ export default {
       loading: false,
       color: '#5bc0de',
       size:'30px',
+      list: [],
     }
   },
   created() {
@@ -226,27 +227,50 @@ export default {
         this.idbranch = user_config.list[0].branch
       } 
     },
-    addOrder(idproduct) {
+    addOrder(product) {
       if(this.isLogged) {
         console.log('Logged')
-        if(this.idcommerce) {
+        if(this.idcommerce && this.idbranch) {
+      
+          console.log(this.idcommerce)
+          console.log(this.idbranch)
+
+          axios.get('api/marketplace-active/'+this.idcommerce+'/'+this.idbranch).then(response => {
+              this.list = response.data.data
+              console.log(response.data.data.length)                
+            })
+
+          if(this.list.length == 0) {
+            console.log(product)
+            console.log('Agregar Nuevo')
+            var data = {
+              'commerce_idcommerce': this.idcommerce,
+              'quantity': '1',
+              'unitprice': product.price,
+              'taxes': parseFloat(product.price*(product.taxpercentage/100)).toFixed(2),
+              'product_idproduct': product.idproduct,
+              'productunitofmeasurement_idproductunitofmeasurement': product.productunitofmeasurement_idproductunitofmeasurement,
+              'branch_idbranch': this.idbranch,
+              'statelisting_idstatelisting': '1'
+            }
+            console.log(data)
+          } else {
+            console.log('Modificar')
+          }
+
+
+
+
+
+
           this.$router.push('/shopping-list')  
         } else {
-          console.log('Ingresa para agregar')
           this.$refs.notifyModal.show()    
         }
       } else {
         console.log(this.isLogged)
         this.$refs.loginModal.show()
       }
-      
-/*
-      if(this.idcommerce) {
-        this.$router.push('/shopping-list')  
-      } else {
-        console.log('Ingresa para agregar')    
-      }
-*/      
     },
     closeNotifyModal() {
       this.$refs.notifyModal.show()    

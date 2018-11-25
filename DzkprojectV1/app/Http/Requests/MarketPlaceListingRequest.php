@@ -32,7 +32,6 @@ class MarketPlaceListingRequest extends FormRequest
             'detalle.*.taxes'     => 'required',
             'detalle.*.product_idproduct'   => 'required',
             'detalle.*.productunitofmeasurement_idproductunitofmeasurement' => 'required',
-            'detalle.*.commerce_idcommerce' => 'required',
             'detalle.*.branch_idbranch'     => 'required',
             'detalle.*.statelisting_idstatelisting' => 'required',
         ];

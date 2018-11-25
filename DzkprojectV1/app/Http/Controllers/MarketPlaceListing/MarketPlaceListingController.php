@@ -134,12 +134,18 @@ class MarketPlaceListingController extends Controller
 
     }
 
-    public function getActive($user)
+    public function getActive($commerce,$branch,$user = null)
     {
-    	$list = MarketPlaceListing::where('user_id',$user)
-    				->where('applicationdate',NULL)
-    					->get();
-        
+    	if(is_null($user)) {
+    		$user = Auth::id();
+    	} 
+
+    	$list = MarketPlaceListing::where('users_id',$user)
+    				->where('commerce_idcommerce',$commerce)
+    					->where('branch_idbranch',$branch)
+    						->where('applicationdate',NULL)
+    							->get();
+
         return response()->json(['success'=>true, 'data'=>$list], 200);   
 
     }

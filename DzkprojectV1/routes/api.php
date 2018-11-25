@@ -94,7 +94,7 @@ Route::group(['middleware' => 'auth:api'], function() {
 	Route::resource('marketplace','MarketPlaceListing\MarketPlaceListingController',
 		['except' => ['create','edit']
 	]);
-	Route::get('marketplace-active/{user}','MarketPlaceListing\MarketPlaceListingController@getActive');
+	Route::get('marketplace-active/{commerce}/{branch}/{user?}','MarketPlaceListing\MarketPlaceListingController@getActive');
 
 });
 

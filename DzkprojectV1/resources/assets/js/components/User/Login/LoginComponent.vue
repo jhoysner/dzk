@@ -99,6 +99,7 @@ import PulseLoader from 'vue-spinner/src/PulseLoader.vue'
 
                             if(localStorage.getItem('redirect')) {
 	            				let redirect = localStorage.getItem('redirect')
+                                localStorage.removeItem('redirect')
 	            				window.location.href = redirect;
             				} else {
 	            				window.location.href = '/';

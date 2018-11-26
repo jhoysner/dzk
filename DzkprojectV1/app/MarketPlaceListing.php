@@ -29,7 +29,7 @@ class MarketPlaceListing extends Model
         'finaltaxes',
         'finalprice',
         'finaltotalprice',
-        'user_id',
+        'users_id',
         'commerce_idcommerce',
         'branch_idbranch'
     ];
@@ -37,4 +37,9 @@ class MarketPlaceListing extends Model
     protected $hidden  = [
         'created_at', 'updated_at', 'deleted_at',
     ];
+
+    public function details()
+    {
+        return $this->hasMany('App\MarketPlaceListingDetail','marketplacelisting_idmarketplacelisting');
+    }
 }

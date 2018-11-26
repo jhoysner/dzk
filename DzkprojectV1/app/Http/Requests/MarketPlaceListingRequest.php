@@ -25,6 +25,7 @@ class MarketPlaceListingRequest extends FormRequest
     {
         return [
             'commerce_idcommerce' => 'required',
+            'branch_idbranch'     => 'required',
             'observations'        => 'nullable|string|max:1024',
             'feedback'            => 'nullable|string|max:1024',
             'detalle.*.quantity'  => 'required|integer',
@@ -32,7 +33,6 @@ class MarketPlaceListingRequest extends FormRequest
             'detalle.*.taxes'     => 'required',
             'detalle.*.product_idproduct'   => 'required',
             'detalle.*.productunitofmeasurement_idproductunitofmeasurement' => 'required',
-            'detalle.*.branch_idbranch'     => 'required',
             'detalle.*.statelisting_idstatelisting' => 'required',
         ];
     }

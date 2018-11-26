@@ -5,12 +5,15 @@ import BootstrapVue from 'bootstrap-vue'
 import swal from 'sweetalert';
 import ToggleButton from 'vue-js-toggle-button'
 import Multiselect from 'vue-multiselect'
+import Vue2Filters from 'vue2-filters'
 
 Vue.use(ToggleButton)
 
 Vue.use(BootstrapVue)
 
 Vue.component('multiselect', Multiselect)
+
+Vue.use(Vue2Filters)
 
 require('./bootstrap');
 

@@ -92,9 +92,11 @@ Route::group(['middleware' => 'auth:api'], function() {
 
 	//Lista de Compra
 	Route::resource('marketplace','MarketPlaceListing\MarketPlaceListingController',
-		['except' => ['create','edit']
+		['except' => ['create','edit','destroy']
 	]);
 	Route::get('marketplace-active/{commerce}/{branch}/{user?}','MarketPlaceListing\MarketPlaceListingController@getActive');
+	Route::delete('marketplace-product/{id}','MarketPlaceListing\MarketPlaceListingController@deleteProduct');
+	Route::post('marketplace-order/{id}','MarketPlaceListing\MarketPlaceListingController@setOrderMarketList');
 
 });
 

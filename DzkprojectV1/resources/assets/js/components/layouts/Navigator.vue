@@ -114,7 +114,7 @@
               <router-link to='/shopping-list'>
                 <a title="Lista de Compra">
                   <i class="fa fa-list-alt fa-2x"></i>
-                  <small></small>
+                  <span v-if="list.length > 0" class="badge badge-danger">.</span>
                 </a>
               </router-link>
             </li>
@@ -155,23 +155,6 @@
                   Login
                 </a>
             </li>
-            <!--<li v-if="!isLogged">
-              <a href="/login">
-                Login
-              </a>
-            </li>-->
-          <!--  <li>
-                <a href="author-account-download.html">Downloads</a>
-            </li>
-            <li>
-                <a href="author-account-review.html">Reviews</a>
-            </li>
-            <li>
-                <a href="author-account-earnings.html">Earnings</a>
-            </li>
-            <li>
-                <a href="author-account-statements.html">Statements</a>
-            </li> -->
         </ul>
     </div>
   </div>
@@ -184,6 +167,10 @@ export default {
   data() {
     return {
       isLogged: '',
+      userId: '',
+      idcommerce: '',
+      idbranch: '',
+      list: [],
     }
   },
   mounted() {
@@ -200,12 +187,28 @@ export default {
 
       if(token) {
         axios.get('api/profile').then(response => {
-        //console.log(response)        
-            this.isLogged = true            
+            this.isLogged = true
+            this.userId = response.data.user.id
           })
           .catch(err => {
             this.isLogged = false
           }) 
+
+          const user_config = JSON.parse(localStorage.getItem('user_config'))
+
+          if( user_config ) {
+              this.idcommerce = user_config.list[0].commerce
+              this.idbranch = user_config.list[0].branch
+
+              axios.get('api/marketplace-active/'+this.idcommerce+'/'+this.idbranch).then(response => {
+                this.list = response.data.data 
+                if(this.list.length > 0) {
+                  
+                }
+
+              }) 
+
+            }
       }
 
     }

@@ -66,7 +66,12 @@
                                   </div>
 
                                   <div class="link">
+                                    <span v-if="!product.agregate">
                                       <a class="relative" @click="addOrder(product)" title="Agregar a Lista de Compra"><i class="icons icon-basket-loaded"></i></a>
+                                    </span>
+                                    <span v-else>
+                                      <button class="relative btn" @click="" title="Agregado a Lista de Compra">Agregado</button>
+                                    </span>
                                   </div>
                               </div>
                               <div class="details pb-10 pt-20">
@@ -74,7 +79,7 @@
                                       <a href="theme-details.html">
                                           <h6>{{product.name}}</h6>
                                       </a>
-                                      <h6 class="price">$ {{product.price}}</h6>
+                                      <h6 class="price">{{ product.price | currency }}</h6>
                                   </div>
                               </div>
                               <div class="meta d-flex flex-row">
@@ -167,12 +172,14 @@ export default {
       form: {},
       userId: '',
       products: [],
+      productos: [],
       branchs: [],
       typeproducts: [],
       loading: false,
       color: '#5bc0de',
       size:'30px',
       list: [],
+      listproducts: [],
     }
   },
   created() {
@@ -202,8 +209,29 @@ export default {
 
       if(this.idbranch) {
         axios.get('api'+this.url+'/'+this.idbranch).then(response => {
-          this.products = response.data.data[0].products
-          this.loading = false
+          this.productos = response.data.data[0].products
+          if(this.list.length > 0) {
+            let idMarketList = this.list[0].idmarketplacelisting
+            axios.get('api/marketplace/'+idMarketList).then(response => {
+              this.listproducts = response.data.data[0].details
+              
+              for(let i=0; i<this.productos.length; i++) {  
+                let pos = this.listproducts.map( function(e) {
+                  return (e.product_idproduct)
+                }).indexOf(this.productos[i].idproduct)
+
+                if(pos !== -1) {
+                  this.productos[i].agregate = true
+                }
+
+              }
+            this.products = this.productos
+            this.loading = false
+            })
+          } else {
+            this.products = this.productos
+            this.loading = false            
+          }
       })
       } else {
         axios.get('api'+this.url).then(response => {
@@ -211,13 +239,9 @@ export default {
           this.loading = false
         })        
       }
+
       this.form.producttype_idproducttype = 0
 
-      /*axios.get('api'+this.url).then(response => {
-          this.products = response.data.data
-          this.loading = false
-          this.form.producttype_idproducttype = 0
-      })*/
     },
     commerceBranchSelect() {
       const user_config = JSON.parse(localStorage.getItem('user_config'))
@@ -225,52 +249,92 @@ export default {
       if( user_config ) {
         this.idcommerce = user_config.list[0].commerce
         this.idbranch = user_config.list[0].branch
+
+        axios.get('api/marketplace-active/'+this.idcommerce+'/'+this.idbranch).then(response => {
+          this.list = response.data.data
+        }) 
       } 
+    },
+    addProduct(product,idmarketplacelisting = null) {
+      let detalles = []
+
+      let detalle = {
+        'quantity': '1',
+        'unitprice': product.price,
+        'taxes': parseFloat(product.price*(product.taxpercentage/100)).toFixed(2),
+        'product_idproduct': product.idproduct,
+        'productunitofmeasurement_idproductunitofmeasurement': product.productunitofmeasurement_idproductunitofmeasurement,
+        'statelisting_idstatelisting': '1'
+      }
+
+      detalles.push(detalle)
+      
+      var datos = {
+        'commerce_idcommerce': this.idcommerce,
+        'branch_idbranch': this.idbranch,
+        'detalle': detalles
+      }
+
+      if(idmarketplacelisting !== null) {
+        datos.idmarketplacelisting = idmarketplacelisting
+      } 
+
+      return datos
     },
     addOrder(product) {
       if(this.isLogged) {
-        console.log('Logged')
         if(this.idcommerce && this.idbranch) {
-      
-          console.log(this.idcommerce)
-          console.log(this.idbranch)
+            if(this.list.length == 0) {
+              let data = this.addProduct(product)
+              var idMarketList = ""
 
-          axios.get('api/marketplace-active/'+this.idcommerce+'/'+this.idbranch).then(response => {
-              this.list = response.data.data
-              console.log(response.data.data.length)                
-            })
+              var stock = this.validStock(product)
+              if(stock) {
+                return
+              }
 
-          if(this.list.length == 0) {
-            console.log(product)
-            console.log('Agregar Nuevo')
-            var data = {
-              'commerce_idcommerce': this.idcommerce,
-              'quantity': '1',
-              'unitprice': product.price,
-              'taxes': parseFloat(product.price*(product.taxpercentage/100)).toFixed(2),
-              'product_idproduct': product.idproduct,
-              'productunitofmeasurement_idproductunitofmeasurement': product.productunitofmeasurement_idproductunitofmeasurement,
-              'branch_idbranch': this.idbranch,
-              'statelisting_idstatelisting': '1'
+              axios.post('api/marketplace',data).then(response => {
+                idMarketList = response.data.data.idmarketplacelisting
+                this.redirectAddProduct(response.data.data.idmarketplacelisting)
+              })
+              .catch(err => {
+                  console.log(err)
+              })
+            } else {
+              idMarketList = this.list[0].idmarketplacelisting
+              
+              var stock = this.validStock(product)
+              if(stock) {
+                return
+              }
+              let data = this.addProduct(product,idMarketList)
+              axios.put('api/marketplace/'+idMarketList,data).then(response => {
+                this.redirectAddProduct(idMarketList)  
+              })
+              .catch(err => {
+                  console.log(err)
+              })
             }
-            console.log(data)
-          } else {
-            console.log('Modificar')
-          }
-
-
-
-
-
-
-          this.$router.push('/shopping-list')  
         } else {
           this.$refs.notifyModal.show()    
         }
       } else {
-        console.log(this.isLogged)
         this.$refs.loginModal.show()
       }
+    },
+    validStock(product) {
+      if(product.pivot.stock == 0) {
+        swal({
+          title: "No hay stock del producto", 
+          icon: "warning",
+        })
+        return true
+      }
+    },
+    redirectAddProduct(idMarketList) {
+      this.$router.push({name: 'shopping-list',
+        params: { 'marketplace': idMarketList}
+      })
     },
     closeNotifyModal() {
       this.$refs.notifyModal.show()    
@@ -284,12 +348,10 @@ export default {
     },
     filtering(id) {
       this.loading = true
-      console.log(id)
       if(id == 0 && !this.idbranch) {
         axios.get('api'+this.url).then(response => {
           this.products = response.data.data
           this.loading = false
-          console.log(this.products)
         })
       } else if(id == 0 && this.idbranch) {
         axios.get('api'+this.url+'/'+this.idbranch).then(response => {
@@ -309,7 +371,6 @@ export default {
         axios.get('api'+this.url+'/'+this.idbranch+'/'+id).then(response => {
           this.branchs = response.data.data
           this.products= []
-          console.log(this.products)
           for( let i=0; i<this.branchs.length; i++ ) {
             if(this.branchs[i].products.length != 0) {
                 var productos = this.branchs[i].products
@@ -329,8 +390,6 @@ export default {
                 var productos = this.branchs[i].products
                 for( let j=0; j<productos.length; j++ ) {
                   this.products.push(productos[j])
-                  console.log(this.products)
-
                 }
             }
           }
@@ -355,7 +414,7 @@ export default {
 </script>
 <style lang="scss" scoped>
  .thumb-img {
-    width: 200px;
+    width: 100%;
     height: 120px;
   }
   #spinner {

@@ -196,7 +196,9 @@ Route::get('message-read/{id}', 'Message\MessageController@read');
 Route::get('follow/{id}/{commerce}', 'Follow\FollowController@follow');
 Route::get('unfollow/{id}/{commerce}', 'Follow\FollowController@unfollow');
 Route::get('follow-state/{id}/{commerce}', 'Follow\FollowController@userStateFollow');
+Route::get('follow-state-block/{id}/{commerce}', 'Follow\FollowController@userStateBlock');
 Route::get('user-follower/{id}', 'Follow\FollowController@userFollowers');
+Route::get('user-following/{id}', 'Follow\FollowController@userFollowing');
 Route::get('user-follower-block/{id}/{commerce}', 'Follow\FollowController@userFollowerBlock');
 Route::get('user-follower-unlock/{id}/{commerce}', 'Follow\FollowController@userFollowerUnlock');
 

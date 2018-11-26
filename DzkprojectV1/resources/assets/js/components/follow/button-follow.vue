@@ -1,15 +1,17 @@
 <template>
     <div>
+        <div v-if="!block">
+            
+            <button v-if="!userStateFollow()" type="button" class="btn" :class="classState"  @click="seguir" >
 
-        <button v-if="!userStateFollow()" type="button" class="btn" :class="classState"  @click="seguir" >
+                Seguir
+            </button>        
 
-            Seguir
-        </button>        
+            <button v-if="userStateFollow()" type="button" class="btn" :class="classState"  @click="dejarSeguir" >
 
-        <button v-if="userStateFollow()" type="button" class="btn" :class="classState"  @click="dejarSeguir" >
-
-             Siguiendo
-        </button>
+                 Siguiendo
+            </button>
+        </div>
     </div>
 
 </template>
@@ -18,7 +20,7 @@
     import Bus from '../../utilities/EventBus';
    
     export default {
-        props: ['user','commerce', 'state'],
+        props: ['user','commerce', 'state', 'block'],
 
         data() {
             return {

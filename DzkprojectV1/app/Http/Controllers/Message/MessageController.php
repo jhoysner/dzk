@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Message;
 
+use App\Events\MessageSent;
 use App\Follower;
 use App\Http\Controllers\Controller;
 use App\MessengerService;
@@ -135,6 +136,8 @@ class MessageController extends Controller
 
       $message = MessengerService::create($fields);
 
+      event(new MessageSent($message));
+
       return response()->json(['data'=> $message], 200);
 
     }       
@@ -146,9 +149,13 @@ class MessageController extends Controller
         $thread = MessengerService::where('users_id_from', $contact)->where('users_id_to', $user)->where('messengerservicetopic_idmessengerservicetopic', 2)->first();
       }
 
-
-      $messages = MessengerService::where('thread', $thread->thread)->orderBy('created_at', 'ASC')->get();
-
+      if ($thread) {
+        
+        $messages = MessengerService::where('thread', $thread->thread)->orderBy('created_at', 'ASC')->get();
+      }
+       else{
+        $messages = [];
+       }
 
       return response()->json(['data'=> $messages], 200);
 

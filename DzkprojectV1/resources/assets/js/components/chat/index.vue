@@ -20,7 +20,7 @@
                 
                 <li class="contact" @click="selectContact(user.contact, user.commerce_idcommerce)">
                     <div class="wrap">
-                        <span class="contact-status online"></span>
+                        <span class="contact-status" :class="user.contact.online ? 'online':'offline'" ></span>
                         <img src="http://emilcarlsson.se/assets/louislitt.png" alt="" />
                         <div class="meta">
                             <p class="name">{{user.contact.firstname}}</p>
@@ -90,9 +90,35 @@
                   },  
             }
         },
-        created(){
-            this.auth();
+        mounted(){
+          $('#frame').hide();
+          $('.close-intro').hide();
+          $('.open-intro').show();
+
+          this.auth();
+
+          Echo.channel('example')
+              .listen('MessageSent', (data) => {
+                if(data.message.users_id_to == this.user.id){
+                  this.findConversationChat()
+                }
+              });      
+
+          Echo.join('online')
+          .here((users) => {
+              users.forEach((user) => this.changeStatus(user, true));
+          })
+          .joining((user) => {
+             this.changeStatus(user, true)
+          })
+          .leaving((user) => {
+             this.changeStatus(user, false)
+          });
+
         },
+        // created(){
+        //     this.auth();
+        // },
         methods: {
 
           auth() {
@@ -126,6 +152,8 @@
             }, 1000);
           },
           selectContact(contact , commerce){
+              this.messages=[];
+              this.form.thread = '';
               this.contactSelect = contact;
               this.commerceSelect = commerce;
               this.form.users_id_from = this.user.id;
@@ -133,17 +161,23 @@
               this.form.commerce_idcommerce = this.commerceSelect;
               this.form.messengerservicetopic_idmessengerservicetopic = '2';
               this.findConversationChat();
+
+              var self = this;
               setTimeout(function(){ 
-               console.log('scroll');
-                $('#messages').scrollTop($('#messages').height())
+                  self.scrollToBottom();
               }, 500);
           },
-          findConversationChat(user, contacts){
+          findConversationChat(){
             axios.get('/api/find-thread-chat/'+this.user.id+'/'+this.contactSelect.id).then(response => {  
-              console.log(response)      
-              this.form.thread = response.data.data[0].thread
-              this.messages = response.data.data
-                          })
+              if(response.data.data.length > 0){
+                this.form.thread = response.data.data[0].thread
+                this.messages = response.data.data
+                var self = this;
+                setTimeout(function(){ 
+                    self.scrollToBottom();
+                }, 500);
+              }
+            })
             .catch(err => console.log(err))
           },         
           send(){
@@ -153,7 +187,10 @@
              axios.post('/api/message-send-chat', this.form).then(response => {
               this.form.message = ''
               this.findConversationChat()
-              console.log(response)
+              var self = this;
+              setTimeout(function(){ 
+                  self.scrollToBottom();
+              }, 500);
             })
             .catch(err => console.log(err));
           },
@@ -163,6 +200,19 @@
           UserSend: function (message) {
             return message.users_id_from == this.user.id
           },
+          scrollToBottom(){
+            const el = document.querySelector('#messages');
+            el.scrollTop = el.scrollHeight;
+          },
+          changeStatus(user, status){
+              const index = this.users.findIndex((contacts) =>{
+                return contacts.contact.id == user.id
+              });
+              if(index >= 0){
+
+                this.$set(this.users[index].contact, 'online', status);
+              }
+          }
   
         },
     }
@@ -541,8 +591,8 @@
     position: absolute;
     left: 0;
     margin: -2px 0 0 -2px;
-    width: 10px;
-    height: 10px;
+    width: 15px;
+    height: 15px;
     border-radius: 50%;
     border: 2px solid #2c3e50;
     background: #95a5a6;

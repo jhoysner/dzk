@@ -86,21 +86,20 @@
         },
         created(){
             this.auth();
-            this.index();
         },
         methods: {
             auth() {
                 axios.get('api/profile').then((response) => {
                   this.user = response.data.user;
-                  // this.index();
+                  this.index();
                 })
                 .catch(err => console.log(err))
             },
             index() {
-                axios.get('api/commerces-user')
+                axios.get('/api/user-commerce-follow/'+this.user.id)
                   .then(response => {
                     console.log(response);
-                    this.commerces = response.data.data[0].commerces_user     
+                    this.commerces = response.data.data     
                     // this.findFollower(this.commerce);      
                   })
                   .catch(err => {

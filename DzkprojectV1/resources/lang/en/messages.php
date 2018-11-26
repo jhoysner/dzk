@@ -32,8 +32,5 @@ return [
     'product_update'=> 'Product Update',
     'product_delete'=> 'Product Delete',
     'product_stock_update'=> 'Stock Update',
-
-
-
-
-    ];
+    'order_created'=> 'Order Created',
+];

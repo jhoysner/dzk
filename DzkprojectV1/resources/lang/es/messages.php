@@ -32,6 +32,5 @@ return [
     'product_update'=> 'Producto actualizado correctamente',
     'product_delete'=> 'Producto borrado correctamente',
     'product_stock_update'=> 'Stock actualizado correctamente',
-
-
+    'order_created'=> 'Pedido creado correctamente',
 ];

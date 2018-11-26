@@ -78,9 +78,8 @@
                                   <div class="title d-flex flex-row justify-content-between">
                                       <a href="theme-details.html">
                                           <h6>{{product.name}}</h6>
-                                          {{product.agregate}}
                                       </a>
-                                      <h6 class="price">$ {{product.price}}</h6>
+                                      <h6 class="price">{{ product.price | currency }}</h6>
                                   </div>
                               </div>
                               <div class="meta d-flex flex-row">
@@ -211,7 +210,6 @@ export default {
       if(this.idbranch) {
         axios.get('api'+this.url+'/'+this.idbranch).then(response => {
           this.productos = response.data.data[0].products
-          console.log(this.list)
           if(this.list.length > 0) {
             let idMarketList = this.list[0].idmarketplacelisting
             axios.get('api/marketplace/'+idMarketList).then(response => {
@@ -285,11 +283,16 @@ export default {
     },
     addOrder(product) {
       if(this.isLogged) {
-        console.log('Logged')
         if(this.idcommerce && this.idbranch) {
             if(this.list.length == 0) {
               let data = this.addProduct(product)
               var idMarketList = ""
+
+              var stock = this.validStock(product)
+              if(stock) {
+                return
+              }
+
               axios.post('api/marketplace',data).then(response => {
                 idMarketList = response.data.data.idmarketplacelisting
                 this.redirectAddProduct(response.data.data.idmarketplacelisting)
@@ -299,8 +302,12 @@ export default {
               })
             } else {
               idMarketList = this.list[0].idmarketplacelisting
+              
+              var stock = this.validStock(product)
+              if(stock) {
+                return
+              }
               let data = this.addProduct(product,idMarketList)
-
               axios.put('api/marketplace/'+idMarketList,data).then(response => {
                 this.redirectAddProduct(idMarketList)  
               })
@@ -312,13 +319,19 @@ export default {
           this.$refs.notifyModal.show()    
         }
       } else {
-        console.log(this.isLogged)
         this.$refs.loginModal.show()
       }
     },
+    validStock(product) {
+      if(product.pivot.stock == 0) {
+        swal({
+          title: "No hay stock del producto", 
+          icon: "warning",
+        })
+        return true
+      }
+    },
     redirectAddProduct(idMarketList) {
-      console.log(idMarketList)
-      Bus.$emit('marketPlace_id', idMarketList)
       this.$router.push({name: 'shopping-list',
         params: { 'marketplace': idMarketList}
       })
@@ -335,12 +348,10 @@ export default {
     },
     filtering(id) {
       this.loading = true
-      console.log(id)
       if(id == 0 && !this.idbranch) {
         axios.get('api'+this.url).then(response => {
           this.products = response.data.data
           this.loading = false
-          console.log(this.products)
         })
       } else if(id == 0 && this.idbranch) {
         axios.get('api'+this.url+'/'+this.idbranch).then(response => {
@@ -360,7 +371,6 @@ export default {
         axios.get('api'+this.url+'/'+this.idbranch+'/'+id).then(response => {
           this.branchs = response.data.data
           this.products= []
-          console.log(this.products)
           for( let i=0; i<this.branchs.length; i++ ) {
             if(this.branchs[i].products.length != 0) {
                 var productos = this.branchs[i].products
@@ -380,8 +390,6 @@ export default {
                 var productos = this.branchs[i].products
                 for( let j=0; j<productos.length; j++ ) {
                   this.products.push(productos[j])
-                  console.log(this.products)
-
                 }
             }
           }
@@ -406,7 +414,7 @@ export default {
 </script>
 <style lang="scss" scoped>
  .thumb-img {
-    width: 200px;
+    width: 100%;
     height: 120px;
   }
   #spinner {

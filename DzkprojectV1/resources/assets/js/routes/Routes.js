@@ -92,7 +92,9 @@ const baseRoutes = [
         },
         {
             path: '/shopping-list',
-            component: ShoppingList
+            component: ShoppingList,
+            name: 'shopping-list',
+            props: true
         },
         {
             path: '/commerces',

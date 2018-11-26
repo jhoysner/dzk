@@ -20,72 +20,60 @@ class MarketPlaceListingController extends Controller
     }
 
     public function store(MarketPlaceListingRequest $request)
-    {
-  
-    	try{
-    	    DB::transaction(function () use($request){
+    {  
        
-    	    	$request->merge(['idmarketplacelisting' => str_random(36)]);
-        
-		        $request->merge(['users_id' => Auth::id()]);
+    	$request->merge(['idmarketplacelisting' => str_random(36)]);
 
-            	$marketplace = MarketPlaceListing::create(
-            		$request->all()
-            	);
+        $request->merge(['users_id' => Auth::id()]);
 
-            	if($request->detalle && count($request->detalle) > 0) {
-	            	foreach ($request->detalle as $temp) {
-						$idmarketplacelistingdetail = str_random(36);
-						//$marketplace->details()->create([
-						MarketPlaceListingDetail::create([
-							'idmarketplacelistingdetail' => $idmarketplacelistingdetail,
-							'quantity' => $temp['quantity'],
-							'unitprice' => $temp['unitprice'],
-							'taxes' => $temp['taxes'],
-							'totalprice' => ($temp['quantity'] * $temp['unitprice']) + $temp['taxes'],
-							'marketplacelisting_idmarketplacelisting' => $request->idmarketplacelisting,
-							'product_idproduct' => $temp['product_idproduct'],
-							'productunitofmeasurement_idproductunitofmeasurement' => $temp['productunitofmeasurement_idproductunitofmeasurement'],
-							'commerce_idcommerce' => $request->commerce_idcommerce,
-							'branch_idbranch' => $temp['branch_idbranch'], //Preguntar
-							'users_id' => $request->users_id,
-							'statelisting_idstatelisting' => $temp['statelisting_idstatelisting'] //Revisar  
-						]);
-	            	}
-            	}
+    	$marketplace = MarketPlaceListing::create(
+    		$request->all()
+    	);
 
-            	$totaltaxes = MarketPlaceListingDetail::select(DB::raw('SUM(taxes) as taxes'))
-            		->where('marketplacelisting_idmarketplacelisting',$request->idmarketplacelisting)
-            			->first();
+    	if(is_array($request->detalle) && count($request->detalle) > 0 ) {
 
-            	$totalprice = MarketPlaceListingDetail::select(DB::raw('SUM(totalprice) as total'))
-            		->where('marketplacelisting_idmarketplacelisting',$request->idmarketplacelisting)
-            			->first();
+        	$this->addProduct($request->all());
+    	
+        	$this->totalListMarket($request->idmarketplacelisting);
 
-            	$marketplacelisting = MarketPlaceListing::find($request->idmarketplacelisting);
-            	$marketplacelisting->initprice = $totalprice->total;
-            	$marketplacelisting->inittaxes = $totaltaxes->taxes;
-            	$marketplacelisting->inittotalprice = $totalprice->total + $totaltaxes->taxes;
-            	$marketplacelisting->save();
-            	
+    	}
 
-            });
-        }catch (\Exception $e){
-            return response()->json(['error' => $e->getMessage()], 422);
+        if(!$marketplace) {
+        	return response()->json(['error'=>'Error al guardar'], 422);   
         }
 
-        return response()->json(['success'=>'Lista de Compra creada'], 200);   
+        return response()->json(['success'=>true,'data'=>$marketplace], 200);   
+
     }
 
     public function update(MarketPlaceListingRequest $request, $id)
     {
 
-    	$markeplace = MarketPlaceListing::find($id);
+    	$marketplace = MarketPlaceListing::find($id);
 
-    	if(!$marketplace ){
+    	if( !$marketplace ){
             return response()->json(['error' => 'Error no existe lista'], 422);
         }
 
+		$request->merge(['users_id' => Auth::id()]);
+
+        try{
+    	    DB::transaction(function () use($request){    	    	
+
+		      	if(is_array($request->detalle) && count($request->detalle) > 0 ) {
+		      		$this->addProduct($request->all());
+
+		      		$this->totalListMarket($request->idmarketplacelisting);
+		      	}
+
+			});
+        }catch (\Exception $e){
+            return response()->json(['error' => $e->getMessage()], 422);
+        }
+
+        return response()->json(['success'=>true], 200);   
+
+/*
     	if($request->detalle && count($request->detalle) > 0) {
 	            	foreach ($request->detalle as $temp) {
 						$idmarketplacelistingdetail = str_random(36);
@@ -129,10 +117,64 @@ class MarketPlaceListingController extends Controller
             	$marketplacelisting->inittaxes = $totaltaxes->taxes;
             	$marketplacelisting->inittotalprice = $totalprice->total + $totaltaxes->taxes;
             	$marketplacelisting->save();
-            	
-
-
+*/
     }
+
+    public function show($id)
+    {
+    	$marketPlaceListing = MarketPlaceListing::where('idmarketplacelisting',$id)
+    							->with(['details'=>function($query) {
+    								$query->with('product');
+    							}])
+    								->get();
+
+		return response()->json(['success'=>true, 'data'=>$marketPlaceListing], 200);  
+    }
+
+    protected function addProduct($data)
+    {
+       	foreach ($data['detalle'] as $temp) {
+			$idmarketplacelistingdetail = str_random(36);
+
+			MarketPlaceListingDetail::updateOrCreate([
+		        'marketplacelisting_idmarketplacelisting'   => $data['idmarketplacelisting'],
+		        'commerce_idcommerce' => $data['commerce_idcommerce'],
+		        'branch_idbranch'     => $data['branch_idbranch'],
+				'product_idproduct' => $temp['product_idproduct']
+		    ],[
+		        'idmarketplacelistingdetail' => $idmarketplacelistingdetail,
+				'quantity' => $temp['quantity'],
+				'unitprice' => $temp['unitprice'],
+				'taxes' => $temp['taxes'],
+				'totalprice' => ($temp['quantity'] * $temp['unitprice']) + $temp['taxes'],
+				'marketplacelisting_idmarketplacelisting' => $data['idmarketplacelisting'],
+				'product_idproduct' => $temp['product_idproduct'],
+				'productunitofmeasurement_idproductunitofmeasurement' => $temp['productunitofmeasurement_idproductunitofmeasurement'],
+				'commerce_idcommerce' => $data['commerce_idcommerce'],
+				'branch_idbranch' => $data['branch_idbranch'], 
+				'users_id' => $data['users_id'],
+				'statelisting_idstatelisting' => $temp['statelisting_idstatelisting']
+		    ]);
+		}
+    }
+
+    protected function totalListMarket($idmarketplacelisting)
+    {
+    	$totaltaxes = MarketPlaceListingDetail::select(DB::raw('SUM(taxes) as taxes'))
+            		->where('marketplacelisting_idmarketplacelisting',$idmarketplacelisting)
+            			->first();
+
+    	$totalprice = MarketPlaceListingDetail::select(DB::raw('SUM(unitprice*quantity) as total'))
+    		->where('marketplacelisting_idmarketplacelisting',$idmarketplacelisting)
+    			->first();
+
+    	$marketplacelisting = MarketPlaceListing::find($idmarketplacelisting);
+    	$marketplacelisting->initprice = $totalprice->total;
+    	$marketplacelisting->inittaxes = $totaltaxes->taxes;
+    	$marketplacelisting->inittotalprice = $totalprice->total + $totaltaxes->taxes;
+    	$marketplacelisting->save();
+    }
+
 
     public function getActive($commerce,$branch,$user = null)
     {
@@ -149,5 +191,4 @@ class MarketPlaceListingController extends Controller
         return response()->json(['success'=>true, 'data'=>$list], 200);   
 
     }
-
 }

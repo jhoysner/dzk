@@ -33,4 +33,9 @@ class MarketPlaceListingDetail extends Model
       return $this->belongsTo('App\StateListing', 'statelisting_idstatelisting', 'idstatelisting');
     }
 
+    public function product()
+    {
+        return $this->belongsTo('App\Product', 'product_idproduct', 'idproduct');
+    }
+
 }

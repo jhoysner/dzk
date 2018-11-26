@@ -88,7 +88,7 @@ class MessageController extends Controller
        $messages =  $messages->orWhere('commerce_idcommerce', $data->commerce_idcommerce);
       }
 
-      $messages = $messages->with(['from', 'commerce'])->get()->unique('thread')->where('messengerservicetopic_idmessengerservicetopic', 1);
+      $messages = $messages->with(['from', 'commerce'])->get()->unique('thread')->where('messengerservicetopic_idmessengerservicetopic', '!=', 2);
    
       return response()->json(['data'=> $messages], 200);
 
@@ -96,7 +96,7 @@ class MessageController extends Controller
 
     public function find($id){
 
-      $messages = MessengerService::where('thread', $id)->where('messengerservicetopic_idmessengerservicetopic', 1)->orderBy('created_at', 'ASC')->get();
+      $messages = MessengerService::where('thread', $id)->where('messengerservicetopic_idmessengerservicetopic','!=', 2)->orderBy('created_at', 'ASC')->get();
 
       return response()->json(['data'=> $messages], 200);
 

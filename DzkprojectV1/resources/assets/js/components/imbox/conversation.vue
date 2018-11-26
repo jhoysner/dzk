@@ -100,9 +100,15 @@
             .catch(err => console.log(err))
           },
           send(){
+
+            if(this.form.message == ''){
+                 return;
+            }
+            
             axios.post('/api/message-send-conversation', this.form).then(response => {
               this.form.message = ''
               this.findThread()
+              console.log(response)
             })
             .catch(err => console.log(err));
           },

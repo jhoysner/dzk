@@ -2,12 +2,13 @@
 
 namespace App\Http\Controllers\Auth;
 
+// use App\Events\OnlineChat;
 use App\Http\Controllers\Controller;
-use Illuminate\Support\Facades\Auth;
-use Illuminate\Http\Request;
-use Illuminate\Foundation\Auth\AuthenticatesUsers;
-use App\User;
 use App\Params;
+use App\User;
+use Illuminate\Foundation\Auth\AuthenticatesUsers;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Lang;
 
 class LoginController extends Controller
@@ -74,6 +75,8 @@ class LoginController extends Controller
         $credentials = $request->only('email','password');
 
         $user = $this->userData($credentials['email']);
+
+        // event(new OnlineChat($user));
  
         if(!$user) {
             return response()->json(['state'=>'Not_Found','error'=>\Lang::get('messages.user_notfound')], 404);

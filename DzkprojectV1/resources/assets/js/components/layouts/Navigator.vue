@@ -24,6 +24,13 @@
                     Seguidores
                   </a>
               </router-link>
+            </li>            
+            <li  v-can="'siguiendo'">
+              <router-link to='/following'>
+                  <a>
+                    Siguiendo
+                  </a>
+              </router-link>
             </li>
             <li>
               <router-link to='/list-products'>

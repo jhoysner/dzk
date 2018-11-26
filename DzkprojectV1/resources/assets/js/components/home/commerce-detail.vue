@@ -72,7 +72,7 @@
 
                 <div class="col-lg-3 sidebar theme-details-sidebar">
                     <div class="single-sidebar">
-                     <buttonfollow :user="user" :commerce="id" :state="followState"> </buttonfollow>
+                     <buttonfollow :user="user" :commerce="id" :state="followState" :block="followStateBlock" > </buttonfollow>
                     </div>
 
                     <div class="single-sidebar">
@@ -166,6 +166,7 @@ import buttonfollow from '../follow/button-follow';
                  discounts: [],
                  user:{},
                  followState: false,
+                 followStateBlock: false,
             }
         },
 
@@ -218,6 +219,7 @@ import buttonfollow from '../follow/button-follow';
                 console.log(response)
                 this.user = response.data.user;
                 this.followerState();
+                this.followerStateBlock();
               })
               .catch(err => console.log(err))
             },  
@@ -233,6 +235,14 @@ import buttonfollow from '../follow/button-follow';
                 axios.get('/api/follow-state/'+this.user.id+'/'+this.id).then((response) => {
                  
                   this.followState = response.data.state
+                })
+                .catch(err => console.log(err))
+            },            
+            followerStateBlock() {
+                axios.get('/api/follow-state-block/'+this.user.id+'/'+this.id).then((response) => {
+                 
+                  this.followStateBlock = response.data.block
+                  console.log(response)
                 })
                 .catch(err => console.log(err))
             },

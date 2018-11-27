@@ -2,10 +2,12 @@
 
 namespace App\Http\Controllers\Follow;
 
-use App\User;
 use App\Follower;
 use App\Http\Controllers\Controller;
+use App\User;
+use App\UserHasCommerce;
 use Illuminate\Http\Request;
+
 
 class FollowController extends Controller
 {
@@ -104,5 +106,14 @@ class FollowController extends Controller
       $follower->save();
 
       return response()->json(['data' => $follower],  201);
+    }
+
+
+    public function getUserCommerces($user)
+    {
+
+        $commerces = UserHasCommerce::where('users_id', $user)->get();
+
+        return response()->json(['data'=>$commerces], 200);
     }
 }

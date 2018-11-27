@@ -126,6 +126,13 @@
                 </a>
               </router-link>
             </li>
+            <li v-if="isLogged">
+              <router-link to='/requests'>
+                <a>
+                  Solicitudes
+                </a>
+              </router-link>
+            </li>
           
             <li v-if="isLogged">
               <router-link to='/profile'>

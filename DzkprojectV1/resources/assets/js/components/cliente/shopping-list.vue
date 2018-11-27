@@ -60,8 +60,8 @@
 			               	</table>
 		               	</div>        
 		               	<div class="col-lg-12">
-		               		<label>Observación</label>
-			               	<textarea class="form-control" v-model="feedback"></textarea>
+		               		<label>Observaciones</label>
+			               	<textarea class="form-control" v-model="observations"></textarea>
 		               	</div>
 		               	<br>
 		               	<div class="col-lg-12 text-center">
@@ -195,8 +195,8 @@ export default {
                 })	
     	},
     	endMarket() {
-    		if(this.feedback.length > 0) {
-    			this.listMarket[0].feedback = this.feedback
+    		if(this.observations.length > 0) {
+    			this.listMarket[0].observations = this.observations
     		}
     		swal({
 	          title: "Desea realizar el pedido de la lista de compra?",
@@ -225,7 +225,7 @@ export default {
 	                    axios.post('/api/marketplace-order/'+id, this.listMarket[0])
 	                      .then((response) => {
 	          				this.loading = false
-	                      	this.$router.push('/list-products')
+	                      	this.$router.push('/requests')
 	          				swal({
 	          					title: response.data.success, 
                                 icon: "success",

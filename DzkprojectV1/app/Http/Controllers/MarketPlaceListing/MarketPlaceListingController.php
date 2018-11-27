@@ -167,7 +167,7 @@ class MarketPlaceListingController extends Controller
 
     	$marketPlaceListing->applicationdate = Carbon::now();
     	if(!is_null($request->feedback))
-    		$marketPlaceListing->feedback = $request->feedback;
+    		$marketPlaceListing->observations = $request->observations;
     	//$marketPlaceListing->finalprice = $totalprice->total;
     	//$marketPlaceListing->finaltaxes = $totaltaxes->taxes;
     	//$marketPlaceListing->finaltotalprice = $totalprice->total + $totaltaxes->taxes;
@@ -176,6 +176,23 @@ class MarketPlaceListingController extends Controller
      		return response()->json(['success'=>\Lang::get('messages.order_created')],200);
     	}
 
+
+    }
+
+    public function getRequestsUser()
+    {
+    	$user = Auth::id();
+
+    	$lists = MarketPlaceListing::where('users_id',$user)
+    			->with('commerce')
+    				->with('branch')
+	    				->with(['details' => function($query) {
+	    					$query->with('product');
+	    					$query->with('state');
+	    				}])
+	    					->get();
+
+        return response()->json(['success'=>true, 'data'=>$lists], 200);   
 
     }
 

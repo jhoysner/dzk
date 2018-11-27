@@ -97,6 +97,7 @@ Route::group(['middleware' => 'auth:api'], function() {
 	Route::get('marketplace-active/{commerce}/{branch}/{user?}','MarketPlaceListing\MarketPlaceListingController@getActive');
 	Route::delete('marketplace-product/{id}','MarketPlaceListing\MarketPlaceListingController@deleteProduct');
 	Route::post('marketplace-order/{id}','MarketPlaceListing\MarketPlaceListingController@setOrderMarketList');
+	Route::get('marketplace-user-requests','MarketPlaceListing\MarketPlaceListingController@getRequestsUser');
 
 });
 

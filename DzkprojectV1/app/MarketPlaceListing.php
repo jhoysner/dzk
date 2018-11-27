@@ -42,4 +42,14 @@ class MarketPlaceListing extends Model
     {
         return $this->hasMany('App\MarketPlaceListingDetail','marketplacelisting_idmarketplacelisting');
     }
+
+    public function branch()
+    {
+        return $this->belongsTo('App\Branch', 'branch_idbranch', 'idbranch');
+    }
+
+    public function commerce()
+    {
+        return $this->belongsTo('App\Commerce', 'commerce_idcommerce', 'idcommerce');
+    }
 }

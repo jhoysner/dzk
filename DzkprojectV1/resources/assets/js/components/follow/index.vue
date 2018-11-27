@@ -9,13 +9,7 @@
 
                   <div class="row">             
                     <template v-for="commerce in commerces">
-                      <div class="card ml-2" style="width: 18rem;" @click="findFollower(commerce.commerce_idcommerce)">
-                        <div class="card-body">
-                          <h5 class="card-title">{{commerce.commerces.name}}</h5>
-                          <h6 class="card-subtitle mb-2 text-muted">{{commerce.commerces.email}}</h6>
-
-                        </div>
-                      </div>
+                      <cardtienda :commerce="commerce"></cardtienda>
                     </template>
                   </div>
                   <hr>
@@ -73,9 +67,10 @@
 <script>
   import Bus from '../../utilities/EventBus';
   import message from '../message/message';
+  import cardtienda from './card-tienda';
 
     export default {
-      components: { message },
+      components: { message, cardtienda},
         data() {
             return {
                 'followers': [],
@@ -105,17 +100,7 @@
                   .catch(err => {
                       console.log(err.response)
                   })   
-            },            
-            findFollower(id) {
-                axios.get('api/user-follower/'+id)
-                  .then(response => {
-                     this.followers = response.data.data; 
-                     this.commerceSelect = response.data.data[0].commerce;
-                  })
-                  .catch(err => {
-                      console.log(err.response)
-                  })   
-            },
+            },                       
             contactAll(commerce) {
                 let data = {
                       client: this.user.id,

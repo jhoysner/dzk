@@ -112,13 +112,7 @@ class FollowController extends Controller
     public function getUserCommerces($user)
     {
 
-          $commerces = User::with(['commercesUser' => function($query) {
-                                    $query->with('commerces');
-                        }])
-                        ->where('id',$user)->get(); 
-
-
-        // $commerces = UserHasCommerce::where('users_id', $user)->with('commerces')->get();
+        $commerces = UserHasCommerce::where('users_id', $user)->with('commerces')->get();
 
         return response()->json(['data'=>$commerces], 200);
     }

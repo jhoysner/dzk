@@ -72,7 +72,7 @@
 
                 <div class="col-lg-3 sidebar theme-details-sidebar">
                     <div class="single-sidebar">
-                     <buttonfollow :user="user" :commerce="id" :state="followState" :block="followStateBlock" > </buttonfollow>
+                     <!-- <buttonfollow :user="user" :commerce="id" :state="followState" :block="followStateBlock" > </buttonfollow> -->
                     </div>
 
                     <div class="single-sidebar">
@@ -140,11 +140,8 @@
 <script>
 import Bus from '../../utilities/EventBus.js';
 import $ from 'jquery';
-import message from '../message/message';
-import buttonfollow from '../follow/button-follow';
 
     export default {
-        components: { message, buttonfollow },
         data() {
             return {
                 id: this.$route.params.id,

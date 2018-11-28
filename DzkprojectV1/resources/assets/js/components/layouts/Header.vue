@@ -24,14 +24,14 @@
                                     Mensajes
                                   </a>
                               </router-link> -->
-                                <div class="top-message mr-0">
+<!--                                 <div class="top-message mr-0">
                                   <router-link to='/imbox'>
                                     <a>
                                       <span class="icons icon-envelope"></span>
                                     </a>
                                   </router-link> 
                                   <span  v-if="messageTrue" class="badge badge-danger">_</span>
-                                </div>
+                                </div> -->
                           </li>
                       </ul>
                   </nav>

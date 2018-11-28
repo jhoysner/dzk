@@ -33,6 +33,9 @@ import ProductList from '../components/home/Index-products'
 import ShoppingList from '../components/cliente/shopping-list'
 import Orders from '../components/order/Index'
 import Requests from '../components/request/Index'
+import Follow from '../components/follow/index';
+import Following from '../components/follow/following';
+
 
 Vue.use(Router);
 
@@ -243,6 +246,16 @@ const baseRoutes = [
             path: '/imbox/:id', 
             component: ImboxConversation,
             props: true,
+
+        }
+        {
+            path: '/followers', 
+            component: Follow,
+
+        },
+        {
+            path: '/following', 
+            component: Following,
 
         }
 

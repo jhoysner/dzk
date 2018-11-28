@@ -121,6 +121,7 @@ class MessageController extends Controller
       return response()->json(['data'=> $users], 200);
 
     }       
+       
 
     public function messageSendChat(Request $request){
 
@@ -158,6 +159,38 @@ class MessageController extends Controller
        }
 
       return response()->json(['data'=> $messages], 200);
+
+    }       
+    public function findThreadChatRead($user, $contact){
+
+      $thread = MessengerService::where('users_id_from', $user)->where('users_id_to', $contact)->where('messengerservicetopic_idmessengerservicetopic', 2)->first();
+
+      if(!$thread){
+        $thread = MessengerService::where('users_id_from', $contact)->where('users_id_to', $user)->where('messengerservicetopic_idmessengerservicetopic', 2)->first();
+      }
+
+      if ($thread) {
+        
+        $messages = MessengerService::where('thread', $thread->thread)->orderBy('created_at', 'ASC')->get();
+      }
+      else{
+        $messages = [];
+      }
+
+       foreach ($messages as $value) {
+
+          if($value->users_id_to == $user && $value->read_at == null){
+
+            $message = MessengerService::find($value->idmessengerservice);
+
+            $message->read_at = 1;
+
+            $message->save();
+          }
+         
+       }
+
+      return response()->json(['data'=> true], 200);
 
     }   
 

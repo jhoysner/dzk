@@ -247,7 +247,7 @@ const baseRoutes = [
             component: ImboxConversation,
             props: true,
 
-        }
+        },
         {
             path: '/followers', 
             component: Follow,

@@ -16,16 +16,18 @@
 
         <div id="contacts">
             <ul>
-              <template v-for="user in users" >
+              <template v-for="use in users" >
                 
-                <li class="contact" @click="selectContact(user.contact, user.commerce_idcommerce)">
+                <li class="contact" @click="selectContact(use.contact, use.commerce_idcommerce)">
                     <div class="wrap">
-                        <span class="contact-status" :class="user.contact.online ? 'online':'offline'" ></span>
+                        <span class="contact-status" :class="use.contact.online ? 'online':'offline'" ></span>
                         <img src="http://emilcarlsson.se/assets/louislitt.png" alt="" />
                         <div class="meta">
-                            <p class="name">{{user.contact.firstname}}</p>
+                            <unread :user='user' :contact="use.contact"></unread>
+                            <p class="name">{{use.contact.firstname}}</p>                            
                         </div>
                     </div>
+
                 </li>
               </template>
             </ul>
@@ -70,13 +72,17 @@
 <script>
     import Bus from '../../utilities/EventBus';
     import moment from 'moment';
+    import unread from './unread';
+
      moment.locale('es');
 
 
     export default {
+        components: { unread},
         data() {
             return {
                 'messages': [],
+                'thread': {},
                 'users':[],
                 'user': {},
                 'contactSelect': {},
@@ -101,6 +107,9 @@
               .listen('MessageSent', (data) => {
                 if(data.message.users_id_to == this.user.id){
                   this.findConversationChat()
+                  this.playSound();
+                  this.getUsers();
+
                 }
               });      
 
@@ -146,7 +155,6 @@
             $('.open-intro').show();
             $('.close-intro').hide();
             var self = this;
-            
             setTimeout(function(){ 
              self.contactSelect = ''; 
             }, 1000);
@@ -161,7 +169,7 @@
               this.form.commerce_idcommerce = this.commerceSelect;
               this.form.messengerservicetopic_idmessengerservicetopic = '2';
               this.findConversationChat();
-
+              this.read();
               var self = this;
               setTimeout(function(){ 
                   self.scrollToBottom();
@@ -179,7 +187,7 @@
               }
             })
             .catch(err => console.log(err))
-          },         
+          },             
           send(){
              if(this.form.message == ''){
                  return;
@@ -212,12 +220,24 @@
 
                 this.$set(this.users[index].contact, 'online', status);
               }
-          }
-  
+          },
+          playSound () {
+            var audio = new Audio('http://soundbible.com/mp3/Air Plane Ding-SoundBible.com-496729130.mp3');
+            audio.play();
+          },
+          read(item){
+            axios.get('/api/find-thread-chat-read/'+this.user.id+'/'+this.contactSelect.id).then(response => {  
+                
+            })
+            .catch(err => console.log(err))
+          },          
+
+    
         },
     }
 </script>
 <style>
+   
   #frame {
     width: 525px;
     /*width: 225px;*/

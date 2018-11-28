@@ -27,10 +27,14 @@ import Roles from '../components/groups/Index'
 import Permissions from '../components/permissions/Index'
 import Logout from '../components/auth/Logout'
 import Products from '../components/products/Index'
+import Imbox from '../components/imbox/Index';
+import ImboxConversation from '../components/imbox/conversation';
 import ProductList from '../components/home/Index-products'
 import ShoppingList from '../components/cliente/shopping-list'
 import Orders from '../components/order/Index'
 import Requests from '../components/request/Index'
+import Follow from '../components/follow/index';
+import Following from '../components/follow/following';
 
 
 Vue.use(Router);
@@ -233,6 +237,28 @@ const baseRoutes = [
             path: '/logout', 
             component: Logout 
         },
+        {
+            path: '/imbox', 
+            component: Imbox,
+          
+        },        
+        {
+            path: '/imbox/:id', 
+            component: ImboxConversation,
+            props: true,
+
+        },
+        {
+            path: '/followers', 
+            component: Follow,
+
+        },
+        {
+            path: '/following', 
+            component: Following,
+
+        }
+
 
  
 ];

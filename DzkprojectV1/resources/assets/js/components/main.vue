@@ -12,7 +12,7 @@
             </div>
           </div>
         </div>
-      <!-- <chat> </chat>  -->
+      <chat> </chat> 
       <!--<Foot/> -->
     </div>
 </template>
@@ -22,14 +22,14 @@ import Header from './layouts/Header.vue';
 import starHero from './layouts/section_star_hero.vue';
 import Foot from './layouts/Footer.vue';
 import Nav from './layouts/Navigator.vue';
-// import Chat from './chat/index.vue';
+import Chat from './chat/index.vue';
 
 import Bus from '../utilities/EventBus';
 
     export default {
       name: 'Main',
       components: {
-        Header, starHero, Nav, Foot
+        Header, starHero, Nav, Foot,Chat
       },
       data() {
         return {

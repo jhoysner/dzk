@@ -211,4 +211,5 @@ Route::get('user-follower-unlock/{id}/{commerce}', 'Follow\FollowController@user
 Route::get('chat-users/{id}' , 'Message\MessageController@chatUsers');
 Route::post('message-send-chat' , 'Message\MessageController@messageSendChat');
 Route::get('find-thread-chat/{user}/{contact}', 'Message\MessageController@findThreadChat');
+Route::get('find-thread-chat-read/{user}/{contact}', 'Message\MessageController@findThreadChatRead');
 	

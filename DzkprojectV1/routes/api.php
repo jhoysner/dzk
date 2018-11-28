@@ -90,6 +90,9 @@ Route::group(['middleware' => 'auth:api'], function() {
 	Route::post('update-stock','Product\ProductController@updateStock');
 	Route::get('total-products','Product\ProductController@getTotalProducts');
 
+	//Estados
+	Route::get('stateslisting','StateListing\StateListingController@index');
+
 	//Lista de Compra
 	Route::resource('marketplace','MarketPlaceListing\MarketPlaceListingController',
 		['except' => ['create','edit','destroy']
@@ -98,7 +101,12 @@ Route::group(['middleware' => 'auth:api'], function() {
 	Route::delete('marketplace-product/{id}','MarketPlaceListing\MarketPlaceListingController@deleteProduct');
 	Route::post('marketplace-order/{id}','MarketPlaceListing\MarketPlaceListingController@setOrderMarketList');
 	Route::get('marketplace-user-requests','MarketPlaceListing\MarketPlaceListingController@getRequestsUser');
-
+	Route::get('marketplace-allrequest','MarketPlaceListing\MarketPlaceListingController@getMarketPlaceListing');
+	Route::post('marketplace-updatedatelist/{id}','MarketPlaceListing\MarketPlaceListingController@updateDateProcessListing');
+	Route::post('marketplace-updatestateproduct/{id}/{state}','MarketPlaceListing\MarketPlaceListingController@updateStateProduct');
+	Route::post('marketplace-updatedatealignlist/{id}','MarketPlaceListing\MarketPlaceListingController@updateDateAlignmentListing');
+	Route::post('marketplace-updatedatefinallist/{id}','MarketPlaceListing\MarketPlaceListingController@updateDateFinalListing');
+	Route::post('marketplace-updatedatedeliverylist/{id}','MarketPlaceListing\MarketPlaceListingController@updateDateDeliveryListing');
 });
 
 //Tipos Productos

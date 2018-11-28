@@ -4,8 +4,10 @@
         <div>
             <div class="settings-content">
                 <h4>Lista de Solicitudes</h4>
-                <div class="responsive">
-                  <div class="table-responsive">
+                <pulse-loader id="spinner" :loading="loading" :color="color" :size="size"></pulse-loader>
+                <div class="responsive"  v-if="!loading">
+
+                  <div class="table-responsive" v-if="requests.length > 0">
                       <table class="table table-hover table-bordered table-striped table-condensed">
                           <thead>
                             <tr>
@@ -49,35 +51,42 @@
                               </td>
                               <td>{{ request.commerce.name }}</td>
                               <td>{{ request.branch.name }}</td>
-                              <td class="text-right">
-                                  <b-btn v-can="'view_params'" v-b-modal="'showModal'" @click="show()" class="btn btn-sm" variant="default">Detalle</b-btn>
-                                  <b-btn v-can="'edit_params'" v-b-modal="'editModal'" @click="edit()" class="btn btn-sm" variant="warning">Editar</b-btn>
+                              <td class="text-right" >
+                                  <button v-if="request.applicationdate==null" @click="edit(request)" class="btn btn-warning btn-sm" >Editar</button>
+                                  <b-btn v-b-modal="'showModal'" @click="showModal(request)" class="btn btn-sm" variant="default">Detalle</b-btn>
                               </td>
-                              </th>
                             </tr>
                           </tbody>
                       </table>
+                  </div>
+                  <div v-else class="text-center">
+                    <h2>No tiene solicitudes</h2>
                   </div>
               </div>
             </div>
         </div>
     </div>
+    <show></show>
   </div>
 </template>
 <script>
-
-import Bus from '../../utilities/EventBus';
-
-import axios from 'axios';
+import Bus from '../../utilities/EventBus'
+import PulseLoader from 'vue-spinner/src/PulseLoader.vue'
+import show from './Show';
 
 export default {
   name: 'index',
   components: {
+    PulseLoader,
+    show
   },
   data() {
     return {
       url: '/marketplace-user-requests',
       requests: [],
+      loading: false,
+      color: '#5bc0de',
+      size:'30px',
     }
   },
 
@@ -87,10 +96,10 @@ export default {
 
   methods: {
     index() {
+      this.loading = true
       axios.get('api' + this.url).then(response => {
         this.requests = response.data.data
-        console.log(this.requests)
-
+      
         for(let i=0; i<this.requests.length; i++) {
           var application = this.requests[i].applicationdate
           var proccess = this.requests[i].processdate
@@ -112,22 +121,42 @@ export default {
               this.requests[i].estatus = 'Entregado - Retirado por cliente'
             }
         }
-
+        this.loading = false
       })
-      .catch(err => console.log(err))
+      .catch(err => {
+        this.loading = false
+        console.log(err)
+      })
     },
 
-    show(id) {
-      Bus.$emit('id_params', id);
+    showModal(data) {
+      Bus.$emit('request', data);
     },
+    edit(data) {
+      const user_config = JSON.parse(localStorage.getItem('user_config'))
 
-    edit(id) {
-      Bus.$emit('edit_id', id);
+      if( user_config ) {
+        localStorage.removeItem('user_config') 
+      }
+
+      var dat = {}
+        dat.list = []
+        dat.list.push({
+          'commerce': data.commerce_idcommerce,
+          'branch': data.branch_idbranch
+        })
+        localStorage.setItem('user_config', JSON.stringify(dat))
+
+      this.$router.push('/list-products')
     },
 
   }
 }
 </script>
 <style lang="scss" scoped>
-  
+  #spinner {
+    text-align: center;
+    padding-top: 10vh;
+    height: 80vh;
+  }
 </style>

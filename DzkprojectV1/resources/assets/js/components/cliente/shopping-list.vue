@@ -111,7 +111,7 @@ export default {
 	      	marketPlaceId: '',
 	      	listProductsMarket: [],
 	      	listMarket: [],
-	      	feedback: ''
+	      	observations: ''
 	    }
 	},
 	created() {

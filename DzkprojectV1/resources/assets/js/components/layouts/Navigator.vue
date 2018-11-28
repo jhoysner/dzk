@@ -70,7 +70,7 @@
               </router-link>
             </li>
 
-            <li v-if="isLogged">
+            <li v-can="'users'">
               <router-link to=''>
                 <a title="Configuración">
                   <i class="fa fa-cogs fa-2x"></i>
@@ -119,7 +119,7 @@
               </router-link>
             </li>
             
-            <li v-can="'orders'" v-if="isLogged">
+            <li v-can="'orders'">
               <router-link to='/orders'>
                 <a>
                   Pedidos

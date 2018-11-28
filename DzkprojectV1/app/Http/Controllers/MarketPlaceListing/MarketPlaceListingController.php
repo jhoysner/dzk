@@ -157,21 +157,10 @@ class MarketPlaceListingController extends Controller
           return response()->json(['error' => 'No existe el listado.'], 422);
       	}
 
-    	/*$totaltaxes = MarketPlaceListingDetail::select(DB::raw('SUM(taxes) as taxes'))
-            		->where('marketplacelisting_idmarketplacelisting',$marketPlaceListing->idmarketplacelisting)
-            			->first();
-
-    	$totalprice = MarketPlaceListingDetail::select(DB::raw('SUM(unitprice*quantity) as total'))
-    		->where('marketplacelisting_idmarketplacelisting',$marketPlaceListing->idmarketplacelisting)
-    			->first();*/
-
     	$marketPlaceListing->applicationdate = Carbon::now();
-    	if(!is_null($request->feedback))
+    	if(!is_null($request->observations))
     		$marketPlaceListing->observations = $request->observations;
-    	//$marketPlaceListing->finalprice = $totalprice->total;
-    	//$marketPlaceListing->finaltaxes = $totaltaxes->taxes;
-    	//$marketPlaceListing->finaltotalprice = $totalprice->total + $totaltaxes->taxes;
-    	
+     	
     	if( $marketPlaceListing->save()) {
      		return response()->json(['success'=>\Lang::get('messages.order_created')],200);
     	}
@@ -211,4 +200,114 @@ class MarketPlaceListingController extends Controller
         return response()->json(['success'=>true, 'data'=>$list], 200);   
 
     }
+
+    public function getMarketPlaceListing()
+    {
+    	$lists = MarketPlaceListing::where('applicationdate','!=',null)
+						->with(['details'=>function($query) {
+							$query->with('product');
+						}])
+							->with('commerce')
+								->with('branch')
+									->with('user')
+										->orderBy('applicationdate','DESC')
+											->get();
+
+		return response()->json(['success'=>true, 'data'=>$lists], 200);  
+
+    }
+
+    public function updateDateProcessListing($id)
+    {
+    	$list = MarketPlaceListing::find($id);
+
+    	if(!$list) {
+          return response()->json(['error' => 'No existe la lista.'], 422);
+      	}
+
+      	if($list->processdate == null) {
+      		$list->processdate = Carbon::now();
+      		$list->save();
+      	}
+
+		return response()->json(['success'=>true], 200);  
+    }
+
+    public function updateStateProduct($id,$state)
+    {	
+    	$detail = MarketPlaceListingDetail::find($id);
+
+    	if(!$detail) {
+          return response()->json(['error' => 'No existe el detalle.'], 422);
+      	}
+
+      	$detail->statelisting_idstatelisting = $state;
+      	$detail->save();
+
+		return response()->json(['success'=>true], 200);  
+
+    }
+	
+	public function updateDateAlignmentListing($id)
+    {
+    	$list = MarketPlaceListing::find($id);
+
+    	if(!$list) {
+          return response()->json(['error' => 'No existe la lista.'], 422);
+      	}
+
+      	if($list->alignmentdate == null) {
+      		$list->alignmentdate = Carbon::now();
+      	}
+
+      	$totaltaxes = MarketPlaceListingDetail::select(DB::raw('SUM(taxes) as taxes'))
+            		->where('marketplacelisting_idmarketplacelisting',$id)
+            			->where('statelisting_idstatelisting',2)
+            				->first();
+
+    	$totalprice = MarketPlaceListingDetail::select(DB::raw('SUM(unitprice*quantity) as total'))
+		    		->where('marketplacelisting_idmarketplacelisting',$id)
+            			->where('statelisting_idstatelisting',2)
+    						->first();
+      	
+    	$list->finalprice = $totalprice->total;
+    	$list->finaltaxes = $totaltaxes->taxes;
+    	$list->finaltotalprice = $totalprice->total + $totaltaxes->taxes;
+      	$list->save();
+      	
+		return response()->json(['success'=>true], 200);  
+    }
+
+	public function updateDateFinalListing($id)
+    {
+    	$list = MarketPlaceListing::find($id);
+
+    	if(!$list) {
+          return response()->json(['error' => 'No existe la lista.'], 422);
+      	}
+
+      	if($list->finaldate == null) {
+      		$list->finaldate = Carbon::now();
+      		$list->save();
+      	}
+
+		return response()->json(['success'=>true], 200);  
+    }
+
+    public function updateDateDeliveryListing($id)
+    {
+    	$list = MarketPlaceListing::find($id);
+
+    	if(!$list) {
+          return response()->json(['error' => 'No existe la lista.'], 422);
+      	}
+
+      	if($list->deliverdate == null) {
+      		$list->deliverdate = Carbon::now();
+      		$list->save();
+      	}
+
+		return response()->json(['success'=>true], 200);  
+    }
+
 }

@@ -52,4 +52,11 @@ class MarketPlaceListing extends Model
     {
         return $this->belongsTo('App\Commerce', 'commerce_idcommerce', 'idcommerce');
     }
+
+    public function user()
+    {
+        return $this->belongsTo('App\User', 'users_id', 'id');
+    }
+
+    
 }

@@ -25,7 +25,7 @@ class ProductUpdateRequest extends FormRequest
     {
         return [
             'name'=>'required|string|max:128',
-            'producttype_idproducttype'=>'required|integer'
+            'producttype_idproducttype'=>'required'
         ];
     }
 }

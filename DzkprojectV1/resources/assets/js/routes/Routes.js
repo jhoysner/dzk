@@ -110,7 +110,7 @@ const baseRoutes = [
             meta: { 
                 requiresAuth: false
             }
-        },
+        }, 
         {
             path: '/commerces',
             component: Commerces,

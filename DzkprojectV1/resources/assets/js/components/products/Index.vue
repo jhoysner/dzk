@@ -29,7 +29,7 @@
                               <td>{{ product.units.name }}</td>
                               <td>{{ product.type.name }}</td>
                               <td class="text-right">{{ product.price }}</td>
-                              <td>{{ product.commerces.name }}</td>
+                              <td>{{ product.commerce }}</td>
                               <td class="text-right" v-if="product.usestock">{{product.stock}}</td>
                               <td class="text-center" v-else><span class="fa fa-info-circle fa-2x" title="Este producto no maneja stock"></span></td>
                               <td width="10%" v-if="product.image" id="imagen">
@@ -110,6 +110,8 @@ export default {
           for(let i=0; i<this.productos.length; i++) {
             let productoId = this.productos[i].idproduct
             let commerceId = this.productos[i].commerce_idcommerce 
+
+            this.productos[i].commerce = this.productos[i].commerces.name
 
             let pos = this.commerces.map( function(e) {
               return (e.commerce_idcommerce)
